@@ -1,4 +1,8 @@
 /* Basic stylesheet */
 body {
-  color: red;
+
+}
+
+section#main {
+  padding-top: 50px;
 }
