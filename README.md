@@ -39,18 +39,21 @@ Known Bugs
 
 Creators
 --------
-### Patrick Karjala
+#### Patrick Karjala
+ * [Website](http://patrickakarjala.wordpress.com)
+ * [GitHub](https://github.com/pkarjala/)
+ * [pkarjala@hawaii.edu](mailto:pkarjala@hawaii.edu)
 
-### David Neely
+#### David Neely
 
-### Mark Nelson
+#### Mark Nelson
  * [Personal website](http://mark.nelson.engineer)
- * eMail: [marknels@hawaii.edu](mail:marknels@hawaii.edu)
+ * eMail: [marknels@hawaii.edu](mailto:marknels@hawaii.edu)
  * [GitHub](https://github.com/marknelsonengineer)
 
 Credits and Acknowledgements
 -----------------------------
-The authors would like to thank the University of Hawaii, the UH Department Information and Computer Science and Dr. Philip Johnson for thier support during the development of this project.
+The authors would like to thank the University of Hawaii, the UH Department Information and Computer Science and Dr. Philip Johnson for their support during the development of this project.
 
 Remember
 --------
