@@ -45,6 +45,9 @@ Creators
  * [pkarjala@hawaii.edu](mailto:pkarjala@hawaii.edu)
 
 #### David Neely
+ * [Personal website](http://davidneely.wordpress.com)
+ * eMail: [marknels@hawaii.edu](mailto:davidics613@gmail.com)
+ * [GitHub](https://github.com/davidkneely)
 
 #### Mark Nelson
  * [Personal website](http://mark.nelson.engineer)
