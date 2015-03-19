@@ -7,8 +7,8 @@ Neely and Mark Nelson.
 Check it out at PlayWithMagic.XXXX.XXXX.
 TODO:  Add a screenshot
 
-Introduction
-------------
+Overview
+--------
 Over their careers, magicians see countless routines, learn thousands of methods, slights, banter, gaffs and
 effects (for now, we'll call them effects).  This catalog allows magicians to cite where they 
 learned the effect.  Who or what influenced it.  How they have personalized it.  Magicians 
@@ -17,6 +17,10 @@ an interface for linking effects as lead-ins, transitions or full-circles.  Fina
 application will have a “Routine Builder” that helps magicians with possibly the most 
 difficult part of preparing a set — taking all of the effects they know and stitching them 
 into a cohesive routine.
+
+Approach
+--------
+This section describes the approach you are taking in this system to address the problem. Once again, complete implementation of your approach may require more work than is possible during this semester. Note that it must involve GitHub, the Play Framework, and Twitter Bootstrap. In almost all cases, it should able to be deployed and run from Heroku.
 
 Quick Start
 -----------
