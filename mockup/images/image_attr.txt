@@ -1,16 +1,18 @@
 Image Locations
 ===============
 
-magic-box.jpg         https://www.flickr.com/photos/glenbledsoe/4836241042/  3/18/2015
+magic-box.jpg                      https://www.flickr.com/photos/glenbledsoe/4836241042/  3/18/2015
 
-card-rainbow.jpg      https://www.flickr.com/photos/jinthai/3204335424/   3/18/2015
+card-rainbow.jpg                   https://www.flickr.com/photos/jinthai/3204335424/   3/18/2015
 
-vintage-red.jpg       http://top1walls.com/walls/art-design/damask-patterns-red-1724672-1920x1080.jpg  3/18/2015
+vintage-red.jpg                    http://top1walls.com/walls/art-design/damask-patterns-red-1724672-1920x1080.jpg  3/18/2015
 
-working-man.jpg       http://pixabay.com/static/uploads/photo/2012/11/22/06/48/self-portrait-66938_640.jpg  3/18/2015
+working-man.jpg                    http://pixabay.com/static/uploads/photo/2012/11/22/06/48/self-portrait-66938_640.jpg  3/18/2015
 
-ace-of-spades-1.jpg   http://hdwallpaperia.com/wp-content/uploads/2013/11/Ace-Of-Spades-Background.jpeg  3/18/2015
+ace-of-spades-1.jpg                http://hdwallpaperia.com/wp-content/uploads/2013/11/Ace-Of-Spades-Background.jpeg  3/18/2015
 
-ace-of-spades-2.jpg   http://distinguishedimports.com/shop/wp-content/uploads/2014/02/Ace-of-Spades-White-on-Black-11.jpg  3/18/2015
+ace-of-spades-2.jpg                http://distinguishedimports.com/shop/wp-content/uploads/2014/02/Ace-of-Spades-White-on-Black-11.jpg  3/18/2015
 
-three-card-monte.jpg  http://upload.wikimedia.org/wikipedia/commons/6/6d/Three_Card_Monte.jpg  3/18/2015
+three-card-monte.jpg               http://upload.wikimedia.org/wikipedia/commons/6/6d/Three_Card_Monte.jpg  3/18/2015
+
+blue_rune_by_Sabakku_no_Gaara.jpg  http://fc09.deviantart.net/fs19/f/2007/285/9/2/blue_rune_by_Sabakku_no_Gaara.jpg
