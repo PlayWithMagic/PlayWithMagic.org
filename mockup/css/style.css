@@ -7,6 +7,6 @@ body header {
   background-size: cover;
   text-align: center;
 }
-body section #main {
-  padding-top: 50px;
+body section#main section#content {
+  text-align: center;
 }
