@@ -13,17 +13,9 @@ body header.jumbotron h1 {
 body section#main section#content {
   text-align: center;
 }
-body section#displayEffect {
-  padding-top: 50px;
-}
-body section#displayEffect section#content {
+body section#page section#content {
   text-align: left;
-}
-body sectiondisplayUser {
   padding-top: 50px;
-}
-body sectiondisplayUser section#content {
-  text-align: left;
 }
 body footer {
   position: absolute;
