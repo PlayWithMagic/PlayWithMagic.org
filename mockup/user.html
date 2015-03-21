@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
 
-  <title>Play With Magic</title>
+  <title>Play With Magic - User</title>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
   <![endif]-->
 </head>
-<body id="home">
+<body id="user">
 
 <!-- Responsive navbar -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -37,84 +37,68 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="effects.html">Effects</a></li>
+        <li><a href="#">Effects</a></li>
         <li><a href="#">Build</a></li>
         <li><a href="#">About</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Login <span class="caret"></span>
-          </a>
-          <form class="dropdown-menu" role="form">
-            <div class="form-group">
-              <label for="loginUsername">Username</label>
-              <input type="email" class="form-control" id="loginUsername" placeholder="Username / Email">
-            </div>
-            <div class="form-group">
-              <label for="loginPassword">Password</label>
-              <input type="password" class="form-control" id="loginPassword" placeholder="Password">
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="remember-me"> Remember me
-              </label>
-            </div>
-            <button class="btn btn-sm btn-primary btn-block" type="submit">Sign in</button>
-            </form>
-          </form>
-        </li>
-      </ul>
-      <!--<div class="btn btn-primary navbar-btn navbar-right">Logout</div>-->
-      <!--<p class="navbar-text navbar-right">Logged In Username &nbsp;&nbsp;</p>-->
+      <!--<ul class="nav navbar-nav navbar-right">-->
+      <!--<li class="dropdown">-->
+      <!--<a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+      <!--Dropdown trigger-->
+      <!--<span class="caret"></span>-->
+      <!--</a>-->
+      <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">-->
+      <!--<li>Username</li>-->
+      <!--<li>Password</li>-->
+      <!--<li>-->
+      <!--<button type="button" class="btn btn-primary">Login</button>-->
+      <!--</li>-->
+      <!--</ul>-->
+      <!--</li>-->
+      <!--</ul>-->
+      <div class="btn btn-primary navbar-btn navbar-right">Login / Sign Up / Logout</div>
+      <p class="navbar-text navbar-right">Logged In Username &nbsp;&nbsp;</p>
     </div>
   </div>
 </nav>
 
 <!-- Page Content -->
 <section id="main">
-  <!-- Header -->
-  <header id="home" class="jumbotron">
-    <div class="container">
-      <h1><i class="fa fa-magic"></i> Play With Magic</h1>
+  <!-- Header NOT DISPLAYED ON USER PAGE-->
+  <!--<header class="jumbotron">-->
+    <!--<div class="container">-->
+      <!--<h1><i class="fa fa-magic"></i> Play With Magic</h1>-->
 
-      <p>The Magician's Toolkit</p>
+      <!--<p>The Magician's Toolkit</p>-->
 
-      <p>Post Effects, Create Routines, and Share</p>
+      <!--<p>Post Effects, Create Routines, and Share</p>-->
 
-      <!-- Search Bar -->
-      <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search by Effect Name">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-            </span>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <button type="button" class="btn btn-primary">Join the Community Today!</button>
-    </div>
-  </header>
+      <!--&lt;!&ndash; Search Bar &ndash;&gt;-->
+      <!--<div class="row">-->
+        <!--<div class="col-md-offset-3 col-md-6">-->
+          <!--<div class="input-group">-->
+            <!--<input type="text" class="form-control" placeholder="Search by Effect Name">-->
+            <!--<span class="input-group-btn">-->
+              <!--<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>-->
+            <!--</span>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<br/>-->
+      <!--<button type="button" class="btn btn-primary">Join the Community Today!</button>-->
+    <!--</div>-->
+  <!--</header>-->
 
 
   <!-- Content -->
   <section id="content" class="container">
     <div class="col-md-4">
       <h2>Create Effects</h2>
-
       <p>Create an effect and share it with others</p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-8">
       <h2>Like Effects</h2>
-
       <p>Remember effects that you like!</p>
-    </div>
-    <div class="col-md-4">
-      <h2>Create Routines</h2>
-
-      <p>From your list of Effects, build a routine for a show!</p>
     </div>
   </section>
 </section>
@@ -141,6 +125,7 @@
 <!-- Load Bootstrap JavaScript components -->
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>
