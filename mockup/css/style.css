@@ -24,6 +24,10 @@ body section#page section#content {
   text-align: left;
   padding-top: 50px;
 }
+body section#page section#content seciton#social ul {
+  list-style-type: none;
+  display: inline;
+}
 body nav#paginator {
   margin-left: auto;
   margin-right: auto;
