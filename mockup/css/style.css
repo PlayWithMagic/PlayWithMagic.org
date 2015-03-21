@@ -20,6 +20,10 @@ body header#effects p {
 body section#main section#content {
   text-align: center;
 }
+body section#page section#content {
+  text-align: left;
+  padding-top: 50px;
+}
 body nav#paginator {
   margin-left: auto;
   margin-right: auto;
