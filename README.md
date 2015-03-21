@@ -46,7 +46,7 @@ The application will also draw on unmodified JQuery, Bootstrap, Bootswatch, Font
 from their CDN servers.
 
 ### Application Deployment Environment
-The application will be deployed through the [Hiroku Cloud Platform](https://www.heroku.com).
+The application will be deployed through the [Heroku Cloud Platform](https://www.heroku.com).
 
 ### Application Development Environment
 The application will be developed on individual Mac systems.
