@@ -13,6 +13,12 @@ body header.jumbotron h1 {
 body section#main section#content {
   text-align: center;
 }
+body section#main section#displayEffectContent {
+  text-align: left;
+}
+body section#main section#displayUserContent {
+  text-align: left;
+}
 body footer {
   position: absolute;
   bottom: 0;
