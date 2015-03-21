@@ -1,7 +1,7 @@
 PlayWithMagic
 =============
 
-PlayWithMagic is a web-based application that catalogs magic tricks for magicians and helps them build sets.
+PlayWithMagic is a web-based application that catalogs magic tricks for magicians and helps them build shows.
 
 [Check out the prototype here](http://mark.nelson.engineer/PlayWithMagic/mockup/)
 
@@ -15,7 +15,7 @@ Overview
 --------
 We're looking for a few good tricks.
 
-It's not difficult to learn a magic trick.  The hard part is choreographing a set of them to work together.
+It's not difficult to learn a magic trick.  The hard part is choreographing together to build a show.
 Over their careers, magicians see countless routines, learn thousands of methods, slights, banter and gaffs
 (collectively called effects).  This web application allows magicians to catalog their effects.  Magicians
 can cite where they learned it, who or what influenced it and how they personalized it.  Magicians
@@ -35,23 +35,23 @@ input, tactile controls such as sliders and movable objects.  For example, in th
 can be dragged from a dock into the set.  Effects in a set can be rearranged and will have visual cues as to
 the length of the effect.
 
-The application will be fully usable in both a desktop and tablet environment.  From a phone sized platform, the
-design may be able to add/modify effects, but the Set Builder will not be available.
+The application will be fully usable in both a desktop and tablet environment.  Mobile platform users will be able
+to view sets, but not modify them.
 
 ### Application Runtime Environment
 The application will run through the [Play Framework](https://www.playframework.com).  The Play Framework provides
 both a webserver (production quality?) and an application runtime framework.
 
-The application will also draw on unmodified JQuery, Bootstrap, Bootswatch and Google Font tools directly from their
- servers (TODO: Discuss).
+The application will also draw on unmodified JQuery, Bootstrap, Bootswatch, FontAwesome and Google Font tools directly
+from their CDN servers.
 
 ### Application Deployment Environment
-The application will be developed on individual Mac systems and deployed through the [Hiroku Cloud Platform]
-(https://www.heroku.com).
-There are no reasons why the application could not be developed on a Windows or Linux platform, but the founding
-authors use Macs.
+The application will be deployed through the [Hiroku Cloud Platform](https://www.heroku.com).
 
 ### Application Development Environment
+The application will be developed on individual Mac systems.
+There are no reasons why the application could not be developed on a Windows or Linux platform, but the founding
+authors use Macs.
 The application will be developed in IntelliJ.  Version control is maintained in GitHub.
 
 Recommended IntelliJ packages include:
