@@ -15,25 +15,25 @@ Overview
 --------
 We're looking for a few good tricks.
 
-It's not difficult to learn a magic trick.  The hard part is choreographing together to build a show.
+It's not difficult to learn a magic trick.  The hard part is choreographing a show from a set of routines.
 Over their careers, magicians see countless routines, learn thousands of methods, slights, banter and gaffs
-(collectively called effects).  This web application allows magicians to catalog their effects.  Magicians
+(collectively called routines).  This web application allows magicians to catalog routines.  Magicians
 can cite where they learned it, who or what influenced it and how they personalized it.  Magicians
-have the option to share their effect with others.  Some effects work well together and the web application will
-be able to link effects.  The benefit of cataloging their effects is access the crowdsourced pool of
-effects feeding a “Set Builder”.  The Set Builder filters effects appropriate for a desired set and sequences them
-into a cohesive routine.  Magicians can identify effects for their set by searching effects in the catalog and adding
-them into a shopping cart.  An effect recommendation engine could prompt magicians to consider routines that
-work well with the other effects in the set.
+have the option to share their routines with others.  Some routines work well with others and this web application will
+help magicians find complementary routines.  The benefit of cataloging routines is access the crowdsourced pool that
+feed a “Set Builder”.  The set builder filters routines and sequences them into a cohesive set.  Magicians can identify
+routines for their set by searching the catalog and adding them into a shopping cart.  A routine recommendation engine
+could prompt magicians to consider routines that are popular, utilize similar materials or take them out of their
+comfort zone.
 
 Approach
 --------
 ### User Experience
-This web application will have a dynamic, database-driven, responsive user interface.  It will use traditional
+This web application has a dynamic, database-driven, responsive user interface.  It uses traditional
 metaphors such as a top navigation bar and familiar iconography.  The user interface will use web-forms for
-input, tactile controls such as sliders and movable objects.  For example, in the Set Builder interface, effects
-can be dragged from a dock into the set.  Effects in a set can be rearranged and will have visual cues as to
-the length of the effect.
+input, tactile controls such as sliders and movable objects.  For example, the set builder interface has users drag
+routines from a dock into a set.  Routines in a set can be rearranged.  Routines have visual cues as to
+length or difficulty.
 
 The application will be fully usable in both a desktop and tablet environment.  Mobile platform users will be able
 to view sets, but not modify them.
@@ -59,11 +59,9 @@ XXX
 
 ### Application High-Level Design
 The model will revolve around three central datasets:
-1. Effects
-2. Sets
+1. Routines
+2. Sets (An personalized, ordered collection of routines)
 3. Magicians/Users
-
-The
 
 The approach
 This section describes the approach you are taking in this system to address the problem. Once again, complete implementation of your approach may require more work than is possible during this semester. Note that it must involve GitHub, the Play Framework, and Twitter Bootstrap. In almost all cases, it should able to be deployed and run from Heroku.
@@ -110,12 +108,18 @@ Credits and Acknowledgements
 -----------------------------
 The authors would like to thank the University of Hawaii, the UH Department Information and Computer Science and Dr. Philip Johnson for their support during the development of this project.
 
+Consulting Magicians
+--------------------
+ * [Lee Asher](http://leeasher.com)
+ * [Mark Nelson](http://mark.nelson.engineer/wordpress/index.php/magic-home-page/)
+
+
 The Three Prime Directives
 --------------------------
 1. The system successfully accomplishes a useful task.
-  * An online catalog of both your own effects and others' effects
-  * A tool for choreographing effects into saved sets
-  * A recommender engine for adding previously unknown effects into sets
+  * An online catalog of both your own routines and others' routines
+  * A tool for choreographing routines into saved sets
+  * A recommender engine for adding previously unknown routines into sets
 2. An external user can successfully install and use the system.
   * The application will be cloud based
   * The only client-side software requirements is a browser
