@@ -92,16 +92,16 @@
               <input type="text" class="form-control" name="age" placeholder="Age">
             </div>
           </div>
-          <div class="form-group">
-            <label for="inputBio" class="col-sm-2 control-label">Bio</label>
 
+          <div class="form-group">
+            <label for="inputBio" class="col-sm-2 control-label" >Bio</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="bio" placeholder="Bio">
+              <textarea class="form-control" rows="3" placeholder="Biography"></textarea>
             </div>
           </div>
+
           <div class="form-group">
             <label for="inputPhoto" class="col-sm-2 control-label">Photo</label>
-
             <div class="col-sm-10">
               <input type="text" class="form-control" name="photo" placeholder="Photo">
             </div>
@@ -117,15 +117,14 @@
             <label for="inputInfluences" class="col-sm-2 control-label">Influences</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="influences" placeholder="Influences">
+              <textarea class="form-control" rows="3" placeholder="Influences"></textarea>
             </div>
           </div>
           <div class="form-group">
             <label for="inputMediaInterests" class="col-sm-2 control-label">Media Interests</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="mediaInterests"
-                     placeholder="What's on your bookshelf / in your video collection? Which did you last read / watch?">
+              <textarea class="form-control" rows="3" placeholder="What's on your bookshelf / in your video collection? Which did you last read / watch?"></textarea>
             </div>
           </div>
           <div class="form-group">
@@ -153,25 +152,27 @@
           <label for="inputFavoriteSites" class="col-sm-2 control-label">What other sites do you frequent?</label>
 
           <div class="col-sm-10">
+
             <input type="text" class="form-control" name="favoriteSites" placeholder="What other sites do you frequent?">
           </div>
         </div><div class="form-group">
           <label for="inputAffiliations" class="col-sm-2 control-label">Affiliations / Associations / Local Clubs & Groups</label>
 
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="affiliations" placeholder="Affiliations / Associations / Local Clubs & Groups">
+            <textarea class="form-control" rows="3" placeholder="Affiliations / Associations / Local Clubs & Groups"></textarea>
           </div>
         </div><div class="form-group">
           <label for="inputQualifications" class="col-sm-2 control-label">Awards / Accolades / Competitions?</label>
 
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="qualifications" placeholder="Awards / Accolades / Competitions?">
+            <textarea class="form-control" rows="3" placeholder="Awards / Accolades / Competitions?"></textarea>
           </div>
         </div><div class="form-group">
           <label for="inputCommunityInvolvement" class="col-sm-2 control-label">Last attended lecture / convention?</label>
 
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="communityInvolvement" placeholder="Last attended lecture / convention?">
+            <textarea class="form-control" rows="3" placeholder="Last attended lecture / convention?"></textarea>
+
           </div>
         </div><div class="form-group">
           <label for="inputFavoriteShop" class="col-sm-2 control-label">What's your favorite magic shop online/offline?</label>
@@ -191,13 +192,15 @@
           <label for="inputLastTrick" class="col-sm-2 control-label">Last trick performed / when?</label>
 
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="lastTrick" placeholder="Last trick performed / when?">
+            <textarea class="form-control" rows="3" placeholder="Last trick performed / when?"></textarea>
+
           </div>
         </div><div class="form-group">
           <label for="inputCrowningMoment" class="col-sm-2 control-label">Crowning moment?</label>
 
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="crowningMoment" placeholder="Crowning moment?">
+            <textarea class="form-control" rows="3" placeholder="Crowning moment?"></textarea>
+
           </div>
         </div><div class="form-group">
           <label for="inputFavoriteYoutubeVideo" class="col-sm-2 control-label">Favorite YouTube Magic Video?</label>
@@ -228,16 +231,22 @@
             <label for="inputLevelOfExperience" class="col-sm-2 control-label">Level of Experience</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="marketable" placeholder="Level of Experience">
-              <ul>
-                <li>Neophyte (newbie)</li>
-                <li>Enthusiast</li>
-                <li>Hobbyist</li>
-                <li> Historian</li>
-                <li> Collector</li>
-                <li> Semi-professional (does a few shows / year)</li>
-                <li> Professional (makes an earning)</li>
-              </ul>
+              <!-- Single button -->
+              <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  Select your Level of Experieince <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Neophyte (newbie)</a></li>
+                  <li><a href="#">Enthusiast</a></li>
+                  <li><a href="#">Hobbyist</a></li>
+                  <li><a href="#">Historian</a></li>
+                  <li><a href="#">Collector</a></li>
+                  <li><a href="#">Semi-professional (does a few shows / year)</a></li>
+                  <li><a href="#">Professional (makes an earning)</a></li>
+                </ul>
+              </div>
+
             </div>
           </div>
 
