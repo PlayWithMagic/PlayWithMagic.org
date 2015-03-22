@@ -35,59 +35,6 @@
       </button>
       <a class="navbar-brand" href="index.html">Play With Magic</a>
     </div>
-    <!-- Don't show major navbar components on account creation page -->
-    <!--<div class="collapse navbar-collapse">-->
-      <!--<ul class="nav navbar-nav">-->
-        <!--<li><a href="listRoutines.html">Browse Routines</a></li>-->
-        <!--<li><a href="#">Browse Sets</a></li>-->
-      <!--</ul>-->
-      <!-- Don't show Search on home page -->
-      <!--<form class="navbar-form navbar-left" role="search">-->
-      <!--<div class="input-group">-->
-      <!--<input type="text" class="form-control" placeholder="Search" />-->
-      <!--<span class="input-group-btn">-->
-      <!--<button class="btn btn-default" type="button">Search Routines</button>-->
-      <!--</span>-->
-      <!--</div>-->
-      <!--</form>-->
-      <!-- Login / User Info Dropdowns -->
-      <!-- Don't show dropdowns on user creation page -->
-      <!--<ul class="nav navbar-nav navbar-right">-->
-        <!--<li class="dropdown">-->
-          <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in-->
-            <!--Username <span class="caret"></span></a>-->
-          <!--<ul class="dropdown-menu" role="menu">-->
-            <!--<li><a href="displayUser.html">Profile</a></li>-->
-            <!--<li><a href="listRoutines.html">My Routines</a></li>-->
-            <!--<li><a href="#">My Sets</a></li>-->
-            <!--<li class="divider"></li>-->
-            <!--<li><a href="#">Logout</a></li>-->
-          <!--</ul>-->
-        <!--</li>-->
-        <!--<li class="dropdown">-->
-          <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">-->
-            <!--Login <span class="caret"></span>-->
-          <!--</a>-->
-
-          <!--<form class="dropdown-menu login" role="form">-->
-            <!--<div class="form-group">-->
-              <!--<label for="loginUsername">Username</label>-->
-              <!--<input type="email" class="form-control" id="loginUsername" placeholder="Username / Email">-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-              <!--<label for="loginPassword">Password</label>-->
-              <!--<input type="password" class="form-control" id="loginPassword" placeholder="Password">-->
-            <!--</div>-->
-            <!--<div class="checkbox">-->
-              <!--<label>-->
-                <!--<input type="checkbox" value="remember-me"> Remember me-->
-              <!--</label>-->
-            <!--</div>-->
-            <!--<button class="btn btn-sm btn-primary btn-block" type="submit">Sign in</button>-->
-          <!--</form>-->
-        <!--</li>-->
-      <!--</ul>-->
-    <!--</div>-->
   </div>
 </nav>
 
@@ -102,31 +49,34 @@
       <div class="container">
         <form id="createUser" class="form-horizontal" action="#">
           <div class="form-group">
+
             <label for="inputUserName" class="col-sm-2 control-label">Username</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="userName" placeholder="User Name">
+
+              <input type="text" class="form-control" id="inputUserName" name="userName" placeholder="User Name">
+
             </div>
           </div>
           <div class="form-group">
             <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="firstName" placeholder="First Name">
+              <input type="text" class="form-control" id="inputFirstName" name="firstName" placeholder="First Name">
             </div>
           </div>
           <div class="form-group">
             <label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="lastName" placeholder="Last Name">
+              <input type="text" class="form-control" id="inputLastName" name="lastName" placeholder="Last Name">
             </div>
           </div>
           <div class="form-group">
             <label for="inputLocation" class="col-sm-2 control-label">Location</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="location" placeholder="Location">
+              <input type="text" class="form-control" id="inputLocation" name="location" placeholder="Location">
             </div>
           </div>
 
@@ -134,49 +84,53 @@
             <label for="inputAge" class="col-sm-2 control-label">Age</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="age" placeholder="Age">
+              <input type="text" class="form-control" id="inputAge" name="age" placeholder="Age">
             </div>
           </div>
 
           <div class="form-group">
-            <label for="inputBio" class="col-sm-2 control-label" >Bio</label>
+            <label for="inputBio" class="col-sm-2 control-label">Bio</label>
+
             <div class="col-sm-10">
-              <textarea class="form-control" rows="3" placeholder="Biography"></textarea>
+              <textarea class="form-control" id="inputBio" rows="3" placeholder="Biography"></textarea>
             </div>
           </div>
 
           <div class="form-group">
             <label for="inputPhoto" class="col-sm-2 control-label">Photo</label>
+
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="photo" placeholder="Photo">
+              <input type="text" class="form-control" id="inputPhoto" name="photo" placeholder="Photo">
             </div>
           </div>
           <div class="form-group">
             <label for="inputMagicType" class="col-sm-2 control-label">Magic Type</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="magicType" placeholder="Magic Type">
+              <input type="text" class="form-control" id="inputMagicType" name="magicType" placeholder="Magic Type">
             </div>
           </div>
           <div class="form-group">
             <label for="inputInfluences" class="col-sm-2 control-label">Influences</label>
 
             <div class="col-sm-10">
-              <textarea class="form-control" rows="3" placeholder="Influences"></textarea>
+              <textarea class="form-control" id="inputInfluences" rows="3" placeholder="Influences"></textarea>
             </div>
           </div>
           <div class="form-group">
             <label for="inputMediaInterests" class="col-sm-2 control-label">Media Interests</label>
 
             <div class="col-sm-10">
-              <textarea class="form-control" rows="3" placeholder="What's on your bookshelf / in your video collection? Which did you last read / watch?"></textarea>
+              <textarea class="form-control" id="inputMediaInterests" rows="3"
+                        placeholder="What's on your bookshelf / in your video collection? Which did you last read / watch?"></textarea>
             </div>
           </div>
           <div class="form-group">
             <label for="inputFavoriteDeck" class="col-sm-2 control-label">Favorite Deck?</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="favoriteDeck" placeholder="Favorite deck of cards?">
+              <input type="text" class="form-control" id="inputFavoriteDeck" name="favoriteDeck"
+                     placeholder="Favorite deck of cards?">
             </div>
           </div>
 
@@ -184,101 +138,131 @@
             <label for="inputIsMagicCollector" class="col-sm-2 control-label">Do you like to collect magic?</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="isMagicCollector" placeholder="Do you like to collect magic?">
+              <input type="text" class="form-control" id="inputIsMagicCollector" name="isMagicCollector"
+                     placeholder="Do you like to collect magic?">
             </div>
-          </div><div class="form-group">
-          <label for="inputCrewSize" class="col-sm-2 control-label">How large is your professional crew?</label>
-
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="crewSize" placeholder="How large is your professional crew?">
           </div>
-        </div>
           <div class="form-group">
-          <label for="inputFavoriteSites" class="col-sm-2 control-label">What other sites do you frequent?</label>
+            <label for="inputCrewSize" class="col-sm-2 control-label">How large is your professional crew?</label>
 
-          <div class="col-sm-10">
-
-            <input type="text" class="form-control" name="favoriteSites" placeholder="What other sites do you frequent?">
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputCrewSize" name="crewSize"
+                     placeholder="How large is your professional crew?">
+            </div>
           </div>
-        </div><div class="form-group">
-          <label for="inputAffiliations" class="col-sm-2 control-label">Affiliations / Associations / Local Clubs & Groups</label>
+          <div class="form-group">
+            <label for="inputFavoriteSites" class="col-sm-2 control-label">What other sites do you frequent?</label>
 
-          <div class="col-sm-10">
-            <textarea class="form-control" rows="3" placeholder="Affiliations / Associations / Local Clubs & Groups"></textarea>
+            <div class="col-sm-10">
+
+              <input type="text" class="form-control" id="inputFavoriteSites" name="favoriteSites"
+                     placeholder="What other sites do you frequent?">
+            </div>
           </div>
-        </div><div class="form-group">
-          <label for="inputQualifications" class="col-sm-2 control-label">Awards / Accolades / Competitions?</label>
+          <div class="form-group">
+            <label for="inputAffiliations" class="col-sm-2 control-label">Affiliations / Associations / Local Clubs &
+              Groups</label>
 
-          <div class="col-sm-10">
-            <textarea class="form-control" rows="3" placeholder="Awards / Accolades / Competitions?"></textarea>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="inputAffiliations" rows="3"
+                        placeholder="Affiliations / Associations / Local Clubs & Groups"></textarea>
+            </div>
           </div>
-        </div><div class="form-group">
-          <label for="inputCommunityInvolvement" class="col-sm-2 control-label">Last attended lecture / convention?</label>
+          <div class="form-group">
+            <label for="inputQualifications" class="col-sm-2 control-label">Awards / Accolades / Competitions?</label>
 
-          <div class="col-sm-10">
-            <textarea class="form-control" rows="3" placeholder="Last attended lecture / convention?"></textarea>
-
+            <div class="col-sm-10">
+              <textarea class="form-control" id="inputQualifications" rows="3"
+                        placeholder="Awards / Accolades / Competitions?"></textarea>
+            </div>
           </div>
-        </div><div class="form-group">
-          <label for="inputFavoriteShop" class="col-sm-2 control-label">What's your favorite magic shop online/offline?</label>
+          <div class="form-group">
+            <label for="inputCommunityInvolvement" class="col-sm-2 control-label">Last attended lecture /
+              convention?</label>
 
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="favoriteShop" placeholder="What's your favorite magic shop online/offline?">
+            <div class="col-sm-10">
+              <textarea class="form-control" id="inputCommunityInvolvement" rows="3"
+                        placeholder="Last attended lecture / convention?"></textarea>
+
+            </div>
           </div>
-        </div>
+          <div class="form-group">
+            <label for="inputFavoriteShop" class="col-sm-2 control-label">What's your favorite magic shop
+              online/offline?</label>
+
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputFavoriteShop" name="favoriteShop"
+                     placeholder="What's your favorite magic shop online/offline?">
+            </div>
+          </div>
 
           <div class="form-group">
             <label for="inputYearsOfExperience" class="col-sm-2 control-label">Years of Experience</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="yearsOfExperience" placeholder="Years of Experience">
+              <input type="text" class="form-control" id="inputYearsOfExperience" name="yearsOfExperience"
+                     placeholder="Years of Experience">
             </div>
-          </div><div class="form-group">
-          <label for="inputLastTrick" class="col-sm-2 control-label">Last trick performed / when?</label>
-
-          <div class="col-sm-10">
-            <textarea class="form-control" rows="3" placeholder="Last trick performed / when?"></textarea>
-
           </div>
-        </div><div class="form-group">
-          <label for="inputCrowningMoment" class="col-sm-2 control-label">Crowning moment?</label>
+          <div class="form-group">
+            <label for="inputLastTrick" class="col-sm-2 control-label">Last trick performed / when?</label>
 
-          <div class="col-sm-10">
-            <textarea class="form-control" rows="3" placeholder="Crowning moment?"></textarea>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="inputLastTrick" rows="3"
+                        placeholder="Last trick performed / when?"></textarea>
 
+            </div>
           </div>
-        </div><div class="form-group">
-          <label for="inputFavoriteYoutubeVideo" class="col-sm-2 control-label">Favorite YouTube Magic Video?</label>
+          <div class="form-group">
+            <label for="inputCrowningMoment" class="col-sm-2 control-label">Crowning moment?</label>
 
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="favoriteYoutubeVideo" placeholder="Favorite YouTube Magic Video?">
-          </div>
-        </div><div class="form-group">
-          <label for="inputLargestShowPerformed" class="col-sm-2 control-label">Largest show performed?</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="inputCrowningMoment" rows="3" placeholder="Crowning moment?"></textarea>
 
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="largestShowPerformed" placeholder="Largest show performed?">
+            </div>
           </div>
-        </div><div class="form-group">
-          <label for="inputPerformanceRegularity" class="col-sm-2 control-label">How often do you perform per week?</label>
+          <div class="form-group">
+            <label for="inputFavoriteYoutubeVideo" class="col-sm-2 control-label">Favorite YouTube Magic Video?</label>
 
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="performanceRegularity" placeholder="How often do you perform per week?">
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputFavoriteYoutubeVideo" name="favoriteYoutubeVideo"
+                     placeholder="Favorite YouTube Magic Video?">
+            </div>
           </div>
-        </div><div class="form-group">
-          <label for="inputIsMarketable" class="col-sm-2 control-label">Do you want to find out about new magic?</label>
+          <div class="form-group">
+            <label for="inputLargestShowPerformed" class="col-sm-2 control-label">Largest show performed?</label>
 
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="marketable" placeholder="Do you want to find out about new magic?">
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputLargestShowPerformed" name="largestShowPerformed"
+                     placeholder="Largest show performed?">
+            </div>
           </div>
-        </div>
+          <div class="form-group">
+            <label for="inputPerformanceRegularity" class="col-sm-2 control-label">How often do you perform per
+              week?</label>
+
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputPerformanceRegularity" name="performanceRegularity"
+                     placeholder="How often do you perform per week?">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputIsMarketable" class="col-sm-2 control-label">Do you want to find out about new
+              magic?</label>
+
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputIsMarketable" name="marketable"
+                     placeholder="Do you want to find out about new magic?">
+            </div>
+          </div>
           <div class="form-group">
             <label for="inputLevelOfExperience" class="col-sm-2 control-label">Level of Experience</label>
 
             <div class="col-sm-10">
               <!-- Single button -->
               <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-default dropdown-toggle" id="inputLevelOfExperience" data-toggle="dropdown"
+                        aria-expanded="false">
                   Select your Level of Experieince <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
