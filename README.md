@@ -13,7 +13,7 @@ TODO:  Add screenshot 3
 
 Overview
 --------
-We're looking for a few good tricks.
+We're looking for a few good routines.
 
 It's not difficult to learn a magic trick.  The hard part is choreographing a show from a set of routines.
 Over their careers, magicians see countless acts, learn thousands of methods, slights, banter and gaffs
@@ -27,7 +27,20 @@ them out of their comfort zone.
 
 Approach
 --------
-This section describes the approach you are taking in this system to address the problem.
+The web application revolves around three entities:  Magicians, Routines and Sets.  A magician creates an account
+and enters profile information about themselves.  Magicians create routines, search others' routines and link
+routines together.  Finally, magicians can compose sets.  Sets consist of:
+  * Information unique to the set (venue, expected duration, type, etc.).
+  * An interface for finding candidate routines:  A search/filter tool that allows magicians to put any shared routines
+    in the applicaiton's catalog into a 'shopping cart'.  This tool will have a recommender engine to help magicians
+    find routines that they may not have picked out on their own.
+  * A set-builder canvas that allows magicians to drag routines from a dock (the results of the picker) into a
+    visual representation of the set.  Routines can be reordered, moved back to the dock, etc.
+  * Indicators/status to help magicians understand certain rules such as:  Set duration, avoid repeating the same effect
+    throughout a set, cost of production, etc.
+
+### Use Cases
+[Several use cases are documented in the Wiki.](https://github.com/pkarjala/PlayWithMagic/wiki/Use-Cases)
 
 ### User Experience
 This web application has a dynamic, database-driven, responsive user interface.  It uses traditional
@@ -61,6 +74,33 @@ The model revolves around three central entities:
 1. Routines (A single magic trick)
 2. Sets (An personalized, ordered collection of routines)
 3. Magicians/Users
+
+Milestones
+----------
+### Mockup
+Due:  25 March
+
+A responsive, non-dynamic (no Java software) representation of the major elements of the application.
+
+### Deliverable 1
+Due:  8 April (2 weeks after Mockup)
+
+Lorem ipsum
+
+### Deliverable 2
+Due:  22 April (2 weeks after Deliverable 1)
+
+Lorem ipsum
+
+### Deliverable 3
+Due:  6 May (2 weeks after Deliverable 2)
+
+Lorem ipsum
+
+### Final Project Due
+Due:  13 May (1 week after Deliverable 3)
+
+Update documentation, final fit-and-finish.
 
 Bugs and Feature Requests
 -------------------------
