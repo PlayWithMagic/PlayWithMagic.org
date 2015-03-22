@@ -83,26 +83,15 @@ Got a bug or a feature request?  We'd like to hear it!  [Click here to open an i
 
 Known Bugs
 ----------
- * None... yet
+[A list of issues can be found at the PlayWithMagic website.](https://github.com/pkarjala/PlayWithMagic/issues)
 
 Creators
 --------
-#### Patrick Karjala
- * [Website](http://patrickakarjala.wordpress.com)
- * [GitHub](https://github.com/pkarjala/)
- * [pkarjala@hawaii.edu](mailto:pkarjala@hawaii.edu)
+ * Patrick Karjala
+ * David Neely
+ * Mark Nelson
 
-#### David Neely
- * [Website](http://davidneely.wordpress.com)
- * [GitHub](https://github.com/davidkneely)
- * [davidics613@gmail.com](mailto:davidics613@gmail.com)
-
-
-#### Mark Nelson
- * [Website](http://mark.nelson.engineer)
- * [GitHub](https://github.com/marknelsonengineer)
- * [marknels@hawaii.edu](mailto:marknels@hawaii.edu)
-
+[Checkout the Contact Us page on the PlayWithMagic Wiki](https://github.com/pkarjala/PlayWithMagic/wiki/Contact-Us)
 
 Credits and Acknowledgements
 -----------------------------
@@ -125,5 +114,5 @@ The Three Prime Directives
   * The only client-side software requirements is a browser
   * The client-side hardware requirement for full functionality is a desktop or tablet
 3. An external developer can successfully understand and enhance the system.
-  * Sufficient documentation will be provided
+  * Documentation can be found at the 
 
