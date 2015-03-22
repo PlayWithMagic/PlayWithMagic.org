@@ -11,10 +11,10 @@ body header#home {
 body header#home.jumbotron h1 {
   color: mintcream;
 }
-body header#effects {
+body header#routines {
   background: none;
 }
-body header#effects p {
+body header#routines p {
   text-align: center;
 }
 body section#main section#content {
