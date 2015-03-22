@@ -13,7 +13,7 @@ TODO:  Add screenshot 3
 
 Overview
 --------
-We're looking for a few good routines.
+_We're looking for a few good routines._
 
 It's not difficult to learn a magic trick.  The hard part is choreographing a show from a set of routines.
 Over their careers, magicians see countless acts, learn thousands of methods, slights, banter and gaffs
@@ -66,7 +66,7 @@ Developer's Wiki hosted on GitHub](https://github.com/pkarjala/PlayWithMagic/wik
 
 ### Application Development Environment
 The application was developed with [IntelliJ](https://www.jetbrains.com/idea/) IDE and uses
-[SBT](http://www.scala-sbt.org) for the build engine.  Version control is maintainedthrough
+[SBT](http://www.scala-sbt.org) for the build engine.  Version control is maintained through
 [GitHub](https://github.com).
 
 ### Application High-Level Design
@@ -74,6 +74,10 @@ The model revolves around three central entities:
 1. Routines (A single magic trick)
 2. Sets (An personalized, ordered collection of routines)
 3. Magicians/Users
+
+The application will use a Model-View-Controller (MVC) design pattern.  The application will be designed with rapid
+prototyping in mind and will consequently rely on unit, integration and application tests to maintain a high level
+of quality at each release.
 
 Milestones
 ----------
@@ -125,8 +129,8 @@ The authors would like to thank the University of Hawaii, the UH Department Info
 Consulting Magicians
 --------------------
  * [Lee Asher](http://leeasher.com)
+ * [Aaron Fisher](http://www.aaronfishermagic.com)
  * [Mark Nelson](http://mark.nelson.engineer/wordpress/index.php/magic-home-page/)
-
 
 The Three Prime Directives
 --------------------------
