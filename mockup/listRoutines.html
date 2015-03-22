@@ -37,30 +37,58 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Effects</a></li>
-        <li><a href="#">Build</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="listRoutines.html">Browse Routines</a></li>
+        <li><a href="#">Browse Sets</a></li>
       </ul>
-      <!--<ul class="nav navbar-nav navbar-right">-->
-        <!--<li class="dropdown">-->
-          <!--<a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-            <!--Dropdown trigger-->
-            <!--<span class="caret"></span>-->
-          <!--</a>-->
-          <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">-->
-            <!--<li>Username</li>-->
-            <!--<li>Password</li>-->
-            <!--<li>-->
-              <!--<button type="button" class="btn btn-primary">Login</button>-->
-            <!--</li>-->
-          <!--</ul>-->
-        <!--</li>-->
-      <!--</ul>-->
-      <div class="btn btn-primary navbar-btn navbar-right">Login / Sign Up / Logout</div>
-      <p class="navbar-text navbar-right"><a href="displayUser.html">Logged In Username</a> &nbsp;&nbsp;</p>
+      <!-- Don't show Search on home page -->
+      <form class="navbar-form navbar-left" role="search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search"/>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Search Routines</button>
+          </span>
+        </div>
+      </form>
+      <!-- Login / User Info Dropdowns -->
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in
+            Username <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="displayUser.html">Profile</a></li>
+            <li><a href="listRoutines.html">My Routines</a></li>
+            <li><a href="#">My Sets</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            Login <span class="caret"></span>
+          </a>
+
+          <form class="dropdown-menu login" role="form">
+            <div class="form-group">
+              <label for="loginUsername">Username</label>
+              <input type="email" class="form-control" id="loginUsername" placeholder="Username / Email">
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div>
+            <button class="btn btn-sm btn-primary btn-block" type="submit">Sign in</button>
+          </form>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
+
 
 <!-- Page Content -->
 <section id="main">
@@ -84,7 +112,7 @@
       <div class="col-sm-6 col-md-3">
         <div class="well">
           <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
+          <a href="displayRoutine.html" class="thumbnail">
             <img src="./images/card-rainbow.jpg" />
           </a>
           <p>Effect Brief Description</p>
@@ -93,7 +121,7 @@
       <div class="col-sm-6 col-md-3">
         <div class="well">
           <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
+          <a href="displayRoutine.html" class="thumbnail">
             <img src="./images/card-rainbow.jpg" />
           </a>
           <p>Effect Brief Description</p>
@@ -102,7 +130,7 @@
       <div class="col-sm-6 col-md-3">
         <div class="well">
           <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
+          <a href="displayRoutine.html" class="thumbnail">
             <img src="./images/card-rainbow.jpg" />
           </a>
           <p>Effect Brief Description</p>
@@ -111,45 +139,7 @@
       <div class="col-sm-6 col-md-3">
         <div class="well">
           <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
-            <img src="./images/card-rainbow.jpg" />
-          </a>
-          <p>Effect Brief Description</p>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6 col-md-3">
-        <div class="well">
-          <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
-            <img src="./images/card-rainbow.jpg" />
-          </a>
-          <p>Effect Brief Description</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-3">
-        <div class="well">
-          <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
-            <img src="./images/card-rainbow.jpg" />
-          </a>
-          <p>Effect Brief Description</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-3">
-        <div class="well">
-          <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
-            <img src="./images/card-rainbow.jpg" />
-          </a>
-          <p>Effect Brief Description</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-3">
-        <div class="well">
-          <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
+          <a href="displayRoutine.html" class="thumbnail">
             <img src="./images/card-rainbow.jpg" />
           </a>
           <p>Effect Brief Description</p>
@@ -160,7 +150,7 @@
       <div class="col-sm-6 col-md-3">
         <div class="well">
           <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
+          <a href="displayRoutine.html" class="thumbnail">
             <img src="./images/card-rainbow.jpg" />
           </a>
           <p>Effect Brief Description</p>
@@ -169,7 +159,7 @@
       <div class="col-sm-6 col-md-3">
         <div class="well">
           <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
+          <a href="displayRoutine.html" class="thumbnail">
             <img src="./images/card-rainbow.jpg" />
           </a>
           <p>Effect Brief Description</p>
@@ -178,7 +168,7 @@
       <div class="col-sm-6 col-md-3">
         <div class="well">
           <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
+          <a href="displayRoutine.html" class="thumbnail">
             <img src="./images/card-rainbow.jpg" />
           </a>
           <p>Effect Brief Description</p>
@@ -187,7 +177,45 @@
       <div class="col-sm-6 col-md-3">
         <div class="well">
           <h2>Effect Name</h2>
-          <a href="displayEffect.html" class="thumbnail">
+          <a href="displayRoutine.html" class="thumbnail">
+            <img src="./images/card-rainbow.jpg" />
+          </a>
+          <p>Effect Brief Description</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="well">
+          <h2>Effect Name</h2>
+          <a href="displayRoutine.html" class="thumbnail">
+            <img src="./images/card-rainbow.jpg" />
+          </a>
+          <p>Effect Brief Description</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="well">
+          <h2>Effect Name</h2>
+          <a href="displayRoutine.html" class="thumbnail">
+            <img src="./images/card-rainbow.jpg" />
+          </a>
+          <p>Effect Brief Description</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="well">
+          <h2>Effect Name</h2>
+          <a href="displayRoutine.html" class="thumbnail">
+            <img src="./images/card-rainbow.jpg" />
+          </a>
+          <p>Effect Brief Description</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="well">
+          <h2>Effect Name</h2>
+          <a href="displayRoutine.html" class="thumbnail">
             <img src="./images/card-rainbow.jpg" />
           </a>
           <p>Effect Brief Description</p>
