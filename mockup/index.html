@@ -37,11 +37,30 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="listEffects.html">Effects</a></li>
-        <li><a href="#">Build</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="#">Browse Routines</a></li>
+        <li><a href="#">Browse Sets</a></li>
       </ul>
+      <!-- Don't show Search on home page -->
+      <!--<form class="navbar-form navbar-left" role="search">-->
+        <!--<div class="input-group">-->
+          <!--<input type="text" class="form-control" placeholder="Search" />-->
+          <!--<span class="input-group-btn">-->
+            <!--<button class="btn btn-default" type="button">Search Routines</button>-->
+          <!--</span>-->
+        <!--</div>-->
+      <!--</form>-->
       <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in
+            Username <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="displayUser">Profile</a></li>
+            <li><a href="listEffects.html">My Routines</a></li>
+            <li><a href="#">My Sets</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             Login <span class="caret"></span>
@@ -66,7 +85,7 @@
         </li>
       </ul>
       <!--<div class="btn btn-primary navbar-btn navbar-right">Logout</div>-->
-      <p class="navbar-text navbar-right"><a href="displayUser.html">Logged In Username</a> &nbsp;&nbsp;</p>
+      <!--<p class="navbar-text navbar-right"><a href="displayUser.html">Logged In Username</a> &nbsp;&nbsp;</p>-->
     </div>
   </div>
 </nav>
@@ -80,17 +99,18 @@
 
       <p>The Magician's Toolkit</p>
 
-      <p>Post Effects, Create Routines, and Share</p>
+      <p>Post Routines, Create Sets, and Share Magic!</p>
 
       <!-- Search Bar -->
       <div class="row">
         <div class="col-md-offset-3 col-md-6">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search by Effect Name">
+            <input type="text" class="form-control" placeholder="Search by Routine Name">
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+              <button class="btn btn-default" type="button"><a href="listEffects.html"><i class="fa fa-search"></i></a></button>
             </span>
           </div>
+          <span><small><a href="search.html">Advanced Search</a></small></span>
         </div>
       </div>
       <br/>
@@ -102,19 +122,19 @@
   <!-- Content -->
   <section id="content" class="container">
     <div class="col-md-4">
-      <h2>Create Effects</h2>
-
-      <p>Create an effect and share it with others</p>
-    </div>
-    <div class="col-md-4">
-      <h2>Like Effects</h2>
-
-      <p>Remember effects that you like!</p>
-    </div>
-    <div class="col-md-4">
       <h2>Create Routines</h2>
 
-      <p>From your list of Effects, build a routine for a show!</p>
+      <p>Create a routine and share it with others</p>
+    </div>
+    <div class="col-md-4">
+      <h2>Like Routines</h2>
+
+      <p>Remember routines that you like!</p>
+    </div>
+    <div class="col-md-4">
+      <h2>Create Sets</h2>
+
+      <p>From your list of Routines, build a set for a show!</p>
     </div>
   </section>
 </section>
@@ -124,7 +144,8 @@
 <footer class="footer">
   <div class="container">
     <div class="col-md-3">
-      Designed using IntelliJ IDEA, LESS, and Postgres
+      <p>About Play with Magic</p>
+      <p>Problems?  Contact us on Github!</p>
     </div>
     <div class="col-md-3">
       <p><i class="fa fa-css3"></i> Responsive Layout built on Twitter Bootstrap</p>
