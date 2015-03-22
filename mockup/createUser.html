@@ -54,6 +54,56 @@
     <div class="col-md-12">
       <h1>Create User</h1>
       <!-- User Attributes -->
+      <div class="container">
+        <form id="createUser" class="form-horizontal" action="#">
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">First</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"
+                   name="@contactForm("firstName").name"
+            id="@contactForm("firstName").id"
+            value="@contactForm("firstName").value"
+            placeholder="First Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">Last</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"
+                   name="@contactForm("lastName").name"
+            id="@contactForm("lastName").id"
+            value="@contactForm("lastName").value"
+            placeholder="Last Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">Digits</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"
+                   name="@contactForm("telephone").name"
+            id="@contactForm("telephone").id"
+            value="@contactForm("telephone").value"
+            placeholder="888-888-8888">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Add User</button>
+          </div>
+        </div>
+        </form>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
       <h2>User Name</h2>
 
       <h2>First Name</h2>
@@ -87,8 +137,6 @@
       <h2>Awards / Accolades / Competitions?</h2>
 
       <h2>Last attended lecture / convention?</h2>
-
-      <h2>What's your favorite magic shop online/offline?</h2>
 
       <h2>What's your favorite magic shop online/offline?</h2>
 
