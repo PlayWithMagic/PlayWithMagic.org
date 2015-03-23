@@ -5,7 +5,7 @@ PlayWithMagic is a web-based application that catalogs magic tricks and helps ma
 
 [Check out the prototype here](http://mark.nelson.engineer/PlayWithMagic/mockup/)
 
-TODO:  Add screenshot 1
+![Home Page](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 TODO:  Add screenshot 2
 
@@ -83,23 +83,32 @@ Milestones
 ----------
 ### Mockup
 Due:  25 March
-
-A responsive, non-dynamic (no Java software) representation of the major elements of the application.
+  + A responsive, non-dynamic (no Java software) representation of the major elements of the application.
+  + A README.md file
+  + A viable GitHub project
+    - Source code
+    - Issue tracker
+    - Wiki content
 
 ### Deliverable 1
 Due:  8 April (2 weeks after Mockup)
-
-Lorem ipsum
+  + Established Look & Feel
+  + Consistent Navigation
+  + CRUD capable entities against an in-memory database w/ 2-3 users pre-populated)
+    - User Profile
+    - User Routines
 
 ### Deliverable 2
 Due:  22 April (2 weeks after Deliverable 1)
-
-Lorem ipsum
+  + Refactor the model into a database-backed system
+  + Increase the number of saved users & routines
+  + Find & Save routines
+  + CRUD capable Set management
 
 ### Deliverable 3
 Due:  6 May (2 weeks after Deliverable 2)
-
-Lorem ipsum
+  + Library mockup (not complete implementation)
+  + Recommender engine mockup
 
 ### Final Project Due
 Due:  13 May (1 week after Deliverable 3)
