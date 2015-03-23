@@ -5,7 +5,7 @@ PlayWithMagic is a web-based application that catalogs magic tricks and helps ma
 
 [Check out the prototype here](http://mark.nelson.engineer/PlayWithMagic/mockup/)
 
-![Home Page](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![Home Page](https://github.com/pkarjala/PlayWithMagic/blob/master/public/images/README-Home.png "Logo Title Text 1")
 
 TODO:  Add screenshot 2
 
