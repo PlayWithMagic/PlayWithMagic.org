@@ -7,10 +7,6 @@ PlayWithMagic is a web-based application that catalogs magic tricks and helps ma
 
 ![Home Page](https://github.com/pkarjala/PlayWithMagic/blob/master/public/images/README-Home.png "Home Page")
 
-![Routine Page](https://github.com/pkarjala/PlayWithMagic/blob/master/public/images/README-Routine.png "Routine Page")
-
-
-
 Overview
 --------
 _We're looking for a few good routines._
@@ -38,6 +34,8 @@ routines together.  Finally, magicians can compose sets.  Sets consist of:
     visual representation of the set.  Routines can be reordered, moved back to the dock, etc.
   * Indicators/status to help magicians understand certain rules such as:  Set duration, avoid repeating the same effect
     throughout a set, cost of production, etc.
+
+![Routine Page](https://github.com/pkarjala/PlayWithMagic/blob/master/public/images/README-Routine.png "Routine Page")
 
 ### Use Cases
 [Several use cases are documented in the Wiki.](https://github.com/pkarjala/PlayWithMagic/wiki/Use-Cases)
