@@ -1,7 +1,6 @@
 PlayWithMagic
 =============
 
-<<<<<<< HEAD
 PlayWithMagic is a web-based application that catalogs magic tricks and helps magicians build shows.
 
 [Check out the prototype here](http://mark.nelson.engineer/PlayWithMagic/mockup/)
@@ -203,48 +202,25 @@ Known Bugs
 
 Creators
 --------
-<<<<<<< HEAD
  * Patrick Karjala
  * David Neely
  * Mark Nelson
 
 [Checkout the Contact Us page on the PlayWithMagic Wiki](https://github.com/pkarjala/PlayWithMagic/wiki/Contact-Us)
-=======
-#### Patrick Karjala
- * [Website](http://patrickakarjala.wordpress.com)
- * [GitHub](https://github.com/pkarjala/)
- * [pkarjala@hawaii.edu](mailto:pkarjala@hawaii.edu)
-
-#### David Neely
- * [Website](http://davidneely.wordpress.com)
- * [GitHub](https://github.com/davidkneely)
- * [davidics613@gmail.com](mailto:davidics613@gmail.com)
-
-
-#### Mark Nelson
- * [Website](http://mark.nelson.engineer)
- * [GitHub](https://github.com/marknelsonengineer)
- * [marknels@hawaii.edu](mailto:marknels@hawaii.edu)
-
->>>>>>> mockup
 
 Credits and Acknowledgements
 -----------------------------
 The authors would like to thank the University of Hawaii, the UH Department Information and Computer Science and Dr. Philip Johnson for their support during the development of this project.
-<<<<<<< HEAD
 
 Consulting Magicians
 --------------------
  * [Lee Asher](http://leeasher.com)
  * [Aaron Fisher](http://www.aaronfishermagic.com)
  * [Mark Nelson](http://mark.nelson.engineer/wordpress/index.php/magic-home-page/)
-=======
->>>>>>> mockup
 
 The Three Prime Directives
 --------------------------
 1. The system successfully accomplishes a useful task.
-<<<<<<< HEAD
   * An online catalog of your own routines
   * Ability to find others' routines
   * A tool for choreographing routines into saved sets
@@ -255,15 +231,5 @@ The Three Prime Directives
   * The client-side hardware requirement for full functionality is a desktop or tablet
 3. An external developer can successfully understand and enhance the system
   * Documentation can be found on the Wiki and will be enough to allow a competent developer to make enhancements
-=======
-  * An online catalog of both your own effects and others' effects
-  * A tool for choreographing effects into saved sets
-  * A recommender engine for adding previously unknown effects into sets
-2. An external user can successfully install and use the system.
-  * The application will be cloud based
-  * The only client-side software requirements is a browser
-  * The client-side hardware requirement for full functionality is a desktop or tablet
-3. An external developer can successfully understand and enhance the system.
-  * Sufficient documentation will be provided
->>>>>>> mockup
+
 
