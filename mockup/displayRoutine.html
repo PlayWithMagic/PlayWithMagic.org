@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
 
-  <title>Play With Magic</title>
+  <title>Play With Magic - Single Routine</title>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
   <![endif]-->
 </head>
-<body id="home">
+<body>
 
 <!-- Responsive navbar -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -41,14 +41,14 @@
         <li><a href="#">Browse Sets</a></li>
       </ul>
       <!-- Don't show Search on home page -->
-      <!--<form class="navbar-form navbar-left" role="search">-->
-        <!--<div class="input-group">-->
-          <!--<input type="text" class="form-control" placeholder="Search" />-->
-          <!--<span class="input-group-btn">-->
-            <!--<button class="btn btn-default" type="button">Search Routines</button>-->
-          <!--</span>-->
-        <!--</div>-->
-      <!--</form>-->
+      <form class="navbar-form navbar-left" role="search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search"/>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Search Routines</button>
+          </span>
+        </div>
+      </form>
       <!-- Login / User Info Dropdowns -->
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -89,64 +89,89 @@
   </div>
 </nav>
 
+
 <!-- Page Content -->
-<section id="main">
-  <!-- Header -->
-  <header id="home" class="jumbotron">
-    <div class="container">
-      <h1><i class="fa fa-magic"></i> Play With Magic</h1>
-
-      <p>The Magician's Toolkit</p>
-
-      <p>Post Routines, Create Sets, and Share Magic!</p>
-
-      <!-- Search Bar -->
-      <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search by Routine Name">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button"><a href="listRoutines.html"><i class="fa fa-search"></i></a>
-              </button>
-            </span>
-          </div>
-          <span><small><a href="search.html">Advanced Search</a></small></span>
-        </div>
-      </div>
-      <br/>
-      <a href="createUser.html"><button type="button" class="btn btn-primary">Join the Community Today!</button></a>
-    </div>
-  </header>
-
+<section id="page">
 
   <!-- Content -->
   <section id="content" class="container">
-    <div class="col-md-4">
-      <h2>Create Routines</h2>
-
-      <p>Create a routine and share it with others</p>
+    <div class="col-md-6">
+      <h1>Routine Name <small><a href="displayUser.html">User Name</a></small></h1>
+      <img class="img-responsive" src="images/card-rainbow.jpg" alt="Image of Magician"/>
+      <h2>Related Routines</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Row</th>
+          <th>Routine</th>
+          <th>Attribution</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td><a href="displayRoutine.html">Routine Name</a></td>
+          <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><a href="displayRoutine.html">Routine Name</a></td>
+          <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><a href="displayRoutine.html">Routine Name</a></td>
+          <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="col-md-4">
-      <h2>Like Routines</h2>
+    <div class="col-md-6">
+      <a href="#" class="btn btn-large">Bookmark Routine</a>
+      <h2>Type</h2>
 
-      <p>Remember routines that you like!</p>
-    </div>
-    <div class="col-md-4">
-      <h2>Create Sets</h2>
+      <h2>Time</h2>
 
-      <p>From your list of Routines, build a set for a show!</p>
+      <h2>Skill Level</h2>
+
+      <h2>Info</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.
+        Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam
+        eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur.
+        Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. </p>
+
+      <h2>Description</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.
+        Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam
+        eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur.
+        Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. </p>
+
+      <h2>Materials</h2>
+
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+        <li>Item 6</li>
+        <li>Item 7</li>
+      </ul>
+
     </div>
+
   </section>
 </section>
-
 
 <!-- Footer -->
 <footer class="footer">
   <div class="container">
     <div class="col-md-3">
-      <p>About Play with Magic</p>
-
-      <p>Problems? Contact us on Github!</p>
+      Designed using IntelliJ IDEA, LESS, and Postgres
     </div>
     <div class="col-md-3">
       <p><i class="fa fa-css3"></i> Responsive Layout built on Twitter Bootstrap</p>
@@ -163,6 +188,7 @@
 <!-- Load Bootstrap JavaScript components -->
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>
