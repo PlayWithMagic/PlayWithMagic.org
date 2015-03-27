@@ -1,34 +1,51 @@
-@(contactForm: Form[views.formdata.ContactFormData])
+@(routineForm: Form[views.formdata.RoutineFormData])
 
 @import views.html.bootstrap3._
 @import helper._
 
-@Main("NewContact") {
+@Main("NewRoutine") {
   <div class="container">
-    @form(routes.Application.postContact(), 'class -> "form-horizontal") {
+    @form(routes.Application.postRoutine(), 'class -> "form-horizontal") {
       <input type="hidden"
-      name="@contactForm("id").name"
-      id="@contactForm("id").id"
-      value="@contactForm("id").value"/>
+      name="@routineForm("id").name"
+      id="@routineForm("id").id"
+      value="@routineForm("id").value"/>
     <!--<form class="form-horizontal">-->
-      <!-- First Name -->
-      @text(contactForm("firstName"),
-        label = "First",
-        placeholder = "First Name",
+      <!-- Name -->
+      @text(routineForm("name"),
+        label = "Name",
+        placeholder = "Name",
         help = "")
-
-      <!-- Last Name -->
-      @text(contactForm("lastName"),
-        label = "Last",
-        placeholder = "Last Name",
+      <!-- Image -->
+      @text(routineForm("image"),
+        label = "Image",
+        placeholder = "Image",
         help = "")
-
-      <!-- Telephone -->
-      @text(contactForm("telephone"),
-        label = "Telephone",
-        placeholder = "xxx-xxx-xxxx",
+      <!-- Magic Type -->
+      @text(routineForm("magicType"),
+        label = "Magic Type",
+        placeholder = "Magic Type",
         help = "")
-
+      <!-- Skill Level -->
+      @text(routineForm("skillLevel"),
+        label = "Skill Level",
+        placeholder = "Skill Level",
+        help = "")
+      <!-- Info -->
+      @text(routineForm("info"),
+        label = "Info",
+        placeholder = "Information",
+        help = "")
+      <!-- Description -->
+      @text(routineForm("description"),
+        label = "Description",
+        placeholder = "Description",
+        help = "")
+      <!-- Materials -->
+      @text(routineForm("materials"),
+        label = "Materials",
+        placeholder = "Materials",
+        help = "")
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
           <button id="submit" type="submit" class="btn btn-default">Add</button>
