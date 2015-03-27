@@ -1,4 +1,4 @@
-name := """digits"""
+name := """playwithmagic"""
 
 version := "1.0-SNAPSHOT"
 
