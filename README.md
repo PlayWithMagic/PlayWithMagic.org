@@ -81,11 +81,11 @@ and say things twice.
 
 ### Application High-Level Design
 The model revolves around three central entities:
-1. Routines (A single magic trick)
-2. Sets (An personalized, ordered collection of routines)
-3. Magicians/Users
+  1. Routines (A single magic trick)
+  2. Sets (An personalized, ordered collection of routines)
+  3. Magicians/Users
 
-The application will use a Model-View-Controller (MVC) design pattern.  The application will be designed with rapid
+The application uses a Model-View-Controller (MVC) design pattern.  The application is designed with rapid
 prototyping in mind and will consequently rely on unit, integration and application tests to maintain a high level
 of quality at each release.
 
@@ -130,7 +130,7 @@ Due:  13 May (1 week after Deliverable 3)
 Bugs and Feature Requests
 -------------------------
 Got a bug or a feature request?  We'd like to hear it!  
-[Click here to open an issue.]https://github.com/PlayWithMagic/PlayWithMagic/issues/new "New Issue")
+[Click here to open an issue.](https://github.com/PlayWithMagic/PlayWithMagic/issues/new "New Issue")
 
 Known Bugs
 ----------
