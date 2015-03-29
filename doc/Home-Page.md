@@ -171,5 +171,3 @@ The Three Prime Directives
   * The client-side hardware requirement for full functionality is a desktop or tablet
 3. An external developer can successfully understand and enhance the system
   * Documentation can be found on the Wiki and will be enough to allow a competent developer to make enhancements
-
-
