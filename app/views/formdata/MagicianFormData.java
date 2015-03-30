@@ -3,6 +3,7 @@ package views.formdata;
 import models.Magician;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * MagicianFormData allows for the stoage of Magician Form Data that is input by the user.
@@ -166,7 +167,18 @@ public class MagicianFormData {
     instagram = magician.getInstagram();
   }
 
+  /**
+   * Validate that all fields are non-empty, and that certain fields adhere to specific criteria.
+   *
+   * @return Either null if no errors, or a List of Div IDs and their associated error messages.
+   */
   public List<ValidationError> validate() {
+
+    List<ValidationError> errors = new ArrayList<>();
+
+    // TODO: Create each of the error issues.
+
+    return errors.isEmpty() ? null : errors;
 
   }
 }
