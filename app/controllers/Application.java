@@ -22,7 +22,7 @@ public class Application extends Controller {
    * @return The resulting home page.
    */
   public static Result index() {
-    return ok(Index.render(ContactDB.getContacts()));
+    return ok(Index.render(ContactDB.getContacts(), RoutineDB.getRoutines()));
   }
 
   /**
@@ -45,7 +45,7 @@ public class Application extends Controller {
    */
   public static Result deleteContact(long id) {
     ContactDB.deleteContact(id);
-    return ok(Index.render(ContactDB.getContacts()));
+    return ok(Index.render(ContactDB.getContacts(), RoutineDB.getRoutines()));
   }
 
   /**
@@ -87,7 +87,7 @@ public class Application extends Controller {
    */
   public static Result deleteRoutine(long id) {
     RoutineDB.deleteRoutine(id);
-    return ok(Index.render(RoutineDB.getRoutines()));
+    return ok(Index.render(ContactDB.getContacts(), RoutineDB.getRoutines()));
   }
 
   /**
