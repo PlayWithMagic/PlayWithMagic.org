@@ -13,6 +13,7 @@ body header#home.jumbotron h1 {
 }
 body header#routines {
   background: none;
+  padding-left: 25px;
 }
 body header#routines p {
   text-align: center;
