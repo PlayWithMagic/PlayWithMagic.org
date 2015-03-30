@@ -59,7 +59,7 @@ public class MagicianDB {
 
   /**
    * Gets the full list of all Magicians in the local storage list.
-   * 
+   *
    * @return The full list of all Magicians.
    */
   public static List<Magician> getMagicians() {
