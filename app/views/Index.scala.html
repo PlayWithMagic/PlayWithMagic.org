@@ -1,7 +1,36 @@
 @(contacts: List[Contact], routines: List[Routine])
 
 @Main("Home") {
-  <div class="container">
+  <!-- Page Content -->
+  <section id="main">
+      <!-- Header -->
+    <header id="home" class="jumbotron">
+      <div class="container">
+        <h1><i class="fa fa-magic"></i> Play With Magic</h1>
+
+        <p>The Magician's Toolkit</p>
+
+        <p>Post Routines, Create Sets, and Share Magic!</p>
+
+          <!-- Search Bar -->
+        <div class="row">
+          <div class="col-md-offset-3 col-md-6">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search by Routine Name">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><a href="listRoutines.html"><i class="fa fa-search"></i></a>
+                </button>
+              </span>
+            </div>
+            <span><small><a href="search.html">Advanced Search</a></small></span>
+          </div>
+        </div>
+        <br/>
+        <a href="createUser.html"><button type="button" class="btn btn-primary">Join the Community Today!</button></a>
+      </div>
+    </header>
+  </section>
+    <div class="container">
     <h1>Current Contacts</h1>
   </div>
   <div class="container">
