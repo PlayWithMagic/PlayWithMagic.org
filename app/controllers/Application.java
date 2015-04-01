@@ -104,7 +104,7 @@ public class Application extends Controller {
     else {
       RoutineFormData data = formData.get();
       RoutineDB.addRoutines(data);
-      System.out.printf("HTTP OK; Form Data:  %s, %s, %s, %n", data.name, data.image, data.magicType,
+      System.out.printf("HTTP OK; Form Data:  %s, %s, %s, %s, %s, %s, %s %n", data.name, data.image, data.magicType,
           data.skillLevel, data.info, data.description, data.materials);
       return ok(NewRoutine.render(formData));
     }
