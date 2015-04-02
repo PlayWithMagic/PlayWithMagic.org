@@ -18,14 +18,14 @@ public class Routine {
   /**
    * Create new Routine object.
    *
-   * @param id The id.
-   * @param name The name of the routine.
-   * @param image The image associated with the routine.
-   * @param magicType The type of magic associated with the routine.
-   * @param skillLevel The skill level required to do this routine.
-   * @param info The information about this routine.
+   * @param id          The id.
+   * @param name        The name of the routine.
+   * @param image       The image associated with the routine.
+   * @param magicType   The type of magic associated with the routine.
+   * @param skillLevel  The skill level required to do this routine.
+   * @param info        The information about this routine.
    * @param description The description of this routine.
-   * @param materials The materials needed to perform this routine.
+   * @param materials   The materials needed to perform this routine.
    */
   public Routine(long id, String name, String image, String magicType, String skillLevel,
                  String info, String description, String materials) {

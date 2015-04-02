@@ -9,7 +9,7 @@ import java.util.Map;
 public class ExperienceLevels {
 
   private static String[] experienceLevels = {"Neophyte", "Enthusiast", "Hobbyist", "Historian", "Collector",
-                                             "Semi-Professional", "Professional"};
+      "Semi-Professional", "Professional"};
 
 
   /**
