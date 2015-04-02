@@ -3,55 +3,66 @@
 @import views.html.bootstrap3._
 @import helper._
 
+
 @Main("NewRoutine") {
-  <div class="container">
-    @form(routes.Application.postRoutine(), 'class -> "form-horizontal") {
-      <input type="hidden"
-      name="@routineForm("id").name"
-      id="@routineForm("id").id"
-      value="@routineForm("id").value"/>
-    <!--<form class="form-horizontal">-->
-      <!-- Name -->
-      @text(routineForm("name"),
-        label = "Name",
-        placeholder = "Name",
-        help = "")
-      <!-- Image -->
-      @text(routineForm("image"),
-        label = "Image",
-        placeholder = "Image",
-        help = "")
-      <!-- Magic Type -->
-      @text(routineForm("magicType"),
-        label = "Magic Type",
-        placeholder = "Magic Type",
-        help = "")
-      <!-- Skill Level -->
-      @text(routineForm("skillLevel"),
-        label = "Skill Level",
-        placeholder = "Skill Level",
-        help = "")
-      <!-- Info -->
-      @text(routineForm("info"),
-        label = "Info",
-        placeholder = "Information",
-        help = "")
-      <!-- Description -->
-      @text(routineForm("description"),
-        label = "Description",
-        placeholder = "Description",
-        help = "")
-      <!-- Materials -->
-      @text(routineForm("materials"),
-        label = "Materials",
-        placeholder = "Materials",
-        help = "")
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button id="submit" type="submit" class="btn btn-default">Add</button>
+  <!-- Page Content -->
+  <section id="page">
+      <!-- Content -->
+    <section id="content" class="container">
+      <div class="col-md-12">
+        <h1>Create Routine</h1>
+          <!-- User Attributes -->
+        <div class="container">
+        @form(routes.Application.postRoutine(), 'class -> "form-horizontal") {
+          <input type="hidden"
+          name="@routineForm("id").name"
+          id="@routineForm("id").id"
+          value="@routineForm("id").value"/>
+            <!--<form class="form-horizontal">-->
+            <!-- Name -->
+          @text(routineForm("name"),
+            label = "Name",
+            placeholder = "Name",
+            help = "")
+            <!-- Image -->
+          @text(routineForm("image"),
+            label = "Image",
+            placeholder = "Image",
+            help = "")
+            <!-- Magic Type -->
+          @text(routineForm("magicType"),
+            label = "Magic Type",
+            placeholder = "Magic Type",
+            help = "")
+            <!-- Skill Level -->
+          @text(routineForm("skillLevel"),
+            label = "Skill Level",
+            placeholder = "Skill Level",
+            help = "")
+            <!-- Info -->
+          @text(routineForm("info"),
+            label = "Info",
+            placeholder = "Information",
+            help = "")
+            <!-- Description -->
+          @text(routineForm("description"),
+            label = "Description",
+            placeholder = "Description",
+            help = "")
+            <!-- Materials -->
+          @text(routineForm("materials"),
+            label = "Materials",
+            placeholder = "Materials",
+            help = "")
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button id="submit" type="submit" class="btn btn-default">Add</button>
+            </div>
+          </div>
+            <!--</form>-->
+        }
         </div>
       </div>
-    <!--</form>-->
-    }
-  </div>
+    </section>
+  </section>
 }
