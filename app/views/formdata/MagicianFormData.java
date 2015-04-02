@@ -1,9 +1,11 @@
 package views.formdata;
 
 import models.Magician;
+import play.data.validation.ValidationError;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * MagicianFormData allows for the stoage of Magician Form Data that is input by the user.
@@ -176,7 +178,6 @@ public class MagicianFormData {
 
     List<ValidationError> errors = new ArrayList<>();
 
-    // TODO: Create each of the error issues.
 
     return errors.isEmpty() ? null : errors;
 
