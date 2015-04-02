@@ -4,9 +4,6 @@
 
 # Home page
 GET         /                     controllers.Application.index()
-GET         /newcontact           controllers.Application.newContact(id: Long?= 0)
-POST        /newcontact           controllers.Application.postContact()
-GET         /delete               controllers.Application.deleteContact(id: Long?= 0)
 
 # Routines page
 GET         /newroutine           controllers.Application.newRoutine(id: Long?= 0)

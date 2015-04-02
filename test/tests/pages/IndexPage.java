@@ -30,21 +30,7 @@ public class IndexPage extends FluentPage {
 
   @Override
   public void isAt() {
-    assertThat(title()).isEqualTo("Home - digits");
+    assertThat(title()).isEqualTo("Play With Magic");
   }
-
-  /**
-   * Checks that the index page table has a given contact.
-   *
-   * @param firstName The first name.
-   * @param lastName  The last name.
-   * @param telephone The telephone number.
-   */
-  public void hasContact(String firstName, String lastName, String telephone) {
-    assertThat(pageSource()).contains(firstName);
-    assertThat(pageSource()).contains(lastName);
-    assertThat(pageSource()).contains(telephone);
-  }
-
 }
 
