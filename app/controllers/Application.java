@@ -9,14 +9,16 @@ import views.html.Index;
 import views.html.NewRoutine;
 
 /**
- * Provides controllers for this application.
+ * The application's MVC Controller class.
+ *
+ * @see http://www.playframework.com
  */
 public class Application extends Controller {
 
   /**
-   * Returns the home page.
+   * Render the Home page.
    *
-   * @return The resulting home page.
+   * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result index() {
     return ok(Index.render(RoutineDB.getRoutines()));
@@ -25,8 +27,8 @@ public class Application extends Controller {
   /**
    * Renders the newRoutine page with a form to add new routines if the ID is 0; otherwise updates the existing routine.
    *
-   * @param id The ID value passed in.
-   * @return The newRoutine page.
+   * @param id The ID of the routine to edit (or 0 if it's a new routine).
+   * @return An HTTP OK message along with the HTML content for the NewRoutine page.
    */
   public static Result newRoutine(long id) {
     RoutineFormData data = (id == 0) ? new RoutineFormData() : new RoutineFormData(RoutineDB.getRoutine(id));
@@ -35,10 +37,10 @@ public class Application extends Controller {
   }
 
   /**
-   * Renders the index page with the given record deleted from the in-memory database.
+   * Delete a routine from the database and render the index page.
    *
-   * @param id The ID value passed in.
-   * @return The Index page.
+   * @param id The ID of the routine to delete.
+   * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result deleteRoutine(long id) {
     RoutineDB.deleteRoutine(id);

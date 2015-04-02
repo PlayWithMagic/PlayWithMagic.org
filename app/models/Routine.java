@@ -3,6 +3,8 @@ package models;
 /**
  * A routine object that holds a name, image, magic type, skill level,
  * information, description, and materials associated with the routine.
+ *
+ * This is a central entity for the Play With Magic application.
  */
 public class Routine {
 
