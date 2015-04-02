@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+  <title>Play With Magic - Single Routine</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CDN loads -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/slate/bootstrap.min.css"/>
+
+  <!--  Load site-specific customizations after bootstrap. -->
+  <link rel="stylesheet" media="screen" href="./css/style.css">
+  <!--<link rel="shortcut icon" type="image/png" href="">-->
+
+  <!-- FontAwesome fonts -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<!-- Responsive navbar -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <!--  Display three horizontal lines when navbar collapsed. -->
+        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Play With Magic</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="listRoutines.html">Browse Routines</a></li>
+        <li><a href="#">Browse Sets</a></li>
+      </ul>
+      <!-- Don't show Search on home page -->
+      <form class="navbar-form navbar-left" role="search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search"/>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Search Routines</button>
+          </span>
+        </div>
+      </form>
+      <!-- Login / User Info Dropdowns -->
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in
+            Username <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="displayUser.html">Profile</a></li>
+            <li><a href="listRoutines.html">My Routines</a></li>
+            <li><a href="#">My Sets</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            Login <span class="caret"></span>
+          </a>
+
+          <form class="dropdown-menu login" role="form">
+            <div class="form-group">
+              <label for="loginUsername">Username</label>
+              <input type="email" class="form-control" id="loginUsername" placeholder="Username / Email">
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div>
+            <button class="btn btn-sm btn-primary btn-block" type="submit">Sign in</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Page Content -->
+<section id="page">
+
+  <!-- Content -->
+  <section id="content" class="container">
+    <div class="col-md-6">
+      <h1>Routine Name <small><a href="displayUser.html">User Name</a></small></h1>
+      <img class="img-responsive" src="images/card-rainbow.jpg" alt="Image of Magician"/>
+      <h2>Related Routines</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Row</th>
+          <th>Routine</th>
+          <th>Attribution</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td><a href="displayRoutine.html">Routine Name</a></td>
+          <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><a href="displayRoutine.html">Routine Name</a></td>
+          <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><a href="displayRoutine.html">Routine Name</a></td>
+          <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <a href="#" class="btn btn-large">Bookmark Routine</a>
+      <h2>Type</h2>
+
+      <h2>Time</h2>
+
+      <h2>Skill Level</h2>
+
+      <h2>Info</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.
+        Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam
+        eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur.
+        Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. </p>
+
+      <h2>Description</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.
+        Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam
+        eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur.
+        Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. </p>
+
+      <h2>Materials</h2>
+
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+        <li>Item 6</li>
+        <li>Item 7</li>
+      </ul>
+
+    </div>
+
+  </section>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="col-md-3">
+      Designed using IntelliJ IDEA, LESS, and Postgres
+    </div>
+    <div class="col-md-3">
+      <p><i class="fa fa-css3"></i> Responsive Layout built on Twitter Bootstrap</p>
+    </div>
+    <div class="col-md-3">
+      <p><i class="fa fa-play"></i> <a href="http://playframework.com">Created with Play Framework</a></p>
+    </div>
+    <div class="col-md-3">
+      <p><a href="http://github.com/pkarjala/PlayWithMagic"><i class="fa fa-github"></i> Contribute on Github</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- Load Bootstrap JavaScript components -->
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

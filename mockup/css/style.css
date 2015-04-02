@@ -1,0 +1,54 @@
+/* Basic stylesheet */
+/* Gloabl Less Variables */
+body {
+  padding-top: 50px;
+}
+body header#home {
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.65)), url("../images/magic-box.jpg") center;
+  background-size: cover;
+  text-align: center;
+}
+body header#home.jumbotron h1 {
+  color: mintcream;
+}
+body header#routines {
+  background: none;
+  padding-left: 25px;
+}
+body header#routines p {
+  text-align: center;
+}
+body section#main section#content {
+  text-align: center;
+}
+body section#page section#content {
+  text-align: left;
+  padding-top: 50px;
+}
+body section#page section#content section#social {
+  font-size: 32px;
+}
+nav#paginator {
+  margin-left: auto;
+  margin-right: auto;
+}
+nav form.dropdown-menu.login {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 300px;
+}
+#home footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #2b2e32;
+  padding: 25px 0 25px 0;
+}
+footer {
+  width: 100%;
+  height: 80px;
+  background-color: #2b2e32;
+  padding: 25px 0 25px 0;
+  margin-top: 50px;
+}
