@@ -1,0 +1,82 @@
+@*
+* The New and Update Routine HTML form page.
+*
+* @author Mark Nelson
+* @see http://www.playframework.com
+*@
+@(magicianForm: Form[views.formdata.MagicianFormData])
+
+  @import helper._
+  @import views.html.bootstrap3._
+
+
+  @Main("NewMagician") {
+    <!-- Page Content -->
+    <section id="page">
+        <!-- Content -->
+      <section id="content" class="container">
+        <div class="col-md-12">
+          <h1>Magician Profile</h1>
+            <!-- User Attributes -->
+          <div class="container">
+          @form(routes.Application.postRoutine(), 'class -> "form-horizontal") {
+            <!-- Hidden ID Field -->
+            @hidden(magicianForm("id"))
+              <!--<form class="form-horizontal">-->
+              <!-- First Name -->
+            @text(magicianForm("firstName"),
+              label = "firstName",
+              placeholder = "firstName",
+              help = "")
+              <!-- Last Name -->
+            @text(magicianForm("lastName"),
+              label = "lastName",
+              placeholder = "lastName",
+              help = "")
+              <!-- Stage Name -->
+            @text(magicianForm("lastName"),
+              label = "lastName",
+              placeholder = "lastName",
+              help = "")
+              <!-- Image -->
+            @text(magicianForm("image"),
+              label = "Image",
+              placeholder = "Image",
+              help = "")
+              <!-- Magic Type -->
+            @text(magicianForm("magicType"),
+              label = "Magic Type",
+              placeholder = "Magic Type",
+              help = "")
+              <!-- Skill Level -->
+            @text(magicianForm("skillLevel"),
+              label = "Skill Level",
+              placeholder = "Skill Level",
+              help = "")
+              <!-- Info -->
+            @text(magicianForm("info"),
+              label = "Info",
+              placeholder = "Information",
+              help = "")
+              <!-- Description -->
+            @text(magicianForm("description"),
+              label = "Description",
+              placeholder = "Description",
+              help = "")
+              <!-- Materials -->
+            @text(magicianForm("materials"),
+              label = "Materials",
+              placeholder = "Materials",
+              help = "")
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button id="submit" type="submit" class="btn btn-default">Add</button>
+              </div>
+            </div>
+              <!--</form>-->
+          }
+          </div>
+        </div>
+      </section>
+    </section>
+  }

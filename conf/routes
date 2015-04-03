@@ -10,6 +10,11 @@ GET         /newroutine           controllers.Application.newRoutine(id: Long?= 
 POST        /newroutine           controllers.Application.postRoutine()
 GET         /deleteRoutine        controllers.Application.deleteRoutine(id: Long?= 0)
 
+# Magicians page
+GET         /newmagician          controllers.Application.newMagician(id: Long?=0)
+POST        /newmagician          controllers.Application.postMagician()
+GET         /deletemagician       controllers.Application.deleteMagician(id: Long?= 0)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file         controllers.Assets.at(path="/public", file)

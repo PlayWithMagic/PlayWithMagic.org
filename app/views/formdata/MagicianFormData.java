@@ -35,16 +35,6 @@ public class MagicianFormData {
   public String stageName;
 
   /**
-   * Input data Date of Birth field (date picker field).
-   */
-  public String dateOfBirth;
-
-  /**
-   * Input boolean on whether or not to show the age.
-   */
-  public boolean showAge;
-
-  /**
    * Input data Location field.
    */
   public String location;
@@ -144,29 +134,27 @@ public class MagicianFormData {
    * @param magician The Magician object passed to the constructor.
    */
   public MagicianFormData(Magician magician) {
-    id = magician.getId();
-    firstName = magician.getFirstName();
-    lastName = magician.getLastName();
-    stageName = magician.getStageName();
-    dateOfBirth = magician.getDateOfBirth();
-    showAge = magician.isShowAge();
-    location = magician.getLocation();
-    userPhoto = magician.getUserPhoto();
-    biography = magician.getBiography();
-    interests = magician.getInterests();
-    influences = magician.getInfluences();
-    experienceLevel = magician.getExperienceLevel();
-    yearsPracticing = magician.getYearsPracticing();
-    organizations = magician.getOrganizations();
-    website = magician.getWebsite();
-    email = magician.getEmail();
-    showEmail = magician.isShowEmail();
-    facebook = magician.getFacebook();
-    twitter = magician.getTwitter();
-    linkedIn = magician.getLinkedIn();
-    googlePlus = magician.getGooglePlus();
-    flickr = magician.getFlickr();
-    instagram = magician.getInstagram();
+    this.id = magician.getId();
+    this.firstName = magician.getFirstName();
+    this.lastName = magician.getLastName();
+    this.stageName = magician.getStageName();
+    this.location = magician.getLocation();
+    this.userPhoto = magician.getUserPhoto();
+    this.biography = magician.getBiography();
+    this.interests = magician.getInterests();
+    this.influences = magician.getInfluences();
+    this.experienceLevel = magician.getExperienceLevel();
+    this.yearsPracticing = magician.getYearsPracticing();
+    this.organizations = magician.getOrganizations();
+    this.website = magician.getWebsite();
+    this.email = magician.getEmail();
+    this.showEmail = magician.isShowEmail();
+    this.facebook = magician.getFacebook();
+    this.twitter = magician.getTwitter();
+    this.linkedIn = magician.getLinkedIn();
+    this.googlePlus = magician.getGooglePlus();
+    this.flickr = magician.getFlickr();
+    this.instagram = magician.getInstagram();
   }
 
   /**
