@@ -1,12 +1,18 @@
 package controllers;
 
+import models.MagicianDB;
 import models.RoutineDB;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.formdata.ExperienceLevels;
+import views.formdata.MagicianFormData;
 import views.formdata.RoutineFormData;
 import views.html.Index;
 import views.html.NewRoutine;
+import views.html.NewMagician;
+
+import java.util.Map;
 
 /**
  * The application's MVC Controller class.
@@ -23,6 +29,29 @@ public class Application extends Controller {
   public static Result index() {
     return ok(Index.render(RoutineDB.getRoutines()));
   }
+
+  /**
+   * Renders the newMagician page with a form to add a new Magician if the ID is 0; otherwise, edit existing Magician.
+   *
+   * @param id The ID of the magician to edit; if new Magician, ID is 0.
+   * @return An HTTP OK message along with the HTML content for the NewMagician page.
+   */
+  public static Result newMagician(long id) {
+    MagicianFormData magician = (id == 0) ? new MagicianFormData() : new MagicianFormData(MagicianDB.getMagician(id));
+    Form<MagicianFormData> magicianData = Form.form(MagicianFormData.class).fill(magician);
+    Map<String, Boolean> experienceLevelMap = ExperienceLevels.getExperienceLevels(magician.experienceLevel);
+    return ok(NewMagician.render(magicianData, experienceLevelMap));
+  }
+
+//  public static Result postMagician(long id) {
+//    Form<MagicianFormData> magicianData = Form.form(MagicianFormData.class).bindFromRequest();
+//    if (magicianData.hasErrors()) {
+//
+//    }
+//    else {
+//
+//    }
+//  }
 
   /**
    * Renders the newRoutine page with a form to add new routines if the ID is 0; otherwise updates the existing routine.
