@@ -27,33 +27,13 @@
 
       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!--[if lt IE 9]>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
-  <![endif]-->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+      <![endif]-->
   </head>
-  <body id="home">
+  <body id="@page">
 
-    @*<!DOCTYPE html>*@
-
-    @*<html>*@
-    @*<head>*@
-    @*<title>@page - digits</title>*@
-    @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
-    @*<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/flatly/bootstrap.min.css">*@
-
-    @*<!-- Load site-specific customizations after bootstrap. -->*@
-    @*<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">*@
-    @*<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">*@
-
-    @*<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->*@
-    @*<!--[if lt IE 9]>*@
-    @*<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>*@
-    @*<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>*@
-    @*<![endif]-->*@
-    @*</head>*@
-    @*<body>*@
-
-    <!-- Responsive navbar -->
+  <!-- Responsive navbar -->
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -61,23 +41,25 @@
             <!--  Display three horizontal lines when navbar collapsed. -->
           <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">Play With Magic</a>
+        <a class="navbar-brand" href="/">Play With Magic</a>
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="listRoutines.html">Browse Routines</a></li>
           <li><a href="#">Browse Sets</a></li>
         </ul>
-          <!-- Don't show Search on home page -->
-          <!--<form class="navbar-form navbar-left" role="search">-->
-          <!--<div class="input-group">-->
-          <!--<input type="text" class="form-control" placeholder="Search" />-->
-          <!--<span class="input-group-btn">-->
-          <!--<button class="btn btn-default" type="button">Search Routines</button>-->
-          <!--</span>-->
-          <!--</div>-->
-          <!--</form>-->
-          <!-- Login / User Info Dropdowns -->
+        <!-- Don't show Search on home page -->
+        @if( page != "home" ) {
+        <form class="navbar-form navbar-left" role="search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Search Routines</button>
+            </span>
+          </div>
+        </form>
+        }
+        <!-- Login / User Info Dropdowns -->
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in
@@ -86,14 +68,16 @@
               <li><a href="displayUser.html">Profile</a></li>
               <li><a href="listRoutines.html">My Routines</a></li>
               <li><a href="#">My Sets</a></li>
+              <li><a href="newroutine">Build Routine</a></li>
+              <li><a href="#">Build Set</a></li>
               <li class="divider"></li>
               <li><a href="#">Logout</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                Login <span class="caret"></span>
-              </a>
+              Login <span class="caret"></span>
+            </a>
 
             <form class="dropdown-menu login" role="form">
               <div class="form-group">
@@ -116,8 +100,8 @@
       </div>
     </div>
   </nav>
-    @content
-    <!-- Footer -->
+  @content
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="col-md-3">
