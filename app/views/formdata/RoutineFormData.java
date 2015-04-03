@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ContactFormData allows for the storage of Form Data that is input by the user.
+ * RoutineFormData allows for the storage of Form Data that is input by the user.
  */
 public class RoutineFormData {
 
