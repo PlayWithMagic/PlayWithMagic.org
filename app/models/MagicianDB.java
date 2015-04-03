@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Patrick A. Karjala on 3/29/15.
+ * Holds an in-memory database of all Magician objects in the data model.
+ *
+ * @see http://www.playframework.com
  */
 public class MagicianDB {
 

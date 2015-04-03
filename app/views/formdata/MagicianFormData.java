@@ -1,12 +1,14 @@
 package views.formdata;
 
 import models.Magician;
+import play.data.validation.ValidationError;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * MagicianFormData allows for the stoage of Magician Form Data that is input by the user.
+ * MagicianFormData allows for the storage of Magician Form Data that is input by the user.
  * This is utilized partially at account creation, and again whenever the Magician info is updated.
  * Eventually we'll decide on which items are strictly required at account creation.
  */
@@ -175,8 +177,6 @@ public class MagicianFormData {
   public List<ValidationError> validate() {
 
     List<ValidationError> errors = new ArrayList<>();
-
-    // TODO: Create each of the error issues.
 
     return errors.isEmpty() ? null : errors;
 

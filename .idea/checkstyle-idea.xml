@@ -3,12 +3,11 @@
   <component name="CheckStyle-IDEA">
     <option name="configuration">
       <map>
-        <entry key="active-configuration" value="INSECURE_HTTP_URL:http://philipmjohnson.github.io/ics613s15/morea/coding-standards/checkstyle.xml:ICS SE Online" />
+        <entry key="active-configuration" value="HTTP_URL:http://philipmjohnson.github.io/ics613s15/morea/coding-standards/checkstyle.xml:ICS SE Online" />
         <entry key="check-nonjava-files" value="false" />
         <entry key="check-test-classes" value="true" />
-        <entry key="location-0" value="LOCAL_FILE:/Users/patrick/ICS613/checkstyle.xml:ICS SE" />
-        <entry key="location-1" value="INSECURE_HTTP_URL:http://philipmjohnson.github.io/ics613s15/morea/coding-standards/checkstyle.xml:ICS SE Online" />
-        <entry key="location-2" value="CLASSPATH:/sun_checks.xml:The default CheckStyle rules" />
+        <entry key="location-0" value="HTTP_URL:http://philipmjohnson.github.io/ics613s15/morea/coding-standards/checkstyle.xml:ICS SE Online" />
+        <entry key="location-1" value="CLASSPATH:/sun_checks.xml:The default CheckStyle rules" />
         <entry key="suppress-errors" value="false" />
         <entry key="thirdparty-classpath" value="" />
       </map>

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
- * Provides testing support for the Index page.
+ * Provides test scaffolding for the Index page.
  */
 public class IndexPage extends FluentPage {
 
@@ -23,28 +23,22 @@ public class IndexPage extends FluentPage {
     this.url = "http://localhost:" + port;
   }
 
+  /**
+   * Get the URL for this page.
+   *
+   * @return The page's URL.
+   */
   @Override
   public String getUrl() {
     return this.url;
   }
 
+  /**
+   * A test to ensure the rendered page displays the correct content.
+   */
   @Override
   public void isAt() {
-    assertThat(title()).isEqualTo("Home - digits");
+    assertThat(title()).isEqualTo("Play With Magic");
   }
-
-  /**
-   * Checks that the index page table has a given contact.
-   *
-   * @param firstName The first name.
-   * @param lastName  The last name.
-   * @param telephone The telephone number.
-   */
-  public void hasContact(String firstName, String lastName, String telephone) {
-    assertThat(pageSource()).contains(firstName);
-    assertThat(pageSource()).contains(lastName);
-    assertThat(pageSource()).contains(telephone);
-  }
-
 }
 

@@ -5,7 +5,8 @@ import java.io.File;
 /**
  * A Magician object that holds the information about a user of the Play With Magic site.
  * Essentially the user data.
- * Pulled from information at https://github.com/PlayWithMagic/PlayWithMagic/issues/32
+ *
+ * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/32
  */
 public class Magician {
 
