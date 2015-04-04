@@ -1,117 +1,119 @@
 package models;
 
 /**
- * A routine object that holds a name, image, magic type, skill level,
- * information, description, and materials associated with the routine.
- *
+ * A single magic routine.
+ * <p>
  * This is a central entity for the Play With Magic application.
  */
 public class Routine {
 
-  private long id;
-  private String name;
-  private String image;
-  private String magicType;
-  private String skillLevel;
-  private String info;
-  private String description;
-  private String materials;
+  private long id;                 /* A unique, synthetic key to the Routine. */
+  private String name;             /* A short name for the routine. */
+  private String description;      /* A multi-line description of the routine. */
+  private Integer duration;        /* The average time to perform a basic rendition of this routine in minutes. */
+  private String method;           /* A multi-line discussion of the method for this routine. */
+  private String handling;         /* A multi-line discussion of the handling for the routine. */
+  private Boolean resetInstantly;  /* Set to true if the routine resets instantly. */
+  private Integer resetDuration;   /* The average time to prepare the routine for presentation. */
+  private String resetDescription; /* A description of the process to prepare the routine. */
 
   /**
-   * Create new Routine object.
+   * Create new, valid Routine object.
+   * <p>
+   * The constructor includes only the Routine's required fields.  Use setters to set the non-required
+   * fields.  The idea is that an object (A routine) is always in a valid state.
    *
-   * @param id          The id.
-   * @param name        The name of the routine.
-   * @param image       The image associated with the routine.
-   * @param magicType   The type of magic associated with the routine.
-   * @param skillLevel  The skill level required to do this routine.
-   * @param info        The information about this routine.
-   * @param description The description of this routine.
-   * @param materials   The materials needed to perform this routine.
+   * @param id          A unique, synthetic key to the Routine.
+   * @param name        A short name for the routine.
+   * @param description A multi-line description of the routine.
    */
-  public Routine(long id, String name, String image, String magicType, String skillLevel,
-                 String info, String description, String materials) {
+  public Routine(
+      long id,
+      String name,
+      String description) {
 
     this.id = id;
     this.name = name;
-    this.image = image;
-    this.magicType = magicType;
-    this.skillLevel = skillLevel;
-    this.info = info;
     this.description = description;
-    this.materials = materials;
   }
 
   /**
-   * Returns the id value to the caller.
+   * Returns a unique, synthetic key to the Routine.
    *
-   * @return id long value.
+   * @return id A unique, synthetic key to the Routine.
    */
   public long getId() {
     return id;
   }
 
   /**
-   * Returns the name value to the caller.
+   * Returns a short name for the routine.
    *
-   * @return The name string.
+   * @return A short name for the routine.
    */
   public String getName() {
     return name;
   }
 
   /**
-   * Returns the image value to the caller.
+   * Returns a multi-line description of the routine.
    *
-   * @return The image string.
-   */
-  public String getImage() {
-    return image;
-  }
-
-  /**
-   * Returns the magic type value to the caller.
-   *
-   * @return The magic type string.
-   */
-  public String getMagicType() {
-    return magicType;
-  }
-
-  /**
-   * Returns the skill level value to the caller.
-   *
-   * @return The skill level string.
-   */
-  public String getSkillLevel() {
-    return skillLevel;
-  }
-
-  /**
-   * Returns the info value to the caller.
-   *
-   * @return The info string.
-   */
-  public String getInfo() {
-    return info;
-  }
-
-  /**
-   * Returns the description value to the caller.
-   *
-   * @return The description string.
+   * @return A multi-line description of the routine.
    */
   public String getDescription() {
     return description;
   }
 
   /**
-   * Returns the materials value to the caller.
+   * Get the average time to perform a basic rendition of this routine in minutes.
    *
-   * @return The materials string.
+   * @return The average time to perform a basic rendition of this routine in minutes.
    */
-  public String getMaterials() {
-    return materials;
+  public Integer getDuration() {
+    return duration;
   }
 
+  /**
+   * Get a multi-line discussion of the method for this routine.
+   *
+   * @return A multi-line discussion of the method for this routine.
+   */
+  public String getMethod() {
+    return method;
+  }
+
+  /**
+   * Get a multi-line discussion of the handling for the routine.
+   * @return A multi-line discussion of the handling for the routine.
+   */
+  public String getHandling() {
+    return handling;
+  }
+
+  /**
+   * Does the routine reset instantly?
+   *
+   * @return True if the routine resets instantly.  False if not.
+   */
+  public Boolean isResetInstantly() {
+    return resetInstantly;
+  }
+
+  /**
+   * Get the average time to prepare the routine for presentation.
+   *
+   * @return The average time to prepare the routine for presentation.
+   */
+  public Integer getResetDuration() {
+    return resetDuration;
+  }
+
+  /**
+   * Get a description of the process to prepare the routine.
+   *
+   * @return A description of the process to prepare the routine.
+   */
+  public String getResetDescription() {
+    return resetDescription;
+  }
 }

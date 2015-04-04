@@ -22,8 +22,13 @@ public class RoutineDB {
    */
   public static void addRoutines(RoutineFormData formData) {
     long idVal = (formData.id == 0) ? currentId++ : formData.id;
-    Routine routineFromForm = new Routine(idVal, formData.name, formData.image,
-        formData.magicType, formData.skillLevel, formData.info, formData.description, formData.materials);
+
+    Routine routineFromForm = new Routine(
+        idVal,
+        formData.name,
+        formData.description);
+
+    // TODO: Create setters and put the other values in.
     routines.put(idVal, routineFromForm);
   }
 

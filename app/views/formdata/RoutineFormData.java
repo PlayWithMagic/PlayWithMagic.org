@@ -12,37 +12,50 @@ import java.util.List;
 public class RoutineFormData {
 
   /**
-   * Input data id hidden field.
+   * A unique, synthetic key to the Routine - hidden field.
    */
   public long id;
+
   /**
-   * Input data name field.
+   * A short name for the routine..
    */
   public String name;
+
   /**
-   * Input data image field.
-   */
-  public String image;
-  /**
-   * Input data magic type field.
-   */
-  public String magicType;
-  /**
-   * Input data skill level field.
-   */
-  public String skillLevel;
-  /**
-   * Input data info field.
-   */
-  public String info;
-  /**
-   * Input data description field.
+   * A multi-line description of the routine.
    */
   public String description;
+
   /**
-   * Input data materials field.
+   * The average time to perform a basic rendition of this routine in minutes.
    */
-  public String materials;
+  public Integer duration;
+
+  /**
+   * A multi-line discussion of the method for this routine.
+   */
+  public String method;
+
+  /**
+   * A multi-line discussion of the handling for the routine.
+   */
+  public String handling;
+
+  /**
+   * Set to true if the routine resets instantly.
+   */
+  public Boolean resetInstantly;
+
+  /**
+   * The average time to prepare the routine for presentation.
+   */
+  public Integer resetDuration;
+
+  /**
+   * A description of the process to prepare the routine.
+   */
+  public String resetDescription;
+
 
   /**
    * Default no-arg constructor required by Play.
@@ -51,51 +64,46 @@ public class RoutineFormData {
     // No content.
   }
 
+
   /**
-   * Constructor that builds the RoutineFormData object from a Routine.
+   * Build a RoutineFormData object from a Routine.
    *
    * @param routine The routine object passed to the constructor.
    */
   public RoutineFormData(Routine routine) {
     id = routine.getId();
     name = routine.getName();
-    image = routine.getImage();
-    magicType = routine.getMagicType();
-    skillLevel = routine.getSkillLevel();
-    info = routine.getInfo();
     description = routine.getDescription();
-    materials = routine.getMaterials();
+    duration = routine.getDuration();
+    method = routine.getMethod();
+    handling = routine.getHandling();
+    resetInstantly = routine.isResetInstantly();
+    resetDuration = routine.getResetDuration();
+    resetDescription = routine.getResetDescription();
   }
 
 
   /**
-   * Validate that all fields are non-empty and that telephone field is 12 characters.
+   * Enforce the UI validation rules for Routines.
    *
-   * @return Either null if no errors, or a List of errors.
+   * 1. The required fields are:  Name, Description
+   *
+   * @return Either null if no errors or a List of errors.
    */
   public List<ValidationError> validate() {
-
     List<ValidationError> errors = new ArrayList<>();
+
+    if (id < 0) {
+      errors.add(new ValidationError("id", "An invalid ID has been passed into the application."));
+    }
+
     if (name == null || name.length() == 0) {
-      errors.add(new ValidationError("name", "A Routine Name must be provided."));
+      errors.add(new ValidationError("name", "Your routine's gotta have a name."));
     }
-    if (image == null || image.length() == 0) {
-      errors.add(new ValidationError("image", "A Routine Image must be provided."));
-    }
-    if (magicType == null || magicType.length() == 0) {
-      errors.add(new ValidationError("magicType", "A Routine Magic Type must be provided."));
-    }
-    if (skillLevel == null || skillLevel.length() == 0) {
-      errors.add(new ValidationError("skillLevel", "A Routine Image must be provided."));
-    }
-    if (info == null || info.length() == 0) {
-      errors.add(new ValidationError("info", "A Routine's Information must be provided."));
-    }
+
     if (description == null || description.length() == 0) {
-      errors.add(new ValidationError("description", "A Routine's Description must be provided."));
-    }
-    if (materials == null || materials.length() == 0) {
-      errors.add(new ValidationError("materials", "A Routine list of materials must be provided."));
+      errors.add(new ValidationError("description",
+          "A name's not enough.  Please write a brief description of your routine."));
     }
 
     return errors.isEmpty() ? null : errors;
