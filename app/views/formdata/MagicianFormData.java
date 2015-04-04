@@ -165,6 +165,18 @@ public class MagicianFormData {
   public List<ValidationError> validate() {
 
     List<ValidationError> errors = new ArrayList<>();
+    if (firstName == null || firstName.length() == 0) {
+      errors.add(new ValidationError("firstName", "A First Name must be provided."));
+    }
+    if (lastName == null || lastName.length() == 0) {
+      errors.add(new ValidationError("lastName", "A Last Name must be provided."));
+    }
+    if (email == null || email.length() == 0) {
+      errors.add(new ValidationError("email", "An email address must be provided."));
+    }
+    if (!ExperienceLevels.isExperienceLevel(experienceLevel)) {
+      errors.add(new ValidationError("experienceLevel", "Please select a level of experience from the list."));
+    }
 
     return errors.isEmpty() ? null : errors;
 

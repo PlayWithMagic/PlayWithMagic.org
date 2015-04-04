@@ -28,12 +28,28 @@
             @text(magicianForm("firstName"),
               label = "First Name",
               placeholder = "First Name",
-              help = "")
+              help = "Required")
               <!-- Last Name -->
             @text(magicianForm("lastName"),
               label = "Last Name",
               placeholder = "Last Name",
+              help = "Required")
+              <!-- Email -->
+            @text(magicianForm("email"),
+              label = "Email",
+              placeholder = "i.e., name@domain.com",
+              help = "Required")
+              <!-- Show email? -->
+            @checkboxes(magicianForm("showEmail"),
+              label = "Do you wish for your email to be displayed publically?",
+              checkboxMap = showMyEmailMap,
               help = "")
+              <!-- Experience Level -->
+            @bootstrap3.select(magicianForm("experienceLevel"),
+              label = "Level of Experience with Magic",
+              optionMap = experienceLevelMap,
+              isMultiple = false,
+              help = "Required")
               <!-- Stage Name -->
             @text(magicianForm("stageName"),
               label = "Stage Name",
@@ -63,12 +79,6 @@
               label = "Influences",
               placeholder = "Who are your influences?",
               help = "")
-              <!-- Experience Level -->
-            @bootstrap3.select(magicianForm("experienceLevel"),
-              label = "Experience Level",
-              optionMap = experienceLevelMap,
-              isMultiple = false,
-              help = "")
               <!-- Years Practicing -->
             @text(magicianForm("yearsPracticing"),
               label = "Years Practicing",
@@ -83,16 +93,6 @@
             @text(magicianForm("website"),
               label = "Website URL",
               placeholder = "i.e., http://www.example.com/",
-              help = "")
-              <!-- Email -->
-            @text(magicianForm("email"),
-              label = "Email",
-              placeholder = "i.e., name@domain.com",
-              help = "")
-              <!-- Show email? -->
-            @checkboxes(magicianForm("showEmail"),
-              label = "Do you wish for your email to be displayed?",
-              checkboxMap = showMyEmailMap,
               help = "")
               <!-- Facebook -->
             @text(magicianForm("facebook"),

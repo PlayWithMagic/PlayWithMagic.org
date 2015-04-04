@@ -12,6 +12,7 @@ import views.formdata.ShowEmail;
 import views.html.Index;
 import views.html.NewRoutine;
 import views.html.NewMagician;
+import views.html.ShowMagicians;
 
 import java.util.Map;
 
@@ -55,16 +56,39 @@ public class Application extends Controller {
     if (formData.hasErrors()) {
       System.out.println("HTTP Form Error.");
       return badRequest(NewMagician.render(formData, ExperienceLevels.getExperienceLevels(),
-                        ShowEmail.getShowMyEmail()));
+          ShowEmail.getShowMyEmail()));
     }
     else {
       MagicianFormData data = formData.get();
       MagicianDB.addMagicians(data);
-      System.out.println("HTTP OK; Form Data submitted.");
+      System.out.printf("HTTP OK; Form Data submitted:  %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, "
+              + "%s, %s, %s %n", data.id, data.firstName, data.lastName, data.stageName, data.location, data.biography,
+          data.interests, data.influences, data.yearsPracticing, data.organizations, data.website, data.email,
+          data.facebook, data.twitter, data.linkedIn, data.googlePlus, data.flickr, data.instagram);
       System.out.println(data.experienceLevel);
-      return ok(NewMagician.render(formData, ExperienceLevels.getExperienceLevels(data.experienceLevel),
-                ShowEmail.getShowMyEmail(data.showEmail)));
+      System.out.println(data.showEmail);
+      return ok(ShowMagicians.render(MagicianDB.getMagicians()));
     }
+  }
+
+  /**
+   * Displays the full list of Magicians registered on the site.
+   *
+   * @return An HTTP OK message along with the HTML content for the ShowMagicians page.
+   */
+  public static Result showMagicians() {
+    return ok(ShowMagicians.render(MagicianDB.getMagicians()));
+  }
+
+  /**
+   * Delete a Magician from the database and render the Show Magicians page.
+   *
+   * @param id The ID of the Magician to delete.
+   * @return An HTTP OK message along with the HTML content for the Home page.
+   */
+  public static Result deleteMagician(long id) {
+    MagicianDB.deleteMagician(id);
+    return ok(ShowMagicians.render(MagicianDB.getMagicians()));
   }
 
   /**

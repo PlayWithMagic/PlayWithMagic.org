@@ -47,7 +47,7 @@ public class Magician {
    * @param userPhoto       Photograph file of user.
    * @param biography       Biography of user.
    * @param interests       User's interests in magic.
-   * @param influences      User's invluences.
+   * @param influences      User's influences.
    * @param experienceLevel User's experience level; pre-set values.
    * @param yearsPracticing Number of years of experience.
    * @param organizations   Any affiliations or organizations the user is a member of.
