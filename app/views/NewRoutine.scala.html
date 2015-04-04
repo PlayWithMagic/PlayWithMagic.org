@@ -15,7 +15,11 @@
       <!-- Content -->
     <section id="content" class="container">
       <div class="col-md-12">
-        <h1>Create Routine</h1>
+        @if(routineForm("id").value == "0") {
+          <h1>Create Routine</h1>
+        } else {
+          <h1>Update Routine</h1>
+        }
           <!-- User Attributes -->
         <div class="container">
         @form(routes.Application.postRoutine(), 'class -> "form-horizontal") {
@@ -24,28 +28,53 @@
           id="@routineForm("id").id"
           value="@routineForm("id").value"/>
 
-            <!-- Name -->
           @text45(routineForm("name"),
             label = "Name",
-            placeholder = "Name",
-            help = "A short name for the routine")
+            placeholder = "A short name for the routine",
+            help = "")
 
-            <!-- Description -->
           @textarea(routineForm("description"),
             rows = "3",
             label = "Description",
-            placeholder = "Description",
-            help = "A brief description of the routine")
+            placeholder = "A brief description of the routine",
+            help = "")
 
-            <!-- Duration -->
           @textInt(routineForm("duration"),
             label = "Duration",
             placeholder = "Mins",
             help = "The average time to perform a basic rendition of this routine in minutes.")
 
+          @textarea(routineForm("method"),
+            rows = "3",
+            label = "Method",
+            placeholder = "The overarching 'secret' of a magic trick. Usually comprised of a combination of " +
+                "slights and handlings.",
+            help = "")
+
+          @textarea(routineForm("handling"),
+            rows = "3",
+            label = "Handling",
+            placeholder = "Discuss the overt handling (moves and techniques) for this routine",
+            help = "")
+
+          <div class="well">
+            @textInt(routineForm("resetDuration"),
+              label = "Setup / Reset Duration",
+              placeholder = "Mins",
+              help = "The average time to prepare this routine or reset it.  Set to 0 if it resets during the act.")
+
+            @textarea(routineForm("resetDescription"),
+              rows = "3",
+              label = "Reset Description",
+              placeholder = "Describe the steps to prepare (or reset) this routine",
+              help = "")
+          </div>
+
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button id="submit" type="submit" class="btn btn-default">Add</button>
+              <button id="submit" type="submit" class="btn btn-default">
+                @if(routineForm("id").value == "0") {Add} else {Update}
+              </button>
             </div>
           </div>
         }

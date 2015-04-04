@@ -4,6 +4,7 @@ import models.Routine;
 import play.data.validation.ValidationError;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatConversionException;
 import java.util.List;
 
 /**
@@ -42,11 +43,6 @@ public class RoutineFormData {
   public String handling;
 
   /**
-   * Set to true if the routine resets instantly.
-   */
-  public Boolean resetInstantly;
-
-  /**
    * The average time to prepare the routine for presentation.
    */
   public Integer resetDuration;
@@ -77,7 +73,6 @@ public class RoutineFormData {
     duration = routine.getDuration();
     method = routine.getMethod();
     handling = routine.getHandling();
-    resetInstantly = routine.isResetInstantly();
     resetDuration = routine.getResetDuration();
     resetDescription = routine.getResetDescription();
   }
@@ -113,18 +108,62 @@ public class RoutineFormData {
           "A name's not enough.  Please write a brief description of your routine."));
     }
 
-    if (duration == null || duration.intValue() < 0) {
-      errors.add(new ValidationError("duration", "Who do you think you are?  Dr. Who?"));
+    if (description == null || description.length() > Routine.MAX_MULTILINE_FIELD_LENGTH) {
+      errors.add(new ValidationError("description",
+          "Description can't accept more than " + Routine.MAX_MULTILINE_FIELD_LENGTH + " characters."));
     }
 
     if (duration == null || duration.intValue() == 0) {
       errors.add(new ValidationError("duration", "If it's under a minute, then just enter 1."));
     }
 
+    if (duration == null || duration.intValue() < 0) {
+      errors.add(new ValidationError("duration", "Who do you think you are?  Dr. Who?"));
+    }
+
     if (duration == null || duration.intValue() > 120) {
       errors.add(new ValidationError("duration",
           "If you need to have a routine longer than 120 minutes, then submit a bug report and we'll look into it."));
     }
+
+    // TODO:  The Play Framework is printing 'error.invalid' and not presenting this error message.
+    // Can't figure out how to get a nicer looking message up front.
+    if (duration != null) {
+      int testDuration;
+      try {
+        testDuration = new Integer(duration);
+      } catch (NumberFormatException e) {
+        errors.add(new ValidationError("duration",
+            "Whatever you put in there is not a nice, round number between 1 and 120 minutes."));
+        // Absorb the error.
+      }
+    }
+
+    if (method == null || method.length() > Routine.MAX_MULTILINE_FIELD_LENGTH) {
+      errors.add(new ValidationError("method",
+          "Handling can't accept more than " + Routine.MAX_MULTILINE_FIELD_LENGTH + " characters."));
+    }
+
+    if (handling == null || handling.length() > Routine.MAX_MULTILINE_FIELD_LENGTH) {
+      errors.add(new ValidationError("handling",
+          "Handling can't accept more than " + Routine.MAX_MULTILINE_FIELD_LENGTH + " characters."));
+    }
+
+    if (resetDuration == null || resetDuration.intValue() < 0) {
+      errors.add(new ValidationError("resetDuration", "Who do you think you are?  Dr. Who?"));
+    }
+
+    if (resetDuration == null || resetDuration.intValue() > 120) {
+      errors.add(new ValidationError("resetDuration",
+          "If it takes longer than 2 hours to reset, well... then we hope it's a great trick.  " +
+              "Submit a bug report and we'll look into it."));
+    }
+
+    if (resetDescription == null || resetDescription.length() > Routine.MAX_MULTILINE_FIELD_LENGTH) {
+      errors.add(new ValidationError("resetDescription",
+          "Reset Description can't accept more than " + Routine.MAX_MULTILINE_FIELD_LENGTH + " characters."));
+    }
+
 
     // TODO:  Scan/expand input to prevent SQL and Cross-site injection
 
