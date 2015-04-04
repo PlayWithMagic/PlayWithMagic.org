@@ -11,6 +11,14 @@ POST        /newRoutine           controllers.Application.postRoutine()
 GET         /deleteRoutine        controllers.Application.deleteRoutine(id: Long?= 0)
 GET         /searchRoutines       controllers.Application.searchRoutines()
 
+# New Magicians page
+GET         /newmagician          controllers.Application.newMagician(id: Long?=0)
+POST        /newmagician          controllers.Application.postMagician()
+GET         /deleteMagician       controllers.Application.deleteMagician(id: Long?= 0)
+
+# Magician List
+GET         /showmagicians        controllers.Application.showMagicians()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file         controllers.Assets.at(path="/public", file)

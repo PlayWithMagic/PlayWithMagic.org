@@ -1,13 +1,22 @@
 package controllers;
 
+import models.MagicianDB;
 import models.RoutineDB;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.formdata.ExperienceLevels;
+import views.formdata.MagicianFormData;
 import views.formdata.RoutineFormData;
+import views.formdata.ShowEmail;
 import views.html.Index;
 import views.html.NewRoutine;
+
 import views.html.SearchRoutines;
+import views.html.NewMagician;
+import views.html.ShowMagicians;
+
+import java.util.Map;
 
 /**
  * The application's MVC Controller class.
@@ -32,6 +41,65 @@ public class Application extends Controller {
    */
   public static Result searchRoutines() {
     return ok(SearchRoutines.render(RoutineDB.getRoutines()));
+  }
+
+  /**
+   * Renders the newMagician page with a form to add a new Magician if the ID is 0; otherwise, edit existing Magician.
+   *
+   * @param id The ID of the magician to edit; if new Magician, ID is 0.
+   * @return An HTTP OK message along with the HTML content for the NewMagician page.
+   */
+  public static Result newMagician(long id) {
+    MagicianFormData data = (id == 0) ? new MagicianFormData() : new MagicianFormData(MagicianDB.getMagician(id));
+    Form<MagicianFormData> formData = Form.form(MagicianFormData.class).fill(data);
+    Map<String, Boolean> experienceLevelMap = ExperienceLevels.getExperienceLevels(data.experienceLevel);
+    Map<String, Boolean> showMyEmailMap = ShowEmail.getShowMyEmail(data.showEmail);
+    return ok(NewMagician.render(formData, experienceLevelMap, showMyEmailMap));
+  }
+
+  /**
+   * Handles the request to post form data from the NewMagician page.
+   *
+   * @return The NewMagician page, either with errors or success.
+   */
+  public static Result postMagician() {
+    Form<MagicianFormData> formData = Form.form(MagicianFormData.class).bindFromRequest();
+    if (formData.hasErrors()) {
+      System.out.println("HTTP Form Error.");
+      return badRequest(NewMagician.render(formData, ExperienceLevels.getExperienceLevels(),
+          ShowEmail.getShowMyEmail()));
+    }
+    else {
+      MagicianFormData data = formData.get();
+      MagicianDB.addMagicians(data);
+      System.out.printf("HTTP OK; Form Data submitted:  %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, "
+              + "%s, %s, %s %n", data.id, data.firstName, data.lastName, data.stageName, data.location, data.biography,
+          data.interests, data.influences, data.yearsPracticing, data.organizations, data.website, data.email,
+          data.facebook, data.twitter, data.linkedIn, data.googlePlus, data.flickr, data.instagram);
+      System.out.println(data.experienceLevel);
+      System.out.println(data.showEmail);
+      return ok(ShowMagicians.render(MagicianDB.getMagicians()));
+    }
+  }
+
+  /**
+   * Displays the full list of Magicians registered on the site.
+   *
+   * @return An HTTP OK message along with the HTML content for the ShowMagicians page.
+   */
+  public static Result showMagicians() {
+    return ok(ShowMagicians.render(MagicianDB.getMagicians()));
+  }
+
+  /**
+   * Delete a Magician from the database and render the Show Magicians page.
+   *
+   * @param id The ID of the Magician to delete.
+   * @return An HTTP OK message along with the HTML content for the Home page.
+   */
+  public static Result deleteMagician(long id) {
+    MagicianDB.deleteMagician(id);
+    return ok(ShowMagicians.render(MagicianDB.getMagicians()));
   }
 
   /**

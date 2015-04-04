@@ -15,8 +15,6 @@ public class Magician {
   private String firstName;
   private String lastName;
   private String stageName;
-  private String dateOfBirth;
-  private boolean showAge;
   private String location; // City/State?  Country?  Perhaps a map of values instead?
   private File userPhoto;
   // Magic Info
@@ -29,7 +27,7 @@ public class Magician {
   // Contact Info
   private String website;
   private String email;
-  private boolean showEmail;
+  private String showEmail;
   private String facebook;
   private String twitter;
   private String linkedIn;
@@ -45,13 +43,11 @@ public class Magician {
    * @param firstName       The first name of the user.
    * @param lastName        The last name of the magician.
    * @param stageName       The stage name of the magician.
-   * @param dateOfBirth     The date of birth of the magician.
-   * @param showAge         Boolean for whether to display the age.
    * @param location        Global location.
    * @param userPhoto       Photograph file of user.
    * @param biography       Biography of user.
    * @param interests       User's interests in magic.
-   * @param influences      User's invluences.
+   * @param influences      User's influences.
    * @param experienceLevel User's experience level; pre-set values.
    * @param yearsPracticing Number of years of experience.
    * @param organizations   Any affiliations or organizations the user is a member of.
@@ -65,17 +61,14 @@ public class Magician {
    * @param flickr          User's flickr account.
    * @param instagram       User's instagram account.
    */
-  public Magician(long id, String firstName, String lastName, String stageName, String dateOfBirth, boolean showAge,
-                  String location, File userPhoto, String biography, String interests, String influences,
-                  String experienceLevel, int yearsPracticing, String organizations, String website, String email,
-                  boolean showEmail, String facebook, String twitter, String linkedIn, String googlePlus,
-                  String flickr, String instagram) {
+  public Magician(long id, String firstName, String lastName, String stageName, String location, File userPhoto,
+                  String biography, String interests, String influences, String experienceLevel, int yearsPracticing,
+                  String organizations, String website, String email, String showEmail, String facebook,
+                  String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.stageName = stageName;
-    this.dateOfBirth = dateOfBirth;
-    this.showAge = showAge;
     this.location = location;
     this.userPhoto = userPhoto;
     this.biography = biography;
@@ -101,8 +94,6 @@ public class Magician {
    * @param firstName       The first name of the user.
    * @param lastName        The last name of the magician.
    * @param stageName       The stage name of the magician.
-   * @param dateOfBirth     The date of birth of the magician.
-   * @param showAge         Boolean for whether to display the age.
    * @param location        Global location.
    * @param userPhoto       Photograph file of user.
    * @param biography       Biography of user.
@@ -121,16 +112,13 @@ public class Magician {
    * @param flickr          User's flickr account.
    * @param instagram       User's instagram account.
    */
-  public Magician(String firstName, String lastName, String stageName, String dateOfBirth, boolean showAge,
-                  String location, File userPhoto, String biography, String interests, String influences,
-                  String experienceLevel, int yearsPracticing, String organizations, String website, String email,
-                  boolean showEmail, String facebook, String twitter, String linkedIn, String googlePlus,
-                  String flickr, String instagram) {
+  public Magician(String firstName, String lastName, String stageName, String location, File userPhoto,
+                  String biography, String interests, String influences, String experienceLevel, int yearsPracticing,
+                  String organizations, String website, String email, String showEmail, String facebook,
+                  String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.stageName = stageName;
-    this.dateOfBirth = dateOfBirth;
-    this.showAge = showAge;
     this.location = location;
     this.userPhoto = userPhoto;
     this.biography = biography;
@@ -184,24 +172,6 @@ public class Magician {
    */
   public String getStageName() {
     return stageName;
-  }
-
-  /**
-   * Get the Date of Birth of the magician as a Date object.
-   *
-   * @return The date of birth.
-   */
-  public String getDateOfBirth() {
-    return dateOfBirth;
-  }
-
-  /**
-   * Get the state of the show age boolean.
-   *
-   * @return True or False depending on setting.
-   */
-  public boolean isShowAge() {
-    return showAge;
   }
 
   /**
@@ -299,7 +269,7 @@ public class Magician {
    *
    * @return True or False depending on the magician's preference.
    */
-  public boolean isShowEmail() {
+  public String isShowEmail() {
     return showEmail;
   }
 
