@@ -4,7 +4,8 @@
 * @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(magicianForm: Form[views.formdata.MagicianFormData], experienceLevelMap: Map[String, Boolean])
+@(magicianForm: Form[views.formdata.MagicianFormData], experienceLevelMap: Map[String, Boolean],
+    showMyEmailMap: Map[String, Boolean])
 
   @import helper._
   @import views.html.bootstrap3._
@@ -46,13 +47,13 @@
               <!-- Magician Photo -->
               <!-- Temporarily disabled until file uploads are sorted -->
               <!-- Biography -->
-            @textarea(magicianForm("biography"),
+            @bootstrap3.textarea(magicianForm("biography"),
               rows = "5",
               label = "Biography",
               placeholder = "Tell us about yourself!",
               help = "")
               <!-- Interests -->
-            @textarea(magicianForm("interests"),
+            @bootstrap3.textarea(magicianForm("interests"),
               rows = "3",
               label = "Interests",
               placeholder = "What are your interests in Magic?",
@@ -87,6 +88,11 @@
             @text(magicianForm("email"),
               label = "Email",
               placeholder = "i.e., name@domain.com",
+              help = "")
+              <!-- Show email? -->
+            @checkboxes(magicianForm("showEmail"),
+              label = "Do you wish for your email to be displayed?",
+              checkboxMap = showMyEmailMap,
               help = "")
               <!-- Facebook -->
             @text(magicianForm("facebook"),

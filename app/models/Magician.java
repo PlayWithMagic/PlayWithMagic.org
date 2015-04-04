@@ -27,7 +27,7 @@ public class Magician {
   // Contact Info
   private String website;
   private String email;
-  private boolean showEmail;
+  private String showEmail;
   private String facebook;
   private String twitter;
   private String linkedIn;
@@ -63,7 +63,7 @@ public class Magician {
    */
   public Magician(long id, String firstName, String lastName, String stageName, String location, File userPhoto,
                   String biography, String interests, String influences, String experienceLevel, int yearsPracticing,
-                  String organizations, String website, String email, boolean showEmail, String facebook,
+                  String organizations, String website, String email, String showEmail, String facebook,
                   String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
     this.id = id;
     this.firstName = firstName;
@@ -114,7 +114,7 @@ public class Magician {
    */
   public Magician(String firstName, String lastName, String stageName, String location, File userPhoto,
                   String biography, String interests, String influences, String experienceLevel, int yearsPracticing,
-                  String organizations, String website, String email, boolean showEmail, String facebook,
+                  String organizations, String website, String email, String showEmail, String facebook,
                   String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -269,7 +269,7 @@ public class Magician {
    *
    * @return True or False depending on the magician's preference.
    */
-  public boolean isShowEmail() {
+  public String isShowEmail() {
     return showEmail;
   }
 

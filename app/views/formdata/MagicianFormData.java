@@ -88,7 +88,7 @@ public class MagicianFormData {
   /**
    * Input data boolean of whether to show the email to other users.
    */
-  public boolean showEmail;
+  public String showEmail;
 
   /**
    * Input data Facebook field.

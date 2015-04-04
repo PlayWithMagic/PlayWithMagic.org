@@ -8,6 +8,7 @@ import play.mvc.Result;
 import views.formdata.ExperienceLevels;
 import views.formdata.MagicianFormData;
 import views.formdata.RoutineFormData;
+import views.formdata.ShowEmail;
 import views.html.Index;
 import views.html.NewRoutine;
 import views.html.NewMagician;
@@ -37,21 +38,34 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the NewMagician page.
    */
   public static Result newMagician(long id) {
-    MagicianFormData magician = (id == 0) ? new MagicianFormData() : new MagicianFormData(MagicianDB.getMagician(id));
-    Form<MagicianFormData> magicianData = Form.form(MagicianFormData.class).fill(magician);
-    Map<String, Boolean> experienceLevelMap = ExperienceLevels.getExperienceLevels(magician.experienceLevel);
-    return ok(NewMagician.render(magicianData, experienceLevelMap));
+    MagicianFormData data = (id == 0) ? new MagicianFormData() : new MagicianFormData(MagicianDB.getMagician(id));
+    Form<MagicianFormData> formData = Form.form(MagicianFormData.class).fill(data);
+    Map<String, Boolean> experienceLevelMap = ExperienceLevels.getExperienceLevels(data.experienceLevel);
+    Map<String, Boolean> showMyEmailMap = ShowEmail.getShowMyEmail(data.showEmail);
+    return ok(NewMagician.render(formData, experienceLevelMap, showMyEmailMap));
   }
 
-//  public static Result postMagician(long id) {
-//    Form<MagicianFormData> magicianData = Form.form(MagicianFormData.class).bindFromRequest();
-//    if (magicianData.hasErrors()) {
-//
-//    }
-//    else {
-//
-//    }
-//  }
+  /**
+   * Handles the request to post form data from the NewMagician page.
+   *
+   * @return The NewMagician page, either with errors or success.
+   */
+  public static Result postMagician() {
+    Form<MagicianFormData> formData = Form.form(MagicianFormData.class).bindFromRequest();
+    if (formData.hasErrors()) {
+      System.out.println("HTTP Form Error.");
+      return badRequest(NewMagician.render(formData, ExperienceLevels.getExperienceLevels(),
+                        ShowEmail.getShowMyEmail()));
+    }
+    else {
+      MagicianFormData data = formData.get();
+      MagicianDB.addMagicians(data);
+      System.out.println("HTTP OK; Form Data submitted.");
+      System.out.println(data.experienceLevel);
+      return ok(NewMagician.render(formData, ExperienceLevels.getExperienceLevels(data.experienceLevel),
+                ShowEmail.getShowMyEmail(data.showEmail)));
+    }
+  }
 
   /**
    * Renders the newRoutine page with a form to add new routines if the ID is 0; otherwise updates the existing routine.
