@@ -17,6 +17,8 @@ public class Routine {
   private Integer resetDuration;   /* The average time to prepare the routine for presentation. */
   private String resetDescription; /* A description of the process to prepare the routine. */
 
+  static public final int MAX_ROUTINE_LENGTH = 45;
+
   /**
    * Create new, valid Routine object.
    * <p>
@@ -62,6 +64,14 @@ public class Routine {
    */
   public String getDescription() {
     return description;
+  }
+
+  /** Set the average time to perform a basic rendition of this routine in minutes.
+   *
+   * @param duration The average time to perform a basic rendition of this routine in minutes.
+   */
+  public void setDuration(Integer duration) {
+    this.duration = duration;
   }
 
   /**

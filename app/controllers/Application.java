@@ -76,7 +76,7 @@ public class Application extends Controller {
       RoutineFormData data = formData.get();
       RoutineDB.addRoutines(data);
 
-      return ok(NewRoutine.render(formData));
+      return ok(SearchRoutines.render(RoutineDB.getRoutines()));
     }
   }
 }

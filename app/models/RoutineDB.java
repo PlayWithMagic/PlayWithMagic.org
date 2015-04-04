@@ -28,6 +28,8 @@ public class RoutineDB {
         formData.name,
         formData.description);
 
+    routineFromForm.setDuration(formData.duration);
+
     // TODO: Create setters and put the other values in.
     routines.put(idVal, routineFromForm);
   }

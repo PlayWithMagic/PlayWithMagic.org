@@ -87,6 +87,8 @@ public class RoutineFormData {
    * Enforce the UI validation rules for Routines.
    *
    * 1. The required fields are:  Name, Description
+   * 2. Maximum field lengths
+   * 3. Scan for SQL injection & Cross-Site injection
    *
    * @return Either null if no errors or a List of errors.
    */
@@ -101,10 +103,30 @@ public class RoutineFormData {
       errors.add(new ValidationError("name", "Your routine's gotta have a name."));
     }
 
+    if (name == null || name.length() > Routine.MAX_ROUTINE_LENGTH) {
+      errors.add(new ValidationError("name",
+          "The routine's name can't be longer than " + Routine.MAX_ROUTINE_LENGTH + " characters."));
+    }
+
     if (description == null || description.length() == 0) {
       errors.add(new ValidationError("description",
           "A name's not enough.  Please write a brief description of your routine."));
     }
+
+    if (duration == null || duration.intValue() < 0) {
+      errors.add(new ValidationError("duration", "Who do you think you are?  Dr. Who?"));
+    }
+
+    if (duration == null || duration.intValue() == 0) {
+      errors.add(new ValidationError("duration", "If it's under a minute, then just enter 1."));
+    }
+
+    if (duration == null || duration.intValue() > 120) {
+      errors.add(new ValidationError("duration",
+          "If you need to have a routine longer than 120 minutes, then submit a bug report and we'll look into it."));
+    }
+
+    // TODO:  Scan/expand input to prevent SQL and Cross-site injection
 
     return errors.isEmpty() ? null : errors;
   }
