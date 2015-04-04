@@ -50,13 +50,13 @@
           <li><a href="#">Browse Sets</a></li>
         </ul>
 
-          <!-- Don't show Search on home page -->
-        @if( page != "home" ) {
+          <!-- Don't show Search on home page or New Magician page-->
+        @if( page != "home" && page != "newMagician" ) {
         <form class="navbar-form navbar-left" role="search">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" />
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Search Routines</button>
+              <button class="btn btn-default" type="button"><a href="searchRoutines">Search Routines</a></button>
             </span>
           </div>
         </form>
@@ -71,7 +71,7 @@
               @*<li><a href="displayuser">Profile</a></li>*@
               @*<li><a href="@routes.Application.searchRoutines()">My Routines</a></li>*@
               @*<li><a href="#">My Sets</a></li>*@
-              @*<li><a href="newroutine">Build Routine</a></li>*@
+              @*<li><a href="newRoutine">Build Routine</a></li>*@
               @*<li><a href="#">Build Set</a></li>*@
               @*<li class="divider"></li>*@
               @*<li><a href="#">Logout</a></li>*@
@@ -79,7 +79,7 @@
           @*</li>*@
 
             <!-- Signup Button, do not show on home page -->
-          @if( page != "home" ) {
+          @if( page != "home" && page != "newMagician" ) {
             <li><button type="button" class="btn btn-primary btn-sm navbar-btn join">Join the Community Today!</button></li>
           }
           <!-- Login Dropdown -->
