@@ -48,3 +48,9 @@ nav form.dropdown-menu.login {
 nav .join {
   margin-right: 10px;
 }
+nav a.navbar-brand {
+  padding: 0 10px 0 0;
+}
+nav .logo {
+  height: 50px;
+}
