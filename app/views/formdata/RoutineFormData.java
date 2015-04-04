@@ -4,7 +4,6 @@ import models.Routine;
 import play.data.validation.ValidationError;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatConversionException;
 import java.util.List;
 
 /**
@@ -80,7 +79,7 @@ public class RoutineFormData {
 
   /**
    * Enforce the UI validation rules for Routines.
-   *
+   * <p>
    * 1. The required fields are:  Name, Description
    * 2. Maximum field lengths
    * 3. Scan for SQL injection & Cross-Site injection
@@ -132,7 +131,8 @@ public class RoutineFormData {
       int testDuration;
       try {
         testDuration = new Integer(duration);
-      } catch (NumberFormatException e) {
+      }
+      catch (NumberFormatException e) {
         errors.add(new ValidationError("duration",
             "Whatever you put in there is not a nice, round number between 1 and 120 minutes."));
         // Absorb the error.
@@ -155,8 +155,8 @@ public class RoutineFormData {
 
     if (resetDuration == null || resetDuration.intValue() > 120) {
       errors.add(new ValidationError("resetDuration",
-          "If it takes longer than 2 hours to reset, well... then we hope it's a great trick.  " +
-              "Submit a bug report and we'll look into it."));
+          "If it takes longer than 2 hours to reset, well... then we hope it's a great trick.  "
+              + "Submit a bug report and we'll look into it."));
     }
 
     if (resetDescription == null || resetDescription.length() > Routine.MAX_MULTILINE_FIELD_LENGTH) {
