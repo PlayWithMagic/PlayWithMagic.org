@@ -5,7 +5,6 @@
 *@
 @(page: String)(content: Html)
 
-
 <!DOCTYPE html>
 <html>
   <head lang="en">
@@ -50,7 +49,8 @@
           <li><a href="@routes.Application.searchRoutines()">Search Routines</a></li>
           <li><a href="#">Browse Sets</a></li>
         </ul>
-        <!-- Don't show Search on home page -->
+
+          <!-- Don't show Search on home page -->
         @if( page != "home" ) {
         <form class="navbar-form navbar-left" role="search">
           <div class="input-group">
@@ -61,7 +61,12 @@
           </div>
         </form>
         }
+
         <ul class="nav navbar-nav navbar-right">
+<<<<<<< HEAD
+=======
+
+>>>>>>> routine-2
           <!-- User Info Dropdown, don't show if not logged in -->
           @*<li class="dropdown">*@
             @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in*@
@@ -76,11 +81,16 @@
               @*<li><a href="#">Logout</a></li>*@
             @*</ul>*@
           @*</li>*@
-          <!-- Signup Button, do not show on home page -->
+
+            <!-- Signup Button, do not show on home page -->
           @if( page != "home" ) {
             <li><button type="button" class="btn btn-primary btn-sm navbar-btn join">Join the Community Today!</button></li>
           }
           <!-- Login Dropdown -->
+<<<<<<< HEAD
+=======
+
+>>>>>>> routine-2
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
               Login <span class="caret"></span>

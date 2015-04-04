@@ -6,45 +6,51 @@
 *@
 @(routineForm: Form[views.formdata.RoutineFormData])
 
-  @import helper._
-  @import views.html.bootstrap3._
+@import helper.form
+@import views.html.bootstrap3.{text, text45, textInt, textarea}
 
+@Main("NewRoutine") {
+  <!-- Page Content -->
+  <section id="page">
+      <!-- Content -->
+    <section id="content" class="container">
+      <div class="col-md-12">
+        <h1>Create Routine</h1>
+          <!-- User Attributes -->
+        <div class="container">
+        @form(routes.Application.postRoutine(), 'class -> "form-horizontal") {
+          <input type="hidden"
+          name="@routineForm("id").name"
+          id="@routineForm("id").id"
+          value="@routineForm("id").value"/>
 
-  @Main("NewRoutine") {
-    <!-- Page Content -->
-    <section id="page">
-        <!-- Content -->
-      <section id="content" class="container">
-        <div class="col-md-12">
-          <h1>Create Routine</h1>
-            <!-- User Attributes -->
-          <div class="container">
-          @form(routes.Application.postRoutine(), 'class -> "form-horizontal") {
-            <input type="hidden"
-            name="@routineForm("id").name"
-            id="@routineForm("id").id"
-            value="@routineForm("id").value"/>
+            <!-- Name -->
+          @text45(routineForm("name"),
+            label = "Name",
+            placeholder = "Name",
+            help = "A short name for the routine")
 
-              <!-- Name -->
-            @text(routineForm("name"),
-              label = "Name",
-              placeholder = "Name",
-              help = "")
+            <!-- Description -->
+          @textarea(routineForm("description"),
+            rows = "3",
+            label = "Description",
+            placeholder = "Description",
+            help = "A brief description of the routine")
 
-              <!-- Description -->
-            @text(routineForm("description"),
-              label = "Description",
-              placeholder = "Description",
-              help = "")
+            <!-- Duration -->
+          @textInt(routineForm("duration"),
+            label = "Duration",
+            placeholder = "Mins",
+            help = "The average time to perform a basic rendition of this routine in minutes.")
 
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button id="submit" type="submit" class="btn btn-default">Add</button>
-              </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button id="submit" type="submit" class="btn btn-default">Add</button>
             </div>
-          }
           </div>
+        }
         </div>
-      </section>
+      </div>
     </section>
-  }
+  </section>
+}
