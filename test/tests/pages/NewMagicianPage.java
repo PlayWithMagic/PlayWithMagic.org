@@ -3,10 +3,9 @@ package tests.pages;
 import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
 
-import java.util.List;
-
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withId;
+import static org.fluentlenium.core.filter.FilterConstructor.withText;
 
 /**
  * Provides test scaffolding for the NewMagician page.
@@ -48,24 +47,24 @@ public class NewMagicianPage extends FluentPage {
   /**
    * Tests the form on the NewMagician page with provided data.
    *
-   * @param firstName       The first name of the user.
+   * @param firstName       The first name of the magician.
    * @param lastName        The last name of the magician.
    * @param stageName       The stage name of the magician.
    * @param location        Global location.
-   * @param biography       Biography of user.
-   * @param interests       User's interests in magic.
-   * @param influences      User's invluences.
-   * @param experienceLevel User's experience level; pre-set values.
+   * @param biography       Biography of magician.
+   * @param interests       Magician's interests in magic.
+   * @param influences      Magician's invluences.
+   * @param experienceLevel Magician's experience level; pre-set values.
    * @param yearsPracticing Number of years of experience.
-   * @param organizations   Any affiliations or organizations the user is a member of.
-   * @param website         User's personal website.
-   * @param email           User's email address.
-   * @param facebook        The user's facebook account.
-   * @param twitter         User's Twitter account.
-   * @param linkedIn        User's LinkedIn account.
-   * @param googlePlus      User's Google Plus account.
-   * @param flickr          User's flickr account.
-   * @param instagram       User's instagram account.
+   * @param organizations   Any affiliations or organizations the magician is a member of.
+   * @param website         Magician's personal website.
+   * @param email           Magician's email address.
+   * @param facebook        The magician's facebook account.
+   * @param twitter         Magician's Twitter account.
+   * @param linkedIn        Magician's LinkedIn account.
+   * @param googlePlus      Magician's Google Plus account.
+   * @param flickr          Magician's flickr account.
+   * @param instagram       Magician's instagram account.
    */
   public void createMagician(String firstName, String lastName, String stageName, String location, String biography,
                              String interests, String influences, String experienceLevel, String yearsPracticing,
@@ -79,13 +78,14 @@ public class NewMagicianPage extends FluentPage {
     fill("#biography").with(biography);
     fill("#interests").with(interests);
     fill("#influences").with(influences);
-    find("select", withId("experienceLevel")).find("option", withId(experienceLevel)).click();
+    System.out.println("Experience Level: " + experienceLevel);
+    find("select", withId("experienceLevel")).find("option", withText().equalTo(experienceLevel)).click();
+    //find("select", withId().equalTo("gender")).find("option", withText().equalTo(gender)).click();
     fill("#yearsPracticing").with(yearsPracticing);
     fill("#organizations").with(organizations);
     fill("#website").with(website);
     fill("#facebook").with(facebook);
     fill("#twitter").with(twitter);
-    fill("#linkedIn").with(linkedIn);
     fill("#linkedIn").with(linkedIn);
     fill("#googlePlus").with(googlePlus);
     fill("#flickr").with(flickr);

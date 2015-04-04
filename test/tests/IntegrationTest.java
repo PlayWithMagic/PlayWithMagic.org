@@ -5,6 +5,7 @@ import play.libs.F.Callback;
 import play.test.TestBrowser;
 import tests.pages.IndexPage;
 import tests.pages.NewMagicianPage;
+import tests.pages.ShowMagiciansPage;
 
 import static play.test.Helpers.HTMLUNIT;
 import static play.test.Helpers.fakeApplication;
@@ -50,6 +51,47 @@ public class IntegrationTest {
             NewMagicianPage newMagicianPage = new NewMagicianPage(browser.getDriver(), port);
             browser.goTo(newMagicianPage);
             newMagicianPage.isAt();
+          }
+        });
+  }
+
+  /**
+   * Tests to verify that a NewMagician form submission works and results can be viewed on the ShowMagicians page.
+   */
+  @Test
+  public void testCreateNewMagician() {
+    running(testServer(port, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+        new Callback<TestBrowser>() {
+          public void invoke(TestBrowser browser) {
+            browser.maximizeWindow();
+            ShowMagiciansPage showMagiciansPage = new ShowMagiciansPage(browser.getDriver(), port);
+            NewMagicianPage newMagicianPage = new NewMagicianPage(browser.getDriver(), port);
+            browser.goTo(newMagicianPage);
+            newMagicianPage.isAt();
+            String firstName = "Patrick";
+            String lastName = "Karjala";
+            String stageName = "The Great Patricio";
+            String location = "Honolulu, HI";
+            String biography = "Born and raised in Hawaii, the greatest magician of the Pacific!";
+            String interests = "Color Sticks";
+            String influences = "Mark Nelson";
+            String experienceLevel = "Enthusiast";
+            String yearsPracticing = "4";
+            String organizations = "none";
+            String website = "http://patrickakarjala.wordpress.com/";
+            String email = "pat_trick@hotmail.com";
+            String facebook = "None";
+            String twitter = "@patrick";
+            String linkedIn = "http://www.linkedin.com/patrickakarjala/";
+            String googlePlus = "Some crazy URL string";
+            String flickr = "yahoo.com";
+            String instagram = "pat_trick_hi";
+            newMagicianPage.createMagician(firstName, lastName, stageName, location, biography, interests, influences,
+                experienceLevel, yearsPracticing, organizations, website, email, facebook, twitter, linkedIn,
+                googlePlus, flickr, instagram);
+            browser.goTo(showMagiciansPage);
+            String fullName = firstName + " " + lastName;
+            showMagiciansPage.hasMagician(fullName, stageName, interests, experienceLevel);
           }
         });
   }
