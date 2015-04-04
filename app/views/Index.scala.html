@@ -3,7 +3,7 @@
 *
 * @see http://www.playframework.com
 *@
-@(routines: List[Routine])
+@()
 
 @Main("Home") {
   <!-- Page Content -->
@@ -35,38 +35,4 @@
       </div>
     </header>
   </section>
-
-  <div class="container">
-    <h1>Current Routines</h1>
-  </div>
-  <div class="container">
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Image</th>
-          <th>Magic Type</th>
-          <th>Skill Level</th>
-          <th>Info</th>
-          <th>Description</th>
-          <th>Materials</th>
-        </tr>
-      </thead>
-      <tbody>
-      @for(routine <- routines) {
-        <tr>
-          <td>@routine.getName</td>
-          <td>@routine.getImage</td>
-          <td>@routine.getMagicType</td>
-          <td>@routine.getSkillLevel</td>
-          <td>@routine.getInfo</td>
-          <td>@routine.getDescription</td>
-          <td>@routine.getMaterials</td>
-          <td><a href="@routes.Application.newRoutine(routine.getId)" class="btn btn-warning btn-xs" role="button">Edit</a></td>
-          <td><a href="@routes.Application.deleteRoutine(routine.getId)" class="btn btn-danger btn-xs" role="button">Delete</a></td>
-        </tr>
-      }
-      </tbody>
-    </table>
-  </div>
 }

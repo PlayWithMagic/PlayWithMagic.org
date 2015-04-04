@@ -7,6 +7,7 @@ import play.mvc.Result;
 import views.formdata.RoutineFormData;
 import views.html.Index;
 import views.html.NewRoutine;
+import views.html.SearchRoutines;
 
 /**
  * The application's MVC Controller class.
@@ -21,7 +22,16 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result index() {
-    return ok(Index.render(RoutineDB.getRoutines()));
+    return ok(Index.render());
+  }
+
+  /**
+   * Render the Search Routines page.
+   *
+   * @return An HTTP OK message along with the HTML content for the Search Routine page.
+   */
+  public static Result searchRoutines() {
+    return ok(SearchRoutines.render(RoutineDB.getRoutines()));
   }
 
   /**
@@ -33,6 +43,7 @@ public class Application extends Controller {
   public static Result newRoutine(long id) {
     RoutineFormData data = (id == 0) ? new RoutineFormData() : new RoutineFormData(RoutineDB.getRoutine(id));
     Form<RoutineFormData> formData = Form.form(RoutineFormData.class).fill(data);
+
     return ok(NewRoutine.render(formData));
   }
 
@@ -44,7 +55,8 @@ public class Application extends Controller {
    */
   public static Result deleteRoutine(long id) {
     RoutineDB.deleteRoutine(id);
-    return ok(Index.render(RoutineDB.getRoutines()));
+
+    return ok(SearchRoutines.render(RoutineDB.getRoutines()));
   }
 
   /**
@@ -54,15 +66,16 @@ public class Application extends Controller {
    */
   public static Result postRoutine() {
     Form<RoutineFormData> formData = Form.form(RoutineFormData.class).bindFromRequest();
+
     if (formData.hasErrors()) {
       System.out.println("HTTP Form Error.");
+
       return badRequest(NewRoutine.render(formData));
     }
     else {
       RoutineFormData data = formData.get();
       RoutineDB.addRoutines(data);
-      System.out.printf("HTTP OK; Form Data:  %s, %s, %s, %s, %s, %s, %s %n", data.name, data.image, data.magicType,
-          data.skillLevel, data.info, data.description, data.materials);
+
       return ok(NewRoutine.render(formData));
     }
   }
