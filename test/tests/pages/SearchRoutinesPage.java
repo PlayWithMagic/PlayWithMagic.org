@@ -30,7 +30,7 @@ public class SearchRoutinesPage extends FluentPage {
    * @param port      The port.
    * @param id        The id of the routine to delete.
    */
-  public SearchRoutinesPage(WebDriver webDriver, int port, int id) {
+  public SearchRoutinesPage(WebDriver webDriver, int port, long id) {
     super(webDriver);
     this.url = "http://localhost:" + port + "/deleteRoutine?id=" + id;
   }
