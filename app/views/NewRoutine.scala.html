@@ -44,6 +44,7 @@
             placeholder = "Mins",
             help = "The average time to perform a basic rendition of this routine in minutes.")
 
+          <div class="well">
           @textarea(routineForm("method"),
             rows = "3",
             label = "Method",
@@ -56,18 +57,24 @@
             label = "Handling",
             placeholder = "Discuss the overt handling (moves and techniques) for this routine",
             help = "")
+          </div>
 
-          <div class="well">
-            @textInt(routineForm("resetDuration"),
-              label = "Setup / Reset Duration",
-              placeholder = "Mins",
-              help = "The average time to prepare this routine or reset it.  Set to 0 if it resets during the act.")
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Setup & Reset</h3>
+            </div>
+            <div class="panel-body">
+              @textInt(routineForm("resetDuration"),
+                label = "Setup / Reset Duration",
+                placeholder = "Mins",
+                help = "The average time to prepare this routine or reset it.  Set to 0 if it resets during the act.")
 
-            @textarea(routineForm("resetDescription"),
-              rows = "3",
-              label = "Reset Description",
-              placeholder = "Describe the steps to prepare (or reset) this routine",
-              help = "")
+              @textarea(routineForm("resetDescription"),
+                rows = "3",
+                label = "Reset Description",
+                placeholder = "Describe the steps to prepare (or reset) this routine",
+                help = "")
+            </div>
           </div>
 
           <div class="form-group">

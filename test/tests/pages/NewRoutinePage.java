@@ -4,6 +4,7 @@ import models.Routine;
 import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
 import play.Logger;
+import play.test.TestBrowser;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -63,6 +64,22 @@ public class NewRoutinePage extends FluentPage {
     fill("#resetDescription").with(routine.getResetDescription());
 
     submit("#submit");
+  }
+
+  /**
+   * Test the contents of the page against a Routine
+   *
+   * @param browser The test browser containing the rendered page.
+   * @param routine A container holding all of the fields to check for in the page.
+   */
+  public void testContents(TestBrowser browser, Routine routine) {
+    assertThat(browser.pageSource()).contains(routine.getName());
+    assertThat(browser.pageSource()).contains(routine.getDescription());
+    assertThat(browser.pageSource()).contains(routine.getDuration().toString());
+    assertThat(browser.pageSource()).contains(routine.getMethod());
+    assertThat(browser.pageSource()).contains(routine.getHandling());
+    assertThat(browser.pageSource()).contains(routine.getResetDuration().toString());
+    assertThat(browser.pageSource()).contains(routine.getResetDescription());
   }
 
 }

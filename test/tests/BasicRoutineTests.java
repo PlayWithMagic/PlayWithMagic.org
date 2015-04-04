@@ -57,8 +57,8 @@ public class BasicRoutineTests {
     routine2.setResetDuration(22);
     routine2.setResetDescription("Test Routine Reset Description 02");
 
-    Logger.debug("Routines setup for testing!!");
-    System.out.println("Routines setup for testing");  // Logger doesn't seem to printout yet.
+    /* Logger.debug("Routines setup for testing"); */ // Logger doesn't work in JUnit tests w/ Play 2.0 (known issue).
+    System.out.println("Routines setup for testing");
   }
 
   /**
@@ -118,13 +118,7 @@ public class BasicRoutineTests {
             browser.goTo(newRoutinePage);
             newRoutinePage.isAt();
             assertThat(browser.pageSource().contains("Update Routine"));
-            assertThat(browser.pageSource()).contains(routine1.getName());
-            assertThat(browser.pageSource()).contains(routine1.getDescription());
-            assertThat(browser.pageSource()).contains(routine1.getDuration().toString());
-            assertThat(browser.pageSource()).contains(routine1.getMethod());
-            assertThat(browser.pageSource()).contains(routine1.getHandling());
-            assertThat(browser.pageSource()).contains(routine1.getResetDuration().toString());
-            assertThat(browser.pageSource()).contains(routine1.getResetDescription());
+            newRoutinePage.testContents(browser, routine1);
 
             newRoutinePage.submitForm(routine2);
 
@@ -153,13 +147,7 @@ public class BasicRoutineTests {
             browser.goTo(newRoutinePage);
             newRoutinePage.isAt();
             assertThat(browser.pageSource().contains("Update Routine"));
-            assertThat(browser.pageSource()).contains(routine2.getName());
-            assertThat(browser.pageSource()).contains(routine2.getDescription());
-            assertThat(browser.pageSource()).contains(routine2.getDuration().toString());
-            assertThat(browser.pageSource()).contains(routine2.getMethod());
-            assertThat(browser.pageSource()).contains(routine2.getHandling());
-            assertThat(browser.pageSource()).contains(routine2.getResetDuration().toString());
-            assertThat(browser.pageSource()).contains(routine2.getResetDescription());
+            newRoutinePage.testContents(browser, routine2);
           }
         });
   }
