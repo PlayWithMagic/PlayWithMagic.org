@@ -13,11 +13,14 @@ public class Routine {
   private Integer duration;        /* The average time to perform a basic rendition of this routine in minutes. */
   private String method;           /* A multi-line discussion of the method for this routine. */
   private String handling;         /* A multi-line discussion of the handling for the routine. */
-  private Boolean resetInstantly;  /* Set to true if the routine resets instantly. */
   private Integer resetDuration;   /* The average time to prepare the routine for presentation. */
   private String resetDescription; /* A description of the process to prepare the routine. */
 
-  static public final int MAX_ROUTINE_LENGTH = 45;
+  /** The maximum number of characters in the routine name. */
+  public static final int MAX_ROUTINE_LENGTH = 45;
+
+  /** The maximum number of characters in generic multiline text fields. */
+  public static final int MAX_MULTILINE_FIELD_LENGTH = 2000;
 
   /**
    * Create new, valid Routine object.
@@ -84,12 +87,30 @@ public class Routine {
   }
 
   /**
+   * Set a multi-line discussion of the method for this routine.
+   *
+   * @param method A multi-line discussion of the method for this routine.
+   */
+  public void setMethod(String method) {
+    this.method = method;
+  }
+
+  /**
    * Get a multi-line discussion of the method for this routine.
    *
    * @return A multi-line discussion of the method for this routine.
    */
   public String getMethod() {
     return method;
+  }
+
+  /**
+   * Set a multi-line discussion of the handling for this routine.
+   *
+   * @param handling a multi-line discussion of the handling for this routine.
+   */
+  public void setHandling(String handling) {
+    this.handling = handling;
   }
 
   /**
@@ -101,12 +122,11 @@ public class Routine {
   }
 
   /**
-   * Does the routine reset instantly?
-   *
-   * @return True if the routine resets instantly.  False if not.
+   * Set the average time to prepare the routine for presentation.
+   * @param resetDuration The average time to prepare the routine for presentation.
    */
-  public Boolean isResetInstantly() {
-    return resetInstantly;
+  public void setResetDuration(Integer resetDuration) {
+    this.resetDuration = resetDuration;
   }
 
   /**
@@ -116,6 +136,15 @@ public class Routine {
    */
   public Integer getResetDuration() {
     return resetDuration;
+  }
+
+  /**
+   * Set a description of the process to prepare the routine.
+   *
+   * @param resetDescription A description of the process to prepare the routine.
+   */
+  public void setResetDescription(String resetDescription) {
+    this.resetDescription = resetDescription;
   }
 
   /**

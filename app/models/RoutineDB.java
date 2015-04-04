@@ -1,5 +1,6 @@
 package models;
 
+import play.Logger;
 import views.formdata.RoutineFormData;
 
 import java.util.ArrayList;
@@ -29,9 +30,15 @@ public class RoutineDB {
         formData.description);
 
     routineFromForm.setDuration(formData.duration);
+    routineFromForm.setMethod(formData.method);
+    routineFromForm.setHandling(formData.handling);
+    routineFromForm.setResetDuration(formData.resetDuration);
+    routineFromForm.setResetDescription(formData.resetDescription);
 
     // TODO: Create setters and put the other values in.
     routines.put(idVal, routineFromForm);
+    Logger.debug("Added or updated routine");
+    Logger.debug("  id = [" + idVal + "]");
   }
 
   /**
@@ -68,5 +75,14 @@ public class RoutineDB {
    */
   public static List<Routine> getRoutines() {
     return new ArrayList<>(routines.values());
+  }
+
+
+  /**
+   * Delete all of the routines in the database.  This is used by JUnit tests.
+   */
+  public static void resetRoutineDB() {
+    routines.clear();
+    currentId = 1;
   }
 }
