@@ -4,7 +4,6 @@ import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.withId;
 
 /**
  * Provides test scaffolding for the showMagicians page.
