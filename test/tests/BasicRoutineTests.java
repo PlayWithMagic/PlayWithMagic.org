@@ -6,7 +6,6 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import play.Logger;
 import play.libs.F;
 import play.test.TestBrowser;
 import tests.pages.NewRoutinePage;

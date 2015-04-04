@@ -67,7 +67,7 @@ public class NewRoutinePage extends FluentPage {
   }
 
   /**
-   * Test the contents of the page against a Routine
+   * Test the contents of the page against a Routine.
    *
    * @param browser The test browser containing the rendered page.
    * @param routine A container holding all of the fields to check for in the page.
