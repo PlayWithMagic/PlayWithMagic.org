@@ -101,22 +101,54 @@ public class RoutineDB {
    */
   public static void init() {
     resetRoutineDB();
+    Routine routine = null;
 
-    Routine routine1 = new Routine(0, "Ambitious Card", "Put a card in the middle of the deck.  It magically comes to "
+    // --------------------------------------
+    routine = new Routine(0, "Ambitious Card", "Put a card in the middle of the deck.  It magically comes to "
         + "the top.");
 
-    routine1.setDuration(2);
-    routine1.setMethod("Get a break under the top two cards.  Perform a double turnover.  Say \"The card on the top "
+    routine.setDuration(2);
+    routine.setMethod("Get a break under the top two cards.  Perform a double turnover.  Say \"The card on the top "
         + "of the deck is the <<Card>>\".  Perform another double turnover.  Place the indifferent card anywhere in "
         + "the deck.  Turn over the top card to show that the selected card has come to the top.");
-    routine1.setHandling("Your lift and turnover should be flawless.  Any method will work.  I grasp the lower-right "
+    routine.setHandling("Your lift and turnover should be flawless.  Any method will work.  I grasp the lower-right "
         + "corner of the cards under the break and turn them over, sliding the pair across the back of the deck to "
         + "maintain registration (alignment).  I leave the cards injogged and refer to them with my right index "
         + "finger.  Repeat the process for the second turnover.");
-    routine1.setResetDuration(0);
-    routine1.setResetDescription("No setup is required for a normal deck assuming that the selected card is also "
+    routine.setResetDuration(0);
+    routine.setResetDescription("No setup is required for a normal deck assuming that the selected card is also "
         + "indifferent.");
 
-    RoutineDB.addRoutines(new RoutineFormData(routine1));
+    RoutineDB.addRoutines(new RoutineFormData(routine));
+
+    // --------------------------------------
+    routine = new Routine(0, "Gypsy Thread", "Pieces of thread are restored into one continuous piece.");
+
+    routine.setDuration(4);
+    routine.setMethod("Not shared");
+    routine.setHandling("I use this as an opener, with the spool in hand.  After detaching the initial piece of "
+        + "thread, I hand out the spool for inspection.");
+    routine.setResetDuration(2);
+    routine.setResetDescription("Not shared");
+
+    RoutineDB.addRoutines(new RoutineFormData(routine));
+
+    // --------------------------------------
+    routine = new Routine(0, "Magician's Practice Deck", "A 'cheap' deck of cards with nothing printed on them "
+        + "magically gets printed on the front and back.");
+
+    routine.setDuration(3);
+    routine.setMethod("A standard Mental Photography deck.  \"Have you ever seen a magician's practice deck?  "
+        + "A magician will go through a deck per week.  You know, the oils from your hands get on the cards and they "
+        + "don't spread smothly anymore.  Anyway, a deck costs about $5 a pack -- and it gets expensive over time.  "
+        + "So magicians have resorted to buying practice decks... and I'd like to show you mine.\"  << Remove the box "
+        + "from your pocket and remove the 'blank' deck from the box.>>  At this point, perform Mental Photography.");
+    routine.setHandling("I'll find myself using this as my first card trick of the set.  I put the deck back in the "
+        + "box and the box in a pocket with a loaded deck I'll use later.  I do a coin trick between the card tricks "
+        + "to demonstrate skill in a variety of magical elements.  This is a good way to introduce cards in the set.");
+    routine.setResetDuration(1);
+    routine.setResetDescription("Cut the deck to the blank cards.");
+
+    RoutineDB.addRoutines(new RoutineFormData(routine));
   }
 }
