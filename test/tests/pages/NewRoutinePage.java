@@ -32,7 +32,7 @@ public class NewRoutinePage extends FluentPage {
    * @param port      The port.
    * @param id        The Routine ID of the routine we shall edit.
    */
-  public NewRoutinePage(WebDriver webDriver, int port, int id) {
+  public NewRoutinePage(WebDriver webDriver, int port, long id) {
     super(webDriver);
     this.url = "http://localhost:" + port + "/newRoutine?id=" + id;
   }

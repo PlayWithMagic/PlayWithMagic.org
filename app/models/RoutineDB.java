@@ -17,6 +17,15 @@ public class RoutineDB {
   private static long currentId = 1;
 
   /**
+   * Get the current ID of the in-memory database.  This should be used for testing only.
+   *
+   * @return The current ID of the in-memory datbase.
+   */
+  public static long getCurrentId() {
+    return currentId;
+  }
+
+  /**
    * Adds a formData input to the Routines list.
    *
    * @param formData Input data from the form.
@@ -35,10 +44,9 @@ public class RoutineDB {
     routineFromForm.setResetDuration(formData.resetDuration);
     routineFromForm.setResetDescription(formData.resetDescription);
 
-    // TODO: Create setters and put the other values in.
     routines.put(idVal, routineFromForm);
-    Logger.debug("Added or updated routine");
-    Logger.debug("  id = [" + idVal + "]");
+    Logger.debug(((formData.id == 0) ? "Added" : "Updated") + " routine.  id = [" + idVal + "]"
+        + "  name = [" + formData.name + "]");
   }
 
   /**
@@ -84,5 +92,31 @@ public class RoutineDB {
   public static void resetRoutineDB() {
     routines.clear();
     currentId = 1;
+    Logger.warn("Routine database reset");
+  }
+
+
+  /**
+   * Initialize the Routine database.
+   */
+  public static void init() {
+    resetRoutineDB();
+
+    Routine routine1 = new Routine(0, "Ambitious Card", "Put a card in the middle of the deck.  It magically comes to "
+        + "the top.");
+
+    routine1.setDuration(2);
+    routine1.setMethod("Get a break under the top two cards.  Perform a double turnover.  Say \"The card on the top "
+        + "of the deck is the <<Card>>\".  Perform another double turnover.  Place the indifferent card anywhere in "
+        + "the deck.  Turn over the top card to show that the selected card has come to the top.");
+    routine1.setHandling("Your lift and turnover should be flawless.  Any method will work.  I grasp the lower-right "
+        + "corner of the cards under the break and turn them over, sliding the pair across the back of the deck to "
+        + "maintain registration (alignment).  I leave the cards injogged and refer to them with my right index "
+        + "finger.  Repeat the process for the second turnover.");
+    routine1.setResetDuration(0);
+    routine1.setResetDescription("No setup is required for a normal deck assuming that the selected card is also "
+        + "indifferent.");
+
+    RoutineDB.addRoutines(new RoutineFormData(routine1));
   }
 }
