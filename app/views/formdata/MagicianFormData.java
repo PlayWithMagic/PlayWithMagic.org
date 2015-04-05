@@ -66,9 +66,9 @@ public class MagicianFormData {
   public String experienceLevel;
 
   /**
-   * Input data Years Practicing field.
+   * Input data Year Started field.
    */
-  public int yearsPracticing;
+  public int yearStarted;
 
   /**
    * Input data Organizations field.
@@ -144,7 +144,7 @@ public class MagicianFormData {
     this.interests = magician.getInterests();
     this.influences = magician.getInfluences();
     this.experienceLevel = magician.getExperienceLevel();
-    this.yearsPracticing = magician.getYearsPracticing();
+    this.yearStarted = magician.getYearStarted();
     this.organizations = magician.getOrganizations();
     this.website = magician.getWebsite();
     this.email = magician.getEmail();

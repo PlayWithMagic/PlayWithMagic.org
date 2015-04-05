@@ -74,7 +74,7 @@ public class Application extends Controller {
       MagicianDB.addMagicians(data);
       System.out.printf("HTTP OK; Form Data submitted:  %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, "
               + "%s, %s, %s %n", data.id, data.firstName, data.lastName, data.stageName, data.location, data.biography,
-          data.interests, data.influences, data.yearsPracticing, data.organizations, data.website, data.email,
+          data.interests, data.influences, data.yearStarted, data.organizations, data.website, data.email,
           data.facebook, data.twitter, data.linkedIn, data.googlePlus, data.flickr, data.instagram);
       System.out.println(data.experienceLevel);
       System.out.println(data.showEmail);
