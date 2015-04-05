@@ -1,5 +1,6 @@
 package views.formdata;
 
+import models.GlobalDbInfo;
 import models.Routine;
 import play.data.validation.ValidationError;
 
@@ -97,9 +98,9 @@ public class RoutineFormData {
       errors.add(new ValidationError("name", "Your routine's gotta have a name."));
     }
 
-    if (name == null || name.length() > Routine.MAX_ROUTINE_LENGTH) {
+    if (name != null && name.length() > GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) {
       errors.add(new ValidationError("name",
-          "The routine's name can't be longer than " + Routine.MAX_ROUTINE_LENGTH + " characters."));
+          "The routine's name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters."));
     }
 
     if (description == null || description.length() == 0) {
@@ -107,20 +108,20 @@ public class RoutineFormData {
           "A name's not enough.  Please write a brief description of your routine."));
     }
 
-    if (description == null || description.length() > Routine.MAX_MULTILINE_FIELD_LENGTH) {
+    if (description != null && description.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
       errors.add(new ValidationError("description",
-          "Description can't accept more than " + Routine.MAX_MULTILINE_FIELD_LENGTH + " characters."));
+          "Description can't accept more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters."));
     }
 
     if (duration == null || duration.intValue() == 0) {
       errors.add(new ValidationError("duration", "If it's under a minute, then just enter 1."));
     }
 
-    if (duration == null || duration.intValue() < 0) {
+    if (duration != null && duration.intValue() < 0) {
       errors.add(new ValidationError("duration", "Who do you think you are?  Dr. Who?"));
     }
 
-    if (duration == null || duration.intValue() > 120) {
+    if (duration != null && duration.intValue() > 120) {
       errors.add(new ValidationError("duration",
           "If you need to have a routine longer than 120 minutes, then submit a bug report and we'll look into it."));
     }
@@ -139,29 +140,29 @@ public class RoutineFormData {
       }
     }
 
-    if (method == null || method.length() > Routine.MAX_MULTILINE_FIELD_LENGTH) {
+    if (method != null && method.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
       errors.add(new ValidationError("method",
-          "Handling can't accept more than " + Routine.MAX_MULTILINE_FIELD_LENGTH + " characters."));
+          "Handling can't accept more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters."));
     }
 
-    if (handling == null || handling.length() > Routine.MAX_MULTILINE_FIELD_LENGTH) {
+    if (handling != null && handling.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
       errors.add(new ValidationError("handling",
-          "Handling can't accept more than " + Routine.MAX_MULTILINE_FIELD_LENGTH + " characters."));
+          "Handling can't accept more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters."));
     }
 
-    if (resetDuration == null || resetDuration.intValue() < 0) {
+    if (resetDuration != null && resetDuration.intValue() < 0) {
       errors.add(new ValidationError("resetDuration", "Who do you think you are?  Dr. Who?"));
     }
 
-    if (resetDuration == null || resetDuration.intValue() > 120) {
+    if (resetDuration != null && resetDuration.intValue() > 120) {
       errors.add(new ValidationError("resetDuration",
           "If it takes longer than 2 hours to reset, well... then we hope it's a great trick.  "
               + "Submit a bug report and we'll look into it."));
     }
 
-    if (resetDescription == null || resetDescription.length() > Routine.MAX_MULTILINE_FIELD_LENGTH) {
+    if (resetDescription != null && resetDescription.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
       errors.add(new ValidationError("resetDescription",
-          "Reset Description can't accept more than " + Routine.MAX_MULTILINE_FIELD_LENGTH + " characters."));
+          "Reset Description can't accept more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters."));
     }
 
 

@@ -27,7 +27,7 @@ public class MagicianDB {
     long idVal = (formData.id == 0) ? currentId++ : formData.id;
     Magician magicianFromForm = new Magician(idVal, formData.firstName, formData.lastName, formData.stageName,
         formData.location, formData.userPhoto, formData.biography, formData.interests, formData.influences,
-        formData.experienceLevel, formData.yearsPracticing, formData.organizations, formData.website, formData.email,
+        formData.experienceLevel, formData.yearStarted, formData.organizations, formData.website, formData.email,
         formData.showEmail, formData.facebook, formData.twitter, formData.linkedIn, formData.googlePlus,
         formData.flickr, formData.instagram);
     magicians.put(idVal, magicianFromForm);
@@ -102,7 +102,7 @@ public class MagicianDB {
         + "all mediums of the art (Cards, coins, rope, etc.).",
         "Tony Slydini, David Regal, Lee Asher, Aaron Fisher, my brother Steve Johnson and many, many others.",
         "Semi-Professional",
-        11,
+        2004,
         null,
         "http://mark.nelson.engineer/wordpress/index.php/magic-home-page/",
         "mr_nelson@icloud.com",

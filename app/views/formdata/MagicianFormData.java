@@ -1,10 +1,12 @@
 package views.formdata;
 
+import models.GlobalDbInfo;
 import models.Magician;
 import play.data.validation.ValidationError;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -66,9 +68,9 @@ public class MagicianFormData {
   public String experienceLevel;
 
   /**
-   * Input data Years Practicing field.
+   * Input data Year Started field.
    */
-  public int yearsPracticing;
+  public Integer yearStarted;
 
   /**
    * Input data Organizations field.
@@ -144,7 +146,7 @@ public class MagicianFormData {
     this.interests = magician.getInterests();
     this.influences = magician.getInfluences();
     this.experienceLevel = magician.getExperienceLevel();
-    this.yearsPracticing = magician.getYearsPracticing();
+    this.yearStarted = magician.getYearStarted();
     this.organizations = magician.getOrganizations();
     this.website = magician.getWebsite();
     this.email = magician.getEmail();
@@ -166,16 +168,107 @@ public class MagicianFormData {
 
     List<ValidationError> errors = new ArrayList<>();
     if (firstName == null || firstName.length() == 0) {
-      errors.add(new ValidationError("firstName", "A First Name must be provided."));
+      errors.add(new ValidationError("firstName", "Everybody (except Teller) has a first name."));
     }
+
+    if (firstName != null && firstName.length() > GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) {
+      errors.add(new ValidationError("firstName",
+          "The name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters."));
+    }
+
     if (lastName == null || lastName.length() == 0) {
       errors.add(new ValidationError("lastName", "A Last Name must be provided."));
     }
+
+    if (lastName != null && lastName.length() > GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) {
+      errors.add(new ValidationError("lastName",
+          "The name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters."));
+    }
+
     if (email == null || email.length() == 0) {
       errors.add(new ValidationError("email", "An email address must be provided."));
     }
+
+    if (email != null && email.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("email",
+          "The Email address can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
     if (!ExperienceLevels.isExperienceLevel(experienceLevel)) {
       errors.add(new ValidationError("experienceLevel", "Please select a level of experience from the list."));
+    }
+
+    if (stageName != null && stageName.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("stageName",
+          "The name can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (location != null && location.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("location",
+          "The location can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (biography != null && biography.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
+      errors.add(new ValidationError("biography",
+          "Your biography can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (interests != null && interests.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
+      errors.add(new ValidationError("interests",
+          "Your interests can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (influences != null && influences.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("influences",
+          "Your influences can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (yearStarted != null && yearStarted.intValue() < 1900) {
+      errors.add(new ValidationError("yearStarted", "How about a real year?"));
+    }
+
+    if (yearStarted != null && yearStarted.intValue() > Calendar.getInstance().get(Calendar.YEAR)) {
+      errors.add(new ValidationError("yearStarted", "How about a real year?"));
+    }
+
+    if (organizations != null && organizations.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("organizations",
+          "Your organizations can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (website != null && website.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("website",
+          "Your website URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (facebook != null && facebook.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("facebook",
+          "Your facebook URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (twitter != null && twitter.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("twitter",
+          "Your twitter URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (linkedIn != null && linkedIn.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("linkedIn",
+          "Your linkedIn URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (googlePlus != null && googlePlus.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("googlePlus",
+          "Your googlePlus URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (flickr != null && flickr.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("flickr",
+          "Your flickr URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
+    }
+
+    if (instagram != null && instagram.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
+      errors.add(new ValidationError("instagram",
+          "Your instagram URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
     }
 
     return errors.isEmpty() ? null : errors;

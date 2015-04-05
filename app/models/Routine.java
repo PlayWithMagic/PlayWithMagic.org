@@ -16,12 +16,6 @@ public class Routine {
   private Integer resetDuration;   /* The average time to prepare the routine for presentation. */
   private String resetDescription; /* A description of the process to prepare the routine. */
 
-  /** The maximum number of characters in the routine name. */
-  public static final int MAX_ROUTINE_LENGTH = 45;
-
-  /** The maximum number of characters in generic multiline text fields. */
-  public static final int MAX_MULTILINE_FIELD_LENGTH = 2000;
-
   /**
    * Create new, valid Routine object.
    * <p>

@@ -76,7 +76,7 @@ public class IntegrationTest {
             String interests = "Color Sticks";
             String influences = "Mark Nelson";
             String experienceLevel = "Enthusiast";
-            String yearsPracticing = "4";
+            String yearStarted = "2011";
             String organizations = "none";
             String website = "http://patrickakarjala.wordpress.com/";
             String email = "pat_trick@hotmail.com";
@@ -87,7 +87,7 @@ public class IntegrationTest {
             String flickr = "yahoo.com";
             String instagram = "pat_trick_hi";
             newMagicianPage.createMagician(firstName, lastName, stageName, location, biography, interests, influences,
-                experienceLevel, yearsPracticing, organizations, website, email, facebook, twitter, linkedIn,
+                experienceLevel, yearStarted, organizations, website, email, facebook, twitter, linkedIn,
                 googlePlus, flickr, instagram);
             browser.goTo(showMagiciansPage);
             String fullName = firstName + " " + lastName;

@@ -22,7 +22,7 @@ public class Magician {
   private String interests;
   private String influences;
   private String experienceLevel;
-  private int yearsPracticing;
+  private int yearStarted;  // The year started - used to compute the number of years of experience.
   private String organizations;
   // Contact Info
   private String website;
@@ -49,7 +49,7 @@ public class Magician {
    * @param interests       User's interests in magic.
    * @param influences      User's influences.
    * @param experienceLevel User's experience level; pre-set values.
-   * @param yearsPracticing Number of years of experience.
+   * @param yearStarted     The year started - used to compute the number of years of experience.
    * @param organizations   Any affiliations or organizations the user is a member of.
    * @param website         User's personal website.
    * @param email           User's email address.
@@ -62,7 +62,7 @@ public class Magician {
    * @param instagram       User's instagram account.
    */
   public Magician(long id, String firstName, String lastName, String stageName, String location, File userPhoto,
-                  String biography, String interests, String influences, String experienceLevel, int yearsPracticing,
+                  String biography, String interests, String influences, String experienceLevel, int yearStarted,
                   String organizations, String website, String email, String showEmail, String facebook,
                   String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
     this.id = id;
@@ -75,7 +75,7 @@ public class Magician {
     this.interests = interests;
     this.influences = influences;
     this.experienceLevel = experienceLevel;
-    this.yearsPracticing = yearsPracticing;
+    this.yearStarted = yearStarted;
     this.organizations = organizations;
     this.website = website;
     this.email = email;
@@ -100,7 +100,7 @@ public class Magician {
    * @param interests       User's interests in magic.
    * @param influences      User's invluences.
    * @param experienceLevel User's experience level; pre-set values.
-   * @param yearsPracticing Number of years of experience.
+   * @param yearStarted     The year started - used to compute the number of years of experience.
    * @param organizations   Any affiliations or organizations the user is a member of.
    * @param website         User's personal website.
    * @param email           User's email address.
@@ -113,7 +113,7 @@ public class Magician {
    * @param instagram       User's instagram account.
    */
   public Magician(String firstName, String lastName, String stageName, String location, File userPhoto,
-                  String biography, String interests, String influences, String experienceLevel, int yearsPracticing,
+                  String biography, String interests, String influences, String experienceLevel, int yearStarted,
                   String organizations, String website, String email, String showEmail, String facebook,
                   String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
     this.firstName = firstName;
@@ -125,7 +125,7 @@ public class Magician {
     this.interests = interests;
     this.influences = influences;
     this.experienceLevel = experienceLevel;
-    this.yearsPracticing = yearsPracticing;
+    this.yearStarted = yearStarted;
     this.organizations = organizations;
     this.website = website;
     this.email = email;
@@ -233,8 +233,8 @@ public class Magician {
    *
    * @return The number of years of practice.
    */
-  public int getYearsPracticing() {
-    return yearsPracticing;
+  public int getYearStarted() {
+    return yearStarted;
   }
 
   /**
