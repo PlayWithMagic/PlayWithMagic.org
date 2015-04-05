@@ -1,0 +1,44 @@
+@*
+* The application's Show Magician page.
+*
+* @see http://www.playframework.com
+*@
+@(magicians: List[Magician])
+
+@Main("showMagicians") {
+  <!-- Page Content -->
+  <div class="container">
+    <h1>Current Magicians</h1>
+  </div>
+
+  <div class="container">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Stage Name</th>
+          <th>Skill Level</th>
+          <th>Routines</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(magician <- magicians) {
+          <tr>
+            <td>@magician.getFirstName @magician.getLastName</td>
+            <td>@if(magician.getStageName) { @magician.getStageName } else { None }</td>
+            <td>@magician.getExperienceLevel</td>
+            <td>Link to Magician's Routines Here</td>
+            <td>
+              <a href="@routes.Application.newMagician(magician.getId)" class="btn btn-warning btn-xs" role="button">
+              Edit</a>
+            </td>
+            <td>
+              <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
+              Delete</a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

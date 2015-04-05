@@ -9,7 +9,7 @@
       <option name="fileExtension" value="less" />
       <option name="immediateSync" value="true" />
       <option name="name" value="LESS" />
-      <option name="output" value="../css/$FileNameWithoutExtension$.css" />
+      <option name="output" value="$FileDir$/../css/$FileNameWithoutExtension$.css" />
       <option name="outputFilters">
         <array>
           <FilterInfo>
@@ -21,7 +21,7 @@
       </option>
       <option name="outputFromStdout" value="true" />
       <option name="passParentEnvs" value="true" />
-      <option name="program" value="/usr/local/bin/lessc" />
+      <option name="program" value="/usr/bin/lessc" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$FileDir$" />

@@ -8,7 +8,17 @@ Want to know more about PlayWithMagic?
   * [The PlayWithMagic Project web page is here](http://playwithmagic.github.io/PlayWithMagic/)
   * [The PlayWithMagic GitHub home page is here](https://github.com/PlayWithMagic/PlayWithMagic/)
 
-Contents
+PlayWithMagic is a web-based application that catalogs magic tricks for magicians and helps them build shows.
+
+[Check out the prototype here](http://mark.nelson.engineer/PlayWithMagic/mockup/)
+
+TODO:  Add screenshot 1
+
+TODO:  Add screenshot 2
+
+TODO:  Add screenshot 3
+
+Overview
 --------
 In the spirit of ensuring that the project's current status is plainly visible at all times, the project home page
 will contain the old contents of the README.md file.  The project's GitHub page will contain Dr. Johnson deliverables 

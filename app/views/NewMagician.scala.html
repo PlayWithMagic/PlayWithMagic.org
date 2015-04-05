@@ -1,0 +1,139 @@
+@*
+* The New and Update Magician HTML form page.
+*
+* @author Mark Nelson
+* @see http://www.playframework.com
+*@
+@(magicianForm: Form[views.formdata.MagicianFormData], experienceLevelMap: Map[String, Boolean],
+    showMyEmailMap: Map[String, Boolean])
+
+  @import helper._
+  @import views.html.bootstrap3._
+
+
+  @Main("newMagician") {
+    <!-- Page Content -->
+    <section id="page">
+        <!-- Content -->
+      <section id="content" class="container">
+        <div class="col-md-12">
+          <h1>Magician Profile</h1>
+            <!-- User Attributes -->
+          <div class="container">
+          @form(routes.Application.postMagician(), 'class -> "form-horizontal") {
+            <!-- Hidden ID Field -->
+            @hidden(magicianForm("id"))
+              <!--<form class="form-horizontal">-->
+              <!-- First Name -->
+            @text45(magicianForm("firstName"),
+              label = "First Name",
+              placeholder = "First Name",
+              help = "Required")
+              <!-- Last Name -->
+            @text45(magicianForm("lastName"),
+              label = "Last Name",
+              placeholder = "Last Name",
+              help = "Required")
+              <!-- Email -->
+            @text(magicianForm("email"),
+              label = "Email",
+              placeholder = "i.e., name@domain.com",
+              help = "Required")
+              <!-- Show email? -->
+            @checkboxes(magicianForm("showEmail"),
+              label = "Do you wish for your email to be displayed publically?",
+              checkboxMap = showMyEmailMap,
+              help = "")
+              <!-- Experience Level -->
+            @bootstrap3.select(magicianForm("experienceLevel"),
+              label = "Level of Experience with Magic",
+              optionMap = experienceLevelMap,
+              isMultiple = false,
+              help = "Required")
+              <!-- Stage Name -->
+            @text(magicianForm("stageName"),
+              label = "Stage Name",
+              placeholder = "Stage Name",
+              help = "")
+              <!-- Location -->
+            @text(magicianForm("location"),
+              label = "Location",
+              placeholder = "City, State, and/or Country",
+              help = "")
+              <!-- Magician Photo -->
+              <!-- Temporarily disabled until file uploads are sorted -->
+              <!-- Biography -->
+            @bootstrap3.textarea(magicianForm("biography"),
+              rows = "5",
+              label = "Biography",
+              placeholder = "Tell us about yourself!",
+              help = "")
+              <!-- Interests -->
+            @bootstrap3.textarea(magicianForm("interests"),
+              rows = "3",
+              label = "Interests",
+              placeholder = "What are your interests in Magic?",
+              help = "")
+              <!-- Influences -->
+            @text(magicianForm("influences"),
+              label = "Influences",
+              placeholder = "Who are your influences?",
+              help = "")
+              <!-- Year Started -->
+            @textInt(magicianForm("yearStarted"),
+              label = "Year Started",
+              placeholder = "Year",
+              help = "")
+              <!-- Organizations -->
+            @text(magicianForm("organizations"),
+              label = "Organizations",
+              placeholder = "Any Magic Organizations that you participate in",
+              help = "")
+              <!-- Website -->
+            @text(magicianForm("website"),
+              label = "Website URL",
+              placeholder = "i.e., http://www.example.com/",
+              help = "")
+              <!-- Facebook -->
+            @text(magicianForm("facebook"),
+              label = "Facebook",
+              placeholder = "Facebook page URL",
+              help = "")
+              <!-- Twitter -->
+            @text(magicianForm("twitter"),
+              label = "Twitter",
+              placeholder = "Twitter handle",
+              help = "")
+              <!-- LinkedIn -->
+            @text(magicianForm("linkedIn"),
+              label = "Linkedin",
+              placeholder = "Linkedin Profile URL",
+              help = "")
+              <!-- Google + -->
+            @text(magicianForm("googlePlus"),
+              label = "Google+",
+              placeholder = "Google + Profile URL",
+              help = "")
+              <!-- flickr -->
+            @text(magicianForm("flickr"),
+              label = "flickr",
+              placeholder = "flickr Profile URL",
+              help = "")
+              <!-- Instagram -->
+            @text(magicianForm("instagram"),
+              label = "Instagram",
+              placeholder = "Instgram handle",
+              help = "")
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button id="submit" type="submit" class="btn btn-default">
+                  @if(magicianForm("id").value == "0") {Add} else {Update}
+                </button>
+              </div>
+            </div>
+          }
+          </div>
+        </div>
+      </section>
+    </section>
+  }
