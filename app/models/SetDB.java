@@ -1,6 +1,8 @@
 package models;
 
 
+import views.formdata.SetFormData;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,11 +23,10 @@ public class SetDB {
    *
    * @param formData Input data from the submitted form.
    */
-  // TODO: Generate the SetFormData object.
   public static void addSet(SetFormData formData) {
     long idVal = (formData.id == 0) ? currentId++ : formData.id;
     Set setFromForm = new Set(idVal, formData.userId, formData.setName, formData.description, formData.routines);
-    magicians.put(idVal, magicianFromForm);
+    sets.put(idVal, setFromForm);
   }
 
   /**
