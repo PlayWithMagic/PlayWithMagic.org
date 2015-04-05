@@ -22,7 +22,7 @@ public class Magician {
   private String interests;
   private String influences;
   private String experienceLevel;
-  private int yearStarted;  // The year started - used to compute the number of years of experience.
+  private Integer yearStarted;  // The year started - used to compute the number of years of experience.
   private String organizations;
   // Contact Info
   private String website;
@@ -62,7 +62,7 @@ public class Magician {
    * @param instagram       User's instagram account.
    */
   public Magician(long id, String firstName, String lastName, String stageName, String location, File userPhoto,
-                  String biography, String interests, String influences, String experienceLevel, int yearStarted,
+                  String biography, String interests, String influences, String experienceLevel, Integer yearStarted,
                   String organizations, String website, String email, String showEmail, String facebook,
                   String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
     this.id = id;
@@ -233,7 +233,7 @@ public class Magician {
    *
    * @return The number of years of practice.
    */
-  public int getYearStarted() {
+  public Integer getYearStarted() {
     return yearStarted;
   }
 
