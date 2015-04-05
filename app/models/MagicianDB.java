@@ -26,15 +26,10 @@ public class MagicianDB {
   public static void addMagicians(MagicianFormData formData) {
     long idVal = (formData.id == 0) ? currentId++ : formData.id;
     Magician magicianFromForm = new Magician(idVal, formData.firstName, formData.lastName, formData.stageName,
-        formData.location, formData.userPhoto, formData.biography, formData.interests,
-        formData.influences,
-        formData.experienceLevel,
-        formData.yearStarted,
-        formData.organizations,
-        formData.website,
-        formData.email,
-        formData.showEmail, formData.facebook, formData.twitter, formData.linkedIn, formData.googlePlus,
-        formData.flickr, formData.instagram);
+        formData.location, formData.userPhoto, formData.biography, formData.interests, formData.influences,
+        formData.experienceLevel, formData.yearStarted, formData.organizations, formData.website, formData.email,
+        formData.facebook, formData.twitter, formData.linkedIn, formData.googlePlus, formData.flickr,
+        formData.instagram);
     magicians.put(idVal, magicianFromForm);
   }
 
@@ -101,7 +96,7 @@ public class MagicianDB {
         "Honolulu, HI",
         null,
         "I got started in magic in 2004.  A retired magician showed me a 2-card monte and I was hooked.  Since "
-        + "then, I've learned the craft, performed hundreds of shows in Honolulu and most recently I nailed"
+        + "then, I've learned the craft, performed hundreds of shows in Honolulu and most recently I nailed "
         + "a parlor act in Beijing.",
         "I'm most comfortable with close-up magic, but I'd like to develop a stage show.  I'd like to be fluent in "
         + "all mediums of the art (Cards, coins, rope, etc.).",
@@ -111,7 +106,6 @@ public class MagicianDB {
         null,
         "http://mark.nelson.engineer/wordpress/index.php/magic-home-page/",
         "mr_nelson@icloud.com",
-        "Y",
         "mark.nelson.engineer",
         "@mr_marknelson",
         "http://www.linkedin.com/in/marknelsonengineer/en",
@@ -133,7 +127,6 @@ public class MagicianDB {
         null,
         "Professional",
         0,
-        null,
         null,
         null,
         null,
@@ -166,7 +159,6 @@ public class MagicianDB {
         null,
         null,
         null,
-        null,
         null
     );
 
@@ -183,7 +175,6 @@ public class MagicianDB {
         null,
         "Professional",
         0,
-        null,
         null,
         null,
         null,

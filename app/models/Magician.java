@@ -27,7 +27,6 @@ public class Magician {
   // Contact Info
   private String website;
   private String email;
-  private String showEmail;
   private String facebook;
   private String twitter;
   private String linkedIn;
@@ -53,7 +52,6 @@ public class Magician {
    * @param organizations   Any affiliations or organizations the user is a member of.
    * @param website         User's personal website.
    * @param email           User's email address.
-   * @param showEmail       Determines whether to show user's email.
    * @param facebook        The user's facebook account.
    * @param twitter         User's Twitter account.
    * @param linkedIn        User's LinkedIn account.
@@ -63,8 +61,8 @@ public class Magician {
    */
   public Magician(long id, String firstName, String lastName, String stageName, String location, File userPhoto,
                   String biography, String interests, String influences, String experienceLevel, Integer yearStarted,
-                  String organizations, String website, String email, String showEmail, String facebook,
-                  String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
+                  String organizations, String website, String email, String facebook, String twitter, String linkedIn,
+                  String googlePlus, String flickr, String instagram) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -79,7 +77,6 @@ public class Magician {
     this.organizations = organizations;
     this.website = website;
     this.email = email;
-    this.showEmail = showEmail;
     this.facebook = facebook;
     this.twitter = twitter;
     this.linkedIn = linkedIn;
@@ -104,7 +101,6 @@ public class Magician {
    * @param organizations   Any affiliations or organizations the user is a member of.
    * @param website         User's personal website.
    * @param email           User's email address.
-   * @param showEmail       Determines whether to show user's email.
    * @param facebook        The user's facebook account.
    * @param twitter         User's Twitter account.
    * @param linkedIn        User's LinkedIn account.
@@ -114,8 +110,8 @@ public class Magician {
    */
   public Magician(String firstName, String lastName, String stageName, String location, File userPhoto,
                   String biography, String interests, String influences, String experienceLevel, int yearStarted,
-                  String organizations, String website, String email, String showEmail, String facebook,
-                  String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
+                  String organizations, String website, String email, String facebook, String twitter, String linkedIn,
+                  String googlePlus, String flickr, String instagram) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.stageName = stageName;
@@ -129,7 +125,6 @@ public class Magician {
     this.organizations = organizations;
     this.website = website;
     this.email = email;
-    this.showEmail = showEmail;
     this.facebook = facebook;
     this.twitter = twitter;
     this.linkedIn = linkedIn;
@@ -262,15 +257,6 @@ public class Magician {
    */
   public String getEmail() {
     return email;
-  }
-
-  /**
-   * Determine if the magician's email should be displayed.
-   *
-   * @return True or False depending on the magician's preference.
-   */
-  public String isShowEmail() {
-    return showEmail;
   }
 
   /**

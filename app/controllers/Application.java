@@ -35,15 +35,6 @@ public class Application extends Controller {
   }
 
   /**
-   * Render the Search Routines page.
-   *
-   * @return An HTTP OK message along with the HTML content for the Search Routine page.
-   */
-  public static Result searchRoutines() {
-    return ok(SearchRoutines.render(RoutineDB.getRoutines()));
-  }
-
-  /**
    * Renders the newMagician page with a form to add a new Magician if the ID is 0; otherwise, edit existing Magician.
    *
    * @param id The ID of the magician to edit; if new Magician, ID is 0.
@@ -53,8 +44,7 @@ public class Application extends Controller {
     MagicianFormData data = (id == 0) ? new MagicianFormData() : new MagicianFormData(MagicianDB.getMagician(id));
     Form<MagicianFormData> formData = Form.form(MagicianFormData.class).fill(data);
     Map<String, Boolean> experienceLevelMap = ExperienceLevels.getExperienceLevels(data.experienceLevel);
-    Map<String, Boolean> showMyEmailMap = ShowEmail.getShowMyEmail(data.showEmail);
-    return ok(NewMagician.render(formData, experienceLevelMap, showMyEmailMap));
+    return ok(NewMagician.render(formData, experienceLevelMap));
   }
 
   /**
@@ -82,7 +72,7 @@ public class Application extends Controller {
         experienceLevelMap = ExperienceLevels.getExperienceLevels();
       }
 
-      return badRequest(NewMagician.render(formData, experienceLevelMap, ShowEmail.getShowMyEmail()));
+      return badRequest(NewMagician.render(formData, experienceLevelMap));
     }
 
     MagicianFormData data = formData.get();
@@ -100,7 +90,6 @@ public class Application extends Controller {
         data.interests, data.influences, data.yearStarted, data.organizations, data.website, data.email,
         data.facebook, data.twitter, data.linkedIn, data.googlePlus, data.flickr, data.instagram);
     System.out.println(data.experienceLevel);
-    System.out.println(data.showEmail);
 
     return ok(ShowMagicians.render(MagicianDB.getMagicians()));
   }
@@ -169,5 +158,14 @@ public class Application extends Controller {
 
       return ok(SearchRoutines.render(RoutineDB.getRoutines()));
     }
+  }
+
+  /**
+   * Render the Search Routines page.
+   *
+   * @return An HTTP OK message along with the HTML content for the Search Routine page.
+   */
+  public static Result searchRoutines() {
+    return ok(SearchRoutines.render(RoutineDB.getRoutines()));
   }
 }
