@@ -46,14 +46,12 @@ public class ShowMagiciansPage extends FluentPage {
    *
    * @param fullName        The combined first and last name of the magician.
    * @param stageName       The stage name of the magician.
-   * @param interests       User's interests in magic.
    * @param experienceLevel User's experience level; pre-set values.
    */
-  public void hasMagician(String fullName, String stageName, String interests, String experienceLevel) {
+  public void hasMagician(String fullName, String stageName, String experienceLevel) {
     assertThat(pageSource()).contains(fullName);
     assertThat(pageSource()).contains(stageName);
     assertThat(pageSource()).contains(experienceLevel);
-    assertThat(pageSource()).contains(interests);
   }
 
 }

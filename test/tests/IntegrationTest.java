@@ -91,7 +91,7 @@ public class IntegrationTest {
                 googlePlus, flickr, instagram);
             browser.goTo(showMagiciansPage);
             String fullName = firstName + " " + lastName;
-            showMagiciansPage.hasMagician(fullName, stageName, interests, experienceLevel);
+            showMagiciansPage.hasMagician(fullName, stageName, experienceLevel);
           }
         });
   }
