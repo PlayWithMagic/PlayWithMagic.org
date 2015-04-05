@@ -26,8 +26,13 @@ public class MagicianDB {
   public static void addMagicians(MagicianFormData formData) {
     long idVal = (formData.id == 0) ? currentId++ : formData.id;
     Magician magicianFromForm = new Magician(idVal, formData.firstName, formData.lastName, formData.stageName,
-        formData.location, formData.userPhoto, formData.biography, formData.interests, formData.influences,
-        formData.experienceLevel, formData.yearStarted, formData.organizations, formData.website, formData.email,
+        formData.location, formData.userPhoto, formData.biography, formData.interests,
+        formData.influences,
+        formData.experienceLevel,
+        formData.yearStarted,
+        formData.organizations,
+        formData.website,
+        formData.email,
         formData.showEmail, formData.facebook, formData.twitter, formData.linkedIn, formData.googlePlus,
         formData.flickr, formData.instagram);
     magicians.put(idVal, magicianFromForm);

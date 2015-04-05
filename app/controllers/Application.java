@@ -2,6 +2,7 @@ package controllers;
 
 import models.MagicianDB;
 import models.RoutineDB;
+import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -10,10 +11,9 @@ import views.formdata.MagicianFormData;
 import views.formdata.RoutineFormData;
 import views.formdata.ShowEmail;
 import views.html.Index;
-import views.html.NewRoutine;
-
-import views.html.SearchRoutines;
 import views.html.NewMagician;
+import views.html.NewRoutine;
+import views.html.SearchRoutines;
 import views.html.ShowMagicians;
 
 import java.util.Map;
@@ -64,22 +64,45 @@ public class Application extends Controller {
    */
   public static Result postMagician() {
     Form<MagicianFormData> formData = Form.form(MagicianFormData.class).bindFromRequest();
+
+    Logger.debug("Raw Magician Form Data");
+    Logger.debug("  id = [" + formData.field("id").value() + "]");
+    Logger.debug("  firstName = [" + formData.field("firstName").value() + "]");
+    Logger.debug("  experienceLevel = [" + formData.field("experienceLevel").value() + "]");
+    Logger.debug("  yearStarted = [" + formData.field("yearStarted").value() + "]");
+
     if (formData.hasErrors()) {
-      System.out.println("HTTP Form Error.");
-      return badRequest(NewMagician.render(formData, ExperienceLevels.getExperienceLevels(),
-          ShowEmail.getShowMyEmail()));
+      Logger.error("HTTP Form Error.");
+
+      Map<String, Boolean> experienceLevelMap = null;
+      if (ExperienceLevels.isExperienceLevel(formData.field("experienceLevel").value())) {
+        experienceLevelMap = ExperienceLevels.getExperienceLevels(formData.field("experienceLevel").value());
+      }
+      else {
+        experienceLevelMap = ExperienceLevels.getExperienceLevels();
+      }
+
+      return badRequest(NewMagician.render(formData, experienceLevelMap, ShowEmail.getShowMyEmail()));
     }
-    else {
-      MagicianFormData data = formData.get();
-      MagicianDB.addMagicians(data);
-      System.out.printf("HTTP OK; Form Data submitted:  %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, "
-              + "%s, %s, %s %n", data.id, data.firstName, data.lastName, data.stageName, data.location, data.biography,
-          data.interests, data.influences, data.yearStarted, data.organizations, data.website, data.email,
-          data.facebook, data.twitter, data.linkedIn, data.googlePlus, data.flickr, data.instagram);
-      System.out.println(data.experienceLevel);
-      System.out.println(data.showEmail);
-      return ok(ShowMagicians.render(MagicianDB.getMagicians()));
-    }
+
+    MagicianFormData data = formData.get();
+
+    Logger.debug("Magician Form Data");
+    Logger.debug("  id = [" + data.id + "]");
+    Logger.debug("  firstName = [" + data.firstName + "]");
+    Logger.debug("  experienceLevel = [" + data.experienceLevel + "]");
+    Logger.debug("  yearStarted = [" + data.yearStarted + "]");
+
+    MagicianDB.addMagicians(data);
+
+    System.out.printf("HTTP OK; Form Data submitted:  %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, "
+            + "%s, %s, %s %n", data.id, data.firstName, data.lastName, data.stageName, data.location, data.biography,
+        data.interests, data.influences, data.yearStarted, data.organizations, data.website, data.email,
+        data.facebook, data.twitter, data.linkedIn, data.googlePlus, data.flickr, data.instagram);
+    System.out.println(data.experienceLevel);
+    System.out.println(data.showEmail);
+
+    return ok(ShowMagicians.render(MagicianDB.getMagicians()));
   }
 
   /**
