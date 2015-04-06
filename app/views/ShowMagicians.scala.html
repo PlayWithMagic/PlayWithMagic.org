@@ -24,7 +24,7 @@
       <tbody>
         @for(magician <- magicians) {
           <tr>
-            <td>@magician.getFirstName @magician.getLastName</td>
+            <td><a href="showMagician?id=@magician.getId">@magician.getFirstName @magician.getLastName</a></td>
             <td>@if(magician.getStageName) { @magician.getStageName } else { None }</td>
             <td>@magician.getExperienceLevel</td>
             <td>Link to Magician's Routines Here</td>
