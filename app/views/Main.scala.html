@@ -80,7 +80,11 @@
 
             <!-- Signup Button, do not show on home page -->
           @if( page != "home" && page != "newMagician" ) {
-            <li><button type="button" class="btn btn-primary btn-sm navbar-btn join">Join the Community Today!</button></li>
+            <li>
+              <div class="join">
+                <a class="btn btn-primary btn-sm navbar-btn" href="newMagician">Join the Community Today!</a>
+              </div>
+            </li>
           }
           <!-- Login Dropdown -->
           <li class="dropdown">

@@ -9,7 +9,6 @@ import play.mvc.Result;
 import views.formdata.ExperienceLevels;
 import views.formdata.MagicianFormData;
 import views.formdata.RoutineFormData;
-import views.formdata.ShowEmail;
 import views.html.Index;
 import views.html.NewMagician;
 import views.html.NewRoutine;
