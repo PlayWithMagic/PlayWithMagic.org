@@ -13,6 +13,7 @@ import views.html.Index;
 import views.html.NewMagician;
 import views.html.NewRoutine;
 import views.html.SearchRoutines;
+import views.html.ShowMagician;
 import views.html.ShowMagicians;
 
 import java.util.Map;
@@ -100,6 +101,16 @@ public class Application extends Controller {
    */
   public static Result showMagicians() {
     return ok(ShowMagicians.render(MagicianDB.getMagicians()));
+  }
+
+  /**
+   * Displays a single Magician based off of the provided ID.
+   *
+   * @param id The ID of the Magician to be displayed.
+   * @return An HTTP OK message along with the HTML content for a single Magician page.
+   */
+  public static Result showMagician(long id) {
+    return ok(ShowMagician.render(MagicianDB.getMagician(id)));
   }
 
   /**
