@@ -10,6 +10,7 @@ GET         /newRoutine            controllers.Application.newRoutine(id: Long?=
 POST        /newRoutine            controllers.Application.postRoutine()
 GET         /deleteRoutine         controllers.Application.deleteRoutine(id: Long?= 0)
 GET         /searchRoutines        controllers.Application.searchRoutines()
+GET         /showRoutine           controllers.Application.showRoutine(id: Long?= 0)
 
 # Magician actions
 GET         /newMagician           controllers.Application.newMagician(id: Long?=0)
