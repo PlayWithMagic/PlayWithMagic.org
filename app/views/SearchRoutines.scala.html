@@ -30,10 +30,16 @@
           <tbody>
           @for(routine <- routines) {
             <tr>
-              <td>@routine.getName</td>
+              <td><a href="showRoutine?id=@routine.getId">@routine.getName</a></td>
               <td>@routine.getDuration @if(routine.getDuration == 1) {min} else {mins}</td>
-              <td><a href="@routes.Application.newRoutine(routine.getId)" class="btn btn-warning btn-xs" role="button">Edit</a></td>
-              <td><a href="@routes.Application.deleteRoutine(routine.getId)" class="btn btn-danger btn-xs" role="button">Delete</a></td>
+              <td>
+                <a href="@routes.Application.newRoutine(routine.getId)" class="btn btn-warning btn-xs"
+                role="button">Edit</a>
+              </td>
+              <td>
+                <a href="@routes.Application.deleteRoutine(routine.getId)" class="btn btn-danger btn-xs"
+                role="button">Delete</a>
+              </td>
             </tr>
           }
           </tbody>
