@@ -15,6 +15,7 @@ import views.html.NewRoutine;
 import views.html.SearchRoutines;
 import views.html.ShowMagician;
 import views.html.ShowMagicians;
+import views.html.ShowRoutine;
 
 import java.util.Map;
 
@@ -177,5 +178,15 @@ public class Application extends Controller {
    */
   public static Result searchRoutines() {
     return ok(SearchRoutines.render(RoutineDB.getRoutines()));
+  }
+
+  /**
+   * Displays a single Routine based off of the provided ID.
+   *
+   * @param id The ID of the Routine to be displayed.
+   * @return An HTTP OK message along with the HTML content for a single Routine page.
+   */
+  public static Result showRoutine(long id) {
+    return ok(ShowRoutine.render(RoutineDB.getRoutine(id)));
   }
 }

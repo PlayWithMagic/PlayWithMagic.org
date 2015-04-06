@@ -1,0 +1,44 @@
+@*
+* The Show Routine page.
+*
+* Displays a single routine.
+*
+* @see http://www.playframework.com
+*@
+@(routine: Routine)
+
+@Main("showRoutine") {
+  <!-- Page Content -->
+  <section id="page">
+    <section id="content" class="container">
+
+      <div class="container">
+        <h1>@routine.getName</h1>
+      </div>
+
+      <div class="container">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Duration</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>@routine.getName</td>
+              <td>@routine.getDuration @if(routine.getDuration == 1) {min} else {mins}</td>
+              <td><a href="@routes.Application.newRoutine(routine.getId)" class="btn btn-warning btn-xs" role="button">Edit</a></td>
+              <td><a href="@routes.Application.deleteRoutine(routine.getId)" class="btn btn-danger btn-xs" role="button">Delete</a></td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+  </section>
+
+}
