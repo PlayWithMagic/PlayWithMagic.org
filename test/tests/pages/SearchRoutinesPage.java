@@ -6,25 +6,25 @@ import org.openqa.selenium.WebDriver;
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
- * Provides test scaffolding for the SearchRoutines page.
+ * Provides test scaffolding for the ListRoutines page.
  */
 public class SearchRoutinesPage extends FluentPage {
 
   private String url;
 
   /**
-   * Create the SearchRoutines page.
+   * Create the ListRoutines page.
    *
    * @param webDriver The driver.
    * @param port      The port.
    */
   public SearchRoutinesPage(WebDriver webDriver, int port) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/searchRoutines";
+    this.url = "http://localhost:" + port + "/listRoutines";
   }
 
   /**
-   * Create the SearchRoutines page (but actually delete the routine and return to the SearchRoutines page).
+   * Create the ListRoutines page (but actually delete the routine and return to the ListRoutines page).
    *
    * @param webDriver The driver.
    * @param port      The port.

@@ -15,18 +15,18 @@ public class NewRoutinePage extends FluentPage {
   private String url;
 
   /**
-   * Create a NewRoutine Page (for a Create Routine action).
+   * Create a EditRoutine Page (for a Create Routine action).
    *
    * @param webDriver The driver.
    * @param port      The port.
    */
   public NewRoutinePage(WebDriver webDriver, int port) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/newRoutine";
+    this.url = "http://localhost:" + port + "/editRoutine";
   }
 
   /**
-   * Create a NewRoutine Page (for an Update Routine action).
+   * Create a EditRoutine Page (for an Update Routine action).
    *
    * @param webDriver The driver.
    * @param port      The port.
@@ -34,7 +34,7 @@ public class NewRoutinePage extends FluentPage {
    */
   public NewRoutinePage(WebDriver webDriver, int port, long id) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/newRoutine?id=" + id;
+    this.url = "http://localhost:" + port + "/editRoutine?id=" + id;
   }
 
   @Override

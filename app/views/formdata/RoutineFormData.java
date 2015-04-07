@@ -126,7 +126,7 @@ public class RoutineFormData {
           "If you need to have a routine longer than 120 minutes, then submit a bug report and we'll look into it."));
     }
 
-    // TODO:  The Play Framework is printing 'error.invalid' and not presenting this error message.
+    // TO-DO:  The Play Framework is printing 'error.invalid' and not presenting this error message.
     // Can't figure out how to get a nicer looking message up front.
     if (duration != null) {
       int testDuration;
@@ -164,9 +164,6 @@ public class RoutineFormData {
       errors.add(new ValidationError("resetDescription",
           "Reset Description can't accept more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters."));
     }
-
-
-    // TODO:  Scan/expand input to prevent SQL and Cross-site injection
 
     return errors.isEmpty() ? null : errors;
   }

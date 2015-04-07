@@ -40,7 +40,7 @@ public class IntegrationTest {
   }
 
   /**
-   * Test that verifies the NewMagician page can be retrieved.
+   * Test that verifies the EditMagician page can be retrieved.
    */
   @Test
   public void testRetrieveNewMagicianPage() {
@@ -56,7 +56,7 @@ public class IntegrationTest {
   }
 
   /**
-   * Tests to verify that a NewMagician form submission works and results can be viewed on the ShowMagicians page.
+   * Tests to verify that a EditMagician form submission works and results can be viewed on the ListMagicians page.
    */
   @Test
   public void testCreateNewMagician() {

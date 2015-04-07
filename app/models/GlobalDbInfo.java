@@ -3,7 +3,7 @@ package models;
 /**
  * Hold database standards and singleton.
  *
- * TODO: Refactor name at some point.
+ * TO-DO: Refactor name at some point.
  */
 public class GlobalDbInfo {
   /** The maximum number of characters in a standard short, single-line text field. */
