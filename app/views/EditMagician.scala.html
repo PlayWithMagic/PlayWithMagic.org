@@ -1,17 +1,16 @@
 @*
-* The New and Update Magician HTML form page.
+* The Edit (New and Update) Magician HTML form page.
 *
 * @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(magicianForm: Form[views.formdata.MagicianFormData], experienceLevelMap: Map[String, Boolean],
-    showMyEmailMap: Map[String, Boolean])
+@(magicianForm: Form[views.formdata.MagicianFormData], experienceLevelMap: Map[String, Boolean])
 
   @import helper._
   @import views.html.bootstrap3._
 
 
-  @Main("newMagician") {
+  @Main("editMagician") {
     <!-- Page Content -->
     <section id="page">
         <!-- Content -->
@@ -39,11 +38,6 @@
               label = "Email",
               placeholder = "i.e., name@domain.com",
               help = "Required")
-              <!-- Show email? -->
-            @checkboxes(magicianForm("showEmail"),
-              label = "Do you wish for your email to be displayed publically?",
-              checkboxMap = showMyEmailMap,
-              help = "")
               <!-- Experience Level -->
             @bootstrap3.select(magicianForm("experienceLevel"),
               label = "Level of Experience with Magic",

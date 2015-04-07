@@ -1,5 +1,5 @@
 @*
-* The Search Routine page.
+* List all of the Routines in the application.
 *
 * For the Minimum Viable Product release, we are not searching/filtering any content. The page list all of the
 * routines.
@@ -8,13 +8,13 @@
 *@
 @(routines: List[Routine])
 
-@Main("searchRoutines") {
+@Main("listRoutines") {
   <!-- Page Content -->
   <section id="page">
     <section id="content" class="container">
 
       <div class="container">
-        <h1>Search Routines</h1>
+        <h1>Current Routines</h1>
       </div>
 
       <div class="container">
@@ -30,10 +30,16 @@
           <tbody>
           @for(routine <- routines) {
             <tr>
-              <td>@routine.getName</td>
+              <td><a href="viewRoutine?id=@routine.getId">@routine.getName</a></td>
               <td>@routine.getDuration @if(routine.getDuration == 1) {min} else {mins}</td>
-              <td><a href="@routes.Application.newRoutine(routine.getId)" class="btn btn-warning btn-xs" role="button">Edit</a></td>
-              <td><a href="@routes.Application.deleteRoutine(routine.getId)" class="btn btn-danger btn-xs" role="button">Delete</a></td>
+              <td>
+                <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-warning btn-xs"
+                role="button">Edit</a>
+              </td>
+              <td>
+                <a href="@routes.Application.deleteRoutine(routine.getId)" class="btn btn-danger btn-xs"
+                role="button">Delete</a>
+              </td>
             </tr>
           }
           </tbody>

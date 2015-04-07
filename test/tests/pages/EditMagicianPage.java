@@ -8,21 +8,21 @@ import static org.fluentlenium.core.filter.FilterConstructor.withId;
 import static org.fluentlenium.core.filter.FilterConstructor.withText;
 
 /**
- * Provides test scaffolding for the NewMagician page.
+ * Provides test scaffolding for the EditMagician page.
  */
-public class NewMagicianPage extends FluentPage {
+public class EditMagicianPage extends FluentPage {
 
   private String url;
 
   /**
-   * Create the NewMagician.
+   * Create the EditMagician.
    *
    * @param webDriver The driver.
    * @param port      The port.
    */
-  public NewMagicianPage(WebDriver webDriver, int port) {
+  public EditMagicianPage(WebDriver webDriver, int port) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/newMagician";
+    this.url = "http://localhost:" + port + "/editMagician";
   }
 
   /**
@@ -40,12 +40,12 @@ public class NewMagicianPage extends FluentPage {
    */
   @Override
   public void isAt() {
-    assertThat(pageSource().contains("<body id=\"newMagician\">"));
+    assertThat(pageSource().contains("<body id=\"editMagician\">"));
   }
 
 
   /**
-   * Tests the form on the NewMagician page with provided data.
+   * Tests the form on the EditMagician page with provided data.
    *
    * @param firstName       The first name of the magician.
    * @param lastName        The last name of the magician.

@@ -4,8 +4,8 @@ import org.junit.Test;
 import play.libs.F.Callback;
 import play.test.TestBrowser;
 import tests.pages.IndexPage;
-import tests.pages.NewMagicianPage;
-import tests.pages.ShowMagiciansPage;
+import tests.pages.EditMagicianPage;
+import tests.pages.ListMagiciansPage;
 
 import static play.test.Helpers.HTMLUNIT;
 import static play.test.Helpers.fakeApplication;
@@ -40,7 +40,7 @@ public class IntegrationTest {
   }
 
   /**
-   * Test that verifies the NewMagician page can be retrieved.
+   * Test that verifies the EditMagician page can be retrieved.
    */
   @Test
   public void testRetrieveNewMagicianPage() {
@@ -48,15 +48,15 @@ public class IntegrationTest {
         new Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             browser.maximizeWindow();
-            NewMagicianPage newMagicianPage = new NewMagicianPage(browser.getDriver(), port);
-            browser.goTo(newMagicianPage);
-            newMagicianPage.isAt();
+            EditMagicianPage editMagicianPage = new EditMagicianPage(browser.getDriver(), port);
+            browser.goTo(editMagicianPage);
+            editMagicianPage.isAt();
           }
         });
   }
 
   /**
-   * Tests to verify that a NewMagician form submission works and results can be viewed on the ShowMagicians page.
+   * Tests to verify that a EditMagician form submission works and results can be viewed on the ListMagicians page.
    */
   @Test
   public void testCreateNewMagician() {
@@ -64,10 +64,10 @@ public class IntegrationTest {
         new Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             browser.maximizeWindow();
-            ShowMagiciansPage showMagiciansPage = new ShowMagiciansPage(browser.getDriver(), port);
-            NewMagicianPage newMagicianPage = new NewMagicianPage(browser.getDriver(), port);
-            browser.goTo(newMagicianPage);
-            newMagicianPage.isAt();
+            ListMagiciansPage listMagiciansPage = new ListMagiciansPage(browser.getDriver(), port);
+            EditMagicianPage editMagicianPage = new EditMagicianPage(browser.getDriver(), port);
+            browser.goTo(editMagicianPage);
+            editMagicianPage.isAt();
             String firstName = "Patrick";
             String lastName = "Karjala";
             String stageName = "The Great Patricio";
@@ -86,12 +86,12 @@ public class IntegrationTest {
             String googlePlus = "Some crazy URL string";
             String flickr = "yahoo.com";
             String instagram = "pat_trick_hi";
-            newMagicianPage.createMagician(firstName, lastName, stageName, location, biography, interests, influences,
+            editMagicianPage.createMagician(firstName, lastName, stageName, location, biography, interests, influences,
                 experienceLevel, yearStarted, organizations, website, email, facebook, twitter, linkedIn,
                 googlePlus, flickr, instagram);
-            browser.goTo(showMagiciansPage);
+            browser.goTo(listMagiciansPage);
             String fullName = firstName + " " + lastName;
-            showMagiciansPage.hasMagician(fullName, stageName, experienceLevel);
+            listMagiciansPage.hasMagician(fullName, stageName, experienceLevel);
           }
         });
   }

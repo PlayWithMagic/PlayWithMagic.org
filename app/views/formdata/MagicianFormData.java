@@ -88,11 +88,6 @@ public class MagicianFormData {
   public String email;
 
   /**
-   * Input data boolean of whether to show the email to other users.
-   */
-  public String showEmail;
-
-  /**
    * Input data Facebook field.
    */
   public String facebook;
@@ -150,7 +145,6 @@ public class MagicianFormData {
     this.organizations = magician.getOrganizations();
     this.website = magician.getWebsite();
     this.email = magician.getEmail();
-    this.showEmail = magician.isShowEmail();
     this.facebook = magician.getFacebook();
     this.twitter = magician.getTwitter();
     this.linkedIn = magician.getLinkedIn();
