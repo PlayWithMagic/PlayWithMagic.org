@@ -9,6 +9,7 @@ import play.mvc.Result;
 import views.formdata.ExperienceLevels;
 import views.formdata.MagicianFormData;
 import views.formdata.RoutineFormData;
+import views.html.About;
 import views.html.EditMagician;
 import views.html.EditRoutine;
 import views.html.Index;
@@ -33,6 +34,15 @@ public class Application extends Controller {
    */
   public static Result index() {
     return ok(Index.render());
+  }
+
+  /**
+   * Render the About page.
+   *
+   * @return An HTTP OK message along with the HTML content for the About page.
+   */
+  public static Result about() {
+    return ok(About.render());
   }
 
   /**
