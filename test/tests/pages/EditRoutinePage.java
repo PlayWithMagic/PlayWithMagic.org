@@ -11,7 +11,7 @@ import static org.fest.assertions.Assertions.assertThat;
 /**
  * Provides test scaffolding for the New Routine page.
  */
-public class NewRoutinePage extends FluentPage {
+public class EditRoutinePage extends FluentPage {
   private String url;
 
   /**
@@ -20,7 +20,7 @@ public class NewRoutinePage extends FluentPage {
    * @param webDriver The driver.
    * @param port      The port.
    */
-  public NewRoutinePage(WebDriver webDriver, int port) {
+  public EditRoutinePage(WebDriver webDriver, int port) {
     super(webDriver);
     this.url = "http://localhost:" + port + "/editRoutine";
   }
@@ -32,7 +32,7 @@ public class NewRoutinePage extends FluentPage {
    * @param port      The port.
    * @param id        The Routine ID of the routine we shall edit.
    */
-  public NewRoutinePage(WebDriver webDriver, int port, long id) {
+  public EditRoutinePage(WebDriver webDriver, int port, long id) {
     super(webDriver);
     this.url = "http://localhost:" + port + "/editRoutine?id=" + id;
   }

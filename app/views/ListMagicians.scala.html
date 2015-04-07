@@ -1,11 +1,11 @@
 @*
-* The application's Show Magician page.
+* List all of the magicians in the application.
 *
 * @see http://www.playframework.com
 *@
 @(magicians: List[Magician])
 
-@Main("showMagicians") {
+@Main("listMagicians") {
   <!-- Page Content -->
   <div class="container">
     <h1>Current Magicians</h1>
@@ -24,12 +24,12 @@
       <tbody>
         @for(magician <- magicians) {
           <tr>
-            <td><a href="showMagician?id=@magician.getId">@magician.getFirstName @magician.getLastName</a></td>
+            <td><a href="viewMagician?id=@magician.getId">@magician.getFirstName @magician.getLastName</a></td>
             <td>@if(magician.getStageName) { @magician.getStageName } else { None }</td>
             <td>@magician.getExperienceLevel</td>
             <td>Link to Magician's Routines Here</td>
             <td>
-              <a href="@routes.Application.newMagician(magician.getId)" class="btn btn-warning btn-xs" role="button">
+              <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-warning btn-xs" role="button">
               Edit</a>
             </td>
             <td>

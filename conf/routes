@@ -6,19 +6,18 @@
 GET         /                      controllers.Application.index()
 
 # Routine actions
-GET         /editRoutine           controllers.Application.newRoutine(id: Long?= 0)
+GET         /listRoutines          controllers.Application.listRoutines()
+GET         /viewRoutine           controllers.Application.viewRoutine(id: Long?= 0)
+GET         /editRoutine           controllers.Application.editRoutine(id: Long?= 0)
 POST        /editRoutine           controllers.Application.postRoutine()
 GET         /deleteRoutine         controllers.Application.deleteRoutine(id: Long?= 0)
-GET         /listRoutines          controllers.Application.searchRoutines()
-GET         /viewRoutine           controllers.Application.showRoutine(id: Long?= 0)
 
 # Magician actions
-GET         /editMagician          controllers.Application.newMagician(id: Long?=0)
+GET         /listMagicians         controllers.Application.listMagicians()
+GET         /viewMagician          controllers.Application.viewMagician(id: Long?=0)
+GET         /editMagician          controllers.Application.editMagician(id: Long?=0)
 POST        /editMagician          controllers.Application.postMagician()
-GET         /listMagicians         controllers.Application.showMagicians()
-GET         /viewMagician          controllers.Application.showMagician(id: Long?=0)
 GET         /deleteMagician        controllers.Application.deleteMagician(id: Long?= 0)
-
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file          controllers.Assets.at(path="/public", file)

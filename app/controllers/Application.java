@@ -9,12 +9,12 @@ import play.mvc.Result;
 import views.formdata.ExperienceLevels;
 import views.formdata.MagicianFormData;
 import views.formdata.RoutineFormData;
-import views.html.Index;
 import views.html.EditMagician;
 import views.html.EditRoutine;
+import views.html.Index;
+import views.html.ListMagicians;
 import views.html.ListRoutines;
 import views.html.ViewMagician;
-import views.html.ListMagicians;
 import views.html.ViewRoutine;
 
 import java.util.Map;
@@ -27,7 +27,7 @@ import java.util.Map;
 public class Application extends Controller {
 
   /**
-   * Render the Home page.
+   * Render the Home/Index page.
    *
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
@@ -36,12 +36,13 @@ public class Application extends Controller {
   }
 
   /**
-   * Renders the newMagician page with a form to add a new Magician if the ID is 0; otherwise, edit existing Magician.
+   * Renders the editMagician page with a form to add a Magician if the ID is 0; or edit an existing
+   * Magician (based on their ID).
    *
    * @param id The ID of the magician to edit; if new Magician, ID is 0.
    * @return An HTTP OK message along with the HTML content for the EditMagician page.
    */
-  public static Result newMagician(long id) {
+  public static Result editMagician(long id) {
     MagicianFormData data = (id == 0) ? new MagicianFormData() : new MagicianFormData(MagicianDB.getMagician(id));
     Form<MagicianFormData> formData = Form.form(MagicianFormData.class).fill(data);
     Map<String, Boolean> experienceLevelMap = ExperienceLevels.getExperienceLevels(data.experienceLevel);
@@ -95,14 +96,16 @@ public class Application extends Controller {
     return ok(ListMagicians.render(MagicianDB.getMagicians()));
   }
 
+
   /**
    * Displays the full list of Magicians registered on the site.
    *
    * @return An HTTP OK message along with the HTML content for the ListMagicians page.
    */
-  public static Result showMagicians() {
+  public static Result listMagicians() {
     return ok(ListMagicians.render(MagicianDB.getMagicians()));
   }
+
 
   /**
    * Displays a single Magician based off of the provided ID.
@@ -110,12 +113,13 @@ public class Application extends Controller {
    * @param id The ID of the Magician to be displayed.
    * @return An HTTP OK message along with the HTML content for a single Magician page.
    */
-  public static Result showMagician(long id) {
+  public static Result viewMagician(long id) {
     return ok(ViewMagician.render(MagicianDB.getMagician(id)));
   }
 
+
   /**
-   * Delete a Magician from the database and render the Show Magicians page.
+   * Delete a Magician from the database and render the List Magicians page.
    *
    * @param id The ID of the Magician to delete.
    * @return An HTTP OK message along with the HTML content for the Home page.
@@ -125,21 +129,24 @@ public class Application extends Controller {
     return ok(ListMagicians.render(MagicianDB.getMagicians()));
   }
 
+
   /**
-   * Renders the newRoutine page with a form to add new routines if the ID is 0; otherwise updates the existing routine.
+   * Renders the editRoutine page with a form to add a new Routine if the ID is 0.  Otherwise, update an existing
+   * Routine based on the passed in ID number.
    *
    * @param id The ID of the routine to edit (or 0 if it's a new routine).
    * @return An HTTP OK message along with the HTML content for the EditRoutine page.
    */
-  public static Result newRoutine(long id) {
+  public static Result editRoutine(long id) {
     RoutineFormData data = (id == 0) ? new RoutineFormData() : new RoutineFormData(RoutineDB.getRoutine(id));
     Form<RoutineFormData> formData = Form.form(RoutineFormData.class).fill(data);
 
     return ok(EditRoutine.render(formData));
   }
 
+
   /**
-   * Delete a routine from the database and render the index page.
+   * Delete a routine from the database and display the ListRoutines page.
    *
    * @param id The ID of the routine to delete.
    * @return An HTTP OK message along with the HTML content for the Home page.
@@ -150,10 +157,11 @@ public class Application extends Controller {
     return ok(ListRoutines.render(RoutineDB.getRoutines()));
   }
 
+
   /**
-   * Handles the request to post form data from the newRoutine page.
+   * Handles the request to post form data from the editRoutine page.
    *
-   * @return The newRoutine page, either with errors or with form data.
+   * @return The editRoutine page, either with errors or with form data.
    */
   public static Result postRoutine() {
     Form<RoutineFormData> formData = Form.form(RoutineFormData.class).bindFromRequest();
@@ -171,14 +179,16 @@ public class Application extends Controller {
     }
   }
 
+
   /**
-   * Render the Search Routines page.
+   * Render the List Routines page.
    *
-   * @return An HTTP OK message along with the HTML content for the Search Routine page.
+   * @return An HTTP OK message along with the HTML content for the List Routine page.
    */
-  public static Result searchRoutines() {
+  public static Result listRoutines() {
     return ok(ListRoutines.render(RoutineDB.getRoutines()));
   }
+
 
   /**
    * Displays a single Routine based off of the provided ID.
@@ -186,7 +196,7 @@ public class Application extends Controller {
    * @param id The ID of the Routine to be displayed.
    * @return An HTTP OK message along with the HTML content for a single Routine page.
    */
-  public static Result showRoutine(long id) {
+  public static Result viewRoutine(long id) {
     return ok(ViewRoutine.render(RoutineDB.getRoutine(id)));
   }
 }

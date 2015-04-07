@@ -6,19 +6,19 @@ import org.openqa.selenium.WebDriver;
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
- * Provides test scaffolding for the showMagicians page.
+ * Provides test scaffolding for the listMagicians page.
  */
-public class ShowMagiciansPage extends FluentPage {
+public class ListMagiciansPage extends FluentPage {
 
   private String url;
 
   /**
-   * Create the showMagicians Page.
+   * Create the listMagicians Page.
    *
    * @param webDriver The driver.
    * @param port      The port.
    */
-  public ShowMagiciansPage(WebDriver webDriver, int port) {
+  public ListMagiciansPage(WebDriver webDriver, int port) {
     super(webDriver);
     this.url = "http://localhost:" + port + "/listMagicians";
   }

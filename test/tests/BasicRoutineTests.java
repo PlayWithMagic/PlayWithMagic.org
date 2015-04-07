@@ -5,8 +5,8 @@ import models.RoutineDB;
 import org.junit.Test;
 import play.libs.F;
 import play.test.TestBrowser;
-import tests.pages.NewRoutinePage;
-import tests.pages.SearchRoutinesPage;
+import tests.pages.EditRoutinePage;
+import tests.pages.ListRoutinesPage;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.HTMLUNIT;
@@ -54,17 +54,17 @@ public class BasicRoutineTests {
   }
 
   /**
-   * Utilize a test browser and the Fluentlenium framework to exercise the Search Routines page.
+   * Utilize a test browser and the Fluentlenium framework to exercise the List Routines page.
    */
   @Test
-  public void testGetInitialSearchRoutinesPage() {
+  public void testGetInitialListRoutinesPage() {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             browser.maximizeWindow();
-            SearchRoutinesPage searchRoutinesPage = new SearchRoutinesPage(browser.getDriver(), TEST_PORT);
-            browser.goTo(searchRoutinesPage);
-            searchRoutinesPage.isAt();
+            ListRoutinesPage listRoutinesPage = new ListRoutinesPage(browser.getDriver(), TEST_PORT);
+            browser.goTo(listRoutinesPage);
+            listRoutinesPage.isAt();
           }
         });
   }
@@ -82,21 +82,21 @@ public class BasicRoutineTests {
           public void invoke(TestBrowser browser) {
             browser.maximizeWindow();
 
-            SearchRoutinesPage searchRoutinesPage = null;
-            NewRoutinePage newRoutinePage = null;
+            ListRoutinesPage listRoutinesPage = null;
+            EditRoutinePage editRoutinePage = null;
 
-            // Look at the Search Routines page first...
-            searchRoutinesPage = new SearchRoutinesPage(browser.getDriver(), TEST_PORT);
-            browser.goTo(searchRoutinesPage);
-            searchRoutinesPage.isAt();
+            // Look at the List Routines page first...
+            listRoutinesPage = new ListRoutinesPage(browser.getDriver(), TEST_PORT);
+            browser.goTo(listRoutinesPage);
+            listRoutinesPage.isAt();
 
             // Add a new Routine...
-            newRoutinePage = new NewRoutinePage(browser.getDriver(), TEST_PORT);
-            browser.goTo(newRoutinePage);
-            newRoutinePage.isAt();
+            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT);
+            browser.goTo(editRoutinePage);
+            editRoutinePage.isAt();
             assertThat(browser.pageSource().contains("Create Routine"));
 
-            newRoutinePage.submitForm(routine1);
+            editRoutinePage.submitForm(routine1);
 
             assertThat(browser.pageSource()).contains(routine1.getName());
             assertThat(browser.pageSource()).contains(routine1.getDuration().toString());
@@ -104,28 +104,28 @@ public class BasicRoutineTests {
             long routineId = RoutineDB.getCurrentId() - 1;
 
             // Update the Routine that was just created...
-            newRoutinePage = new NewRoutinePage(browser.getDriver(), TEST_PORT, routineId);
-            browser.goTo(newRoutinePage);
-            newRoutinePage.isAt();
+            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT, routineId);
+            browser.goTo(editRoutinePage);
+            editRoutinePage.isAt();
             assertThat(browser.pageSource().contains("Update Routine"));
-            newRoutinePage.testContents(browser, routine1);
+            editRoutinePage.testContents(browser, routine1);
 
-            newRoutinePage.submitForm(routine2);
+            editRoutinePage.submitForm(routine2);
 
             assertThat(browser.pageSource()).contains(routine2.getName());
             assertThat(browser.pageSource()).contains(routine2.getDuration().toString());
 
             // Verify that all of the routine updates happened.
-            newRoutinePage = new NewRoutinePage(browser.getDriver(), TEST_PORT, routineId);
-            browser.goTo(newRoutinePage);
-            newRoutinePage.isAt();
+            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT, routineId);
+            browser.goTo(editRoutinePage);
+            editRoutinePage.isAt();
             assertThat(browser.pageSource().contains("Update Routine"));
-            newRoutinePage.testContents(browser, routine2);
+            editRoutinePage.testContents(browser, routine2);
 
             // Delete a Routine.
-            searchRoutinesPage = new SearchRoutinesPage(browser.getDriver(), TEST_PORT, routineId);
-            browser.goTo(searchRoutinesPage);
-            searchRoutinesPage.isAt();
+            listRoutinesPage = new ListRoutinesPage(browser.getDriver(), TEST_PORT, routineId);
+            browser.goTo(listRoutinesPage);
+            listRoutinesPage.isAt();
             assertThat(browser.pageSource()).doesNotContain(routine2.getName());
             assertThat(browser.pageSource()).doesNotContain(routine2.getDuration().toString());
           }

@@ -10,7 +10,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.withText;
 /**
  * Provides test scaffolding for the EditMagician page.
  */
-public class NewMagicianPage extends FluentPage {
+public class EditMagicianPage extends FluentPage {
 
   private String url;
 
@@ -20,7 +20,7 @@ public class NewMagicianPage extends FluentPage {
    * @param webDriver The driver.
    * @param port      The port.
    */
-  public NewMagicianPage(WebDriver webDriver, int port) {
+  public EditMagicianPage(WebDriver webDriver, int port) {
     super(webDriver);
     this.url = "http://localhost:" + port + "/editMagician";
   }
