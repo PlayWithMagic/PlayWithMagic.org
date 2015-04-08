@@ -44,7 +44,6 @@
             placeholder = "Mins",
             help = "The average time to perform a basic rendition of this routine in minutes.")
 
-          <div class="well">
           @textarea(routineForm("method"),
             rows = "3",
             label = "Method",
@@ -57,7 +56,6 @@
             label = "Handling",
             placeholder = "Discuss the overt handling (moves and techniques) for this routine",
             help = "")
-          </div>
 
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -77,10 +75,20 @@
             </div>
           </div>
 
+          @text(routineForm("youTubeUrl"),
+            label = "YouTube URL",
+            placeholder = "The URL to your YouTube video performing this routine",
+            help = "")
+
+          @text(routineForm("imageUrl"),
+            label = "Image URL",
+            placeholder = "The URL of the image that represents this routine",
+            help = "")
+
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button id="submit" type="submit" class="btn btn-default">
-                @if(routineForm("id").value == "0") {Add} else {Update}
+              @if(routineForm("id").value == "0") {Add} else {Update}
               </button>
             </div>
           </div>

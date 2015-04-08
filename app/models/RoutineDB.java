@@ -26,7 +26,7 @@ public class RoutineDB {
   }
 
   /**
-   * Adds a formData input to the Routines list.
+   * Adds a Routine, based on formData, to the Routines database.
    *
    * @param formData Input data from the form.
    */
@@ -43,6 +43,9 @@ public class RoutineDB {
     routineFromForm.setHandling(formData.handling);
     routineFromForm.setResetDuration(formData.resetDuration);
     routineFromForm.setResetDescription(formData.resetDescription);
+    routineFromForm.setYouTubeUrl(formData.youTubeUrl);
+    routineFromForm.setImageUrl(formData.imageUrl);
+
 
     routines.put(idVal, routineFromForm);
     Logger.debug(((formData.id == 0) ? "Added" : "Updated") + " routine.  id = [" + idVal + "]"
@@ -118,6 +121,9 @@ public class RoutineDB {
     routine.setResetDuration(0);
     routine.setResetDescription("No setup is required for a normal deck assuming that the selected card is also "
         + "indifferent.");
+    routine.setYouTubeUrl("https://www.youtube.com/watch?v=w4iu5FMaR2o");
+    routine.setImageUrl("images/routines/1.jpg");
+
 
     RoutineDB.addRoutines(new RoutineFormData(routine));
 
@@ -130,6 +136,8 @@ public class RoutineDB {
         + "thread, I hand out the spool for inspection.");
     routine.setResetDuration(2);
     routine.setResetDescription("Not shared");
+    routine.setYouTubeUrl("https://www.youtube.com/watch?v=ANdHX8X889M");
+    routine.setImageUrl("images/routines/2.jpg");
 
     RoutineDB.addRoutines(new RoutineFormData(routine));
 
@@ -148,6 +156,9 @@ public class RoutineDB {
         + "to demonstrate skill in a variety of magical elements.  This is a good way to introduce cards in the set.");
     routine.setResetDuration(1);
     routine.setResetDescription("Cut the deck to the blank cards.");
+    routine.setYouTubeUrl("https://www.youtube.com/watch?v=4a_9ZVj1lTY");
+    // TO-DO:  I need to record my own performance.
+    routine.setImageUrl("images/routines/3.jpg");
 
     RoutineDB.addRoutines(new RoutineFormData(routine));
   }

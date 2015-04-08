@@ -12,7 +12,7 @@
     <section id="content" class="container">
       <div class="col-md-6">
         <h1>@routine.getName <small><a href="listMagicians">Magician Name</a></small></h1>
-        <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")" alt="Image of Routine"/>
+        <img class="img-responsive" src="@routes.Assets.at(routine.getImageUrl)" alt="Image of Routine"/>
         <h2>Related Routines</h2>
         <table class="table table-striped">
           <thead>
@@ -38,8 +38,8 @@
         </table>
       </div>
       <div class="col-md-6">
-        <p><a href="showRoutines" class="btn btn-large">Return to Routine List</a>
-          <a href="/editRoutine?id=@routine.getId" class="btn btn-large">Edit Routine</a></p>
+        <p><a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
+          <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a></p>
 
         <h3>Description</h3>
         <p>@routine.getDescription</p>
