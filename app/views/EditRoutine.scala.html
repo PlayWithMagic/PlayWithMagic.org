@@ -6,91 +6,95 @@
 *@
 @(routineForm: Form[views.formdata.RoutineFormData])
 
-  @import helper.form
-  @import views.html.bootstrap3.{text45, textInt, textarea}
+@import helper.form
+@import views.html.bootstrap3.{text, text45, textInt, textarea}
 
-  @Main("editRoutine") {
-    <!-- Page Content -->
-    <section id="page">
-        <!-- Content -->
-      <section id="content" class="container">
-        <div class="col-md-12">
-          @if(routineForm("id").value == "0") {
-            <h1>Create Routine</h1>
-          } else {
-            <h1>Update Routine</h1>
-          }
-            <!-- User Attributes -->
-          <div class="container">
-            @form(routes.Application.postRoutine(), 'class -> "form-horizontal") {
-              <input type="hidden"
-              name="@routineForm("id").name"
-              id="@routineForm("id").id"
-              value="@routineForm("id").value"/>
+@Main("editRoutine") {
+  <!-- Page Content -->
+  <section id="page">
+      <!-- Content -->
+    <section id="content" class="container">
+      <div class="col-md-12">
+        @if(routineForm("id").value == "0") {
+          <h1>Create Routine</h1>
+        } else {
+          <h1>Update Routine</h1>
+        }
+          <!-- User Attributes -->
+        <div class="container">
+        @form(routes.Application.postRoutine(), 'class -> "form-horizontal") {
+          <input type="hidden"
+          name="@routineForm("id").name"
+          id="@routineForm("id").id"
+          value="@routineForm("id").value"/>
 
-              @text45(routineForm("name"),
-                label = "Name",
-                placeholder = "A short name for the routine",
-                help = "")
+          @text45(routineForm("name"),
+            label = "Name",
+            placeholder = "A short name for the routine",
+            help = "")
 
-              @textarea(routineForm("description"),
-                rows = "3",
-                label = "Description",
-                placeholder = "A brief description of the routine",
-                help = "")
+          @textarea(routineForm("description"),
+            rows = "3",
+            label = "Description",
+            placeholder = "A brief description of the routine",
+            help = "")
 
-              @textInt(routineForm("duration"),
-                label = "Duration",
+          @textInt(routineForm("duration"),
+            label = "Duration",
+            placeholder = "Mins",
+            help = "The average time to perform a basic rendition of this routine in minutes.")
+
+          @textarea(routineForm("method"),
+            rows = "3",
+            label = "Method",
+            placeholder = "The overarching 'secret' of a magic trick. Usually comprised of a combination of " +
+                "slights and handlings.",
+            help = "")
+
+          @textarea(routineForm("handling"),
+            rows = "3",
+            label = "Handling",
+            placeholder = "Discuss the overt handling (moves and techniques) for this routine",
+            help = "")
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Setup & Reset</h3>
+            </div>
+            <div class="panel-body">
+              @textInt(routineForm("resetDuration"),
+                label = "Setup / Reset Duration",
                 placeholder = "Mins",
-                help = "The average time to perform a basic rendition of this routine in minutes.")
+                help = "The average time to prepare this routine or reset it.  Set to 0 if it resets during the act.")
 
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Setup & Reset</h3>
-                </div>
-                <div class="panel-body">
-                  @textarea(routineForm("method"),
-                    rows = "3",
-                    label = "Method",
-                    placeholder = "The overarching 'secret' of a magic trick. Usually comprised of a combination of " +
-                        "slights and handlings.",
-                    help = "")
-
-                  @textarea(routineForm("handling"),
-                    rows = "3",
-                    label = "Handling",
-                    placeholder = "Discuss the overt handling (moves and techniques) for this routine",
-                    help = "")
-                </div>
-
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Setup & Reset</h3>
-                  </div>
-                  <div class="panel-body">
-                    @textInt(routineForm("resetDuration"),
-                      label = "Setup / Reset Duration",
-                      placeholder = "Mins",
-                      help = "The average time to prepare this routine or reset it.  Set to 0 if it resets during the act.")
-
-                    @textarea(routineForm("resetDescription"),
-                      rows = "3",
-                      label = "Reset Description",
-                      placeholder = "Describe the steps to prepare (or reset) this routine",
-                      help = "")
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <button id="submit" type="submit" class="btn btn-default">
-                    @if(routineForm("id").value == "0") {Add} else {Update}
-                    </button>
-                  </div>
-                </div>
-                }
+              @textarea(routineForm("resetDescription"),
+                rows = "3",
+                label = "Reset Description",
+                placeholder = "Describe the steps to prepare (or reset) this routine",
+                help = "")
+            </div>
           </div>
+
+          @text(routineForm("youTubeUrl"),
+            label = "YouTube URL",
+            placeholder = "The URL to your YouTube video performing this routine",
+            help = "")
+
+          @text(routineForm("imageUrl"),
+            label = "Image URL",
+            placeholder = "The URL of the image that represents this routine",
+            help = "")
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button id="submit" type="submit" class="btn btn-default">
+              @if(routineForm("id").value == "0") {Add} else {Update}
+              </button>
+            </div>
           </div>
-      </section>
+        }
+        </div>
+      </div>
     </section>
-  }
+  </section>
+}
