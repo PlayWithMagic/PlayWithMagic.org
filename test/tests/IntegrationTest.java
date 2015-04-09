@@ -3,6 +3,8 @@ package tests;
 import org.junit.Test;
 import play.libs.F.Callback;
 import play.test.TestBrowser;
+import tests.pages.AboutPage;
+import tests.pages.HelpPage;
 import tests.pages.IndexPage;
 import tests.pages.EditMagicianPage;
 import tests.pages.ListMagiciansPage;
@@ -24,10 +26,11 @@ public class IntegrationTest {
   private final int port = 3333;
 
   /**
-   * Test that verifies the index page can be retrieved.
+   * Test that verifies that several static pages can be retrieved.
+   * This test verifies that the Index, About and Help pages can be retrieved.
    */
   @Test
-  public void testRetrieveIndexPage() {
+  public void testStaticPages() {
     running(testServer(port, fakeApplication(inMemoryDatabase())), HTMLUNIT,
         new Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
@@ -35,6 +38,14 @@ public class IntegrationTest {
             IndexPage indexPage = new IndexPage(browser.getDriver(), port);
             browser.goTo(indexPage);
             indexPage.isAt();
+
+            AboutPage aboutPage = new AboutPage(browser.getDriver(), port);
+            browser.goTo(aboutPage);
+            aboutPage.isAt();
+
+            HelpPage helpPage = new HelpPage(browser.getDriver(), port);
+            browser.goTo(helpPage);
+            helpPage.isAt();
           }
         });
   }
