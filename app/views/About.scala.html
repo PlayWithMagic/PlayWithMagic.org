@@ -1,0 +1,91 @@
+@*
+* The application's About page.
+*
+* @see http://www.playframework.com
+*@
+@()
+
+@Main("about") {
+  <!-- Page Content -->
+  <section id="main">
+    <!-- Header -->
+    <header id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <img class="img-responsive" src="@routes.Assets.at("images/logo_original_trans.png")"/>
+            <h1>We're Looking for a Few Good Routines</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+    <hr />
+    <section id="about-body" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <h2>About this website</h2>
+          <p>Play With Magic is a place for Magicians to catalog and share their Routines, find new Routines, and
+            build Sets.</p>
+          <p>Once an account is created, a Magician can post their own Routines, or Magic Tricks,
+            search posted Routines, and keep track of other Routines that they like.</p>
+          <p>From this list, a Magician can then create a Set, or a series of Routines.  The Set Builder allows
+            a Magician to receive suggestions based on Venue, Audience Size, Desired Effects, and so forth.</p>
+        </div>
+        <div class="col-md-4">
+          <p>
+            <i class="fa fa-css3 fa-fw"></i>
+            <a href="http://getbootstrap.com/">Responsive Layout built on Twitter Bootstrap</a>
+          </p>
+          <p>
+            <i class="fa fa-play fa-fw"></i>
+            <a href="http://playframework.com">Built with Java on the Play Framework</a>
+          </p>
+          <p>
+            <i class="fa fa-database fa-fw"></i>
+            <a href="http://www.postgresql.org">Backend Database by PostgreSQL</a>
+          </p>
+          <p>
+            <i class="fa fa-cloud fa-fw"></i>
+            <a href="http://heroku.com/">Hosted by Heroku</a>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <h3>Attributions & Credits</h3>
+          <br />
+          <h4>Consulting Magicians</h4>
+          <p>Lee Asher</p>
+          <p>Steve Johnson</p>
+          <p>Wayne Houchin</p>
+          <br />
+          <h4>Images</h4>
+          <p>Home page background image "Mysto Magic" is unaltered and was photographed by<br />
+            <a href="https://www.flickr.com/photos/glenbledsoe/4836241042/">PhotoAtelier on Flickr</a>,
+            licensed under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>
+          </p>
+          <p>Logo is comprised of the following free vector images:
+            <ul>
+              <li>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from
+                <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under
+                <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+              </li>
+              <li>Shooting Stars from <a href="http://shmector.com">Shmector</a></li>
+            </ul>
+          </p>
+        </div>
+        <div class="col-md-4">
+          <p>Website design, code, and database by</p>
+          <p><a href="http://mark.nelson.engineer/">Mark Nelson</a></p>
+          <p><a href="https://davidneely.wordpress.com/">David Neely</p>
+          <p><a href="http://patrickakarjala.wordpress.com">Patrick Karjala</a></p>
+          <p>
+            <i class="fa fa-github"></i>
+            <a href="http://github.com/PlayWithMagic/PlayWithMagic">Collaborate and view the code base on Github</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </section>
+}

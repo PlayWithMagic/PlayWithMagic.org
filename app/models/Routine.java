@@ -15,12 +15,8 @@ public class Routine {
   private String handling;         /* A multi-line discussion of the handling for the routine. */
   private Integer resetDuration;   /* The average time to prepare the routine for presentation. */
   private String resetDescription; /* A description of the process to prepare the routine. */
-
-  /** The maximum number of characters in the routine name. */
-  public static final int MAX_ROUTINE_LENGTH = 45;
-
-  /** The maximum number of characters in generic multiline text fields. */
-  public static final int MAX_MULTILINE_FIELD_LENGTH = 2000;
+  private String youTubeUrl;       /* A URL of the magician performing this routine on YouTube. */
+  private String imageUrl;         /* A URL of an image of this routine. */
 
   /**
    * Create new, valid Routine object.
@@ -69,14 +65,6 @@ public class Routine {
     return description;
   }
 
-  /** Set the average time to perform a basic rendition of this routine in minutes.
-   *
-   * @param duration The average time to perform a basic rendition of this routine in minutes.
-   */
-  public void setDuration(Integer duration) {
-    this.duration = duration;
-  }
-
   /**
    * Get the average time to perform a basic rendition of this routine in minutes.
    *
@@ -87,12 +75,12 @@ public class Routine {
   }
 
   /**
-   * Set a multi-line discussion of the method for this routine.
+   * Set the average time to perform a basic rendition of this routine in minutes.
    *
-   * @param method A multi-line discussion of the method for this routine.
+   * @param duration The average time to perform a basic rendition of this routine in minutes.
    */
-  public void setMethod(String method) {
-    this.method = method;
+  public void setDuration(Integer duration) {
+    this.duration = duration;
   }
 
   /**
@@ -105,16 +93,17 @@ public class Routine {
   }
 
   /**
-   * Set a multi-line discussion of the handling for this routine.
+   * Set a multi-line discussion of the method for this routine.
    *
-   * @param handling a multi-line discussion of the handling for this routine.
+   * @param method A multi-line discussion of the method for this routine.
    */
-  public void setHandling(String handling) {
-    this.handling = handling;
+  public void setMethod(String method) {
+    this.method = method;
   }
 
   /**
    * Get a multi-line discussion of the handling for the routine.
+   *
    * @return A multi-line discussion of the handling for the routine.
    */
   public String getHandling() {
@@ -122,11 +111,12 @@ public class Routine {
   }
 
   /**
-   * Set the average time to prepare the routine for presentation.
-   * @param resetDuration The average time to prepare the routine for presentation.
+   * Set a multi-line discussion of the handling for this routine.
+   *
+   * @param handling a multi-line discussion of the handling for this routine.
    */
-  public void setResetDuration(Integer resetDuration) {
-    this.resetDuration = resetDuration;
+  public void setHandling(String handling) {
+    this.handling = handling;
   }
 
   /**
@@ -139,12 +129,12 @@ public class Routine {
   }
 
   /**
-   * Set a description of the process to prepare the routine.
+   * Set the average time to prepare the routine for presentation.
    *
-   * @param resetDescription A description of the process to prepare the routine.
+   * @param resetDuration The average time to prepare the routine for presentation.
    */
-  public void setResetDescription(String resetDescription) {
-    this.resetDescription = resetDescription;
+  public void setResetDuration(Integer resetDuration) {
+    this.resetDuration = resetDuration;
   }
 
   /**
@@ -154,5 +144,51 @@ public class Routine {
    */
   public String getResetDescription() {
     return resetDescription;
+  }
+
+  /**
+   * Set a description of the process to prepare the routine.
+   *
+   * @param resetDescription A description of the process to prepare the routine.
+   */
+  public void setResetDescription(String resetDescription) {
+    this.resetDescription = resetDescription;
+  }
+
+  /**
+   * Get a URL of the magician performing this routine on YouTube.
+   *
+   * @return A URL of the magician performing this routine on YouTube.
+   */
+  public String getYouTubeUrl() {
+    return youTubeUrl;
+  }
+
+
+  /**
+   * Set a URL of the magician performing this routine on YouTube.
+   *
+   * @param youTubeUrl A URL of the magician performing this routine on YouTube.
+   */
+  public void setYouTubeUrl(String youTubeUrl) {
+    this.youTubeUrl = youTubeUrl;
+  }
+
+  /**
+   * Get a URL of the image for this routine.
+   *
+   * @return A URL of the image for this routine.
+   */
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  /**
+   * Set a URl of the image for this routine.
+   *
+   * @param imageUrl A URL of the image for this routine.
+   */
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
   }
 }

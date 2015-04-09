@@ -24,6 +24,8 @@
       <!-- FontAwesome fonts -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
 
+
+
       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!--[if lt IE 9]>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -46,32 +48,35 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li><a href="@routes.Application.searchRoutines()">Search Routines</a></li>
+          <li><a href="@routes.Application.listRoutines()">Browse Routines</a></li>
           <li><a href="#">Browse Sets</a></li>
         </ul>
 
           <!-- Don't show Search on home page or New Magician page-->
-        @if( page != "home" && page != "newMagician" ) {
+        @if( page != "home" && page != "editMagician" ) {
         <form class="navbar-form navbar-left" role="search">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" />
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button"><a href="searchRoutines">Search Routines</a></button>
+              <button class="btn btn-default" type="button"><a href="listRoutines">Search Routines</a></button>
             </span>
           </div>
         </form>
         }
 
         <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/help"><i class="fa fa-question fa-lg"></i></a>
+          </li>
           <!-- User Info Dropdown, don't show if not logged in -->
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in
               Username <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               @* <li><a href="displayuser">Profile</a></li> *@
-              <li><a href="@routes.Application.searchRoutines()">My Routines</a></li>
+              <li><a href="@routes.Application.listRoutines()">My Routines</a></li>
               @* <li><a href="#">My Sets</a></li> *@
-              <li><a href="@routes.Application.newRoutine()">Create Routine</a></li>
+              <li><a href="@routes.Application.editRoutine()">Create Routine</a></li>
               @* <li><a href="#">Build Set</a></li> *@
               <li class="divider"></li>
               @* <li><a href="#">Logout</a></li> *@
@@ -79,10 +84,15 @@
           </li>
 
             <!-- Signup Button, do not show on home page -->
-          @if( page != "home" && page != "newMagician" ) {
-            <li><button type="button" class="btn btn-primary btn-sm navbar-btn join">Join the Community Today!</button></li>
+          @if( page != "home" && page != "editMagician" ) {
+            <li>
+              <div class="join">
+                <a class="btn btn-primary btn-sm navbar-btn" href="editMagician">Join the Community Today!</a>
+              </div>
+            </li>
           }
-          <!-- Login Dropdown -->
+          <!-- Login Dropdown; only show on Home Page -->
+          @if(page == "home" ) {
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
               Login <span class="caret"></span>
@@ -104,6 +114,7 @@
               <button class="btn btn-sm btn-primary btn-block" type="submit">Sign in</button>
             </form>
           </li>
+          }
         </ul>
       </div>
     </div>
@@ -114,7 +125,7 @@
     <footer class="footer">
       <div class="container">
         <div class="col-md-3">
-          <p>About Play with Magic</p>
+          <p><a href="/about">About Play with Magic</a></p>
 
           <p>Problems? Contact us on Github!</p>
         </div>
@@ -135,6 +146,7 @@
   <!-- Load Bootstrap JavaScript components -->
   <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="@routes.Assets.at("javascripts/scripts.js")"></script>
 
   </body>
 </html>

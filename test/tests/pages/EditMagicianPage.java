@@ -8,21 +8,21 @@ import static org.fluentlenium.core.filter.FilterConstructor.withId;
 import static org.fluentlenium.core.filter.FilterConstructor.withText;
 
 /**
- * Provides test scaffolding for the NewMagician page.
+ * Provides test scaffolding for the EditMagician page.
  */
-public class NewMagicianPage extends FluentPage {
+public class EditMagicianPage extends FluentPage {
 
   private String url;
 
   /**
-   * Create the NewMagician.
+   * Create the EditMagician.
    *
    * @param webDriver The driver.
    * @param port      The port.
    */
-  public NewMagicianPage(WebDriver webDriver, int port) {
+  public EditMagicianPage(WebDriver webDriver, int port) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/newMagician";
+    this.url = "http://localhost:" + port + "/editMagician";
   }
 
   /**
@@ -40,12 +40,12 @@ public class NewMagicianPage extends FluentPage {
    */
   @Override
   public void isAt() {
-    assertThat(pageSource().contains("<body id=\"newMagician\">"));
+    assertThat(pageSource().contains("<body id=\"editMagician\">"));
   }
 
 
   /**
-   * Tests the form on the NewMagician page with provided data.
+   * Tests the form on the EditMagician page with provided data.
    *
    * @param firstName       The first name of the magician.
    * @param lastName        The last name of the magician.
@@ -55,7 +55,7 @@ public class NewMagicianPage extends FluentPage {
    * @param interests       Magician's interests in magic.
    * @param influences      Magician's invluences.
    * @param experienceLevel Magician's experience level; pre-set values.
-   * @param yearsPracticing Number of years of experience.
+   * @param yearStarted     The year started - used to compute the number of years of experience.
    * @param organizations   Any affiliations or organizations the magician is a member of.
    * @param website         Magician's personal website.
    * @param email           Magician's email address.
@@ -67,7 +67,7 @@ public class NewMagicianPage extends FluentPage {
    * @param instagram       Magician's instagram account.
    */
   public void createMagician(String firstName, String lastName, String stageName, String location, String biography,
-                             String interests, String influences, String experienceLevel, String yearsPracticing,
+                             String interests, String influences, String experienceLevel, String yearStarted,
                              String organizations, String website, String email, String facebook,
                              String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
     fill("#firstName").with(firstName);
@@ -81,7 +81,7 @@ public class NewMagicianPage extends FluentPage {
     System.out.println("Experience Level: " + experienceLevel);
     find("select", withId("experienceLevel")).find("option", withText().equalTo(experienceLevel)).click();
     //find("select", withId().equalTo("gender")).find("option", withText().equalTo(gender)).click();
-    fill("#yearsPracticing").with(yearsPracticing);
+    fill("#yearStarted").with(yearStarted);
     fill("#organizations").with(organizations);
     fill("#website").with(website);
     fill("#facebook").with(facebook);
