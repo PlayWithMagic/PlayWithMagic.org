@@ -12,6 +12,7 @@ import views.formdata.RoutineFormData;
 import views.html.About;
 import views.html.EditMagician;
 import views.html.EditRoutine;
+import views.html.Help;
 import views.html.Index;
 import views.html.ListMagicians;
 import views.html.ListRoutines;
@@ -43,6 +44,15 @@ public class Application extends Controller {
    */
   public static Result about() {
     return ok(About.render());
+  }
+
+  /**
+   * Render the Help page.
+   *
+   * @return An HTTP OK message along with the HTML content for the Help page.
+   */
+  public static Result help() {
+    return ok(Help.render());
   }
 
   /**

@@ -5,6 +5,7 @@
 # Home / About / Lexicon page
 GET         /                      controllers.Application.index()
 GET         /about                 controllers.Application.about()
+GET         /help                  controllers.Application.help()
 
 
 # Routine actions
