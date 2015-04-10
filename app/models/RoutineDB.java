@@ -118,7 +118,6 @@ public class RoutineDB {
         + "corner of the cards under the break and turn them over, sliding the pair across the back of the deck to "
         + "maintain registration (alignment).  I leave the cards injogged and refer to them with my right index "
         + "finger.  Repeat the process for the second turnover.");
-    routine.setResetDuration(0);
     routine.setResetDescription("No setup is required for a normal deck assuming that the selected card is also "
         + "indifferent.");
     routine.setYouTubeUrl("https://www.youtube.com/embed/w4iu5FMaR2o");

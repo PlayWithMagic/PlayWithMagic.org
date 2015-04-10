@@ -2,6 +2,10 @@ package views.formdata;
 
 import models.GlobalDbInfo;
 import models.Magician;
+import play.data.validation.Constraints.Email;
+import play.data.validation.Constraints.MaxLength;
+import play.data.validation.Constraints.Min;
+import play.data.validation.Constraints.Required;
 import play.data.validation.ValidationError;
 
 import java.io.File;
@@ -24,21 +28,31 @@ public class MagicianFormData {
   /**
    * Input data First Name field.
    */
+  @Required(message = "Everybody (except Teller) has a first name.")
+  @MaxLength(value = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH,
+      message = "Your name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters.")
   public String firstName;
 
   /**
    * Input data Last Name field.
    */
+  @Required(message = "A Last Name must be provided.")
+  @MaxLength(value = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH,
+      message = "Your name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters.")
   public String lastName;
 
   /**
    * Input data Stage Name field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "Your stage name can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String stageName;
 
   /**
    * Input data Location field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "Your location can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String location;
 
   /**
@@ -46,20 +60,25 @@ public class MagicianFormData {
    */
   public File userPhoto;
 
-  // Magic Info
   /**
    * Input data Biography field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH,
+      message = "Your biography can't be longer than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters.")
   public String biography;
 
   /**
    * Input data Interests field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH,
+      message = "Your interests can't be longer than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters.")
   public String interests;
 
   /**
    * Input data Influences field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "Your influences can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String influences;
 
   /**
@@ -70,51 +89,72 @@ public class MagicianFormData {
   /**
    * Input data Year Started field.
    */
+  @Min(value = 1900, message = "How about a real year?")
   public Integer yearStarted;
 
   /**
    * Input data Organizations field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "Your list of organizations can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String organizations;
 
   /**
    * Input data Website field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "Your website URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String website;
 
   /**
    * Input data Email field.
    */
+  @Required(message = "An Email address must be provided.")
+  @Email(message = "An Email address must be provided.")
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "The Email address can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String email;
 
   /**
    * Input data Facebook field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "Your Facebook URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String facebook;
 
   /**
    * Input data Twitter field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "Your Twitter URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String twitter;
 
   /**
    * Input data LinkedIn field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "Your LinkedIn URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String linkedIn;
 
   /**
    * Input data Google+ field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "Your Google+ URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String googlePlus;
 
   /**
    * Input data flickr field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "Your Flickr URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String flickr;
 
   /**
    * Input data Instagram field.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "Your Instagram URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String instagram;
 
 
@@ -154,118 +194,22 @@ public class MagicianFormData {
   }
 
   /**
-   * Validate that all fields are non-empty, and that certain fields adhere to specific criteria.
+   * Enforce special UI validation rules for magicians.
    *
    * @return Either null if no errors, or a List of Div IDs and their associated error messages.
    */
   public List<ValidationError> validate() {
 
     List<ValidationError> errors = new ArrayList<>();
-    if (firstName == null || firstName.length() == 0) {
-      errors.add(new ValidationError("firstName", "Everybody (except Teller) has a first name."));
-    }
-
-    if (firstName != null && firstName.length() > GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) {
-      errors.add(new ValidationError("firstName",
-          "The name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters."));
-    }
-
-    if (lastName == null || lastName.length() == 0) {
-      errors.add(new ValidationError("lastName", "A Last Name must be provided."));
-    }
-
-    if (lastName != null && lastName.length() > GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) {
-      errors.add(new ValidationError("lastName",
-          "The name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters."));
-    }
-
-    if (email == null || email.length() == 0) {
-      errors.add(new ValidationError("email", "An email address must be provided."));
-    }
-
-    if (email != null && email.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("email",
-          "The Email address can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
 
     if (!ExperienceLevels.isExperienceLevel(experienceLevel)) {
       errors.add(new ValidationError("experienceLevel", "Please select a level of experience from the list."));
-    }
-
-    if (stageName != null && stageName.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("stageName",
-          "The name can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (location != null && location.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("location",
-          "The location can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (biography != null && biography.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
-      errors.add(new ValidationError("biography",
-          "Your biography can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (interests != null && interests.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
-      errors.add(new ValidationError("interests",
-          "Your interests can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (influences != null && influences.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("influences",
-          "Your influences can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (yearStarted != null && yearStarted.intValue() < 1900) {
-      errors.add(new ValidationError("yearStarted", "How about a real year?"));
     }
 
     if (yearStarted != null && yearStarted.intValue() > Calendar.getInstance().get(Calendar.YEAR)) {
       errors.add(new ValidationError("yearStarted", "How about a real year?"));
     }
 
-    if (organizations != null && organizations.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("organizations",
-          "Your organizations can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (website != null && website.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("website",
-          "Your website URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (facebook != null && facebook.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("facebook",
-          "Your facebook URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (twitter != null && twitter.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("twitter",
-          "Your twitter URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (linkedIn != null && linkedIn.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("linkedIn",
-          "Your linkedIn URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (googlePlus != null && googlePlus.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("googlePlus",
-          "Your googlePlus URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (flickr != null && flickr.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("flickr",
-          "Your flickr URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (instagram != null && instagram.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("instagram",
-          "Your instagram URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
     return errors.isEmpty() ? null : errors;
-
   }
 }

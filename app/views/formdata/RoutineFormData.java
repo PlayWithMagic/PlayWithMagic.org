@@ -2,6 +2,10 @@ package views.formdata;
 
 import models.GlobalDbInfo;
 import models.Routine;
+import play.data.validation.Constraints.Max;
+import play.data.validation.Constraints.MaxLength;
+import play.data.validation.Constraints.Min;
+import play.data.validation.Constraints.Required;
 import play.data.validation.ValidationError;
 
 import java.util.ArrayList;
@@ -20,46 +24,72 @@ public class RoutineFormData {
   /**
    * A short name for the routine..
    */
+  @Required(message = "Your routine's gotta have a name.")
+  @MaxLength(value = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH,
+      message = "The routine's name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters.")
   public String name;
 
   /**
    * A multi-line description of the routine.
    */
+  @Required(message = "A name's not enough.  Please write a brief description of your routine.")
+  @MaxLength(value = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH,
+      message = "Description can't be more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters.")
   public String description;
 
   /**
    * The average time to perform a basic rendition of this routine in minutes.
    */
+  @Min(value = 1,
+      message = "If it's under a minute, then just enter 1.")
+  @Max(value = 120,
+      message = "If you need a routine longer than 120 minutes, submit a bug report and we'll look into it.")
+  @Required(message = "If it's under a minute, then just enter 1.")
   public Integer duration;
 
   /**
    * A multi-line discussion of the method for this routine.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH,
+      message = "Method can't be more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters.")
   public String method;
 
   /**
    * A multi-line discussion of the handling for the routine.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH,
+      message = "Handling can't be more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters.")
   public String handling;
 
   /**
    * The average time to prepare the routine for presentation.
    */
+  @Min(value = 1, message = "If it resets instantly, then just leave this blank.  If it takes under a minute "
+      + "to reset, then enter 1.")
+  @Max(value = 120,
+      message = "If it takes longer than 2 hours to reset, well... then we hope it's a great trick.  "
+          + "Submit a bug report and we'll look into it.")
   public Integer resetDuration;
 
   /**
    * A description of the process to prepare the routine.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH,
+      message = "Reset Description can't be more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters.")
   public String resetDescription;
 
   /**
    * A URL of the magician performing this Routine on YouTube.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "YouTube URL can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String youTubeUrl;
 
   /**
    * A URL of the image for this routine.
    */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "The image URL can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String imageUrl;
 
 
@@ -91,11 +121,7 @@ public class RoutineFormData {
 
 
   /**
-   * Enforce the UI validation rules for Routines.
-   * <p>
-   * 1. The required fields are:  Name, Description
-   * 2. Maximum field lengths
-   * 3. Scan for SQL injection & Cross-Site injection
+   * Enforce special UI validation rules for Routines.
    *
    * @return Either null if no errors or a List of errors.
    */
@@ -106,39 +132,7 @@ public class RoutineFormData {
       errors.add(new ValidationError("id", "An invalid ID has been passed into the application."));
     }
 
-    if (name == null || name.length() == 0) {
-      errors.add(new ValidationError("name", "Your routine's gotta have a name."));
-    }
-
-    if (name != null && name.length() > GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) {
-      errors.add(new ValidationError("name",
-          "The routine's name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters."));
-    }
-
-    if (description == null || description.length() == 0) {
-      errors.add(new ValidationError("description",
-          "A name's not enough.  Please write a brief description of your routine."));
-    }
-
-    if (description != null && description.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
-      errors.add(new ValidationError("description",
-          "Description can't be more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters."));
-    }
-
-    if (duration == null || duration.intValue() == 0) {
-      errors.add(new ValidationError("duration", "If it's under a minute, then just enter 1."));
-    }
-
-    if (duration != null && duration.intValue() < 0) {
-      errors.add(new ValidationError("duration", "Who do you think you are?  Dr. Who?"));
-    }
-
-    if (duration != null && duration.intValue() > 120) {
-      errors.add(new ValidationError("duration",
-          "If you need to have a routine longer than 120 minutes, then submit a bug report and we'll look into it."));
-    }
-
-    // TO-DO:  The Play Framework is printing 'error.invalid' and not presenting this error message.
+    // TO-DO:  The Play Framework prints 'error.invalid' and not presenting this error message.
     // Can't figure out how to get a nicer looking message up front.
     if (duration != null) {
       int testDuration;
@@ -150,41 +144,6 @@ public class RoutineFormData {
             "Whatever you put in there is not a nice, round number between 1 and 120 minutes."));
         // Absorb the error.
       }
-    }
-
-    if (method != null && method.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
-      errors.add(new ValidationError("method",
-          "Handling can't be more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters."));
-    }
-
-    if (handling != null && handling.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
-      errors.add(new ValidationError("handling",
-          "Handling can't be more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters."));
-    }
-
-    if (resetDuration != null && resetDuration.intValue() < 0) {
-      errors.add(new ValidationError("resetDuration", "Who do you think you are?  Dr. Who?"));
-    }
-
-    if (resetDuration != null && resetDuration.intValue() > 120) {
-      errors.add(new ValidationError("resetDuration",
-          "If it takes longer than 2 hours to reset, well... then we hope it's a great trick.  "
-              + "Submit a bug report and we'll look into it."));
-    }
-
-    if (resetDescription != null && resetDescription.length() > GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) {
-      errors.add(new ValidationError("resetDescription",
-          "Reset Description can't be more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters."));
-    }
-
-    if (youTubeUrl != null && youTubeUrl.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("youTubeUrl",
-          "YouTube URL can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
-    }
-
-    if (imageUrl != null && imageUrl.length() > GlobalDbInfo.MAX_LONG_TEXT_LENGTH) {
-      errors.add(new ValidationError("imageUrl",
-          "The image's URL can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters."));
     }
 
     return errors.isEmpty() ? null : errors;
