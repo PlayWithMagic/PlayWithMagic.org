@@ -22,5 +22,8 @@ GET         /editMagician          controllers.Application.editMagician(id: Long
 POST        /editMagician          controllers.Application.postMagician()
 GET         /deleteMagician        controllers.Application.deleteMagician(id: Long?= 0)
 
+# Set actions
+GET         /editSet               controllers.Application.editSet(id: Long?=0)
+
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file          controllers.Assets.at(path="/public", file)

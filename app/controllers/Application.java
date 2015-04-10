@@ -2,6 +2,7 @@ package controllers;
 
 import models.MagicianDB;
 import models.RoutineDB;
+import models.SetDB;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
@@ -9,9 +10,11 @@ import play.mvc.Result;
 import views.formdata.ExperienceLevels;
 import views.formdata.MagicianFormData;
 import views.formdata.RoutineFormData;
+import views.formdata.SetFormData;
 import views.html.About;
 import views.html.EditMagician;
 import views.html.EditRoutine;
+import views.html.EditSet;
 import views.html.Help;
 import views.html.Index;
 import views.html.ListMagicians;
@@ -218,5 +221,20 @@ public class Application extends Controller {
    */
   public static Result viewRoutine(long id) {
     return ok(ViewRoutine.render(RoutineDB.getRoutine(id)));
+  }
+
+
+  /**
+   * Renders the editSet page with a form to add a new Set if the ID is 0.  Otherwise, update an existing
+   * Set based on the passed in ID number.
+   *
+   * @param id The ID of the Set to edit (or 0 if it's a new routine).
+   * @return An HTTP OK message along with the HTML content for the EditSet page.
+   */
+  public static Result editSet(long id) {
+    SetFormData data = (id == 0) ? new SetFormData() : new SetFormData(SetDB.getSet(id));
+    Form<SetFormData> formData = Form.form(SetFormData.class).fill(data);
+
+    return ok(EditSet.render(formData, RoutineDB.getRoutines()));
   }
 }
