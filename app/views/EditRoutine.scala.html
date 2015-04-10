@@ -7,7 +7,28 @@
 @(routineForm: Form[views.formdata.RoutineFormData])
 
 @import helper.form
+@import helper.repeat
 @import views.html.bootstrap3.{text, text45, textInt, textarea}
+
+
+@materialGroup(field: Field) = {
+  <div class="well">
+    @text45(field("name"),
+      label = "Name",
+      placeholder = "Item name",
+      help = "")
+
+    @textarea(field("description"),
+      rows = "3",
+      label = "Notes",
+      placeholder = "Notes about this item",
+      help = "")
+
+    <button class="btn danger pull-right">Remove</button>
+    <a class="btn danger pull-right">Remove</a>
+  </div>
+}
+
 
 @Main("editRoutine") {
   <!-- Page Content -->
@@ -43,6 +64,20 @@
             label = "Duration",
             placeholder = "Minutes",
             help = "The average time to perform a basic rendition of this routine in minutes.")
+
+          @*I put this here during R&D so it was near the required fields *@
+
+          @repeat(routineForm("materials")) { material =>
+            @materialGroup(material)
+          }
+
+          @**
+          * Keep an hidden block that will be used as template for Javascript copy code
+          **@
+
+          <div class="manage">
+            <a class="btn success">Add material</a>
+          </div>
 
           @textarea(routineForm("method"),
             rows = "3",

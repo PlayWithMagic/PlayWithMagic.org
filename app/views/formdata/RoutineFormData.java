@@ -92,6 +92,10 @@ public class RoutineFormData {
       message = "The image URL can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String imageUrl;
 
+  /**
+   * The list of materials for this routine.
+   */
+  public List<Material> materials = new ArrayList<Material>();
 
   /**
    * Default no-arg constructor required by Play.
@@ -118,7 +122,6 @@ public class RoutineFormData {
     youTubeUrl = routine.getYouTubeUrl();
     imageUrl = routine.getImageUrl();
   }
-
 
   /**
    * Enforce special UI validation rules for Routines.
@@ -147,5 +150,52 @@ public class RoutineFormData {
     }
 
     return errors.isEmpty() ? null : errors;
+  }
+
+  /**
+   * The materials required to perform this routine.
+   */
+  public static class Material {
+    /**
+     * It's name -- whatever you'd call this item.
+     */
+    @Required(message = "A name for the material is required.")
+    public String name;
+
+    /**
+     * The cost of this item.
+     */
+    public Integer price;
+
+    /**
+     * Notes about this item.
+     */
+    public String description;
+
+    /**
+     * A link to where you might purchase this item.
+     */
+    public String purchaseUrl;
+
+    /**
+     * A URI to an image of this item.
+     */
+    public String imageUrl;
+
+    /**
+     * Default no-arg constructor required by Play.
+     */
+    public Material() {
+      // No content.
+    }
+
+    // TODO:  Refactor this before doing the JavaDocs.
+    public Material(String name, Integer price, String description, String purchaseUrl, String imageUrl) {
+      this.name = name;
+      this.price = price;
+      this.description = description;
+      this.purchaseUrl = purchaseUrl;
+      this.imageUrl = imageUrl;
+    }
   }
 }

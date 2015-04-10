@@ -159,6 +159,7 @@ public class Application extends Controller {
    */
   public static Result editRoutine(long id) {
     RoutineFormData data = (id == 0) ? new RoutineFormData() : new RoutineFormData(RoutineDB.getRoutine(id));
+
     Form<RoutineFormData> formData = Form.form(RoutineFormData.class).fill(data);
 
     return ok(EditRoutine.render(formData));

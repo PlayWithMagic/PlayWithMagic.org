@@ -46,7 +46,6 @@ public class RoutineDB {
     routineFromForm.setYouTubeUrl(formData.youTubeUrl);
     routineFromForm.setImageUrl(formData.imageUrl);
 
-
     routines.put(idVal, routineFromForm);
     Logger.debug(((formData.id == 0) ? "Added" : "Updated") + " routine.  id = [" + idVal + "]"
         + "  name = [" + formData.name + "]");
