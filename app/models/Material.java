@@ -4,69 +4,28 @@ package models;
  * An item used in the performance of a routine.
  */
 public class Material {
-  private long id;                 /* A unique, synthetic key to the Material. */
-  private Routine routine;         /* The routine that holds this item. */
   private String name;             /* A short name for the item. */
   private String description;      /* A multi-line description of the item. */
-  private Boolean isInspectable;   /* Is the item inspectable by the audience? */
-  private Boolean isGivenAway;     /* Does the audience take this with them? */
-  private Boolean isConsumed;      /* Is the item consumed over the course of this routine? */
+  private boolean isInspectable;   /* Is the item inspectable by the audience? */
+  //TODO:  Separate Is Inspectable to before & after routine
+  private boolean isGivenAway;     /* Does the audience take this with them? */
+  private boolean isConsumed;      /* Is the item consumed over the course of this routine? */
   private Integer price;           /* What is the cost of this item? */
-  //TODO:  Let's do currency later -- create an item for multi-currency support
-  private String purchaseURL;      /* Where would you buy one of these items? */
+  //TODO:  Do currency later -- create an item for multi-currency support
+  private String purchaseUrl;      /* Where would you buy one of these items? */
   private String imageUrl;         /* A URL of an image of this item. */
 
   /**
-   * Create a new, valid Material object.
+   * Create a new, valid FormMaterial object.
    * <p>
-   * The constructor includes only the Material's required fields.  Use setters to set the non-required
+   * The constructor includes only the FormMaterial's required fields.  Use setters to set the non-required
    * fields.  The idea is that an object is always in a valid state.
    * </p>
    *
-   * @param id      A unique, synthetic key to the Material.
-   * @param routine The Routine that holds this item.
-   * @param name    A short name for the item.
+   * @param name A short name for the item.
    */
-  public Material(long id, Routine routine, String name) {
-    this.id = id;
-    this.routine = routine;
+  public Material(String name) {
     this.name = name;
-  }
-
-  /**
-   * Returns a unique, synthetic key to the Material.
-   *
-   * @return A unique, synthetic key to the Material.
-   */
-  public long getId() {
-    return id;
-  }
-
-  /**
-   * Set a unique, synthetick key to the Material.
-   *
-   * @param id A unique, synthetic key to the Material.
-   */
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  /**
-   * A reference to the Routine that uses this item.
-   *
-   * @return routine The Routine that uses this item.
-   */
-  public Routine getRoutine() {
-    return routine;
-  }
-
-  /**
-   * Set the Routine that uses this item.
-   *
-   * @param routine The Routine that uses this item.
-   */
-  public void setRoutine(Routine routine) {
-    this.routine = routine;
   }
 
   /**
@@ -110,7 +69,7 @@ public class Material {
    *
    * @return True if the item is inspectable.  False if it is not inspectable.
    */
-  public Boolean isInspectable() {
+  public boolean isInspectable() {
     return isInspectable;
   }
 
@@ -119,7 +78,7 @@ public class Material {
    *
    * @param isInspectable True if the item is inspectable.  False if it is not inspectable.
    */
-  public void setIsInspectable(Boolean isInspectable) {
+  public void isInspectable(boolean isInspectable) {
     this.isInspectable = isInspectable;
   }
 
@@ -128,7 +87,7 @@ public class Material {
    *
    * @return True if the item is given away.  False if it is not given away.
    */
-  public Boolean isGivenAway() {
+  public boolean isGivenAway() {
     return isGivenAway;
   }
 
@@ -137,7 +96,7 @@ public class Material {
    *
    * @param isGivenAway True if the item is given away.  False if it is not given away.
    */
-  public void setIsGivenAway(Boolean isGivenAway) {
+  public void isGivenAway(boolean isGivenAway) {
     this.isGivenAway = isGivenAway;
   }
 
@@ -146,7 +105,7 @@ public class Material {
    *
    * @return True if the item is consumed over the course of the routine.  False if it is not consumed.
    */
-  public Boolean isConsumed() {
+  public boolean isConsumed() {
     return isConsumed;
   }
 
@@ -155,7 +114,7 @@ public class Material {
    *
    * @param isConsumed True if the item is consumed over the course of the routine.  False if it is not consumed.
    */
-  public void setIsConsumed(Boolean isConsumed) {
+  public void isConsumed(boolean isConsumed) {
     this.isConsumed = isConsumed;
   }
 
@@ -182,17 +141,17 @@ public class Material {
    *
    * @return The URL where you can purchase or find this item.
    */
-  public String getPurchaseURL() {
-    return purchaseURL;
+  public String getPurchaseUrl() {
+    return purchaseUrl;
   }
 
   /**
    * Set the URL where you can purchase or find this item.
    *
-   * @param purchaseURL The URL where you can purchase or find this item.
+   * @param purchaseUrl The URL where you can purchase or find this item.
    */
-  public void setPurchaseURL(String purchaseURL) {
-    this.purchaseURL = purchaseURL;
+  public void setPurchaseUrl(String purchaseUrl) {
+    this.purchaseUrl = purchaseUrl;
   }
 
   /**

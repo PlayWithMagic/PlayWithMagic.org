@@ -1,7 +1,9 @@
 package views.formdata;
 
 import models.GlobalDbInfo;
+import models.Material;
 import models.Routine;
+import play.Logger;
 import play.data.validation.Constraints.Max;
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.Min;
@@ -95,7 +97,7 @@ public class RoutineFormData {
   /**
    * The list of materials for this routine.
    */
-  public List<Material> materials = new ArrayList<Material>();
+  public List<FormMaterial> materials = new ArrayList<FormMaterial>();
 
   /**
    * Default no-arg constructor required by Play.
@@ -121,6 +123,20 @@ public class RoutineFormData {
     resetDescription = routine.getResetDescription();
     youTubeUrl = routine.getYouTubeUrl();
     imageUrl = routine.getImageUrl();
+
+    Logger.debug("materials length = [" + routine.getMaterials().size() + "]");
+
+    for(Material material : routine.getMaterials()) {
+      Logger.debug("asdfa");
+      FormMaterial formMaterial = new FormMaterial();
+      formMaterial.name = material.getName();
+      formMaterial.description = material.getDescription();
+      formMaterial.price = material.getPrice();
+      formMaterial.purchaseUrl = material.getPurchaseUrl();
+      formMaterial.imageUrl = material.getImageUrl();
+
+      this.materials.add(formMaterial);
+    }
   }
 
   /**
@@ -155,7 +171,7 @@ public class RoutineFormData {
   /**
    * The materials required to perform this routine.
    */
-  public static class Material {
+  public static class FormMaterial {
     /**
      * It's name -- whatever you'd call this item.
      */
@@ -185,12 +201,12 @@ public class RoutineFormData {
     /**
      * Default no-arg constructor required by Play.
      */
-    public Material() {
+    public FormMaterial() {
       // No content.
     }
 
     // TODO:  Refactor this before doing the JavaDocs.
-    public Material(String name, Integer price, String description, String purchaseUrl, String imageUrl) {
+    public FormMaterial(String name, Integer price, String description, String purchaseUrl, String imageUrl) {
       this.name = name;
       this.price = price;
       this.description = description;

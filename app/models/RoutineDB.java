@@ -28,27 +28,38 @@ public class RoutineDB {
   /**
    * Adds a Routine, based on formData, to the Routines database.
    *
-   * @param formData Input data from the form.
+   * @param routineFormData Input data from the form.
    */
-  public static void addRoutines(RoutineFormData formData) {
-    long idVal = (formData.id == 0) ? currentId++ : formData.id;
+  public static void addRoutines(RoutineFormData routineFormData) {
+    long idVal = (routineFormData.id == 0) ? currentId++ : routineFormData.id;
 
     Routine routineFromForm = new Routine(
         idVal,
-        formData.name,
-        formData.description);
+        routineFormData.name,
+        routineFormData.description);
 
-    routineFromForm.setDuration(formData.duration);
-    routineFromForm.setMethod(formData.method);
-    routineFromForm.setHandling(formData.handling);
-    routineFromForm.setResetDuration(formData.resetDuration);
-    routineFromForm.setResetDescription(formData.resetDescription);
-    routineFromForm.setYouTubeUrl(formData.youTubeUrl);
-    routineFromForm.setImageUrl(formData.imageUrl);
+    routineFromForm.setDuration(routineFormData.duration);
+    routineFromForm.setMethod(routineFormData.method);
+    routineFromForm.setHandling(routineFormData.handling);
+    routineFromForm.setResetDuration(routineFormData.resetDuration);
+    routineFromForm.setResetDescription(routineFormData.resetDescription);
+    routineFromForm.setYouTubeUrl(routineFormData.youTubeUrl);
+    routineFromForm.setImageUrl(routineFormData.imageUrl);
+
+    for(RoutineFormData.FormMaterial formMaterial : routineFormData.materials) {
+      Material material = new Material(formMaterial.name);
+      material.setDescription(formMaterial.description);
+      //TODO:  Set the booleans
+      material.setPrice(formMaterial.price);
+      material.setPurchaseUrl(formMaterial.purchaseUrl);
+      material.setImageUrl(formMaterial.imageUrl);
+
+      routineFromForm.getMaterials().add(material);
+    }
 
     routines.put(idVal, routineFromForm);
-    Logger.debug(((formData.id == 0) ? "Added" : "Updated") + " routine.  id = [" + idVal + "]"
-        + "  name = [" + formData.name + "]");
+    Logger.debug(((routineFormData.id == 0) ? "Added" : "Updated") + " routine.  id = [" + idVal + "]"
+        + "  name = [" + routineFormData.name + "]");
   }
 
   /**
@@ -104,6 +115,7 @@ public class RoutineDB {
   public static void init() {
     resetRoutineDB();
     Routine routine = null;
+    Material material = null;
 
     // --------------------------------------
     routine = new Routine(0, "Ambitious Card", "Put a card in the middle of the deck.  It magically comes to "
@@ -122,6 +134,39 @@ public class RoutineDB {
     routine.setYouTubeUrl("https://www.youtube.com/embed/w4iu5FMaR2o");
     routine.setImageUrl("images/routines/1.jpg");
 
+    material = new Material("A regular deck of cards");
+    material.setDescription("I use red 808s, but any deck will do.");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.bicyclecards.com/products/playing-card/bicycle-standard-index");
+    material.setImageUrl("images/material/1.jpg");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("XXA regular deck of cards");
+    material.setDescription("I use red 808s, but any deck will do.");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.bicyclecards.com/products/playing-card/bicycle-standard-index");
+    material.setImageUrl("images/material/1.jpg");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("XXXXA regular deck of cards");
+    material.setDescription("I use red 808s, but any deck will do.");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.bicyclecards.com/products/playing-card/bicycle-standard-index");
+    material.setImageUrl("images/material/1.jpg");
+
+    routine.getMaterials().add(material);
+
 
     RoutineDB.addRoutines(new RoutineFormData(routine));
 
@@ -136,6 +181,19 @@ public class RoutineDB {
     routine.setResetDescription("Not shared");
     routine.setYouTubeUrl("https://www.youtube.com/embed/ANdHX8X889M");
     routine.setImageUrl("images/routines/2.jpg");
+
+    material = new Material("A spool of thread");
+    material.setDescription("Cotton quilting thread or silk thread work great.  Make sure it contrasts with what "
+        + "you are wearing.");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(10);
+    material.setPurchaseUrl("http://www.amazon.com/Natural-Cotton-Thread-Solids-Yards-Black/dp/B001K54U50/"
+        + "ref=sr_1_fkmr0_2?ie=UTF8&qid=1428699866&sr=8-2-fkmr0&keywords=gutermann+cotton+quilting+thread+CNE50");
+    material.setImageUrl("images/material/2.jpg");
+
+    routine.getMaterials().add(material);
 
     RoutineDB.addRoutines(new RoutineFormData(routine));
 
@@ -157,6 +215,16 @@ public class RoutineDB {
     routine.setYouTubeUrl("https://www.youtube.com/embed/4a_9ZVj1lTY");
     // TO-DO:  I need to record my own performance.
     routine.setImageUrl("images/routines/3.jpg");
+
+    material = new Material("A Mental Photography Deck");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(15);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/mental-photography/");
+    material.setImageUrl("images/material/3.jpg");
+
+    routine.getMaterials().add(material);
 
     RoutineDB.addRoutines(new RoutineFormData(routine));
   }

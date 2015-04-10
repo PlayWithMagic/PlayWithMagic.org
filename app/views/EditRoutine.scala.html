@@ -1,34 +1,12 @@
 @*
 * The Edit (New and Update) Routine HTML form page.
 *
-* @author Mark Nelson
 * @see http://www.playframework.com
 *@
 @(routineForm: Form[views.formdata.RoutineFormData])
 
-@import helper.form
-@import helper.repeat
+@import helper.{form, repeat}
 @import views.html.bootstrap3.{text, text45, textInt, textarea}
-
-
-@materialGroup(field: Field) = {
-  <div class="well">
-    @text45(field("name"),
-      label = "Name",
-      placeholder = "Item name",
-      help = "")
-
-    @textarea(field("description"),
-      rows = "3",
-      label = "Notes",
-      placeholder = "Notes about this item",
-      help = "")
-
-    <button class="btn danger pull-right">Remove</button>
-    <a class="btn danger pull-right">Remove</a>
-  </div>
-}
-
 
 @Main("editRoutine") {
   <!-- Page Content -->
@@ -65,18 +43,47 @@
             placeholder = "Minutes",
             help = "The average time to perform a basic rendition of this routine in minutes.")
 
-          @*I put this here during R&D so it was near the required fields *@
+          @* TODO: I put this here during R&D so it was near the required fields *@
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Materials</h3>
+            </div>
+            <div class="panel-body">
 
-          @repeat(routineForm("materials")) { material =>
-            @materialGroup(material)
-          }
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @repeat(routineForm("materials")) { material =>
 
-          @**
-          * Keep an hidden block that will be used as template for Javascript copy code
-          **@
+                  <tr>
+                    <td>@material("name").value</td>
+                    <td>$ @material("price").value</td>
+                    <td><img src="@routes.Assets.at(material("imageUrl").value.get)" height="22px" alt="Material"></td>
+                    <td>
+                      <a href="@routes.Application.editMaterial(routineForm("id").value, 0)" class="btn btn-warning btn-xs"
+                      role="button">Edit</a>
+                    </td>
+                    <td>
+                      <a href="#happy TODO" class="btn btn-danger btn-xs"
+                      role="button">Delete</a>
+                    </td>
+                  </tr>
+                }
+                </tbody>
+              </table>
 
-          <div class="manage">
-            <a class="btn success">Add material</a>
+              <div class="manage">
+                <a class="btn success">Add material</a>
+              </div>
+            </div>
           </div>
 
           @textarea(routineForm("method"),

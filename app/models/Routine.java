@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +40,7 @@ public class Routine {
     this.id = id;
     this.name = name;
     this.description = description;
+    this.materials = new ArrayList<Material>();
   }
 
   /**
@@ -204,12 +206,4 @@ public class Routine {
     return materials;
   }
 
-  /**
-   * Set the materials used for this routine.
-   *
-   * @param materials The materials used for this routine.
-   */
-  public void setMaterials(List<Material> materials) {
-    this.materials = materials;
-  }
 }

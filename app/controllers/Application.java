@@ -11,6 +11,7 @@ import views.formdata.MagicianFormData;
 import views.formdata.RoutineFormData;
 import views.html.About;
 import views.html.EditMagician;
+import views.html.EditMaterial;
 import views.html.EditRoutine;
 import views.html.Help;
 import views.html.Index;
@@ -67,6 +68,10 @@ public class Application extends Controller {
     Form<MagicianFormData> formData = Form.form(MagicianFormData.class).fill(data);
     Map<String, Boolean> experienceLevelMap = ExperienceLevels.getExperienceLevels(data.experienceLevel);
     return ok(EditMagician.render(formData, experienceLevelMap));
+  }
+
+  public static Result editMaterial(long routineId, long materialId) {
+    return ok(EditMaterial.render());
   }
 
   /**
@@ -158,9 +163,20 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the EditRoutine page.
    */
   public static Result editRoutine(long id) {
-    RoutineFormData data = (id == 0) ? new RoutineFormData() : new RoutineFormData(RoutineDB.getRoutine(id));
+    RoutineFormData data;
+
+    if(id == 0) {
+      data = new RoutineFormData();
+      Logger.debug("New");
+    }
+    else {
+      Logger.debug("Update");
+      data = new RoutineFormData(RoutineDB.getRoutine(id));
+    }
 
     Form<RoutineFormData> formData = Form.form(RoutineFormData.class).fill(data);
+
+    Logger.debug("Here I am [" + data.materials.size() + "]");
 
     return ok(EditRoutine.render(formData));
   }
