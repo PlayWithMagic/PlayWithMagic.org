@@ -3,7 +3,6 @@ package views.formdata;
 import models.GlobalDbInfo;
 import models.Material;
 import models.Routine;
-import play.Logger;
 import play.data.validation.Constraints.Max;
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.Min;
@@ -97,7 +96,7 @@ public class RoutineFormData {
   /**
    * The list of materials for this routine.
    */
-  public List<FormMaterial> materials = new ArrayList<FormMaterial>();
+  public List<FormMaterial> materials;
 
   /**
    * Default no-arg constructor required by Play.
@@ -124,18 +123,23 @@ public class RoutineFormData {
     youTubeUrl = routine.getYouTubeUrl();
     imageUrl = routine.getImageUrl();
 
-    Logger.debug("materials length = [" + routine.getMaterials().size() + "]");
+    if (!routine.getMaterials().isEmpty()) {
+      materials = new ArrayList<FormMaterial>();
+      long materialId = 1;
 
-    for(Material material : routine.getMaterials()) {
-      Logger.debug("asdfa");
-      FormMaterial formMaterial = new FormMaterial();
-      formMaterial.name = material.getName();
-      formMaterial.description = material.getDescription();
-      formMaterial.price = material.getPrice();
-      formMaterial.purchaseUrl = material.getPurchaseUrl();
-      formMaterial.imageUrl = material.getImageUrl();
+      for (Material material : routine.getMaterials()) {
+        FormMaterial formMaterial = new FormMaterial();
 
-      this.materials.add(formMaterial);
+        formMaterial.id = materialId++;
+        formMaterial.name = material.getName();
+        formMaterial.description = material.getDescription();
+        // TODO:  Add boolean fields
+        formMaterial.price = material.getPrice();
+        formMaterial.purchaseUrl = material.getPurchaseUrl();
+        formMaterial.imageUrl = material.getImageUrl();
+
+        this.materials.add(formMaterial);
+      }
     }
   }
 
@@ -172,6 +176,12 @@ public class RoutineFormData {
    * The materials required to perform this routine.
    */
   public static class FormMaterial {
+
+    /**
+     * A synthetic key, unique within the Routine.
+     */
+    public long id;
+
     /**
      * It's name -- whatever you'd call this item.
      */
@@ -206,12 +216,14 @@ public class RoutineFormData {
     }
 
     // TODO:  Refactor this before doing the JavaDocs.
-    public FormMaterial(String name, Integer price, String description, String purchaseUrl, String imageUrl) {
+    public FormMaterial(long id, String name, Integer price, String description, String purchaseUrl, String imageUrl) {
+      this.id = id;
       this.name = name;
       this.price = price;
       this.description = description;
       this.purchaseUrl = purchaseUrl;
       this.imageUrl = imageUrl;
+      // TODO:  Add boolean fields
     }
   }
 }

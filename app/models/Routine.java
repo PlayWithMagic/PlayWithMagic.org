@@ -62,12 +62,30 @@ public class Routine {
   }
 
   /**
+   * Set a short name for the routine.
+   *
+   * @param name A short name for the routine.
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  /**
    * Returns a multi-line description of the routine.
    *
    * @return A multi-line description of the routine.
    */
   public String getDescription() {
     return description;
+  }
+
+  /**
+   * Set a multi-line description of the routine.
+   *
+   * @param description A multi-line description of the routine.
+   */
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   /**

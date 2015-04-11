@@ -28,38 +28,43 @@ public class RoutineDB {
   /**
    * Adds a Routine, based on formData, to the Routines database.
    *
-   * @param routineFormData Input data from the form.
+   * @param routineForm Input data from the form.
+   * @return The ID of the Routine that was just added to the database.
    */
-  public static void addRoutines(RoutineFormData routineFormData) {
-    long idVal = (routineFormData.id == 0) ? currentId++ : routineFormData.id;
+  public static long addRoutines(RoutineFormData routineForm) {
+    Routine routine;
+    long idVal;
 
-    Routine routineFromForm = new Routine(
-        idVal,
-        routineFormData.name,
-        routineFormData.description);
+    if (routineForm.id == 0) {
+      idVal = currentId++;
 
-    routineFromForm.setDuration(routineFormData.duration);
-    routineFromForm.setMethod(routineFormData.method);
-    routineFromForm.setHandling(routineFormData.handling);
-    routineFromForm.setResetDuration(routineFormData.resetDuration);
-    routineFromForm.setResetDescription(routineFormData.resetDescription);
-    routineFromForm.setYouTubeUrl(routineFormData.youTubeUrl);
-    routineFromForm.setImageUrl(routineFormData.imageUrl);
+      routine = new Routine(
+          idVal,
+          routineForm.name,
+          routineForm.description);
+    }
+    else {
+      idVal = routineForm.id;
 
-    for(RoutineFormData.FormMaterial formMaterial : routineFormData.materials) {
-      Material material = new Material(formMaterial.name);
-      material.setDescription(formMaterial.description);
-      //TODO:  Set the booleans
-      material.setPrice(formMaterial.price);
-      material.setPurchaseUrl(formMaterial.purchaseUrl);
-      material.setImageUrl(formMaterial.imageUrl);
+      routine = RoutineDB.getRoutine(idVal);
 
-      routineFromForm.getMaterials().add(material);
+      routine.setName(routineForm.name);
+      routine.setDescription(routineForm.description);
     }
 
-    routines.put(idVal, routineFromForm);
-    Logger.debug(((routineFormData.id == 0) ? "Added" : "Updated") + " routine.  id = [" + idVal + "]"
-        + "  name = [" + routineFormData.name + "]");
+    routine.setDuration(routineForm.duration);
+    routine.setMethod(routineForm.method);
+    routine.setHandling(routineForm.handling);
+    routine.setResetDuration(routineForm.resetDuration);
+    routine.setResetDescription(routineForm.resetDescription);
+    routine.setYouTubeUrl(routineForm.youTubeUrl);
+    routine.setImageUrl(routineForm.imageUrl);
+
+    routines.put(idVal, routine);
+    Logger.debug(((routineForm.id == 0) ? "Added" : "Updated") + " routine.  id = [" + idVal + "]"
+        + "  name = [" + routineForm.name + "]");
+
+    return idVal;
   }
 
   /**
@@ -74,6 +79,23 @@ public class RoutineDB {
       throw new RuntimeException("Unable to find routine with given ID value.");
     }
     return routine;
+  }
+
+  /**
+   * Get a list of materials for the routine.
+   * <p>
+   * If the routineId is 0, return an empty list.  If the routineId is non-0, return the materials from the Routine.
+   *
+   * @param routineId The ID of a routine or 0 to create an empty list for a new routine.
+   * @return A list of materials.
+   */
+  public static List<Material> getMaterials(long routineId) {
+    if (routineId == 0) {
+      return new ArrayList<Material>();
+    }
+    else {
+      return routines.get(routineId).getMaterials();
+    }
   }
 
   /**
@@ -116,6 +138,7 @@ public class RoutineDB {
     resetRoutineDB();
     Routine routine = null;
     Material material = null;
+    long id;
 
     // --------------------------------------
     routine = new Routine(0, "Ambitious Card", "Put a card in the middle of the deck.  It magically comes to "
@@ -133,6 +156,9 @@ public class RoutineDB {
         + "indifferent.");
     routine.setYouTubeUrl("https://www.youtube.com/embed/w4iu5FMaR2o");
     routine.setImageUrl("images/routines/1.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
 
     material = new Material("A regular deck of cards");
     material.setDescription("I use red 808s, but any deck will do.");
@@ -168,8 +194,6 @@ public class RoutineDB {
     routine.getMaterials().add(material);
 
 
-    RoutineDB.addRoutines(new RoutineFormData(routine));
-
     // --------------------------------------
     routine = new Routine(0, "Gypsy Thread", "Pieces of thread are restored into one continuous piece.");
 
@@ -181,6 +205,9 @@ public class RoutineDB {
     routine.setResetDescription("Not shared");
     routine.setYouTubeUrl("https://www.youtube.com/embed/ANdHX8X889M");
     routine.setImageUrl("images/routines/2.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
 
     material = new Material("A spool of thread");
     material.setDescription("Cotton quilting thread or silk thread work great.  Make sure it contrasts with what "
@@ -195,7 +222,6 @@ public class RoutineDB {
 
     routine.getMaterials().add(material);
 
-    RoutineDB.addRoutines(new RoutineFormData(routine));
 
     // --------------------------------------
     routine = new Routine(0, "Magician's Practice Deck", "A 'cheap' deck of cards with nothing printed on them "
@@ -216,6 +242,9 @@ public class RoutineDB {
     // TO-DO:  I need to record my own performance.
     routine.setImageUrl("images/routines/3.jpg");
 
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
     material = new Material("A Mental Photography Deck");
     material.isInspectable(false);
     material.isGivenAway(false);
@@ -225,7 +254,5 @@ public class RoutineDB {
     material.setImageUrl("images/material/3.jpg");
 
     routine.getMaterials().add(material);
-
-    RoutineDB.addRoutines(new RoutineFormData(routine));
   }
 }

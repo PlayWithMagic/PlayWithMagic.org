@@ -3,10 +3,11 @@
 *
 * @see http://www.playframework.com
 *@
-@(routineForm: Form[views.formdata.RoutineFormData])
+@(routineForm: Form[views.formdata.RoutineFormData], materials: List[Material])
 
 @import helper.{form, repeat}
 @import views.html.bootstrap3.{text, text45, textInt, textarea}
+@import java.util.List;
 
 @Main("editRoutine") {
   <!-- Page Content -->
@@ -46,7 +47,11 @@
           @* TODO: I put this here during R&D so it was near the required fields *@
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Materials</h3>
+              <h3 class="panel-title">Materials
+
+                <a class="btn btn-success btn-xs pull-right">Add material</a>
+
+              </h3>
             </div>
             <div class="panel-body">
 
@@ -61,28 +66,28 @@
                   </tr>
                 </thead>
                 <tbody>
-                @repeat(routineForm("materials")) { material =>
+                  @for(material <- materials) {
+                    <tr>
+                      <td>@material.getName()</td>
+                      <td>$ @material.getPrice()</td>
+                      <td><img src="@routes.Assets.at(material.getImageUrl)" height="22px" alt="Material"></td>
+                      <td>
+                        <a href="#happy" class="btn btn-warning btn-xs"
+                        role="button">Edit</a>
+                        @* TODO:  Refactor to a button like delete *@
+                      </td>
+                      <td>
+                        <button id="delete" type="submit" class="btn btn-danger btn-xs"
+                        formaction="@routes.Application.deleteMaterial(materials.indexOf(material))">
+                        Delete
+                        </button>
 
-                  <tr>
-                    <td>@material("name").value</td>
-                    <td>$ @material("price").value</td>
-                    <td><img src="@routes.Assets.at(material("imageUrl").value.get)" height="22px" alt="Material"></td>
-                    <td>
-                      <a href="@routes.Application.editMaterial(routineForm("id").value, 0)" class="btn btn-warning btn-xs"
-                      role="button">Edit</a>
-                    </td>
-                    <td>
-                      <a href="#happy TODO" class="btn btn-danger btn-xs"
-                      role="button">Delete</a>
-                    </td>
-                  </tr>
-                }
+                      </td>
+                    </tr>
+                  }
                 </tbody>
               </table>
 
-              <div class="manage">
-                <a class="btn success">Add material</a>
-              </div>
             </div>
           </div>
 
