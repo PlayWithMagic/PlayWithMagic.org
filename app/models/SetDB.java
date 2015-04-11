@@ -26,7 +26,7 @@ public class SetDB {
    */
   public static void addSet(SetFormData formData) {
     long idVal = (formData.id == 0) ? currentId++ : formData.id;
-    Set setFromForm = new Set(idVal, formData.userId, formData.setName, formData.description, formData.routines);
+    Set setFromForm = new Set(idVal, formData.userId, formData.name, formData.description, formData.routines);
     sets.put(idVal, setFromForm);
   }
 

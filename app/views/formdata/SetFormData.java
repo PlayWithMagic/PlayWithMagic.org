@@ -25,7 +25,7 @@ public class SetFormData {
   /**
    * Input data Set Name field.
    */
-  public String setName;
+  public String name;
 
   /**
    * Input data Description field.
@@ -54,7 +54,7 @@ public class SetFormData {
   public SetFormData(Set set) {
     this.id = set.getId();
     this.userId = set.getUserId();
-    this.setName = set.getName();
+    this.name = set.getName();
     this.description = set.getDescription();
     this.routines = set.getRoutines();
   }
@@ -63,13 +63,13 @@ public class SetFormData {
    * Testing initialization constructor, does not include ID.
    *
    * @param userId  The userID associated with the Set.
-   * @param setName The name of the Set.
+   * @param name The name of the Set.
    * @param description The description of the Set.
    * @param routines The list of Routine IDs in the Set.
    */
-  public SetFormData(long userId, String setName, String description, List<Long> routines) {
+  public SetFormData(long userId, String name, String description, List<Long> routines) {
     this.userId = userId;
-    this.setName = setName;
+    this.name = name;
     this.description = description;
     this.routines = routines;
   }
