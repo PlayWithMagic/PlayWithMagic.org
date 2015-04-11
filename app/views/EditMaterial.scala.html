@@ -3,11 +3,71 @@
 *
 * @see http://www.playframework.com
 *@
+@(materialForm: Form[views.formdata.MaterialFormData])
 
-@import helper.{form, repeat}
-@import views.html.bootstrap3.{text, text45, textInt, textarea}
+@import helper.form
+@import views.html.bootstrap3.{hidden, text, text45, textInt, textarea}
 
 @Main("editMaterial") {
   <!-- Page Content -->
-  <h1>Material</h1>
+  <section id="page">
+      <!-- Content -->
+    <section id="content" class="container">
+      <div class="col-md-12">
+        @if(materialForm("materialId").value == "-1") {
+          <h1>New Item</h1>
+        } else {
+          <h1>Edit Item</h1>
+        }
+
+
+        <!-- Form Fields -->
+        <div class="container">
+        @form(routes.Application.postMaterial(), 'class -> "form-horizontal") {
+
+          @hidden(materialForm("routineId"))
+
+          @hidden(materialForm("materialId"))
+
+          @text45(materialForm("name"),
+            label = "Name",
+            placeholder = "A short name for the item",
+            help = "")
+
+          @* TODO: Add checkboxes *@
+
+          @textInt(materialForm("price"),
+            label = "Price",
+            placeholder = "Price in $",
+            help = "")
+
+          @text(materialForm("purchaseUrl"),
+            label = "Purchase URL",
+            placeholder = "Where can you find this item?",
+            help = "")
+
+          @textarea(materialForm("description"),
+            rows = "3",
+            label = "Notes/Description",
+            placeholder = "Anything special about this item?",
+            help = "")
+
+          @text(materialForm("imageUrl"),
+            label = "Image URL",
+            placeholder = "The URL of the image that represents this item",
+            help = "")
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button id="submit" type="submit" class="btn btn-default">
+              @if(materialForm("materialId").value == "-1") {Add} else {Update}
+              </button>
+            </div>
+          </div>
+        }
+        </div>
+      </div>
+    </section>
+  </section>
+
 }
