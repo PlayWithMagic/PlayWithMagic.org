@@ -156,11 +156,14 @@ public class RoutineDB {
   }
 
 
+  /******************************************************************************************************************
+   * I N I T I A L I Z E   D A T A B A S E
+   ******************************************************************************************************************/
+
   /**
-   * Initialize the Routine database.
+   * Populate a routine.
    */
-  public static void init() {
-    resetRoutineDB();
+  public static void init01() {
     Routine routine = null;
     Material material = null;
     long id;
@@ -217,9 +220,16 @@ public class RoutineDB {
     material.setImageUrl("images/material/1.jpg");
 
     routine.getMaterials().add(material);
+  }
 
+  /**
+   * Populate a routine.
+   */
+  public static void init02() {
+    Routine routine = null;
+    Material material = null;
+    long id;
 
-    // --------------------------------------
     routine = new Routine(0, "Gypsy Thread", "Pieces of thread are restored into one continuous piece.");
 
     routine.setDuration(4);
@@ -246,9 +256,17 @@ public class RoutineDB {
     material.setImageUrl("images/material/2.jpg");
 
     routine.getMaterials().add(material);
+  }
 
 
-    // --------------------------------------
+  /**
+   * Populate a routine.
+   */
+  public static void init03() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
     routine = new Routine(0, "Magician's Practice Deck", "A 'cheap' deck of cards with nothing printed on them "
         + "magically gets printed on the front and back.");
 
@@ -279,9 +297,17 @@ public class RoutineDB {
     material.setImageUrl("images/material/3.jpg");
 
     routine.getMaterials().add(material);
+  }
 
 
-    // --------------------------------------
+  /**
+   * Populate a routine.
+   */
+  public static void init04() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
     routine = new Routine(0, "Twice Burned", "This is a good bar trick I learned from Steve Johnson.  Strike a match "
         + "and blow it out.  Strike it a second time and, astonishingly, it lights!  It's a good way to get "
         + "a free beer.");
@@ -318,9 +344,17 @@ public class RoutineDB {
     material.setImageUrl("images/material/201.jpg");
 
     routine.getMaterials().add(material);
+  }
 
 
-    // --------------------------------------
+  /**
+   * Populate a routine.
+   */
+  public static void init05() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
     routine = new Routine(0, "Daryl's Vindu Knot", "I hope I got the title right...  This is a very fun "
         + "bit.  Take a rope and cut in half and tie the two ends together in a knot.  Have "
         + "folks from the audience test the strength of the knot -- it's solid.  Then, you have someone cover the "
@@ -361,9 +395,17 @@ public class RoutineDB {
     material.setDescription("You can re-use about 90% of the rope... About 8\" will be consumed with each performance");
 
     routine.getMaterials().add(material);
+  }
 
 
-    // --------------------------------------
+  /**
+   * Populate a routine.
+   */
+  public static void init06() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
     routine = new Routine(0, "Charming Chinese Challenge", "This is a three phase effect where the magician removes "
         + "Chinese coins threaded through a ribbon, one at a time.  I first learned this routine from Joshua "
         + "Jay, who credits Troy Hooser for this particular handling.");
@@ -404,9 +446,17 @@ public class RoutineDB {
         + "broken over the years.");
 
     routine.getMaterials().add(material);
+  }
 
 
-    // --------------------------------------
+  /**
+   * Populate a routine.
+   */
+  public static void init07() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
     routine = new Routine(0, "Two Card Monte", "This is a 'giveaway' routine I perform whereby I teach the "
         + "audience a little magic trick and I give them two gaff (novelty) cards to remember the event.");
 
@@ -443,9 +493,17 @@ public class RoutineDB {
     material.setDescription("This is the per-deck price.");
 
     routine.getMaterials().add(material);
+  }
 
 
-    // --------------------------------------
+  /**
+   * Populate a routine.
+   */
+  public static void init08() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
     routine = new Routine(0, "Panic", "This is my favorite effect within a set.  It's a transposition effect that "
         + "allows me to switch from an audience-handled, sorted deck to a packet-loaded deck.  Strangly, people "
         + "forget about this nearly impossible effect because I follow it with my closer French Kiss.");
@@ -473,7 +531,33 @@ public class RoutineDB {
     material.setDescription("");
 
     routine.getMaterials().add(material);
+  }
 
 
+  /**
+   * Populate a routine.
+   */
+  public static void initTemplate() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+  }
+
+
+  /**
+   * Initialize the Routine database.
+   */
+  public static void init() {
+    resetRoutineDB();
+
+    init01();
+    init02();
+    init03();
+    init04();
+    init05();
+    init06();
+    init07();
+    init08();
   }
 }
