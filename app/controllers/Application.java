@@ -2,6 +2,7 @@ package controllers;
 
 import models.MagicianDB;
 import models.RoutineDB;
+import models.Set;
 import models.SetDB;
 import play.Logger;
 import play.data.Form;
@@ -23,7 +24,10 @@ import views.html.ListRoutines;
 import views.html.ListSets;
 import views.html.ViewMagician;
 import views.html.ViewRoutine;
+import views.html.ViewSet;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -250,8 +254,14 @@ public class Application extends Controller {
   public static Result editSet(long id) {
     SetFormData data = (id == 0) ? new SetFormData() : new SetFormData(SetDB.getSet(id));
     Form<SetFormData> formData = Form.form(SetFormData.class).fill(data);
+    if(id != 0) {
+      Set thisSet = SetDB.getSet(id);
+      return ok(EditSet.render(formData, RoutineDB.getRoutines(), thisSet.getRoutines()));
+    } else {
+      List<Long> temp = new ArrayList<Long>();
+      return ok(EditSet.render(formData, RoutineDB.getRoutines(), temp));
+    }
 
-    return ok(EditSet.render(formData, RoutineDB.getRoutines()));
   }
 
   /**
@@ -294,7 +304,8 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for a single Set page.
    */
   public static Result viewSet(long id) {
-    return ok(ListSets.render(SetDB.getSet(id), RoutineDB.getRoutines()));
+    Set thisViewSet = SetDB.getSet(id);
+    return ok(ViewSet.render(SetDB.getSet(id), RoutineDB.getRoutines(), thisViewSet.getRoutines()));
   }
 
   /***************************************************************************************************************

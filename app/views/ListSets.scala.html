@@ -6,7 +6,7 @@
 *
 * @see http://www.playframework.com
 *@
-@(sets: List[Set])
+@(sets: List[models.Set])
 
 @Main("listSets") {
   <!-- Page Content -->
@@ -27,15 +27,15 @@
             </tr>
           </thead>
           <tbody>
-          @for(set <- sets) {
+          @for(thisSet <- sets) {
             <tr>
-              <td><a href="viewSet?id=@set.getId">@set.getName</a></td>
+              <td><a href="viewSet?id=@thisSet.getId">@thisSet.getName</a></td>
               <td>
-                <a href="@routes.Application.editSet(set.getId)" class="btn btn-warning btn-xs"
+                <a href="@routes.Application.editSet(thisSet.getId)" class="btn btn-warning btn-xs"
                 role="button">Edit</a>
               </td>
               <td>
-                <a href="@routes.Application.deleteSet(set.getId)" class="btn btn-danger btn-xs"
+                <a href="@routes.Application.deleteSet(thisSet.getId)" class="btn btn-danger btn-xs"
                 role="button">Delete</a>
               </td>
             </tr>

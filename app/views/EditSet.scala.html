@@ -4,7 +4,7 @@
 * @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(setForm: Form[views.formdata.SetFormData], routines: List[Routine])
+@(setForm: Form[views.formdata.SetFormData], routines: List[Routine], formRoutines: List[Long])
 
 @import helper.form
 @import views.html.bootstrap3.{text45, textarea}
@@ -28,7 +28,7 @@
           id="@setForm("id").id"
           value="@setForm("id").value"/>
 
-          @text45(setForm("Name"),
+          @text45(setForm("name"),
             label = "Name",
             placeholder = "A short name for the Set",
             help = "")
@@ -44,9 +44,33 @@
               <h3 class="panel-title">Routines</h3>
             </div>
             <div class="panel-body">
-              A list of Routines will need to be propigated here.
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Add to Set</th>
+                    <th>Name</th>
+                    <th>Time to Perform</th>
+                  </tr>
+                </thead>
+                <tbody>
               <!-- Should use the list of Routines thrown in against the list of Set list items to pull -->
-
+                @for(routine <- routines) {
+                <tr>
+                  <td>
+                      <input type="checkbox"
+                        name="@(routine.getName + "[]")"
+                        id="@routine.getName"
+                        value="@routine.getId"
+                        @for(formRoutine <- formRoutines) {
+                          @if(formRoutine == routine.getId) {checked}
+                        }>
+                  </td>
+                  <td>@routine.getName()</td>
+                  <td>@routine.getDuration()</td>
+                </tr>
+                }
+                </tbody>
+              </table>
             </div>
           </div>
           <div class="form-group">

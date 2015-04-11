@@ -30,6 +30,17 @@ public class SetDB {
     sets.put(idVal, setFromForm);
   }
 
+
+  /**
+   * Adds a Set to the DB directly for pre-filling the Database.
+   *
+   * @param newSet The pre-formatted set to place in the database.
+   */
+  public static void addSet(Set newSet) {
+    long idVal = (newSet.getId() == 0) ? currentId++ : newSet.getId();
+    sets.put(idVal, newSet);
+  }
+
   /**
    * Retrieve a Set associated with a given id from the local storage list.
    *
@@ -86,9 +97,11 @@ public class SetDB {
 
     // --------------------------------------
     List<Long> routineIds = new ArrayList<Long>();
-    routineIds.add(3L);
-    set = new Set(0, 1, "Amazing Set", "This is a powerful set comprised of mostly card tricks", routineIds);
-    //SetDB.addSet();
+    routineIds.add(2L);
+    routineIds.add(1L);
+    set = new Set(currentId, 1, "Amazing Set", "This is a powerful set comprised of mostly card tricks", routineIds);
+    SetDB.addSet(set);
+    currentId++;
 
 
   }
