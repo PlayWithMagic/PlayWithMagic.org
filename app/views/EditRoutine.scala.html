@@ -1,13 +1,13 @@
 @*
 * The Edit (New and Update) Routine HTML form page.
 *
-* @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(routineForm: Form[views.formdata.RoutineFormData])
+@(routineForm: Form[views.formdata.RoutineFormData], materials: List[Material])
 
-@import helper.form
+@import helper.{form, repeat}
 @import views.html.bootstrap3.{text, text45, textInt, textarea}
+@import java.util.List;
 
 @Main("editRoutine") {
   <!-- Page Content -->
@@ -41,8 +41,55 @@
 
           @textInt(routineForm("duration"),
             label = "Duration",
-            placeholder = "Mins",
+            placeholder = "Minutes",
             help = "The average time to perform a basic rendition of this routine in minutes.")
+
+          @* TODO: I put this here during R&D so it was near the required fields *@
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Materials
+
+                <a class="btn btn-success btn-xs pull-right">Add material</a>
+
+              </h3>
+            </div>
+            <div class="panel-body">
+
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for(material <- materials) {
+                    <tr>
+                      <td>@material.getName()</td>
+                      <td>$ @material.getPrice()</td>
+                      <td><img src="@routes.Assets.at(material.getImageUrl)" height="22px" alt="Material"></td>
+                      <td>
+                        <a href="#happy" class="btn btn-warning btn-xs"
+                        role="button">Edit</a>
+                        @* TODO:  Refactor to a button like delete *@
+                      </td>
+                      <td>
+                        <button id="delete" type="submit" class="btn btn-danger btn-xs"
+                        formaction="@routes.Application.deleteMaterial(materials.indexOf(material))">
+                        Delete
+                        </button>
+
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+
+            </div>
+          </div>
 
           @textarea(routineForm("method"),
             rows = "3",
