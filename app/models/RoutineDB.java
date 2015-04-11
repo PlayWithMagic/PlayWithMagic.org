@@ -271,5 +271,202 @@ public class RoutineDB {
     material.setImageUrl("images/material/3.jpg");
 
     routine.getMaterials().add(material);
+
+
+    // --------------------------------------
+    routine = new Routine(0, "Twice Burned", "This is a good bar trick I learned from Steve Johnson.  Strike a match "
+        + "and blow it out.  Strike it a second time and, astonishingly, it lights!  It's a good way to get "
+        + "a free beer.");
+
+    routine.setDuration(2);
+    routine.setMethod("Prepare a duplicate match.  Use a sharpie to blacken the head.  Keep the dup in finger palm "
+        + "and swap it with the burned out match.");
+    routine.setHandling("");
+    routine.setResetDuration(2);
+    routine.setResetDescription("Blacken some match heads and put one in a place that's easy to get into finger palm.");
+    routine.setYouTubeUrl("");
+
+    routine.setImageUrl("images/routines/200.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("A matchstick");
+    material.isInspectable(true);
+    material.isGivenAway(true);
+    material.isConsumed(true);
+    material.setPrice(0);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/200.jpg");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("Sharpie");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/201.jpg");
+
+    routine.getMaterials().add(material);
+
+
+    // --------------------------------------
+    routine = new Routine(0, "Daryl's Vindu Knot", "I hope I got the title right...  This is a very fun "
+      +  "bit.  Take a rope and cut in half and tie the two ends together in a knot.  Have "
+      +  "folks from the audience test the strength of the knot -- it's solid.  Then, you have someone cover the "
+      +  "knot with their hand... and the knot moves.  In fact, the knot comes off in their hand and they are "
+      +  "left with a nice takeaway.  A beautiful torn-and-restored effect.");
+
+    routine.setDuration(5);
+    routine.setMethod("I can't share it without permission, but you can always ask Darly or watch his video.");
+    routine.setHandling("");
+    routine.setResetDuration(2);
+    routine.setResetDescription("I have several 1-meter sections of rope ready to go.  I ensure the sissors are "
+      +  "in my back pocket.");
+    routine.setYouTubeUrl("");
+
+    routine.setImageUrl("images/routines/202.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Large shears or sissors");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/203.jpg");
+    material.setDescription("Something that's big and impressive.");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("Rope");
+    material.isInspectable(true);
+    material.isGivenAway(true);
+    material.isConsumed(true);
+    material.setPrice(2);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/rope-300-foot-ball/");
+    material.setImageUrl("images/material/204.gif");
+    material.setDescription("You can re-use about 90% of the rope... About 8\" will be consumed with each performance");
+
+    routine.getMaterials().add(material);
+
+
+    // --------------------------------------
+    routine = new Routine(0, "Charming Chinese Challenge", "This is a three phase effect where the magician removes " +
+        "Chinese coins threaded through a ribbon, one at a time.  I first learned this routine from Joshua " +
+        "Jay, who credits Troy Hooser for this particular handling.");
+
+    routine.setDuration(5);
+    routine.setMethod("I can't share it without permission, but you can always ask Troy or read DesTROYers.");
+    routine.setHandling("");
+    routine.setResetDuration(0);
+    routine.setResetDescription("Get the ribbon and all of the coins in their right places.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/PLlUMopDXhc");
+
+    routine.setImageUrl("images/routines/203.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Ribbon");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(10);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/205.jpg");
+    material.setDescription("I like bright, communist red ribbon about 8mm wide.  I cut the ends at a sharp angle "
+        + "to make the coins easier to thread");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("A few Chinese Coins");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Vintage-Chinese-Wealth-Double-Fortune/dp/B00JF0UPVK/ref=sr_1_11?"
+        + "ie=UTF8&qid=1428755038&sr=8-11&keywords=chinese+coins");
+    material.setImageUrl("images/material/206.jpg");
+    material.setDescription("About the size of a half-dollar... make sure they are thick.  I've had several coins "
+       + "broken over the years.");
+
+    routine.getMaterials().add(material);
+
+
+    // --------------------------------------
+    routine = new Routine(0, "Two Card Monte", "This is a 'giveaway' routine I perform whereby I teach the "
+        + "audience a little magic trick and I give them two gaff (novelty) cards to remember the event.");
+
+    routine.setDuration(10);
+    routine.setMethod("It's probably best just to watch the video.");
+    routine.setHandling("It usually takes 10-15 minutes and I'll do this as a sort of encore after a set.");
+    routine.setResetDuration(0);
+    routine.setResetDescription("");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/ts4sn0xNNJo");
+
+    routine.setImageUrl("images/routines/204.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("A double backed card");
+    material.isInspectable(false);
+    material.isGivenAway(true);
+    material.isConsumed(true);
+    material.setPrice(10);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/double-back-cards/");
+    material.setImageUrl("images/material/207.jpg");
+    material.setDescription("This is the per-deck price");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("A double faced card");
+    material.isInspectable(false);
+    material.isGivenAway(true);
+    material.isConsumed(true);
+    material.setPrice(10);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/double-face-cards/");
+    material.setImageUrl("images/material/208.jpg");
+    material.setDescription("This is the per-deck price.");
+
+    routine.getMaterials().add(material);
+
+
+    // --------------------------------------
+    routine = new Routine(0, "Panic", "This is my favorite effect within a set.  It's a transposition effect that "
+        + "allows me to switch from an audience-handled, sorted deck to a packet-loaded deck.  Strangly, people "
+        + "forget about this nearly impossible effect because I follow it with my closer French Kiss.");
+
+    routine.setDuration(2);
+    routine.setMethod("Go buy Aaron's video.");
+    routine.setHandling("I've had the best luck doing several find-the-card bits before I get into Panic.  This "
+        + "firmly establishes the fact that the deck is real and full of unique cards.");
+    routine.setResetDuration(2);
+    routine.setResetDescription("Panic resets instantly, but I need to sort out the decks when I'm done.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/w2m30DlKR8k");
+
+    routine.setImageUrl("images/routines/205.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("The panic gaff");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/panic-by-aaron-fisher/");
+    material.setImageUrl("images/material/209.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+
+
+
   }
 }
