@@ -95,11 +95,11 @@ public class MagicianDB {
         "Mark Nelson",
         "Honolulu, HI",
         null,
-        "I got started in magic in 2004.  A retired magician showed me a 2-card monte and I was hooked.  Since "
-        + "then, I've learned the craft, performed hundreds of shows in Honolulu and most recently I nailed "
+        "I got started in magic in 2004.  A retired magician, JC Dunn, showed me a 2-card monte and I was hooked. "
+        + "Since then, I've learned the craft, performed hundreds of shows in Honolulu and most recently I nailed "
         + "a parlor act in Beijing.",
-        "I'm most comfortable with close-up magic, but I'd like to develop a stage show.  I'd like to be fluent in "
-        + "all mediums of the art (Cards, coins, rope, etc.).",
+        "I'm most comfortable with close-up magic, but I'd like to develop a stage show.  I strive to be fluent in "
+        + "all mediums of the art (cards, coins, rope, etc.).",
         "Tony Slydini, David Regal, Lee Asher, Aaron Fisher, my brother Steve Johnson and many, many others.",
         "Semi-Professional",
         2004,
