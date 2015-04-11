@@ -23,8 +23,10 @@ POST        /editMagician          controllers.Application.postMagician()
 GET         /deleteMagician        controllers.Application.deleteMagician(id: Long?= 0)
 
 #Material actions
-GET         /editMaterial          controllers.Application.editMaterial(routineId: String, materialId: String)
-POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Long)
+POST        /newMaterial           controllers.Application.newMaterial()
+POST        /editMaterial          controllers.Application.editMaterial(materialId: Integer)
+POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Integer)
+POST        /postMaterial          controllers.Application.postMaterial()
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file          controllers.Assets.at(path="/public", file)

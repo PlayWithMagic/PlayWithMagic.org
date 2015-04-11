@@ -5,9 +5,10 @@
 *@
 @(routineForm: Form[views.formdata.RoutineFormData], materials: List[Material])
 
-@import helper.{form, repeat}
-@import views.html.bootstrap3.{text, text45, textInt, textarea}
-@import java.util.List;
+@import java.util.List
+
+@import helper.form
+@import views.html.bootstrap3.{hidden, text, text45, textInt, textarea};
 
 @Main("editRoutine") {
   <!-- Page Content -->
@@ -20,13 +21,12 @@
         } else {
           <h1>Update Routine</h1>
         }
-          <!-- User Attributes -->
+
+          <!-- Form Fields -->
         <div class="container">
         @form(routes.Application.postRoutine(), 'class -> "form-horizontal") {
-          <input type="hidden"
-          name="@routineForm("id").name"
-          id="@routineForm("id").id"
-          value="@routineForm("id").value"/>
+
+          @hidden(routineForm("id"))
 
           @text45(routineForm("name"),
             label = "Name",
@@ -43,13 +43,15 @@
             label = "Duration",
             placeholder = "Minutes",
             help = "The average time to perform a basic rendition of this routine in minutes.")
-
           @* TODO: I put this here during R&D so it was near the required fields *@
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">Materials
 
-                <a class="btn btn-success btn-xs pull-right">Add material</a>
+                <button id="add-material" type="submit" class="btn btn-success btn-xs pull-right"
+                formaction="@routes.Application.newMaterial()">  @* TODO: Check, but this should be working. *@
+                    Add Material
+                </button>
 
               </h3>
             </div>
@@ -59,32 +61,36 @@
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Price</th>
+                    <th>Price $</th>
                     <th>Image</th>
                     <th>Edit</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @for(material <- materials) {
-                    <tr>
-                      <td>@material.getName()</td>
-                      <td>$ @material.getPrice()</td>
-                      <td><img src="@routes.Assets.at(material.getImageUrl)" height="22px" alt="Material"></td>
-                      <td>
-                        <a href="#happy" class="btn btn-warning btn-xs"
-                        role="button">Edit</a>
-                        @* TODO:  Refactor to a button like delete *@
-                      </td>
-                      <td>
-                        <button id="delete" type="submit" class="btn btn-danger btn-xs"
-                        formaction="@routes.Application.deleteMaterial(materials.indexOf(material))">
+                @for(material <- materials) {
+                  <tr>
+                    <td>@material.getName()</td>
+                    <td>@material.getPrice()</td>
+                    <td>@if(material.getImageUrl != "") {
+                        <img src="@routes.Assets.at(material.getImageUrl)" height="22px" alt="Material">
+                      }
+                    </td>
+                    <td>
+                      <button id="edit-material" type="submit" class="btn btn-warning btn-xs"
+                      formaction="@routes.Application.editMaterial(materials.indexOf(material))">
+                        Edit
+                      </button>
+                    </td>
+                    <td>
+                      <button id="delete-material" type="submit" class="btn btn-danger btn-xs"
+                      formaction="@routes.Application.deleteMaterial(materials.indexOf(material))">
                         Delete
-                        </button>
+                      </button>
 
-                      </td>
-                    </tr>
-                  }
+                    </td>
+                  </tr>
+                }
                 </tbody>
               </table>
 

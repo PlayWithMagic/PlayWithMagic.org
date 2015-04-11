@@ -1,7 +1,6 @@
 package views.formdata;
 
 import models.GlobalDbInfo;
-import models.Material;
 import models.Routine;
 import play.data.validation.Constraints.Max;
 import play.data.validation.Constraints.MaxLength;
@@ -93,10 +92,6 @@ public class RoutineFormData {
       message = "The image URL can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String imageUrl;
 
-  /**
-   * The list of materials for this routine.
-   */
-  public List<FormMaterial> materials;
 
   /**
    * Default no-arg constructor required by Play.
@@ -122,25 +117,6 @@ public class RoutineFormData {
     resetDescription = routine.getResetDescription();
     youTubeUrl = routine.getYouTubeUrl();
     imageUrl = routine.getImageUrl();
-
-    if (!routine.getMaterials().isEmpty()) {
-      materials = new ArrayList<FormMaterial>();
-      long materialId = 1;
-
-      for (Material material : routine.getMaterials()) {
-        FormMaterial formMaterial = new FormMaterial();
-
-        formMaterial.id = materialId++;
-        formMaterial.name = material.getName();
-        formMaterial.description = material.getDescription();
-        // TODO:  Add boolean fields
-        formMaterial.price = material.getPrice();
-        formMaterial.purchaseUrl = material.getPurchaseUrl();
-        formMaterial.imageUrl = material.getImageUrl();
-
-        this.materials.add(formMaterial);
-      }
-    }
   }
 
   /**
@@ -170,60 +146,5 @@ public class RoutineFormData {
     }
 
     return errors.isEmpty() ? null : errors;
-  }
-
-  /**
-   * The materials required to perform this routine.
-   */
-  public static class FormMaterial {
-
-    /**
-     * A synthetic key, unique within the Routine.
-     */
-    public long id;
-
-    /**
-     * It's name -- whatever you'd call this item.
-     */
-    @Required(message = "A name for the material is required.")
-    public String name;
-
-    /**
-     * The cost of this item.
-     */
-    public Integer price;
-
-    /**
-     * Notes about this item.
-     */
-    public String description;
-
-    /**
-     * A link to where you might purchase this item.
-     */
-    public String purchaseUrl;
-
-    /**
-     * A URI to an image of this item.
-     */
-    public String imageUrl;
-
-    /**
-     * Default no-arg constructor required by Play.
-     */
-    public FormMaterial() {
-      // No content.
-    }
-
-    // TODO:  Refactor this before doing the JavaDocs.
-    public FormMaterial(long id, String name, Integer price, String description, String purchaseUrl, String imageUrl) {
-      this.id = id;
-      this.name = name;
-      this.price = price;
-      this.description = description;
-      this.purchaseUrl = purchaseUrl;
-      this.imageUrl = imageUrl;
-      // TODO:  Add boolean fields
-    }
   }
 }

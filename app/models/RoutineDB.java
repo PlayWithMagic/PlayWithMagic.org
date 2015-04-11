@@ -1,6 +1,7 @@
 package models;
 
 import play.Logger;
+import views.formdata.MaterialFormData;
 import views.formdata.RoutineFormData;
 
 import java.util.ArrayList;
@@ -65,6 +66,22 @@ public class RoutineDB {
         + "  name = [" + routineForm.name + "]");
 
     return idVal;
+  }
+
+  public static void addMaterial(MaterialFormData materialForm) {
+    Material material = new Material(materialForm.name);
+    material.setDescription(materialForm.description);
+    //TODO:  Set the booleans
+    material.setPrice(materialForm.price);
+    material.setPurchaseUrl(materialForm.purchaseUrl);
+    material.setImageUrl(materialForm.imageUrl);
+
+    if (materialForm.materialId == -1) {
+      RoutineDB.getMaterials(materialForm.routineId).add(material);
+    }
+    else {
+      RoutineDB.getMaterials(materialForm.routineId).set(materialForm.materialId, material);
+    }
   }
 
   /**
