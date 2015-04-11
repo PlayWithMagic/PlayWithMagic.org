@@ -12,6 +12,10 @@
     <section id="content" class="container">
       <div class="col-md-6">
         <h1>@routine.getName <small><a href="listMagicians">Magician Name</a></small></h1>
+        <p class="visible-xs-block visible-sm-block">
+          <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
+          <a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
+        </p>
         <img class="img-responsive" src="@routes.Assets.at(routine.getImageUrl)" alt="Image of Routine"/>
         <br />
         @if(routine.getYouTubeUrl != null) {
@@ -43,9 +47,10 @@
         </table>
       </div>
       <div class="col-md-6">
-        <p><a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
-          <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a></p>
-
+        <p class="hidden-xs hidden-sm">
+          <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
+          <a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
+        </p>
         <h3>Description</h3>
         <p>@routine.getDescription</p>
 
@@ -75,7 +80,6 @@
           <li>Item 6</li>
           <li>Item 7</li>
         </ul>
-
       </div>
 
     </section>
