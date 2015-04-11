@@ -6,7 +6,7 @@
 @(materialForm: Form[views.formdata.MaterialFormData])
 
 @import helper.form
-@import views.html.bootstrap3.{checkbox2, hidden, text, text45, textInt, textarea}
+@import views.html.bootstrap3.{checkboxBoolean, hidden, text, text45, textInt, textarea}
 
 @Main("editMaterial") {
   <!-- Page Content -->
@@ -33,9 +33,9 @@
             placeholder = "A short name for the item",
             help = "")
 
-          @checkbox2(materialForm("isInspectable"), label = "Inspectable?", help = "")
-          @checkbox2(materialForm("isGivenAway"), label = "Given Away?", help = "")
-          @checkbox2(materialForm("isConsumed"), label = "Consumed?", help = "")
+          @checkboxBoolean(materialForm("isInspectable"), label = "Inspectable?", help = "")
+          @checkboxBoolean(materialForm("isGivenAway"), label = "Given Away?", help = "")
+          @checkboxBoolean(materialForm("isConsumed"), label = "Consumed?", help = "")
 
           @textInt(materialForm("price"),
             label = "Price",
