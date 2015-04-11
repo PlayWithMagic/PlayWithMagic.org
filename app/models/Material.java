@@ -7,11 +7,9 @@ public class Material {
   private String name;             /* A short name for the item. */
   private String description;      /* A multi-line description of the item. */
   private boolean isInspectable;   /* Is the item inspectable by the audience? */
-  //TODO:  Separate Is Inspectable to before & after routine
   private boolean isGivenAway;     /* Does the audience take this with them? */
   private boolean isConsumed;      /* Is the item consumed over the course of this routine? */
   private Integer price;           /* What is the cost of this item? */
-  //TODO:  Do currency later -- create an item for multi-currency support
   private String purchaseUrl;      /* Where would you buy one of these items? */
   private String imageUrl;         /* A URL of an image of this item. */
 
