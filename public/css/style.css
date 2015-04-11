@@ -20,12 +20,16 @@ nav .logo {
   height: 50px;
 }
 body {
+  background-color: #2b2e32;
   padding-top: 50px;
 }
 body header#home {
   background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.75)), url("../images/magic-box.jpg") center;
   background-size: cover;
   text-align: center;
+}
+body header#home.jumbotron {
+  margin-bottom: 0px;
 }
 body header#home.jumbotron img {
   margin-left: auto;
@@ -64,8 +68,6 @@ body section#page section#content section#social {
   font-size: 32px;
 }
 body#home footer {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   height: 100px;
   background-color: #2b2e32;
