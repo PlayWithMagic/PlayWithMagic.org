@@ -68,10 +68,18 @@ public class RoutineDB {
     return idVal;
   }
 
+
+  /**
+   * Add or update a Material object to a Routine object saved in the Routines database.
+   *
+   * @param materialForm Input data from an HTML form.
+   */
   public static void addMaterial(MaterialFormData materialForm) {
     Material material = new Material(materialForm.name);
     material.setDescription(materialForm.description);
-    //TODO:  Set the booleans
+    material.isInspectable(materialForm.isInspectable);
+    material.isGivenAway(materialForm.isGivenAway);
+    material.isConsumed(materialForm.isConsumed);
     material.setPrice(materialForm.price);
     material.setPurchaseUrl(materialForm.purchaseUrl);
     material.setImageUrl(materialForm.imageUrl);
@@ -314,17 +322,17 @@ public class RoutineDB {
 
     // --------------------------------------
     routine = new Routine(0, "Daryl's Vindu Knot", "I hope I got the title right...  This is a very fun "
-      +  "bit.  Take a rope and cut in half and tie the two ends together in a knot.  Have "
-      +  "folks from the audience test the strength of the knot -- it's solid.  Then, you have someone cover the "
-      +  "knot with their hand... and the knot moves.  In fact, the knot comes off in their hand and they are "
-      +  "left with a nice takeaway.  A beautiful torn-and-restored effect.");
+        + "bit.  Take a rope and cut in half and tie the two ends together in a knot.  Have "
+        + "folks from the audience test the strength of the knot -- it's solid.  Then, you have someone cover the "
+        + "knot with their hand... and the knot moves.  In fact, the knot comes off in their hand and they are "
+        + "left with a nice takeaway.  A beautiful torn-and-restored effect.");
 
     routine.setDuration(5);
     routine.setMethod("I can't share it without permission, but you can always ask Darly or watch his video.");
     routine.setHandling("");
     routine.setResetDuration(2);
     routine.setResetDescription("I have several 1-meter sections of rope ready to go.  I ensure the sissors are "
-      +  "in my back pocket.");
+        + "in my back pocket.");
     routine.setYouTubeUrl("");
 
     routine.setImageUrl("images/routines/202.jpg");
@@ -356,9 +364,9 @@ public class RoutineDB {
 
 
     // --------------------------------------
-    routine = new Routine(0, "Charming Chinese Challenge", "This is a three phase effect where the magician removes " +
-        "Chinese coins threaded through a ribbon, one at a time.  I first learned this routine from Joshua " +
-        "Jay, who credits Troy Hooser for this particular handling.");
+    routine = new Routine(0, "Charming Chinese Challenge", "This is a three phase effect where the magician removes "
+        + "Chinese coins threaded through a ribbon, one at a time.  I first learned this routine from Joshua "
+        + "Jay, who credits Troy Hooser for this particular handling.");
 
     routine.setDuration(5);
     routine.setMethod("I can't share it without permission, but you can always ask Troy or read DesTROYers.");
@@ -393,7 +401,7 @@ public class RoutineDB {
         + "ie=UTF8&qid=1428755038&sr=8-11&keywords=chinese+coins");
     material.setImageUrl("images/material/206.jpg");
     material.setDescription("About the size of a half-dollar... make sure they are thick.  I've had several coins "
-       + "broken over the years.");
+        + "broken over the years.");
 
     routine.getMaterials().add(material);
 
@@ -465,7 +473,6 @@ public class RoutineDB {
     material.setDescription("");
 
     routine.getMaterials().add(material);
-
 
 
   }

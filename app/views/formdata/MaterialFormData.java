@@ -2,10 +2,10 @@ package views.formdata;
 
 import models.GlobalDbInfo;
 import models.Material;
-import play.data.validation.Constraints.MaxLength;
-import play.data.validation.Constraints.Required;
-import play.data.validation.Constraints.Min;
 import play.data.validation.Constraints.Max;
+import play.data.validation.Constraints.MaxLength;
+import play.data.validation.Constraints.Min;
+import play.data.validation.Constraints.Required;
 import play.data.validation.ValidationError;
 
 import java.util.ArrayList;
@@ -15,16 +15,17 @@ import java.util.List;
  * Play Framework backing class that allows for the storage of Form Data input by the user.
  */
 public class MaterialFormData {
+
   /**
    * A unique, synthetic key to the Routine - hidden field.
-   *
+   * <p>
    * This is held as a key to a HashMap, so a long datatype is warranted.
    */
   public long routineId;
 
   /**
    * A unique, index of the material item or 0 if it's a new item.
-   *
+   * <p>
    * This is held as an index into an ArrayList, so an int (the index into the ArrayList) is warranted.
    */
   public int materialId;
@@ -35,10 +36,23 @@ public class MaterialFormData {
   @Required(message = "A name for the material is required.")
   public String name;
 
-  // TODO:  Implement checkboxes
+  /**
+   * Is the item inspectable?
+   */
+  public Boolean isInspectable = false;
 
   /**
-   * The cost of this item.
+   * Is the item given away?
+   */
+  public Boolean isGivenAway = false;
+
+  /**
+   * Is the item consumed during the course of the routine?
+   */
+  public Boolean isConsumed = false;
+
+  /**
+   * The cost of this item.  Currently in US Dollars.
    */
   @Min(value = 0,
       message = "Gotta be a positive number")
@@ -68,6 +82,7 @@ public class MaterialFormData {
       message = "The image URL can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String imageUrl;
 
+
   /**
    * Default no-arg constructor required by Play.
    */
@@ -75,18 +90,21 @@ public class MaterialFormData {
     // No content.
   }
 
+
   /**
    * Build a MaterialFormData object from a material object.
    *
-   * @param material The container holding the non-key portion of the material data.
+   * @param material   The container holding the non-key portion of the material data.
    * @param routineId  The ID of the routine associated with this material.
-   * @param materialId  The ID of the material (if it's being edited) or 0 if it's new.
+   * @param materialId The ID of the material (if it's being edited) or 0 if it's new.
    */
   public MaterialFormData(Material material, long routineId, int materialId) {
     this.routineId = routineId;
     this.materialId = materialId;
     this.name = material.getName();
-    // TODO:  Add boolean fields
+    this.isInspectable = material.isInspectable();
+    this.isGivenAway = material.isGivenAway();
+    this.isConsumed = material.isConsumed();
     this.price = material.getPrice();
     this.description = material.getDescription();
     this.purchaseUrl = material.getPurchaseUrl();
