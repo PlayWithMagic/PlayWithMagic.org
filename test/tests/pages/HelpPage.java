@@ -6,21 +6,21 @@ import org.openqa.selenium.WebDriver;
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
- * Provides test scaffolding for the Index page.
+ * Provides test scaffolding for the Help page.
  */
-public class IndexPage extends FluentPage {
+public class HelpPage extends FluentPage {
 
   private String url;
 
   /**
-   * Create the Index Page.
+   * Create the Help Page.
    *
    * @param webDriver The driver.
    * @param port      The port.
    */
-  public IndexPage(WebDriver webDriver, int port) {
+  public HelpPage(WebDriver webDriver, int port) {
     super(webDriver);
-    this.url = "http://localhost:" + port;
+    this.url = "http://localhost:" + port + "/help";
   }
 
   /**
@@ -39,7 +39,8 @@ public class IndexPage extends FluentPage {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo("Play With Magic");
-    assertThat(pageSource().contains("We're Looking for a Few Good Routines"));
-    assertThat(pageSource().contains("Post Routines, Create Sets, and Share Magic!"));
+    assertThat(pageSource().contains("Overview"));
+    assertThat(pageSource().contains("Terminology"));
   }
 }
+

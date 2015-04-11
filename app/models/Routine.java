@@ -1,5 +1,8 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A single magic routine.
  * <p>
@@ -7,16 +10,17 @@ package models;
  */
 public class Routine {
 
-  private long id;                 /* A unique, synthetic key to the Routine. */
-  private String name;             /* A short name for the routine. */
-  private String description;      /* A multi-line description of the routine. */
-  private Integer duration;        /* The average time to perform a basic rendition of this routine in minutes. */
-  private String method;           /* A multi-line discussion of the method for this routine. */
-  private String handling;         /* A multi-line discussion of the handling for the routine. */
-  private Integer resetDuration;   /* The average time to prepare the routine for presentation. */
-  private String resetDescription; /* A description of the process to prepare the routine. */
-  private String youTubeUrl;       /* A URL of the magician performing this routine on YouTube. */
-  private String imageUrl;         /* A URL of an image of this routine. */
+  private long id;                   /* A unique, synthetic key to the Routine. */
+  private String name;               /* A short name for the routine. */
+  private String description;        /* A multi-line description of the routine. */
+  private Integer duration;          /* The average time to perform a basic rendition of this routine in minutes. */
+  private String method;             /* A multi-line discussion of the method for this routine. */
+  private String handling;           /* A multi-line discussion of the handling for the routine. */
+  private Integer resetDuration;     /* The average time to prepare the routine for presentation. */
+  private String resetDescription;   /* A description of the process to prepare the routine. */
+  private String youTubeUrl;         /* A URL of the magician performing this routine on YouTube. */
+  private String imageUrl;           /* A URL of an image of this routine. */
+  private List<Material> materials;  /* The materials used for this routine. */
 
   /**
    * Create new, valid Routine object.
@@ -36,6 +40,7 @@ public class Routine {
     this.id = id;
     this.name = name;
     this.description = description;
+    this.materials = new ArrayList<Material>();
   }
 
   /**
@@ -57,12 +62,30 @@ public class Routine {
   }
 
   /**
+   * Set a short name for the routine.
+   *
+   * @param name A short name for the routine.
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  /**
    * Returns a multi-line description of the routine.
    *
    * @return A multi-line description of the routine.
    */
   public String getDescription() {
     return description;
+  }
+
+  /**
+   * Set a multi-line description of the routine.
+   *
+   * @param description A multi-line description of the routine.
+   */
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   /**
@@ -184,11 +207,21 @@ public class Routine {
   }
 
   /**
-   * Set a URl of the image for this routine.
+   * Set a URL of the image for this routine.
    *
    * @param imageUrl A URL of the image for this routine.
    */
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
   }
+
+  /**
+   * Get the materials used for this routine.
+   *
+   * @return The materials used for this routine.
+   */
+  public List<Material> getMaterials() {
+    return materials;
+  }
+
 }

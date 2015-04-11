@@ -15,6 +15,10 @@ GET         /editRoutine           controllers.Application.editRoutine(id: Long?
 POST        /editRoutine           controllers.Application.postRoutine()
 GET         /deleteRoutine         controllers.Application.deleteRoutine(id: Long?= 0)
 
+#Material actions
+GET         /editMaterial          controllers.Application.editMaterial(routineId: String, materialId: String)
+POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Long)
+
 # Magician actions
 GET         /listMagicians         controllers.Application.listMagicians()
 GET         /viewMagician          controllers.Application.viewMagician(id: Long?=0)
