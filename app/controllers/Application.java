@@ -20,6 +20,7 @@ import views.html.Help;
 import views.html.Index;
 import views.html.ListMagicians;
 import views.html.ListRoutines;
+import views.html.ListSets;
 import views.html.ViewMagician;
 import views.html.ViewRoutine;
 
@@ -253,14 +254,57 @@ public class Application extends Controller {
     return ok(EditSet.render(formData, RoutineDB.getRoutines()));
   }
 
+  /**
+   * Delete a set from the database and display the ListSets page.
+   *
+   * @param id The ID of the set to delete.
+   * @return An HTTP OK message along with the HTML content for the Set List page.
+   */
+  public static Result deleteSet(long id) {
+    SetDB.deleteSet(id);
+
+    return ok(ListSets.render(SetDB.getSets()));
+  }
+
+  /**
+   * Handles the request to post form data from the editSet page.
+   *
+   * @return An HTTP OK message if no errors, otherwise the form page with errors.
+   */
+  public static Result postSet() {
+    Form<SetFormData> formData = Form.form(SetFormData.class).bindFromRequest();
+
+    return ok(ListSets.render(SetDB.getSets()));
+
+  }
+
+  /**
+   * Render the List Sets page.
+   *
+   * @return An HTTP OK message along with the HTML content for the List Set page.
+   */
+  public static Result listSets() {
+    return ok(ListSets.render(SetDB.getSets()));
+  }
+
+  /**
+   * Render the View Set page.
+   *
+   * @param id The ID of the Set to view.
+   * @return An HTTP OK message along with the HTML content for a single Set page.
+   */
+  public static Result viewSet(long id) {
+    return ok(ListSets.render(SetDB.getSet(id), RoutineDB.getRoutines()));
+  }
+
   /***************************************************************************************************************
    * M A T E R I A L
    ***************************************************************************************************************/
 
   /**
-   * @param routineId
-   * @param materialId
-   * @return
+   * @param routineId The ID of the parent Routine that the Materials belongs to.
+   * @param materialId The ID of the Material being edited.
+   * @return The EditMaterial page with the inserted materials.
    */
   public static Result editMaterial(String routineId, String materialId) {
     return ok(EditMaterial.render());

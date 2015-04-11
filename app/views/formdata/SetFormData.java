@@ -54,7 +54,7 @@ public class SetFormData {
   public SetFormData(Set set) {
     this.id = set.getId();
     this.userId = set.getUserId();
-    this.setName = set.getSetName();
+    this.setName = set.getName();
     this.description = set.getDescription();
     this.routines = set.getRoutines();
   }

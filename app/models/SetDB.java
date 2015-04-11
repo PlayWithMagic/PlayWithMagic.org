@@ -1,6 +1,7 @@
 package models;
 
 
+import play.Logger;
 import views.formdata.SetFormData;
 
 import java.util.ArrayList;
@@ -64,4 +65,35 @@ public class SetDB {
   public static List<Set> getSets() {
     return new ArrayList<>(sets.values());
   }
+
+
+  /**
+   * Delete all of the Sets in the database.  This is used by JUnit tests.
+   */
+  public static void resetSetDB() {
+    sets.clear();
+    currentId = 1;
+    Logger.warn("Set database reset");
+  }
+
+  /**
+   * Initialize the Set database.
+   */
+  public static void init() {
+    resetSetDB();
+    Set set = null;
+    long id;
+
+    // --------------------------------------
+    List<Long> routineIds = new ArrayList<Long>();
+    routineIds.add(3L);
+    set = new Set(0, 1, "Amazing Set", "This is a powerful set comprised of mostly card tricks", routineIds);
+    //SetDB.addSet();
+
+
+  }
+
+
 }
+
+

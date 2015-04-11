@@ -14,7 +14,7 @@ public class Set {
   private long id;
   private long userId;
   // Set Info
-  private String setName;
+  private String name;
   private String description;
   private List<Long> routines;
 
@@ -24,14 +24,14 @@ public class Set {
    *
    * @param id          The ID of the Set.
    * @param userId      The ID of the user who created the Set.
-   * @param setName     The Name of the Set.
+   * @param name        The name of the Set.
    * @param description The description of the Set.
    * @param routines    The List of Long IDs of the routines in the set.
    */
-  public Set(long id, long userId, String setName, String description, List<Long> routines) {
+  public Set(long id, long userId, String name, String description, List<Long> routines) {
     this.id = id;
     this.userId = userId;
-    this.setName = setName;
+    this.name = name;
     this.description = description;
     this.routines = routines;
   }
@@ -55,12 +55,12 @@ public class Set {
   }
 
   /**
-   * Get the Name of the set.
+   * Get the name of the set.
    *
-   * @return The Name of the set.
+   * @return The name of the set.
    */
-  public String getSetName() {
-    return setName;
+  public String getName() {
+    return name;
   }
 
   /**
