@@ -81,6 +81,7 @@ public class MagicianDB {
   /**
    * Initialize the Routine database.
    */
+  //TODO: This needs to be fixed to refer to Magicians only, not Routines.
   public static void init() {
     resetRoutineDB();
     Routine routine = null;

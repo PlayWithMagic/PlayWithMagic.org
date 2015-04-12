@@ -2,6 +2,8 @@ package controllers;
 
 import models.MagicianDB;
 import models.RoutineDB;
+import models.Set;
+import models.SetDB;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
@@ -10,17 +12,23 @@ import views.formdata.ExperienceLevels;
 import views.formdata.MagicianFormData;
 import views.formdata.MaterialFormData;
 import views.formdata.RoutineFormData;
+import views.formdata.SetFormData;
 import views.html.About;
 import views.html.EditMagician;
 import views.html.EditMaterial;
 import views.html.EditRoutine;
+import views.html.EditSet;
 import views.html.Help;
 import views.html.Index;
 import views.html.ListMagicians;
 import views.html.ListRoutines;
+import views.html.ListSets;
 import views.html.ViewMagician;
 import views.html.ViewRoutine;
+import views.html.ViewSet;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -247,6 +255,82 @@ public class Application extends Controller {
     return ok(ViewRoutine.render(RoutineDB.getRoutine(routineId)));
   }
 
+  /***************************************************************************************************************
+   * S E T
+   ***************************************************************************************************************/
+
+  /**
+   * Renders the editSet page with a form to add a new Set if the ID is 0.  Otherwise, update an existing
+   * Set based on the passed in ID number.
+   *
+   * @param id The ID of the Set to edit (or 0 if it's a new routine).
+   * @return An HTTP OK message along with the HTML content for the EditSet page.
+   */
+  public static Result editSet(long id) {
+    SetFormData data = (id == 0) ? new SetFormData() : new SetFormData(SetDB.getSet(id));
+    Form<SetFormData> formData = Form.form(SetFormData.class).fill(data);
+    if (id != 0) {
+      Set thisSet = SetDB.getSet(id);
+      return ok(EditSet.render(formData, RoutineDB.getRoutines(), thisSet.getRoutines()));
+    }
+    else {
+      List<Long> temp = new ArrayList<Long>();
+      return ok(EditSet.render(formData, RoutineDB.getRoutines(), temp));
+    }
+  }
+
+  /**
+   * Delete a set from the database and display the ListSets page.
+   *
+   * @param id The ID of the set to delete.
+   * @return An HTTP OK message along with the HTML content for the Set List page.
+   */
+  public static Result deleteSet(long id) {
+    SetDB.deleteSet(id);
+    return ok(ListSets.render(SetDB.getSets()));
+  }
+
+  /**
+   * Handles the request to post form data from the editSet page.
+   *
+   * @return An HTTP OK message if no errors, otherwise the form page with errors.
+   */
+  public static Result postSet() {
+    Form<SetFormData> formWithSetData = Form.form(SetFormData.class).bindFromRequest();
+
+    long setId = new Long(formWithSetData.field("id").value()).longValue();
+
+    if (formWithSetData.hasErrors()) {
+      System.out.println("HTTP Form Error.");
+      Set thisSet = SetDB.getSet(setId);
+      return badRequest(EditSet.render(formWithSetData, RoutineDB.getRoutines(), thisSet.getRoutines()));
+    }
+    else {
+      SetFormData data = formWithSetData.get();
+      SetDB.addSet(data);
+      return ok(ListSets.render(SetDB.getSets()));
+    }
+  }
+
+  /**
+   * Render the List Sets page.
+   *
+   * @return An HTTP OK message along with the HTML content for the List Set page.
+   */
+  public static Result listSets() {
+    return ok(ListSets.render(SetDB.getSets()));
+  }
+
+  /**
+   * Render the View Set page.
+   *
+   * @param id The ID of the Set to view.
+   * @return An HTTP OK message along with the HTML content for a single Set page.
+   */
+  public static Result viewSet(long id) {
+    Set thisViewSet = SetDB.getSet(id);
+    return ok(ViewSet.render(SetDB.getSet(id), RoutineDB.getRoutines(), thisViewSet.getRoutines()));
+  }
 
   /***************************************************************************************************************
    * M A T E R I A L
@@ -386,5 +470,4 @@ public class Application extends Controller {
 
     return ok(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
   }
-
 }

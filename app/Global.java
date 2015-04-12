@@ -1,6 +1,7 @@
 import com.typesafe.config.ConfigFactory;
 import models.MagicianDB;
 import models.RoutineDB;
+import models.SetDB;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
@@ -16,6 +17,7 @@ public class Global extends GlobalSettings {
 
     MagicianDB.init();
     RoutineDB.init();
+    SetDB.init();
 
     Logger.info(ConfigFactory.load().getString("application.name") + " has started");
   }
