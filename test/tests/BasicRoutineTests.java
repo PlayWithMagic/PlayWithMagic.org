@@ -1,7 +1,9 @@
 package tests;
 
+import models.MagicianDB;
 import models.Routine;
 import models.RoutineDB;
+import models.SetDB;
 import org.junit.Test;
 import play.libs.F;
 import play.test.TestBrowser;
@@ -84,6 +86,10 @@ public class BasicRoutineTests {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
+            SetDB.resetSetDB();
+            RoutineDB.resetRoutineDB();
+            MagicianDB.resetMagicianDB();
+
             browser.maximizeWindow();
 
             ListRoutinesPage listRoutinesPage = null;
