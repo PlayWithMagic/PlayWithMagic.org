@@ -261,7 +261,6 @@ public class Application extends Controller {
       List<Long> temp = new ArrayList<Long>();
       return ok(EditSet.render(formData, RoutineDB.getRoutines(), temp));
     }
-
   }
 
   /**
@@ -282,10 +281,27 @@ public class Application extends Controller {
    * @return An HTTP OK message if no errors, otherwise the form page with errors.
    */
   public static Result postSet() {
-    Form<SetFormData> formData = Form.form(SetFormData.class).bindFromRequest();
+    Form<SetFormData> formWithSetData = Form.form(SetFormData.class).bindFromRequest();
 
-    return ok(ListSets.render(SetDB.getSets()));
+    long setId = new Long(formWithSetData.field("id").value()).longValue();
 
+    if (formWithSetData.hasErrors()) {
+      System.out.println("HTTP Form Error.");
+      Set thisSet = SetDB.getSet(setId);
+      return badRequest(EditSet.render(formWithSetData, RoutineDB.getRoutines(), thisSet.getRoutines()));
+    }
+    else {
+      SetFormData data = formWithSetData.get();
+      System.out.println(data.id);
+      System.out.println(data.name);
+      System.out.println(data.description);
+      System.out.println(data.routines);
+      SetDB.addSet(data);
+      // Set newSet = Set(data.name);
+      // System.out.println(newSet.getRoutines());
+
+      return ok(ListSets.render(SetDB.getSets()));
+    }
   }
 
   /**

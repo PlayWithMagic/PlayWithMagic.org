@@ -44,8 +44,6 @@ public class SetFormData {
     // No content.
   }
 
-
-
   /**
    * Constructor that builds the SetFormData object from a provided Set.
    *
@@ -71,7 +69,17 @@ public class SetFormData {
     this.userId = userId;
     this.name = name;
     this.description = description;
-    this.routines = routines;
+    if (routines != null) {
+      System.out.println("Non-null routine data.");
+      for (Long routine : routines) {
+        this.routines.add(routine.longValue());
+      }
+    }
+    else {
+      System.out.println("Null Routine Data.");
+      this.routines.clear();
+    }
+
   }
 
   /**
@@ -82,6 +90,18 @@ public class SetFormData {
   public List<ValidationError> validate() {
 
     List<ValidationError> errors = new ArrayList<>();
+
+    if (name == null || name.length() == 0) {
+      errors.add(new ValidationError("name", "Must provide a name for the Set."));
+    }
+
+    if (description == null || description.length() == 0) {
+      errors.add(new ValidationError("description", "Please provide a description of this Set."));
+    }
+
+    if (routines == null ) {
+      errors.add(new ValidationError("routines", "Please select at least one Routine for a Set."));
+    }
 
     //TO-DO:  Build validation inputs for a Set.
 

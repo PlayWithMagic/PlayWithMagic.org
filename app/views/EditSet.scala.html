@@ -4,7 +4,7 @@
 * @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(setForm: Form[views.formdata.SetFormData], routines: List[Routine], formRoutines: List[Long])
+@(setForm: Form[views.formdata.SetFormData], routineList: List[Routine], formRoutines: List[Long])
 
 @import helper.form
 @import views.html.bootstrap3.{text45, textarea}
@@ -28,7 +28,7 @@
           id="@setForm("id").id"
           value="@setForm("id").value"/>
 
-          @text45(setForm("Name"),
+          @text45(setForm("name"),
             label = "Name",
             placeholder = "A short name for the Set",
             help = "")
@@ -39,7 +39,7 @@
             placeholder = "A brief description of the Set",
             help = "")
 
-          <div class="panel panel-default">
+          <div class="panel panel-default form-group @if(setForm.hasErrors) {has-error}">
             <div class="panel-heading">
               <h3 class="panel-title">Routines</h3>
             </div>
@@ -54,11 +54,11 @@
                 </thead>
                 <tbody>
               <!-- Should use the list of Routines thrown in against the list of Set list items to pull -->
-                @for(routine <- routines) {
+                @for(routine <- routineList) {
                 <tr>
                   <td>
                       <input type="checkbox"
-                        name="@(routine.getName + "[]")"
+                        name="routines[]"
                         id="@routine.getName"
                         value="@routine.getId"
                         @for(formRoutine <- formRoutines) {
@@ -71,6 +71,8 @@
                 }
                 </tbody>
               </table>
+              <span class="help-block"></span>
+              <span class="help-block has-error">@{setForm("routines").error.map { error => error.message }}</span>
             </div>
           </div>
           <div class="form-group">
