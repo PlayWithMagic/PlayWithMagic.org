@@ -817,7 +817,7 @@ public class RoutineDB {
         + "night and day. This is sleight of hand at its finest!");
 
     routine.setDuration(2);
-    routine.setMethod("This. Is. Awsome. Incredible. Beautiful. Devastating. EASY!!!! If you have had some "
+    routine.setMethod("This. Is. Awesome. Incredible. Beautiful. Devastating. EASY!!!! If you have had some "
         + "experience with card manipulation, you can do the Peregrine Pass. The method is so gorgeous it's not "
         + "even right...you WILL have the mechanics down in under 8 minutes, and if you do this in front of "
         + "a mirror, you'll fool yourself! I most definitely will be using this, it's a worker. Five stars.");
@@ -840,6 +840,136 @@ public class RoutineDB {
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
     material.setImageUrl("images/material/300.jpg");
     material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init33() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Flux Deal", "A diabolical switch that allows for the seamless and constant change of "
+        + "cards dealt onto the table. Switch one card or many cards, cause cards to visually change, force cards, "
+        + "and more. The Flux Deal is great for mathematical tricks, gambling demonstrations, and transpositions. "
+        + "The possibilities are endless! The deal is not only imperceptible, but indistinguishable. With practice, "
+        + "the switch will even fool you.");
+
+    routine.setDuration(2);
+    routine.setMethod("I find the grip hard to execute because my forefinger isn't long enough to hold the cards "
+        + "steady. I can hold the cards with my middle finger but then it´s hard to execute the following move "
+        + "so I think it's only for people with big hands.");
+
+    routine.setHandling("");
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into card box.");
+
+    routine.setImageUrl("images/routines/303.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init34() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Slipshift", "The Slipshift is a visual color change done at the fingertips. "
+        + "Within this video Chris explains several variations of the change along with a method to control "
+        + "a selected card to the top of the deck.");
+
+    routine.setDuration(2);
+    routine.setMethod("Being able to change a card right in front of the spectators face is one of the strongest "
+        + "effects there are. I would say this is a must have but only for more advanced magicians.");
+
+    routine.setHandling("");
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into card box.");
+
+    routine.setImageUrl("images/routines/304.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init35() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Recharmed, I'm Sure!", "One at a time, three Chinese coins hanging on a length "
+        + "of string magically come off right before your eyes. With each phase progressively appearing more "
+        + "impossible, the third and final coin is held at the fingertips and visibly melts right through the "
+        + "string and then back on again. Finally, it vanishes completely, reappearing with the other two on "
+        + "a table.");
+
+    routine.setDuration(2);
+    routine.setMethod("");
+
+    routine.setHandling("The performers shows three coins and a length of string. All can be freely examined "
+        + "by the audience. Threading the coins on the string, they’re clearly situated there, and yet one coin "
+        + "'dances' off the string and onto a spectator’s hand. The two remaining coins are clearly seen on the "
+        + "string. Again, one coin simply falls off onto the first coin. The performer holds the last coin at his "
+        + "extreme fingertips. The coin is unequivocally on the center of the string and yet, the performer "
+        + "visibly pulls them apart. Just as astonishingly, however, he causes the string to visibly melt right "
+        + "back on the coin and immediately has the spectator pull on the string to verify that it’s really on "
+        + "there. It is. No sooner is this done than the performer visibly pulls the string through the coin "
+        + "again— and there is no doubt about this, the string is in one hand and the coin is in the other."
+        + "Just as casually, the string visibly melts back on. Again, the spectator pulls on the string, "
+        + "clearly showing at the coin is on it. Once more, the coin melts through the string into the "
+        + "performer’s hand, but suddenly it’s gone, and the errant coin is finally found with the other "
+        + "two, in plain view.");
+
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put coins back into coin purse. Recoil string.");
+
+    routine.setImageUrl("images/routines/305.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Chinese Coin set");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(25);
+    material.setPurchaseUrl("http://shop.dananddave.com/recharmed-lance-pierce.html");
+    material.setImageUrl("images/material/305.png");
+    material.setDescription("Set of three chinese coins and piece of string.");
 
     routine.getMaterials().add(material);
   }
@@ -878,5 +1008,8 @@ public class RoutineDB {
     init30();
     init31();
     init32();
+    init33();
+    init34();
+    init35();
   }
 }
