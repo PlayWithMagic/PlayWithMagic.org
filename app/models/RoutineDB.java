@@ -974,6 +974,412 @@ public class RoutineDB {
     routine.getMaterials().add(material);
   }
 
+  /**
+   * Populate a routine.
+   */
+  public static void init36() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "King Brand", "Visually dynamic, the effect couldn't be simpler: The deck is removed "
+        + "and only four cards are presented, the two red Kings and and the two black fours. With one pair "
+        + "sandwiched between the other, they visually trade places under impossible conditions. "
+        + "The plot builds in three phases with the final trasposition happening in a spectators own hand.");
+
+    routine.setDuration(2);
+    routine.setMethod("Three phase, sleight heavy, and super deceptive.");
+
+    routine.setHandling("");
+
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into deck.");
+
+    routine.setImageUrl("images/routines/306.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init37() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Gödel", "Gödel is an innovative face-up color change from the mind of Alexander "
+        + "Hansford. With a wave of the hands, cards transform under direct scrutiny. Not only will you receive "
+        + "two additional routines with your purchase, Twisting and Sandwich, you’ll find Gödel to be an "
+        + "incredible utility for the effects you already perform.");
+
+    routine.setDuration(2);
+    routine.setMethod("");
+
+    routine.setHandling("After having two cards selected and lost in the pack, two black Jacks are waved "
+        + "above the deck only to have one of the selections appear between them. Both sides are shown "
+        + "throughout the effect, destroying any guess your spectator might have towards the method. "
+        + "With one final and extremely open wave, the selection between the Jacks changes to the other "
+        + "for an astonishing finish.");
+
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into deck.");
+
+    routine.setImageUrl("images/routines/307.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init38() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Spring St. Aces", "As the cards are sprung face up from hand to hand, the dealer "
+        + "is able to stop dead on an Ace. This is repeated three more times until all four Aces have been found. "
+        + "An impeccable feat to say the least.");
+
+    routine.setDuration(2);
+    routine.setMethod("");
+
+    routine.setHandling("");
+
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into deck.");
+
+    routine.setImageUrl("images/routines/308.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init39() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Diagonal Palm Shift", "First published in 1902 by S.W. Erdnase, the Diagonal Palm "
+        + "Shift - a secret maneuver for bottom palming a selected card placed into the middle of the deck - "
+        + "is explained in detail by one of this generations most beloved sleight of hand artists, Ricky Smith.");
+
+    routine.setDuration(2);
+    routine.setMethod("");
+
+    routine.setHandling("");
+
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into deck.");
+
+    routine.setImageUrl("images/routines/309.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init40() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Vernon One-Hand Table Shuffle", "We originally learned this technique from Vernon's "
+        + "book, Ultimate Secrets of Card Magic (1967); however it wasn't until we saw a video of Ross Bertram "
+        + "performing the shuffle perfectly that we began to take interest. What you see before you is our own "
+        + "handling created to achieve the perfect one-for-one riffle along with various subtleties acquired "
+        + "from years of practice.");
+
+    routine.setDuration(2);
+    routine.setMethod("");
+
+    routine.setHandling("");
+
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into deck.");
+
+    routine.setImageUrl("images/routines/310.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init41() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "WeFlex", "A remarkable transformation of a playing card unlike any other. Taking "
+        + "place away from the deck, WeFlex is a single-card color change. It all happens at the fingertips, "
+        + "so it's all very open. With apparently just the flexing of a card back and forth, it changes right "
+        + "before your eyes. WeFlex is as beautiful as it is graceful, and in our opinion is one of the most "
+        + "elegant and magical color change ever created.");
+
+    routine.setDuration(2);
+    routine.setMethod("");
+
+    routine.setHandling("It is not angle proof but its easy to get right after practice in the mirror. "
+        + "This isn't the easiest to pull off smoothly and will take some time");
+
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into deck.");
+
+    routine.setImageUrl("images/routines/311.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init42() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Catch 23", "Perfect for shows small and large, Asi’s Catch 23 creates a connection "
+        + "between the performer and the audience that few effects have the ability to do. Catch 23 has been an "
+        + "integral part of Asi’s live shows for years. Today he offers it to us. Asi’s creative ingenuity and "
+        + "passion for magic has advanced our art ten-fold. This newest addition to an overwhelming collection "
+        + "is nothing short of brilliant.");
+
+    routine.setDuration(2);
+    routine.setMethod("");
+
+    routine.setHandling("A performer invites four spectators to the stage. After cleanly showing five envelopes "
+        + "that have be previously marked “1-5,” each spectator is asked to make a decision which number envelope "
+        + "they’d like. This is a completely free choice. The performer having been left with the single envelope "
+        + "not selected, invites an audience member to remove its contents. Within, they’ll be astonished to find "
+        + "a check for the exact amount created by the envelope order of the participants on stage. In addition, "
+        + "each volunteer is asked to open their selected envelops where a note card states a distinguishing "
+        + "feature about them (i.e. This will be selected by the only man in glasses). The effect culminates "
+        + "as the last envelope to be opened reveals the name of the participant who has made its selection.");
+
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into deck.");
+
+    routine.setImageUrl("images/routines/312.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Evidence bag and cards");
+    material.isInspectable(false);
+    material.isGivenAway(true);
+    material.isConsumed(true);
+    material.setPrice(50);
+    material.setPurchaseUrl("http://shop.dananddave.com/catch23-asi-wind.html");
+    material.setImageUrl("images/material/312.png");
+    material.setDescription("Evidence bag and cards with descriptions of participants.");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init43() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Triumph and Triumph Again", "Two spectators are asked to make separate selections- "
+        + "one to be placed immediately face down, the other remembered. The pack is then shuffled face-up and "
+        + "face-down, only to be spread moments later to show the cards have returned to normal face-down position, "
+        + "except for twelve like-suited cards in order! It’s discovered that the card needed to complete the "
+        + "sequence is the one that’s been on the table since the start of the effect. A spectator is then invited "
+        + "to shuffle the pack themselves, and the trick is repeated to reveal the second selection of an entirely "
+        + "different suit. Finally, the first selection transforms into the second for a startling conclusion.");
+
+    routine.setDuration(2);
+    routine.setMethod("The method is smart and fun to pull off. With so many different forms of Triumph out "
+        + "there, it can be easy to assume you know all you need to, but the second wave of this trick amplifies "
+        + "the effect phenomenally.");
+
+    routine.setHandling("");
+
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into deck.");
+
+    routine.setImageUrl("images/routines/313.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init44() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Trigger", "Trigger is a stunning and surprising effect that looks like trick "
+        + "photography. The solution is impossible to reconstruct, yet seems fair and is easily achieved.");
+
+    routine.setDuration(2);
+    routine.setMethod("After a card is shuffled into the center, the deck is wrapped tightly with a rubber "
+        + "band, sealing the card within. At your command, the band passes through the entire deck with the "
+        + "exception of a single card, which shoots out from the center for a dynamic and visual effect.");
+
+    routine.setHandling("");
+
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into deck.");
+
+    routine.setImageUrl("images/routines/314.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init45() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Static", "With the spectator's finger touching the top of the deck, the deck slowly "
+        + "splits itself in half. With a delicate touch, their chosen card shoots out of the pack. The deck is "
+        + "completely examinable before and after the effect. They will find nothing. They will have no "
+        + "explanation.");
+
+    routine.setDuration(2);
+    routine.setMethod("");
+
+    routine.setHandling("");
+
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into deck.");
+
+    routine.setImageUrl("images/routines/315.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
 
   /**
    * Populate a routine.
@@ -1011,5 +1417,15 @@ public class RoutineDB {
     init33();
     init34();
     init35();
+    init36();
+    init37();
+    init38();
+    init39();
+    init40();
+    init41();
+    init42();
+    init43();
+    init44();
+    init45();
   }
 }
