@@ -72,19 +72,17 @@ public class MagicianDB {
   /**
    * Delete all of the Magicians in the database.  This is used by JUnit tests.
    */
-  public static void resetRoutineDB() {
+  public static void resetMagicianDB() {
     magicians.clear();
     currentId = 1;
     Logger.warn("Magician database reset");
   }
 
   /**
-   * Initialize the Routine database.
+   * Initialize the Magician database.
    */
-  //TODO: This needs to be fixed to refer to Magicians only, not Routines.
   public static void init() {
-    resetRoutineDB();
-    Routine routine = null;
+    resetMagicianDB();
 
     // --------------------------------------
 
