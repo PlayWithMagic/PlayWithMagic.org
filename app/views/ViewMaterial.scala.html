@@ -25,6 +25,18 @@
         <h3>Notes</h3>
         <p>@material.getDescription</p>
 
+        <h3>Usage</h3>
+        <p>Is Inspectable? @if(material.isInspectable()) {Yes} else {No}</p>
+        <p>Is Given Away? @if(material.isGivenAway()) {Yes} else {No}</p>
+        <p>Is Consumed? @if(material.isConsumed()) {Yes} else {No}</p>
+
+        <h3>Procurement</h3>
+        <p>Price = $ @if(material.getPrice() != null) {@material.getPrice()} else {Not available}</p>
+        @if(material.getPurchaseUrl() != null && material.getPurchaseUrl().length() > 0) {
+          <a href="@material.getPurchaseUrl()">@material.getPurchaseUrl()</a>
+        } else {
+          <p>A link to purchase the item is not available.  Please add one!</p>
+        }
       </div>
 
     </section>

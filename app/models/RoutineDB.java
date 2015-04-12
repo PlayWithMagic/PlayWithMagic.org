@@ -101,7 +101,7 @@ public class RoutineDB {
   public static Routine getRoutine(long id) {
     Routine routine = routines.get(id);
     if (routine == null) {
-      throw new RuntimeException("Unable to find routine with given ID value.");
+      throw new RuntimeException("Unable to find routine with given ID value of [" + id + "].");
     }
     return routine;
   }
@@ -199,27 +199,6 @@ public class RoutineDB {
 
     routine.getMaterials().add(material);
 
-    material = new Material("XXA regular deck of cards");
-    material.setDescription("I use red 808s, but any deck will do.");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
-    material.setPrice(5);
-    material.setPurchaseUrl("http://www.bicyclecards.com/products/playing-card/bicycle-standard-index");
-    material.setImageUrl("images/material/1.jpg");
-
-    routine.getMaterials().add(material);
-
-    material = new Material("XXXXA regular deck of cards");
-    material.setDescription("I use red 808s, but any deck will do.");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
-    material.setPrice(5);
-    material.setPurchaseUrl("http://www.bicyclecards.com/products/playing-card/bicycle-standard-index");
-    material.setImageUrl("images/material/1.jpg");
-
-    routine.getMaterials().add(material);
   }
 
   /**
@@ -413,7 +392,7 @@ public class RoutineDB {
     routine.setDuration(5);
     routine.setMethod("I can't share it without permission, but you can always ask Troy or read DesTROYers.");
     routine.setHandling("");
-    routine.setResetDuration(0);
+    routine.setResetDuration(1);
     routine.setResetDescription("Get the ribbon and all of the coins in their right places.");
     routine.setYouTubeUrl("https://www.youtube.com/embed/PLlUMopDXhc");
 
@@ -463,7 +442,7 @@ public class RoutineDB {
     routine.setDuration(10);
     routine.setMethod("It's probably best just to watch the video.");
     routine.setHandling("It usually takes 10-15 minutes and I'll do this as a sort of encore after a set.");
-    routine.setResetDuration(0);
+    routine.setResetDuration(1);
     routine.setResetDescription("");
     routine.setYouTubeUrl("https://www.youtube.com/embed/ts4sn0xNNJo");
 
