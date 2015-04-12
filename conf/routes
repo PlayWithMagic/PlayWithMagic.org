@@ -27,6 +27,7 @@ POST        /newMaterial           controllers.Application.newMaterial()
 POST        /editMaterial          controllers.Application.editMaterial(materialId: Integer)
 POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Integer)
 POST        /postMaterial          controllers.Application.postMaterial()
+GET         /viewMaterial          controllers.Application.viewMaterial(routineId: Long, materialId: Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file          controllers.Assets.at(path="/public", file)

@@ -1,6 +1,8 @@
 package controllers;
 
 import models.MagicianDB;
+import models.Material;
+import models.Routine;
 import models.RoutineDB;
 import play.Logger;
 import play.data.Form;
@@ -19,6 +21,7 @@ import views.html.Index;
 import views.html.ListMagicians;
 import views.html.ListRoutines;
 import views.html.ViewMagician;
+import views.html.ViewMaterial;
 import views.html.ViewRoutine;
 
 import java.util.Map;
@@ -385,6 +388,21 @@ public class Application extends Controller {
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).fill(routineFormData);
 
     return ok(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+  }
+
+
+  /**
+   * Display a single Material page.
+   *
+   * @param routineId The ID of the Routine to be displayed.
+   * @param materialId The ArrayList index of the material to display.
+   * @return An HTTP OK message along with the HTML content for a single Routine page.
+   */
+  public static Result viewMaterial(long routineId, int materialId) {
+    Routine routine = RoutineDB.getRoutine(routineId);
+    Material material = routine.getMaterials().get(materialId);
+
+    return ok(ViewMaterial.render(material));
   }
 
 }

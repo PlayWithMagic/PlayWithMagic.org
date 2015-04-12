@@ -5,83 +5,84 @@
 *@
 @(routine: Routine)
 
-@Main("viewRoutine") {
-  <!-- Page Content -->
-  <section id="page">
-      <!-- Content -->
-    <section id="content" class="container">
-      <div class="col-md-6">
-        <h1>@routine.getName <small><a href="listMagicians">Magician Name</a></small></h1>
-        <p class="visible-xs-block visible-sm-block">
-          <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
-          <a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
-        </p>
-        <img class="img-responsive" src="@routes.Assets.at(routine.getImageUrl)" alt="Image of Routine"/>
-        <br />
-        @if(routine.getYouTubeUrl != null) {
-          <h2>@routine.getName Example</h2>
-          <iframe width="420" height="315" src="@routine.getYouTubeUrl" frameborder="0" allowfullscreen></iframe>
-        }
-        <h2>Related Routines</h2>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Routine</th>
-              <th>Attribution</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="showRoutinesl">Routine Name</a></td>
-              <td><a href="listMagicians">User Name</a></td>
-            </tr>
-            <tr>
-              <td><a href="showRoutinesl">Routine Name</a></td>
-              <td><a href="listMagicians">User Name</a></td>
-            </tr>
-            <tr>
-              <td><a href="showRoutinesl">Routine Name</a></td>
-              <td><a href="listMagicians">User Name</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-md-6">
-        <p class="hidden-xs hidden-sm">
-          <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
-          <a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
-        </p>
-        <h3>Description</h3>
-        <p>@routine.getDescription</p>
+  @Main("viewRoutine") {
+    <!-- Page Content -->
+    <section id="page">
+        <!-- Content -->
+      <section id="content" class="container">
+        <div class="col-md-6">
+          <h1>@routine.getName <small><a href="listMagicians">Magician Name</a></small></h1>
+          <p class="visible-xs-block visible-sm-block">
+            <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
+            <a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
+          </p>
+          @if(routine.getImageUrl != null) {
+            <img class="img-responsive" src="@routes.Assets.at(routine.getImageUrl)" alt="Image of Routine"/>
+            }
+          <br />
+          @if(routine.getYouTubeUrl != null) {
+            <h2>@routine.getName Example</h2>
+            <iframe width="420" height="315" src="@routine.getYouTubeUrl" frameborder="0" allowfullscreen></iframe>
+          }
+          <h2>Related Routines</h2>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Routine</th>
+                <th>Attribution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="showRoutinesl">Routine Name</a></td>
+                <td><a href="listMagicians">User Name</a></td>
+              </tr>
+              <tr>
+                <td><a href="showRoutinesl">Routine Name</a></td>
+                <td><a href="listMagicians">User Name</a></td>
+              </tr>
+              <tr>
+                <td><a href="showRoutinesl">Routine Name</a></td>
+                <td><a href="listMagicians">User Name</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6">
+          <p class="hidden-xs hidden-sm">
+            <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
+            <a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
+          </p>
+          <h3>Description</h3>
+          <p>@routine.getDescription</p>
 
-        <h3>Time to Perform</h3>
-        <p>@routine.getDuration @if(routine.getDuration == 1) {minute} else {minutes}</p>
+          <h3>Time to Perform</h3>
+          <p>@routine.getDuration @if(routine.getDuration == 1) {minute} else {minutes}</p>
 
-        <h3>Method</h3>
-        <p>@routine.getMethod</p>
+          <h3>Method</h3>
+          <p>@routine.getMethod</p>
 
-        <h3>Handling</h3>
-        <p>@routine.getHandling</p>
+          <h3>Handling</h3>
+          <p>@routine.getHandling</p>
 
-        <h3>Reset Duration</h3>
-        <p>@routine.getResetDuration @if(routine.getResetDuration == 1) {minute} else {minutes}</p>
+          <h3>Reset Duration</h3>
+          <p>@routine.getResetDuration @if(routine.getResetDuration == 1) {minute} else {minutes}</p>
 
-        <h3>Reset Description</h3>
-        <p>@routine.getResetDescription</p>
+          <h3>Reset Description</h3>
+          <p>@routine.getResetDescription</p>
 
-        <h3>Materials</h3>
-        @* TODO:  Fix this up *@
-        <ul>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-          <li>Item 4</li>
-          <li>Item 5</li>
-          <li>Item 6</li>
-          <li>Item 7</li>
-        </ul>
-      </div>
+          <h3>Materials</h3>
+          @if(routine.getMaterials().size() == 0) {
+            <p>None</p>
+          } else {
+            <ul>
+              @for(material <- routine.getMaterials()) {
+                <li>@material.getName()</li>
+              }
+            </ul>
+          }
+        </div>
 
+      </section>
     </section>
-  </section>
-}
+  }
