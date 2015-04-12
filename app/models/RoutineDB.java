@@ -1449,9 +1449,7 @@ public class RoutineDB {
     init12();
     init13();
     init30();
-<<<<<<< HEAD
     init201();
-=======
     init31();
     init32();
     init33();
@@ -1467,6 +1465,5 @@ public class RoutineDB {
     init43();
     init44();
     init45();
->>>>>>> AddSampleRoutines-1
   }
 }
