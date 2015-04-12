@@ -769,6 +769,43 @@ public class RoutineDB {
   /**
    * Populate a routine.
    */
+  public static void init201() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Slydini's Knotted Slilks", "I've wanted to learn this trick for a long time.  It's "
+        + "a 4 stage trick but it has over 60 moves to it.  The essence of the trick is that two silks are tied "
+        + "together with a solid knot, then magically, the silks come apart.");
+
+    routine.setDuration(12);
+    routine.setMethod("Go buy the book.");
+    routine.setHandling("Again, go buy the book.");
+    routine.setResetDuration(0);
+    routine.setResetDescription("It resets instantly and all of the silks can be examined");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/-HbTQA_4btQ");
+
+    routine.setImageUrl("images/routines/206.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Two silk scarves");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/silk-18-inch/");
+    material.setImageUrl("images/material/210.gif");
+    material.setDescription("The best material to use is strong nylon.  Cotton and Japanese silks don't work well.");
+
+    routine.getMaterials().add(material);
+  }
+
+
+  /**
+   * Populate a routine.
+   */
   public static void initTemplate() {
     Routine routine = null;
     Material material = null;
@@ -797,5 +834,6 @@ public class RoutineDB {
     init12();
     init13();
     init30();
+    init201();
   }
 }

@@ -98,7 +98,7 @@ public class BasicRoutineTests {
             editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT);
             browser.goTo(editRoutinePage);
             editRoutinePage.isAt();
-            assertThat(browser.pageSource().contains("Create Routine"));
+            assertThat(browser.pageSource()).contains("Create Routine");
 
             editRoutinePage.submitForm(routine1);
 
@@ -111,7 +111,7 @@ public class BasicRoutineTests {
             editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT, routineId);
             browser.goTo(editRoutinePage);
             editRoutinePage.isAt();
-            assertThat(browser.pageSource().contains("Update Routine"));
+            assertThat(browser.pageSource()).contains("Update Routine");
             editRoutinePage.testContents(browser, routine1);
 
             editRoutinePage.submitForm(routine2);
@@ -123,7 +123,7 @@ public class BasicRoutineTests {
             editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT, routineId);
             browser.goTo(editRoutinePage);
             editRoutinePage.isAt();
-            assertThat(browser.pageSource().contains("Update Routine"));
+            assertThat(browser.pageSource()).contains("Update Routine");
             editRoutinePage.testContents(browser, routine2);
 
             // Delete a Routine.
