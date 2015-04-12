@@ -1417,6 +1417,403 @@ public class RoutineDB {
     routine.getMaterials().add(material);
   }
 
+  /**
+   * Populate a routine.
+   */
+  public static void init202() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Blendo", "This is a good parlor routine.  The magician removes three 24\" colorful "
+        + "silks from a black, slik bag.  The silks are inspected and a spectator puts the silks into the bag and "
+        + "'mixes' them.  The magician reminds the audience that the United States is a mixture of many, many "
+        + "world cultures and the three silks are red, white and blue.  The three mixed silks are then instantly "
+        + "combined to produce an american flag.");
+
+    routine.setDuration(4);
+    routine.setMethod("Get a blendo bag and some silks.  Learn to fold the blendo bag.");
+    //routine.setHandling("");
+    routine.setResetDuration(10);
+    routine.setResetDescription("It takes awhile to fold the bag.  Also, make sure the silks are not wrinkly.");
+    //routine.setYouTubeUrl("https://www.youtube.com/embed/-HbTQA_4btQ");
+
+    routine.setImageUrl("images/routines/207.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Three 18\" silk scarves: Red, White and Blue");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(8);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/silk-18-inch/");
+    material.setImageUrl("images/material/210.gif");
+    //material.setDescription("The best material to use is strong nylon.  Cotton and Japanese silks don't work well.");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("A blendo bag");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(30);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/american-flag-blendo/");
+    material.setImageUrl("images/material/211.jpg");
+    //material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+
+  /**
+   * Populate a routine.
+   */
+  public static void init203() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Lucifer's Wallet", "Remove your wallet.  Set it on fire, remove a burning business "
+        + "card.  Blow it out.  Snuff out the fire in your wallet.  Hand out the still-warm card -- without a "
+        + "singe mark on it.  Let the audience look at the wallet.");
+
+    routine.setDuration(1);
+    routine.setMethod("Very carefully -- you're literally playing with fire.");
+    //routine.setHandling("");
+    routine.setResetDuration(5);
+    //routine.setResetDescription("");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/O_McHgSfkf4");
+
+    routine.setImageUrl("images/routines/208.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Lucifer's wallet");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(30);
+    material.setPurchaseUrl("http://www.themagicdepot.com/product_info.php?products_id=6365");
+    material.setImageUrl("images/material/212.jpg");
+    //material.setDescription("");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("Lighter fluid");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Zippo-3165-Lighter-Fluid-12OZ/dp/B000K2U3JG");
+    material.setImageUrl("images/material/213.jpg");
+    //material.setDescription("");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("Business card");
+    material.isInspectable(true);
+    material.isGivenAway(true);
+    material.isConsumed(true);
+    material.setPrice(1);
+    //material.setPurchaseUrl("");
+    material.setImageUrl("images/material/214.jpg");
+    //material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+
+  /**
+   * Populate a routine.
+   */
+  public static void init204() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "The Magic Project Plan", "\"The hardest part of a project is the beginning.  The fear of "
+        + "the blank page\"... thumb through a `book` full of empty pages.  Then have a project manager sprinkle some "
+        + "fairy dust on it and thumb through the book again -- this time it's full of charts and graphs.  Finally "
+        + "have a programmer type on the book's cover, and when you thumb through the book, it's full of code.");
+
+    routine.setDuration(4);
+    routine.setMethod("I make my books by hand, but the template is a classic Magic Coloring Book");
+    routine.setHandling("Oh, so easy.  Go visit your local magic shop and they'll set you up.");
+    //routine.setResetDuration(1);
+    routine.setResetDescription("The routine itself resets instantly.  It takes me a couple of hours and a trip "
+        + "to Kinkos to make my book.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/bwCdRbJEJmU");
+
+    routine.setImageUrl("images/routines/209.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("A gaff book");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(10);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/coloring-book-magic/");
+    material.setImageUrl("images/material/215.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+
+  /**
+   * Populate a routine.
+   */
+  public static void init205() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Are You Normal... or Are You an Engineer?", "Inspired by one of my favorite magicians "
+        + "Mr. David Regal.  This routine uses a Wellington Switchboard and consists of three phases.  The first "
+        + "phase introduces the switchboard... four colored lights and four colored switches.  Whenever the normal "
+        + "person is asked to throw a switch the light corresponding to the switch's color lights up.  Whenever "
+        + "the engineer throws a switch, the light opposite the switch lights up.");
+
+    routine.setDuration(10);
+    //routine.setMethod("");
+    //routine.setHandling("");
+    //routine.setResetDuration(1);
+    routine.setResetDescription("Resets instantly");
+    //routine.setYouTubeUrl("https://www.youtube.com/embed/");
+
+    routine.setImageUrl("images/routines/210.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Wellington Switchboard");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(400);
+    material.setPurchaseUrl("http://www.wellingtonent.com/products/mswitchb.html");
+    material.setImageUrl("images/material/216.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+
+  /**
+   * Populate a routine.
+   */
+  public static void init206() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "French Kiss", "This is a classic double-turnover routine that I originally found in "
+        + "The Royal Road to Card Magic.  However, Wayne Houchin's version is edgy, fun and is my closer.  Thank you, "
+        + "Wayne.  It's a transposition effect where a spectator's signed card, is transposed with the magician's "
+        + "signed card.");
+
+    routine.setDuration(4);
+    routine.setMethod("A flawless double turnover");
+    routine.setHandling("");
+    routine.setResetDuration(2);
+    routine.setResetDescription("I just can't bring myself to post it");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/9HfWyW49-v4");
+
+    routine.setImageUrl("images/routines/211.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(true);
+    material.isConsumed(true);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+
+  /**
+   * Populate a routine.
+   */
+  public static void init207() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Three Fly", "Poker chips (or coins) fly from one hand to the other... and back.");
+
+    routine.setDuration(2);
+    routine.setMethod("You can get that from Lee.");
+    routine.setHandling("Checkout Lee Asher's performance of this routine 2:47 into the video...");
+    routine.setResetDuration(1);
+    routine.setResetDescription("");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/1dTXKKGR06A");
+
+    routine.setImageUrl("images/routines/217.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("At least four poker chips");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("http://www.leeasher.com/store/tricks/three_stylin.html");
+    material.setImageUrl("images/routines/217.jpg");
+    material.setDescription("Get some big, colorful, high-contrast, authentic chips from a Macau or Vegas casino.");
+
+    routine.getMaterials().add(material);
+  }
+
+
+  /**
+   * Populate a routine.
+   */
+  public static void init208() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Witness", "A spectator seals a 'wild joker' in a zip-lock bag.  The spectator then "
+        + "selects a card an puts it in the deck.  Suddenly, the card is in the zip-lock bag.");
+
+    routine.setDuration(1);
+    routine.setMethod("See Lee's website...");
+    //routine.setHandling("");
+    routine.setResetDuration(2);
+    //routine.setResetDescription("");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/2N75cJHrkpc");
+
+    routine.setImageUrl("images/routines/218.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("The Widness DVD");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("http://www.leeasher.com/store/media/witness.html");
+    material.setImageUrl("images/routines/218.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("A ziplock bag");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    //material.setPurchaseUrl("");
+    material.setImageUrl("images/material/217.jpg");
+    material.setDescription("Just a regular ziplock bag");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(true);
+    material.isConsumed(true);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+
+  /**
+   * Populate a routine.
+   */
+  public static void init209() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Marked Cards", "This isn't exactly a magic trick, but it's a nice intersticial bit "
+        + "I'll do.  Basically, I hand out cards from a blue-backed Fornier 505 deck.  The cards are marked, but "
+        + "about 90% of the time, the audience can't find the markings.  I use the time to talk about cards and "
+        + "card games.  I tend to do it when I'm getting burned by an audience and I want to bring the tension down "
+        + "a bit.  Sometimes, I'll do it to demonstrate that this isn't supernatural.  Other times, I'll do it "
+        + "to make an audience member feel special or not foolish.");
+
+    routine.setDuration(5);
+    //routine.setMethod("");
+    routine.setHandling("Just be yourself.");
+    //routine.setResetDuration(1);
+    //routine.setResetDescription("");
+    //routine.setYouTubeUrl("https://www.youtube.com/embed/");
+
+    routine.setImageUrl("images/material/219.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Blue Fournier 505 Deck");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(10);
+    material.setPurchaseUrl("http://www.amazon.com/Fournier-Standard-Decks-Playing-Cards/dp/B000XZ0944/ref=sr_1_1?ie"
+        + "=UTF8&s=toys-and-games&qid=1203992691&sr=8-1");
+    material.setImageUrl("images/material/219.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+
+  /**
+   * Populate a routine.
+   */
+  public static void init210() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Cocoa", "I don't perform this trick... yet.  I saw David Regal perform it at a lecture "
+        + "once and it's burned into my mind.  Basically, these marshmellows are coming and going out of a cup "
+        + "of hot chocolate.  ");
+
+    routine.setDuration(10);
+    routine.setMethod("Get David's book Approaching Magic");
+    //routine.setHandling("");
+    //routine.setResetDuration(1);
+    routine.setResetDescription("The damn thing self-resets");
+    //routine.setYouTubeUrl("https://www.youtube.com/embed/");
+
+    routine.setImageUrl("images/routines/220.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Approaching Magic");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(65);
+    material.setPurchaseUrl("http://davidregal.com/approaching-magic/");
+    material.setImageUrl("images/material/220.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
 
   /**
    * Populate a routine.
@@ -1426,6 +1823,30 @@ public class RoutineDB {
     Material material = null;
     long id;
 
+    routine = new Routine(0, "", "");
+
+    routine.setDuration(1);
+    routine.setMethod("");
+    routine.setHandling("");
+    routine.setResetDuration(1);
+    routine.setResetDescription("");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/");
+
+    routine.setImageUrl("images/routines/xxx.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(1);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/xxx.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
   }
 
 
@@ -1438,6 +1859,7 @@ public class RoutineDB {
     init01();
     init02();
     init03();
+    init205();
     init04();
     init05();
     init06();
@@ -1465,5 +1887,13 @@ public class RoutineDB {
     init43();
     init44();
     init45();
+    init202();
+    init203();
+    init204();
+    init206();
+    init207();
+    init208();
+    init209();
+    init210();
   }
 }
