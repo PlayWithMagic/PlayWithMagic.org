@@ -765,6 +765,85 @@ public class RoutineDB {
     routine.getMaterials().add(material);
   }
 
+  /**
+   * Populate a routine.
+   */
+  public static void init31() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "A.A.C.A.A.N", "From one spectator, any card is named. From a different spectator, "
+        + "a number one through fifty-two is named. With absolutely nothing to suspect, the named card appears "
+        + "at exactly the number named. A probability so impressive only magic can explain it. "
+        + "This is Any Card at Any Number, for real.");
+
+    routine.setDuration(2);
+    routine.setMethod("");
+
+    routine.setHandling("");
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into card box.");
+
+    routine.setImageUrl("images/routines/301.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init32() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Peregrine Pass", "It's not often we stumble upon a secret technique that looks "
+        + "authentic to the natural action taking place, in this case - closing a spread of cards. With the "
+        + "Peregrine Pass, what happens \"behind the scenes\" when compared to the polished performance is "
+        + "night and day. This is sleight of hand at its finest!");
+
+    routine.setDuration(2);
+    routine.setMethod("This. Is. Awsome. Incredible. Beautiful. Devastating. EASY!!!! If you have had some "
+        + "experience with card manipulation, you can do the Peregrine Pass. The method is so gorgeous it's not "
+        + "even right...you WILL have the mechanics down in under 8 minutes, and if you do this in front of "
+        + "a mirror, you'll fool yourself! I most definitely will be using this, it's a worker. Five stars.");
+
+    routine.setHandling("");
+    routine.setResetDuration(1);
+    routine.setResetDescription("Put cards back into card box.");
+
+    routine.setImageUrl("images/routines/302.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
 
   /**
    * Populate a routine.
@@ -797,5 +876,7 @@ public class RoutineDB {
     init12();
     init13();
     init30();
+    init31();
+    init32();
   }
 }
