@@ -716,6 +716,55 @@ public class RoutineDB {
     routine.getMaterials().add(material);
   }
 
+  /**
+   * Populate a routine.
+   */
+  public static void init30() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Double Exposure", "A mind-blowing new take on a classic effect. Double Exposure "
+        + "by Asi Wind is a reality altering version of Triumph that happens within a borrowed camera under your "
+        + "spectators complete control.");
+
+    routine.setDuration(2);
+    routine.setMethod("");
+
+    routine.setHandling("There are no gimmicks or special applications needed. 100% impromptu. "
+        + "Just you, a deck of cards, and a borrowed camera are all that's necessary.");
+    routine.setResetDuration(5);
+    routine.setResetDescription("No need to reset. Just give phone back to participant.");
+
+    routine.setImageUrl("images/routines/300.png");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("iPhone");
+    material.isInspectable(true);
+    material.isGivenAway(true);
+    material.isConsumed(false);
+    material.setPrice(600);
+    material.setPurchaseUrl("http://store.apple.com/us/iphone");
+    material.setImageUrl("images/material/300a.jpeg");
+    material.setDescription("A standard iPhone.");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("Deck of Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
+        + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
+    material.setImageUrl("images/material/300.jpg");
+    material.setDescription("Standard deck of cards");
+
+    routine.getMaterials().add(material);
+  }
+
 
   /**
    * Populate a routine.
@@ -747,5 +796,6 @@ public class RoutineDB {
     init11();
     init12();
     init13();
+    init30();
   }
 }
