@@ -59,7 +59,7 @@
                   <td>
                       <input type="checkbox"
                         name="routines[]"
-                        id="@routine.getName"
+                        id="@routine.getId"
                         value="@routine.getId"
                         @for(formRoutine <- formRoutines) {
                           @if(formRoutine == routine.getId) {checked}

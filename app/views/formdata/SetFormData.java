@@ -60,10 +60,10 @@ public class SetFormData {
   /**
    * Testing initialization constructor, does not include ID.
    *
-   * @param userId  The userID associated with the Set.
-   * @param name The name of the Set.
+   * @param userId      The userID associated with the Set.
+   * @param name        The name of the Set.
    * @param description The description of the Set.
-   * @param routines The list of Routine IDs in the Set.
+   * @param routines    The list of Routine IDs in the Set.
    */
   public SetFormData(long userId, String name, String description, List<Long> routines) {
     this.userId = userId;
@@ -99,7 +99,7 @@ public class SetFormData {
       errors.add(new ValidationError("description", "Please provide a description of this Set."));
     }
 
-    if (routines == null ) {
+    if (routines == null) {
       errors.add(new ValidationError("routines", "Please select at least one Routine for a Set."));
     }
 

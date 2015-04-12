@@ -254,10 +254,11 @@ public class Application extends Controller {
   public static Result editSet(long id) {
     SetFormData data = (id == 0) ? new SetFormData() : new SetFormData(SetDB.getSet(id));
     Form<SetFormData> formData = Form.form(SetFormData.class).fill(data);
-    if(id != 0) {
+    if (id != 0) {
       Set thisSet = SetDB.getSet(id);
       return ok(EditSet.render(formData, RoutineDB.getRoutines(), thisSet.getRoutines()));
-    } else {
+    }
+    else {
       List<Long> temp = new ArrayList<Long>();
       return ok(EditSet.render(formData, RoutineDB.getRoutines(), temp));
     }
@@ -271,7 +272,6 @@ public class Application extends Controller {
    */
   public static Result deleteSet(long id) {
     SetDB.deleteSet(id);
-
     return ok(ListSets.render(SetDB.getSets()));
   }
 
@@ -292,14 +292,7 @@ public class Application extends Controller {
     }
     else {
       SetFormData data = formWithSetData.get();
-      System.out.println(data.id);
-      System.out.println(data.name);
-      System.out.println(data.description);
-      System.out.println(data.routines);
       SetDB.addSet(data);
-      // Set newSet = Set(data.name);
-      // System.out.println(newSet.getRoutines());
-
       return ok(ListSets.render(SetDB.getSets()));
     }
   }

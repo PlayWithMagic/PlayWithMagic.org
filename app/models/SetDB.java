@@ -99,9 +99,9 @@ public class SetDB {
     List<Long> routineIds = new ArrayList<Long>();
     routineIds.add(2L);
     routineIds.add(1L);
-    set = new Set(currentId, 1, "Amazing Set", "This is the best set ever. It opens with the Ambitious Card trick" +
-        " to warm up the audience. From there, it shifts to something different with Gypsy Thread. And in the closer," +
-        " it breaks back down to a card trick to cool down the audience afterwords.", routineIds);
+    set = new Set(currentId, 1, "Amazing Set", "This is the best set ever. It opens with the Ambitious Card trick"
+        + " to warm up the audience. From there, it shifts to something different with Gypsy Thread. "
+        + "And in the closer, it breaks back down to a card trick to cool down the audience afterwords.", routineIds);
     SetDB.addSet(set);
     currentId++;
 
