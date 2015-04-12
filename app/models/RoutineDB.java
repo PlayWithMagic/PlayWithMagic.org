@@ -512,6 +512,210 @@ public class RoutineDB {
     routine.getMaterials().add(material);
   }
 
+  /**
+   * Populate a routine.
+   */
+  public static void init09() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Side Steal", "The Side Steal allows total control of a single card to the top of the deck"
+        + " - invisibly. It doesn’t end there, use it to control a card to any position near the top or as a stunningly"
+        + " visual color change.");
+
+    routine.setDuration(2);
+    routine.setMethod("Purchase the video at https://store.theory11.com/products/side-steal-jason-england.");
+    routine.setHandling("Requires nimble fingers and sleight of hand!");
+    routine.setResetDuration(2);
+    routine.setResetDescription("Simply shuffle the cards to reset.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/CzST8dLlsks");
+
+    routine.setImageUrl("images/routines/401.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/1.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init10() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Phantom", "You give half of the deck to the spectator. You take the remaining half, and "
+        + "riffle through the faces. The spectator is asked to THINK of any card they see — it's a free selection.\n"
+        + "Instantly, you spread through the cards and show that the card they were THINKING of is GONE. Vanished. It "
+        + "was merely a PHANTOM. Where did it go? It’s been in THEIR hands all along. You even know it’s position - "
+        + "from a face down pile.\n Phantom is Spidey’s adaptation of classic principles published by Theodore "
+        + "Annemann, Franklin Taylor, and Charles Jordan.\n A demonstration of astral projection or remote viewing. "
+        + "The ability to gather information from a distant or unseen target using extra-sensory perception (ESP).");
+
+    routine.setDuration(2);
+    routine.setMethod("Purchase the video at https://store.theory11.com/products/phantom-by-spidey.");
+    routine.setHandling("Requires nimble fingers and sleight of hand!  Presentation is everything for this Routine, "
+        + "especially if you want to sell the ESP portion of it.  Be sure to practice your Patter.");
+    routine.setResetDuration(2);
+    routine.setResetDescription("Simply shuffle the cards to reset for this routine.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/J5PeqXUJTf4");
+
+    routine.setImageUrl("images/routines/402.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/1.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init11() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Fancyband", "An ordinary rubberband is sprung off your fingertips, spiraling a few "
+        + "meters forward - then spins on the tabletop, slingshotting it back towards you. A demonstration of skill "
+        + "you can unleash at anytime.");
+
+    routine.setDuration(1);
+    routine.setMethod("Full method is available for FREE at "
+        + "https://store.theory11.com/products/fancy-band-chris-kenner");
+
+    routine.setHandling("Make sure you have a smooth flat surface to perform this Routine on.  In addition, you can "
+        + "use Patter to make a ridiculous claim about what you're going to do, much to their disbelief!");
+    routine.setResetDuration(1);
+    routine.setResetDescription("Simply retrieve the rubber band to reset.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/7f0vUiYBfBE");
+
+    routine.setImageUrl("images/routines/403.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Rubber Band");
+    material.isInspectable(true);
+    material.isGivenAway(true);
+    material.isConsumed(false);
+    material.setPrice(1);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/401.jpg");
+    material.setDescription("A simple rubber band; the cost is for a bag.");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init12() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Classic Color Change", "It is one of the simplest, most fluid, visual moves in magic - "
+        + "and it is also one of the easiest. With a simple wave, one playing card visually changes into another.\n");
+
+    routine.setDuration(1);
+    routine.setMethod("Full method is available for FREE at "
+        + "https://store.theory11.com/products/classic-color-change-jonathan-bayme");
+
+    routine.setHandling("As simple as this Routine is, it's important to practice it until you get the movement fluid"
+        + " and precise.  It requires steady hands, and the addition of some Patter will really spice it up.");
+    routine.setResetDuration(1);
+    routine.setResetDescription("Will need a moment of non-visible reset");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/HhKANQhcD-4");
+
+    routine.setImageUrl("images/routines/404.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/1.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init13() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Zig-Zag-Pencil", "This was one of the first Routines I was exposed to as a 10 year old."
+        + " My grandparents purchased me a magic kit that included this, and the really cool part is how simple the "
+        + "routine is--and also that you can improve upon it with a few easy steps!");
+
+    routine.setDuration(5);
+    routine.setMethod("The required kit comes with the method in-box.");
+
+    routine.setHandling("There are a few improvements on the basic part of this set.  I've seen one that uses money "
+        + "in place of the pencil, and another one that uses a two tipped two color pencil that changes when it's "
+        + "reset.  Be creative and find your own way to improve upon it!.");
+    routine.setResetDuration(5);
+    routine.setResetDescription("Unable to reset this one in front of the audience.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/Vz9xmMJC_sQ");
+
+    routine.setImageUrl("images/routines/405.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Zig-Zag Pencil Box");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(6);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/zig-zag-pencil/");
+    material.setImageUrl("images/material/402.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("Pencil");
+    material.isInspectable(true);
+    material.isGivenAway(true);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/403.jpg");
+    material.setDescription("You will need two; $5 for a box.");
+
+    routine.getMaterials().add(material);
+  }
+
 
   /**
    * Populate a routine.
@@ -538,5 +742,10 @@ public class RoutineDB {
     init06();
     init07();
     init08();
+    init09();
+    init10();
+    init11();
+    init12();
+    init13();
   }
 }

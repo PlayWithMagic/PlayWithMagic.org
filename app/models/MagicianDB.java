@@ -83,7 +83,6 @@ public class MagicianDB {
    */
   public static void init() {
     resetMagicianDB();
-    //Routine routine = null;
 
     // --------------------------------------
 
