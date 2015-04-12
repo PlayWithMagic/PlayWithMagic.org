@@ -43,13 +43,26 @@
             label = "Duration",
             placeholder = "Minutes",
             help = "The average time to perform a basic rendition of this routine in minutes.")
-          @* TODO: I put this here during R&D so it was near the required fields *@
+
+          @textarea(routineForm("method"),
+            rows = "3",
+            label = "Method",
+            placeholder = "The overarching 'secret' of a magic trick. Usually comprised of a combination of " +
+                "slights and handlings.",
+            help = "")
+
+          @textarea(routineForm("handling"),
+            rows = "3",
+            label = "Handling",
+            placeholder = "Discuss the overt handling (moves and techniques) for this routine",
+            help = "")
+
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">Materials
 
                 <button id="add-material" type="submit" class="btn btn-success btn-xs pull-right"
-                formaction="@routes.Application.newMaterial()">  @* TODO: Check, but this should be working. *@
+                formaction="@routes.Application.newMaterial()">
                     Add Material
                 </button>
 
@@ -73,7 +86,7 @@
                     <td>@material.getName()</td>
                     <td>@material.getPrice()</td>
                     <td>@if(material.getImageUrl != "") {
-                        <img src="@routes.Assets.at(material.getImageUrl)" height="22px" alt="Material">
+                      <img src="@routes.Assets.at(material.getImageUrl)" height="22px" alt="Material">
                       }
                     </td>
                     <td>
@@ -97,19 +110,6 @@
             </div>
           </div>
 
-          @textarea(routineForm("method"),
-            rows = "3",
-            label = "Method",
-            placeholder = "The overarching 'secret' of a magic trick. Usually comprised of a combination of " +
-                "slights and handlings.",
-            help = "")
-
-          @textarea(routineForm("handling"),
-            rows = "3",
-            label = "Handling",
-            placeholder = "Discuss the overt handling (moves and techniques) for this routine",
-            help = "")
-
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">Setup & Reset</h3>
@@ -128,15 +128,22 @@
             </div>
           </div>
 
-          @text(routineForm("youTubeUrl"),
-            label = "YouTube URL",
-            placeholder = "The URL to your YouTube video performing this routine",
-            help = "Please use an embed URL in the form of http://www.youtube.com/embed/VIDEO_ID")
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Media</h3>
+            </div>
+            <div class="panel-body">
+              @text(routineForm("youTubeUrl"),
+                label = "YouTube URL",
+                placeholder = "The URL to your YouTube video performing this routine",
+                help = "Please use an embed URL in the form of http://www.youtube.com/embed/VIDEO_ID")
 
-          @text(routineForm("imageUrl"),
-            label = "Image URL",
-            placeholder = "The URL of the image that represents this routine",
-            help = "")
+              @text(routineForm("imageUrl"),
+                label = "Image URL",
+                placeholder = "The URL of the image that represents this routine",
+                help = "")
+            </div>
+          </div>
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

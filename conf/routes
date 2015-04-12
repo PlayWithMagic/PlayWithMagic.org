@@ -28,6 +28,7 @@ POST        /newMaterial           controllers.Application.newMaterial()
 POST        /editMaterial          controllers.Application.editMaterial(materialId: Integer)
 POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Integer)
 POST        /postMaterial          controllers.Application.postMaterial()
+GET         /viewMaterial          controllers.Application.viewMaterial(routineId: Long, materialId: Integer)
 
 # Set actions
 GET         /listSets              controllers.Application.listSets()
