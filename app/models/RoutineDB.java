@@ -716,6 +716,459 @@ public class RoutineDB {
     routine.getMaterials().add(material);
   }
 
+
+  /**
+   * Populate a routine.
+   */
+  public static void init14() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "eXile", "From the award-winning mind of Mathieu Bich comes eXile - the effect that kick "
+        + "started the latest David Blaine special with a bang. eXile takes place entirely on the spectator's own "
+        + "hand. Three small X's are drawn on someone's open palm. A quarter is placed in the center of their hand.\n"
+        + "Slowly, you slide your fingers over each X, and they visually, instantly vanish. No sign of ink to be "
+        + "seen. Nothing. When the quarter is lifted, there are three perfect X's directly in the center of their "
+        + "palm.");
+
+    routine.setDuration(2);
+    routine.setMethod("Full information on the method may be found at https://store.theory11.com/products/exile");
+
+    routine.setHandling("It's important that the participant be able to keep still.  Take your time with removing "
+        + "each of the X's, and really give it weight when dropping it under the coin.");
+    routine.setResetDuration(10);
+    routine.setResetDescription("Unable to reset this one in front of the audience.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/z7crYXJbDg4");
+
+    routine.setImageUrl("images/routines/406.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Coin");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(6);
+    material.setPurchaseUrl("http://kbmagic.com/replicamorgandollars.html");
+    material.setImageUrl("images/material/404.jpg");
+    material.setDescription("Any large coin will do.");
+
+    routine.getMaterials().add(material);
+
+    material = new Material("Pen");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(3);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/405.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init15() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Hellbound Spellbound", "A single silver coin is displayed and held at the fingertips. "
+        + "With a meticulous rub, the coin instantly and visually changes into a copper coin... then changes back to "
+        + "a silver coin again.\n You explain you've been using two coins - but show that they're BOTH silver.\n"
+        + "Hellbound Spellbound is a stunningly visual coin trick with nothing but great methodology and pure "
+        + "sleight-of-hand. NO gimmicks are needed to perform the routine.");
+
+    routine.setDuration(4);
+    routine.setMethod("Full information on the method may be found at "
+        + "https://store.theory11.com/products/hellbound-spellbound-chris-kenner");
+
+    routine.setHandling("Practice makes perfect on this Routine.  You need to be able to handle the coins deftly, "
+        + "and any mess ups will expose the trick.  Be sure to get your movements fluid!");
+    routine.setResetDuration(10);
+    routine.setResetDescription("Unable to reset this one in front of the audience.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/hJzmvlAQj78");
+
+    routine.setImageUrl("images/routines/411.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Coin");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(6);
+    material.setPurchaseUrl("http://kbmagic.com/replicamorgandollars.html");
+    material.setImageUrl("images/material/404.jpg");
+    material.setDescription("Four coins will be needed, two silver, two copper");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init16() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "GPS", "GPS is a classic and deceptively brilliant method to ascertain a spectator's "
+        + "freely selected playing card - done under nearly impossible conditions. NO key cards. NO gimmicks.\n"
+        + "They shuffle the the cards not once but TWICE during the demonstration.\n You are able to locate their "
+        + "selection 100% of the time. Learn a powerful technique that you can apply to any magic trick you wish, "
+        + "as a way to identify a selected card under truly test conditions.");
+
+    routine.setDuration(4);
+    routine.setMethod("Full information on the method may be found at "
+        + "https://store.theory11.com/products/gps-chris-kenner");
+
+    routine.setHandling("Best performed on a table so that you can have the audience member easily shuffle.  Be sure"
+        + " to handle the cards with a professional flair, and take your time when spotting the card in question.");
+    routine.setResetDuration(1);
+    routine.setResetDescription("Instantly resets.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/d_BhLddlpp4");
+
+    routine.setImageUrl("images/routines/407.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/1.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init17() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Digital Dissolve", "A half dollar is placed into a spectator's closed hand. You rest "
+        + "a copper English penny on the back of that same hand. In the blink of an eye and without warning, the "
+        + "copper coin visually changes into the silver half dollar.\n The half dollar is immediately shown on "
+        + "both sides. The spectator then slowly opens their hand to reveal the English penny. Both coins can be "
+        + "immediately handed out for full examination.\n Originally published by magician Steve Dusheck, Digital "
+        + "Dissolve takes simple, effective coin magic to the next level with a streamlined copper / silver "
+        + "transposition routine that you'll actually use.");
+
+    routine.setDuration(4);
+    routine.setMethod("Full information on the method may be found at "
+        + "https://store.theory11.com/products/digital-dissolve");
+
+    routine.setHandling("Best performed on a table so that you can have the audience member easily shuffle.  Be sure"
+        + " to handle the cards with a professional flair, and take your time when spotting the card in question.");
+    routine.setResetDuration(2);
+    routine.setResetDescription("Requires a minute or two to reset.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/Alv_sZXmfYw");
+
+    routine.setImageUrl("images/routines/408.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Coin");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(6);
+    material.setPurchaseUrl("http://kbmagic.com/replicamorgandollars.html");
+    material.setImageUrl("images/material/404.jpg");
+    material.setDescription("Coins come with this Routine on purchase.");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init18() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Overstuft", "You eat the cream inside of an Oreo cookie - and then, so visually, it "
+        + "REFILLS itself! As seen on The Ellen Show with Justin Flom.\n Overstuft is a utility prop that enables "
+        + "you to do a myriad of magical effects using something the whole world is familiar with - a chocolate "
+        + "cookie!\n From a quick trick to a full-fledged multi-phase routine, Overstuft will be your secret weapon "
+        + "for powerful, fun magic at any moment.");
+
+    routine.setDuration(2);
+    routine.setMethod("Full information on the method may be found at "
+        + "https://store.theory11.com/products/overstuft-by-bizzaro");
+
+    routine.setHandling("");
+    routine.setResetDuration(2);
+    routine.setResetDescription("Cannot be reset in front of the audience, requires you to set up the effect again.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/1vdshxjIohg");
+
+    routine.setImageUrl("images/routines/409.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Overstuft Kit");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(30);
+    material.setPurchaseUrl("https://store.theory11.com/products/overstuft-by-bizzaro");
+    material.setImageUrl("images/material/406.jpg");
+    material.setDescription("Included with purchase of the Routine.");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init19() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Magic Cup and Balls", "Another simple routine that I learned as a child.  There are 3 "
+        + "cups and 3 balls.  Make the balls pass through the cups, and multiply the number of balls that each cup"
+        + "reveals!  There are a number of different variations that can also be done on this routine.");
+
+    routine.setDuration(5);
+    routine.setMethod("There is of course more than 3 sponge or cloth balls used for this routine.");
+
+    routine.setHandling("  The key to making this happen for the audience is to move quickly with each cup, and "
+        + "don't give them a ton of time to think about what was just done.");
+    routine.setResetDuration(1);
+    routine.setResetDescription("Instantly resets");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/gWkyqmgAOsk");
+
+    routine.setImageUrl("images/routines/410.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Cup and Ball Kit");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(25);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/combo-cups-and-balls/");
+    material.setImageUrl("images/material/407.jpg");
+    material.setDescription("Single kit of 3 cups and balls.");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init20() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "3 Long Ropes", "My uncle taught me this Routine when I was in elementary school. Take "
+        + "three different lengths of rope, and magically make them all the same length!");
+
+    routine.setDuration(5);
+    routine.setMethod("Two of the lengths are cut in such a way that when crossed behind the hand, it appears that"
+        + "the three ropes are now the same length.");
+
+    routine.setHandling("Take the time to let the audience inspect each piece of rope, and don't rush!");
+    routine.setResetDuration(2);
+    routine.setResetDescription("Instantly resets.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/7Tej0-P8zd0");
+
+    routine.setImageUrl("images/routines/412.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("1 length of rope");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/408.jpg");
+    material.setDescription("Can be done with any length of rope purchased at a hardware store.");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init21() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Blind", "Two decks with different colored backs are introduced. You ask your "
+        + "spectator to choose any card and place it on top of your pack. You do the same. To everyone's amazement, "
+        + "BOTH cards match.\n A free choice from the spectator leads to one impossible conclusion.\n BLIND is a "
+        + "modern take on a timeless prediction plot, done under impossible conditions. NO duplicates. NO doubles. "
+        + "NO possible explanation.");
+
+    routine.setDuration(2);
+    routine.setMethod("Learn the method at https://store.theory11.com/products/blind-daniel-madison");
+
+    routine.setHandling("Be sure that the participant doesn't look at the decks!");
+    routine.setResetDuration(10);
+    routine.setResetDescription("Need to reset both decks to perform the trick again.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/xW1sVasRkS8");
+
+    routine.setImageUrl("images/routines/413.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Cards");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/1.jpg");
+    material.setDescription("Requires two decks of different colors; purchase price is for one deck.");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init22() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Stairway", "An ordinary bill is borrowed from your spectator - then folded over the "
+        + "bottom of two rubberbands being held at the fingertips and paperclipped to ensure full security. "
+        + "Additionally, a member of your audience pinches the bottom of the bill to dissolve any doubts. "
+        + "NO funny business.\n What happens next is practical, impromptu, visual magic at its best.\n"
+        + "One-by-one, the bill travels up both rubberbands with just a flick of the wrist, coming to rest on the "
+        + "very top strand. Three penetrations done in ten seconds time, under impossible conditions. For the finale, "
+        + "the bill travels back down the bands slowly and visually - ending where it originally started.");
+
+    routine.setDuration(2);
+    routine.setMethod("Learn the method at https://store.theory11.com/products/blind-daniel-madison");
+
+    routine.setHandling("Be patient and go slow with the rubber band setup; you don't want to flub it.");
+    routine.setResetDuration(5);
+    routine.setResetDescription("Need to set up the rubber bands again.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/yub_tOwdS9o");
+
+    routine.setImageUrl("images/routines/414.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Rubber Band");
+    material.isInspectable(true);
+    material.isGivenAway(true);
+    material.isConsumed(false);
+    material.setPrice(1);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/401.jpg");
+    material.setDescription("A simple rubber band; the cost is for a bag.");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init23() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Breach", "Any playing card is selected and placed face up on top of the deck. The pack "
+        + "is lowered beneath a glass surface or tabletop and the selection visually penetrates up through the "
+        + "glass.\n Without warning, it immediately melts back down through the table again.\n BREACH is an "
+        + "incredibly visual card penetration that happens with little cover using ANY glass tabletop or surface. "
+        + "This is what card magic is supposed to look like.");
+
+    routine.setDuration(2);
+    routine.setMethod("Learn the method at https://store.theory11.com/products/breach-daniel-madison");
+
+    routine.setHandling("As always this requires good control with the cards.  A clear table is also required, just "
+        + "make sure that if it's glass you don't break it!");
+    routine.setResetDuration(5);
+    routine.setResetDescription("Needs a fresh deck of cards if any of them were signed as part of this routine.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/kDWOE0-xTX0");
+
+    routine.setImageUrl("images/routines/415.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/1.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init24() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Free Will", "Three wooden tokens are shown and mixed, face down by the audience.  "
+        + "A prediction is shown and placed, face down, onto the table.  The audience member chooses a token for "
+        + "themselves, one for another spectator and one for the bag that the chips were taken from.  Amazingly, "
+        + "even though the audience member had freewill, the prediction is perfectly accurate.\n Works EVERY "
+        + "time with NO sleight of hand. Very, very easy to perform");
+
+    routine.setDuration(2);
+    routine.setMethod("The method for this routine may be purchased as a kit at "
+          + "http://www.grandillusions.com/product/free-will/");
+
+    routine.setHandling("You can really embellish on the presentation of this routine by making great stories for it!");
+    routine.setResetDuration(10);
+    routine.setResetDescription("Requires the bag trick to be reset after each performance, along with any props.");
+    //routine.setYouTubeUrl(null);
+
+    routine.setImageUrl("images/routines/416.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Free Will Packet");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(18);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/free-will/");
+    material.setImageUrl("images/material/409.jpg");
+    material.setDescription("Everything needed is included in the kit.");
+
+    routine.getMaterials().add(material);
+  }
+
   /**
    * Populate a routine.
    */
@@ -1870,6 +2323,17 @@ public class RoutineDB {
     init11();
     init12();
     init13();
+    init14();
+    init15();
+    init16();
+    init17();
+    init18();
+    init19();
+    init20();
+    init21();
+    init22();
+    init23();
+    init24();
     init30();
     init201();
     init31();
