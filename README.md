@@ -9,11 +9,6 @@ Want to know more about PlayWithMagic?
   * [The PlayWithMagic GitHub home](https://github.com/PlayWithMagic/PlayWithMagic/)
   * [For those who are interested, here's the original prototype](http://mark.nelson.engineer/PlayWithMagic/mockup/)
 
-PlayWithMagic is a web-based application that catalogs magic tricks for magicians and helps them build shows.
-
-[Check out the prototype here](http://mark.nelson.engineer/PlayWithMagic/mockup/)
-
-
 |               | The Home Page | Routines  |
 | ------------- |:-------------:| :--------:|
 | Desktop       | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_home.png "Logo Title Text 1") | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_routines.png "") |
@@ -35,8 +30,8 @@ Milestone 1 Status
 Prime Directives and also illustrates at least one “cool” feature of your system.~~
 
 ### Deployment
-Your milestone release must be deployed. This means that it is available on Heroku, that your team has purchased a 
-custom domain name for it, and that this custom domain name resolves to your running instance on Heroku.
+~~Your milestone release must be deployed. This means that it is available on Heroku, that your team has purchased a 
+custom domain name for it, and that this custom domain name resolves to your running instance on Heroku.~~
 
 ### One cool feature
 ~~Your deployment should illustrate at least one interesting domain-specific feature. If you are unsure after planning 
@@ -76,12 +71,12 @@ I will be periodically checking your issue lists as part of evaluating how well 
 ### Satisfy the three prime directives
 ~~To satisfy the first directive, your milestone must implement an interesting feature.~~
 
-To satisfy the second directive, you must provide a User Guide wiki page that documents how a user can use the system.
+~~To satisfy the second directive, you must provide a User Guide wiki page that documents how a user can use the system.~~
 
 ~~To satisfy the third directive, you must provide a Developer Guide wiki page that documents how to download, build, 
 extend, test, and collaborate with other developers.~~
 
-Your documentation should document the current version of the system, not some future version.
+~~Your documentation should document the current version of the system, not some future version.~~
 
 ### Submission instructions
 
