@@ -18,6 +18,12 @@ TODO:  Add screenshot 2
 
 TODO:  Add screenshot 3
 
+|               | Home          | Cool  |
+| ------------- |:-------------:| -----:|
+| Desktop       | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/README-Home.png "Logo Title Text 1") | $1600 |
+| Mobile        | centered      |   $12 |
+
+
 Overview
 --------
 In the spirit of ensuring that the project's current status is plainly visible at all times, the project home page
