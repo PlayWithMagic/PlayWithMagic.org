@@ -1089,7 +1089,85 @@ public class RoutineDB {
     routine.getMaterials().add(material);
   }
 
+  /**
+   * Populate a routine.
+   */
+  public static void init23() {
+    Routine routine = null;
+    Material material = null;
+    long id;
 
+    routine = new Routine(0, "Breach", "Any playing card is selected and placed face up on top of the deck. The pack "
+        + "is lowered beneath a glass surface or tabletop and the selection visually penetrates up through the "
+        + "glass.\n Without warning, it immediately melts back down through the table again.\n BREACH is an "
+        + "incredibly visual card penetration that happens with little cover using ANY glass tabletop or surface. "
+        + "This is what card magic is supposed to look like.");
+
+    routine.setDuration(2);
+    routine.setMethod("Learn the method at https://store.theory11.com/products/breach-daniel-madison");
+
+    routine.setHandling("As always this requires good control with the cards.  A clear table is also required, just "
+        + "make sure that if it's glass you don't break it!");
+    routine.setResetDuration(5);
+    routine.setResetDescription("Needs a fresh deck of cards if any of them were signed as part of this routine.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/kDWOE0-xTX0");
+
+    routine.setImageUrl("images/routines/415.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Cards");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/1.jpg");
+    material.setDescription("");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init24() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Free Will", "Three wooden tokens are shown and mixed, face down by the audience.  "
+        + "A prediction is shown and placed, face down, onto the table.  The audience member chooses a token for "
+        + "themselves, one for another spectator and one for the bag that the chips were taken from.  Amazingly, "
+        + "even though the audience member had freewill, the prediction is perfectly accurate.\n Works EVERY "
+        + "time with NO sleight of hand. Very, very easy to perform");
+
+    routine.setDuration(2);
+    routine.setMethod("The method for this routine may be purchased as a kit at "
+          + "http://www.grandillusions.com/product/free-will/");
+
+    routine.setHandling("You can really embellish on the presentation of this routine by making great stories for it!");
+    routine.setResetDuration(10);
+    routine.setResetDescription("Requires the bag trick to be reset after each performance, along with any props.");
+    //routine.setYouTubeUrl(null);
+
+    routine.setImageUrl("images/routines/416.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Free Will Packet");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(18);
+    material.setPurchaseUrl("http://www.grandillusions.com/product/free-will/");
+    material.setImageUrl("images/material/409.jpg");
+    material.setDescription("Everything needed is included in the kit.");
+
+    routine.getMaterials().add(material);
+  }
 
   /**
    * Populate a routine.
@@ -1832,6 +1910,8 @@ public class RoutineDB {
     init20();
     init21();
     init22();
+    init23();
+    init24();
     init30();
     init201();
     init31();
