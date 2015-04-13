@@ -3,12 +3,13 @@ PlayWithMagic
 
 PlayWithMagic is a web-based application that catalogs magic tricks and helps magicians build shows.
 
-![Home Page](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/README-Home.png "Home Page")
+![Home Page](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_home.png "Home Page")
 
 Want to know more about PlayWithMagic?
-  * [Check out the prototype here](http://mark.nelson.engineer/PlayWithMagic/mockup/)
-  * [The PlayWithMagic Project web page is here](http://playwithmagic.github.io/PlayWithMagic/)
-  * [The PlayWithMagic GitHub home page is here](https://github.com/PlayWithMagic/PlayWithMagic/)
+  * [Go to PlayWithMagic now](http://playwithmagic.org)
+  * [The PlayWithMagic Project site](http://playwithmagic.github.io/PlayWithMagic/)
+  * [The PlayWithMagic GitHub home](https://github.com/PlayWithMagic/PlayWithMagic/)
+  * [For those who are interested, here's the original prototype](http://mark.nelson.engineer/PlayWithMagic/mockup/)
              
 Overview
 --------
@@ -38,7 +39,7 @@ routines together and 'rate' routines.  Finally, magicians can compose sets.  Se
   * Indicators/status to help magicians understand certain rules such as:  Set duration, avoid repeating the same effect
     throughout a set, cost of production, etc.
 
-![Routine Page](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/README-Routine.png "Routine Page")
+![Routine Page](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_routines.png "Routine Page")
 
 ### Use Cases
 [Several use cases are documented in the Wiki.](https://github.com/PlayWithMagic/PlayWithMagic/wiki/Use-Cases)
@@ -76,15 +77,15 @@ The application was developed with [IntelliJ](https://www.jetbrains.com/idea/) I
 
 ### User Interface Philosophy
 We'd like to build a user interface that even magicians can use.  Magicians are an odd bunch.  They categorically 
-suffer from attention deficit disorder (unless they are practicing).  They are not organized (except for loading 
-packet tricks)... and they like to drink (a lot).  So, we have adopted a User Interface strategy called 
+suffer from attention deficit disorder (unless they are practicing).  They are not organized (except when setting the 
+prop table)... and they like to drink (a lot).  So, we have adopted a User Interface strategy called 
 [The User is Drunk](https://www.youtube.com/watch?v=r2CbbBLVaPk).  There is an excellent 5 minute video to get you
 started.  The central ideas are:  Great UI isn't there (people don't realize it's there).  Give users lots of guidance
 and say things twice.  
 
 ### Application High-Level Design
 The model revolves around three central entities:
-  1. Routines (A single magic trick)
+  1. Routines (A single magic trick) and the materials for the routines
   2. Sets (An personalized, ordered collection of routines)
   3. Magicians/Users
 
@@ -105,20 +106,20 @@ Due:  25 March
 
 ### Deliverable 1
 Due:  8 April (2 weeks after Mockup)
-  + Established Look & Feel
-  + Consistent Navigation
-  + CRUD capable entities against an in-memory database w/ 2-3 users pre-populated)
-    - User Profile
-    - User Routines
-  + Seed the dataset with a minimum of 24 routines 
+  + ~~Established Look & Feel~~
+  + ~~Consistent Navigation~~
+  + ~~CRUD capable entities against an in-memory database w/ 2-3 users pre-populated)~~
+    - ~~User Profile~~
+    - ~~User Routines~~
+  + ~~Seed the dataset with a minimum of 24 routines~~ 
 
 ### Deliverable 2
 Due:  22 April (2 weeks after Deliverable 1)
   + Refactor the model into a database-backed system
-  + Increase the number of saved users & routines
+  + Increase the number of saved users & ~~routines~~
   + Find & Save routines
-  + CRUD capable Set management
-  + Add an additional 12 routines -- have the consulting magicians use the UI to add routines
+  + ~~CRUD capable Set management~~
+  + ~~Add an additional 12 routines~~ -- have the consulting magicians use the UI to add routines
 
 ### Deliverable 3
 Due:  6 May (2 weeks after Deliverable 2)
