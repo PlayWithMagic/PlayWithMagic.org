@@ -12,14 +12,9 @@ PlayWithMagic is a web-based application that catalogs magic tricks for magician
 
 [Check out the prototype here](http://mark.nelson.engineer/PlayWithMagic/mockup/)
 
-TODO:  Add screenshot 1
-
-TODO:  Add screenshot 2
-
-TODO:  Add screenshot 3
 
 |               | The Home Page | Routines  |
-| ------------- |:-------------:| -----:|
+| ------------- |:-------------:| :--------:|
 | Desktop       | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_home.png "Logo Title Text 1") | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_routines.png "") |
 | Mobile        | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Mobile_home.PNG "Logo Title Text 1")      |   ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Mobile_routines.PNG "") |
 
@@ -35,12 +30,12 @@ At the completion of the project, these milestones will be replaced by appropria
             
 Milestone 1 Status
 ------------------
-The goal of the Milestone 1 is to deliver a deployed release of your final project in a manner that satisfies the Three 
-Prime Directives and also illustrates at least one “cool” feature of your system.
+~~The goal of the Milestone 1 is to deliver a deployed release of your final project in a manner that satisfies the Three 
+Prime Directives and also illustrates at least one “cool” feature of your system.~~
 
 ### Deployment
-~~Your milestone release must be deployed. This means that it is available on Heroku, that your team has purchased a 
-custom domain name for it, and that this custom domain name resolves to your running instance on Heroku.~~
+Your milestone release must be deployed. This means that it is available on Heroku, that your team has purchased a 
+custom domain name for it, and that this custom domain name resolves to your running instance on Heroku.
 
 ### One cool feature
 ~~Your deployment should illustrate at least one interesting domain-specific feature. If you are unsure after planning 
@@ -61,7 +56,7 @@ system.~~
 
 ### Authorization and authentication
 For the first milestone, I do not recommend that you spend time implementing authorization (i.e. role-based page access)
- or authentication (i.e. login). No proposed project uses authorization or authentication in an interesting way.
+ or authentication (i.e. login). ~~No proposed project uses authorization or authentication in an interesting way.~~
 
 ~~Instead, either design your first milestone release with public access to all pages, or else initialize your system 
 with a set of users and provide a simple mechanism for setting the user in the session object.~~
@@ -71,7 +66,7 @@ with a set of users and provide a simple mechanism for setting the user in the s
 submit~~ all ~~most forms.~~
 
 ### Satisfy the project management guidelines
-Regardless of whether you are working alone or in a group, you must satisfy the Project Management Guidelines.
+~~Regardless of whether you are working alone or in a group, you must satisfy the Project Management Guidelines.~~
 
 I will be periodically checking your issue lists as part of evaluating how well you are managing your project.
 
