@@ -972,6 +972,123 @@ public class RoutineDB {
     routine.getMaterials().add(material);
   }
 
+  /**
+   * Populate a routine.
+   */
+  public static void init20() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "3 Long Ropes", "My uncle taught me this Routine when I was in elementary school. Take "
+        + "three different lengths of rope, and magically make them all the same length!");
+
+    routine.setDuration(5);
+    routine.setMethod("Two of the lengths are cut in such a way that when crossed behind the hand, it appears that"
+        + "the three ropes are now the same length.");
+
+    routine.setHandling("Take the time to let the audience inspect each piece of rope, and don't rush!");
+    routine.setResetDuration(2);
+    routine.setResetDescription("Instantly resets.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/7Tej0-P8zd0");
+
+    routine.setImageUrl("images/routines/412.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("1 length of rope");
+    material.isInspectable(true);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(5);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/408.jpg");
+    material.setDescription("Can be done with any length of rope purchased at a hardware store.");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init21() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Blind", "Two decks with different colored backs are introduced. You ask your "
+        + "spectator to choose any card and place it on top of your pack. You do the same. To everyone's amazement, "
+        + "BOTH cards match.\n A free choice from the spectator leads to one impossible conclusion.\n BLIND is a "
+        + "modern take on a timeless prediction plot, done under impossible conditions. NO duplicates. NO doubles. "
+        + "NO possible explanation.");
+
+    routine.setDuration(2);
+    routine.setMethod("Learn the method at https://store.theory11.com/products/blind-daniel-madison");
+
+    routine.setHandling("Be sure that the participant doesn't look at the decks!");
+    routine.setResetDuration(10);
+    routine.setResetDescription("Need to reset both decks to perform the trick again.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/xW1sVasRkS8");
+
+    routine.setImageUrl("images/routines/413.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Cards");
+    material.isInspectable(false);
+    material.isGivenAway(false);
+    material.isConsumed(false);
+    material.setPrice(20);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/1.jpg");
+    material.setDescription("Requires two decks of different colors; purchase price is for one deck.");
+
+    routine.getMaterials().add(material);
+  }
+
+  /**
+   * Populate a routine.
+   */
+  public static void init22() {
+    Routine routine = null;
+    Material material = null;
+    long id;
+
+    routine = new Routine(0, "Stairway", "An ordinary bill is borrowed from your spectator - then folded over the "
+        + "bottom of two rubberbands being held at the fingertips and paperclipped to ensure full security. "
+        + "Additionally, a member of your audience pinches the bottom of the bill to dissolve any doubts. "
+        + "NO funny business.\n What happens next is practical, impromptu, visual magic at its best.\n"
+        + "One-by-one, the bill travels up both rubberbands with just a flick of the wrist, coming to rest on the "
+        + "very top strand. Three penetrations done in ten seconds time, under impossible conditions. For the finale, "
+        + "the bill travels back down the bands slowly and visually - ending where it originally started.");
+
+    routine.setDuration(2);
+    routine.setMethod("Learn the method at https://store.theory11.com/products/blind-daniel-madison");
+
+    routine.setHandling("Be patient and go slow with the rubber band setup; you don't want to flub it.");
+    routine.setResetDuration(5);
+    routine.setResetDescription("Need to set up the rubber bands again.");
+    routine.setYouTubeUrl("https://www.youtube.com/embed/yub_tOwdS9o");
+
+    routine.setImageUrl("images/routines/414.jpg");
+
+    id = RoutineDB.addRoutines(new RoutineFormData(routine));
+    routine = RoutineDB.getRoutine(id);
+
+    material = new Material("Rubber Band");
+    material.isInspectable(true);
+    material.isGivenAway(true);
+    material.isConsumed(false);
+    material.setPrice(1);
+    material.setPurchaseUrl("");
+    material.setImageUrl("images/material/401.jpg");
+    material.setDescription("A simple rubber band; the cost is for a bag.");
+
+    routine.getMaterials().add(material);
+  }
+
 
 
   /**
@@ -1712,6 +1829,9 @@ public class RoutineDB {
     init17();
     init18();
     init19();
+    init20();
+    init21();
+    init22();
     init30();
     init201();
     init31();
