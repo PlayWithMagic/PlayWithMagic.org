@@ -18,10 +18,10 @@ TODO:  Add screenshot 2
 
 TODO:  Add screenshot 3
 
-|               | Home          | Cool  |
+|               | Home          | Routines  |
 | ------------- |:-------------:| -----:|
-| Desktop       | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/README-Home.png "Logo Title Text 1") | $1600 |
-| Mobile        | centered      |   $12 |
+| Desktop       | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_Home.png "Logo Title Text 1") | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_routines.PNG "") |
+| Mobile        | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Mobile_home.PNG "Logo Title Text 1")      |   ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Mobile_routines.PNG "") |
 
 
 Overview
