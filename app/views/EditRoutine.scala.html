@@ -1,13 +1,14 @@
 @*
 * The Edit (New and Update) Routine HTML form page.
 *
-* @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(routineForm: Form[views.formdata.RoutineFormData])
+@(routineForm: Form[views.formdata.RoutineFormData], materials: List[Material])
+
+@import java.util.List
 
 @import helper.form
-@import views.html.bootstrap3.{text, text45, textInt, textarea}
+@import views.html.bootstrap3.{hidden, text, text45, textInt, textarea};
 
 @Main("editRoutine") {
   <!-- Page Content -->
@@ -20,13 +21,12 @@
         } else {
           <h1>Update Routine</h1>
         }
-          <!-- User Attributes -->
+
+          <!-- Form Fields -->
         <div class="container">
         @form(routes.Application.postRoutine(), 'class -> "form-horizontal") {
-          <input type="hidden"
-          name="@routineForm("id").name"
-          id="@routineForm("id").id"
-          value="@routineForm("id").value"/>
+
+          @hidden(routineForm("id"))
 
           @text45(routineForm("name"),
             label = "Name",
@@ -41,10 +41,9 @@
 
           @textInt(routineForm("duration"),
             label = "Duration",
-            placeholder = "Mins",
+            placeholder = "Minutes",
             help = "The average time to perform a basic rendition of this routine in minutes.")
 
-          <div class="well">
           @textarea(routineForm("method"),
             rows = "3",
             label = "Method",
@@ -57,6 +56,58 @@
             label = "Handling",
             placeholder = "Discuss the overt handling (moves and techniques) for this routine",
             help = "")
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Materials
+
+                <button id="add-material" type="submit" class="btn btn-success btn-xs pull-right"
+                formaction="@routes.Application.newMaterial()">
+                    Add Material
+                </button>
+
+              </h3>
+            </div>
+            <div class="panel-body">
+
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Price $</th>
+                    <th>Image</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @for(material <- materials) {
+                  <tr>
+                    <td>@material.getName()</td>
+                    <td>@material.getPrice()</td>
+                    <td>@if(material.getImageUrl != "") {
+                      <img src="@routes.Assets.at(material.getImageUrl)" height="22px" alt="Material">
+                      }
+                    </td>
+                    <td>
+                      <button id="edit-material" type="submit" class="btn btn-warning btn-xs"
+                      formaction="@routes.Application.editMaterial(materials.indexOf(material))">
+                        Edit
+                      </button>
+                    </td>
+                    <td>
+                      <button id="delete-material" type="submit" class="btn btn-danger btn-xs"
+                      formaction="@routes.Application.deleteMaterial(materials.indexOf(material))">
+                        Delete
+                      </button>
+
+                    </td>
+                  </tr>
+                }
+                </tbody>
+              </table>
+
+            </div>
           </div>
 
           <div class="panel panel-default">
@@ -77,10 +128,27 @@
             </div>
           </div>
 
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Media</h3>
+            </div>
+            <div class="panel-body">
+              @text(routineForm("youTubeUrl"),
+                label = "YouTube URL",
+                placeholder = "The URL to your YouTube video performing this routine",
+                help = "Please use an embed URL in the form of http://www.youtube.com/embed/VIDEO_ID")
+
+              @text(routineForm("imageUrl"),
+                label = "Image URL",
+                placeholder = "The URL of the image that represents this routine",
+                help = "")
+            </div>
+          </div>
+
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button id="submit" type="submit" class="btn btn-default">
-                @if(routineForm("id").value == "0") {Add} else {Update}
+              @if(routineForm("id").value == "0") {Add} else {Update}
               </button>
             </div>
           </div>

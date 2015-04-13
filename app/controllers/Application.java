@@ -1,30 +1,49 @@
 package controllers;
 
 import models.MagicianDB;
+import models.Material;
+import models.Routine;
 import models.RoutineDB;
+import models.Set;
+import models.SetDB;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.formdata.ExperienceLevels;
 import views.formdata.MagicianFormData;
+import views.formdata.MaterialFormData;
 import views.formdata.RoutineFormData;
+import views.formdata.SetFormData;
+import views.html.About;
 import views.html.EditMagician;
+import views.html.EditMaterial;
 import views.html.EditRoutine;
+import views.html.EditSet;
+import views.html.Help;
 import views.html.Index;
 import views.html.ListMagicians;
 import views.html.ListRoutines;
+import views.html.ListSets;
 import views.html.ViewMagician;
+import views.html.ViewMaterial;
 import views.html.ViewRoutine;
+import views.html.ViewSet;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
- * The application's MVC Controller class.
+ * Play With Magic's MVC Controller class.
  *
  * @see http://www.playframework.com
  */
 public class Application extends Controller {
+
+  /******************************************************************************************************************
+   * B A S I C   P A G E S
+   ******************************************************************************************************************/
 
   /**
    * Render the Home/Index page.
@@ -34,6 +53,31 @@ public class Application extends Controller {
   public static Result index() {
     return ok(Index.render());
   }
+
+
+  /**
+   * Render the About page.
+   *
+   * @return An HTTP OK message along with the HTML content for the About page.
+   */
+  public static Result about() {
+    return ok(About.render());
+  }
+
+
+  /**
+   * Render the Help page.
+   *
+   * @return An HTTP OK message along with the HTML content for the Help page.
+   */
+  public static Result help() {
+    return ok(Help.render());
+  }
+
+
+  /******************************************************************************************************************
+   * M A G I C I A N
+   ******************************************************************************************************************/
 
   /**
    * Renders the editMagician page with a form to add a Magician if the ID is 0; or edit an existing
@@ -48,6 +92,7 @@ public class Application extends Controller {
     Map<String, Boolean> experienceLevelMap = ExperienceLevels.getExperienceLevels(data.experienceLevel);
     return ok(EditMagician.render(formData, experienceLevelMap));
   }
+
 
   /**
    * Handles the request to post form data from the EditMagician page.
@@ -130,53 +175,66 @@ public class Application extends Controller {
   }
 
 
+  /******************************************************************************************************************
+   * R O U T I N E
+   ******************************************************************************************************************/
+
   /**
-   * Renders the editRoutine page with a form to add a new Routine if the ID is 0.  Otherwise, update an existing
-   * Routine based on the passed in ID number.
+   * Show the EditRoutine page.  If routineId is 0, then bind the page/form with a new Routine.  Otherwise,
+   * bind with an existing Routine.
    *
-   * @param id The ID of the routine to edit (or 0 if it's a new routine).
+   * @param routineId The ID of the routine to edit (or 0 if it's a new routine).
    * @return An HTTP OK message along with the HTML content for the EditRoutine page.
    */
-  public static Result editRoutine(long id) {
-    RoutineFormData data = (id == 0) ? new RoutineFormData() : new RoutineFormData(RoutineDB.getRoutine(id));
-    Form<RoutineFormData> formData = Form.form(RoutineFormData.class).fill(data);
+  public static Result editRoutine(long routineId) {
+    RoutineFormData routineFormData;
+    if (routineId == 0) {
+      routineFormData = new RoutineFormData();
+    }
+    else {
+      routineFormData = new RoutineFormData(RoutineDB.getRoutine(routineId));
+    }
 
-    return ok(EditRoutine.render(formData));
+    Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).fill(routineFormData);
+
+    return ok(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
   }
 
 
   /**
    * Delete a routine from the database and display the ListRoutines page.
    *
-   * @param id The ID of the routine to delete.
+   * @param routineId The ID of the routine to delete.
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
-  public static Result deleteRoutine(long id) {
-    RoutineDB.deleteRoutine(id);
+  public static Result deleteRoutine(long routineId) {
+    RoutineDB.deleteRoutine(routineId);
 
     return ok(ListRoutines.render(RoutineDB.getRoutines()));
   }
 
 
   /**
-   * Handles the request to post form data from the editRoutine page.
+   * Process the POST method from the EditRoutine page.  If the form has errors, then redisplay EditRoutine.  If not,
+   * then display ListRoutines.
    *
    * @return The editRoutine page, either with errors or with form data.
    */
   public static Result postRoutine() {
-    Form<RoutineFormData> formData = Form.form(RoutineFormData.class).bindFromRequest();
+    Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
 
-    if (formData.hasErrors()) {
-      System.out.println("HTTP Form Error.");
+    long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
 
-      return badRequest(EditRoutine.render(formData));
+    if (formWithRoutineData.hasErrors()) {
+      Logger.error("HTTP Routine Form Error.");
+
+      return badRequest(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
     }
-    else {
-      RoutineFormData data = formData.get();
-      RoutineDB.addRoutines(data);
 
-      return ok(ListRoutines.render(RoutineDB.getRoutines()));
-    }
+    RoutineFormData routineFormData = formWithRoutineData.get();
+    RoutineDB.addRoutines(routineFormData);
+
+    return ok(ListRoutines.render(RoutineDB.getRoutines()));
   }
 
 
@@ -191,12 +249,244 @@ public class Application extends Controller {
 
 
   /**
-   * Displays a single Routine based off of the provided ID.
+   * Display a single Routine.
    *
-   * @param id The ID of the Routine to be displayed.
+   * @param routineId The ID of the Routine to be displayed.
    * @return An HTTP OK message along with the HTML content for a single Routine page.
    */
-  public static Result viewRoutine(long id) {
-    return ok(ViewRoutine.render(RoutineDB.getRoutine(id)));
+  public static Result viewRoutine(long routineId) {
+    return ok(ViewRoutine.render(RoutineDB.getRoutine(routineId)));
   }
+
+  /***************************************************************************************************************
+   * S E T
+   ***************************************************************************************************************/
+
+  /**
+   * Renders the editSet page with a form to add a new Set if the ID is 0.  Otherwise, update an existing
+   * Set based on the passed in ID number.
+   *
+   * @param id The ID of the Set to edit (or 0 if it's a new routine).
+   * @return An HTTP OK message along with the HTML content for the EditSet page.
+   */
+  public static Result editSet(long id) {
+    SetFormData data = (id == 0) ? new SetFormData() : new SetFormData(SetDB.getSet(id));
+    Form<SetFormData> formData = Form.form(SetFormData.class).fill(data);
+    if (id != 0) {
+      Set thisSet = SetDB.getSet(id);
+      return ok(EditSet.render(formData, RoutineDB.getRoutines(), thisSet.getRoutines()));
+    }
+    else {
+      List<Long> temp = new ArrayList<Long>();
+      return ok(EditSet.render(formData, RoutineDB.getRoutines(), temp));
+    }
+  }
+
+  /**
+   * Delete a set from the database and display the ListSets page.
+   *
+   * @param id The ID of the set to delete.
+   * @return An HTTP OK message along with the HTML content for the Set List page.
+   */
+  public static Result deleteSet(long id) {
+    SetDB.deleteSet(id);
+    return ok(ListSets.render(SetDB.getSets()));
+  }
+
+  /**
+   * Handles the request to post form data from the editSet page.
+   *
+   * @return An HTTP OK message if no errors, otherwise the form page with errors.
+   */
+  public static Result postSet() {
+    Form<SetFormData> formWithSetData = Form.form(SetFormData.class).bindFromRequest();
+
+    long setId = new Long(formWithSetData.field("id").value()).longValue();
+
+    if (formWithSetData.hasErrors()) {
+      System.out.println("HTTP Form Error.");
+      Set thisSet = SetDB.getSet(setId);
+      return badRequest(EditSet.render(formWithSetData, RoutineDB.getRoutines(), thisSet.getRoutines()));
+    }
+    else {
+      SetFormData data = formWithSetData.get();
+      SetDB.addSet(data);
+      return ok(ListSets.render(SetDB.getSets()));
+    }
+  }
+
+  /**
+   * Render the List Sets page.
+   *
+   * @return An HTTP OK message along with the HTML content for the List Set page.
+   */
+  public static Result listSets() {
+    return ok(ListSets.render(SetDB.getSets()));
+  }
+
+  /**
+   * Render the View Set page.
+   *
+   * @param id The ID of the Set to view.
+   * @return An HTTP OK message along with the HTML content for a single Set page.
+   */
+  public static Result viewSet(long id) {
+    Set thisViewSet = SetDB.getSet(id);
+    return ok(ViewSet.render(SetDB.getSet(id), RoutineDB.getRoutines(), thisViewSet.getRoutines()));
+  }
+
+  /***************************************************************************************************************
+   * M A T E R I A L
+   *
+   * The way we integrated Materials into Routines needs a little explanation.  Routines and Materials have a chicken-
+   * and-egg problem.  Materials are stored in Routine objects.  Routine objects are not created until the Routine is
+   * saved at the end of EditRoutine.  You run into trouble when, while you are composing a Routine, you
+   * create/edit/delete some Materials.  The Materials wants to save itself in a Routine object that doesn't yet exist.
+   *
+   * How do we solve this?  Essentially, all of the Material buttons (Add material, Edit and Delete) will post
+   * the Routine and save it.  If the Routine is incomplete and had errors, the EditRoutine page won't let you
+   * continue to the Add/Edit Materials page until the errors are fixed.  This makes sense... the UI is not letting
+   * you continue until you have a good Routine object.
+   *
+   * You could maintain all of the Material data in RoutineFormData.  Unfortunately, Play/Scala makes it difficult
+   * to iterate over and get into the variables.  The easiest way to move forward is to hold Materials in Routine Java
+   * objects... and make all of the Materials buttons do a validated Save Routine first.
+   *
+   ***************************************************************************************************************/
+
+  /**
+   * Show the EditMaterial page to update an item.  First, process the Routine page, deal with any errors and update
+   * RoutineDB.  Finally, show the EditMaterial page.
+   *
+   * @param materialId The ListArray index of the Material row you want to edit.
+   * @return An HTTP page EditMaterial if all is well or EditRoutine if there's an error on that page.
+   */
+  public static Result editMaterial(Integer materialId) {
+    Form<RoutineFormData> routineFormData = Form.form(RoutineFormData.class).bindFromRequest();
+    long routineId = new Long(routineFormData.field("id").value()).longValue();
+
+    if (routineFormData.hasErrors()) {
+      Logger.error("HTTP Form Error in editMaterial");
+
+      return badRequest(EditRoutine.render(routineFormData, RoutineDB.getMaterials(routineId)));
+    }
+
+    RoutineFormData data = routineFormData.get();
+    routineId = RoutineDB.addRoutines(data);
+
+    // End of processing Routine page.  Start processing material.
+
+    MaterialFormData materialFormData =
+        new MaterialFormData(RoutineDB.getMaterials(routineId).get(materialId.intValue()), routineId, materialId);
+
+    Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
+
+    return ok(EditMaterial.render(formWithMaterialData));
+  }
+
+
+  /**
+   * Show the EditMaterial page to create a new item.  First, process the Routine page and deal with any errors.
+   * Update RoutineDB and finally show the EditMaterial page.
+   *
+   * @return An HTTP page EditMaterial if all is well or EditRoutine if there's an error on that page.
+   */
+  public static Result newMaterial() {
+    Form<RoutineFormData> routineFormData = Form.form(RoutineFormData.class).bindFromRequest();
+    long routineId = new Long(routineFormData.field("id").value()).longValue();
+
+    if (routineFormData.hasErrors()) {
+      Logger.error("HTTP Form Error in editMaterial");
+
+      return badRequest(EditRoutine.render(routineFormData, RoutineDB.getMaterials(routineId)));
+    }
+
+    RoutineFormData data = routineFormData.get();
+    routineId = RoutineDB.addRoutines(data);
+
+    // End of processing Routine page.  Start processing material.
+
+    MaterialFormData materialFormData = new MaterialFormData();
+    materialFormData.routineId = routineId;
+    materialFormData.materialId = -1;
+
+    Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
+    return ok(EditMaterial.render(formWithMaterialData));
+  }
+
+
+  /**
+   * Delete a Material item and redisplay the EditRoutine page.  First, process the Routine page and deal with any
+   * errors.  Update RoutineDB, then delete the Material item and finally redisplay EditRoutine.
+   *
+   * @param materialId The ArrayList index in Routine.materials of the item to delete.
+   * @return An HTTP EditMaterial page.
+   */
+  public static Result deleteMaterial(Integer materialId) {
+    Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
+    long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
+
+    if (formWithRoutineData.hasErrors()) {
+      System.out.println("HTTP Form Error.");
+
+      return badRequest(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+    }
+
+    RoutineFormData routineFormData = formWithRoutineData.get();
+    routineId = RoutineDB.addRoutines(routineFormData);
+
+    // End of processing Routine page.  Start of processing material.
+
+    RoutineDB.getMaterials(routineId).remove(materialId.intValue());
+
+    return ok(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+  }
+
+
+  /**
+   * Post new and updated Material information from the EditMaterial page and add it to the Routine.  Then,
+   * display EditRoutine.
+   *
+   * @return On success, an HTTP OK message along with the HTML content for the EditRoutine page.  On a validation
+   * error, an HTTP BadRequest message with the HTML content of the EditMaterial page.
+   */
+  public static Result postMaterial() {
+    Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).bindFromRequest();
+
+    long routineId = new Long(formWithMaterialData.field("routineId").value()).longValue();
+
+    if (formWithMaterialData.hasErrors()) {
+      Logger.error("HTTP Form Error in postMaterial.");
+
+      return badRequest(EditMaterial.render(formWithMaterialData));
+    }
+
+    Logger.debug("Form Field Data isInspectable = " + formWithMaterialData.field("isInspectable").value());
+    MaterialFormData materialFormData = formWithMaterialData.get();
+
+    Logger.debug("isInspectable = " + materialFormData.isInspectable);
+
+    RoutineDB.addMaterial(materialFormData);
+
+    RoutineFormData routineFormData = new RoutineFormData(RoutineDB.getRoutine(routineId));
+    Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).fill(routineFormData);
+
+    return ok(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+  }
+
+
+  /**
+   * Display a single Material page.
+   *
+   * @param routineId The ID of the Routine to be displayed.
+   * @param materialId The ArrayList index of the material to display.
+   * @return An HTTP OK message along with the HTML content for a single Routine page.
+   */
+  public static Result viewMaterial(long routineId, int materialId) {
+    Routine routine = RoutineDB.getRoutine(routineId);
+    Material material = routine.getMaterials().get(materialId);
+
+    return ok(ViewMaterial.render(material));
+  }
+
 }

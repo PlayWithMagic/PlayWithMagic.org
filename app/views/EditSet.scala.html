@@ -1,0 +1,90 @@
+@*
+* The Edit (New and Update) Routine HTML form page.
+*
+* @author Mark Nelson
+* @see http://www.playframework.com
+*@
+@(setForm: Form[views.formdata.SetFormData], routineList: List[Routine], formRoutines: List[Long])
+
+@import helper.form
+@import views.html.bootstrap3.{text45, textarea}
+
+@Main("editSet") {
+  <!-- Page Content -->
+  <section id="page">
+      <!-- Content -->
+    <section id="content" class="container">
+      <div class="col-md-12">
+        @if(setForm("id").value == "0") {
+          <h1>Create Set</h1>
+        } else {
+          <h1>Update Set</h1>
+        }
+          <!-- User Attributes -->
+        <div class="container">
+        @form(routes.Application.postSet(), 'class -> "form-horizontal") {
+          <input type="hidden"
+          name="@setForm("id").name"
+          id="@setForm("id").id"
+          value="@setForm("id").value"/>
+
+          @text45(setForm("name"),
+            label = "Name",
+            placeholder = "A short name for the Set",
+            help = "")
+
+          @textarea(setForm("description"),
+            rows = "3",
+            label = "Description",
+            placeholder = "A brief description of the Set",
+            help = "")
+
+          <div class="panel panel-default form-group @if(setForm.hasErrors) {has-error}">
+            <div class="panel-heading">
+              <h3 class="panel-title">Routines</h3>
+            </div>
+            <div class="panel-body">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Add to Set</th>
+                    <th>Name</th>
+                    <th>Time to Perform</th>
+                  </tr>
+                </thead>
+                <tbody>
+              <!-- Should use the list of Routines thrown in against the list of Set list items to pull -->
+                @for(routine <- routineList) {
+                <tr>
+                  <td>
+                      <input type="checkbox"
+                        name="routines[]"
+                        id="@routine.getId"
+                        value="@routine.getId"
+                        @for(formRoutine <- formRoutines) {
+                          @if(formRoutine == routine.getId) {checked}
+                        }>
+                  </td>
+                  <td>@routine.getName()</td>
+                  <td>@routine.getDuration()</td>
+                </tr>
+                }
+                </tbody>
+              </table>
+              <span class="help-block"></span>
+              <span class="help-block has-error">@{setForm("routines").error.map { error => error.message }}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button id="submit" type="submit" class="btn btn-default">
+              @if(setForm("id").value == "0") {Add} else {Update}
+              </button>
+            </div>
+          </div>
+        }
+        </div>
+      </div>
+    </section>
+  </section>
+}

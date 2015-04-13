@@ -1,7 +1,9 @@
 package tests;
 
+import models.MagicianDB;
 import models.Routine;
 import models.RoutineDB;
+import models.SetDB;
 import org.junit.Test;
 import play.libs.F;
 import play.test.TestBrowser;
@@ -41,6 +43,8 @@ public class BasicRoutineTests {
     routine1.setHandling("Test Routine Handling");
     routine1.setResetDuration(21);
     routine1.setResetDescription("Test Routine Reset Description");
+    routine1.setYouTubeUrl("Test YouTube URL");
+    routine1.setImageUrl("Test Image URL");
 
     routine2 = new Routine(0, "Test Routine Name 02", "Test Routine Description 02");
     routine2.setDuration(12);
@@ -48,6 +52,8 @@ public class BasicRoutineTests {
     routine2.setHandling("Test Routine Handling 02");
     routine2.setResetDuration(22);
     routine2.setResetDescription("Test Routine Reset Description 02");
+    routine2.setYouTubeUrl("Test YouTube URL 02");
+    routine2.setImageUrl("Test Image URL 02");
 
     /* Logger.debug("Routines setup for testing"); */ // Logger doesn't work in JUnit tests w/ Play 2.0 (known issue).
     System.out.println("Test Routines constructed");
@@ -80,6 +86,10 @@ public class BasicRoutineTests {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
+            SetDB.resetSetDB();
+            RoutineDB.resetRoutineDB();
+            MagicianDB.resetMagicianDB();
+
             browser.maximizeWindow();
 
             ListRoutinesPage listRoutinesPage = null;
@@ -94,7 +104,7 @@ public class BasicRoutineTests {
             editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT);
             browser.goTo(editRoutinePage);
             editRoutinePage.isAt();
-            assertThat(browser.pageSource().contains("Create Routine"));
+            assertThat(browser.pageSource()).contains("Create Routine");
 
             editRoutinePage.submitForm(routine1);
 
@@ -107,7 +117,7 @@ public class BasicRoutineTests {
             editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT, routineId);
             browser.goTo(editRoutinePage);
             editRoutinePage.isAt();
-            assertThat(browser.pageSource().contains("Update Routine"));
+            assertThat(browser.pageSource()).contains("Update Routine");
             editRoutinePage.testContents(browser, routine1);
 
             editRoutinePage.submitForm(routine2);
@@ -119,7 +129,7 @@ public class BasicRoutineTests {
             editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT, routineId);
             browser.goTo(editRoutinePage);
             editRoutinePage.isAt();
-            assertThat(browser.pageSource().contains("Update Routine"));
+            assertThat(browser.pageSource()).contains("Update Routine");
             editRoutinePage.testContents(browser, routine2);
 
             // Delete a Routine.

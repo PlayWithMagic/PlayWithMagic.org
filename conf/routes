@@ -2,8 +2,11 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
+# Home / About / Lexicon page
 GET         /                      controllers.Application.index()
+GET         /about                 controllers.Application.about()
+GET         /help                  controllers.Application.help()
+
 
 # Routine actions
 GET         /listRoutines          controllers.Application.listRoutines()
@@ -12,12 +15,27 @@ GET         /editRoutine           controllers.Application.editRoutine(id: Long?
 POST        /editRoutine           controllers.Application.postRoutine()
 GET         /deleteRoutine         controllers.Application.deleteRoutine(id: Long?= 0)
 
+
 # Magician actions
 GET         /listMagicians         controllers.Application.listMagicians()
 GET         /viewMagician          controllers.Application.viewMagician(id: Long?=0)
 GET         /editMagician          controllers.Application.editMagician(id: Long?=0)
 POST        /editMagician          controllers.Application.postMagician()
 GET         /deleteMagician        controllers.Application.deleteMagician(id: Long?= 0)
+
+#Material actions
+POST        /newMaterial           controllers.Application.newMaterial()
+POST        /editMaterial          controllers.Application.editMaterial(materialId: Integer)
+POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Integer)
+POST        /postMaterial          controllers.Application.postMaterial()
+GET         /viewMaterial          controllers.Application.viewMaterial(routineId: Long, materialId: Integer)
+
+# Set actions
+GET         /listSets              controllers.Application.listSets()
+GET         /viewSet               controllers.Application.viewSet(id: Long?=0)
+GET         /editSet               controllers.Application.editSet(id: Long?=0)
+POST        /editSet               controllers.Application.postSet()
+GET         /deleteSet             controllers.Application.deleteSet(id: Long?=0)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file          controllers.Assets.at(path="/public", file)

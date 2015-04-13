@@ -1,0 +1,48 @@
+@*
+* List all of the Sets in the application.
+*
+* For the Minimum Viable Product release, we are not searching/filtering any content. The page list all of the
+* sets.
+*
+* @see http://www.playframework.com
+*@
+@(sets: List[models.Set])
+
+@Main("listSets") {
+  <!-- Page Content -->
+  <section id="page">
+      <!-- Content -->
+    <section id="content" class="container">
+      <div class="container">
+        <h1>Current Sets</h1>
+      </div>
+
+      <div class="container">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+          @for(thisSet <- sets) {
+            <tr>
+              <td><a href="viewSet?id=@thisSet.getId">@thisSet.getName</a></td>
+              <td>
+                <a href="@routes.Application.editSet(thisSet.getId)" class="btn btn-warning btn-xs"
+                role="button">Edit</a>
+              </td>
+              <td>
+                <a href="@routes.Application.deleteSet(thisSet.getId)" class="btn btn-danger btn-xs"
+                role="button">Delete</a>
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+}

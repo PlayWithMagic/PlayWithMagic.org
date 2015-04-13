@@ -24,6 +24,8 @@
       <!-- FontAwesome fonts -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
 
+
+
       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!--[if lt IE 9]>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -41,13 +43,13 @@
           <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="/">
-          <img class="logo" src="@routes.Assets.at("images/logo_original_trans.png")"/>
+          <img class="logo" src="@routes.Assets.at("images/logo_original_trans.png")" alt="Logo"/>
         </a>
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="@routes.Application.listRoutines()">Browse Routines</a></li>
-          <li><a href="#">Browse Sets</a></li>
+          <li><a href="@routes.Application.listSets()">Browse Sets</a></li>
         </ul>
 
           <!-- Don't show Search on home page or New Magician page-->
@@ -63,6 +65,12 @@
         }
 
         <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/help">
+              <i class="fa fa-question fa-lg hidden-xs"></i>
+              <span class="visible-xs-inline">Help</span>
+            </a>
+          </li>
           <!-- User Info Dropdown, don't show if not logged in -->
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in
@@ -70,9 +78,9 @@
             <ul class="dropdown-menu" role="menu">
               @* <li><a href="displayuser">Profile</a></li> *@
               <li><a href="@routes.Application.listRoutines()">My Routines</a></li>
-              @* <li><a href="#">My Sets</a></li> *@
+              <li><a href="@routes.Application.listSets()">My Sets</a></li>
               <li><a href="@routes.Application.editRoutine()">Create Routine</a></li>
-              @* <li><a href="#">Build Set</a></li> *@
+              <li><a href="@routes.Application.editSet()">Build Set</a></li>
               <li class="divider"></li>
               @* <li><a href="#">Logout</a></li> *@
             </ul>
@@ -86,7 +94,8 @@
               </div>
             </li>
           }
-          <!-- Login Dropdown -->
+          <!-- Login Dropdown; only show on Home Page -->
+          @if(page == "home" ) {
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
               Login <span class="caret"></span>
@@ -108,6 +117,7 @@
               <button class="btn btn-sm btn-primary btn-block" type="submit">Sign in</button>
             </form>
           </li>
+          }
         </ul>
       </div>
     </div>
@@ -118,7 +128,7 @@
     <footer class="footer">
       <div class="container">
         <div class="col-md-3">
-          <p>About Play with Magic</p>
+          <p><a href="/about">About Play with Magic</a></p>
 
           <p>Problems? Contact us on Github!</p>
         </div>
@@ -139,6 +149,7 @@
   <!-- Load Bootstrap JavaScript components -->
   <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="@routes.Assets.at("javascripts/scripts.js")"></script>
 
   </body>
 </html>

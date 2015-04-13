@@ -1,0 +1,53 @@
+@*
+* View/display a single routine.
+*
+* @see http://www.playframework.com
+*@
+@(set: models.Set, routines: List[Routine], routineInSet: List[Long])
+
+@Main("viewSet") {
+  <!-- Page Content -->
+  <section id="page">
+      <!-- Content -->
+    <section id="content" class="container">
+      <div class="col-md-6">
+        <h1>@set.getName <small><a href="@routes.Application.listMagicians()">Magician Name</a></small></h1>
+        <p class="visible-xs-block visible-sm-block">
+          <a href="@routes.Application.editSet(set.getId)" class="btn btn-large">Edit Set</a>
+          <a href="@routes.Application.listSets()" class="btn btn-large">Return to Set List</a>
+        </p>
+        <h2>Routines in this Set</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Routine</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(routine <- routines) {
+              @for(thisRoutineId <- routineInSet) {
+                @if(routine.getId == thisRoutineId) {
+                  <tr>
+                    <td>@routine.getName</td>
+                    <td>@routine.getDuration</td>
+                  </tr>
+                }
+              }
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <p class="hidden-xs hidden-sm">
+          <a href="@routes.Application.editSet(set.getId)" class="btn btn-large">Edit Set</a>
+          <a href="@routes.Application.listSets()" class="btn btn-large">Return to Set List</a>
+        </p>
+        <h3>Description</h3>
+        <p>@set.getDescription</p>
+
+      </div>
+
+    </section>
+  </section>
+}

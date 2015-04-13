@@ -12,7 +12,18 @@
     <section id="content" class="container">
       <div class="col-md-6">
         <h1>@routine.getName <small><a href="listMagicians">Magician Name</a></small></h1>
-        <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")" alt="Image of Routine"/>
+        <p class="visible-xs-block visible-sm-block">
+          <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
+          <a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
+        </p>
+        @if(routine.getImageUrl != null) {
+          <img class="img-responsive" src="@routes.Assets.at(routine.getImageUrl)" alt="Image of Routine"/>
+        }
+        <br />
+        @if(routine.getYouTubeUrl != null) {
+          <h2>@routine.getName Example</h2>
+          <iframe width="420" height="315" src="@routine.getYouTubeUrl" frameborder="0" allowfullscreen></iframe>
+        }
         <h2>Related Routines</h2>
         <table class="table table-striped">
           <thead>
@@ -38,9 +49,10 @@
         </table>
       </div>
       <div class="col-md-6">
-        <p><a href="showRoutines" class="btn btn-large">Return to Routine List</a>
-          <a href="/editRoutine?id=@routine.getId" class="btn btn-large">Edit Routine</a></p>
-
+        <p class="hidden-xs hidden-sm">
+          <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
+          <a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
+        </p>
         <h3>Description</h3>
         <p>@routine.getDescription</p>
 
@@ -60,17 +72,21 @@
         <p>@routine.getResetDescription</p>
 
         <h3>Materials</h3>
-
-        <ul>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-          <li>Item 4</li>
-          <li>Item 5</li>
-          <li>Item 6</li>
-          <li>Item 7</li>
-        </ul>
-
+        @if(routine.getMaterials().size() == 0) {
+          <p>None</p>
+        } else {
+          <ul>
+          @for(material <- routine.getMaterials()) {
+            <li>
+              <a href="@routes.Application.viewMaterial(
+                routine.getId(),
+                routine.getMaterials().indexOf(material))">
+              @material.getName()
+              </a>
+            </li>
+          }
+          </ul>
+        }
       </div>
 
     </section>

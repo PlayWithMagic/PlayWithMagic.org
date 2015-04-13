@@ -1,0 +1,44 @@
+@*
+* View/display a single item or material used in a routine.
+*
+* @see http://www.playframework.com
+*@
+@(material: Material)
+
+@Main("viewRoutine") {
+  <!-- Page Content -->
+  <section id="page">
+      <!-- Content -->
+    <section id="content" class="container">
+      <div class="col-md-6">
+        <h1>@material.getName</h1>
+        @if(material.getImageUrl != null) {
+          <img class="img-responsive" src="@routes.Assets.at(material.getImageUrl)" alt="Image of Marerial"/>
+        }
+        <br />
+      </div>
+      <div class="col-md-6">
+        <p class="hidden-xs hidden-sm">  @* TODO FIX 1 Below *@
+          <a href="@routes.Application.editMaterial(1)" class="btn btn-large">Edit Material</a>
+          <a href="@routes.Application.listRoutines()" class="btn btn-large">Show Routines</a>
+        </p>
+        <h3>Notes</h3>
+        <p>@material.getDescription</p>
+
+        <h3>Usage</h3>
+        <p>Is Inspectable? @if(material.isInspectable()) {Yes} else {No}</p>
+        <p>Is Given Away? @if(material.isGivenAway()) {Yes} else {No}</p>
+        <p>Is Consumed? @if(material.isConsumed()) {Yes} else {No}</p>
+
+        <h3>Procurement</h3>
+        <p>Price = $ @if(material.getPrice() != null) {@material.getPrice()} else {Not available}</p>
+        @if(material.getPurchaseUrl() != null && material.getPurchaseUrl().length() > 0) {
+          <a href="@material.getPurchaseUrl()">@material.getPurchaseUrl()</a>
+        } else {
+          <p>A link to purchase the item is not available.  Please add one!</p>
+        }
+      </div>
+
+    </section>
+  </section>
+}
