@@ -120,8 +120,6 @@ public class SetDB {
     routineIds3.add(14L);
     routineIds3.add(15L);
     routineIds3.add(34L);
-    System.out.println(currentId);
-    System.out.println(routineIds);
     set = new Set(currentId, 3, "Mechanisms", "With each of the routines in this set, it involves some physical device"
         + " that the audience can either interact with, or view interaction with.  The key is to really liven up "
         + "Zig-Zag-Pencil with your own bit of flare, otherwise it will pale against the other routines in this Set. "
