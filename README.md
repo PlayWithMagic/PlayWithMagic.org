@@ -4,6 +4,7 @@ PlayWithMagic
 PlayWithMagic is a web-based application that catalogs magic tricks and helps magicians build shows.
 
 Want to know more about PlayWithMagic?
+  * [Check out PlayWithMagic here](http://playwithmagic.org)
   * [Check out the prototype here](http://mark.nelson.engineer/PlayWithMagic/mockup/)
   * [The PlayWithMagic Project web page is here](http://playwithmagic.github.io/PlayWithMagic/)
   * [The PlayWithMagic GitHub home page is here](https://github.com/PlayWithMagic/PlayWithMagic/)
