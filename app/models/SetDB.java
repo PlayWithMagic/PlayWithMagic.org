@@ -105,6 +105,33 @@ public class SetDB {
     SetDB.addSet(set);
     currentId++;
 
+    List<Long> routineIds2 = new ArrayList<Long>();
+    routineIds2.add(5L);
+    routineIds2.add(10L);
+    routineIds2.add(33L);
+    set = new Set(currentId, 2, "With Flare", "This starts off with a match routine for something that has a bit "
+        + "of an explosive opener, followed by a simple card trick.  Finally, you light up the night with a flaming "
+        + "wallet routine, which binds the card trick and the fire trick together.", routineIds2);
+    SetDB.addSet(set);
+    currentId++;
+
+    List<Long> routineIds3 = new ArrayList<Long>();
+    routineIds3.add(4L);
+    routineIds3.add(14L);
+    routineIds3.add(15L);
+    routineIds3.add(34L);
+    System.out.println(currentId);
+    System.out.println(routineIds);
+    set = new Set(currentId, 3, "Mechanisms", "With each of the routines in this set, it involves some physical device"
+        + " that the audience can either interact with, or view interaction with.  The key is to really liven up "
+        + "Zig-Zag-Pencil with your own bit of flare, otherwise it will pale against the other routines in this Set. "
+        + "Next, a simple card trick that allows the audience member to interact with their cell phone!  Always good "
+        + "to have more audience interaction.  Finally, the close is something that goes back to the engineer theme "
+        + "of the opener with a twist! "
+        + "Once you've closed, the audience member will walk away with a photo memory on their phone.", routineIds3);
+    SetDB.addSet(set);
+    currentId++;
+
 
   }
 
