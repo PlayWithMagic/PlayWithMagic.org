@@ -92,6 +92,12 @@ public class RoutineFormData {
       message = "The image URL can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String imageUrl;
 
+  /**
+   * A URL of the review for this routine.
+   */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "The review URL can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
+  public String reviewUrl;
 
   /**
    * Default no-arg constructor required by Play.
@@ -117,6 +123,7 @@ public class RoutineFormData {
     resetDescription = routine.getResetDescription();
     youTubeUrl = routine.getYouTubeUrl();
     imageUrl = routine.getImageUrl();
+    reviewUrl = routine.getReviewUrl();
   }
 
   /**
