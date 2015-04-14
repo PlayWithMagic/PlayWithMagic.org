@@ -21,6 +21,7 @@ public class Routine {
   private String youTubeUrl;         /* A URL of the magician performing this routine on YouTube. */
   private String imageUrl;           /* A URL of an image of this routine. */
   private List<Material> materials;  /* The materials used for this routine. */
+  private String reviewUrl;          /* A URL of a review of the routine. */
 
   /**
    * Create new, valid Routine object.
@@ -222,6 +223,15 @@ public class Routine {
    */
   public List<Material> getMaterials() {
     return materials;
+  }
+
+  /**
+   * Get a URL of the image for this routine.
+   *
+   * @return A URL of the image for this routine.
+   */
+  public String getReviewUrl() {
+    return reviewUrl;
   }
 
 }
