@@ -87,6 +87,12 @@
           }
           </ul>
         }
+
+        @if(routine.getReviewUrl != null) {
+          <h3>Review</h3>
+          <p><a href="@routine.getReviewUrl" target="_blank">@routine.getReviewUrl</a></p>
+        }
+
       </div>
 
     </section>
