@@ -67,6 +67,7 @@ public class RoutineDBInit1 {
     routine.setResetDescription("Not shared");
     routine.setYouTubeUrl("https://www.youtube.com/embed/ANdHX8X889M");
     routine.setImageUrl("images/routines/2.jpg");
+    routine.setReviewUrl("http://www.themagiccafe.com/forums/viewtopic.php?topic=245183&forum=109");
 
     id = RoutineDB.addRoutines(new RoutineFormData(routine));
     routine = RoutineDB.getRoutine(id);
