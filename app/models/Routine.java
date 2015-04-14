@@ -226,6 +226,15 @@ public class Routine {
   }
 
   /**
+   * Set a URL of the review of this routine.
+   *
+   * @param reviewUrl A URL of the review of this routine.
+   */
+  public void setReviewUrl(String reviewUrl) {
+    this.reviewUrl = reviewUrl;
+  }
+
+  /**
    * Get a URL of a review for this routine.
    *
    * @return A URL of the review for this routine.
