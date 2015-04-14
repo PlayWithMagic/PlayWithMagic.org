@@ -226,9 +226,9 @@ public class Routine {
   }
 
   /**
-   * Get a URL of the image for this routine.
+   * Get a URL of a review for this routine.
    *
-   * @return A URL of the image for this routine.
+   * @return A URL of the review for this routine.
    */
   public String getReviewUrl() {
     return reviewUrl;
