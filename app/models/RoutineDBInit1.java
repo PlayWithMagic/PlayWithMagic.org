@@ -343,6 +343,7 @@ public class RoutineDBInit1 {
     routine.setResetDuration(2);
     routine.setResetDescription("Panic resets instantly, but I need to sort out the decks when I'm done.");
     routine.setYouTubeUrl("https://www.youtube.com/embed/w2m30DlKR8k");
+    routine.setReviewUrl("http://themagiccafe.com/forums/viewtopic.php?topic=225471&forum=109&184&start=180#3");
 
     routine.setImageUrl("images/routines/205.jpg");
 
