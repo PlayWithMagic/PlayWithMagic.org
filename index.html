@@ -1,51 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="PlayWithMagic.org : We&#39;re looking for a few good routines">
+    <title>PlayWithMagic.org by PlayWithMagic</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>PlayWithMagic.org</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1>PlayWithMagic.org</h1>
+        <p>We&#39;re looking for a few good routines</p>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/PlayWithMagic/PlayWithMagic.org">View on GitHub</a>
+        <p class="view"><a href="https://github.com/PlayWithMagic/PlayWithMagic.org">View the Project on GitHub <small>PlayWithMagic/PlayWithMagic.org</small></a></p>
 
-          <h1 id="project_title">PlayWithMagic.org</h1>
-          <h2 id="project_tagline">We&#39;re looking for a few good routines</h2>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/PlayWithMagic/PlayWithMagic.org/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/PlayWithMagic/PlayWithMagic.org/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+        <ul>
+          <li><a href="https://github.com/PlayWithMagic/PlayWithMagic.org/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/PlayWithMagic/PlayWithMagic.org/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/PlayWithMagic/PlayWithMagic.org">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
         <h1>
-<a id="playwithmagic" class="anchor" href="#playwithmagic" aria-hidden="true"><span class="octicon octicon-link"></span></a>PlayWithMagic</h1>
+<a id="playwithmagicorg" class="anchor" href="#playwithmagicorg" aria-hidden="true"><span class="octicon octicon-link"></span></a>PlayWithMagic.org</h1>
 
-<p>PlayWithMagic is a web-based application that catalogs magic tricks and helps magicians build shows.</p>
+<p>PlayWithMagic.org is a web-based application that catalogs magic tricks and helps magicians build shows.  It is the back
+end for the live website, <a href="http://www.playwithmagic.org">http://www.playwithmagic.org/</a>.</p>
 
-<p><img src="https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_home.png" alt="Home Page" title="Home Page"></p>
+<p><img src="https://github.com/PlayWithMagic/PlayWithMagic.org/raw/master/doc/images/Desktop_home.png" alt="Home Page" title="Home Page"></p>
 
-<p>Want to know more about PlayWithMagic?</p>
-
-<ul>
-<li><a href="http://playwithmagic.org">Go to PlayWithMagic now</a></li>
-<li><a href="http://playwithmagic.github.io/PlayWithMagic/">The PlayWithMagic Project site</a></li>
-<li><a href="https://github.com/PlayWithMagic/PlayWithMagic/">The PlayWithMagic GitHub home</a></li>
-<li><a href="http://mark.nelson.engineer/PlayWithMagic/mockup/">For those who are interested, here's the original prototype</a></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center">The Home Page</th>
+<th align="center">Routines</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Desktop</td>
+<td align="center"><img src="https://github.com/PlayWithMagic/PlayWithMagic.org/raw/master/doc/images/Desktop_home.png" alt="alt text" title="Logo Title Text 1"></td>
+<td align="center"><img src="https://github.com/PlayWithMagic/PlayWithMagic.org/raw/master/doc/images/Desktop_routines.png" alt="alt text"></td>
+</tr>
+<tr>
+<td>Mobile</td>
+<td align="center"><img src="https://github.com/PlayWithMagic/PlayWithMagic.org/raw/master/doc/images/Mobile_home.PNG" alt="alt text" title="Logo Title Text 1"></td>
+<td align="center"><img src="https://github.com/PlayWithMagic/PlayWithMagic.org/raw/master/doc/images/Mobile_routines.PNG" alt="alt text"></td>
+</tr>
+</tbody>
+</table>
 
 <h2>
 <a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -63,181 +74,25 @@ recommendation engine could prompt magicians to consider routines that are popul
 them out of their comfort zone.</p>
 
 <h2>
-<a id="approach" class="anchor" href="#approach" aria-hidden="true"><span class="octicon octicon-link"></span></a>Approach</h2>
+<a id="user-guide" class="anchor" href="#user-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>User Guide</h2>
 
-<p>The web application revolves around three entities:  Magicians, Routines and Sets.  A magician creates an account
-and enters profile information about themselves.  Magicians create routines, search others' routines, link
-routines together and 'rate' routines.  Finally, magicians can compose sets.  Sets consist of:</p>
-
-<ul>
-<li>Information unique to the set (venue, expected duration, type, etc.).</li>
-<li>An interface for finding candidate routines:  A search/filter tool that allows magicians to find shared routines
-in the application's catalog into a 'shopping cart'.  This tool will have a recommender engine to help magicians
-find routines that they may not have picked on their own.</li>
-<li>A set-builder canvas that allows magicians to drag routines from a dock (the results of the picker) into a
-visual representation of the set.  Routines can be reordered, moved back to the dock, etc.</li>
-<li>Indicators/status to help magicians understand certain rules such as:  Set duration, avoid repeating the same effect
-throughout a set, cost of production, etc.</li>
-</ul>
-
-<p><img src="https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_routines.png" alt="Routine Page" title="Routine Page"></p>
-
-<h3>
-<a id="use-cases" class="anchor" href="#use-cases" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use Cases</h3>
-
-<p><a href="https://github.com/PlayWithMagic/PlayWithMagic/wiki/Use-Cases">Several use cases are documented in the Wiki.</a></p>
-
-<h3>
-<a id="user-experience" class="anchor" href="#user-experience" aria-hidden="true"><span class="octicon octicon-link"></span></a>User Experience</h3>
-
-<p>This web application has a dynamic, database-driven, responsive user interface.  It uses traditional metaphors such as 
-top navigation and familiar iconography.  Web-forms are used for input, tactile controls such as sliders and movable 
-objects may be used.  The set builder allows magicians to drag routines from a dock into a set.  Routines can be 
-visually rearranged and contain visual cues as to length or difficulty.</p>
-
-<p>The application is fully usable from a desktop or tablet.  Mobile platform users can view sets, but not modify them.</p>
-
-<p>Generally, using the application should be self-evident and obvious to use.  We aspire that the UI will be so good that
-people can use it when they are sloppy drunk. (See the development section below for a more lucid explanation).  However
-we will have some
-<a href="https://github.com/PlayWithMagic/PlayWithMagic/wiki/User-Guide">user-level documentation in the project wiki</a>.</p>
-
-<h3>
-<a id="application-runtime-environment" class="anchor" href="#application-runtime-environment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Application Runtime Environment</h3>
-
-<p>The application runs through the <a href="https://www.playframework.com">Play Framework</a>.  The Play Framework provides
-both a webserver and an application runtime framework.</p>
-
-<p>The application draws on unmodified <a href="http://jqueryui.com">JQuery</a>, <a href="http://getbootstrap.com">Bootstrap</a>,
-<a href="https://bootswatch.com">Bootswatch</a>, <a href="http://fontawesome.io/icon/cog/">Font Awesome</a> and
-<a href="http://www.google.com/fonts">Google Font</a> tools directly from their CDN servers.</p>
-
-<h3>
-<a id="application-deployment-environment" class="anchor" href="#application-deployment-environment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Application Deployment Environment</h3>
-
-<p>The application is deployed through the <a href="https://www.heroku.com">Heroku Cloud Platform</a>.
-Information about the deployment, development and design of the application can be found at the <a href="https://github.com/PlayWithMagic/PlayWithMagic/wiki/Developer-Guide">PlayWithMagic
-Developer's Wiki hosted on GitHub</a>.</p>
-
-<h3>
-<a id="application-development-environment" class="anchor" href="#application-development-environment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Application Development Environment</h3>
-
-<p>The application was developed with <a href="https://www.jetbrains.com/idea/">IntelliJ</a> IDE and uses
-<a href="http://www.scala-sbt.org">SBT</a> for the build engine.  Version control is maintained through
-<a href="https://github.com">GitHub</a>.</p>
-
-<h3>
-<a id="user-interface-philosophy" class="anchor" href="#user-interface-philosophy" aria-hidden="true"><span class="octicon octicon-link"></span></a>User Interface Philosophy</h3>
-
-<p>We'd like to build a user interface that even magicians can use.  Magicians are an odd bunch.  They categorically 
-suffer from attention deficit disorder (unless they are practicing).  They are not organized (except when setting the 
-prop table)... and they like to drink (a lot).  So, we have adopted a User Interface strategy called 
-<a href="https://www.youtube.com/watch?v=r2CbbBLVaPk">The User is Drunk</a>.  There is an excellent 5 minute video to get you
-started.  The central ideas are:  Great UI isn't there (people don't realize it's there).  Give users lots of guidance
-and say things twice.  </p>
-
-<h3>
-<a id="application-high-level-design" class="anchor" href="#application-high-level-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Application High-Level Design</h3>
-
-<p>The model revolves around three central entities:</p>
-
-<ol>
-<li>Routines (A single magic trick) and the materials for the routines</li>
-<li>Sets (An personalized, ordered collection of routines)</li>
-<li>Magicians/Users</li>
-</ol>
-
-<p>The application uses a Model-View-Controller (MVC) design pattern.  The application is designed with rapid
-prototyping in mind and will consequently rely on unit, integration and application tests to maintain a high level
-of quality at each release.</p>
+<p>A helpful User Guide is available on the <a href="https://github.com/PlayWithMagic/PlayWithMagic.org/wiki/User-Guide">PlayWithMagic.org Wiki</a>.</p>
 
 <h2>
-<a id="milestones" class="anchor" href="#milestones" aria-hidden="true"><span class="octicon octicon-link"></span></a>Milestones</h2>
+<a id="developer-guide" class="anchor" href="#developer-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Developer Guide</h2>
 
-<h3>
-<a id="mockup" class="anchor" href="#mockup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mockup</h3>
-
-<p>Due:  25 March</p>
-
-<ul>
-<li><del>A responsive, non-dynamic (no Java software) representation of the major elements of the application.</del></li>
-<li><del>A README.md file</del></li>
-<li>
-<del>A viable GitHub project</del>
-
-<ul>
-<li><del>Source code</del></li>
-<li><del>Issue tracker</del></li>
-<li><del>Wiki content</del></li>
-</ul>
-</li>
-</ul>
-
-<h3>
-<a id="deliverable-1" class="anchor" href="#deliverable-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deliverable 1</h3>
-
-<p>Due:  8 April (2 weeks after Mockup)</p>
-
-<ul>
-<li><del>Established Look &amp; Feel</del></li>
-<li><del>Consistent Navigation</del></li>
-<li>
-<del>CRUD capable entities against an in-memory database w/ 2-3 users pre-populated)</del>
-
-<ul>
-<li><del>User Profile</del></li>
-<li><del>User Routines</del></li>
-</ul>
-</li>
-<li>
-<del>Seed the dataset with a minimum of 24 routines</del> </li>
-</ul>
-
-<h3>
-<a id="deliverable-2" class="anchor" href="#deliverable-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deliverable 2</h3>
-
-<p>Due:  22 April (2 weeks after Deliverable 1)</p>
-
-<ul>
-<li>Refactor the model into a database-backed system</li>
-<li>Increase the number of saved users &amp; <del>routines</del>
-</li>
-<li>Find &amp; Save routines</li>
-<li><del>CRUD capable Set management</del></li>
-<li>
-<del>Add an additional 12 routines</del> -- have the consulting magicians use the UI to add routines</li>
-</ul>
-
-<h3>
-<a id="deliverable-3" class="anchor" href="#deliverable-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deliverable 3</h3>
-
-<p>Due:  6 May (2 weeks after Deliverable 2)</p>
-
-<ul>
-<li>Library mockup (not complete implementation)</li>
-<li>Recommender engine mockup</li>
-<li>Add an additional 12 routines</li>
-</ul>
-
-<h3>
-<a id="final-project-due" class="anchor" href="#final-project-due" aria-hidden="true"><span class="octicon octicon-link"></span></a>Final Project Due</h3>
-
-<p>Due:  13 May (1 week after Deliverable 3)</p>
-
-<ul>
-<li>Update documentation, final fit-and-finish.</li>
-</ul>
+<p>PlayWithMagic.org is an Open Source project, and anyone can contribute!  Want to help develop PlayWithMagic.org?  Please start with the <a href="https://github.com/PlayWithMagic/PlayWithMagic.org/wiki/Developer-Guide">Developer Guide</a>.</p>
 
 <h2>
 <a id="bugs-and-feature-requests" class="anchor" href="#bugs-and-feature-requests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bugs and Feature Requests</h2>
 
 <p>Got a bug or a feature request?  We'd like to hear it!<br>
-<a href="https://github.com/PlayWithMagic/PlayWithMagic/issues/new" title="New Issue">Click here to open an issue.</a></p>
+<a href="https://github.com/PlayWithMagic/PlayWithMagic.org/issues/new" title="New Issue">Click here to open an issue.</a></p>
 
 <h2>
 <a id="known-bugs" class="anchor" href="#known-bugs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Known Bugs</h2>
 
-<p><a href="https://github.com/PlayWithMagic/PlayWithMagic/issues">An up-to-date list of issues can be found at the PlayWithMagic website.</a></p>
+<p><a href="https://github.com/PlayWithMagic/PlayWithMagic.org/issues">An up-to-date list of issues can be found at the PlayWithMagic.org GitHub Issues page.</a></p>
 
 <h2>
 <a id="creators" class="anchor" href="#creators" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creators</h2>
@@ -248,7 +103,7 @@ of quality at each release.</p>
 <li>Mark Nelson</li>
 </ul>
 
-<p><a href="https://github.com/PlayWithMagic/PlayWithMagic/wiki/Contact-Us">Checkout the Contact Us page on the PlayWithMagic Wiki</a></p>
+<p><a href="https://github.com/PlayWithMagic/PlayWithMagic.org/wiki/Project-Maintainers">Checkout the Project Maintainer's page on the PlayWithMagic.org Wiki</a></p>
 
 <h2>
 <a id="credits-and-acknowledgements" class="anchor" href="#credits-and-acknowledgements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits and Acknowledgements</h2>
@@ -264,47 +119,13 @@ of quality at each release.</p>
 <li><a href="http://www.aaronfishermagic.com">Aaron Fisher</a></li>
 <li><a href="http://mark.nelson.engineer/wordpress/index.php/magic-home-page/">Mark Nelson</a></li>
 </ul>
-
-<h2>
-<a id="the-three-prime-directives" class="anchor" href="#the-three-prime-directives" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Three Prime Directives</h2>
-
-<ol>
-<li>The system successfully accomplishes a useful task.
-
-<ul>
-<li>An online catalog of your own routines</li>
-<li>Ability to find others' routines</li>
-<li>A tool for choreographing routines into saved sets</li>
-<li>A recommender engine for adding previously unknown routines into sets</li>
-</ul>
-</li>
-<li>An external user can successfully install and use the system
-
-<ul>
-<li>The application will be cloud based</li>
-<li>The only client-side software requirements is a browser</li>
-<li>The client-side hardware requirement for full functionality is a desktop or tablet</li>
-</ul>
-</li>
-<li>An external developer can successfully understand and enhance the system
-
-<ul>
-<li>Documentation can be found on the Wiki and will be enough to allow a competent developer to make enhancements</li>
-</ul>
-</li>
-</ol>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">PlayWithMagic.org maintained by <a href="https://github.com/PlayWithMagic">PlayWithMagic</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/PlayWithMagic">PlayWithMagic</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-
+    <script src="javascripts/scale.fix.js"></script>
     
-
   </body>
 </html>
