@@ -68,7 +68,7 @@ public class BasicMaterialTests {
 
             // Start at the home page...
             browser.goTo("http://localhost:" + TEST_PORT + "/");
-            assertThat(browser.pageSource()).contains("We're Looking for a Few Good Routines");
+            assertThat(browser.pageSource()).contains("We're looking for a few good routines");
 
             // Click Logged in Username -> Create Routine
             browser.goTo("http://localhost:" + TEST_PORT + "/editRoutine");
