@@ -39,7 +39,7 @@ public class IndexPage extends FluentPage {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo("Play With Magic");
-    assertThat(pageSource().contains("We're Looking for a Few Good Routines"));
-    assertThat(pageSource().contains("Post Routines, Create Sets, and Share Magic!"));
+    assertThat(pageSource().contains("We're looking for a few good routines"));
+    assertThat(pageSource().contains("Post Routines, Create Sets and Share Magic!"));
   }
 }
