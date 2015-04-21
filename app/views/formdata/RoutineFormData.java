@@ -100,6 +100,29 @@ public class RoutineFormData {
   public String reviewUrl;
 
   /**
+   * What was the inspiration for this routine.
+   */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "This must be really inspiring.  Unfortunately, this field can't be more than "
+          + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
+  public String inspiration;        /* What was the inspiration for this routine. */
+
+  /**
+   * What routines would you put next to this.
+   */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "The placement text can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
+  public String placement;          /* What routines would you put next to this. */
+
+  /**
+   * Why did you make some of the choices you made in the design of this routine.
+   */
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "The choices text can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
+  public String choices;            /* Why did you make some of the choices you made in the design of this routine. */
+
+
+  /**
    * Default no-arg constructor required by Play.
    */
   public RoutineFormData() {
@@ -124,7 +147,11 @@ public class RoutineFormData {
     youTubeUrl = routine.getYouTubeUrl();
     imageUrl = routine.getImageUrl();
     reviewUrl = routine.getReviewUrl();
+    inspiration = routine.getInspiration();
+    placement = routine.getPlacement();
+    choices = routine.getChoices();
   }
+
 
   /**
    * Enforce special UI validation rules for Routines.

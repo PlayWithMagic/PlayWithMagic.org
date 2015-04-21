@@ -61,6 +61,9 @@ public class RoutineDB {
     routine.setYouTubeUrl(routineForm.youTubeUrl);
     routine.setImageUrl(routineForm.imageUrl);
     routine.setReviewUrl(routineForm.reviewUrl);
+    routine.setInspiration(routineForm.inspiration);
+    routine.setPlacement(routineForm.placement);
+    routine.setChoices(routineForm.choices);
 
     routines.put(idVal, routine);
     Logger.debug(((routineForm.id == 0) ? "Added" : "Updated") + " routine.  id = [" + idVal + "]"
@@ -178,6 +181,9 @@ public class RoutineDB {
     routine.setResetDescription("");
     routine.setYouTubeUrl("https://www.youtube.com/embed/");
     routine.setReviewUrl("");
+    routine.setInspiration("");
+    routine.setPlacement("");
+    routine.setChoices("");
 
     routine.setImageUrl("images/routines/xxx.jpg");
 

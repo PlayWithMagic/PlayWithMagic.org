@@ -64,6 +64,9 @@ public class EditRoutinePage extends FluentPage {
     fill("#resetDescription").with(routine.getResetDescription());
     fill("#youTubeUrl").with(routine.getYouTubeUrl());
     fill("#imageUrl").with(routine.getImageUrl());
+    fill("#inspiration").with(routine.getInspiration());
+    fill("#placement").with(routine.getPlacement());
+    fill("#choices").with(routine.getChoices());
 
     submit("#submit");
   }
@@ -84,6 +87,9 @@ public class EditRoutinePage extends FluentPage {
     assertThat(browser.pageSource()).contains(routine.getResetDescription());
     assertThat(browser.pageSource()).contains(routine.getYouTubeUrl());
     assertThat(browser.pageSource()).contains(routine.getImageUrl());
+    assertThat(browser.pageSource()).contains(routine.getInspiration());
+    assertThat(browser.pageSource()).contains(routine.getPlacement());
+    assertThat(browser.pageSource()).contains(routine.getChoices());
   }
 
 }
