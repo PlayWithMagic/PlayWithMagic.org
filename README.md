@@ -5,10 +5,10 @@ PlayWithMagic is a web-based application that catalogs magic tricks and helps ma
 
 Want to know more about PlayWithMagic?
   * [Go to PlayWithMagic now](http://playwithmagic.org)
-  * [The PlayWithMagic Project site](http://playwithmagic.github.io/PlayWithMagic/)
-  * [The PlayWithMagic GitHub home](https://github.com/PlayWithMagic/PlayWithMagic/)
+  * [The PlayWithMagic Project site](http://playwithmagic.github.io/PlayWithMagic.org/) 
+  * [The PlayWithMagic GitHub home](https://github.com/PlayWithMagic/PlayWithMagic.org) 
   * [For those who are interested, here's the original prototype](http://mark.nelson.engineer/PlayWithMagic/mockup/)
-
+  
 |               | The Home Page | Routines  |
 | ------------- |:-------------:| :--------:|
 | Desktop       | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_home.png "Logo Title Text 1") | ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_routines.png "") |
