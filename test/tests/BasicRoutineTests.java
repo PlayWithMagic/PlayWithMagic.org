@@ -45,6 +45,9 @@ public class BasicRoutineTests {
     routine1.setResetDescription("Test Routine Reset Description");
     routine1.setYouTubeUrl("Test YouTube URL");
     routine1.setImageUrl("Test Image URL");
+    routine1.setInspiration("Test Inspiration");
+    routine1.setPlacement("Test Placement");
+    routine1.setChoices("Test Choices");
 
     routine2 = new Routine(0, "Test Routine Name 02", "Test Routine Description 02");
     routine2.setDuration(12);
@@ -54,6 +57,9 @@ public class BasicRoutineTests {
     routine2.setResetDescription("Test Routine Reset Description 02");
     routine2.setYouTubeUrl("Test YouTube URL 02");
     routine2.setImageUrl("Test Image URL 02");
+    routine2.setInspiration("Test Inspiration 02");
+    routine2.setPlacement("Test Placement 02");
+    routine2.setChoices("Test Choices 02");
 
     /* Logger.debug("Routines setup for testing"); */ // Logger doesn't work in JUnit tests w/ Play 2.0 (known issue).
     System.out.println("Test Routines constructed");
