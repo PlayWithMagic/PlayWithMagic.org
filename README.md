@@ -28,8 +28,8 @@ are plenty of websites that have product reviews and discuss routines, but what 
 *metadata*: All of the discrete fields we ask magicians to fill out.  Over time, these fields will become searchable
 and will drive all kinds of unique innovations.
 
-So What?  Well, if you're not a magician, then it's probably not very interesting.  But if you are a magician -- 
-perhaps one who has grown up in an Internet era -- then this is a terrific place to share, to learn and to 
+So What?  Well, if you're not a magician, then it's probably not very interesting.  But if you are a magician — 
+perhaps one who has grown up in the Internet era — then this is a terrific place to share, to learn and to 
 collaborate.
 
 Using PlayWithMagic.org
