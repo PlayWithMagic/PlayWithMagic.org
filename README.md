@@ -1,14 +1,27 @@
 PlayWithMagic.org
-=============
+=================
 
-PlayWithMagic.org is a web-based application that catalogs magic tricks and helps magicians build shows.  It is the back
-end for the live website, [http://www.playwithmagic.org/](http://www.playwithmagic.org).
+[PlayWithMagic.org](http://www.playwithmagic.org) is a web application that catalogs magic tricks and helps magicians 
+build shows.
 
+Overview
+--------
 
-Home Page
----------
+  * [Responsive Layout built on Twitter Bootstrap](http://getbootstrap.com)
+  * [Built with Java on the Play Framework](href="http://playframework.com)
+  * [Hosted by Heroku](http://heroku.com)
+  * [Makes CSS easier with the LESS transpiler](http://lesscss.org/)
 
-Learn more at [The PlayWithMagic.org Project site](http://playwithmagic.github.io/PlayWithMagic.org/).
+This application uses an in-memory database to catalog Routines and Sets for magicians.  For more information visit the
+[project home page](http://playwithmagic.github.io/PlayWithMagic.org/).
+
+You can also visit the application at [http://www.playwithmagic.org/](http://www.playwithmagic.org).
+
+The First Few Things You Should Know as a Project Developer
+-----------------------------------------------------------
+  * We make extensive use of GitHub's Issue tracker.
+  * The application uses a Model-
+
 
 
 Documentation
