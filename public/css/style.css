@@ -51,9 +51,6 @@ body header#about img.logo {
 body header#help {
   padding-top: 25px;
 }
-body header#help img.logo {
-  height: 100px;
-}
 body section#main section#content {
   text-align: center;
 }
