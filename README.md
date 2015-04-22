@@ -23,9 +23,9 @@ This application uses an in-memory database to catalog Routines and Sets for mag
 
 ###The Gee Wiz Test and the So What Test
 "Geez, this is kinda cool."  That's what we want to hear from our users.  There are a few novel things about this 
-website.  According to our consulting magicians, there is no other website that catalogs magic tricks like this.  
-There are plenty of websites that have product review and discuss routines, but what sets PlayWithMagic apart is
-metadata.  All of the discrete fields we ask magicians to fill out.  Over time, these fields will become searchable
+website.  According to our consulting magicians, there is no other website that catalogs magic tricks like this.  There 
+are plenty of websites that have product reviews and discuss routines, but what sets PlayWithMagic apart is
+*metadata*: All of the discrete fields we ask magicians to fill out.  Over time, these fields will become searchable
 and will drive all kinds of unique innovations.
 
 So What?  Well, if you're not a magician, then it's probably not very interesting.  But if you are a magician -- 
