@@ -4,7 +4,7 @@ PlayWithMagic.org
 [PlayWithMagic.org](http://www.playwithmagic.org) is a web application that catalogs magic tricks and helps magicians 
 build shows.
 
-![alt text](https://github.com/PlayWithMagic/PlayWithMagic.org/raw/master/doc/images/Desktop_home.png "Logo Title Text 1")
+![alt text](https://github.com/PlayWithMagic/PlayWithMagic.org/raw/master/doc/images/homePageDesktop.png "Logo Title Text 1")
 
 Want to know more about PlayWithMagic?
   * [Go to PlayWithMagic.org now](http://playwithmagic.org)
