@@ -7,8 +7,8 @@ build shows.
 ![alt text](https://github.com/PlayWithMagic/PlayWithMagic/raw/master/doc/images/Desktop_home.png "Logo Title Text 1")
 
 Want to know more about PlayWithMagic?
-  * [Go to PlayWithMagic now](http://playwithmagic.org)
-  * [The PlayWithMagic Project site](http://playwithmagic.github.io/PlayWithMagic.org/) 
+  * [Go to PlayWithMagic.org now](http://playwithmagic.org)
+  * [The PlayWithMagic.org Project site](http://playwithmagic.github.io/PlayWithMagic.org/) 
   
 Overview
 --------
