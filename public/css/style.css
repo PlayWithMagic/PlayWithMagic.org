@@ -45,10 +45,13 @@ body header#routines p {
 body header#about {
   padding-top: 25px;
 }
+body header#about img.logo {
+  height: 100px;
+}
 body header#help {
   padding-top: 25px;
 }
-body header#help img.help-logo {
+body header#help img.logo {
   height: 100px;
 }
 body section#main section#content {
