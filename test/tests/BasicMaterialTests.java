@@ -3,6 +3,8 @@ package tests;
 import models.Material;
 import models.Routine;
 import org.junit.Test;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import play.libs.F;
 import play.test.TestBrowser;
 
@@ -61,7 +63,7 @@ public class BasicMaterialTests {
    */
   @Test
   public void testMaterialCrudWorkflow() {
-    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             browser.maximizeWindow();
@@ -75,7 +77,6 @@ public class BasicMaterialTests {
             assertThat(browser.pageSource()).contains("Create Routine");
 
             // Click Add Material without entering any information... this should generate an error.
-/*
             assertThat(browser.pageSource()).doesNotContain("Your routine's gotta have a name.");
             browser.click(browser.find("#add-material"));
             assertThat(browser.pageSource()).contains("Your routine's gotta have a name.");
@@ -84,12 +85,13 @@ public class BasicMaterialTests {
             browser.fill("#name").with(routine1.getName());
             browser.fill("#description").with(routine1.getDescription());
             browser.fill("#duration").with(routine1.getDuration().toString());
-            browser.click("#add-material");
+            browser.click(browser.find("#add-material"));
             browser.await().untilPage().isLoaded();
+            System.out.println(browser.pageSource());  // TODO: Remove before flight
+            assertThat(browser.pageSource()).contains("New Item");
+            // -- Point of failure
 
             // Add first new Material item...
-            assertThat(browser.pageSource()).contains("New Item");
-
             browser.fill("#name").with(material1.getName());
             browser.fill("#description").with(material1.getDescription());
             // TO-DO:  Add booleans
@@ -100,7 +102,7 @@ public class BasicMaterialTests {
             browser.click(browser.find("#submit"));
             assertThat(browser.pageSource()).contains("Update Routine");
             assertThat(browser.pageSource()).contains(material1.getName());
-*/
+
           }
         });
   }
