@@ -50,21 +50,30 @@
         <ul class="nav navbar-nav">
           <li><a href="@routes.Application.listRoutines()">Browse Routines</a></li>
           <li><a href="@routes.Application.listSets()">Browse Sets</a></li>
+          <li><a href="@routes.Application.listMagicians()">Browse Magicians</a></li>
         </ul>
 
           <!-- Don't show Search on home page or New Magician page-->
-        @if( page != "home" && page != "editMagician" ) {
-        <form class="navbar-form navbar-left" role="search">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" />
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button"><a href="listRoutines">Search Routines</a></button>
-            </span>
-          </div>
-        </form>
-        }
+        @* @if( page != "home" && page != "editMagician" ) { *@
+        @*<form class="navbar-form navbar-left" role="search">*@
+          @*<div class="input-group">*@
+            @*<input type="text" class="form-control" placeholder="Search" />*@
+            @*<span class="input-group-btn">*@
+              @*<button class="btn btn-default" type="button"><a href="listRoutines">Search Routines</a></button>*@
+            @*</span>*@
+          @*</div>*@
+        @*</form>*@
+        @*}*@
 
         <ul class="nav navbar-nav navbar-right">
+          <!-- Signup Button, do not show on home page -->
+          @if( page != "home" && page != "editMagician" ) {
+            <li>
+              <div class="join">
+                <a class="btn btn-primary btn-sm navbar-btn" href="editMagician">Join the Community Today!</a>
+              </div>
+            </li>
+          }
           <li>
             <a href="/help">
               <i class="fa fa-question fa-lg hidden-xs"></i>
@@ -73,51 +82,46 @@
           </li>
           <!-- User Info Dropdown, don't show if not logged in -->
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in
-              Username <span class="caret"></span></a>
+            @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in*@
+              @*Username <span class="caret"></span></a>*@
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Create...
+              <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               @* <li><a href="displayuser">Profile</a></li> *@
-              <li><a href="@routes.Application.listRoutines()">My Routines</a></li>
-              <li><a href="@routes.Application.listSets()">My Sets</a></li>
+              @* <li><a href="@routes.Application.listRoutines()">My Routines</a></li>*@
+              @* <li><a href="@routes.Application.listSets()">My Sets</a></li>*@
               <li><a href="@routes.Application.editRoutine()">Create Routine</a></li>
-              <li><a href="@routes.Application.editSet()">Build Set</a></li>
-              <li class="divider"></li>
+              <li><a href="@routes.Application.editSet()">Create Set</a></li>
+              @* <li class="divider"></li>*@
               @* <li><a href="#">Logout</a></li> *@
             </ul>
           </li>
 
-            <!-- Signup Button, do not show on home page -->
-          @if( page != "home" && page != "editMagician" ) {
-            <li>
-              <div class="join">
-                <a class="btn btn-primary btn-sm navbar-btn" href="editMagician">Join the Community Today!</a>
-              </div>
-            </li>
-          }
+
           <!-- Login Dropdown; only show on Home Page -->
-          @if(page == "home" ) {
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              Login <span class="caret"></span>
-            </a>
-            <form class="dropdown-menu login" role="form">
-              <div class="form-group">
-                <label for="loginUsername">Username</label>
-                <input type="email" class="form-control" id="loginUsername" placeholder="Username / Email">
-              </div>
-              <div class="form-group">
-                <label for="loginPassword">Password</label>
-                <input type="password" class="form-control" id="loginPassword" placeholder="Password">
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" value="remember-me"> Remember me
-                </label>
-              </div>
-              <button class="btn btn-sm btn-primary btn-block" type="submit">Sign in</button>
-            </form>
-          </li>
-          }
+          @* @if(page == "home" ) {*@
+          @*<li class="dropdown">*@
+            @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">*@
+              @*Login <span class="caret"></span>*@
+            @*</a>*@
+            @*<form class="dropdown-menu login" role="form">*@
+              @*<div class="form-group">*@
+                @*<label for="loginUsername">Username</label>*@
+                @*<input type="email" class="form-control" id="loginUsername" placeholder="Username / Email">*@
+              @*</div>*@
+              @*<div class="form-group">*@
+                @*<label for="loginPassword">Password</label>*@
+                @*<input type="password" class="form-control" id="loginPassword" placeholder="Password">*@
+              @*</div>*@
+              @*<div class="checkbox">*@
+                @*<label>*@
+                  @*<input type="checkbox" value="remember-me"> Remember me*@
+                @*</label>*@
+              @*</div>*@
+              @*<button class="btn btn-sm btn-primary btn-block" type="submit">Sign in</button>*@
+            @*</form>*@
+          @*</li>*@
+          @*}*@
         </ul>
       </div>
     </div>
