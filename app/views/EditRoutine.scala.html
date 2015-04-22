@@ -157,6 +157,31 @@
             </div>
           </div>
 
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Design</h3>
+            </div>
+            <div class="panel-body">
+              @textarea(routineForm("inspiration"),
+                rows = "3",
+                label = "Inspiration",
+                placeholder = "What is the inspiration for this routine?",
+                help = "")
+
+              @textarea(routineForm("placement"),
+                rows = "3",
+                label = "Placement",
+                placeholder = "What routines would you put before or after this?",
+                help = "")
+
+              @textarea(routineForm("choices"),
+                rows = "3",
+                label = "Choices",
+                placeholder = "Why did you make some of the choices you made in the design of this routine?",
+                help = "")
+            </div>
+          </div>
+
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button id="submit" type="submit" class="btn btn-default">

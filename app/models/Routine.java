@@ -22,6 +22,9 @@ public class Routine {
   private String imageUrl;           /* A URL of an image of this routine. */
   private List<Material> materials;  /* The materials used for this routine. */
   private String reviewUrl;          /* A URL of a review of the routine. */
+  private String inspiration;        /* What was the inspiration for this routine. */
+  private String placement;          /* What routines would you put next to this. */
+  private String choices;            /* Why did you make some of the choices you made in the design of this routine. */
 
   /**
    * Create new, valid Routine object.
@@ -243,4 +246,57 @@ public class Routine {
     return reviewUrl;
   }
 
+  /**
+   * Get the choices field for the routine.
+   *
+   * @return The choices field for the routine.
+   */
+  public String getChoices() {
+    return choices;
+  }
+
+  /**
+   * Set the choices field for the routine.
+   *
+   * @param choices The choices field for the routine.
+   */
+  public void setChoices(String choices) {
+    this.choices = choices;
+  }
+
+  /**
+   * Get the inspiration field for the routine.
+   *
+   * @return The inspiration field for the routine.
+   */
+  public String getInspiration() {
+    return inspiration;
+  }
+
+  /**
+   * Set the inspiration field for the routine.
+   *
+   * @param inspiration the inspiration field for the routine.
+   */
+  public void setInspiration(String inspiration) {
+    this.inspiration = inspiration;
+  }
+
+  /**
+   * Get the placement field for the routine.
+   *
+   * @return The placement field for the routine.
+   */
+  public String getPlacement() {
+    return placement;
+  }
+
+  /**
+   * Set the placement field for the routine.
+   *
+   * @param placement The placement field for the routine.
+   */
+  public void setPlacement(String placement) {
+    this.placement = placement;
+  }
 }
