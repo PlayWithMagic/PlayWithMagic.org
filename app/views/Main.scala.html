@@ -124,7 +124,7 @@
   </nav>
   @content
   <!-- Footer, only display on home page -->
-  @if( page == "home" ) {
+  @if( page == "home" || page == "help" ) {
     <footer class="footer">
       <div class="container">
         <div class="col-md-3">
@@ -144,8 +144,8 @@
           <p><i class="fa fa-play"></i> <a href="http://playframework.com">Created with Play Framework</a></p>
         </div>
         <div class="col-md-3">
-          <p><a href="http://github.com/PlayWithMagic/PlayWithMagic"><i class="fa fa-github"></i>
-            Contribute on Github</a></p>
+          <p><a href="http://playwithmagic.github.io/PlayWithMagic.org"><i class="fa fa-github"></i>
+            Visit the Project on Github</a></p>
         </div>
       </div>
     </footer>
