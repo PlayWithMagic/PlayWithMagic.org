@@ -3,12 +3,19 @@ package tests;
 import models.Material;
 import models.Routine;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import play.Logger;
 import play.libs.F;
 import play.test.TestBrowser;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import static org.fest.assertions.Assertions.assertThat;
+import static play.test.Helpers.FIREFOX;
 import static play.test.Helpers.HTMLUNIT;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
@@ -29,6 +36,7 @@ public class BasicMaterialTests {
 
   private static Routine routine1 = null;
   private static Material material1 = null;
+  private static Material material2 = null;
 
 
   /**
@@ -49,9 +57,19 @@ public class BasicMaterialTests {
     material1.isConsumed(true);
     material1.isGivenAway(false);
     material1.isInspectable(true);
-    material1.setPrice(1);
+    material1.setPrice(11011);
     material1.setPurchaseUrl("Test Material Purchase URL 01");
     material1.setImageUrl("Test Material Image URL 01");
+
+    material2 = new Material("Test Material 02");
+    material2.setDescription("Test Material Description 02");
+    material2.isConsumed(false);
+    material2.isGivenAway(true);
+    material2.isInspectable(false);
+    material2.setPrice(22022);
+    material2.setPurchaseUrl("Test Material Purchase URL 02");
+    material2.setImageUrl("Test Material Image URL 02");
+
   }
 
 
@@ -87,14 +105,20 @@ public class BasicMaterialTests {
             browser.fill("#duration").with(routine1.getDuration().toString());
             browser.click(browser.find("#add-material"));
             browser.await().untilPage().isLoaded();
-            System.out.println(browser.pageSource());  // TODO: Remove before flight
             assertThat(browser.pageSource()).contains("New Item");
-            // -- Point of failure
 
             // Add first new Material item...
             browser.fill("#name").with(material1.getName());
             browser.fill("#description").with(material1.getDescription());
-            // TO-DO:  Add booleans
+            if(material1.isInspectable()) {
+              browser.find("#isInspectable").click();
+            }
+            if(material1.isGivenAway()) {
+              browser.find("#isGivenAway").click();
+            }
+            if(material1.isConsumed()) {
+              browser.find("#isConsumed").click();
+            }
             browser.fill("#price").with(material1.getPrice().toString());
             browser.fill("#purchaseUrl").with(material1.getPurchaseUrl());
             browser.fill("#imageUrl").with(material1.getImageUrl());
@@ -102,6 +126,38 @@ public class BasicMaterialTests {
             browser.click(browser.find("#submit"));
             assertThat(browser.pageSource()).contains("Update Routine");
             assertThat(browser.pageSource()).contains(material1.getName());
+            assertThat(browser.pageSource()).contains(material1.getPrice().toString());
+            assertThat(browser.pageSource()).contains(material1.getImageUrl());
+
+            // Edit the material in the routine
+            browser.click(browser.find("#edit-material"));
+            browser.fill("#name").with(material2.getName());
+            browser.fill("#description").with(material2.getDescription());
+            if(material2.isInspectable()) {
+              browser.find("#isInspectable").click();
+            }
+            if(material2.isGivenAway()) {
+              browser.find("#isGivenAway").click();
+            }
+            if(material2.isConsumed()) {
+              browser.find("#isConsumed").click();
+            }
+            browser.fill("#price").with(material2.getPrice().toString());
+            browser.fill("#purchaseUrl").with(material2.getPurchaseUrl());
+            browser.fill("#imageUrl").with(material2.getImageUrl());
+
+            browser.executeScript("Object gettableRoutineId = document.getElementById('routineId').value");
+            //Logger.debug("I am Sam = [" + browser.find("#gettableRoutineId").getValue() + "]");
+
+
+
+            browser.click(browser.find("#submit"));
+            assertThat(browser.pageSource()).contains("Update Routine");
+            assertThat(browser.pageSource()).contains(material2.getName());
+            assertThat(browser.pageSource()).contains(material2.getPrice().toString());
+            assertThat(browser.pageSource()).contains(material2.getImageUrl());
+
+
 
           }
         });

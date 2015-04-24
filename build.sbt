@@ -10,5 +10,6 @@ libraryDependencies ++= Seq(
   javaJdbc,
   javaEbean,
   cache,
-  javaWs
+  javaWs,
+  "com.github.detro.ghostdriver" % "phantomjsdriver" % "1.0.4" % "test"
 )
