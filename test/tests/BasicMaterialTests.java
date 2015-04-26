@@ -2,30 +2,20 @@ package tests;
 
 import models.Material;
 import models.Routine;
+
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import play.Logger;
 import play.libs.F;
 import play.test.TestBrowser;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import static org.fest.assertions.Assertions.assertThat;
-import static play.test.Helpers.FIREFOX;
-import static play.test.Helpers.HTMLUNIT;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.running;
 import static play.test.Helpers.testServer;
 
 /**
- * Test the live interaction of the Material pages with a simulated browser.
- * <p>
- * Utilizes a test browser and the Fluentlenium framework for testing.
+ * Test the live interaction of the Material pages with Chrome.
  */
 public class BasicMaterialTests {
 
@@ -69,14 +59,13 @@ public class BasicMaterialTests {
     material2.setPrice(22022);
     material2.setPurchaseUrl("Test Material Purchase URL 02");
     material2.setImageUrl("Test Material Image URL 02");
-
   }
 
 
   /**
    * Test Material CRUD.
    * <p>
-   * This is a large workflow because the Play Framework the application restarts between tests -- and this wipes
+   * This is a large workflow because the Play Framework the application restarts between tests -- which wipes
    * out the in-memory database.
    */
   @Test
@@ -84,7 +73,7 @@ public class BasicMaterialTests {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
-            browser.maximizeWindow();
+            // browser.maximizeWindow();
 
             // Start at the home page...
             browser.goTo("http://localhost:" + TEST_PORT + "/");
@@ -105,18 +94,18 @@ public class BasicMaterialTests {
             browser.fill("#duration").with(routine1.getDuration().toString());
             browser.click(browser.find("#add-material"));
             browser.await().untilPage().isLoaded();
-            assertThat(browser.pageSource()).contains("New Item");
 
             // Add first new Material item...
+            assertThat(browser.pageSource()).contains("New Item");
             browser.fill("#name").with(material1.getName());
             browser.fill("#description").with(material1.getDescription());
-            if(material1.isInspectable()) {
+            if (material1.isInspectable()) {
               browser.find("#isInspectable").click();
             }
-            if(material1.isGivenAway()) {
+            if (material1.isGivenAway()) {
               browser.find("#isGivenAway").click();
             }
-            if(material1.isConsumed()) {
+            if (material1.isConsumed()) {
               browser.find("#isConsumed").click();
             }
             browser.fill("#price").with(material1.getPrice().toString());
@@ -124,6 +113,8 @@ public class BasicMaterialTests {
             browser.fill("#imageUrl").with(material1.getImageUrl());
 
             browser.click(browser.find("#submit"));
+
+            // Verify the basic material information is in the Routine page
             assertThat(browser.pageSource()).contains("Update Routine");
             assertThat(browser.pageSource()).contains(material1.getName());
             assertThat(browser.pageSource()).contains(material1.getPrice().toString());
@@ -133,32 +124,51 @@ public class BasicMaterialTests {
             browser.click(browser.find("#edit-material"));
             browser.fill("#name").with(material2.getName());
             browser.fill("#description").with(material2.getDescription());
-            if(material2.isInspectable()) {
-              browser.find("#isInspectable").click();
-            }
-            if(material2.isGivenAway()) {
-              browser.find("#isGivenAway").click();
-            }
-            if(material2.isConsumed()) {
-              browser.find("#isConsumed").click();
-            }
             browser.fill("#price").with(material2.getPrice().toString());
             browser.fill("#purchaseUrl").with(material2.getPurchaseUrl());
             browser.fill("#imageUrl").with(material2.getImageUrl());
 
-            browser.executeScript("Object gettableRoutineId = document.getElementById('routineId').value");
-            //Logger.debug("I am Sam = [" + browser.find("#gettableRoutineId").getValue() + "]");
-
-
+            String routineId = browser.findFirst("#routineId").getValue();
+            String materialId = browser.findFirst("#materialId").getValue();
 
             browser.click(browser.find("#submit"));
+
+            // Verify the basic material is updated on the Routine page
             assertThat(browser.pageSource()).contains("Update Routine");
             assertThat(browser.pageSource()).contains(material2.getName());
             assertThat(browser.pageSource()).contains(material2.getPrice().toString());
             assertThat(browser.pageSource()).contains(material2.getImageUrl());
 
+            // Verify all material information is on the View page
+            browser.goTo("http://localhost:" + TEST_PORT + "/viewMaterial"
+                    + "?routineId=" + routineId
+                    + "&materialId=" + materialId
+            );  //http://localhost:9000/viewMaterial?routineId=3&materialId=0
+            assertThat(browser.pageSource()).contains(material2.getName());
+            assertThat(browser.pageSource()).contains(material2.getDescription());
+            // The checkboxes are not fully implemented because it's difficult to get their state out of the page
+            assertThat(browser.pageSource()).contains(material2.getPrice().toString());
+            assertThat(browser.pageSource()).contains(material2.getPurchaseUrl());
+            assertThat(browser.pageSource()).contains(material2.getImageUrl());
 
+            // Go to the Routine page
+            browser.goTo("http://localhost:" + TEST_PORT + "/editRoutine"
+                    + "?id=" + routineId
+            );  //http://localhost:9000/editRoutine?id=1
 
+            // Delete the material
+            assertThat(browser.pageSource()).contains(material2.getName());
+            browser.findFirst("#delete-material").click();
+            assertThat(browser.pageSource()).doesNotContain(material2.getName());
+
+            browser.click(browser.find("#submit"));
+
+            // Delete the routine
+            assertThat(browser.pageSource()).contains(routine1.getName());
+            browser.goTo("http://localhost:" + TEST_PORT + "/deleteRoutine"
+                    + "?id=" + routineId
+            );  //http://localhost:9000/deleteRoutine?id=3
+            assertThat(browser.pageSource()).doesNotContain(routine1.getName());
           }
         });
   }
