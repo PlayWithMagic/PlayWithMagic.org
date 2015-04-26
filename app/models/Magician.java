@@ -8,7 +8,7 @@ import java.io.File;
  *
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/32
  */
-public class Magician {
+public class Magician extends play.db.ebean.Model {
 
   private long id;
   // User Info
