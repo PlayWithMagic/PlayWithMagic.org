@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class MagicianDB {
 
-  private static Map<Long, Magician> magicians = new HashMap<>();
+  private static Map<Long, Magician> magicians = new HashMap<Long, Magician>();
   private static long currentId = 1;
 
   /**
@@ -66,7 +66,7 @@ public class MagicianDB {
    * @return The full list of all Magicians.
    */
   public static List<Magician> getMagicians() {
-    return new ArrayList<>(magicians.values());
+    return new ArrayList<Magician>(magicians.values());
   }
 
   /**

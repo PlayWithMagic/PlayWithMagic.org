@@ -89,7 +89,7 @@ public class SetFormData {
    */
   public List<ValidationError> validate() {
 
-    List<ValidationError> errors = new ArrayList<>();
+    List<ValidationError> errors = new ArrayList<ValidationError>();
 
     if (name == null || name.length() == 0) {
       errors.add(new ValidationError("name", "Must provide a name for the Set."));
