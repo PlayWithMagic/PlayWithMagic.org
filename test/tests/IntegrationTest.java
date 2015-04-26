@@ -1,6 +1,7 @@
 package tests;
 
 import org.junit.Test;
+import org.openqa.selenium.chrome.ChromeDriver;
 import play.libs.F.Callback;
 import play.test.TestBrowser;
 import tests.pages.AboutPage;
@@ -14,7 +15,6 @@ import tests.pages.ListSetsPage;
 import java.util.ArrayList;
 import java.util.List;
 
-import static play.test.Helpers.HTMLUNIT;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.running;
@@ -36,7 +36,7 @@ public class IntegrationTest {
    */
   @Test
   public void testStaticPages() {
-    running(testServer(port, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+    running(testServer(port, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             browser.maximizeWindow();
@@ -60,7 +60,7 @@ public class IntegrationTest {
    */
   @Test
   public void testRetrieveNewMagicianPage() {
-    running(testServer(port, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+    running(testServer(port, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             browser.maximizeWindow();
@@ -76,7 +76,7 @@ public class IntegrationTest {
    */
   @Test
   public void testCreateNewMagician() {
-    running(testServer(port, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+    running(testServer(port, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             browser.maximizeWindow();
@@ -117,7 +117,7 @@ public class IntegrationTest {
    */
   @Test
   public void testRetrieveListSetsPage() {
-    running(testServer(port, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+    running(testServer(port, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             browser.maximizeWindow();
@@ -133,7 +133,7 @@ public class IntegrationTest {
    */
   @Test
   public void testCreateNewSet() {
-    running(testServer(port, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+    running(testServer(port, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             browser.maximizeWindow();

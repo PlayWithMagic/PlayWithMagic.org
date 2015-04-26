@@ -5,13 +5,13 @@ import models.Routine;
 import models.RoutineDB;
 import models.SetDB;
 import org.junit.Test;
+import org.openqa.selenium.chrome.ChromeDriver;
 import play.libs.F;
 import play.test.TestBrowser;
 import tests.pages.EditRoutinePage;
 import tests.pages.ListRoutinesPage;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static play.test.Helpers.HTMLUNIT;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.running;
@@ -70,7 +70,7 @@ public class BasicRoutineTests {
    */
   @Test
   public void testGetInitialListRoutinesPage() {
-    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             browser.maximizeWindow();
@@ -89,7 +89,7 @@ public class BasicRoutineTests {
    */
   @Test
   public void testRoutineCrudWorkflow() {
-    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             SetDB.resetSetDB();
