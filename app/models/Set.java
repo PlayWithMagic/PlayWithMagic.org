@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/101
  */
-public class Set {
+public class Set extends play.db.ebean.Model {
 
   private long id;
   private long userId;

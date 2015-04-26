@@ -8,7 +8,7 @@ import java.util.List;
  * <p>
  * This is a central entity for the Play With Magic application.
  */
-public class Routine {
+public class Routine extends play.db.ebean.Model {
 
   private long id;                   /* A unique, synthetic key to the Routine. */
   private String name;               /* A short name for the routine. */
