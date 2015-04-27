@@ -10,6 +10,7 @@ import play.libs.F;
 import play.test.TestBrowser;
 import tests.pages.EditRoutinePage;
 import tests.pages.ListRoutinesPage;
+import tests.pages.ViewRoutinePage;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.fakeApplication;
@@ -18,11 +19,9 @@ import static play.test.Helpers.running;
 import static play.test.Helpers.testServer;
 
 /**
- * Test the live interaction of the Routine pages with a simulated browser.
- * <p>
- * Utilizes a test browser and the Fluentlenium framework for testing.
+ * Test the live interaction of the Routine pages with Chrome.
  */
-public class BasicRoutineTests {
+public class TestRoutineCRUD {
 
   /**
    * The port number on which to run the tests.
@@ -34,26 +33,26 @@ public class BasicRoutineTests {
 
 
   /**
-   * Populate the static Routine objects in the constructor.
+   * Populate static objects needed for testing.
    */
-  public BasicRoutineTests() {
-    routine1 = new Routine(0, "Test Routine Name", "Test Routine Description");
-    routine1.setDuration(11);
-    routine1.setMethod("Test Routine Method");
-    routine1.setHandling("Test Routine Handling");
+  public TestRoutineCRUD() {
+    routine1 = new Routine(0, "Test Routine Name 01", "Test Routine Description 01");
+    routine1.setDuration(101);
+    routine1.setMethod("Test Routine Method 01");
+    routine1.setHandling("Test Routine Handling 01");
     routine1.setResetDuration(21);
-    routine1.setResetDescription("Test Routine Reset Description");
-    routine1.setYouTubeUrl("Test YouTube URL");
-    routine1.setImageUrl("Test Image URL");
-    routine1.setInspiration("Test Inspiration");
-    routine1.setPlacement("Test Placement");
-    routine1.setChoices("Test Choices");
+    routine1.setResetDescription("Test Routine Reset Description 01");
+    routine1.setYouTubeUrl("Test YouTube URL 01");
+    routine1.setImageUrl("Test Image URL 01");
+    routine1.setInspiration("Test Inspiration 01");
+    routine1.setPlacement("Test Placement 01");
+    routine1.setChoices("Test Choices 01");
 
     routine2 = new Routine(0, "Test Routine Name 02", "Test Routine Description 02");
     routine2.setDuration(12);
     routine2.setMethod("Test Routine Method 02");
     routine2.setHandling("Test Routine Handling 02");
-    routine2.setResetDuration(22);
+    routine2.setResetDuration(119);
     routine2.setResetDescription("Test Routine Reset Description 02");
     routine2.setYouTubeUrl("Test YouTube URL 02");
     routine2.setImageUrl("Test Image URL 02");
@@ -64,6 +63,7 @@ public class BasicRoutineTests {
     /* Logger.debug("Routines setup for testing"); */ // Logger doesn't work in JUnit tests w/ Play 2.0 (known issue).
     System.out.println("Test Routines constructed");
   }
+
 
   /**
    * Utilize a test browser and the Fluentlenium framework to exercise the List Routines page.
@@ -80,6 +80,7 @@ public class BasicRoutineTests {
           }
         });
   }
+
 
   /**
    * Test Routine CRUD.
@@ -114,36 +115,30 @@ public class BasicRoutineTests {
 
             editRoutinePage.submitForm(routine1);
 
-            assertThat(browser.pageSource()).contains(routine1.getName());
-            assertThat(browser.pageSource()).contains(routine1.getDuration().toString());
-
-            long routineId = RoutineDB.getCurrentId() - 1;
-
-            // Update the Routine that was just created...
-            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT, routineId);
-            browser.goTo(editRoutinePage);
-            editRoutinePage.isAt();
-            assertThat(browser.pageSource()).contains("Update Routine");
+            // Verify the routine data is in the database...
+            browser.findFirst(".editRoutine").click();
             editRoutinePage.testContents(browser, routine1);
+            browser.findFirst("#submit").click();
+            browser.findFirst(".viewRoutine").click();
+            ViewRoutinePage.testContents(browser, routine1);
 
-            editRoutinePage.submitForm(routine2);
 
-            assertThat(browser.pageSource()).contains(routine2.getName());
-            assertThat(browser.pageSource()).contains(routine2.getDuration().toString());
-
-            // Verify that all of the routine updates happened.
-            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT, routineId);
-            browser.goTo(editRoutinePage);
-            editRoutinePage.isAt();
+            // Edit/modify all of the data...                                                   // The button click
+            browser.goTo(browser.findFirst(".editRoutine").getElement().getAttribute("href"));  // didn't work, so I
+            editRoutinePage.isAt();                                                             // did this instead.
             assertThat(browser.pageSource()).contains("Update Routine");
+            editRoutinePage.submitForm(routine2);
+            browser.findFirst(".editRoutine").click();
             editRoutinePage.testContents(browser, routine2);
 
             // Delete a Routine.
-            listRoutinesPage = new ListRoutinesPage(browser.getDriver(), TEST_PORT, routineId);
-            browser.goTo(listRoutinesPage);
-            listRoutinesPage.isAt();
+            browser.findFirst("#submit").click();
+            assertThat(browser.pageSource()).contains(routine2.getName());
+            assertThat(browser.pageSource()).contains(routine2.getDuration().toString());
+            browser.findFirst(".deleteRoutine").click();
             assertThat(browser.pageSource()).doesNotContain(routine2.getName());
             assertThat(browser.pageSource()).doesNotContain(routine2.getDuration().toString());
+
           }
         });
   }

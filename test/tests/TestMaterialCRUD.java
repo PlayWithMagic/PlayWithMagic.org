@@ -2,7 +2,6 @@ package tests;
 
 import models.Material;
 import models.Routine;
-
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import play.libs.F;
@@ -17,7 +16,7 @@ import static play.test.Helpers.testServer;
 /**
  * Test the live interaction of the Material pages with Chrome.
  */
-public class BasicMaterialTests {
+public class TestMaterialCRUD {
 
   /**
    * The port number on which to run the tests.
@@ -30,9 +29,9 @@ public class BasicMaterialTests {
 
 
   /**
-   * Populate the static objects needed for testing.
+   * Populate static objects needed for testing.
    */
-  public BasicMaterialTests() {
+  public TestMaterialCRUD() {
     routine1 = new Routine(0, "Test Routine Name", "Test Routine Description");
     routine1.setDuration(11);
     routine1.setMethod("Test Routine Method");
