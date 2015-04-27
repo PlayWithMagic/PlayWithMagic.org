@@ -159,7 +159,7 @@ public class RoutineFormData {
    * @return Either null if no errors or a List of errors.
    */
   public List<ValidationError> validate() {
-    List<ValidationError> errors = new ArrayList<>();
+    List<ValidationError> errors = new ArrayList<ValidationError>();
 
     if (id < 0) {
       errors.add(new ValidationError("id", "An invalid ID has been passed into the application."));

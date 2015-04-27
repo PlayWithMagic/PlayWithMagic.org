@@ -118,7 +118,7 @@ public class MaterialFormData {
    * @return Either null if no errors or a List of errors.
    */
   public List<ValidationError> validate() {
-    List<ValidationError> errors = new ArrayList<>();
+    List<ValidationError> errors = new ArrayList<ValidationError>();
 
     if (routineId < 0) {
       errors.add(new ValidationError("routineId", "An invalid routine ID has been passed into the application."));

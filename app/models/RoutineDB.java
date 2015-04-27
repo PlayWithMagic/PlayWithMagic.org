@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class RoutineDB {
 
-  private static Map<Long, Routine> routines = new HashMap<>();
+  private static Map<Long, Routine> routines = new HashMap<Long, Routine>();
   private static long currentId = 1;
 
   /**
@@ -146,7 +146,7 @@ public class RoutineDB {
    * @return the full list of routines.
    */
   public static List<Routine> getRoutines() {
-    return new ArrayList<>(routines.values());
+    return new ArrayList<Routine>(routines.values());
   }
 
 

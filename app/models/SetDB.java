@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class SetDB {
 
-  private static Map<Long, Set> sets = new HashMap<>();
+  private static Map<Long, Set> sets = new HashMap<Long, Set>();
   private static long currentId = 1;
 
   /**
@@ -74,7 +74,7 @@ public class SetDB {
    * @return The full list of all Sets.
    */
   public static List<Set> getSets() {
-    return new ArrayList<>(sets.values());
+    return new ArrayList<Set>(sets.values());
   }
 
 

@@ -200,7 +200,7 @@ public class MagicianFormData {
    */
   public List<ValidationError> validate() {
 
-    List<ValidationError> errors = new ArrayList<>();
+    List<ValidationError> errors = new ArrayList<ValidationError>();
 
     if (!ExperienceLevels.isExperienceLevel(experienceLevel)) {
       errors.add(new ValidationError("experienceLevel", "Please select a level of experience from the list."));
