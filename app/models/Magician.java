@@ -1,5 +1,7 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.File;
 
 /**
@@ -8,8 +10,10 @@ import java.io.File;
  *
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/32
  */
+@Entity
 public class Magician extends play.db.ebean.Model {
 
+  @Id
   private long id;
   // User Info
   private String firstName;
@@ -511,5 +515,13 @@ public class Magician extends play.db.ebean.Model {
    */
   public void setInstagram(String instagram) {
     this.instagram = instagram;
+  }
+
+  /**
+   * The EBean ORM finder method for database queries.
+   * @return The finder method.
+   */
+  public static Finder<Long, Magician> find() {
+    return new Finder<Long, Magician>(Long.class, Magician.class);
   }
 }

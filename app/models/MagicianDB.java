@@ -16,7 +16,33 @@ import java.util.Map;
 public class MagicianDB {
 
   private static Map<Long, Magician> magicians = new HashMap<Long, Magician>();
+  private static Map<String, MagicianType> magicianTypes = new HashMap<String, MagicianType>();
   private static long currentId = 1;
+
+
+  /**
+   * Add a Magician Type to the database.
+   *
+   * @param magicianType  The magician type to add.
+   */
+  public static void addMagicianType(MagicianType magicianType) {
+    magicianTypes.put(magicianType.getName(), magicianType);
+  }
+
+  /**
+   * Get a Magician Type from the database.
+   *
+   * @param magicianTypeName The name of the MagicianType to get.
+   * @return A MagicianType object from the database.
+   */
+  public static MagicianType getMagicianType(String magicianTypeName) {
+    if (!magicianTypes.containsKey(magicianTypeName)) {
+      throw new RuntimeException("Can't find Magician Type = [" + magicianTypeName + "] in the database");
+    }
+
+    return magicianTypes.get(magicianTypeName);
+  }
+
 
   /**
    * Adds a formData input to the magicians local storage list.
@@ -83,6 +109,21 @@ public class MagicianDB {
    */
   public static void init() {
     resetMagicianDB();
+
+    MagicianDB.addMagicianType(new MagicianType("Neophyte",
+        "A newcomer to magic.", 1));
+    MagicianDB.addMagicianType(new MagicianType("Enthusiast",
+        "Likes magic, does a few tricks.", 2));
+    MagicianDB.addMagicianType(new MagicianType("Hobbyist",
+        "Studies magic.  Participates in a club.  Attends lectures.", 3));
+    MagicianDB.addMagicianType(new MagicianType("Semi-Professional",
+        "Gets paid gigs.  Has at least 1 full set of A-material", 4));
+    MagicianDB.addMagicianType(new MagicianType("Professional",
+        "Makes a living at magic.", 5));
+    MagicianDB.addMagicianType(new MagicianType("Historian",
+        "Someone who studies the history and lore of magic, but does not perform as much.", 6));
+    MagicianDB.addMagicianType(new MagicianType("Collector",
+        "Someone who collects props, gaffs or other items related to magic.", 7));
 
     // --------------------------------------
 
