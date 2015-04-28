@@ -11,7 +11,6 @@ import java.util.List;
 public class Set extends play.db.ebean.Model {
 
   private long id;
-  private long userId;
   // Set Info
   private String name;
   private String description;
@@ -22,14 +21,12 @@ public class Set extends play.db.ebean.Model {
    * Creates a Set object.
    *
    * @param id          The ID of the Set.
-   * @param userId      The ID of the user who created the Set.
    * @param name        The name of the Set.
    * @param description The description of the Set.
    * @param routines    The List of Long IDs of the routines in the set.
    */
-  public Set(long id, long userId, String name, String description, List<Long> routines) {
+  public Set(long id, String name, String description, List<Long> routines) {
     this.id = id;
-    this.userId = userId;
     this.name = name;
     this.description = description;
     this.routines = routines;
@@ -44,14 +41,6 @@ public class Set extends play.db.ebean.Model {
     return id;
   }
 
-  /**
-   * Get the ID of the User who created the Set.
-   *
-   * @return The ID of the user.
-   */
-  public long getUserId() {
-    return userId;
-  }
 
   /**
    * Get the name of the set.

@@ -19,6 +19,7 @@ public class SetDB {
   private static Map<Long, Set> sets = new HashMap<Long, Set>();
   private static long currentId = 1;
 
+
   /**
    * Adds a formData input to the Set local storage list.
    *
@@ -26,7 +27,7 @@ public class SetDB {
    */
   public static void addSet(SetFormData formData) {
     long idVal = (formData.id == 0) ? currentId++ : formData.id;
-    Set setFromForm = new Set(idVal, formData.userId, formData.name, formData.description, formData.routines);
+    Set setFromForm = new Set(idVal, formData.name, formData.description, formData.routines);
     sets.put(idVal, setFromForm);
   }
 
@@ -40,6 +41,7 @@ public class SetDB {
     long idVal = (newSet.getId() == 0) ? currentId++ : newSet.getId();
     sets.put(idVal, newSet);
   }
+
 
   /**
    * Retrieve a Set associated with a given id from the local storage list.
@@ -55,6 +57,7 @@ public class SetDB {
     return set;
   }
 
+
   /**
    * Delete a Set associated with a given id from the local storage list.
    *
@@ -67,6 +70,7 @@ public class SetDB {
     }
     sets.remove(id);
   }
+
 
   /**
    * Gets the full list of all Sets in the local storage list.
@@ -87,6 +91,7 @@ public class SetDB {
     Logger.warn("Set database reset");
   }
 
+
   /**
    * Initialize the Set database.
    */
@@ -99,7 +104,7 @@ public class SetDB {
     List<Long> routineIds = new ArrayList<Long>();
     routineIds.add(2L);
     routineIds.add(1L);
-    set = new Set(currentId, 1, "Amazing Set", "This is the best set ever. It opens with the Ambitious Card trick"
+    set = new Set(currentId, "Amazing Set", "This is the best set ever. It opens with the Ambitious Card trick"
         + " to warm up the audience. From there, it shifts to something different with Gypsy Thread. "
         + "And in the closer, it breaks back down to a card trick to cool down the audience afterwords.", routineIds);
     SetDB.addSet(set);
@@ -109,7 +114,7 @@ public class SetDB {
     routineIds2.add(5L);
     routineIds2.add(10L);
     routineIds2.add(33L);
-    set = new Set(currentId, 2, "With Flare", "This starts off with a match routine for something that has a bit "
+    set = new Set(currentId, "With Flare", "This starts off with a match routine for something that has a bit "
         + "of an explosive opener, followed by a simple card trick.  Finally, you light up the night with a flaming "
         + "wallet routine, which binds the card trick and the fire trick together.", routineIds2);
     SetDB.addSet(set);
@@ -120,7 +125,7 @@ public class SetDB {
     routineIds3.add(14L);
     routineIds3.add(15L);
     routineIds3.add(34L);
-    set = new Set(currentId, 3, "Mechanisms", "With each of the routines in this set, it involves some physical device"
+    set = new Set(currentId, "Mechanisms", "With each of the routines in this set, it involves some physical device"
         + " that the audience can either interact with, or view interaction with.  The key is to really liven up "
         + "Zig-Zag-Pencil with your own bit of flare, otherwise it will pale against the other routines in this Set. "
         + "Next, a simple card trick that allows the audience member to interact with their cell phone!  Always good "
@@ -129,7 +134,6 @@ public class SetDB {
         + "Once you've closed, the audience member will walk away with a photo memory on their phone.", routineIds3);
     SetDB.addSet(set);
     currentId++;
-
 
   }
 
