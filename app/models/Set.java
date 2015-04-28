@@ -32,8 +32,9 @@ public class Set extends play.db.ebean.Model {
     this.routines = routines;
   }
 
+
   /**
-   * Get the ID of the set.
+   * Get the ID of the Set.
    *
    * @return The Set ID value.
    */
@@ -41,14 +42,31 @@ public class Set extends play.db.ebean.Model {
     return id;
   }
 
+  /**
+   * Set the ID of the... Set.
+   *
+   * @param id The ID of the Set.
+   */
+  public void setId(long id) {
+    this.id = id;
+  }
 
   /**
-   * Get the name of the set.
+   * Get the name of the Set.
    *
-   * @return The name of the set.
+   * @return The name of the Set.
    */
   public String getName() {
     return name;
+  }
+
+  /**
+   * Set the name of the Set.
+   *
+   * @param name The name of the Set.
+   */
+  public void setName(String name) {
+    this.name = name;
   }
 
   /**
@@ -61,11 +79,29 @@ public class Set extends play.db.ebean.Model {
   }
 
   /**
+   * Set the description of the Set.
+   *
+   * @param description The Description of the Set.
+   */
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  /**
    * Get the List of Routine IDs in the set.
    *
    * @return The List of Routine IDs.
    */
   public List<Long> getRoutines() {
     return routines;
+  }
+
+  /**
+   * Set the List of Routine IDs in the set.
+   *
+   * @param routines The list of Routine IDs.
+   */
+  public void setRoutines(List<Long> routines) {
+    this.routines = routines;
   }
 }

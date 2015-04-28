@@ -28,7 +28,9 @@ public class TestSetCRUD {
   private static Set set1;
   private static Set set2;
 
-
+  /**
+   * Populate static objects needed for testing.
+   */
   public TestSetCRUD() {
   }
 

@@ -306,9 +306,10 @@ public class Application extends Controller {
     if (formWithSetData.hasErrors()) {
       Logger.warn("HTTP Form Error in postSet");
       List<Long> listOfRoutines;
-      if(setId != 0) {
+      if (setId != 0) {
         listOfRoutines = SetDB.getSet(setId).getRoutines();
-      } else {
+      }
+      else {
         listOfRoutines = new ArrayList<Long>();
       }
       return badRequest(EditSet.render(formWithSetData, RoutineDB.getRoutines(), listOfRoutines));
