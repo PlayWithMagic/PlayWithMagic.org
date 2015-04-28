@@ -4,7 +4,7 @@
 * @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(magicianForm: Form[views.formdata.EditMagicianFormData], experienceLevelMap: Map[String, Boolean], magicianTypeMap: Map[String, Boolean])
+@(magicianForm: Form[views.formdata.EditMagicianFormData], magicianTypeMap: Map[String, Boolean])
 
 @import helper._
 @import views.html.bootstrap3._
@@ -37,12 +37,6 @@
           @text(magicianForm("email"),
             label = "Email",
             placeholder = "i.e., name@domain.com",
-            help = "Required")
-            <!-- Experience Level -->
-          @bootstrap3.select(magicianForm("experienceLevel"),
-            label = "Level of Experience with Magic",
-            optionMap = experienceLevelMap,
-            isMultiple = false,
             help = "Required")
             <!-- Magician Type -->
           @bootstrap3.select(magicianForm("magicianType"),

@@ -9,6 +9,7 @@ import views.formdata.EditMagicianFormData;
  * @see http://www.playframework.com
  */
 public class MagicianDB {
+//TODO:  Kill this class
 
   /**
    * Delete all of the Magicians in the database.  This is used by JUnit tests.
@@ -46,7 +47,6 @@ public class MagicianDB {
         "I'm most comfortable with close-up magic, but I'd like to develop a stage show.  I strive to be fluent in "
         + "all mediums of the art (cards, coins, rope, etc.).",
         "Tony Slydini, David Regal, Lee Asher, Aaron Fisher, my brother Steve Johnson and many, many others.",
-        "Semi-Professional",
         magicianTypeSemiProfessional,
         2004,
         null,
@@ -71,7 +71,6 @@ public class MagicianDB {
         null,
         null,
         null,
-        "Professional",
         magicianTypeProfessional,
         0,
         null,
@@ -96,7 +95,6 @@ public class MagicianDB {
         null,
         null,
         null,
-        "Professional",
         magicianTypeProfessional,
         0,
         null,
@@ -121,7 +119,6 @@ public class MagicianDB {
         null,
         null,
         null,
-        "Professional",
         magicianTypeProfessional,
         0,
         null,

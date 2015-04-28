@@ -12,7 +12,6 @@ create table magician (
   biography                 varchar(255),
   interests                 varchar(255),
   influences                varchar(255),
-  experience_level          varchar(255),
   magician_type_id          bigint,
   year_started              integer,
   organizations             varchar(255),
@@ -39,20 +38,16 @@ create sequence magician_seq;
 
 create sequence magician_type_seq;
 
-alter table magician add constraint fk_magician_magicianType_1 foreign key (magician_type_id) references magician_type (id) on delete restrict on update restrict;
+alter table magician add constraint fk_magician_magicianType_1 foreign key (magician_type_id) references magician_type (id);
 create index ix_magician_magicianType_1 on magician (magician_type_id);
 
 
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+drop table if exists magician cascade;
 
-drop table if exists magician;
-
-drop table if exists magician_type;
-
-SET REFERENTIAL_INTEGRITY TRUE;
+drop table if exists magician_type cascade;
 
 drop sequence if exists magician_seq;
 

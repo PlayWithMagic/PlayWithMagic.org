@@ -98,9 +98,8 @@ public class Application extends Controller {
     }
 
     Form<EditMagicianFormData> formData = Form.form(EditMagicianFormData.class).fill(editMagicianFormData);
-    Map<String, Boolean> experienceLevelMap = ExperienceLevels.getExperienceLevels(editMagicianFormData.experienceLevel);
     Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editMagicianFormData.magicianType);
-    return ok(EditMagician.render(formData, experienceLevelMap, magicianTypeMap));
+    return ok(EditMagician.render(formData, magicianTypeMap));
   }
 
 
@@ -115,18 +114,10 @@ public class Application extends Controller {
     Logger.debug("Raw Magician Form Data");
     Logger.debug("  id = [" + formData.field("id").value() + "]");
     Logger.debug("  firstName = [" + formData.field("firstName").value() + "]");
-    Logger.debug("  experienceLevel = [" + formData.field("experienceLevel").value() + "]");
+    Logger.debug("  magicianType = [" + formData.field("magicianType").value() + "]");
 
     if (formData.hasErrors()) {
       Logger.error("EditMagician HTTP Form Error.");
-
-      Map<String, Boolean> experienceLevelMap = null;
-      if (ExperienceLevels.isExperienceLevel(formData.field("experienceLevel").value())) {
-        experienceLevelMap = ExperienceLevels.getExperienceLevels(formData.field("experienceLevel").value());
-      }
-      else {
-        experienceLevelMap = ExperienceLevels.getExperienceLevels();
-      }
 
       Map<String, Boolean> magicianTypeMap = null;
       if (MagicianTypeFormData.isMagicianType(formData.field("magigianType").value())) {
@@ -136,7 +127,7 @@ public class Application extends Controller {
         magicianTypeMap = MagicianTypeFormData.getMagicianTypes();
       }
 
-      return badRequest(EditMagician.render(formData, experienceLevelMap, magicianTypeMap));
+      return badRequest(EditMagician.render(formData, magicianTypeMap));
     }
 
     EditMagicianFormData editMagicianFormData = formData.get();
@@ -144,7 +135,7 @@ public class Application extends Controller {
     Logger.debug("Magician Form Data");
     Logger.debug("  id = [" + editMagicianFormData.id + "]");
     Logger.debug("  firstName = [" + editMagicianFormData.firstName + "]");
-    Logger.debug("  experienceLevel = [" + editMagicianFormData.experienceLevel + "]");
+    Logger.debug("  magicianType = [" + editMagicianFormData.magicianType + "]");
 
     Magician.createMagicianFromForm(editMagicianFormData);
 
@@ -153,7 +144,6 @@ public class Application extends Controller {
             + "%s, %s, %s %n", editMagicianFormData.id, editMagicianFormData.firstName, editMagicianFormData.lastName, editMagicianFormData.stageName, editMagicianFormData.location, editMagicianFormData.biography,
         editMagicianFormData.interests, editMagicianFormData.influences, editMagicianFormData.yearStarted, editMagicianFormData.organizations, editMagicianFormData.website, editMagicianFormData.email,
         editMagicianFormData.facebook, editMagicianFormData.twitter, editMagicianFormData.linkedIn, editMagicianFormData.googlePlus, editMagicianFormData.flickr, editMagicianFormData.instagram);
-    System.out.println(editMagicianFormData.experienceLevel);
     System.out.println(editMagicianFormData.magicianType);
 
     return ok(ListMagicians.render(Magician.getActiveMagicians()));

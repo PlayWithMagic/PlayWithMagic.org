@@ -40,7 +40,6 @@ public class TestMagicianCRUD {
         "Test First Name 01"
         , "Test Last Name 01"
         , "Test_eMail_01@playwithmagic.org"
-        , "Professional"
         , MagicianType.getMagicianType("Professional")
     );
 
@@ -64,7 +63,6 @@ public class TestMagicianCRUD {
         "02 Test First Name 02"
         , "02 Test Last Name 02"
         , "Test_eMail_02@playwithmagic.org"
-        , "Historian"
         , MagicianType.getMagicianType("Historian")
     );
 
@@ -154,10 +152,10 @@ public class TestMagicianCRUD {
 
             // Delete the magician
             assertThat(browser.pageSource()).contains(magician1.getFirstName() + " " + magician1.getLastName());
-            assertThat(browser.pageSource()).contains(magician1.getExperienceLevel());
+            assertThat(browser.pageSource()).contains(magician1.getMagicianType().getName());
             browser.findFirst(".deleteMagician").click();
             assertThat(browser.pageSource()).doesNotContain(magician1.getFirstName() + " " + magician1.getLastName());
-            assertThat(browser.pageSource()).doesNotContain(magician1.getExperienceLevel());
+            assertThat(browser.pageSource()).doesNotContain(magician1.getMagicianType().getName());
 
           }
         });
@@ -195,7 +193,7 @@ public class TestMagicianCRUD {
             assertThat(browser.pageSource()).contains("Current Magicians");
             assertThat(browser.pageSource()).contains(magician1.getFirstName() + " " + magician1.getLastName());
             assertThat(browser.pageSource()).contains(magician1.getStageName());
-            assertThat(browser.pageSource()).contains(magician1.getExperienceLevel());
+            assertThat(browser.pageSource()).contains(magician1.getMagicianType().getName());
 
             // View the magician and check all of the fields
             browser.findFirst(".viewMagician").click();
@@ -209,7 +207,7 @@ public class TestMagicianCRUD {
             assertThat(browser.pageSource()).contains("Current Magicians");
             assertThat(browser.pageSource()).contains(magician2.getFirstName() + " " + magician2.getLastName());
             assertThat(browser.pageSource()).contains(magician2.getStageName());
-            assertThat(browser.pageSource()).contains(magician2.getExperienceLevel());
+            assertThat(browser.pageSource()).contains(magician2.getMagicianType().getName());
 
             // View the magician and check all of the fields
             browser.findFirst(".viewMagician").click();
@@ -218,10 +216,10 @@ public class TestMagicianCRUD {
             // Go back to list magician and delete the magician
             browser.goTo(browser.findFirst(".listMagicians").getElement().getAttribute("href"));
             assertThat(browser.pageSource()).contains(magician2.getFirstName() + " " + magician2.getLastName());
-            assertThat(browser.pageSource()).contains(magician2.getExperienceLevel());
+            assertThat(browser.pageSource()).contains(magician2.getMagicianType().getName());
             browser.findFirst(".deleteMagician").click();
             assertThat(browser.pageSource()).doesNotContain(magician2.getFirstName() + " " + magician2.getLastName());
-            assertThat(browser.pageSource()).doesNotContain(magician2.getExperienceLevel());
+            assertThat(browser.pageSource()).doesNotContain(magician2.getMagicianType().getName());
           }
         });
   }

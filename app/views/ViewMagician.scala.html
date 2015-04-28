@@ -53,9 +53,9 @@
           <a href="/editMagician?id=@magician.getId" class="btn btn-large editMagician">Edit Profile</a>
           <a href="listMagicians" class="btn btn-large listMagicians">Return to Magician List</a>
         </p>
-        <h3>Level of Experience</h3>
+        <h3>Experience with Magic</h3>
         <p>
-          @magician.getExperienceLevel@if(magician.getYearStarted != 0) {, practicing since @magician.getYearStarted}
+          @magician.getMagicianType @if(magician.getYearStarted != 0) {, practicing since @magician.getYearStarted}
         </p>
 
         @if(magician.getBiography) {

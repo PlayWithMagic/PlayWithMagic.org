@@ -30,7 +30,6 @@ public class Magician extends play.db.ebean.Model {
   private String biography;
   private String interests;
   private String influences;
-  private String experienceLevel;
   @ManyToOne
   private MagicianType magicianType;
   private Integer yearStarted;  // The year started - used to compute the number of years of experience.
@@ -59,7 +58,6 @@ public class Magician extends play.db.ebean.Model {
    * @param biography       Biography of user.
    * @param interests       User's interests in magic.
    * @param influences      User's influences.
-   * @param experienceLevel User's experience level; pre-set values.
    * @param magicianType    The type of magician the user identifies with.
    * @param yearStarted     The year started - used to compute the number of years of experience.
    * @param organizations   Any affiliations or organizations the user is a member of.
@@ -73,7 +71,7 @@ public class Magician extends play.db.ebean.Model {
    * @param instagram       User's instagram account.
    */
   public Magician(long id, String firstName, String lastName, String stageName, String location, File userPhoto,
-                  String biography, String interests, String influences, String experienceLevel,
+                  String biography, String interests, String influences,
                   MagicianType magicianType, Integer yearStarted,
                   String organizations, String website, String email, String facebook, String twitter, String linkedIn,
                   String googlePlus, String flickr, String instagram) {
@@ -86,7 +84,6 @@ public class Magician extends play.db.ebean.Model {
     this.biography = biography;
     this.interests = interests;
     this.influences = influences;
-    this.experienceLevel = experienceLevel;
     this.magicianType = magicianType;
     this.yearStarted = yearStarted;
     this.organizations = organizations;
@@ -107,18 +104,16 @@ public class Magician extends play.db.ebean.Model {
    * @param firstName       The magician's first name.
    * @param lastName        The magician's last name.
    * @param email           The magician's eMail address.
-   * @param experienceLevel The magician's experience level.
    * @param magicianType    The type of magician the user identifies with.
    */
-  public Magician(String firstName, String lastName, String email, String experienceLevel, MagicianType magicianType) {
+  public Magician(String firstName, String lastName, String email, MagicianType magicianType) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
-    this.experienceLevel = experienceLevel;
     this.magicianType = magicianType;
   }
 
-
+// TODO:  Look into deleting one of these
   /**
    * Create a new Magician object for testing purposes only.
    *
@@ -130,7 +125,6 @@ public class Magician extends play.db.ebean.Model {
    * @param biography       Biography of user.
    * @param interests       User's interests in magic.
    * @param influences      User's invluences.
-   * @param experienceLevel User's experience level; pre-set values.
    * @param magicianType    The type of magician the user identifies with.
    * @param yearStarted     The year started - used to compute the number of years of experience.
    * @param organizations   Any affiliations or organizations the user is a member of.
@@ -144,7 +138,7 @@ public class Magician extends play.db.ebean.Model {
    * @param instagram       User's instagram account.
    */
   public Magician(String firstName, String lastName, String stageName, String location, File userPhoto,
-                  String biography, String interests, String influences, String experienceLevel,
+                  String biography, String interests, String influences,
                   MagicianType magicianType, int yearStarted,
                   String organizations, String website, String email, String facebook, String twitter, String linkedIn,
                   String googlePlus, String flickr, String instagram) {
@@ -156,7 +150,6 @@ public class Magician extends play.db.ebean.Model {
     this.biography = biography;
     this.interests = interests;
     this.influences = influences;
-    this.experienceLevel = experienceLevel;
     this.magicianType = magicianType;
     this.yearStarted = yearStarted;
     this.organizations = organizations;
@@ -170,6 +163,7 @@ public class Magician extends play.db.ebean.Model {
     this.instagram = instagram;
   }
 
+
   /**
    * The EBean ORM finder method for database queries.
    *
@@ -178,6 +172,7 @@ public class Magician extends play.db.ebean.Model {
   public static Finder<Long, Magician> find() {
     return new Finder<Long, Magician>(Long.class, Magician.class);
   }
+
 
   /**
    * Get all of the active Magicians.
@@ -189,6 +184,7 @@ public class Magician extends play.db.ebean.Model {
   public static List<Magician> getActiveMagicians() {
     return Magician.find().all();
   }
+
 
   /**
    * Delete a Magician associated with a given id.
@@ -204,6 +200,7 @@ public class Magician extends play.db.ebean.Model {
     magician.delete();
   }
 
+
   /**
    * Get a Magician associated with a given id.
    *
@@ -217,6 +214,7 @@ public class Magician extends play.db.ebean.Model {
     }
     return magician;
   }
+
 
   /**
    * Create a new Magician object from EditMagicianFormData.  Add it to the database and return the newly created
@@ -234,7 +232,6 @@ public class Magician extends play.db.ebean.Model {
           editMagicianFormData.firstName
           , editMagicianFormData.lastName
           , editMagicianFormData.email
-          , editMagicianFormData.experienceLevel
           , magicianType);
     }
     else {
@@ -242,7 +239,6 @@ public class Magician extends play.db.ebean.Model {
       magician.setFirstName(editMagicianFormData.firstName);
       magician.setLastName(editMagicianFormData.lastName);
       magician.setEmail(editMagicianFormData.email);
-      magician.setExperienceLevel(editMagicianFormData.experienceLevel);
       magician.setMagicianType(magicianType);
     }
 
@@ -426,24 +422,6 @@ public class Magician extends play.db.ebean.Model {
    */
   public void setInfluences(String influences) {
     this.influences = influences;
-  }
-
-  /**
-   * Get the experience level of the magician.
-   *
-   * @return The experience level.
-   */
-  public String getExperienceLevel() {
-    return experienceLevel;
-  }
-
-  /**
-   * Set the magician's experience level.
-   *
-   * @param experienceLevel The magician's experience level.
-   */
-  public void setExperienceLevel(String experienceLevel) {
-    this.experienceLevel = experienceLevel;
   }
 
   /**

@@ -56,7 +56,7 @@ public class EditMagicianPage extends FluentPage {
    * @param biography       Biography of magician.
    * @param interests       Magician's interests in magic.
    * @param influences      Magician's invluences.
-   * @param experienceLevel Magician's experience level; pre-set values.
+   * @param magicianType    Magician's experience level; pre-set values.
    * @param yearStarted     The year started - used to compute the number of years of experience.
    * @param organizations   Any affiliations or organizations the magician is a member of.
    * @param website         Magician's personal website.
@@ -69,7 +69,7 @@ public class EditMagicianPage extends FluentPage {
    * @param instagram       Magician's instagram account.
    */
   public void createMagician(String firstName, String lastName, String stageName, String location, String biography,
-                             String interests, String influences, String experienceLevel, String yearStarted,
+                             String interests, String influences, String magicianType, String yearStarted,
                              String organizations, String website, String email, String facebook,
                              String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
     fill("#firstName").with(firstName);
@@ -80,9 +80,8 @@ public class EditMagicianPage extends FluentPage {
     fill("#biography").with(biography);
     fill("#interests").with(interests);
     fill("#influences").with(influences);
-    //System.out.println("Experience Level: " + experienceLevel);
-    find("select", withId("experienceLevel")).find("option", withText().equalTo(experienceLevel)).click();
-    //find("select", withId().equalTo("gender")).find("option", withText().equalTo(gender)).click();
+    // System.out.println("MagicianType = [" + magicianType + "]");
+    find("select", withId("magicianType")).find("option", withText().equalTo(magicianType)).click();
     fill("#yearStarted").with(yearStarted);
     fill("#organizations").with(organizations);
     fill("#website").with(website);
@@ -92,6 +91,7 @@ public class EditMagicianPage extends FluentPage {
     fill("#googlePlus").with(googlePlus);
     fill("#flickr").with(flickr);
     fill("#instagram").with(instagram);
+
     submit("#submit");
   }
 
@@ -106,7 +106,7 @@ public class EditMagicianPage extends FluentPage {
     browser.fill("#firstName").with(magician.getFirstName());
     browser.fill("#lastName").with(magician.getLastName());
     browser.fill("#email").with(magician.getEmail());
-    browser.find("#" + magician.getExperienceLevel()).click();
+    browser.find("#" + magician.getMagicianType()).click();
     browser.fill("#stageName").with(magician.getStageName());
     browser.fill("#location").with(magician.getLocation());
     browser.fill("#biography").with(magician.getBiography());
@@ -133,7 +133,7 @@ public class EditMagicianPage extends FluentPage {
     assertThat(browser.pageSource()).contains(magician.getFirstName());
     assertThat(browser.pageSource()).contains(magician.getLastName());
     assertThat(browser.pageSource()).contains(magician.getEmail());
-    assertThat(browser.pageSource()).contains(magician.getExperienceLevel());
+    assertThat(browser.pageSource()).contains(magician.getMagicianType().getName());
     assertThat(browser.pageSource()).contains(magician.getStageName());
     // No image for now
     assertThat(browser.pageSource()).contains(magician.getLocation());

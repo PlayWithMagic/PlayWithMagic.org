@@ -87,11 +87,6 @@ public class EditMagicianFormData {
   public String influences;
 
   /**
-   * Input data Experience Level selector; stored as string from the selectbox.
-   */
-  public String experienceLevel;
-
-  /**
    * Input data MagicianType selector; stored as a string from the selectbox.
    */
   public String magicianType;
@@ -191,7 +186,6 @@ public class EditMagicianFormData {
     this.biography = magician.getBiography();
     this.interests = magician.getInterests();
     this.influences = magician.getInfluences();
-    this.experienceLevel = magician.getExperienceLevel();
     this.magicianType = magician.getMagicianType().getName();
     this.yearStarted = magician.getYearStarted();
     this.organizations = magician.getOrganizations();
@@ -214,10 +208,6 @@ public class EditMagicianFormData {
   public List<ValidationError> validate() {
 
     List<ValidationError> errors = new ArrayList<ValidationError>();
-
-    if (!ExperienceLevels.isExperienceLevel(experienceLevel)) {
-      errors.add(new ValidationError("experienceLevel", "Please select a level of experience from the list."));
-    }
 
     if (!MagicianTypeFormData.isMagicianType(magicianType)) {
       errors.add(new ValidationError("magicianType",

@@ -17,8 +17,8 @@
         <tr>
           <th>Name</th>
           <th>Stage Name</th>
-          <th>Skill Level</th>
-          <th>Routines</th>
+          <th>Type</th>
+      @*    <th>Routines</th>  *@   @* TODO: Remove for now / continuous release  *@
         </tr>
       </thead>
       <tbody>
@@ -26,8 +26,8 @@
           <tr>
             <td><a href="viewMagician?id=@magician.getId" class="viewMagician">@magician.getFirstName @magician.getLastName</a></td>
             <td>@if(magician.getStageName) { @magician.getStageName } else { None }</td>
-            <td>@magician.getExperienceLevel</td>
-            <td>Link to Magician's Routines Here</td>
+            <td>@magician.getMagicianType.getName</td>
+@*          <td>Link to Magician's Routines Here</td>  *@
             <td>
               <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-warning btn-xs" role="button">
               Edit</a>
