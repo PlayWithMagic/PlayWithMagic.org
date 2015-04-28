@@ -2,6 +2,7 @@ package tests;
 
 import models.Magician;
 import models.MagicianDB;
+import models.MagicianType;
 import models.RoutineDB;
 import models.SetDB;
 import org.junit.Test;
@@ -40,6 +41,7 @@ public class TestMagicianCRUD {
         , "Test Last Name 01"
         , "Test_eMail_01@playwithmagic.org"
         , "Professional"
+        , MagicianType.getMagicianType("Professional")
     );
 
     magician1.setStageName("Test stage name 01");
@@ -63,6 +65,7 @@ public class TestMagicianCRUD {
         , "02 Test Last Name 02"
         , "Test_eMail_02@playwithmagic.org"
         , "Historian"
+        , MagicianType.getMagicianType("Historian")
     );
 
     magician2.setStageName("02 Test stage name 02");

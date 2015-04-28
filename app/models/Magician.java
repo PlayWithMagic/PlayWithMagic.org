@@ -1,8 +1,12 @@
 package models;
 
+import views.formdata.EditMagicianFormData;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.io.File;
+import java.util.List;
 
 /**
  * A Magician object that holds the information about a user of the Play With Magic site.
@@ -27,6 +31,8 @@ public class Magician extends play.db.ebean.Model {
   private String interests;
   private String influences;
   private String experienceLevel;
+  @ManyToOne
+  private MagicianType magicianType;
   private Integer yearStarted;  // The year started - used to compute the number of years of experience.
   private String organizations;
   private String website;
@@ -54,6 +60,7 @@ public class Magician extends play.db.ebean.Model {
    * @param interests       User's interests in magic.
    * @param influences      User's influences.
    * @param experienceLevel User's experience level; pre-set values.
+   * @param magicianType    The type of magician the user identifies with.
    * @param yearStarted     The year started - used to compute the number of years of experience.
    * @param organizations   Any affiliations or organizations the user is a member of.
    * @param website         User's personal website.
@@ -66,7 +73,8 @@ public class Magician extends play.db.ebean.Model {
    * @param instagram       User's instagram account.
    */
   public Magician(long id, String firstName, String lastName, String stageName, String location, File userPhoto,
-                  String biography, String interests, String influences, String experienceLevel, Integer yearStarted,
+                  String biography, String interests, String influences, String experienceLevel,
+                  MagicianType magicianType, Integer yearStarted,
                   String organizations, String website, String email, String facebook, String twitter, String linkedIn,
                   String googlePlus, String flickr, String instagram) {
     this.id = id;
@@ -79,6 +87,7 @@ public class Magician extends play.db.ebean.Model {
     this.interests = interests;
     this.influences = influences;
     this.experienceLevel = experienceLevel;
+    this.magicianType = magicianType;
     this.yearStarted = yearStarted;
     this.organizations = organizations;
     this.website = website;
@@ -99,12 +108,14 @@ public class Magician extends play.db.ebean.Model {
    * @param lastName        The magician's last name.
    * @param email           The magician's eMail address.
    * @param experienceLevel The magician's experience level.
+   * @param magicianType    The type of magician the user identifies with.
    */
-  public Magician(String firstName, String lastName, String email, String experienceLevel) {
+  public Magician(String firstName, String lastName, String email, String experienceLevel, MagicianType magicianType) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.experienceLevel = experienceLevel;
+    this.magicianType = magicianType;
   }
 
 
@@ -120,6 +131,7 @@ public class Magician extends play.db.ebean.Model {
    * @param interests       User's interests in magic.
    * @param influences      User's invluences.
    * @param experienceLevel User's experience level; pre-set values.
+   * @param magicianType    The type of magician the user identifies with.
    * @param yearStarted     The year started - used to compute the number of years of experience.
    * @param organizations   Any affiliations or organizations the user is a member of.
    * @param website         User's personal website.
@@ -132,7 +144,8 @@ public class Magician extends play.db.ebean.Model {
    * @param instagram       User's instagram account.
    */
   public Magician(String firstName, String lastName, String stageName, String location, File userPhoto,
-                  String biography, String interests, String influences, String experienceLevel, int yearStarted,
+                  String biography, String interests, String influences, String experienceLevel,
+                  MagicianType magicianType, int yearStarted,
                   String organizations, String website, String email, String facebook, String twitter, String linkedIn,
                   String googlePlus, String flickr, String instagram) {
     this.firstName = firstName;
@@ -144,6 +157,7 @@ public class Magician extends play.db.ebean.Model {
     this.interests = interests;
     this.influences = influences;
     this.experienceLevel = experienceLevel;
+    this.magicianType = magicianType;
     this.yearStarted = yearStarted;
     this.organizations = organizations;
     this.website = website;
@@ -156,6 +170,101 @@ public class Magician extends play.db.ebean.Model {
     this.instagram = instagram;
   }
 
+  /**
+   * The EBean ORM finder method for database queries.
+   *
+   * @return The finder method.
+   */
+  public static Finder<Long, Magician> find() {
+    return new Finder<Long, Magician>(Long.class, Magician.class);
+  }
+
+  /**
+   * Get all of the active Magicians.
+   * <p>
+   * TO-DO:  Add where status=active and create a getAllMagicians -- use only in Admin pages.
+   *
+   * @return The all active Magicians.
+   */
+  public static List<Magician> getActiveMagicians() {
+    return Magician.find().all();
+  }
+
+  /**
+   * Delete a Magician associated with a given id.
+   * <p>
+   * TO-DO:  Set the status=inactive instead of deleting the magician.  Rename method to deactivate Magician.
+   * Create an activate Magician method.
+   *
+   * @param id The ID of the magician to delete.
+   */
+  public static void deleteMagician(long id) {
+    Magician magician = getMagician(id);
+
+    magician.delete();
+  }
+
+  /**
+   * Get a Magician associated with a given id.
+   *
+   * @param id The ID of the magician to retrieve.
+   * @return The retrieved magician object.
+   */
+  public static Magician getMagician(long id) {
+    Magician magician = Magician.find().byId(id);
+    if (magician == null) {
+      throw new RuntimeException("Unable to find Magician with the given ID [" + id + "]");
+    }
+    return magician;
+  }
+
+  /**
+   * Create a new Magician object from EditMagicianFormData.  Add it to the database and return the newly created
+   * Magician.
+   *
+   * @param editMagicianFormData The source of data for the Magician.
+   * @return A fully populated Magician object that's just been persisted in the database.
+   */
+  public static Magician createMagicianFromForm(EditMagicianFormData editMagicianFormData) {
+    Magician magician = null;
+    MagicianType magicianType = MagicianType.getMagicianType(editMagicianFormData.magicianType);
+
+    if (editMagicianFormData.id == 0) {
+      magician = new Magician(
+          editMagicianFormData.firstName
+          , editMagicianFormData.lastName
+          , editMagicianFormData.email
+          , editMagicianFormData.experienceLevel
+          , magicianType);
+    }
+    else {
+      magician = Magician.find().byId(editMagicianFormData.id);
+      magician.setFirstName(editMagicianFormData.firstName);
+      magician.setLastName(editMagicianFormData.lastName);
+      magician.setEmail(editMagicianFormData.email);
+      magician.setExperienceLevel(editMagicianFormData.experienceLevel);
+      magician.setMagicianType(magicianType);
+    }
+
+    magician.setStageName(editMagicianFormData.stageName);
+    magician.setLocation(editMagicianFormData.location);
+    // User photo
+    magician.setBiography(editMagicianFormData.biography);
+    magician.setInterests(editMagicianFormData.interests);
+    magician.setInfluences(editMagicianFormData.influences);
+    magician.setYearStarted(editMagicianFormData.yearStarted);
+    magician.setOrganizations(editMagicianFormData.organizations);
+    magician.setWebsite(editMagicianFormData.website);
+    magician.setFacebook(editMagicianFormData.facebook);
+    magician.setTwitter(editMagicianFormData.twitter);
+    magician.setLinkedIn(editMagicianFormData.linkedIn);
+    magician.setGooglePlus(editMagicianFormData.googlePlus);
+    magician.setInstagram(editMagicianFormData.instagram);
+    magician.setFlickr(editMagicianFormData.flickr);
+
+    magician.save();
+    return magician;
+  }
 
   /**
    * Get the ID of the magician.
@@ -518,10 +627,21 @@ public class Magician extends play.db.ebean.Model {
   }
 
   /**
-   * The EBean ORM finder method for database queries.
-   * @return The finder method.
+   * Get the MagicianType object.
+   *
+   * @return The MagicianType object.
    */
-  public static Finder<Long, Magician> find() {
-    return new Finder<Long, Magician>(Long.class, Magician.class);
+  public MagicianType getMagicianType() {
+    return magicianType;
   }
+
+  /**
+   * Set the MagicianType object.
+   *
+   * @param magicianType The MagicianType object.
+   */
+  public void setMagicianType(MagicianType magicianType) {
+    this.magicianType = magicianType;
+  }
+
 }

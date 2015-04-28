@@ -14,14 +14,19 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * MagicianFormData allows for the storage of Magician Form Data that is input by the user.
+ * EditMagicianFormData allows for the storage of Magician data from an HTML form.
+ *
+ * This is a Play Framework backing class that allows for the storage of HTML Form Data input by the user (usually as
+ * String data being moved in/out of Model data).
+ *
+ * These backing classes also contain basic input form validation for required fields, field length, etc.
+ *
  * This is utilized partially at account creation, and again whenever the Magician info is updated.
- * Eventually we'll decide on which items are strictly required at account creation.
  */
-public class MagicianFormData {
+public class EditMagicianFormData {
 
   /**
-   * Input data id hidden field.
+   * Magician ID hidden field.
    */
   public long id;
 
@@ -82,9 +87,14 @@ public class MagicianFormData {
   public String influences;
 
   /**
-   * Input data Experience Level selector; stored as string from field.
+   * Input data Experience Level selector; stored as string from the selectbox.
    */
   public String experienceLevel;
+
+  /**
+   * Input data MagicianType selector; stored as a string from the selectbox.
+   */
+  public String magicianType;
 
   /**
    * Input data Year Started field.
@@ -161,16 +171,17 @@ public class MagicianFormData {
   /**
    * Default no-arg constructor required by Play.
    */
-  public MagicianFormData() {
+  public EditMagicianFormData() {
     // No content.
   }
 
+
   /**
-   * Constructor that builds the MagicianFormData object from a provided Magician.
+   * Constructor that builds the EditMagicianFormData object from a provided Magician.
    *
    * @param magician The Magician object passed to the constructor.
    */
-  public MagicianFormData(Magician magician) {
+  public EditMagicianFormData(Magician magician) {
     this.id = magician.getId();
     this.firstName = magician.getFirstName();
     this.lastName = magician.getLastName();
@@ -181,6 +192,7 @@ public class MagicianFormData {
     this.interests = magician.getInterests();
     this.influences = magician.getInfluences();
     this.experienceLevel = magician.getExperienceLevel();
+    this.magicianType = magician.getMagicianType().getName();
     this.yearStarted = magician.getYearStarted();
     this.organizations = magician.getOrganizations();
     this.website = magician.getWebsite();
@@ -193,8 +205,9 @@ public class MagicianFormData {
     this.instagram = magician.getInstagram();
   }
 
+
   /**
-   * Enforce special UI validation rules for magicians.
+   * Enforce special user interface validation rules for Magician HTML form data.
    *
    * @return Either null if no errors, or a List of Div IDs and their associated error messages.
    */
@@ -204,6 +217,11 @@ public class MagicianFormData {
 
     if (!ExperienceLevels.isExperienceLevel(experienceLevel)) {
       errors.add(new ValidationError("experienceLevel", "Please select a level of experience from the list."));
+    }
+
+    if (!MagicianTypeFormData.isMagicianType(magicianType)) {
+      errors.add(new ValidationError("magicianType",
+          "How would you identify yourself as a magician?  Please select from the list."));
     }
 
     if (yearStarted != null && yearStarted.intValue() > Calendar.getInstance().get(Calendar.YEAR)) {
