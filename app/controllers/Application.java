@@ -304,9 +304,15 @@ public class Application extends Controller {
     long setId = new Long(formWithSetData.field("id").value()).longValue();
 
     if (formWithSetData.hasErrors()) {
-      System.out.println("HTTP Form Error.");
-      Set thisSet = SetDB.getSet(setId);
-      return badRequest(EditSet.render(formWithSetData, RoutineDB.getRoutines(), thisSet.getRoutines()));
+      Logger.warn("HTTP Form Error in postSet");
+      List<Long> listOfRoutines;
+      if (setId != 0) {
+        listOfRoutines = SetDB.getSet(setId).getRoutines();
+      }
+      else {
+        listOfRoutines = new ArrayList<Long>();
+      }
+      return badRequest(EditSet.render(formWithSetData, RoutineDB.getRoutines(), listOfRoutines));
     }
     else {
       SetFormData data = formWithSetData.get();

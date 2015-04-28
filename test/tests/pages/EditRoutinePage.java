@@ -58,15 +58,33 @@ public class EditRoutinePage extends FluentPage {
     fill("#name").with(routine.getName());
     fill("#description").with(routine.getDescription());
     fill("#duration").with(routine.getDuration().toString());
-    fill("#method").with(routine.getMethod());
-    fill("#handling").with(routine.getHandling());
-    fill("#resetDuration").with(routine.getResetDuration().toString());
-    fill("#resetDescription").with(routine.getResetDescription());
-    fill("#youTubeUrl").with(routine.getYouTubeUrl());
-    fill("#imageUrl").with(routine.getImageUrl());
-    fill("#inspiration").with(routine.getInspiration());
-    fill("#placement").with(routine.getPlacement());
-    fill("#choices").with(routine.getChoices());
+    if (routine.getMethod() != null) {
+      fill("#method").with(routine.getMethod());
+    }
+    if (routine.getHandling() != null) {
+      fill("#handling").with(routine.getHandling());
+    }
+    if (routine.getResetDuration() != null) {
+      fill("#resetDuration").with(routine.getResetDuration().toString());
+    }
+    if (routine.getResetDescription() != null) {
+      fill("#resetDescription").with(routine.getResetDescription());
+    }
+    if (routine.getYouTubeUrl() != null) {
+      fill("#youTubeUrl").with(routine.getYouTubeUrl());
+    }
+    if (routine.getImageUrl() != null) {
+      fill("#imageUrl").with(routine.getImageUrl());
+    }
+    if (routine.getInspiration() != null) {
+      fill("#inspiration").with(routine.getInspiration());
+    }
+    if (routine.getPlacement() != null) {
+      fill("#placement").with(routine.getPlacement());
+    }
+    if (routine.getChoices() != null) {
+      fill("#choices").with(routine.getChoices());
+    }
 
     submit("#submit");
   }

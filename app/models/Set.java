@@ -1,18 +1,16 @@
 package models;
 
-
 import java.util.List;
 
 /**
- * A Set object that holds the information about list of Routines.
- * Is really a link of various Routine IDs.
+ * A Set object that holds the information about lists of Routines.
+ * Is really a link to various Routine IDs.
  *
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/101
  */
 public class Set extends play.db.ebean.Model {
 
   private long id;
-  private long userId;
   // Set Info
   private String name;
   private String description;
@@ -23,21 +21,20 @@ public class Set extends play.db.ebean.Model {
    * Creates a Set object.
    *
    * @param id          The ID of the Set.
-   * @param userId      The ID of the user who created the Set.
    * @param name        The name of the Set.
    * @param description The description of the Set.
    * @param routines    The List of Long IDs of the routines in the set.
    */
-  public Set(long id, long userId, String name, String description, List<Long> routines) {
+  public Set(long id, String name, String description, List<Long> routines) {
     this.id = id;
-    this.userId = userId;
     this.name = name;
     this.description = description;
     this.routines = routines;
   }
 
+
   /**
-   * Get the ID of the set.
+   * Get the ID of the Set.
    *
    * @return The Set ID value.
    */
@@ -46,21 +43,30 @@ public class Set extends play.db.ebean.Model {
   }
 
   /**
-   * Get the ID of the User who created the Set.
+   * Set the ID of the... Set.
    *
-   * @return The ID of the user.
+   * @param id The ID of the Set.
    */
-  public long getUserId() {
-    return userId;
+  public void setId(long id) {
+    this.id = id;
   }
 
   /**
-   * Get the name of the set.
+   * Get the name of the Set.
    *
-   * @return The name of the set.
+   * @return The name of the Set.
    */
   public String getName() {
     return name;
+  }
+
+  /**
+   * Set the name of the Set.
+   *
+   * @param name The name of the Set.
+   */
+  public void setName(String name) {
+    this.name = name;
   }
 
   /**
@@ -73,11 +79,29 @@ public class Set extends play.db.ebean.Model {
   }
 
   /**
+   * Set the description of the Set.
+   *
+   * @param description The Description of the Set.
+   */
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  /**
    * Get the List of Routine IDs in the set.
    *
    * @return The List of Routine IDs.
    */
   public List<Long> getRoutines() {
     return routines;
+  }
+
+  /**
+   * Set the List of Routine IDs in the set.
+   *
+   * @param routines The list of Routine IDs.
+   */
+  public void setRoutines(List<Long> routines) {
+    this.routines = routines;
   }
 }
