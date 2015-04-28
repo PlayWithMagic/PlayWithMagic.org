@@ -48,8 +48,8 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li><a href="@routes.Application.listRoutines()">Browse Routines</a></li>
-          <li><a href="@routes.Application.listSets()">Browse Sets</a></li>
+          <li><a id="browseRoutines" href="@routes.Application.listRoutines()">Browse Routines</a></li>
+          <li><a id="browseSets" href="@routes.Application.listSets()">Browse Sets</a></li>
           <li><a id="browseMagicians" href="@routes.Application.listMagicians()">Browse Magicians</a></li>
         </ul>
 
@@ -84,14 +84,14 @@
           <li class="dropdown">
             @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in*@
               @*Username <span class="caret"></span></a>*@
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Create...
+            <a href="#" class="dropdown-toggle createNew" data-toggle="dropdown" role="button" aria-expanded="false">Create...
               <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               @* <li><a href="displayuser">Profile</a></li> *@
               @* <li><a href="@routes.Application.listRoutines()">My Routines</a></li>*@
               @* <li><a href="@routes.Application.listSets()">My Sets</a></li>*@
-              <li><a href="@routes.Application.editRoutine()">Create Routine</a></li>
-              <li><a href="@routes.Application.editSet()">Create Set</a></li>
+              <li><a id="createRoutine" href="@routes.Application.editRoutine()">Create Routine</a></li>
+              <li><a id="createSet" href="@routes.Application.editSet()">Create Set</a></li>
               @* <li class="divider"></li>*@
               @* <li><a href="#">Logout</a></li> *@
             </ul>

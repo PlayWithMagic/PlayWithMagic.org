@@ -66,6 +66,34 @@ public class TestRoutineCRUD {
 
 
   /**
+   * Test Routine Navigation from home page and navigation bars.
+   */
+  @Test
+  public void testRoutineNav() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
+        new F.Callback<TestBrowser>() {
+          public void invoke(TestBrowser browser) {
+            // browser.maximizeWindow();
+
+            // Start at the home page...
+            browser.goTo("http://localhost:" + TEST_PORT + "/");
+            assertThat(browser.pageSource()).contains("We're looking for a few good routines");
+            assertThat(browser.pageSource()).contains("Join the Community Today!");
+
+            // Click the Browse Routines button
+            browser.findFirst("#browseRoutines").click();
+            assertThat(browser.pageSource()).contains("Current Routines");
+
+            // Click the Create Routines button
+            browser.findFirst(".createNew").click();
+            browser.findFirst("#createRoutine").click();
+            assertThat(browser.pageSource()).contains("Create Routine");
+          }
+        });
+  }
+
+
+  /**
    * Utilize a test browser and the Fluentlenium framework to exercise the List Routines page.
    */
   @Test

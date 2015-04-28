@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import play.libs.F;
 import play.test.TestBrowser;
 import tests.pages.EditMagicianPage;
+import tests.pages.ListMagiciansPage;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.fakeApplication;
@@ -218,6 +219,65 @@ public class TestMagicianCRUD {
             browser.findFirst(".deleteMagician").click();
             assertThat(browser.pageSource()).doesNotContain(magician2.getFirstName() + " " + magician2.getLastName());
             assertThat(browser.pageSource()).doesNotContain(magician2.getExperienceLevel());
+          }
+        });
+  }
+
+
+  /**
+   * Test that verifies the EditMagician page can be retrieved.
+   */
+  @Test
+  public void testRetrieveNewMagicianPage() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
+        new F.Callback<TestBrowser>() {
+          public void invoke(TestBrowser browser) {
+            browser.maximizeWindow();
+            EditMagicianPage editMagicianPage = new EditMagicianPage(browser.getDriver(), TEST_PORT);
+            browser.goTo(editMagicianPage);
+            editMagicianPage.isAt();
+          }
+        });
+  }
+
+
+  /**
+   * Tests to verify that a EditMagician form submission works and results can be viewed on the ListMagicians page.
+   */
+  @Test
+  public void testCreateNewMagician() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
+        new F.Callback<TestBrowser>() {
+          public void invoke(TestBrowser browser) {
+            browser.maximizeWindow();
+            ListMagiciansPage listMagiciansPage = new ListMagiciansPage(browser.getDriver(), TEST_PORT);
+            EditMagicianPage editMagicianPage = new EditMagicianPage(browser.getDriver(), TEST_PORT);
+            browser.goTo(editMagicianPage);
+            editMagicianPage.isAt();
+            String firstName = "Patrick";
+            String lastName = "Karjala";
+            String stageName = "The Great Patricio";
+            String location = "Honolulu, HI";
+            String biography = "Born and raised in Hawaii, the greatest magician of the Pacific!";
+            String interests = "Color Sticks";
+            String influences = "Mark Nelson";
+            String experienceLevel = "Enthusiast";
+            String yearStarted = "2011";
+            String organizations = "none";
+            String website = "http://patrickakarjala.wordpress.com/";
+            String email = "pat_trick@hotmail.com";
+            String facebook = "None";
+            String twitter = "@patrick";
+            String linkedIn = "http://www.linkedin.com/patrickakarjala/";
+            String googlePlus = "Some crazy URL string";
+            String flickr = "yahoo.com";
+            String instagram = "pat_trick_hi";
+            editMagicianPage.createMagician(firstName, lastName, stageName, location, biography, interests, influences,
+                experienceLevel, yearStarted, organizations, website, email, facebook, twitter, linkedIn,
+                googlePlus, flickr, instagram);
+            browser.goTo(listMagiciansPage);
+            String fullName = firstName + " " + lastName;
+            listMagiciansPage.hasMagician(fullName, stageName, experienceLevel);
           }
         });
   }
