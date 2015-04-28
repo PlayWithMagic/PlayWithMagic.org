@@ -1,6 +1,7 @@
 package tests;
 
 import models.MagicianDB;
+import models.Routine;
 import models.RoutineDB;
 import models.Set;
 import models.SetDB;
@@ -8,6 +9,12 @@ import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import play.libs.F;
 import play.test.TestBrowser;
+import tests.pages.EditRoutinePage;
+import tests.pages.EditSetPage;
+import tests.pages.ListSetsPage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.fakeApplication;
@@ -28,10 +35,26 @@ public class TestSetCRUD {
   private static Set set1;
   private static Set set2;
 
+  private static Routine routine1 = null;
+  private static Routine routine2 = null;
+  private static Routine routine3 = null;
+
+
   /**
    * Populate static objects needed for testing.
    */
   public TestSetCRUD() {
+    set1 = new Set(-1, "Test Set Name 01", "Test Set Description 01", null);
+    set2 = new Set(-1, "02 Test Set Name 02", "02 Test Set Description 02", null);
+
+    routine1 = new Routine(0, "Test Routine Name 01", "Test Routine Description 01");
+    routine1.setDuration(11);
+
+    routine2 = new Routine(0, "Test Routine Name 02", "Test Routine Description 02");
+    routine2.setDuration(22);
+
+    routine3 = new Routine(0, "Test Routine Name 03", "Test Routine Description 03");
+    routine3.setDuration(33);
   }
 
   /**
@@ -115,6 +138,29 @@ public class TestSetCRUD {
             SetDB.resetSetDB();
             RoutineDB.resetRoutineDB();
             MagicianDB.resetMagicianDB();
+            Long routineId1;
+            Long routineId2;
+            Long routineId3;
+
+            // Create three routines used for testing
+            EditRoutinePage editRoutinePage;
+            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT);
+            browser.goTo(editRoutinePage);
+            editRoutinePage.isAt();
+            editRoutinePage.submitForm(routine1);
+            routineId1 = RoutineDB.getRoutines().get(0).getId();
+
+            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT);
+            browser.goTo(editRoutinePage);
+            editRoutinePage.isAt();
+            editRoutinePage.submitForm(routine2);
+            routineId2 = RoutineDB.getRoutines().get(1).getId();
+
+            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT);
+            browser.goTo(editRoutinePage);
+            editRoutinePage.isAt();
+            editRoutinePage.submitForm(routine3);
+            routineId3 = RoutineDB.getRoutines().get(2).getId();
 
             // browser.maximizeWindow();
 
@@ -127,50 +173,107 @@ public class TestSetCRUD {
             browser.findFirst("#createSet").click();
             assertThat(browser.pageSource()).contains("Create Set");
 
-
-/*
-            // Click the Join the Community Today! button
-            browser.findFirst("#joinTheCommunity").click();
-            assertThat(browser.pageSource()).contains("Magician Profile");
-
-            // Populate all of the fields and click Add
-            EditMagicianPage.populateMagician(browser, magician1);
+            // Populate the fields, the first and third routines and click Add
+            browser.fill("#name").with(set1.getName());
+            browser.fill("#description").with(set1.getDescription());
+            browser.findFirst("input[id=\"" + routineId1 + "\"").click();
+            browser.findFirst("input[id=\"" + routineId3 + "\"").click();
             browser.click(browser.find("#submit"));
-            assertThat(browser.pageSource()).contains("Current Magicians");
-            assertThat(browser.pageSource()).contains(magician1.getFirstName() + " " + magician1.getLastName());
-            assertThat(browser.pageSource()).contains(magician1.getStageName());
-            assertThat(browser.pageSource()).contains(magician1.getExperienceLevel());
 
-            // View the magician and check all of the fields
-            browser.findFirst(".viewMagician").click();
-            EditMagicianPage.checkMagician(browser, magician1);
+            // Verify the new set is in the list
+            assertThat(browser.pageSource()).contains("Current Sets");
+            assertThat(browser.pageSource()).contains(set1.getName());
 
-            // Edit the magician and update all of the fields                                    // The button click
-            browser.goTo(browser.findFirst(".editMagician").getElement().getAttribute("href"));  // didn't work, so I
-            EditMagicianPage.checkMagician(browser, magician1);                                  // did this instead.
-            EditMagicianPage.populateMagician(browser, magician2);
+            // View the new set and verify its contents
+            browser.findFirst(".viewSet").click();
+            assertThat(browser.pageSource()).contains(set1.getName());
+            assertThat(browser.pageSource()).contains(set1.getDescription());
+            assertThat(browser.pageSource()).contains(routine1.getName());
+            assertThat(browser.pageSource()).doesNotContain(routine2.getName());
+            assertThat(browser.pageSource()).contains(routine3.getName());
+
+            // Go back to Edit Set and verify everyting is good
+            browser.goTo(browser.findFirst(".editSet").getElement().getAttribute("href"));
+            assertThat(browser.pageSource()).contains(set1.getName());
+            assertThat(browser.pageSource()).contains(set1.getDescription());
+            assertThat(browser.findFirst("input[id=\"" + routineId1 + "\"").isSelected());
+            assertThat(!browser.findFirst("input[id=\"" + routineId2 + "\"").isSelected());
+            assertThat(browser.findFirst("input[id=\"" + routineId3 + "\"").isSelected());
+
+            // Now change all of the fields
+            browser.fill("#name").with(set2.getName());
+            browser.fill("#description").with(set2.getDescription());
+            browser.findFirst("input[id=\"" + routineId1 + "\"").click();
+            browser.findFirst("input[id=\"" + routineId2 + "\"").click();
+            browser.findFirst("input[id=\"" + routineId3 + "\"").click();
+
             browser.click(browser.find("#submit"));
-            assertThat(browser.pageSource()).contains("Current Magicians");
-            assertThat(browser.pageSource()).contains(magician2.getFirstName() + " " + magician2.getLastName());
-            assertThat(browser.pageSource()).contains(magician2.getStageName());
-            assertThat(browser.pageSource()).contains(magician2.getExperienceLevel());
 
-            // View the magician and check all of the fields
-            browser.findFirst(".viewMagician").click();
-            EditMagicianPage.checkMagician(browser, magician2);
+            // Verify the new set is in the list
+            assertThat(browser.pageSource()).contains("Current Sets");
+            assertThat(browser.pageSource()).contains(set2.getName());
 
-            // Go back to list magician and delete the magician
-            browser.goTo(browser.findFirst(".listMagicians").getElement().getAttribute("href"));
-            assertThat(browser.pageSource()).contains(magician2.getFirstName() + " " + magician2.getLastName());
-            assertThat(browser.pageSource()).contains(magician2.getExperienceLevel());
-            browser.findFirst(".deleteMagician").click();
-            assertThat(browser.pageSource()).doesNotContain(magician2.getFirstName() + " " + magician2.getLastName());
-            assertThat(browser.pageSource()).doesNotContain(magician2.getExperienceLevel());
-*/
+            // View the new set and verify its contents
+            browser.findFirst(".viewSet").click();
+            assertThat(browser.pageSource()).contains(set2.getName());
+            assertThat(browser.pageSource()).contains(set2.getDescription());
+            assertThat(browser.pageSource()).doesNotContain(routine1.getName());
+            assertThat(browser.pageSource()).contains(routine2.getName());
+            assertThat(browser.pageSource()).doesNotContain(routine3.getName());
+
+            // Go back to list sets and delete the set
+            browser.goTo(browser.findFirst(".listSets").getElement().getAttribute("href"));
+            assertThat(browser.pageSource()).contains("Current Sets");
+            assertThat(browser.pageSource()).contains(set2.getName());
+            browser.findFirst(".deleteSet").click();
+            assertThat(browser.pageSource()).doesNotContain(set2.getName());
+
           }
         });
   }
 
 
+  /**
+   * Test that verifies the ListSets page can be retrieved.
+   */
+  @Test
+  public void testRetrieveListSetsPage() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
+        new F.Callback<TestBrowser>() {
+          public void invoke(TestBrowser browser) {
+            browser.maximizeWindow();
+            ListSetsPage listSetsPage = new ListSetsPage(browser.getDriver(), TEST_PORT);
+            browser.goTo(listSetsPage);
+            listSetsPage.isAt();
+          }
+        });
+  }
+
+
+  /**
+   * Test to verify that a EditSet form submission works and results can beviewed on the ListSets Page.
+   */
+  @Test
+  public void testCreateNewSet() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
+        new F.Callback<TestBrowser>() {
+          public void invoke(TestBrowser browser) {
+            browser.maximizeWindow();
+            ListSetsPage listSetsPage = new ListSetsPage(browser.getDriver(), TEST_PORT);
+            EditSetPage editSetPage = new EditSetPage(browser.getDriver(), TEST_PORT);
+            browser.goTo(editSetPage);
+            editSetPage.isAt();
+            String name = "My First Set";
+            String description = "This is the first set that I have built!";
+            List<Long> routineList = new ArrayList<Long>();
+            routineList.add(1L);
+            routineList.add(3L);
+            editSetPage.createSet(name, description, routineList);
+            browser.goTo(listSetsPage);
+            listSetsPage.isAt();
+            listSetsPage.hasSet(name);
+          }
+        });
+  }
 
 }
