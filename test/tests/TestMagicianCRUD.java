@@ -1,10 +1,7 @@
 package tests;
 
 import models.Magician;
-import models.MagicianDB;
 import models.MagicianType;
-import models.RoutineDB;
-import models.SetDB;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import play.libs.F;
@@ -97,7 +94,8 @@ public class TestMagicianCRUD /*extends play.test.WithApplication */ {
    */
   @Test
   public void testSamIam() {
-    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class, new F.Callback<TestBrowser>() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
+        new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
             // browser.maximizeWindow();
 

@@ -27,7 +27,7 @@ public class TestStaticPages {
   /**
    * This test verifies that the Index, About and Help pages can be retrieved.
    */
-//  @Test
+  @Test
   public void testStaticPages() {
     running(testServer(port, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new Callback<TestBrowser>() {

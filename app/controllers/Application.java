@@ -11,7 +11,6 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.formdata.EditMagicianFormData;
-import views.formdata.ExperienceLevels;
 import views.formdata.MagicianTypeFormData;
 import views.formdata.MaterialFormData;
 import views.formdata.RoutineFormData;

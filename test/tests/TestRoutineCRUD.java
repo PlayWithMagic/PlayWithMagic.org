@@ -66,7 +66,7 @@ public class TestRoutineCRUD {
 
 
   /**
-   * Test Routine Navigation from home page and navigation bars.
+   * Test Routine navigation from index page and navigation bars.
    */
   @Test
   public void testRoutineNav() {
@@ -101,7 +101,8 @@ public class TestRoutineCRUD {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
-            browser.maximizeWindow();
+            // browser.maximizeWindow();
+
             ListRoutinesPage listRoutinesPage = new ListRoutinesPage(browser.getDriver(), TEST_PORT);
             browser.goTo(listRoutinesPage);
             listRoutinesPage.isAt();
@@ -125,7 +126,7 @@ public class TestRoutineCRUD {
             RoutineDB.resetRoutineDB();
             MagicianDB.resetMagicianDB();
 
-            browser.maximizeWindow();
+            // browser.maximizeWindow();
 
             ListRoutinesPage listRoutinesPage = null;
             EditRoutinePage editRoutinePage = null;

@@ -13,6 +13,9 @@ import java.util.List;
  * A Magician object that holds the information about a user of the Play With Magic site.
  * Essentially the user data.
  *
+ * The synthetic unique constraint on this model is id.
+ * The logical unique constraint on this model is email.
+ *
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/32
  */
 @Entity

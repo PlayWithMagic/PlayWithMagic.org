@@ -15,6 +15,8 @@ import static play.test.Helpers.testServer;
 
 /**
  * Test the live interaction of the Material pages with Chrome.
+ *
+ * Run a server with a fake in-memory database to test the system.
  */
 public class TestMaterialCRUD {
 
