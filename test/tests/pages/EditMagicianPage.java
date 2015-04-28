@@ -1,7 +1,9 @@
 package tests.pages;
 
+import models.Magician;
 import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
+import play.test.TestBrowser;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withId;
@@ -78,7 +80,7 @@ public class EditMagicianPage extends FluentPage {
     fill("#biography").with(biography);
     fill("#interests").with(interests);
     fill("#influences").with(influences);
-    System.out.println("Experience Level: " + experienceLevel);
+    //System.out.println("Experience Level: " + experienceLevel);
     find("select", withId("experienceLevel")).find("option", withText().equalTo(experienceLevel)).click();
     //find("select", withId().equalTo("gender")).find("option", withText().equalTo(gender)).click();
     fill("#yearStarted").with(yearStarted);
@@ -91,6 +93,62 @@ public class EditMagicianPage extends FluentPage {
     fill("#flickr").with(flickr);
     fill("#instagram").with(instagram);
     submit("#submit");
+  }
+
+
+  /**
+   * Set passed values into the form, then submit it.
+   *
+   * @param browser The test browser containing the rendered page.
+   * @param magician A container holding all of the fields to check for in the page.
+   */
+  public static void populateMagician(TestBrowser browser, Magician magician) {
+    browser.fill("#firstName").with(magician.getFirstName());
+    browser.fill("#lastName").with(magician.getLastName());
+    browser.fill("#email").with(magician.getEmail());
+    browser.find("#" + magician.getExperienceLevel()).click();
+    browser.fill("#stageName").with(magician.getStageName());
+    browser.fill("#location").with(magician.getLocation());
+    browser.fill("#biography").with(magician.getBiography());
+    browser.fill("#interests").with(magician.getInterests());
+    browser.fill("#influences").with(magician.getInfluences());
+    browser.fill("#yearStarted").with(magician.getYearStarted().toString());
+    browser.fill("#organizations").with(magician.getOrganizations());
+    browser.fill("#website").with(magician.getWebsite());
+    browser.fill("#facebook").with(magician.getFacebook());
+    browser.fill("#twitter").with(magician.getTwitter());
+    browser.fill("#linkedIn").with(magician.getLinkedIn());
+    browser.fill("#googlePlus").with(magician.getGooglePlus());
+    browser.fill("#flickr").with(magician.getFlickr());
+    browser.fill("#instagram").with(magician.getInstagram());
+  }
+
+  /**
+   * Check the browser can see all of the values in the Magician object.
+   *
+   * @param browser The test browser containing the redered page.
+   * @param magician A container holding all of the fields to check for in the page.
+   */
+  public static void checkMagician(TestBrowser browser, Magician magician) {
+    assertThat(browser.pageSource()).contains(magician.getFirstName());
+    assertThat(browser.pageSource()).contains(magician.getLastName());
+    assertThat(browser.pageSource()).contains(magician.getEmail());
+    assertThat(browser.pageSource()).contains(magician.getExperienceLevel());
+    assertThat(browser.pageSource()).contains(magician.getStageName());
+    // No image for now
+    assertThat(browser.pageSource()).contains(magician.getLocation());
+    assertThat(browser.pageSource()).contains(magician.getBiography());
+    assertThat(browser.pageSource()).contains(magician.getInterests());
+    assertThat(browser.pageSource()).contains(magician.getInfluences());
+    assertThat(browser.pageSource()).contains(magician.getYearStarted().toString());
+    assertThat(browser.pageSource()).contains(magician.getOrganizations());
+    assertThat(browser.pageSource()).contains(magician.getWebsite());
+    assertThat(browser.pageSource()).contains(magician.getFacebook());
+    assertThat(browser.pageSource()).contains(magician.getTwitter());
+    assertThat(browser.pageSource()).contains(magician.getLinkedIn());
+    assertThat(browser.pageSource()).contains(magician.getGooglePlus());
+    assertThat(browser.pageSource()).contains(magician.getFlickr());
+    assertThat(browser.pageSource()).contains(magician.getInstagram());
   }
 }
 

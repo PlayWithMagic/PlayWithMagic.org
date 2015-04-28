@@ -24,7 +24,7 @@
       <tbody>
         @for(magician <- magicians) {
           <tr>
-            <td><a href="viewMagician?id=@magician.getId">@magician.getFirstName @magician.getLastName</a></td>
+            <td><a href="viewMagician?id=@magician.getId" class="viewMagician">@magician.getFirstName @magician.getLastName</a></td>
             <td>@if(magician.getStageName) { @magician.getStageName } else { None }</td>
             <td>@magician.getExperienceLevel</td>
             <td>Link to Magician's Routines Here</td>
@@ -33,7 +33,7 @@
               Edit</a>
             </td>
             <td>
-              <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
+              <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs deleteMagician" role="button">
               Delete</a>
             </td>
           </tr>
