@@ -47,6 +47,21 @@ public class EditMagicianFormData {
   public String lastName;
 
   /**
+   * Input data Email field.
+   */
+  @Required(message = "An Email address must be provided.")
+  @Email(message = "An Email address must be provided.")
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "The Email address can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
+  public String email;
+
+  /**
+   * Input data MagicianType selector; stored as a string from the selectbox.
+   */
+  @Required(message = "How would you identify yourself as a magician?  Please select from the list.")
+  public String magicianType;
+
+  /**
    * Input data Stage Name field.
    */
   @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
@@ -87,11 +102,6 @@ public class EditMagicianFormData {
   public String influences;
 
   /**
-   * Input data MagicianType selector; stored as a string from the selectbox.
-   */
-  public String magicianType;
-
-  /**
    * Input data Year Started field.
    */
   @Min(value = 1900, message = "How about a real year?")
@@ -110,15 +120,6 @@ public class EditMagicianFormData {
   @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
       message = "Your website URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String website;
-
-  /**
-   * Input data Email field.
-   */
-  @Required(message = "An Email address must be provided.")
-  @Email(message = "An Email address must be provided.")
-  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
-      message = "The Email address can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
-  public String email;
 
   /**
    * Input data Facebook field.

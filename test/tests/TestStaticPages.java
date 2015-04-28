@@ -13,10 +13,11 @@ import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.running;
 import static play.test.Helpers.testServer;
 
+
 /**
- * Runs a server with a fake in-memory database to test the system.
+ * Test the static pages and basic navigation.
  */
-public class IntegrationTest {
+public class TestStaticPages {
 
   /**
    * The port to be used for testing.
@@ -24,15 +25,15 @@ public class IntegrationTest {
   private final int port = 3333;
 
   /**
-   * Test that verifies that several static pages can be retrieved.
    * This test verifies that the Index, About and Help pages can be retrieved.
    */
-  @Test
+//  @Test
   public void testStaticPages() {
     running(testServer(port, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
-            browser.maximizeWindow();
+            // browser.maximizeWindow();
+
             IndexPage indexPage = new IndexPage(browser.getDriver(), port);
             browser.goTo(indexPage);
             indexPage.isAt();

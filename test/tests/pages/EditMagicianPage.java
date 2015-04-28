@@ -106,7 +106,7 @@ public class EditMagicianPage extends FluentPage {
     browser.fill("#firstName").with(magician.getFirstName());
     browser.fill("#lastName").with(magician.getLastName());
     browser.fill("#email").with(magician.getEmail());
-    browser.find("#" + magician.getMagicianType()).click();
+    browser.find("#" + magician.getMagicianType().getName()).click();
     browser.fill("#stageName").with(magician.getStageName());
     browser.fill("#location").with(magician.getLocation());
     browser.fill("#biography").with(magician.getBiography());

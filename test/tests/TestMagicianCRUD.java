@@ -18,10 +18,13 @@ import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.running;
 import static play.test.Helpers.testServer;
 
+
 /**
  * Test the live interaction of the Material pages with Chrome.
+ *
+ * Run a server with a fake in-memory database to test the system.
  */
-public class TestMagicianCRUD {
+public class TestMagicianCRUD /*extends play.test.WithApplication */ {
 
   /**
    * The port number on which to run the tests.
@@ -31,11 +34,16 @@ public class TestMagicianCRUD {
   private static Magician magician1 = null;
   private static Magician magician2 = null;
 
+//  @Override
+//  protected play.test.FakeApplication provideFakeApplication() {
+//    return fakeApplication(inMemoryDatabase());
+//  }
 
   /**
    * Populate static objects needed for testing.
    */
-  public TestMagicianCRUD() {
+  public void initializeTest() {
+
     magician1 = new Magician(
         "Test First Name 01"
         , "Test Last Name 01"
@@ -88,6 +96,21 @@ public class TestMagicianCRUD {
    * Test Magician Navigation from home page and navigation bars.
    */
   @Test
+  public void testSamIam() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class, new F.Callback<TestBrowser>() {
+          public void invoke(TestBrowser browser) {
+            // browser.maximizeWindow();
+
+            initializeTest();
+          }
+        });
+  }
+
+
+  /**
+   * Test Magician Navigation from home page and navigation bars.
+   */
+  @Test
   public void testMagicianNav() {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new F.Callback<TestBrowser>() {
@@ -119,9 +142,7 @@ public class TestMagicianCRUD {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
-            SetDB.resetSetDB();
-            RoutineDB.resetRoutineDB();
-            MagicianDB.resetMagicianDB();
+            initializeTest();
 
             // browser.maximizeWindow();
 
@@ -173,9 +194,7 @@ public class TestMagicianCRUD {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
-            SetDB.resetSetDB();
-            RoutineDB.resetRoutineDB();
-            MagicianDB.resetMagicianDB();
+            initializeTest();
 
             // browser.maximizeWindow();
 
@@ -233,7 +252,9 @@ public class TestMagicianCRUD {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
-            browser.maximizeWindow();
+            initializeTest();
+
+            // browser.maximizeWindow();
             EditMagicianPage editMagicianPage = new EditMagicianPage(browser.getDriver(), TEST_PORT);
             browser.goTo(editMagicianPage);
             editMagicianPage.isAt();
@@ -250,7 +271,10 @@ public class TestMagicianCRUD {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
         new F.Callback<TestBrowser>() {
           public void invoke(TestBrowser browser) {
-            browser.maximizeWindow();
+            initializeTest();
+
+            // browser.maximizeWindow();
+
             ListMagiciansPage listMagiciansPage = new ListMagiciansPage(browser.getDriver(), TEST_PORT);
             EditMagicianPage editMagicianPage = new EditMagicianPage(browser.getDriver(), TEST_PORT);
             browser.goTo(editMagicianPage);

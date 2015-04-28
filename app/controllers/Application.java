@@ -120,7 +120,7 @@ public class Application extends Controller {
       Logger.error("EditMagician HTTP Form Error.");
 
       Map<String, Boolean> magicianTypeMap = null;
-      if (MagicianTypeFormData.isMagicianType(formData.field("magigianType").value())) {
+      if (MagicianTypeFormData.isMagicianType(formData.field("magicianType").value())) {
         magicianTypeMap = MagicianTypeFormData.getMagicianTypes(formData.field("magicianType").value());
       }
       else {
@@ -137,14 +137,12 @@ public class Application extends Controller {
     Logger.debug("  firstName = [" + editMagicianFormData.firstName + "]");
     Logger.debug("  magicianType = [" + editMagicianFormData.magicianType + "]");
 
-    Magician.createMagicianFromForm(editMagicianFormData);
+    Magician magician = Magician.createMagicianFromForm(editMagicianFormData);
 
-    // TODO: Fixup
-    System.out.printf("HTTP OK; Form Data submitted:  %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, "
-            + "%s, %s, %s %n", editMagicianFormData.id, editMagicianFormData.firstName, editMagicianFormData.lastName, editMagicianFormData.stageName, editMagicianFormData.location, editMagicianFormData.biography,
-        editMagicianFormData.interests, editMagicianFormData.influences, editMagicianFormData.yearStarted, editMagicianFormData.organizations, editMagicianFormData.website, editMagicianFormData.email,
-        editMagicianFormData.facebook, editMagicianFormData.twitter, editMagicianFormData.linkedIn, editMagicianFormData.googlePlus, editMagicianFormData.flickr, editMagicianFormData.instagram);
-    System.out.println(editMagicianFormData.magicianType);
+    Logger.debug("Magician Persisted Data");
+    Logger.debug("  id = [" + magician.getId() + "]");
+    Logger.debug("  firstName = [" + magician.getFirstName() + "]");
+    Logger.debug("  magicianType = [" + magician.getMagicianType().getName() + "]");
 
     return ok(ListMagicians.render(Magician.getActiveMagicians()));
   }

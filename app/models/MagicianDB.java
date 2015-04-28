@@ -27,7 +27,7 @@ public class MagicianDB {
   public static void init() {
     resetMagicianDB();
 
-    MagicianType.init();
+
     MagicianType magicianTypeSemiProfessional = MagicianType.getMagicianType("Semi-Professional");
     MagicianType magicianTypeProfessional = MagicianType.getMagicianType("Professional");
 

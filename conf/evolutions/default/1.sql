@@ -38,16 +38,20 @@ create sequence magician_seq;
 
 create sequence magician_type_seq;
 
-alter table magician add constraint fk_magician_magicianType_1 foreign key (magician_type_id) references magician_type (id);
+alter table magician add constraint fk_magician_magicianType_1 foreign key (magician_type_id) references magician_type (id) on delete restrict on update restrict;
 create index ix_magician_magicianType_1 on magician (magician_type_id);
 
 
 
 # --- !Downs
 
-drop table if exists magician cascade;
+SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists magician_type cascade;
+drop table if exists magician;
+
+drop table if exists magician_type;
+
+SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists magician_seq;
 

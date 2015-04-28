@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.Constraints;
 import views.formdata.EditMagicianFormData;
 
 import javax.persistence.Entity;
@@ -20,7 +21,9 @@ public class Magician extends play.db.ebean.Model {
   @Id
   private long id;
   // User Info
+  @Constraints.Required
   private String firstName;
+  @Constraints.Required
   private String lastName;
   private String stageName;
   private String location; // City/State?  Country?  Perhaps a map of values instead?
@@ -30,6 +33,8 @@ public class Magician extends play.db.ebean.Model {
   private String biography;
   private String interests;
   private String influences;
+
+  @Constraints.Required
   @ManyToOne
   private MagicianType magicianType;
   private Integer yearStarted;  // The year started - used to compute the number of years of experience.
@@ -37,6 +42,7 @@ public class Magician extends play.db.ebean.Model {
   private String website;
 
   // Social Media
+  @Constraints.Required
   private String email;
   private String facebook;
   private String twitter;
