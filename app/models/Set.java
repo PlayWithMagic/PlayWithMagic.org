@@ -1,11 +1,10 @@
 package models;
 
-
 import java.util.List;
 
 /**
- * A Set object that holds the information about list of Routines.
- * Is really a link of various Routine IDs.
+ * A Set object that holds the information about lists of Routines.
+ * Is really a link to various Routine IDs.
  *
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/101
  */
