@@ -21,6 +21,8 @@ public class MagicianType extends play.db.ebean.Model {
   private List<Magician> magicians;
 
 
+  // TODO:  Magician Type is not being sorted in the Form... need to look into that.
+
   /**
    * Create a new MagicianType with all of the required fields.
    *
