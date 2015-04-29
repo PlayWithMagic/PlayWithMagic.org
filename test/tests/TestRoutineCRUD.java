@@ -85,7 +85,7 @@ public class TestRoutineCRUD {
             assertThat(browser.pageSource()).contains("Current Routines");
 
             // Click the Create Routines button
-            browser.findFirst(".createNew").click();
+            browser.findFirst("#createNew").click();
             browser.findFirst("#createRoutine").click();
             assertThat(browser.pageSource()).contains("Create Routine");
           }
@@ -103,9 +103,7 @@ public class TestRoutineCRUD {
           public void invoke(TestBrowser browser) {
             // browser.maximizeWindow();
 
-            ListRoutinesPage listRoutinesPage = new ListRoutinesPage(browser.getDriver(), TEST_PORT);
-            browser.goTo(listRoutinesPage);
-            listRoutinesPage.isAt();
+            ListRoutinesPage listRoutinesPage = new ListRoutinesPage(browser);
           }
         });
   }
@@ -132,14 +130,10 @@ public class TestRoutineCRUD {
             EditRoutinePage editRoutinePage = null;
 
             // Look at the List Routines page first...
-            listRoutinesPage = new ListRoutinesPage(browser.getDriver(), TEST_PORT);
-            browser.goTo(listRoutinesPage);
-            listRoutinesPage.isAt();
+            listRoutinesPage = new ListRoutinesPage(browser);
 
             // Add a new Routine...
-            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT);
-            browser.goTo(editRoutinePage);
-            editRoutinePage.isAt();
+            editRoutinePage = new EditRoutinePage(browser);
             assertThat(browser.pageSource()).contains("Create Routine");
 
             editRoutinePage.submitForm(routine1);

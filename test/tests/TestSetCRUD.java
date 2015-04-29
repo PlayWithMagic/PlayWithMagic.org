@@ -80,7 +80,7 @@ public class TestSetCRUD {
             assertThat(browser.pageSource()).contains("Current Sets");
 
             // Click the Create Sets button
-            browser.findFirst(".createNew").click();
+            browser.findFirst("#createNew").click();
             browser.findFirst("#createSet").click();
             assertThat(browser.pageSource()).contains("Create Set");
           }
@@ -107,7 +107,7 @@ public class TestSetCRUD {
             assertThat(browser.pageSource()).contains("We're looking for a few good routines");
 
             // Click Add Set
-            browser.findFirst(".createNew").click();
+            browser.findFirst("#createNew").click();
             browser.findFirst("#createSet").click();
             assertThat(browser.pageSource()).contains("Create Set");
 
@@ -147,21 +147,15 @@ public class TestSetCRUD {
 
             // Create three routines used for testing
             EditRoutinePage editRoutinePage;
-            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT);
-            browser.goTo(editRoutinePage);
-            editRoutinePage.isAt();
+            editRoutinePage = new EditRoutinePage(browser);
             editRoutinePage.submitForm(routine1);
             routineId1 = RoutineDB.getRoutines().get(0).getId();
 
-            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT);
-            browser.goTo(editRoutinePage);
-            editRoutinePage.isAt();
+            editRoutinePage = new EditRoutinePage(browser);
             editRoutinePage.submitForm(routine2);
             routineId2 = RoutineDB.getRoutines().get(1).getId();
 
-            editRoutinePage = new EditRoutinePage(browser.getDriver(), TEST_PORT);
-            browser.goTo(editRoutinePage);
-            editRoutinePage.isAt();
+            editRoutinePage = new EditRoutinePage(browser);
             editRoutinePage.submitForm(routine3);
             routineId3 = RoutineDB.getRoutines().get(2).getId();
 
@@ -172,7 +166,7 @@ public class TestSetCRUD {
             assertThat(browser.pageSource()).contains("We're looking for a few good routines");
 
             // Click Add Set
-            browser.findFirst(".createNew").click();
+            browser.findFirst("#createNew").click();
             browser.findFirst("#createSet").click();
             assertThat(browser.pageSource()).contains("Create Set");
 
@@ -246,9 +240,7 @@ public class TestSetCRUD {
           public void invoke(TestBrowser browser) {
             // browser.maximizeWindow();
 
-            ListSetsPage listSetsPage = new ListSetsPage(browser.getDriver(), TEST_PORT);
-            browser.goTo(listSetsPage);
-            listSetsPage.isAt();
+            ListSetsPage listSetsPage = new ListSetsPage(browser);
           }
         });
   }
@@ -257,7 +249,7 @@ public class TestSetCRUD {
   /**
    * Test to verify that a EditSet form submission works and results can beviewed on the ListSets Page.
    */
-  // TODO:  This needs to get re-added to the test suite.
+  // TODO:  This needs to get re-added to the test suite when it can populate its own routines.
 //  @Test
   public void testCreateNewSet() {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
@@ -265,10 +257,8 @@ public class TestSetCRUD {
           public void invoke(TestBrowser browser) {
             // browser.maximizeWindow();
 
-            ListSetsPage listSetsPage = new ListSetsPage(browser.getDriver(), TEST_PORT);
-            EditSetPage editSetPage = new EditSetPage(browser.getDriver(), TEST_PORT);
-            browser.goTo(editSetPage);
-            editSetPage.isAt();
+            ListSetsPage listSetsPage = new ListSetsPage(browser);
+            EditSetPage editSetPage = new EditSetPage(browser);
             String name = "My First Set";
             String description = "This is the first set that I have built!";
             List<Long> routineList = new ArrayList<Long>();
