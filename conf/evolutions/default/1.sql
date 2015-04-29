@@ -23,6 +23,8 @@ create table magician (
   google_plus               varchar(255),
   flickr                    varchar(255),
   instagram                 varchar(255),
+  constraint uq_magician_stage_name unique (stage_name),
+  constraint uq_magician_1 unique (first_name,last_name),
   constraint pk_magician primary key (id))
 ;
 

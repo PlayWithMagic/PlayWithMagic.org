@@ -42,7 +42,7 @@
             <!--  Display three horizontal lines when navbar collapsed. -->
           <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">
+        <a id="linkToIndexPage" class="navbar-brand" href="@routes.Application.index()">
           <img class="logo" src="@routes.Assets.at("images/logo_original_trans.png")" alt="Logo"/>
         </a>
       </div>
@@ -75,7 +75,7 @@
             </li>
           }
           <li>
-            <a href="/help">
+            <a id="linkToHelpPage" href="@routes.Application.help()">
               <i class="fa fa-question fa-lg hidden-xs"></i>
               <span class="visible-xs-inline">Help</span>
             </a>
@@ -132,24 +132,29 @@
     <footer class="footer">
       <div class="container">
         <div class="col-md-3">
-          <p><a href="/about">About Play with Magic</a></p>
+          <p><a id="linkToAboutPage" href="/about">About Play with Magic</a></p>
           <p>
-            <a href="https://github.com/PlayWithMagic/PlayWithMagic.org/issues/new">Problems? Contact us on Github!</a>
+            <a id="linkToGitHubNewIssue" href="https://github.com/PlayWithMagic/PlayWithMagic.org/issues/new">Problems? Contact us on Github!</a>
           </p>
         </div>
         <div class="col-md-3">
           <p>
             <i class="fa fa-css3 fa-fw"></i>
-            <a href="http://getbootstrap.com/">Responsive Layout built on Twitter Bootstrap</a>
+            <a id="linkToTwitterBootstrap" href="http://getbootstrap.com/">Responsive Layout built on Twitter Bootstrap</a>
           </p>
 
         </div>
         <div class="col-md-3">
-          <p><i class="fa fa-play"></i> <a href="http://playframework.com">Created with Play Framework</a></p>
+          <p>
+            <i class="fa fa-play"></i>
+            <a id="linkToPlayFramework" href="http://playframework.com">Created with Play Framework</a>
+          </p>
         </div>
         <div class="col-md-3">
-          <p><a href="http://playwithmagic.github.io/PlayWithMagic.org"><i class="fa fa-github"></i>
-            Visit the Project on Github</a></p>
+          <p>
+            <i class="fa fa-github"></i>
+            <a id="linkToProjectHomepage" href="http://playwithmagic.github.io/PlayWithMagic.org">Visit the Project on Github</a>
+          </p>
         </div>
       </div>
     </footer>

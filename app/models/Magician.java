@@ -3,9 +3,12 @@ package models;
 import play.data.validation.Constraints;
 import views.formdata.EditMagicianFormData;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.File;
 import java.util.List;
 
@@ -19,15 +22,16 @@ import java.util.List;
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/32
  */
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"first_name", "last_name"}))
 public class Magician extends play.db.ebean.Model {
-
   @Id
   private long id;
   // User Info
   @Constraints.Required
-  private String firstName;
+  private String firstName;  // TODO:  We need to set length attributes for all of our columns  -- also COnstraints.Required doesn't seem to do anyhing.  nullable=false
   @Constraints.Required
   private String lastName;
+  @Column(unique=true)
   private String stageName;
   private String location; // City/State?  Country?  Perhaps a map of values instead?
   private File userPhoto;
