@@ -1,6 +1,5 @@
 package tests;
 
-import models.MagicianDB;
 import models.Routine;
 import models.RoutineDB;
 import models.SetDB;
@@ -118,7 +117,7 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
   public void testRoutineCrudWorkflow() {
     SetDB.resetSetDB();
     RoutineDB.resetRoutineDB();
-    MagicianDB.resetMagicianDB();
+    // MagicianDB.resetMagicianDB();
 
     // browser.maximizeWindow();
 

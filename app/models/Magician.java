@@ -1,8 +1,8 @@
 package models;
 
-import play.data.validation.Constraints;
 import views.formdata.EditMagicianFormData;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -25,37 +25,34 @@ import java.util.List;
 public class Magician extends play.db.ebean.Model {
   @Id
   private long id;
-  // User Info
-  @Constraints.Required
-  private String firstName;  // TODO:  We need to set length attributes for all of our columns
-  @Constraints.Required      // TODO:  Constraints.Required doesn't seem to do anyhing.  nullable=false
-  private String lastName;
-//@Column(unique=true)
-  private String stageName;
-  private String location; // City/State?  Country?  Perhaps a map of values instead?
+  // Magician Information
+  @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) private String firstName;
+  @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) private String lastName;
+  @Column(unique = true, nullable = false, length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String email;
+  @Column(nullable = false)
+  @ManyToOne
+  private MagicianType magicianType;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String stageName;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String location;  // City/State? Country? Perhaps a map.
   private File userPhoto;
 
   // Magic Info
-  private String biography;
-  private String interests;
-  private String influences;
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) private String biography;
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) private String interests;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String influences;
 
-  @Constraints.Required
-  @ManyToOne
-  private MagicianType magicianType;
   private Integer yearStarted;  // The year started - used to compute the number of years of experience.
-  private String organizations;
-  private String website;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String organizations;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String website;
 
   // Social Media
-  @Constraints.Required
-  private String email;
-  private String facebook;
-  private String twitter;
-  private String linkedIn;
-  private String googlePlus;
-  private String flickr;
-  private String instagram;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String facebook;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String twitter;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String linkedIn;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String googlePlus;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String flickr;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String instagram;
 
 
   /**
@@ -632,6 +629,126 @@ public class Magician extends play.db.ebean.Model {
    */
   public void setMagicianType(MagicianType magicianType) {
     this.magicianType = magicianType;
+  }
+
+
+
+  public Magician init(Magician magician) {
+return null;
+  }
+
+// TODO:  Add eMails and use init(magician) function.
+  /**
+   * Initialize the Magician database.
+   */
+  public static void init() {
+    // resetMagicianDB();
+
+    MagicianType magicianTypeSemiProfessional = MagicianType.getMagicianType("Semi-Professional");
+    MagicianType magicianTypeProfessional = MagicianType.getMagicianType("Professional");
+
+    // --------------------------------------
+
+    Magician magician = null;
+
+    magician = new Magician(
+        "Mark",
+        "Nelson",
+        "Mark Nelson",
+        "Honolulu, HI",
+        null,
+        "I got started in magic in 2004.  A retired magician, JC Dunn, showed me a 2-card monte and I was hooked. "
+            + "Since then, I've learned the craft, performed hundreds of shows in Honolulu and most recently I nailed "
+            + "a parlor act in Beijing.",
+        "I'm most comfortable with close-up magic, but I'd like to develop a stage show.  I strive to be fluent in "
+            + "all mediums of the art (cards, coins, rope, etc.).",
+        "Tony Slydini, David Regal, Lee Asher, Aaron Fisher, my brother Steve Johnson and many, many others.",
+        magicianTypeSemiProfessional,
+        2004,
+        null,
+        "http://mark.nelson.engineer/wordpress/index.php/magic-home-page/",
+        "mr_nelson@icloud.com",
+        "mark.nelson.engineer",
+        "@mr_marknelson",
+        "http://www.linkedin.com/in/marknelsonengineer/en",
+        "mr_nelson@icloud.com",
+        null,
+        "mr_mark_nelson"
+    );
+
+    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
+
+    magician = new Magician(
+        "Lee",
+        "Asher",
+        "Lee Asher",
+        null,
+        null,
+        null,
+        null,
+        null,
+        magicianTypeProfessional,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    );
+
+    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
+
+    magician = new Magician(
+        "Steve",
+        "Johnson",
+        "Steve Johnson",
+        null,
+        null,
+        null,
+        null,
+        null,
+        magicianTypeProfessional,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    );
+
+    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
+
+    magician = new Magician(
+        "Wayne",
+        "Houchin",
+        "Wayne Houchin",
+        null,
+        null,
+        null,
+        null,
+        null,
+        magicianTypeProfessional,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    );
+
+    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
   }
 
 }

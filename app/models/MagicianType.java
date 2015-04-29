@@ -62,6 +62,7 @@ public class MagicianType extends play.db.ebean.Model {
     return magicianType;
   }
 
+
   /**
    * Add a Magician Type to the database.
    *
@@ -77,6 +78,7 @@ public class MagicianType extends play.db.ebean.Model {
 
     return magicianType;
   }
+
 
   /**
    * Initialize the MagicianType dataset.

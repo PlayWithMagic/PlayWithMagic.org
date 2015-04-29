@@ -1,6 +1,5 @@
 package tests;
 
-import models.MagicianDB;
 import models.Routine;
 import models.RoutineDB;
 import models.Set;
@@ -96,7 +95,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
   public void testSetMinimumAddDelete() {
     SetDB.resetSetDB();
     RoutineDB.resetRoutineDB();
-    MagicianDB.resetMagicianDB();
+    // MagicianDB.resetMagicianDB();
 
     // browser.maximizeWindow();
 
@@ -132,7 +131,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
   public void testSetCrudWorkflow() {
     SetDB.resetSetDB();
     RoutineDB.resetRoutineDB();
-    MagicianDB.resetMagicianDB();
+    // MagicianDB.resetMagicianDB();
     Long routineId1;
     Long routineId2;
     Long routineId3;
