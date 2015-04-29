@@ -34,6 +34,8 @@
  * @see http://junit.org
  * @see http://www.scala-sbt.org
  * @see https://sites.google.com/a/chromium.org/chromedriver/
+ * @see https://books.google.com/books?id=gpefBAAAQBAJ&pg=PT100
+ * @see https://www.playframework.com/documentation/2.3.0/api/java/play/test/WithBrowser.html
  *
  * @since 6.0
  */

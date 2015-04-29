@@ -45,8 +45,6 @@ public class EditRoutinePage extends NavigationWrapper {
   }
 
 
-  // TODO: Refactor the Submit button at the bottom.
-
   /**
    * Set passed values into the form, then submit it.
    *
@@ -83,6 +81,8 @@ public class EditRoutinePage extends NavigationWrapper {
     if (routine.getChoices() != null) {
       fill("#choices").with(routine.getChoices());
     }
+
+    // TODO: Move the Submit button at the bottom to its own method.
 
     submit("#submit");
   }

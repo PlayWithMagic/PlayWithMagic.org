@@ -1,5 +1,6 @@
 package tests.pages;
 
+import models.Magician;
 import org.openqa.selenium.WebDriver;
 import play.test.TestBrowser;
 import tests.GlobalTest;
@@ -24,7 +25,7 @@ public class ListMagiciansPage extends NavigationWrapper {
 
 
   /**
-   * The browser should already be at the ListMagicians page.  Make sure the browser is already there.
+   * The browser should already be at the ListMagicians page.  Make sure the browser is there.
    *
    * @param webDriver The state of the current test browser.
    */
@@ -47,43 +48,50 @@ public class ListMagiciansPage extends NavigationWrapper {
   /**
    * Checks the ListMagician page contains a given magician.
    *
-   * @param fullName        The combined first and last name of the magician.
-   * @param stageName       The stage name of the magician.
-   * @param experienceLevel User's experience level; pre-set values.
+   * @param magician A magician that should be listed on this page.
    */
-  public void hasMagician(String fullName, String stageName, String experienceLevel) {
-    assertThat(pageSource()).contains(fullName);
-    if (stageName != null) {
-      assertThat(pageSource()).contains(stageName);
+  public void hasMagician(Magician magician) {
+    assertThat(pageSource()).contains(magician.getFirstName() + " " + magician.getLastName());
+    if (magician.getStageName() != null) {
+      assertThat(pageSource()).contains(magician.getStageName());
     }
-    assertThat(pageSource()).contains(experienceLevel);
+    assertThat(pageSource()).contains(magician.getMagicianType().getName());
   }
 
 
   /**
    * Checks the ListMagician page does not contain a given magician.
    *
-   * @param fullName        The combined first and last name of the magician.
-   * @param stageName       The stage name of the magician.
-   * @param experienceLevel User's experience level; pre-set values.
+   * @param magician A magician that should be listed on this page.
    */
-  public void doesNotHaveMagician(String fullName, String stageName, String experienceLevel) {
-    assertThat(pageSource()).doesNotContain(fullName);
-    if (stageName != null) {
-      assertThat(pageSource()).doesNotContain(stageName);
+  public void doesNotHaveMagician(Magician magician) {
+    assertThat(pageSource()).doesNotContain(magician.getFirstName() + " " + magician.getLastName());
+    if (magician.getStageName() != null) {
+      assertThat(pageSource()).doesNotContain(magician.getStageName());
     }
-    assertThat(pageSource()).doesNotContain(experienceLevel);
+    assertThat(pageSource()).doesNotContain(magician.getMagicianType().getName());
   }
 
 
   /**
-   * Delete the first magician in the page.
+   * Delete the first magician in the page.  Return back to ListMagicians page.
    *
    * @return The ListMagiciansPage.
    */
   public ListMagiciansPage deleteFirstMagician() {
     this.findFirst(".deleteMagician").click();
     return new ListMagiciansPage(this.getDriver());
+  }
+
+
+  /**
+   * View the first magician in the page.
+   *
+   * @return The ViewMagicianPage.
+   */
+  public ViewMagicianPage viewFirstMagician() {
+    this.findFirst(".viewMagician").click();
+    return new ViewMagicianPage(this.getDriver());
   }
 
 }

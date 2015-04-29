@@ -11,13 +11,19 @@
       <!-- Content -->
     <section id="content" class="container">
       <div class="col-md-6">
-        <h2>@if(magician.getStageName && magician.getStageName != magician.getFirstName + " " + magician.getLastName) { @magician.getStageName } else { Magician }
+        <h2>
+          @if(magician.getStageName && magician.getStageName != magician.getFirstName + " " + magician.getLastName) {
+            @magician.getStageName
+          } else {
+            Magician
+          }
           <small>@magician.getFirstName @magician.getLastName</small>
-          <p class="visible-xs-block visible-sm-block">
-            <a href="/editMagician?id=@magician.getId" class="btn btn-large">Edit Profile</a>
-            <a href="listMagicians" class="btn btn-large">Return to Magician List</a>
-          </p>
         </h2>
+
+        <p class="visible-xs-block visible-sm-block">
+          <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">Edit Profile</a>
+          <a href="@routes.Application.listMagicians()" class="btn btn-large">Return to Magician List</a>
+        </p>
 
         <img class="img-responsive" src="@routes.Assets.at("images/working-man.jpg")" alt="Image of Magician"/>
 
@@ -50,12 +56,17 @@
       </div>
       <div class="col-md-6">
         <p class="hidden-xs hidden-sm">
-          <a href="/editMagician?id=@magician.getId" class="btn btn-large editMagician">Edit Profile</a>
-          <a href="listMagicians" class="btn btn-large listMagicians">Return to Magician List</a>
+          <a id="editMagician" href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">
+            Edit Profile
+          </a>
+          <a id="returnToMagicianList" href="@routes.Application.listMagicians()" class="btn btn-large">
+            Return to Magician List
+          </a>
         </p>
+
         <h3>Experience with Magic</h3>
         <p>
-          @magician.getMagicianType.getName @if(magician.getYearStarted != 0) {, practicing since @magician.getYearStarted}
+          @magician.getMagicianType.getName @if(magician.getYearStarted != null) {, practicing since @magician.getYearStarted}
         </p>
 
         @if(magician.getBiography) {
@@ -93,7 +104,7 @@
           </small>
         </h3>
         <p class="visible-xs-block visible-sm-block">
-          <a href="/editRoutine" class="btn btn-sm">Add Routine</a>
+        <a href="/editRoutine" class="btn btn-sm">Add Routine</a>
         </p>
         <table class="table table-striped">
           <thead>

@@ -1,8 +1,5 @@
 import com.typesafe.config.ConfigFactory;
-import models.MagicianDB;
 import models.MagicianType;
-import models.RoutineDB;
-import models.SetDB;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;

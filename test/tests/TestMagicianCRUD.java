@@ -8,8 +8,8 @@ import play.test.TestBrowser;
 import tests.pages.EditMagicianPage;
 import tests.pages.IndexPage;
 import tests.pages.ListMagiciansPage;
+import tests.pages.ViewMagicianPage;
 
-import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
 
@@ -25,6 +25,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
 
   private static Magician magician1 = null;
   private static Magician magician2 = null;
+  private static Magician magician3 = null;
 
   @Override
   protected play.test.FakeApplication provideFakeApplication() {
@@ -91,6 +92,14 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     magician2.setGooglePlus("02 Test GooglePlus 02");
     magician2.setFlickr("02 Test Flickr 02");
     magician2.setInstagram("02 Test Instagram 02");
+
+    magician3 = new Magician(
+        "03 Test First Name 03"
+        , "03 Test Last Name 03"
+        , "Test_eMail_03@playwithmagic.org"
+        , MagicianType.getMagicianType("Collector")
+    );
+
   }
 
 
@@ -128,39 +137,29 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     EditMagicianPage editMagician = indexPage.clickJoinTheCommunityToday();
 
     // Click Add without entering any information... this should generate an error.
-    // TODO: Add these checks and counter-checks to the EditMagician class
-    assertThat(editMagician.pageSource()).doesNotContain("Everybody (except Teller) has a first name.");
-    assertThat(editMagician.pageSource()).doesNotContain("A Last Name must be provided.");
-    assertThat(editMagician.pageSource()).doesNotContain("An Email address must be provided.");
+    editMagician.doesNotHaveRequiredFieldErrors();
     editMagician.clickSubmit();
-    assertThat(editMagician.pageSource()).contains("Everybody (except Teller) has a first name.");
-    assertThat(editMagician.pageSource()).contains("A Last Name must be provided.");
-    assertThat(editMagician.pageSource()).contains("An Email address must be provided.");
+    editMagician.hasRequiredFieldErrors();
 
     // Populate only the required information and click Add
-    editMagician.fill("#firstName").with(magician1.getFirstName());
-    editMagician.fill("#lastName").with(magician1.getLastName());
-    editMagician.fill("#email").with(magician1.getEmail());
-    editMagician.findFirst("#Professional").click();
+    editMagician.fill("#firstName").with(magician3.getFirstName());
+    editMagician.fill("#lastName").with(magician3.getLastName());
+    editMagician.fill("#email").with(magician3.getEmail());
+    editMagician.selectMagicianType(magician3.getMagicianType().getName());
     editMagician.clickSubmit();
 
     // This should be successful and the browser should go to ListMagicians.  Verify the magician.
     ListMagiciansPage listMagiciansPage = new ListMagiciansPage(editMagician.getDriver());
-    listMagiciansPage.hasMagician(magician1.getFirstName() + " " + magician1.getLastName(),
-        null, magician1.getMagicianType().getName());
+    listMagiciansPage.hasMagician(magician3);
 
     // Delete the magician
     listMagiciansPage.deleteFirstMagician();
-    listMagiciansPage.doesNotHaveMagician(magician1.getFirstName() + " " + magician1.getLastName(),
-        null, magician1.getMagicianType().getName());
+    listMagiciansPage.doesNotHaveMagician(magician3);
   }
 
 
   /**
    * Test Magician CRUD.
-   * <p>
-   * This is a large workflow because the Play Framework the application restarts between tests -- which wipes
-   * out the in-memory database.
    */
   @Test
   public void testMagicianCrudWorkflow() {
@@ -169,47 +168,42 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     // browser.maximizeWindow();
 
     // Start at the home page...
-    browser.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/");
-    assertThat(browser.pageSource()).contains("We're looking for a few good routines");
+    IndexPage indexPage = new IndexPage(browser);
 
     // Click the Join the Community Today! button
-    browser.findFirst("#joinTheCommunity").click();
-    assertThat(browser.pageSource()).contains("Magician Profile");
+    EditMagicianPage editMagician = indexPage.clickJoinTheCommunityToday();
 
     // Populate all of the fields and click Add
-// TODO: Fix this
-//            EditMagicianPage.populateMagician(browser, magician1);
-    browser.click(browser.find("#submit"));
-    assertThat(browser.pageSource()).contains("Current Magicians");
-    assertThat(browser.pageSource()).contains(magician1.getFirstName() + " " + magician1.getLastName());
-    assertThat(browser.pageSource()).contains(magician1.getStageName());
-    assertThat(browser.pageSource()).contains(magician1.getMagicianType().getName());
+    editMagician.populateMagician(magician1);
+    editMagician.clickSubmit();
+
+    // This should be successful and the browser should go to ListMagicians.  Verify the magician.
+    ListMagiciansPage listMagiciansPage = new ListMagiciansPage(editMagician.getDriver());
+    listMagiciansPage.hasMagician(magician1);
 
     // View the magician and check all of the fields
-    browser.findFirst(".viewMagician").click();
-    EditMagicianPage.checkMagician(browser, magician1);
+    ViewMagicianPage viewMagicianPage = listMagiciansPage.viewFirstMagician();
+    viewMagicianPage.checkMagician(magician1);
 
-    // Edit the magician and update all of the fields                                    // The button click
-    browser.goTo(browser.findFirst(".editMagician").getElement().getAttribute("href"));  // didn't work, so I
-    EditMagicianPage.checkMagician(browser, magician1);                                  // did this instead.
-//            EditMagicianPage.populateMagician(browser, magician2);
-    browser.click(browser.find("#submit"));
-    assertThat(browser.pageSource()).contains("Current Magicians");
-    assertThat(browser.pageSource()).contains(magician2.getFirstName() + " " + magician2.getLastName());
-    assertThat(browser.pageSource()).contains(magician2.getStageName());
-    assertThat(browser.pageSource()).contains(magician2.getMagicianType().getName());
+    // Edit the magician and update all of the fields
+    editMagician = viewMagicianPage.clickEditProfileButton();
+    editMagician.checkMagician(magician1);
+    editMagician.populateMagician(magician2);
+    editMagician.clickSubmit();
 
-    // View the magician and check all of the fields
-    browser.findFirst(".viewMagician").click();
-    EditMagicianPage.checkMagician(browser, magician2);
+    // Verify the new information is in the list and the old information is not.
+    listMagiciansPage = new ListMagiciansPage(editMagician.getDriver());
+    listMagiciansPage.hasMagician(magician2);
+    listMagiciansPage.doesNotHaveMagician(magician1);
+
+    viewMagicianPage = listMagiciansPage.viewFirstMagician();
+    viewMagicianPage.checkMagician(magician2);
 
     // Go back to list magician and delete the magician
-    browser.goTo(browser.findFirst(".listMagicians").getElement().getAttribute("href"));
-    assertThat(browser.pageSource()).contains(magician2.getFirstName() + " " + magician2.getLastName());
-    assertThat(browser.pageSource()).contains(magician2.getMagicianType().getName());
-    browser.findFirst(".deleteMagician").click();
-    assertThat(browser.pageSource()).doesNotContain(magician2.getFirstName() + " " + magician2.getLastName());
-    assertThat(browser.pageSource()).doesNotContain(magician2.getMagicianType().getName());
+    listMagiciansPage = viewMagicianPage.clickReturnToMagicianListButton();
+    listMagiciansPage.hasMagician(magician2);
+    listMagiciansPage.deleteFirstMagician();
+    listMagiciansPage.doesNotHaveMagician(magician2);
   }
 
 }
