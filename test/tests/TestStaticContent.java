@@ -6,8 +6,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import play.libs.F.Callback;
 import play.test.TestBrowser;
 import tests.pages.AboutPage;
+import tests.pages.EditMagicianPage;
+import tests.pages.EditRoutinePage;
+import tests.pages.EditSetPage;
 import tests.pages.HelpPage;
 import tests.pages.IndexPage;
+import tests.pages.ListMagiciansPage;
+import tests.pages.ListRoutinesPage;
+import tests.pages.ListSetsPage;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.fakeApplication;
@@ -60,7 +66,7 @@ public class TestStaticContent {
 
 
   /**
-   * This test verifies the navigation links at the top of the Index page.
+   * This test verifies the navigation links across the top of the Index page.
    */
   @Test
   public void testIndexTopNavigation() {
@@ -69,18 +75,41 @@ public class TestStaticContent {
           public void invoke(TestBrowser browser) {
             // browser.maximizeWindow();
 
-            IndexPage indexPage;
-            AboutPage aboutPage;
-            FluentPage otherPage;
-            HelpPage helpPage;
-
-            indexPage = new IndexPage(browser);
+            IndexPage indexPage = new IndexPage(browser);
             indexPage = indexPage.clickHomeButton();
 
-            helpPage = indexPage.clickHelpButton();
+            ListRoutinesPage listRoutinesPage = indexPage.clickBrowseRoutinesButton();
+
+            ListSetsPage listSetsPage = listRoutinesPage.clickBrowseSetsButton();
+
+            ListMagiciansPage listMagiciansPage = listSetsPage.clickBrowseMagiciansButton();
+
+            EditMagicianPage editMagicianPage = listMagiciansPage.clickJoinTheCommunityToday();
+
+            HelpPage helpPage = editMagicianPage.clickHelpButton();
+
+            EditRoutinePage editRoutinePage = helpPage.clickCreateRoutineButton();
+
+            EditSetPage editSetPage = editRoutinePage.clickCreateSetButton();
           }
         });
   }
 
+
+  /**
+   * This test verifies Index page functionality (just clicking the big Join the Community Today button).
+   */
+  @Test
+  public void testIndexPage() {
+    running(testServer(GlobalTest.TEST_PORT, fakeApplication(inMemoryDatabase())), ChromeDriver.class,
+        new Callback<TestBrowser>() {
+          public void invoke(TestBrowser browser) {
+            // browser.maximizeWindow();
+
+            IndexPage indexPage = new IndexPage(browser);
+            indexPage.clickJoinTheCommunityToday();
+          }
+        });
+  }
 
 }

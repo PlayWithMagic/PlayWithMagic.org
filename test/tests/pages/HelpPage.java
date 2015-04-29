@@ -1,6 +1,5 @@
 package tests.pages;
 
-import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
 import play.test.TestBrowser;
 import tests.GlobalTest;
@@ -10,7 +9,7 @@ import static org.fest.assertions.Assertions.assertThat;
 /**
  * Provides scaffolding to remotely control the Help page for testing.
  */
-public class HelpPage extends FluentPage {
+public class HelpPage extends NavigationWrapper {
 
   /**
    * Go directly to the Help page and make sure the browser gets there.
@@ -25,7 +24,7 @@ public class HelpPage extends FluentPage {
 
 
   /**
-   * The browser should already be at the Help page.  Make sure the browser is already there..
+   * The browser should already be at the Help page.  Make sure the browser is already there.
    *
    * @param webDriver The state of the current test browser.
    */
@@ -40,7 +39,7 @@ public class HelpPage extends FluentPage {
    */
   @Override
   public void isAt() {
-    assertThat(title()).isEqualTo("Play With Magic");
+    assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
     assertThat(pageSource().contains("Overview"));
     assertThat(pageSource().contains("Terminology"));
   }

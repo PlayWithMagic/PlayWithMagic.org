@@ -1,7 +1,8 @@
 package tests.pages;
 
-import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
+import play.test.TestBrowser;
+import tests.GlobalTest;
 
 import java.util.List;
 
@@ -9,39 +10,40 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withId;
 
 /**
- * Provides test scaffolding for the EditMagician page.
+ * Provides scaffolding to remotely control the EditSet page for testing.
  */
-public class EditSetPage extends FluentPage {
-
-  private String url;
+public class EditSetPage extends NavigationWrapper {
 
   /**
-   * Create the EditSet page object.
+   * Go directly to the EditSet page and make sure the browser gets there.
    *
-   * @param webDriver The driver.
-   * @param port      The port.
+   * @param browser A remotely controlled test browser.
    */
-  public EditSetPage(WebDriver webDriver, int port) {
+  public EditSetPage(TestBrowser browser) {
+    super(browser.getDriver());
+    this.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/editSet");
+    isAt();
+  }
+
+
+  /**
+   * The browser should already be at the EditSet page.  Make sure the browser is already there.
+   *
+   * @param webDriver The state of the current test browser.
+   */
+  public EditSetPage(WebDriver webDriver) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/editSet";
+    isAt();
   }
 
-  /**
-   * Get the URL for this page.
-   *
-   * @return The page's URL.
-   */
-  @Override
-  public String getUrl() {
-    return this.url;
-  }
 
   /**
-   * A test to ensure the rendered page displays the correct content.
+   * Validate that the browser is on the right page.
    */
   @Override
   public void isAt() {
-    assertThat(pageSource().contains("<body id=\"editSet\">"));
+    assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
+    assertThat(pageSource().contains("<h1>Create Set</h1>") || pageSource().contains("<h1>Update Set</h1>"));
   }
 
 

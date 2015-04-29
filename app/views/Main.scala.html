@@ -70,7 +70,7 @@
           @if( page != "home" && page != "editMagician" ) {
             <li>
               <div class="join">
-                <a class="btn btn-primary btn-sm navbar-btn" href="editMagician">Join the Community Today!</a>
+                <a id="joinTheCommunity" class="btn btn-primary btn-sm navbar-btn" href="editMagician">Join the Community Today!</a>
               </div>
             </li>
           }
@@ -84,8 +84,9 @@
           <li class="dropdown">
             @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in*@
               @*Username <span class="caret"></span></a>*@
-            <a href="#" class="dropdown-toggle createNew" data-toggle="dropdown" role="button" aria-expanded="false">Create...
-              <span class="caret"></span></a>
+            <a id="createNew" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Create...
+              <span class="caret"></span>
+            </a>
             <ul class="dropdown-menu" role="menu">
               @* <li><a href="displayuser">Profile</a></li> *@
               @* <li><a href="@routes.Application.listRoutines()">My Routines</a></li>*@
