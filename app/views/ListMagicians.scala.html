@@ -18,7 +18,10 @@
           <th>Name</th>
           <th>Stage Name</th>
           <th>Type</th>
-      @*    <th>Routines</th>  *@   @* TODO: Remove for now / continuous release  *@
+          @*    <th>Routines</th>  *@   @* TODO: Remove for now / continuous release  *@
+          <th>Edit</th>
+          <th>Change Password</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +34,10 @@
             <td>
               <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-warning btn-xs" role="button">
               Edit</a>
+            </td>
+            <td>
+              <a href="@routes.Application.editUser(magician.getId)" class="btn btn-warning btn-xs changePassword" role="button">
+              Change Password</a>
             </td>
             <td>
               <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs deleteMagician" role="button">

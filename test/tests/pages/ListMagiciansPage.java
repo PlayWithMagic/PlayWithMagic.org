@@ -85,6 +85,17 @@ public class ListMagiciansPage extends NavigationWrapper {
 
 
   /**
+   * Edit the first user in the page by going to the EditUser page.
+   *
+   * @return The EditUserPage.
+   */
+  public EditUserPage changeFirstMagicianPassword() {
+    this.findFirst(".changePassword").click();
+    return new EditUserPage(this.getDriver());
+  }
+
+
+  /**
    * View the first magician in the page.
    *
    * @return The ViewMagicianPage.

@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import play.test.TestBrowser;
 import tests.pages.EditMagicianPage;
+import tests.pages.EditUserPage;
 import tests.pages.IndexPage;
 import tests.pages.ListMagiciansPage;
 import tests.pages.ViewMagicianPage;
@@ -52,6 +53,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
         , "Test Last Name 01"
         , "Test_eMail_01@playwithmagic.org"
         , MagicianType.getMagicianType("Professional")
+        , "11P@ssw0rd111111"
     );
 
     magician1.setStageName("Test stage name 01");
@@ -75,6 +77,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
         , "02 Test Last Name 02"
         , "Test_eMail_02@playwithmagic.org"
         , MagicianType.getMagicianType("Historian")
+        , "22P@ssw0rd222222"
     );
 
     magician2.setStageName("02 Test stage name 02");
@@ -98,6 +101,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
         , "03 Test Last Name 03"
         , "Test_eMail_03@playwithmagic.org"
         , MagicianType.getMagicianType("Collector")
+        , "P@ssw0rd"
     );
 
   }
@@ -114,10 +118,10 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     IndexPage indexPage = new IndexPage(browser);
 
     // Click the Join the Community Today! button
-    EditMagicianPage editMagicianPage = indexPage.clickJoinTheCommunityToday();
+    EditUserPage editUserPage = indexPage.clickJoinTheCommunityToday();
 
     // Click the Browse Magicians button
-    ListMagiciansPage listMagiciansPage = editMagicianPage.clickBrowseMagiciansButton();
+    ListMagiciansPage listMagiciansPage = editUserPage.clickBrowseMagiciansButton();
   }
 
 
@@ -134,22 +138,29 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     IndexPage indexPage = new IndexPage(browser);
 
     // Click the Join the Community Today! button
-    EditMagicianPage editMagician = indexPage.clickJoinTheCommunityToday();
+    EditUserPage editUser = indexPage.clickJoinTheCommunityToday();
 
     // Click Add without entering any information... this should generate an error.
-    editMagician.doesNotHaveRequiredFieldErrors();
-    editMagician.clickSubmit();
-    editMagician.hasRequiredFieldErrors();
+    editUser.doesNotHaveRequiredFieldErrors();
+    editUser.clickSubmit();
+    editUser.hasRequiredFieldErrors();
 
     // Populate only the required information and click Add
-    editMagician.fill("#firstName").with(magician3.getFirstName());
-    editMagician.fill("#lastName").with(magician3.getLastName());
-    editMagician.fill("#email").with(magician3.getEmail());
-    editMagician.selectMagicianType(magician3.getMagicianType().getName());
-    editMagician.clickSubmit();
+    editUser.fill("#firstName").with(magician3.getFirstName());
+    editUser.fill("#lastName").with(magician3.getLastName());
+    editUser.fill("#email").with(magician3.getEmail());
+    editUser.selectMagicianType(magician3.getMagicianType().getName());
+    editUser.fill("#password").with(magician3.getPassword());
+    editUser.clickSubmit();
+
+    // This should be successful and the browser should go to EditMagicians.  Verify the magician.
+    EditMagicianPage editMagicianPage = new EditMagicianPage(editUser.getDriver());
+    // editMagicianPage.hasMagician(magician3);
+    // TODO: Add above to EditMagician
+    editMagicianPage.clickSubmit();
 
     // This should be successful and the browser should go to ListMagicians.  Verify the magician.
-    ListMagiciansPage listMagiciansPage = new ListMagiciansPage(editMagician.getDriver());
+    ListMagiciansPage listMagiciansPage = new ListMagiciansPage(editUser.getDriver());
     listMagiciansPage.hasMagician(magician3);
 
     // Delete the magician
@@ -171,9 +182,14 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     IndexPage indexPage = new IndexPage(browser);
 
     // Click the Join the Community Today! button
-    EditMagicianPage editMagician = indexPage.clickJoinTheCommunityToday();
+    EditUserPage editUserPage = indexPage.clickJoinTheCommunityToday();
 
     // Populate all of the fields and click Add
+    editUserPage.populateMagician(magician1);
+    editUserPage.clickSubmit();
+
+    // Land in the EditMagician page, populate all of the fields and click Add
+    EditMagicianPage editMagician = new EditMagicianPage(editUserPage.getDriver());
     editMagician.populateMagician(magician1);
     editMagician.clickSubmit();
 
@@ -185,9 +201,15 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     ViewMagicianPage viewMagicianPage = listMagiciansPage.viewFirstMagician();
     viewMagicianPage.checkMagician(magician1);
 
-    // Edit the magician and update all of the fields
-    editMagician = viewMagicianPage.clickEditProfileButton();
-    editMagician.checkMagician(magician1);
+    // Update the user
+    listMagiciansPage = viewMagicianPage.clickReturnToMagicianListButton();
+    editUserPage = listMagiciansPage.changeFirstMagicianPassword();
+    editUserPage.checkMagician(magician1);
+    editUserPage.populateMagician(magician2);
+    editUserPage.clickSubmit();
+
+    // Update the magician
+    editMagician = new EditMagicianPage(editUserPage.getDriver());
     editMagician.populateMagician(magician2);
     editMagician.clickSubmit();
 
@@ -198,12 +220,18 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
 
     viewMagicianPage = listMagiciansPage.viewFirstMagician();
     viewMagicianPage.checkMagician(magician2);
+    listMagiciansPage = viewMagicianPage.clickReturnToMagicianListButton();
+
+    // Verify the new information is in the User
+    editUserPage = listMagiciansPage.changeFirstMagicianPassword();
+    editUserPage.checkMagician(magician2);
+    listMagiciansPage = editUserPage.clickBrowseMagiciansButton();
 
     // Go back to list magician and delete the magician
-    listMagiciansPage = viewMagicianPage.clickReturnToMagicianListButton();
     listMagiciansPage.hasMagician(magician2);
     listMagiciansPage.deleteFirstMagician();
     listMagiciansPage.doesNotHaveMagician(magician2);
+
   }
 
 }

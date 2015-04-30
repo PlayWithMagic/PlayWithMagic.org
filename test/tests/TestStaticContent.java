@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import play.test.TestBrowser;
 import tests.pages.AboutPage;
-import tests.pages.EditMagicianPage;
 import tests.pages.EditRoutinePage;
 import tests.pages.EditSetPage;
 import tests.pages.HelpPage;
@@ -92,9 +91,7 @@ public class TestStaticContent extends play.test.WithBrowser {
 
     ListMagiciansPage listMagiciansPage = listSetsPage.clickBrowseMagiciansButton();
 
-    EditMagicianPage editMagicianPage = listMagiciansPage.clickJoinTheCommunityToday();
-
-    HelpPage helpPage = editMagicianPage.clickHelpButton();
+    HelpPage helpPage = listMagiciansPage.clickHelpButton();
 
     EditRoutinePage editRoutinePage = helpPage.clickCreateRoutineButton();
 

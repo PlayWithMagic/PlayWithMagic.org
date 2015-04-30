@@ -11,6 +11,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.formdata.EditMagicianFormData;
+import views.formdata.EditUserFormData;
 import views.formdata.MagicianTypeFormData;
 import views.formdata.MaterialFormData;
 import views.formdata.RoutineFormData;
@@ -20,6 +21,7 @@ import views.html.EditMagician;
 import views.html.EditMaterial;
 import views.html.EditRoutine;
 import views.html.EditSet;
+import views.html.EditUser;
 import views.html.Help;
 import views.html.Index;
 import views.html.ListMagicians;
@@ -76,25 +78,101 @@ public class Application extends Controller {
 
 
   /******************************************************************************************************************
+   * U S E R
+   ******************************************************************************************************************/
+
+  /**
+   * Renders the EditUser view.  Add a Magician if the ID is 0; or edit an existing
+   * Magician (based on their ID).
+   * <p>
+   * Note:  EditMagician and EditUser are two different views on the same entity.
+   *
+   * @param id The ID of the Magician to edit; if new Magician, ID is 0.
+   * @return An HTTP OK message along with the HTML content for the EditUser page.
+   */
+  public static Result editUser(long id) {
+    EditUserFormData editUserFormData;
+
+    if (id == 0) {
+      editUserFormData = new EditUserFormData();
+    }
+    else {
+      editUserFormData = new EditUserFormData(Magician.getMagician(id));
+    }
+
+    Form<EditUserFormData> formData = Form.form(EditUserFormData.class).fill(editUserFormData);
+    Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editUserFormData.magicianType);
+    return ok(EditUser.render(formData, magicianTypeMap));
+  }
+
+
+  /**
+   * Handles the request to post form data from the EditUser page.
+   *
+   * @return On success, the the EditMagician page.  On failure, redisplay the EditUser page.
+   */
+  public static Result postUser() {
+    Form<EditUserFormData> formData = Form.form(EditUserFormData.class).bindFromRequest();
+
+    Logger.debug("postUser Raw Magician Form Data");
+    Logger.debug("  id = [" + formData.field("id").value() + "]");
+    Logger.debug("  firstName = [" + formData.field("firstName").value() + "]");
+    Logger.debug("  eMail = [" + formData.field("email").value() + "]");
+    Logger.debug("  magicianType = [" + formData.field("magicianType").value() + "]");
+
+    if (formData.hasErrors()) {
+      Logger.error("postUser HTTP Form Error.");
+
+      Map<String, Boolean> magicianTypeMap = null;
+      if (MagicianTypeFormData.isMagicianType(formData.field("magicianType").value())) {
+        magicianTypeMap = MagicianTypeFormData.getMagicianTypes(formData.field("magicianType").value());
+      }
+      else {
+        magicianTypeMap = MagicianTypeFormData.getMagicianTypes();
+      }
+
+      return badRequest(EditUser.render(formData, magicianTypeMap));
+    }
+
+    EditUserFormData editUserFormData = formData.get();
+
+    Logger.debug("postUser Magician Form Data");
+    Logger.debug("  id = [" + editUserFormData.id + "]");
+    Logger.debug("  firstName = [" + editUserFormData.firstName + "]");
+    Logger.debug("  eMail = [" + editUserFormData.email + "]");
+    Logger.debug("  magicianType = [" + editUserFormData.magicianType + "]");
+
+    Magician magician = Magician.createMagicianFromForm(editUserFormData);
+
+    Logger.debug("postUser Magician Persisted Data");
+    Logger.debug("  id = [" + magician.getId() + "]");
+    Logger.debug("  firstName = [" + magician.getFirstName() + "]");
+    Logger.debug("  eMail = [" + magician.getEmail() + "]");
+    Logger.debug("  magicianType = [" + magician.getMagicianType().getName() + "]");
+
+    EditMagicianFormData editMagicianFormData = new EditMagicianFormData(magician);
+
+    Form<EditMagicianFormData> editMagicianFormFields;
+    editMagicianFormFields = Form.form(EditMagicianFormData.class).fill(editMagicianFormData);
+    Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editMagicianFormData.magicianType);
+    return ok(EditMagician.render(editMagicianFormFields, magicianTypeMap));
+  }
+
+
+  /******************************************************************************************************************
    * M A G I C I A N
    ******************************************************************************************************************/
 
   /**
-   * Renders the EditMagician view.  Add a Magician if the ID is 0; or edit an existing
-   * Magician (based on their ID).
+   * Renders the EditMagician view.  Can only edit existing Magicians (based on the ID).
+   * <p>
+   * Note:  EditMagician and EditUser are two different views on the same entity.
    *
-   * @param id The ID of the magician to edit; if new Magician, ID is 0.
+   * @param id The ID of the magician to edit.
    * @return An HTTP OK message along with the HTML content for the EditMagician page.
    */
   public static Result editMagician(long id) {
-    EditMagicianFormData editMagicianFormData;
-
-    if (id == 0) {
-      editMagicianFormData = new EditMagicianFormData();
-    }
-    else {
-      editMagicianFormData = new EditMagicianFormData(Magician.getMagician(id));
-    }
+    EditMagicianFormData editMagicianFormData = new EditMagicianFormData(Magician.getMagician(id));
 
     Form<EditMagicianFormData> formData = Form.form(EditMagicianFormData.class).fill(editMagicianFormData);
     Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editMagicianFormData.magicianType);
@@ -105,18 +183,18 @@ public class Application extends Controller {
   /**
    * Handles the request to post form data from the EditMagician page.
    *
-   * @return The EditMagician page, either with errors or success.
+   * @return If successful, the ListMagicians page.  On error, the EditMagician page.
    */
   public static Result postMagician() {
     Form<EditMagicianFormData> formData = Form.form(EditMagicianFormData.class).bindFromRequest();
 
-    Logger.debug("Raw Magician Form Data");
+    Logger.debug("postMagician Raw Magician Form Data");
     Logger.debug("  id = [" + formData.field("id").value() + "]");
     Logger.debug("  firstName = [" + formData.field("firstName").value() + "]");
     Logger.debug("  magicianType = [" + formData.field("magicianType").value() + "]");
 
     if (formData.hasErrors()) {
-      Logger.error("EditMagician HTTP Form Error.");
+      Logger.error("postMagician HTTP Form Error.");
 
       Map<String, Boolean> magicianTypeMap = null;
       if (MagicianTypeFormData.isMagicianType(formData.field("magicianType").value())) {
@@ -131,14 +209,14 @@ public class Application extends Controller {
 
     EditMagicianFormData editMagicianFormData = formData.get();
 
-    Logger.debug("Magician Form Data");
+    Logger.debug("postMagician Magician Form Data");
     Logger.debug("  id = [" + editMagicianFormData.id + "]");
     Logger.debug("  firstName = [" + editMagicianFormData.firstName + "]");
     Logger.debug("  magicianType = [" + editMagicianFormData.magicianType + "]");
 
     Magician magician = Magician.createMagicianFromForm(editMagicianFormData);
 
-    Logger.debug("Magician Persisted Data");
+    Logger.debug("postMagician Magician Persisted Data");
     Logger.debug("  id = [" + magician.getId() + "]");
     Logger.debug("  firstName = [" + magician.getFirstName() + "]");
     Logger.debug("  magicianType = [" + magician.getMagicianType().getName() + "]");
@@ -489,7 +567,7 @@ public class Application extends Controller {
   /**
    * Display a single Material page.
    *
-   * @param routineId The ID of the Routine to be displayed.
+   * @param routineId  The ID of the Routine to be displayed.
    * @param materialId The ArrayList index of the material to display.
    * @return An HTTP OK message along with the HTML content for a single Routine page.
    */

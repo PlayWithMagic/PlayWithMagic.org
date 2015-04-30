@@ -14,4 +14,19 @@ public class GlobalDbInfo {
 
   /** The maximum number of characters in a standard multi-line text field. */
   public static final int MAX_MULTILINE_TEXT_LENGTH = 2000;
+
+  /** The minimum password length. */
+  public static final int MIN_PASSWORD_LENGTH = 8;
+
+  /** The minimum number of uppercase characters in the password. */
+  public static final int MIN_PASSWORD_UPPERCASE_CHARS = 1;
+
+  /** The minimum number of lowercase characters in the password. */
+  public static final int MIN_PASSWORD_LOWERCASE_CHARS = 1;
+
+  /** The minimum number of numeric characters in the password. */
+  public static final int MIN_PASSWORD_NUMERIC_CHARS = 1;
+
+  /** The minimum number of symbolic characters in the password. */
+  public static final int MIN_PASSWORD_SYMBOL_CHARS = 1;
 }

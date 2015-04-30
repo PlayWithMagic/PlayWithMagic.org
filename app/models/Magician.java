@@ -1,6 +1,7 @@
 package models;
 
 import views.formdata.EditMagicianFormData;
+import views.formdata.EditUserFormData;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +30,7 @@ public class Magician extends play.db.ebean.Model {
   @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) private String firstName;
   @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) private String lastName;
   @Column(unique = true, nullable = false, length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String email;
+  @Column(nullable = false, length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String password;
   @Column(nullable = false)
   @ManyToOne
   private MagicianType magicianType;
@@ -114,20 +116,24 @@ public class Magician extends play.db.ebean.Model {
    * @param lastName        The magician's last name.
    * @param email           The magician's eMail address.
    * @param magicianType    The type of magician the user identifies with.
+   * @param password        The magician's password.
    */
-  public Magician(String firstName, String lastName, String email, MagicianType magicianType) {
+  public Magician(String firstName, String lastName, String email, MagicianType magicianType, String password) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.magicianType = magicianType;
+    this.password = password;
   }
 
-// TODO:  Look into deleting one of these
   /**
    * Create a new Magician object for testing purposes only.
    *
+   * TODO: This constructor is used exclusivly by init() to create new magicians.  Find another way.
+   *
    * @param firstName       The first name of the user.
    * @param lastName        The last name of the magician.
+   * @param password        The password of the user.
    * @param stageName       The stage name of the magician.
    * @param location        Global location.
    * @param userPhoto       Photograph file of user.
@@ -146,13 +152,14 @@ public class Magician extends play.db.ebean.Model {
    * @param flickr          User's flickr account.
    * @param instagram       User's instagram account.
    */
-  public Magician(String firstName, String lastName, String stageName, String location, File userPhoto,
+  public Magician(String firstName, String lastName, String password, String stageName, String location, File userPhoto,
                   String biography, String interests, String influences,
                   MagicianType magicianType, int yearStarted,
                   String organizations, String website, String email, String facebook, String twitter, String linkedIn,
                   String googlePlus, String flickr, String instagram) {
     this.firstName = firstName;
     this.lastName = lastName;
+    this.password = password;
     this.stageName = stageName;
     this.location = location;
     this.userPhoto = userPhoto;
@@ -233,23 +240,13 @@ public class Magician extends play.db.ebean.Model {
    * @return A fully populated Magician object that's just been persisted in the database.
    */
   public static Magician createMagicianFromForm(EditMagicianFormData editMagicianFormData) {
-    Magician magician = null;
     MagicianType magicianType = MagicianType.getMagicianType(editMagicianFormData.magicianType);
 
-    if (editMagicianFormData.id == 0) {
-      magician = new Magician(
-          editMagicianFormData.firstName
-          , editMagicianFormData.lastName
-          , editMagicianFormData.email
-          , magicianType);
-    }
-    else {
-      magician = Magician.find().byId(editMagicianFormData.id);
-      magician.setFirstName(editMagicianFormData.firstName);
-      magician.setLastName(editMagicianFormData.lastName);
-      magician.setEmail(editMagicianFormData.email);
-      magician.setMagicianType(magicianType);
-    }
+    Magician magician = Magician.find().byId(editMagicianFormData.id);
+    magician.setFirstName(editMagicianFormData.firstName);
+    magician.setLastName(editMagicianFormData.lastName);
+    magician.setEmail(editMagicianFormData.email);
+    magician.setMagicianType(magicianType);
 
     magician.setStageName(editMagicianFormData.stageName);
     magician.setLocation(editMagicianFormData.location);
@@ -266,6 +263,38 @@ public class Magician extends play.db.ebean.Model {
     magician.setGooglePlus(editMagicianFormData.googlePlus);
     magician.setInstagram(editMagicianFormData.instagram);
     magician.setFlickr(editMagicianFormData.flickr);
+
+    magician.save();
+    return magician;
+  }
+
+  /**
+   * Create a new Magician object from EditMagicianFormData.  Add it to the database and return the newly created
+   * Magician.
+   *
+   * @param editUserFormData The source of data for the Magician.
+   * @return A fully populated Magician object that's just been persisted in the database.
+   */
+  public static Magician createMagicianFromForm(EditUserFormData editUserFormData) {
+    Magician magician = null;
+    MagicianType magicianType = MagicianType.getMagicianType(editUserFormData.magicianType);
+
+    if (editUserFormData.id == 0) {
+      magician = new Magician(
+          editUserFormData.firstName
+          , editUserFormData.lastName
+          , editUserFormData.email
+          , magicianType
+          , editUserFormData.password);
+    }
+    else {
+      magician = Magician.find().byId(editUserFormData.id);
+      magician.setFirstName(editUserFormData.firstName);
+      magician.setLastName(editUserFormData.lastName);
+      magician.setEmail(editUserFormData.email);
+      magician.setMagicianType(magicianType);
+      magician.setPassword(editUserFormData.password);
+    }
 
     magician.save();
     return magician;
@@ -323,6 +352,24 @@ public class Magician extends play.db.ebean.Model {
    */
   public void setLastName(String lastName) {
     this.lastName = lastName;
+  }
+
+  /**
+   * Get the magician's password.
+   *
+   * @return The magician's password.
+   */
+  public String getPassword() {
+    return password;
+  }
+
+  /**
+   * Set the magician's password.
+   *
+   * @param password The magician's password.
+   */
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   /**
@@ -634,7 +681,7 @@ public class Magician extends play.db.ebean.Model {
 
 
   public Magician init(Magician magician) {
-return null;
+    return null;
   }
 
 // TODO:  Add eMails and use init(magician) function.
@@ -654,6 +701,7 @@ return null;
     magician = new Magician(
         "Mark",
         "Nelson",
+        "P@ssw0rd",
         "Mark Nelson",
         "Honolulu, HI",
         null,
@@ -681,6 +729,7 @@ return null;
     magician = new Magician(
         "Lee",
         "Asher",
+        "P@ssw0rd",
         "Lee Asher",
         null,
         null,
@@ -705,6 +754,7 @@ return null;
     magician = new Magician(
         "Steve",
         "Johnson",
+        "P@ssw0rd",
         "Steve Johnson",
         null,
         null,
@@ -729,6 +779,7 @@ return null;
     magician = new Magician(
         "Wayne",
         "Houchin",
+        "P@ssw0rd",
         "Wayne Houchin",
         null,
         null,

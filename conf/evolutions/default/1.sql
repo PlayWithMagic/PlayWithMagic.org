@@ -8,6 +8,7 @@ create table magician (
   first_name                varchar(45) not null,
   last_name                 varchar(45) not null,
   email                     varchar(255) not null,
+  password                  varchar(255) not null,
   magician_type_id          bigint,
   stage_name                varchar(255),
   location                  varchar(255),
@@ -40,20 +41,16 @@ create sequence magician_seq;
 
 create sequence magician_type_seq;
 
-alter table magician add constraint fk_magician_magicianType_1 foreign key (magician_type_id) references magician_type (id) on delete restrict on update restrict;
+alter table magician add constraint fk_magician_magicianType_1 foreign key (magician_type_id) references magician_type (id);
 create index ix_magician_magicianType_1 on magician (magician_type_id);
 
 
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+drop table if exists magician cascade;
 
-drop table if exists magician;
-
-drop table if exists magician_type;
-
-SET REFERENTIAL_INTEGRITY TRUE;
+drop table if exists magician_type cascade;
 
 drop sequence if exists magician_seq;
 

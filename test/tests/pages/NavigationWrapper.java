@@ -63,17 +63,6 @@ public abstract class NavigationWrapper extends FluentPage {
 
 
   /**
-   * Click the Browse Magicians button in the top navigation.
-   *
-   * @return The ListMagiciansPage.
-   */
-  public EditMagicianPage clickJoinTheCommunityToday() {
-    this.findFirst("#joinTheCommunity").click();
-    return new EditMagicianPage(this.getDriver());
-  }
-
-
-  /**
    * Click the Create Routine button in the top navigation.
    *
    * @return The EditRoutinePage.

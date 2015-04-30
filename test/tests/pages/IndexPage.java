@@ -47,6 +47,19 @@ public class IndexPage extends NavigationWrapper {
 
 
   /**
+   * Click the Join the Community Today button.
+   *
+   * @return The EditUserPage.
+   */
+  public EditUserPage clickJoinTheCommunityToday() {
+    this.findFirst("#joinTheCommunity").click();
+    return new EditUserPage(this.getDriver());
+  }
+
+
+  // Footers are only on the Index and Help page
+
+  /**
    * Click the About button on the Index page.
    *
    * @return The AboutPage.

@@ -26,6 +26,8 @@ public class MagicianTypeFormData {
   public static Map<String, Boolean> getMagicianTypes() {
     Map<String, Boolean> magicianTypeMap = new HashMap<String, Boolean>();
 
+    // TODO:  Magician Type is not being sorted in the Form...  This is because it's stored as a HashMap.
+
     for (MagicianType magicianType : MagicianType.find().orderBy("displayOrder").findList()) {
       magicianTypeMap.put(magicianType.getName(), false);
     }

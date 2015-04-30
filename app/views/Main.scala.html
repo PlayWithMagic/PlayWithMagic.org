@@ -66,14 +66,6 @@
         @*}*@
 
         <ul class="nav navbar-nav navbar-right">
-          <!-- Signup Button, do not show on home page -->
-          @if( page != "home" && page != "editMagician" ) {
-            <li>
-              <div class="join">
-                <a id="joinTheCommunity" class="btn btn-primary btn-sm navbar-btn" href="editMagician">Join the Community Today!</a>
-              </div>
-            </li>
-          }
           <li>
             <a id="linkToHelpPage" href="@routes.Application.help()">
               <i class="fa fa-question fa-lg hidden-xs"></i>
