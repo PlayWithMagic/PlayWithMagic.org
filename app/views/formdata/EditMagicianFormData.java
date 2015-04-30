@@ -14,14 +14,19 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * MagicianFormData allows for the storage of Magician Form Data that is input by the user.
+ * EditMagicianFormData allows for the storage of Magician data from an HTML form.
+ *
+ * This is a Play Framework backing class that allows for the storage of HTML Form Data input by the user (usually as
+ * String data being moved in/out of Model data).
+ *
+ * These backing classes also contain basic input form validation for required fields, field length, etc.
+ *
  * This is utilized partially at account creation, and again whenever the Magician info is updated.
- * Eventually we'll decide on which items are strictly required at account creation.
  */
-public class MagicianFormData {
+public class EditMagicianFormData {
 
   /**
-   * Input data id hidden field.
+   * Magician ID hidden field.
    */
   public long id;
 
@@ -40,6 +45,21 @@ public class MagicianFormData {
   @MaxLength(value = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH,
       message = "Your name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters.")
   public String lastName;
+
+  /**
+   * Input data Email field.
+   */
+  @Required(message = "An Email address must be provided.")
+  @Email(message = "An Email address must be provided.")
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
+      message = "The Email address can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
+  public String email;
+
+  /**
+   * Input data MagicianType selector; stored as a string from the selectbox.
+   */
+  @Required(message = "How would you identify yourself as a magician?  Please select from the list.")
+  public String magicianType;
 
   /**
    * Input data Stage Name field.
@@ -82,11 +102,6 @@ public class MagicianFormData {
   public String influences;
 
   /**
-   * Input data Experience Level selector; stored as string from field.
-   */
-  public String experienceLevel;
-
-  /**
    * Input data Year Started field.
    */
   @Min(value = 1900, message = "How about a real year?")
@@ -105,15 +120,6 @@ public class MagicianFormData {
   @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
       message = "Your website URL can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String website;
-
-  /**
-   * Input data Email field.
-   */
-  @Required(message = "An Email address must be provided.")
-  @Email(message = "An Email address must be provided.")
-  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
-      message = "The Email address can't be longer than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
-  public String email;
 
   /**
    * Input data Facebook field.
@@ -161,30 +167,31 @@ public class MagicianFormData {
   /**
    * Default no-arg constructor required by Play.
    */
-  public MagicianFormData() {
+  public EditMagicianFormData() {
     // No content.
   }
 
+
   /**
-   * Constructor that builds the MagicianFormData object from a provided Magician.
+   * Constructor that builds the EditMagicianFormData object from a provided Magician.
    *
    * @param magician The Magician object passed to the constructor.
    */
-  public MagicianFormData(Magician magician) {
+  public EditMagicianFormData(Magician magician) {
     this.id = magician.getId();
     this.firstName = magician.getFirstName();
     this.lastName = magician.getLastName();
+    this.email = magician.getEmail();
+    this.magicianType = magician.getMagicianType().getName();
     this.stageName = magician.getStageName();
     this.location = magician.getLocation();
     this.userPhoto = magician.getUserPhoto();
     this.biography = magician.getBiography();
     this.interests = magician.getInterests();
     this.influences = magician.getInfluences();
-    this.experienceLevel = magician.getExperienceLevel();
     this.yearStarted = magician.getYearStarted();
     this.organizations = magician.getOrganizations();
     this.website = magician.getWebsite();
-    this.email = magician.getEmail();
     this.facebook = magician.getFacebook();
     this.twitter = magician.getTwitter();
     this.linkedIn = magician.getLinkedIn();
@@ -193,8 +200,9 @@ public class MagicianFormData {
     this.instagram = magician.getInstagram();
   }
 
+
   /**
-   * Enforce special UI validation rules for magicians.
+   * Enforce special user interface validation rules for Magician HTML form data.
    *
    * @return Either null if no errors, or a List of Div IDs and their associated error messages.
    */
@@ -202,8 +210,9 @@ public class MagicianFormData {
 
     List<ValidationError> errors = new ArrayList<ValidationError>();
 
-    if (!ExperienceLevels.isExperienceLevel(experienceLevel)) {
-      errors.add(new ValidationError("experienceLevel", "Please select a level of experience from the list."));
+    if (!MagicianTypeFormData.isMagicianType(magicianType)) {
+      errors.add(new ValidationError("magicianType",
+          "How would you identify yourself as a magician?  Please select from the list."));
     }
 
     if (yearStarted != null && yearStarted.intValue() > Calendar.getInstance().get(Calendar.YEAR)) {

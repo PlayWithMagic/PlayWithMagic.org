@@ -8,28 +8,28 @@ import tests.GlobalTest;
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
- * Provides test scaffolding for the EditMagician page.
+ * Provides test scaffolding for the EditUser page.
  */
-public class EditMagicianPage extends NavigationWrapper {
+public class EditUserPage extends NavigationWrapper {
 
   /**
-   * Go directly to the EditMagician page and make sure the browser gets there.
+   * Go directly to the EditUser page and make sure the browser gets there.
    *
    * @param browser A remotely controlled test browser.
    */
-  public EditMagicianPage(TestBrowser browser) {
+  public EditUserPage(TestBrowser browser) {
     super(browser.getDriver());
-    this.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/editMagician");
+    this.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/editUser");
     isAt();
   }
 
 
   /**
-   * The browser should already be at the EditMagician page.  Make sure the browser is already there.
+   * The browser should already be at the EditUser page.  Make sure the browser is already there.
    *
    * @param webDriver The state of the current test browser.
    */
-  public EditMagicianPage(WebDriver webDriver) {
+  public EditUserPage(WebDriver webDriver) {
     super(webDriver);
     isAt();
   }
@@ -45,21 +45,7 @@ public class EditMagicianPage extends NavigationWrapper {
     assertThat(this.pageSource()).contains(magician.getLastName());
     assertThat(this.pageSource()).contains(magician.getEmail());
     assertThat(this.pageSource()).contains(magician.getMagicianType().getName());
-    assertThat(this.pageSource()).contains(magician.getStageName());
-    // No image for now
-    assertThat(this.pageSource()).contains(magician.getLocation());
-    assertThat(this.pageSource()).contains(magician.getBiography());
-    assertThat(this.pageSource()).contains(magician.getInterests());
-    assertThat(this.pageSource()).contains(magician.getInfluences());
-    assertThat(this.pageSource()).contains(magician.getYearStarted().toString());
-    assertThat(this.pageSource()).contains(magician.getOrganizations());
-    assertThat(this.pageSource()).contains(magician.getWebsite());
-    assertThat(this.pageSource()).contains(magician.getFacebook());
-    assertThat(this.pageSource()).contains(magician.getTwitter());
-    assertThat(this.pageSource()).contains(magician.getLinkedIn());
-    assertThat(this.pageSource()).contains(magician.getGooglePlus());
-    assertThat(this.pageSource()).contains(magician.getFlickr());
-    assertThat(this.pageSource()).contains(magician.getInstagram());
+    assertThat(this.pageSource()).contains(magician.getPassword());
   }
 
 
@@ -70,6 +56,7 @@ public class EditMagicianPage extends NavigationWrapper {
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
     assertThat(pageSource().contains("<h1>Magician Profile</h1>"));
+    assertThat(pageSource().contains("<h1>New User</h1>") || pageSource().contains("<h1>Edit User</h1>"));
   }
 
 
@@ -77,8 +64,8 @@ public class EditMagicianPage extends NavigationWrapper {
    * Click the Add or Update button (submit) at the bottom of the page.
    * <p>
    * This returns void because we don't know which page it would render...
-   * On success, it goes to ListMagicians
-   * On error, it stays on EditMagician
+   * On success, it goes to EditMagician
+   * On error, it stays on EditUser
    */
   public void clickSubmit() {
     this.findFirst("#submit").click();
@@ -94,6 +81,7 @@ public class EditMagicianPage extends NavigationWrapper {
     this.find("#" + magicianTypeName).click();
   }
 
+
   /**
    * Set passed values into the form.
    *
@@ -104,20 +92,7 @@ public class EditMagicianPage extends NavigationWrapper {
     this.fill("#lastName").with(magician.getLastName());
     this.fill("#email").with(magician.getEmail());
     selectMagicianType(magician.getMagicianType().getName());
-    this.fill("#stageName").with(magician.getStageName());
-    this.fill("#location").with(magician.getLocation());
-    this.fill("#biography").with(magician.getBiography());
-    this.fill("#interests").with(magician.getInterests());
-    this.fill("#influences").with(magician.getInfluences());
-    this.fill("#yearStarted").with(magician.getYearStarted().toString());
-    this.fill("#organizations").with(magician.getOrganizations());
-    this.fill("#website").with(magician.getWebsite());
-    this.fill("#facebook").with(magician.getFacebook());
-    this.fill("#twitter").with(magician.getTwitter());
-    this.fill("#linkedIn").with(magician.getLinkedIn());
-    this.fill("#googlePlus").with(magician.getGooglePlus());
-    this.fill("#flickr").with(magician.getFlickr());
-    this.fill("#instagram").with(magician.getInstagram());
+    this.fill("#password").with(magician.getPassword());
   }
 
 
@@ -129,6 +104,7 @@ public class EditMagicianPage extends NavigationWrapper {
     assertThat(this.pageSource()).doesNotContain("A Last Name must be provided.");
     assertThat(this.pageSource()).doesNotContain("An Email address must be provided.");
     assertThat(this.pageSource()).doesNotContain("How would you identify yourself as a magician?");
+    assertThat(this.pageSource()).doesNotContain("You need to have a password.");
   }
 
 
@@ -140,6 +116,7 @@ public class EditMagicianPage extends NavigationWrapper {
     assertThat(this.pageSource()).contains("A Last Name must be provided.");
     assertThat(this.pageSource()).contains("An Email address must be provided.");
     assertThat(this.pageSource()).contains("How would you identify yourself as a magician?");
+    assertThat(this.pageSource()).contains("You need to have a password.");
   }
 
 }

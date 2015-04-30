@@ -10,16 +10,20 @@ GET         /help                  controllers.Application.help()
 
 # Routine actions
 GET         /listRoutines          controllers.Application.listRoutines()
+# TODO: Possibly remove =0 from viewRoutine(check the others too)
 GET         /viewRoutine           controllers.Application.viewRoutine(id: Long?= 0)
 GET         /editRoutine           controllers.Application.editRoutine(id: Long?= 0)
 POST        /editRoutine           controllers.Application.postRoutine()
 GET         /deleteRoutine         controllers.Application.deleteRoutine(id: Long?= 0)
 
+# User actions
+GET         /editUser              controllers.Application.editUser(id: Long?=0)
+POST        /editUser              controllers.Application.postUser()
 
 # Magician actions
 GET         /listMagicians         controllers.Application.listMagicians()
-GET         /viewMagician          controllers.Application.viewMagician(id: Long?=0)
-GET         /editMagician          controllers.Application.editMagician(id: Long?=0)
+GET         /viewMagician          controllers.Application.viewMagician(id: Long)
+GET         /editMagician          controllers.Application.editMagician(id: Long)
 POST        /editMagician          controllers.Application.postMagician()
 GET         /deleteMagician        controllers.Application.deleteMagician(id: Long?= 0)
 

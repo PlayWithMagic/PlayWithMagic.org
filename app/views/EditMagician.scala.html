@@ -1,10 +1,9 @@
 @*
 * The Edit (New and Update) Magician HTML form page.
 *
-* @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(magicianForm: Form[views.formdata.MagicianFormData], experienceLevelMap: Map[String, Boolean])
+@(magicianForm: Form[views.formdata.EditMagicianFormData], magicianTypeMap: Map[String, Boolean])
 
 @import helper._
 @import views.html.bootstrap3._
@@ -38,10 +37,10 @@
             label = "Email",
             placeholder = "i.e., name@domain.com",
             help = "Required")
-            <!-- Experience Level -->
-          @bootstrap3.select(magicianForm("experienceLevel"),
-            label = "Level of Experience with Magic",
-            optionMap = experienceLevelMap,
+            <!-- Magician Type -->
+          @bootstrap3.select(magicianForm("magicianType"),
+            label = "Experience with Magic",
+            optionMap = magicianTypeMap,
             isMultiple = false,
             help = "Required")
             <!-- Stage Name -->
@@ -131,7 +130,7 @@
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button id="submit" type="submit" class="btn btn-default">
-              @if(magicianForm("id").value == "0") {Add} else {Update}
+                Update
               </button>
             </div>
           </div>

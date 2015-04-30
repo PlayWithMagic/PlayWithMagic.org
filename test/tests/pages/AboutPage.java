@@ -1,46 +1,47 @@
 package tests.pages;
 
-import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
+import play.test.TestBrowser;
+import tests.GlobalTest;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+
 /**
- * Provides test scaffolding for the About page.
+ * Provides scaffolding to remotely control the About page for testing.
  */
-public class AboutPage extends FluentPage {
-
-  private String url;
+public class AboutPage extends NavigationWrapper {
 
   /**
-   * Create the About Page.
+   * Go directly to the About page and make sure the browser gets there.
    *
-   * @param webDriver The driver.
-   * @param port      The port.
+   * @param browser A remotely controlled test browser.
    */
-  public AboutPage(WebDriver webDriver, int port) {
+  public AboutPage(TestBrowser browser) {
+    super(browser.getDriver());
+    this.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/about");
+    isAt();
+  }
+
+
+  /**
+   * The browser should already be at the About page.  Make sure the browser is already there.
+   *
+   * @param webDriver The state of the current test browser.
+   */
+  public AboutPage(WebDriver webDriver) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/about";
+    isAt();
   }
 
-  /**
-   * Get the URL for this page.
-   *
-   * @return The page's URL.
-   */
-  @Override
-  public String getUrl() {
-    return this.url;
-  }
 
   /**
-   * A test to ensure the rendered page displays the correct content.
+   * Validate that the browser is on the right page.
    */
   @Override
   public void isAt() {
-    assertThat(title()).isEqualTo("Play With Magic");
+    assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
     assertThat(pageSource().contains("About this Website"));
     assertThat(pageSource().contains("Play With Magic was written by:"));
   }
 }
-

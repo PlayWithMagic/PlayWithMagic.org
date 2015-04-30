@@ -17,7 +17,7 @@
 
         <p>Post Routines, Create Sets and Share Magic!</p>
 
-          <!-- Search Bar -->
+        <!-- Search Bar -->
         @*<div class="row">*@
           @*<div class="col-md-offset-3 col-md-6">*@
             @*<div class="input-group">*@
@@ -30,8 +30,13 @@
             @*<span><small><a href="listRoutines">Advanced Search</a></small></span>*@
           @*</div>*@
         @*</div>*@
+
         <br/>
-        <a href="editMagician"><button id="joinTheCommunity" type="button" class="btn btn-primary">Join the Community Today!</button></a>
+        <a href="@routes.Application.editUser(0)">
+          <button id="joinTheCommunity" type="button" class="btn btn-primary">
+            Join the Community Today!
+          </button>
+        </a>
       </div>
     </header>
   </section>

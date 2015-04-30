@@ -1,53 +1,49 @@
 package tests.pages;
 
 import models.Routine;
-import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
-import play.Logger;
 import play.test.TestBrowser;
+import tests.GlobalTest;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
- * Provides test scaffolding for the New Routine page.
+ * Provides scaffolding to remotely control the EditRoutine page for testing.
  */
-public class EditRoutinePage extends FluentPage {
-  private String url;
+public class EditRoutinePage extends NavigationWrapper {
 
   /**
-   * Create a EditRoutine Page (for a Create Routine action).
+   * Go directly to the EditRoutine page and make sure the browser gets there.
    *
-   * @param webDriver The driver.
-   * @param port      The port.
+   * @param browser A remotely controlled test browser.
    */
-  public EditRoutinePage(WebDriver webDriver, int port) {
-    super(webDriver);
-    this.url = "http://localhost:" + port + "/editRoutine";
+  public EditRoutinePage(TestBrowser browser) {
+    super(browser.getDriver());
+    this.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/editRoutine");
+    isAt();
   }
+
 
   /**
-   * Create a EditRoutine Page (for an Update Routine action).
+   * The browser should already be at the EditRoutine page.  Make sure the browser is already there.
    *
-   * @param webDriver The driver.
-   * @param port      The port.
-   * @param id        The Routine ID of the routine we shall edit.
+   * @param webDriver The state of the current test browser.
    */
-  public EditRoutinePage(WebDriver webDriver, int port, long id) {
+  public EditRoutinePage(WebDriver webDriver) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/editRoutine?id=" + id;
+    isAt();
   }
 
-  @Override
-  public String getUrl() {
-    Logger.debug(this.url);
-    return this.url;
-  }
 
+  /**
+   * Validate that the browser is on the right page.
+   */
   @Override
   public void isAt() {
-    assertThat(title()).isEqualTo("Play With Magic");
-    assertThat(pageSource().contains("Create Routine") || pageSource().contains("Update Routine"));
+    assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
+    assertThat(pageSource().contains("<h1>Create Routine</h1>") || pageSource().contains("<h1>Update Routine</h1>"));
   }
+
 
   /**
    * Set passed values into the form, then submit it.
@@ -86,8 +82,11 @@ public class EditRoutinePage extends FluentPage {
       fill("#choices").with(routine.getChoices());
     }
 
+    // TODO: Move the Submit button at the bottom to its own method.
+
     submit("#submit");
   }
+
 
   /**
    * Test the contents of the page against a Routine.

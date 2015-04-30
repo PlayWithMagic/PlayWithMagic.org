@@ -3,6 +3,11 @@
  *
  * These tests use Chrome and the Chrome Driver to automate tests.
  *
+ * Some of these workflows are large because the Play Framework the application restarts between tests -- which wipes
+ * out the in-memory database.
+ *
+ * These tests are designed to run in a fake in-memory database -- not against the production database.
+ *
  * The Play Framework normally uses HTMLUnit, but it does not support the formaction attribute of a button...
  * consequently, it can't click the 'Add Material' button and we can't test materials.  After fooling around with
  * a few other drivers, we selected the Chrome Driver.
@@ -29,6 +34,8 @@
  * @see http://junit.org
  * @see http://www.scala-sbt.org
  * @see https://sites.google.com/a/chromium.org/chromedriver/
+ * @see https://books.google.com/books?id=gpefBAAAQBAJ&pg=PT100
+ * @see https://www.playframework.com/documentation/2.3.0/api/java/play/test/WithBrowser.html
  *
  * @since 6.0
  */
