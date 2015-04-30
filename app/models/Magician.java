@@ -218,6 +218,20 @@ public class Magician extends play.db.ebean.Model {
 
 
   /**
+   * Get a Magician associated with a given email.
+   *
+   * @param email The ID of the magician to retrieve.
+   * @return The retrieved magician object.
+   */
+  public static Magician getMagician(String email) {
+    Magician magician = Magician.find().where().eq("email", email).findUnique();
+    if (magician == null) {
+      throw new RuntimeException("Unable to find Magician with the given email [" + email + "]");
+    }
+    return magician;
+  }
+
+  /**
    * Get a Magician associated with a given id.
    *
    * @param id The ID of the magician to retrieve.
