@@ -27,8 +27,7 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
    * Populate static objects needed for testing.
    */
   public TestMaterialCRUD() {
-    routine1 = new Routine(0, "Test Routine Name", "Test Routine Description");
-    routine1.setDuration(11);
+    routine1 = new Routine(0, "Test Routine Name", "Test Routine Description", 11);
     routine1.setMethod("Test Routine Method");
     routine1.setHandling("Test Routine Handling");
     routine1.setResetDuration(21);

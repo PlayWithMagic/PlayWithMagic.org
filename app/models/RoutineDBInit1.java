@@ -17,9 +17,8 @@ public class RoutineDBInit1 {
 
     // --------------------------------------
     routine = new Routine(0, "Ambitious Card", "Put a card in the middle of the deck.  It magically comes to "
-        + "the top.");
+        + "the top.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Get a break under the top two cards.  Perform a double turnover.  Say \"The card on the top "
         + "of the deck is the <<Card>>\".  Perform another double turnover.  Place the indifferent card anywhere in "
         + "the deck.  Turn over the top card to show that the selected card has come to the top.");
@@ -57,9 +56,8 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Gypsy Thread", "Pieces of thread are restored into one continuous piece.");
+    routine = new Routine(0, "Gypsy Thread", "Pieces of thread are restored into one continuous piece.", 4);
 
-    routine.setDuration(4);
     routine.setMethod("Not shared");
     routine.setHandling("I use this as an opener, with the spool in hand.  After detaching the initial piece of "
         + "thread, I hand out the spool for inspection.");
@@ -96,9 +94,8 @@ public class RoutineDBInit1 {
     long id;
 
     routine = new Routine(0, "Magician's Practice Deck", "A 'cheap' deck of cards with nothing printed on them "
-        + "magically gets printed on the front and back.");
+        + "magically gets printed on the front and back.", 3);
 
-    routine.setDuration(3);
     routine.setMethod("A standard Mental Photography deck.  \"Have you ever seen a magician's practice deck?  "
         + "A magician will go through a deck per week.  You know, the oils from your hands get on the cards and they "
         + "don't spread smothly anymore.  Anyway, a deck costs about $5 a pack -- and it gets expensive over time.  "
@@ -138,9 +135,8 @@ public class RoutineDBInit1 {
 
     routine = new Routine(0, "Twice Burned", "This is a good bar trick I learned from Steve Johnson.  Strike a match "
         + "and blow it out.  Strike it a second time and, astonishingly, it lights!  It's a good way to get "
-        + "a free beer.");
+        + "a free beer.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Prepare a duplicate match.  Use a sharpie to blacken the head.  Keep the dup in finger palm "
         + "and swap it with the burned out match.");
     routine.setHandling("");
@@ -187,9 +183,8 @@ public class RoutineDBInit1 {
         + "bit.  Take a rope and cut in half and tie the two ends together in a knot.  Have "
         + "folks from the audience test the strength of the knot -- it's solid.  Then, you have someone cover the "
         + "knot with their hand... and the knot moves.  In fact, the knot comes off in their hand and they are "
-        + "left with a nice takeaway.  A beautiful torn-and-restored effect.");
+        + "left with a nice takeaway.  A beautiful torn-and-restored effect.", 5);
 
-    routine.setDuration(5);
     routine.setMethod("I can't share it without permission, but you can always ask Darly or watch his video.");
     routine.setHandling("");
     routine.setResetDuration(2);
@@ -236,9 +231,8 @@ public class RoutineDBInit1 {
 
     routine = new Routine(0, "Charming Chinese Challenge", "This is a three phase effect where the magician removes "
         + "Chinese coins threaded through a ribbon, one at a time.  I first learned this routine from Joshua "
-        + "Jay, who credits Troy Hooser for this particular handling.");
+        + "Jay, who credits Troy Hooser for this particular handling.", 5);
 
-    routine.setDuration(5);
     routine.setMethod("I can't share it without permission, but you can always ask Troy or read DesTROYers.");
     routine.setHandling("");
     routine.setResetDuration(1);
@@ -286,9 +280,8 @@ public class RoutineDBInit1 {
     long id;
 
     routine = new Routine(0, "Two Card Monte", "This is a 'giveaway' routine I perform whereby I teach the "
-        + "audience a little magic trick and I give them two gaff (novelty) cards to remember the event.");
+        + "audience a little magic trick and I give them two gaff (novelty) cards to remember the event.", 10);
 
-    routine.setDuration(10);
     routine.setMethod("It's probably best just to watch the video.");
     routine.setHandling("It usually takes 10-15 minutes and I'll do this as a sort of encore after a set.");
     routine.setResetDuration(1);
@@ -334,9 +327,8 @@ public class RoutineDBInit1 {
 
     routine = new Routine(0, "Panic", "This is my favorite effect within a set.  It's a transposition effect that "
         + "allows me to switch from an audience-handled, sorted deck to a packet-loaded deck.  Strangly, people "
-        + "forget about this nearly impossible effect because I follow it with my closer French Kiss.");
+        + "forget about this nearly impossible effect because I follow it with my closer French Kiss.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Go buy Aaron's video.");
     routine.setHandling("I've had the best luck doing several find-the-card bits before I get into Panic.  This "
         + "firmly establishes the fact that the deck is real and full of unique cards.");
@@ -372,9 +364,8 @@ public class RoutineDBInit1 {
 
     routine = new Routine(0, "Side Steal", "The Side Steal allows total control of a single card to the top of the deck"
         + " - invisibly. It doesn’t end there, use it to control a card to any position near the top or as a stunningly"
-        + " visual color change.");
+        + " visual color change.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Purchase the video at https://store.theory11.com/products/side-steal-jason-england.");
     routine.setHandling("Requires nimble fingers and sleight of hand!");
     routine.setResetDuration(2);
@@ -412,9 +403,8 @@ public class RoutineDBInit1 {
         + "was merely a PHANTOM. Where did it go? It’s been in THEIR hands all along. You even know it’s position - "
         + "from a face down pile.\n Phantom is Spidey’s adaptation of classic principles published by Theodore "
         + "Annemann, Franklin Taylor, and Charles Jordan.\n A demonstration of astral projection or remote viewing. "
-        + "The ability to gather information from a distant or unseen target using extra-sensory perception (ESP).");
+        + "The ability to gather information from a distant or unseen target using extra-sensory perception (ESP).", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Purchase the video at https://store.theory11.com/products/phantom-by-spidey.");
     routine.setHandling("Requires nimble fingers and sleight of hand!  Presentation is everything for this Routine, "
         + "especially if you want to sell the ESP portion of it.  Be sure to practice your Patter.");
@@ -449,9 +439,8 @@ public class RoutineDBInit1 {
 
     routine = new Routine(0, "Fancyband", "An ordinary rubberband is sprung off your fingertips, spiraling a few "
         + "meters forward - then spins on the tabletop, slingshotting it back towards you. A demonstration of skill "
-        + "you can unleash at anytime.");
+        + "you can unleash at anytime.", 1);
 
-    routine.setDuration(1);
     routine.setMethod("Full method is available for FREE at "
         + "https://store.theory11.com/products/fancy-band-chris-kenner");
 
@@ -487,9 +476,9 @@ public class RoutineDBInit1 {
     long id;
 
     routine = new Routine(0, "Classic Color Change", "It is one of the simplest, most fluid, visual moves in magic - "
-        + "and it is also one of the easiest. With a simple wave, one playing card visually changes into another.\n");
+        + "and it is also one of the easiest. With a simple wave, one playing card visually changes into another.\n"
+        , 1);
 
-    routine.setDuration(1);
     routine.setMethod("Full method is available for FREE at "
         + "https://store.theory11.com/products/classic-color-change-jonathan-bayme");
 
@@ -526,9 +515,8 @@ public class RoutineDBInit1 {
 
     routine = new Routine(0, "Zig-Zag-Pencil", "This was one of the first Routines I was exposed to as a 10 year old."
         + " My grandparents purchased me a magic kit that included this, and the really cool part is how simple the "
-        + "routine is--and also that you can improve upon it with a few easy steps!");
+        + "routine is--and also that you can improve upon it with a few easy steps!", 5);
 
-    routine.setDuration(5);
     routine.setMethod("The required kit comes with the method in-box.");
 
     routine.setHandling("There are a few improvements on the basic part of this set.  I've seen one that uses money "
@@ -580,9 +568,8 @@ public class RoutineDBInit1 {
         + "hand. Three small X's are drawn on someone's open palm. A quarter is placed in the center of their hand.\n"
         + "Slowly, you slide your fingers over each X, and they visually, instantly vanish. No sign of ink to be "
         + "seen. Nothing. When the quarter is lifted, there are three perfect X's directly in the center of their "
-        + "palm.");
+        + "palm.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Full information on the method may be found at https://store.theory11.com/products/exile");
 
     routine.setHandling("It's important that the participant be able to keep still.  Take your time with removing "
@@ -631,9 +618,8 @@ public class RoutineDBInit1 {
         + "With a meticulous rub, the coin instantly and visually changes into a copper coin... then changes back to "
         + "a silver coin again.\n You explain you've been using two coins - but show that they're BOTH silver.\n"
         + "Hellbound Spellbound is a stunningly visual coin trick with nothing but great methodology and pure "
-        + "sleight-of-hand. NO gimmicks are needed to perform the routine.");
+        + "sleight-of-hand. NO gimmicks are needed to perform the routine.", 4);
 
-    routine.setDuration(4);
     routine.setMethod("Full information on the method may be found at "
         + "https://store.theory11.com/products/hellbound-spellbound-chris-kenner");
 
@@ -672,9 +658,8 @@ public class RoutineDBInit1 {
         + "freely selected playing card - done under nearly impossible conditions. NO key cards. NO gimmicks.\n"
         + "They shuffle the the cards not once but TWICE during the demonstration.\n You are able to locate their "
         + "selection 100% of the time. Learn a powerful technique that you can apply to any magic trick you wish, "
-        + "as a way to identify a selected card under truly test conditions.");
+        + "as a way to identify a selected card under truly test conditions.", 4);
 
-    routine.setDuration(4);
     routine.setMethod("Full information on the method may be found at "
         + "https://store.theory11.com/products/gps-chris-kenner");
 
@@ -715,9 +700,8 @@ public class RoutineDBInit1 {
         + "both sides. The spectator then slowly opens their hand to reveal the English penny. Both coins can be "
         + "immediately handed out for full examination.\n Originally published by magician Steve Dusheck, Digital "
         + "Dissolve takes simple, effective coin magic to the next level with a streamlined copper / silver "
-        + "transposition routine that you'll actually use.");
+        + "transposition routine that you'll actually use.", 4);
 
-    routine.setDuration(4);
     routine.setMethod("Full information on the method may be found at "
         + "https://store.theory11.com/products/digital-dissolve");
 
@@ -756,9 +740,8 @@ public class RoutineDBInit1 {
         + "REFILLS itself! As seen on The Ellen Show with Justin Flom.\n Overstuft is a utility prop that enables "
         + "you to do a myriad of magical effects using something the whole world is familiar with - a chocolate "
         + "cookie!\n From a quick trick to a full-fledged multi-phase routine, Overstuft will be your secret weapon "
-        + "for powerful, fun magic at any moment.");
+        + "for powerful, fun magic at any moment.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Full information on the method may be found at "
         + "https://store.theory11.com/products/overstuft-by-bizzaro");
 
@@ -794,9 +777,8 @@ public class RoutineDBInit1 {
 
     routine = new Routine(0, "Magic Cup and Balls", "Another simple routine that I learned as a child.  There are 3 "
         + "cups and 3 balls.  Make the balls pass through the cups, and multiply the number of balls that each cup"
-        + "reveals!  There are a number of different variations that can also be done on this routine.");
+        + "reveals!  There are a number of different variations that can also be done on this routine.", 5);
 
-    routine.setDuration(5);
     routine.setMethod("There is of course more than 3 sponge or cloth balls used for this routine.");
 
     routine.setHandling("  The key to making this happen for the audience is to move quickly with each cup, and "

@@ -40,14 +40,9 @@ public class TestSetCRUD extends play.test.WithBrowser {
     set1 = new Set(-1, "Test Set Name 01", "Test Set Description 01", null);
     set2 = new Set(-1, "02 Test Set Name 02", "02 Test Set Description 02", null);
 
-    routine1 = new Routine(0, "Test Routine Name 01", "Test Routine Description 01");
-    routine1.setDuration(11);
-
-    routine2 = new Routine(0, "Test Routine Name 02", "Test Routine Description 02");
-    routine2.setDuration(22);
-
-    routine3 = new Routine(0, "Test Routine Name 03", "Test Routine Description 03");
-    routine3.setDuration(33);
+    routine1 = new Routine(0, "Test Routine Name 01", "Test Routine Description 01", 11);
+    routine2 = new Routine(0, "Test Routine Name 02", "Test Routine Description 02", 22);
+    routine3 = new Routine(0, "Test Routine Name 03", "Test Routine Description 03", 33);
   }
 
   @Override

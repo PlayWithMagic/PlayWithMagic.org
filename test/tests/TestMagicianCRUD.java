@@ -111,7 +111,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
 
 
   /**
-   * Test Magician Navigation from home page and navigation bars.
+   * Test Magician navigation from home page and navigation bars.
    */
   @Test
   public void testMagicianNav() {

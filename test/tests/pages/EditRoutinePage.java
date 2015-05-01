@@ -48,9 +48,21 @@ public class EditRoutinePage extends NavigationWrapper {
     assertThat(pageSource().contains("<h1>Create Routine</h1>") || pageSource().contains("<h1>Update Routine</h1>"));
   }
 
+  /**
+   * Click the Add or Update button (submit) at the bottom of the page.
+   * <p>
+   * This returns void because we don't know which page it would render...
+   *   On success, it goes to ListRoutines
+   *   On error, it stays on EditRoutine
+   */
+  public void clickSubmit() {
+    this.findFirst("#submit").click();
+  }
+
+
 
   /**
-   * Set passed values into the form, then submit it.
+   * Set passed values into the form.
    *
    * @param routine A container holding all of the fields to populate the Routine with.
    */
@@ -85,10 +97,6 @@ public class EditRoutinePage extends NavigationWrapper {
     if (routine.getChoices() != null) {
       fill("#choices").with(routine.getChoices());
     }
-
-    // TODO: Move the Submit button at the bottom to its own method.
-
-    submit("#submit");
   }
 
 
@@ -112,5 +120,26 @@ public class EditRoutinePage extends NavigationWrapper {
     assertThat(browser.pageSource()).contains(routine.getPlacement());
     assertThat(browser.pageSource()).contains(routine.getChoices());
   }
+
+
+  /**
+   * Test to ensure the page does not have required field validation errors.
+   */
+  public void doesNotHaveRequiredFieldErrors() {
+    assertThat(this.pageSource()).doesNotContain("Your routine's gotta have a name.");
+    assertThat(this.pageSource()).doesNotContain("A name's not enough. Please write a brief description of your routine.");
+    assertThat(this.pageSource()).doesNotContain("The average time to perform a basic rendition of this routine in minutes.");
+  }
+
+
+  /**
+   * Test to ensure the page has all of the required field validation errors.
+   */
+  public void hasRequiredFieldErrors() {
+    assertThat(this.pageSource()).contains("Your routine's gotta have a name.");
+    assertThat(this.pageSource()).contains("A name's not enough. Please write a brief description of your routine.");
+    assertThat(this.pageSource()).contains("The average time to perform a basic rendition of this routine in minutes.");
+  }
+
 
 }

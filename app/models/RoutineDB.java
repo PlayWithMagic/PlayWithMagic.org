@@ -42,7 +42,9 @@ public class RoutineDB {
       routine = new Routine(
           idVal,
           routineForm.name,
-          routineForm.description);
+          routineForm.description,
+          routineForm.duration
+      );
     }
     else {
       idVal = routineForm.id;
@@ -53,7 +55,6 @@ public class RoutineDB {
       routine.setDescription(routineForm.description);
     }
 
-    routine.setDuration(routineForm.duration);
     routine.setMethod(routineForm.method);
     routine.setHandling(routineForm.handling);
     routine.setResetDuration(routineForm.resetDuration);
@@ -172,9 +173,8 @@ public class RoutineDB {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "", "");
+    routine = new Routine(0, "", "", 1);
 
-    routine.setDuration(1);
     routine.setMethod("");
     routine.setHandling("");
     routine.setResetDuration(1);

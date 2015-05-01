@@ -20,19 +20,22 @@ import static play.test.Helpers.inMemoryDatabase;
  * <p>
  * Run a server with a fake application, in-memory database and browser (Chrome) to test the system.
  *
+ * When you want to *go* to a page, do new IndexPage(browser);
+ * When you are already *at* a page, do new IndexPage(browser.getDriver());
+ *
  * @see https://www.playframework.com/documentation/2.3.0/api/java/play/test/WithBrowser.html
  */
 public class TestRoutineCRUD extends play.test.WithBrowser {
 
   private static Routine routine1 = null;
   private static Routine routine2 = null;
+  private static Routine routine3 = null;
 
   /**
    * Populate static objects needed for testing.
    */
   public TestRoutineCRUD() {
-    routine1 = new Routine(0, "Test Routine Name 01", "Test Routine Description 01");
-    routine1.setDuration(101);
+    routine1 = new Routine(0, "Test Routine Name 01", "Test Routine Description 01", 101);
     routine1.setMethod("Test Routine Method 01");
     routine1.setHandling("Test Routine Handling 01");
     routine1.setResetDuration(21);
@@ -43,17 +46,18 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     routine1.setPlacement("Test Placement 01");
     routine1.setChoices("Test Choices 01");
 
-    routine2 = new Routine(0, "Test Routine Name 02", "Test Routine Description 02");
-    routine2.setDuration(12);
-    routine2.setMethod("Test Routine Method 02");
-    routine2.setHandling("Test Routine Handling 02");
+    routine2 = new Routine(0, "02 Test Routine Name 02", "02 Test Routine Description 02", 22);
+    routine2.setMethod("02 Test Routine Method 02");
+    routine2.setHandling("02 Test Routine Handling 02");
     routine2.setResetDuration(119);
-    routine2.setResetDescription("Test Routine Reset Description 02");
-    routine2.setYouTubeUrl("Test YouTube URL 02");
-    routine2.setImageUrl("Test Image URL 02");
-    routine2.setInspiration("Test Inspiration 02");
-    routine2.setPlacement("Test Placement 02");
-    routine2.setChoices("Test Choices 02");
+    routine2.setResetDescription("02 Test Routine Reset Description 02");
+    routine2.setYouTubeUrl("02 Test YouTube URL 02");
+    routine2.setImageUrl("02 Test Image URL 02");
+    routine2.setInspiration("02 Test Inspiration 02");
+    routine2.setPlacement("02 Test Placement 02");
+    routine2.setChoices("02 Test Choices 02");
+
+    routine3 = new Routine(0, "Test Routine Name 03", "Test Routine Description 03", 33);
 
     /* Logger.debug("Routines setup for testing"); */ // Logger doesn't work in JUnit tests w/ Play 2.0 (known issue).
     System.out.println("Test Routines constructed");
@@ -83,39 +87,47 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
 
     // Start at the home page...
     IndexPage indexPage = new IndexPage(browser);
-    browser.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/");
-    assertThat(browser.pageSource()).contains("We're looking for a few good routines");
-    assertThat(browser.pageSource()).contains("Join the Community Today!");
 
     // Click the Browse Routines button
-    browser.findFirst("#browseRoutines").click();
-    assertThat(browser.pageSource()).contains("Current Routines");
+    ListRoutinesPage listRoutinesPage = indexPage.clickBrowseRoutinesButton();
 
     // Click the Create Routines button
-    browser.findFirst("#createNew").click();
-    browser.findFirst("#createRoutine").click();
-    assertThat(browser.pageSource()).contains("Create Routine");
+    EditRoutinePage editRoutinePage = listRoutinesPage.clickCreateRoutineButton();
   }
 
 
   /**
-   * Utilize a test browser and the Fluentlenium framework to exercise the List Routines page.
+   * A workflow that tests a basic add and delete Routine with only the required fields.
    */
   @Test
-  public void testGetInitialListRoutinesPage() {
+  public void testMagicianMinimumAddDelete() {
     // browser.maximizeWindow();
 
-    ListRoutinesPage listRoutinesPage = new ListRoutinesPage(browser);
+    // Start at the home page...
+    IndexPage indexPage = new IndexPage(browser);
+
+    // Click the Create Routines button
+    EditRoutinePage editRoutinePage = indexPage.clickCreateRoutineButton();
+
+    // Click Add without entering any information... this should generate an error.
+    editRoutinePage.doesNotHaveRequiredFieldErrors();
+    editRoutinePage.clickSubmit();
+    editRoutinePage.hasRequiredFieldErrors();
+
+    // Populate only the required information and click Add
+    editRoutinePage.submitForm(routine3);
+    editRoutinePage.clickSubmit();
+
+
+
+
   }
 
 
-  /**
-   * Test Routine CRUD.
-   * <p>
-   * Originally, I had this workflow broken up into individual methods.  However, the Play Framework seems to
-   * restart the entire application between method runs -- and this wipes out the in-memory database.
-   */
-  @Test
+    /**
+     * Test Routine CRUD.
+     */
+//  @Test
   public void testRoutineCrudWorkflow() {
     SetDB.resetSetDB();
     RoutineDB.resetRoutineDB();
