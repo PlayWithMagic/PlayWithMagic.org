@@ -7,6 +7,13 @@ GET         /                      controllers.Application.index()
 GET         /about                 controllers.Application.about()
 GET         /help                  controllers.Application.help()
 
+# Login and authentication workflow
+GET         /login               controllers.Application.login(msg: String?= "")
+POST        /login               controllers.Application.postLogin()
+GET         /logout              controllers.Application.logout()
+
+GET         /signup              controllers.Application.signup()
+POST        /signup              controllers.Application.postSignup()
 
 # Routine actions
 GET         /listRoutines          controllers.Application.listRoutines()

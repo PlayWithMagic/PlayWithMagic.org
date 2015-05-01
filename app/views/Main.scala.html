@@ -3,7 +3,7 @@
 *
 * @see http://www.playframework.com
 *@
-@(page: String)(content: Html)
+@(page: String, isLoggedIn: Boolean, userInfo: Magician)(content: Html)
 
 <!DOCTYPE html>
 <html>
@@ -73,25 +73,33 @@
             </a>
           </li>
           <!-- User Info Dropdown, don't show if not logged in -->
-          <li class="dropdown">
-            @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in*@
-              @*Username <span class="caret"></span></a>*@
-            <a id="createNew" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Create...
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              @* <li><a href="displayuser">Profile</a></li> *@
-              @* <li><a href="@routes.Application.listRoutines()">My Routines</a></li>*@
-              @* <li><a href="@routes.Application.listSets()">My Sets</a></li>*@
-              <li><a id="createRoutine" href="@routes.Application.editRoutine()">Create Routine</a></li>
-              <li><a id="createSet" href="@routes.Application.editSet()">Create Set</a></li>
-              @* <li class="divider"></li>*@
-              @* <li><a href="#">Logout</a></li> *@
-            </ul>
-          </li>
-
+          @if(isLoggedIn) {
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                @userInfo.getStageName()<span class="caret"></span>
+              </a>
+              @*<a id="createNew" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Create...*@
+                @*<span class="caret"></span>*@
+              @*</a>*@
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="displayuser">Profile</a></li>
+                <li><a href="@routes.Application.listRoutines()">My Routines</a></li>
+                <li><a href="@routes.Application.listSets()">My Sets</a></li>
+                <li><a id="createRoutine" href="@routes.Application.editRoutine()">Create Routine</a></li>
+                <li><a id="createSet" href="@routes.Application.editSet()">Create Set</a></li>
+                <li class="divider"></li
+                <li><a href="@routes.Application.logout()">Logout</a></li>
+              </ul>
+            </li>
+          } else {
+            @if(page != "home") {
+              <li><a href="@routes.Application.signup()">Signup</a></li>
+            }
+            <li><a href="@routes.Application.login()">Login</a></li>
+          }
 
           <!-- Login Dropdown; only show on Home Page -->
+          <!-- NOTE: This is being moved to a separate page. -->
           @* @if(page == "home" ) {*@
           @*<li class="dropdown">*@
             @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">*@

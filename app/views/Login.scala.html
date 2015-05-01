@@ -1,0 +1,10 @@
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, loginForm: Form[views.formdata.LoginFormData],
+    message: String)
+
+@import bootstrap3._
+
+@Main(page, isLoggedIn, userInfo) {
+   <div class="container">
+     @loginform(routes.Application.postLogin(), loginForm("email"), loginForm("password"), message)
+   </div>
+}
