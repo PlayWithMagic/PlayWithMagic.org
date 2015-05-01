@@ -32,8 +32,7 @@ public class RoutineDBInit1 {
     routine.setImageUrl("images/routines/1.jpg");
     routine.setReviewUrl("http://www.themagiccafe.com/forums/viewtopic.php?topic=577109&forum=2");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("A regular deck of cards");
     material.setDescription("I use red 808s, but any deck will do.");
@@ -67,8 +66,7 @@ public class RoutineDBInit1 {
     routine.setImageUrl("images/routines/2.jpg");
     routine.setReviewUrl("http://www.themagiccafe.com/forums/viewtopic.php?topic=245183&forum=109");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("A spool of thread");
     material.setDescription("Cotton quilting thread or silk thread work great.  Make sure it contrasts with what "
@@ -110,8 +108,7 @@ public class RoutineDBInit1 {
     // TO-DO:  I need to record my own performance.
     routine.setImageUrl("images/routines/3.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("A Mental Photography Deck");
     material.isInspectable(false);
@@ -146,8 +143,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/200.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("A matchstick");
     material.isInspectable(true);
@@ -194,8 +190,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/202.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Large shears or sissors");
     material.isInspectable(true);
@@ -241,8 +236,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/203.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Ribbon");
     material.isInspectable(true);
@@ -290,8 +284,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/204.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("A double backed card");
     material.isInspectable(false);
@@ -339,8 +332,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/205.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("The panic gaff");
     material.isInspectable(false);
@@ -374,8 +366,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/401.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
     material.isInspectable(true);
@@ -414,8 +405,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/402.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
     material.isInspectable(true);
@@ -452,8 +442,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/403.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Rubber Band");
     material.isInspectable(true);
@@ -490,8 +479,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/404.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
     material.isInspectable(true);
@@ -528,8 +516,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/405.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Zig-Zag Pencil Box");
     material.isInspectable(false);
@@ -580,8 +567,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/406.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Coin");
     material.isInspectable(false);
@@ -631,8 +617,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/411.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Coin");
     material.isInspectable(false);
@@ -671,8 +656,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/407.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
     material.isInspectable(true);
@@ -713,8 +697,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/408.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Coin");
     material.isInspectable(true);
@@ -752,8 +735,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/409.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Overstuft Kit");
     material.isInspectable(false);
@@ -789,8 +771,7 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/410.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cup and Ball Kit");
     material.isInspectable(false);

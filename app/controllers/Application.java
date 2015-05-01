@@ -82,8 +82,7 @@ public class Application extends Controller {
    ******************************************************************************************************************/
 
   /**
-   * Renders the EditUser view.  Add a Magician if the ID is 0; or edit an existing
-   * Magician (based on their ID).
+   * Show the EditUser page.  Add a Magician if the ID is 0; or edit an existing Magician (based on their ID).
    * <p>
    * Note:  EditMagician and EditUser are two different views on the same entity.
    *
@@ -109,7 +108,7 @@ public class Application extends Controller {
   /**
    * Handles the request to post form data from the EditUser page.
    *
-   * @return On success, the the EditMagician page.  On failure, redisplay the EditUser page.
+   * @return On success, the EditMagician page.  On failure, redisplay the EditUser page.
    */
   public static Result postUser() {
     Form<EditUserFormData> formData = Form.form(EditUserFormData.class).bindFromRequest();
@@ -136,7 +135,7 @@ public class Application extends Controller {
 
     EditUserFormData editUserFormData = formData.get();
 
-    Logger.debug("postUser Magician Form Data");
+    Logger.debug("postUser Form Backing Class Data");
     Logger.debug("  id = [" + editUserFormData.id + "]");
     Logger.debug("  firstName = [" + editUserFormData.firstName + "]");
     Logger.debug("  eMail = [" + editUserFormData.email + "]");
@@ -144,7 +143,7 @@ public class Application extends Controller {
 
     Magician magician = Magician.createMagicianFromForm(editUserFormData);
 
-    Logger.debug("postUser Magician Persisted Data");
+    Logger.debug("postUser Persisted Data");
     Logger.debug("  id = [" + magician.getId() + "]");
     Logger.debug("  firstName = [" + magician.getFirstName() + "]");
     Logger.debug("  eMail = [" + magician.getEmail() + "]");
@@ -164,7 +163,7 @@ public class Application extends Controller {
    ******************************************************************************************************************/
 
   /**
-   * Renders the EditMagician view.  Can only edit existing Magicians (based on the ID).
+   * Show the EditMagician page.  Can only edit existing Magicians (based on the ID).
    * <p>
    * Note:  EditMagician and EditUser are two different views on the same entity.
    *
@@ -271,6 +270,7 @@ public class Application extends Controller {
    */
   public static Result editRoutine(long routineId) {
     RoutineFormData routineFormData;
+
     if (routineId == 0) {
       routineFormData = new RoutineFormData();
     }
@@ -285,6 +285,46 @@ public class Application extends Controller {
 
 
   /**
+   * Process the POST method from the EditRoutine page.  If the form has errors, then redisplay EditRoutine.  If not,
+   * then display ListRoutines.
+   *
+   * @return On success, the ListRoutines page.  On failure, redisplay the EditRoutine page.
+   */
+  public static Result postRoutine() {
+    Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
+
+    Logger.debug("postRoutine Raw Routine Form Data");
+    Logger.debug("  id = [" + formWithRoutineData.field("id").value() + "]");
+    Logger.debug("  name = [" + formWithRoutineData.field("name").value() + "]");
+    Logger.debug("  duration = [" + formWithRoutineData.field("duration").value() + "]");
+
+    long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
+
+    if (formWithRoutineData.hasErrors()) {
+      Logger.error("postRoutine HTTP Form Error.");
+
+      return badRequest(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+    }
+
+    RoutineFormData routineFormData = formWithRoutineData.get();
+
+    Logger.debug("postRoutine Form Backing Class Data");
+    Logger.debug("  id = [" + routineFormData.id + "]");
+    Logger.debug("  name = [" + routineFormData.name + "]");
+    Logger.debug("  duration = [" + routineFormData.duration + "]");
+
+    Routine routine = RoutineDB.saveRoutineFromForm(routineFormData);
+
+    Logger.debug("postRoutine Persisted Data");
+    Logger.debug("  id = [" + routine.getId() + "]");
+    Logger.debug("  name = [" + routine.getName() + "]");
+    Logger.debug("  duration = [" + routine.getDuration() + "]");
+
+    return ok(ListRoutines.render(RoutineDB.getRoutines()));
+  }
+
+
+  /**
    * Delete a routine from the database and display the ListRoutines page.
    *
    * @param routineId The ID of the routine to delete.
@@ -292,30 +332,6 @@ public class Application extends Controller {
    */
   public static Result deleteRoutine(long routineId) {
     RoutineDB.deleteRoutine(routineId);
-
-    return ok(ListRoutines.render(RoutineDB.getRoutines()));
-  }
-
-
-  /**
-   * Process the POST method from the EditRoutine page.  If the form has errors, then redisplay EditRoutine.  If not,
-   * then display ListRoutines.
-   *
-   * @return The editRoutine page, either with errors or with form data.
-   */
-  public static Result postRoutine() {
-    Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
-
-    long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
-
-    if (formWithRoutineData.hasErrors()) {
-      Logger.error("HTTP Routine Form Error.");
-
-      return badRequest(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
-    }
-
-    RoutineFormData routineFormData = formWithRoutineData.get();
-    RoutineDB.addRoutines(routineFormData);
 
     return ok(ListRoutines.render(RoutineDB.getRoutines()));
   }
@@ -461,7 +477,8 @@ public class Application extends Controller {
     }
 
     RoutineFormData data = routineFormData.get();
-    routineId = RoutineDB.addRoutines(data);
+    Routine routine = RoutineDB.saveRoutineFromForm(data);
+    routineId = routine.getId();
 
     // End of processing Routine page.  Start processing material.
 
@@ -491,7 +508,8 @@ public class Application extends Controller {
     }
 
     RoutineFormData data = routineFormData.get();
-    routineId = RoutineDB.addRoutines(data);
+    Routine routine = RoutineDB.saveRoutineFromForm(data);
+    routineId = routine.getId();
 
     // End of processing Routine page.  Start processing material.
 
@@ -522,7 +540,8 @@ public class Application extends Controller {
     }
 
     RoutineFormData routineFormData = formWithRoutineData.get();
-    routineId = RoutineDB.addRoutines(routineFormData);
+    Routine routine = RoutineDB.saveRoutineFromForm(routineFormData);
+    routineId = routine.getId();
 
     // End of processing Routine page.  Start of processing material.
 

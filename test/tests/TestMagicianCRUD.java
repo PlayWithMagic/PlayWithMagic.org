@@ -187,17 +187,17 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     editUserPage.clickSubmit();
 
     // Land in the EditMagician page, populate all of the fields and click Add
-    EditMagicianPage editMagician = new EditMagicianPage(editUserPage.getDriver());
-    editMagician.populateMagician(magician1);
-    editMagician.clickSubmit();
+    EditMagicianPage editMagicianPage = new EditMagicianPage(editUserPage.getDriver());
+    editMagicianPage.populateMagician(magician1);
+    editMagicianPage.clickSubmit();
 
     // This should be successful and the browser should go to ListMagicians.  Verify the magician.
-    ListMagiciansPage listMagiciansPage = new ListMagiciansPage(editMagician.getDriver());
+    ListMagiciansPage listMagiciansPage = new ListMagiciansPage(editMagicianPage.getDriver());
     listMagiciansPage.hasMagician(magician1);
 
     // View the magician and check all of the fields
     ViewMagicianPage viewMagicianPage = listMagiciansPage.viewFirstMagician();
-    viewMagicianPage.checkMagician(magician1);
+    viewMagicianPage.hasMagician(magician1);
 
     // Update the user
     listMagiciansPage = viewMagicianPage.clickReturnToMagicianListButton();
@@ -207,17 +207,18 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     editUserPage.clickSubmit();
 
     // Update the magician
-    editMagician = new EditMagicianPage(editUserPage.getDriver());
-    editMagician.populateMagician(magician2);
-    editMagician.clickSubmit();
+    editMagicianPage = new EditMagicianPage(editUserPage.getDriver());
+    editMagicianPage.populateMagician(magician2);
+    editMagicianPage.clickSubmit();
 
     // Verify the new information is in the list and the old information is not.
-    listMagiciansPage = new ListMagiciansPage(editMagician.getDriver());
-    listMagiciansPage.hasMagician(magician2);
+    listMagiciansPage = new ListMagiciansPage(editMagicianPage.getDriver());
     listMagiciansPage.doesNotHaveMagician(magician1);
+    listMagiciansPage.hasMagician(magician2);
 
+    // Verify the new information is in ViewMagician
     viewMagicianPage = listMagiciansPage.viewFirstMagician();
-    viewMagicianPage.checkMagician(magician2);
+    viewMagicianPage.hasMagician(magician2);
     listMagiciansPage = viewMagicianPage.clickReturnToMagicianListButton();
 
     // Verify the new information is in the User
@@ -225,7 +226,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     editUserPage.checkMagician(magician2);
     listMagiciansPage = editUserPage.clickBrowseMagiciansButton();
 
-    // Go back to list magician and delete the magician
+    // Delete the magician
     listMagiciansPage.hasMagician(magician2);
     listMagiciansPage.deleteFirstMagician();
     listMagiciansPage.doesNotHaveMagician(magician2);

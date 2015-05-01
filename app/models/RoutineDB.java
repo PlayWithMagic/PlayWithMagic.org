@@ -32,7 +32,7 @@ public class RoutineDB {
    * @param routineForm Input data from the form.
    * @return The ID of the Routine that was just added to the database.
    */
-  public static long addRoutines(RoutineFormData routineForm) {
+  public static Routine saveRoutineFromForm(RoutineFormData routineForm) {
     Routine routine;
     long idVal;
 
@@ -53,6 +53,7 @@ public class RoutineDB {
 
       routine.setName(routineForm.name);
       routine.setDescription(routineForm.description);
+      routine.setDuration(routineForm.duration);
     }
 
     routine.setMethod(routineForm.method);
@@ -70,7 +71,7 @@ public class RoutineDB {
     Logger.debug(((routineForm.id == 0) ? "Added" : "Updated") + " routine.  id = [" + idVal + "]"
         + "  name = [" + routineForm.name + "]");
 
-    return idVal;
+    return routine;
   }
 
 
@@ -187,8 +188,7 @@ public class RoutineDB {
 
     routine.setImageUrl("images/routines/xxx.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("");
     material.isInspectable(true);

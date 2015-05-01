@@ -1,8 +1,6 @@
 package tests;
 
 import models.Routine;
-import models.RoutineDB;
-import models.SetDB;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import play.test.TestBrowser;
@@ -131,49 +129,58 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     /**
      * Test Routine CRUD.
      */
-//  @Test
+  @Test
   public void testRoutineCrudWorkflow() {
-    SetDB.resetSetDB();
-    RoutineDB.resetRoutineDB();
-    // MagicianDB.resetMagicianDB();
-
     // browser.maximizeWindow();
 
-    ListRoutinesPage listRoutinesPage = null;
-    EditRoutinePage editRoutinePage = null;
+    // Start at the home page...
+    IndexPage indexPage = new IndexPage(browser);
 
     // Look at the List Routines page first...
-    listRoutinesPage = new ListRoutinesPage(browser);
+    ListRoutinesPage listRoutinesPage = indexPage.clickBrowseRoutinesButton();
+    listRoutinesPage.doesNotHaveRoutine(routine1);
 
     // Add a new Routine...
-    editRoutinePage = new EditRoutinePage(browser);
-    assertThat(browser.pageSource()).contains("Create Routine");
-
+    EditRoutinePage editRoutinePage = listRoutinesPage.clickCreateRoutineButton();
+    assertThat(editRoutinePage.pageSource()).contains("Create Routine");
     editRoutinePage.populateRoutine(routine1);
+    editRoutinePage.clickSubmit();
 
-    // Verify the routine data is in the database...
-    browser.findFirst(".editRoutine").click();
+    // This should be successful and the browser should go to ListRoutines.  Verify the routine.
+    listRoutinesPage = new ListRoutinesPage(editRoutinePage.getDriver());
+    listRoutinesPage.hasRoutine(routine1);
+
+    // View the routine and check all of the fields
+    ViewRoutinePage viewRoutinePage = listRoutinesPage.viewFirstRoutine();
+    viewRoutinePage.hasRoutine(routine1);
+
+    // Update the routine
+    editRoutinePage = viewRoutinePage.clickEditRoutineButton();
+    assertThat(editRoutinePage.pageSource()).contains("Update Routine");
     editRoutinePage.checkRoutine(routine1);
-    browser.findFirst("#submit").click();
-    browser.findFirst(".viewRoutine").click();
-    ViewRoutinePage.testContents(browser, routine1);
-
-
-    // Edit/modify all of the data...                                                   // The button click
-    browser.goTo(browser.findFirst(".editRoutine").getElement().getAttribute("href"));  // didn't work, so I
-    editRoutinePage.isAt();                                                             // did this instead.
-    assertThat(browser.pageSource()).contains("Update Routine");
     editRoutinePage.populateRoutine(routine2);
-    browser.findFirst(".editRoutine").click();
-    editRoutinePage.checkRoutine(routine2);
+    editRoutinePage.clickSubmit();
 
-    // Delete a Routine.
-    browser.findFirst("#submit").click();
-    assertThat(browser.pageSource()).contains(routine2.getName());
-    assertThat(browser.pageSource()).contains(routine2.getDuration().toString());
-    browser.findFirst(".deleteRoutine").click();
-    assertThat(browser.pageSource()).doesNotContain(routine2.getName());
-    assertThat(browser.pageSource()).doesNotContain(routine2.getDuration().toString());
+    // Verify the new information is in the list and the old information is not.
+    listRoutinesPage = new ListRoutinesPage(editRoutinePage.getDriver());
+    listRoutinesPage.doesNotHaveRoutine(routine1);
+    listRoutinesPage.hasRoutine(routine2);
+
+    // Verify the new information is in ViewRoutine
+    viewRoutinePage = listRoutinesPage.viewFirstRoutine();
+    viewRoutinePage.hasRoutine(routine2);
+    listRoutinesPage = viewRoutinePage.clickReturnToRoutineListButton();
+
+    // Verify the new information is in EditRoutine
+    editRoutinePage = listRoutinesPage.editFirstRoutine();
+    editRoutinePage.checkRoutine(routine2);
+    listRoutinesPage = editRoutinePage.clickBrowseRoutinesButton();
+
+    // Delete the routine
+    listRoutinesPage.hasRoutine(routine2);
+    listRoutinesPage.deleteFirstRoutine();
+    listRoutinesPage.doesNotHaveRoutine(routine2);
+    listRoutinesPage.doesNotHaveRoutine(routine1);
 
   }
 

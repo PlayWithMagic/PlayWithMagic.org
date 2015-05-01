@@ -55,7 +55,7 @@ public class ViewMagicianPage extends NavigationWrapper {
    *
    * @param magician A container holding all of the fields to check for in the page.
    */
-  public void checkMagician(Magician magician) {
+  public void hasMagician(Magician magician) {
     // Required fields
     assertThat(this.pageSource()).contains(magician.getFirstName());
     assertThat(this.pageSource()).contains(magician.getLastName());

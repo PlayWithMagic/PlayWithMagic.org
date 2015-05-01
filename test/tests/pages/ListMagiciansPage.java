@@ -102,6 +102,17 @@ public class ListMagiciansPage extends NavigationWrapper {
 
 
   /**
+   * Edit the first magician in the page by going to the EditMagician page.
+   *
+   * @return The EditMagicianPage.
+   */
+  public EditMagicianPage editFirstMagician() {
+    this.findFirst(".editMagician").click();
+    return new EditMagicianPage(this.getDriver());
+  }
+
+
+  /**
    * View the first magician in the page.
    *
    * @return The ViewMagicianPage.

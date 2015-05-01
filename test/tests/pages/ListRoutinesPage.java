@@ -71,6 +71,28 @@ public class ListRoutinesPage extends NavigationWrapper {
 
 
   /**
+   * View the first routine on the page.
+   *
+   * @return The ViewRoutinePage.
+   */
+  public ViewRoutinePage viewFirstRoutine() {
+    this.findFirst(".viewRoutine").click();
+    return new ViewRoutinePage(this.getDriver());
+  }
+
+
+  /**
+   * Edit the first routine in the page by going to the EditRoutine page.
+   *
+   * @return The EditRoutinePage.
+   */
+  public EditRoutinePage editFirstRoutine() {
+    this.findFirst(".editRoutine").click();
+    return new EditRoutinePage(this.getDriver());
+  }
+
+
+  /**
    * Delete the first routine on the page.  Return back to ListRoutines page.
    *
    * @return The ListMagiciansPage.
@@ -79,8 +101,5 @@ public class ListRoutinesPage extends NavigationWrapper {
     this.findFirst(".deleteRoutine").click();
     return new ListRoutinesPage(this.getDriver());
   }
-
-
-
 
 }
