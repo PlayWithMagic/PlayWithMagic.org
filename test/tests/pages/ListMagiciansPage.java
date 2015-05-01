@@ -56,9 +56,11 @@ public class ListMagiciansPage extends NavigationWrapper {
    */
   public void hasMagician(Magician magician) {
     assertThat(pageSource()).contains(magician.getFirstName() + " " + magician.getLastName());
+
     if (magician.getStageName() != null) {
       assertThat(pageSource()).contains(magician.getStageName());
     }
+
     assertThat(pageSource()).contains(magician.getMagicianType().getName());
   }
 
@@ -70,10 +72,10 @@ public class ListMagiciansPage extends NavigationWrapper {
    */
   public void doesNotHaveMagician(Magician magician) {
     assertThat(pageSource()).doesNotContain(magician.getFirstName() + " " + magician.getLastName());
+
     if (magician.getStageName() != null) {
       assertThat(pageSource()).doesNotContain(magician.getStageName());
     }
-    assertThat(pageSource()).doesNotContain(magician.getMagicianType().getName());
   }
 
 

@@ -3,8 +3,12 @@ package tests.pages;
 import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 /**
  * Provides scaffolding to remotely control common navigation elements for testing.
+ *
+ * This class also includes two utility methods that assist in checking/populating fields.
  */
 public abstract class NavigationWrapper extends FluentPage {
 
@@ -94,6 +98,45 @@ public abstract class NavigationWrapper extends FluentPage {
   public HelpPage clickHelpButton() {
     this.findFirst("#linkToHelpPage").click();
     return new HelpPage(this.getDriver());
+  }
+
+
+  /**
+   * Optionally check for the presence of a value in the page source.
+   *
+   * @param field The value to check for.  If the value is null, then don't check.
+   */
+  protected void checkOptionalField(Object field) {
+    if (field != null) {
+      assertThat(this.pageSource()).contains(field.toString());
+    }
+  }
+
+
+  /**
+   * Fill a value in field.
+   *
+   * @param fieldName The ID of the HTML form field.
+   * @param fieldValue The value to put into the field.
+   */
+  protected void fillRequiredField(String fieldName, Object fieldValue) {
+    assertThat(fieldName).isNotEmpty();
+    assertThat(fieldValue).isNotNull();
+
+    this.fill(fieldName).with(fieldValue.toString());
+  }
+
+
+  /**
+   * Optionally fill a value in a field.
+   *
+   * @param fieldName The ID of the HTML form field.
+   * @param fieldValue The value to put into the field.
+   */
+  protected void fillOptionalField(String fieldName, Object fieldValue) {
+    if (fieldValue != null) {
+      fillRequiredField(fieldName, fieldValue);
+    }
   }
 
 }

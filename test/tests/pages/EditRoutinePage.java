@@ -66,10 +66,13 @@ public class EditRoutinePage extends NavigationWrapper {
    *
    * @param routine A container holding all of the fields to populate the Routine with.
    */
-  public void submitForm(Routine routine) {
+  public void populateRoutine(Routine routine) {
+    // Required fields
     fill("#name").with(routine.getName());
     fill("#description").with(routine.getDescription());
     fill("#duration").with(routine.getDuration().toString());
+
+    // Optional fields
     if (routine.getMethod() != null) {
       fill("#method").with(routine.getMethod());
     }
@@ -101,24 +104,26 @@ public class EditRoutinePage extends NavigationWrapper {
 
 
   /**
-   * Test the contents of the page against a Routine.
+   * See if the browser has all of the values in the Routine object.
    *
-   * @param browser The test browser containing the rendered page.
    * @param routine A container holding all of the fields to check for in the page.
    */
-  public void testContents(TestBrowser browser, Routine routine) {
-    assertThat(browser.pageSource()).contains(routine.getName());
-    assertThat(browser.pageSource()).contains(routine.getDescription());
-    assertThat(browser.pageSource()).contains(routine.getDuration().toString());
-    assertThat(browser.pageSource()).contains(routine.getMethod());
-    assertThat(browser.pageSource()).contains(routine.getHandling());
-    assertThat(browser.pageSource()).contains(routine.getResetDuration().toString());
-    assertThat(browser.pageSource()).contains(routine.getResetDescription());
-    assertThat(browser.pageSource()).contains(routine.getYouTubeUrl());
-    assertThat(browser.pageSource()).contains(routine.getImageUrl());
-    assertThat(browser.pageSource()).contains(routine.getInspiration());
-    assertThat(browser.pageSource()).contains(routine.getPlacement());
-    assertThat(browser.pageSource()).contains(routine.getChoices());
+  public void checkRoutine(Routine routine) {
+    // Required fields
+    assertThat(this.pageSource()).contains(routine.getName());
+    assertThat(this.pageSource()).contains(routine.getDescription());
+    assertThat(this.pageSource()).contains(routine.getDuration().toString());
+
+    // Optional fields
+    checkOptionalField(routine.getMethod());
+    checkOptionalField(routine.getHandling());
+    checkOptionalField(routine.getResetDuration());
+    checkOptionalField(routine.getResetDescription());
+    checkOptionalField(routine.getYouTubeUrl());
+    checkOptionalField(routine.getImageUrl());
+    checkOptionalField(routine.getInspiration());
+    checkOptionalField(routine.getPlacement());
+    checkOptionalField(routine.getChoices());
   }
 
 
@@ -127,8 +132,8 @@ public class EditRoutinePage extends NavigationWrapper {
    */
   public void doesNotHaveRequiredFieldErrors() {
     assertThat(this.pageSource()).doesNotContain("Your routine's gotta have a name.");
-    assertThat(this.pageSource()).doesNotContain("A name's not enough. Please write a brief description of your routine.");
-    assertThat(this.pageSource()).doesNotContain("The average time to perform a basic rendition of this routine in minutes.");
+    assertThat(this.pageSource()).doesNotContain("Please write a brief description of your routine.");
+    assertThat(this.pageSource()).doesNotContain("If it's under a minute, then just enter 1.");
   }
 
 
@@ -137,8 +142,8 @@ public class EditRoutinePage extends NavigationWrapper {
    */
   public void hasRequiredFieldErrors() {
     assertThat(this.pageSource()).contains("Your routine's gotta have a name.");
-    assertThat(this.pageSource()).contains("A name's not enough. Please write a brief description of your routine.");
-    assertThat(this.pageSource()).contains("The average time to perform a basic rendition of this routine in minutes.");
+    assertThat(this.pageSource()).contains("Please write a brief description of your routine.");
+    assertThat(this.pageSource()).contains("If it's under a minute, then just enter 1.");
   }
 
 

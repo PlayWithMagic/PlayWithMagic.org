@@ -115,12 +115,16 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     editRoutinePage.hasRequiredFieldErrors();
 
     // Populate only the required information and click Add
-    editRoutinePage.submitForm(routine3);
+    editRoutinePage.populateRoutine(routine3);
     editRoutinePage.clickSubmit();
 
+    // This should be successful and the browser should go to ListRoutines.  Verify the routine.
+    ListRoutinesPage listRoutinesPage = new ListRoutinesPage(editRoutinePage.getDriver());
+    listRoutinesPage.hasRoutine(routine3);
 
-
-
+    // Delete the routine
+    listRoutinesPage.deleteFirstRoutine();
+    listRoutinesPage.doesNotHaveRoutine(routine3);
   }
 
 
@@ -145,11 +149,11 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     editRoutinePage = new EditRoutinePage(browser);
     assertThat(browser.pageSource()).contains("Create Routine");
 
-    editRoutinePage.submitForm(routine1);
+    editRoutinePage.populateRoutine(routine1);
 
     // Verify the routine data is in the database...
     browser.findFirst(".editRoutine").click();
-    editRoutinePage.testContents(browser, routine1);
+    editRoutinePage.checkRoutine(routine1);
     browser.findFirst("#submit").click();
     browser.findFirst(".viewRoutine").click();
     ViewRoutinePage.testContents(browser, routine1);
@@ -159,9 +163,9 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     browser.goTo(browser.findFirst(".editRoutine").getElement().getAttribute("href"));  // didn't work, so I
     editRoutinePage.isAt();                                                             // did this instead.
     assertThat(browser.pageSource()).contains("Update Routine");
-    editRoutinePage.submitForm(routine2);
+    editRoutinePage.populateRoutine(routine2);
     browser.findFirst(".editRoutine").click();
-    editRoutinePage.testContents(browser, routine2);
+    editRoutinePage.checkRoutine(routine2);
 
     // Delete a Routine.
     browser.findFirst("#submit").click();

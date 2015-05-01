@@ -149,17 +149,12 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     editUser.hasRequiredFieldErrors();
 
     // Populate only the required information and click Add
-    editUser.fill("#firstName").with(magician3.getFirstName());
-    editUser.fill("#lastName").with(magician3.getLastName());
-    editUser.fill("#email").with(magician3.getEmail());
-    editUser.selectMagicianType(magician3.getMagicianType().getName());
-    editUser.fill("#password").with(magician3.getPassword());
+    editUser.populateMagician(magician3);
     editUser.clickSubmit();
 
     // This should be successful and the browser should go to EditMagicians.  Verify the magician.
     EditMagicianPage editMagicianPage = new EditMagicianPage(editUser.getDriver());
-    // editMagicianPage.hasMagician(magician3);
-    // TODO: Add above to EditMagician
+    editMagicianPage.checkMagician(magician3);
     editMagicianPage.clickSubmit();
 
     // This should be successful and the browser should go to ListMagicians.  Verify the magician.
