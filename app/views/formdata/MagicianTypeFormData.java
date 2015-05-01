@@ -5,8 +5,6 @@ import models.MagicianType;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-// TODO: Refactor this into a generic class
-
 /**
  * Utility class for handling the different types of Magicians (Novice, Expert, Professional, etc.).
  */
@@ -25,8 +23,6 @@ public class MagicianTypeFormData {
    */
   public static Map<String, Boolean> getMagicianTypes() {
     Map<String, Boolean> magicianTypeMap = new LinkedHashMap<>();
-
-    // TODO:  Magician Type is not being sorted in the Form...  This is because it's stored as a HashMap.
 
     for (MagicianType magicianType : MagicianType.find().orderBy("displayOrder").findList()) {
       magicianTypeMap.put(magicianType.getName(), false);

@@ -20,7 +20,7 @@ public class MagicianType extends play.db.ebean.Model {
   @OneToMany(mappedBy = "magicianType", cascade = CascadeType.PERSIST)
   private List<Magician> magicians;
 
-  // TODO: Check this reverse relationship.
+  // TODO: Check the reverse relationship in a test.
 
   /**
    * Create a new MagicianType with all of the required fields.

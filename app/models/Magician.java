@@ -58,58 +58,6 @@ public class Magician extends play.db.ebean.Model {
 
 
   /**
-   * Create a new Magician object.
-   *
-   * @param id              The unique ID.
-   * @param firstName       The first name of the user.
-   * @param lastName        The last name of the magician.
-   * @param stageName       The stage name of the magician.
-   * @param location        Global location.
-   * @param userPhoto       Photograph file of user.
-   * @param biography       Biography of user.
-   * @param interests       User's interests in magic.
-   * @param influences      User's influences.
-   * @param magicianType    The type of magician the user identifies with.
-   * @param yearStarted     The year started - used to compute the number of years of experience.
-   * @param organizations   Any affiliations or organizations the user is a member of.
-   * @param website         User's personal website.
-   * @param email           User's email address.
-   * @param facebook        The user's facebook account.
-   * @param twitter         User's Twitter account.
-   * @param linkedIn        User's LinkedIn account.
-   * @param googlePlus      User's Google Plus account.
-   * @param flickr          User's flickr account.
-   * @param instagram       User's instagram account.
-   */
-  public Magician(long id, String firstName, String lastName, String stageName, String location, File userPhoto,
-                  String biography, String interests, String influences,
-                  MagicianType magicianType, Integer yearStarted,
-                  String organizations, String website, String email, String facebook, String twitter, String linkedIn,
-                  String googlePlus, String flickr, String instagram) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.stageName = stageName;
-    this.location = location;
-    this.userPhoto = userPhoto;
-    this.biography = biography;
-    this.interests = interests;
-    this.influences = influences;
-    this.magicianType = magicianType;
-    this.yearStarted = yearStarted;
-    this.organizations = organizations;
-    this.website = website;
-    this.email = email;
-    this.facebook = facebook;
-    this.twitter = twitter;
-    this.linkedIn = linkedIn;
-    this.googlePlus = googlePlus;
-    this.flickr = flickr;
-    this.instagram = instagram;
-  }
-
-
-  /**
    * Create a magician with only the required fields.
    *
    * @param firstName       The magician's first name.
@@ -124,59 +72,6 @@ public class Magician extends play.db.ebean.Model {
     this.email = email;
     this.magicianType = magicianType;
     this.password = password;
-  }
-
-  /**
-   * Create a new Magician object for testing purposes only.
-   *
-   * TODO: This constructor is used exclusivly by init() to create new magicians.  Find another way.
-   *
-   * @param firstName       The first name of the user.
-   * @param lastName        The last name of the magician.
-   * @param password        The password of the user.
-   * @param stageName       The stage name of the magician.
-   * @param location        Global location.
-   * @param userPhoto       Photograph file of user.
-   * @param biography       Biography of user.
-   * @param interests       User's interests in magic.
-   * @param influences      User's invluences.
-   * @param magicianType    The type of magician the user identifies with.
-   * @param yearStarted     The year started - used to compute the number of years of experience.
-   * @param organizations   Any affiliations or organizations the user is a member of.
-   * @param website         User's personal website.
-   * @param email           User's email address.
-   * @param facebook        The user's facebook account.
-   * @param twitter         User's Twitter account.
-   * @param linkedIn        User's LinkedIn account.
-   * @param googlePlus      User's Google Plus account.
-   * @param flickr          User's flickr account.
-   * @param instagram       User's instagram account.
-   */
-  public Magician(String firstName, String lastName, String password, String stageName, String location, File userPhoto,
-                  String biography, String interests, String influences,
-                  MagicianType magicianType, int yearStarted,
-                  String organizations, String website, String email, String facebook, String twitter, String linkedIn,
-                  String googlePlus, String flickr, String instagram) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.password = password;
-    this.stageName = stageName;
-    this.location = location;
-    this.userPhoto = userPhoto;
-    this.biography = biography;
-    this.interests = interests;
-    this.influences = influences;
-    this.magicianType = magicianType;
-    this.yearStarted = yearStarted;
-    this.organizations = organizations;
-    this.website = website;
-    this.email = email;
-    this.facebook = facebook;
-    this.twitter = twitter;
-    this.linkedIn = linkedIn;
-    this.googlePlus = googlePlus;
-    this.flickr = flickr;
-    this.instagram = instagram;
   }
 
 
@@ -679,12 +574,12 @@ public class Magician extends play.db.ebean.Model {
   }
 
 
-
   public Magician init(Magician magician) {
+    // TODO: Implement when we have a SELECT statement
     return null;
   }
 
-// TODO:  Add eMails and use init(magician) function.
+
   /**
    * Initialize the Magician database.
    */
@@ -698,107 +593,36 @@ public class Magician extends play.db.ebean.Model {
 
     Magician magician = null;
 
-    magician = new Magician(
-        "Mark",
-        "Nelson",
-        "P@ssw0rd",
-        "Mark Nelson",
-        "Honolulu, HI",
-        null,
-        "I got started in magic in 2004.  A retired magician, JC Dunn, showed me a 2-card monte and I was hooked. "
-            + "Since then, I've learned the craft, performed hundreds of shows in Honolulu and most recently I nailed "
-            + "a parlor act in Beijing.",
-        "I'm most comfortable with close-up magic, but I'd like to develop a stage show.  I strive to be fluent in "
-            + "all mediums of the art (cards, coins, rope, etc.).",
-        "Tony Slydini, David Regal, Lee Asher, Aaron Fisher, my brother Steve Johnson and many, many others.",
-        magicianTypeSemiProfessional,
-        2004,
-        null,
-        "http://mark.nelson.engineer/wordpress/index.php/magic-home-page/",
-        "mr_nelson@icloud.com",
-        "mark.nelson.engineer",
-        "@mr_marknelson",
-        "http://www.linkedin.com/in/marknelsonengineer/en",
-        "mr_nelson@icloud.com",
-        null,
-        "mr_mark_nelson"
-    );
+    magician = new Magician("Mark", "Nelson", "mr_nelson@icloud.com", magicianTypeSemiProfessional, "P@ssw0rd");
+    magician.setStageName("Mark Nelson");
+    magician.setLocation("Honolulu, HI");
+    // No photo
+    magician.setBiography("I got started in magic in 2004.  A retired magician, JC Dunn, showed me a 2-card monte and "
+        + "I was hooked.  Since then, I've learned the craft, performed hundreds of shows in Honolulu and most "
+        + "recently I nailed a parlor act in Beijing.");
+    magician.setInterests("I'm most comfortable with close-up magic, but I'd like to develop a stage show.  I strive "
+        + "to be fluent in all mediums of the art (cards, coins, rope, etc.).");
+    magician.setInfluences("Tony Slydini, David Regal, Lee Asher, Aaron Fisher, my brother Steve Johnson and many, "
+        + "many others.");
+    magician.setYearStarted(2004);
+    //magician.setOrganizations();
+    magician.setWebsite("http://mark.nelson.engineer/wordpress/index.php/magic-home-page/");
+    magician.setFacebook("mark.nelson.engineer");
+    magician.setTwitter("@mr_marknelson");
+    magician.setLinkedIn("http://www.linkedin.com/in/marknelsonengineer/en");
+    magician.setGooglePlus("mr_nelson@icloud.com");
+    magician.setInstagram("mr_mark_nelson");
 
     Magician.createMagicianFromForm(new EditMagicianFormData(magician));
 
-    magician = new Magician(
-        "Lee",
-        "Asher",
-        "P@ssw0rd",
-        "Lee Asher",
-        null,
-        null,
-        null,
-        null,
-        null,
-        magicianTypeProfessional,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-    );
 
+    magician = new Magician("Lee", "Asher", "lee@leeasher.com", magicianTypeProfessional, "P@ssw0rd");
     Magician.createMagicianFromForm(new EditMagicianFormData(magician));
 
-    magician = new Magician(
-        "Steve",
-        "Johnson",
-        "P@ssw0rd",
-        "Steve Johnson",
-        null,
-        null,
-        null,
-        null,
-        null,
-        magicianTypeProfessional,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-    );
-
+    magician = new Magician("Steve", "Johnson", "steve@grandillusions.com", magicianTypeProfessional, "P@ssw0rd");
     Magician.createMagicianFromForm(new EditMagicianFormData(magician));
 
-    magician = new Magician(
-        "Wayne",
-        "Houchin",
-        "P@ssw0rd",
-        "Wayne Houchin",
-        null,
-        null,
-        null,
-        null,
-        null,
-        magicianTypeProfessional,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-    );
-
+    magician = new Magician("Wayne", "Houchin", "wayne@waynehouchin.com", magicianTypeProfessional, "P@ssw0rd");
     Magician.createMagicianFromForm(new EditMagicianFormData(magician));
   }
 
