@@ -573,9 +573,15 @@ public class Magician extends play.db.ebean.Model {
     this.magicianType = magicianType;
   }
 
-
+  /**
+   * Add a magician to the database, but check to see if the magician is already in there first.
+   *
+   * TODO: Implement when we have a SELECT statement.
+   *
+   * @param magician The magician to add.
+   * @return The magician that was just added.
+   */
   public Magician init(Magician magician) {
-    // TODO: Implement when we have a SELECT statement
     return null;
   }
 

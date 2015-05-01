@@ -13,6 +13,7 @@ import tests.pages.ViewMagicianPage;
 
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
+import static org.fest.assertions.Assertions.assertThat;
 
 
 /**
@@ -103,7 +104,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
         "03 Test First Name 03"
         , "03 Test Last Name 03"
         , "Test_eMail_03@playwithmagic.org"
-        , MagicianType.getMagicianType("Collector")
+        , MagicianType.getMagicianType("Historian")
         , "P@ssw0rd"
     );
 
@@ -113,7 +114,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
   /**
    * Test Magician navigation from home page and navigation bars.
    */
-  @Test
+//  @Test
   public void testMagicianNav() {
     // browser.maximizeWindow();
 
@@ -131,7 +132,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
   /**
    * A workflow that tests a basic add and delete Magician with only the required fields.
    */
-  @Test
+//  @Test
   public void testMagicianMinimumAddDelete() {
     initializeTest();
 
@@ -170,7 +171,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
   /**
    * Test Magician CRUD.
    */
-  @Test
+//  @Test
   public void testMagicianCrudWorkflow() {
     initializeTest();
 
@@ -230,6 +231,54 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     listMagiciansPage.hasMagician(magician2);
     listMagiciansPage.deleteFirstMagician();
     listMagiciansPage.doesNotHaveMagician(magician2);
+
+  }
+
+
+  /**
+   * Test to ensure that the Magician and MagicianType entities are bi-directional.
+   */
+  @Test
+  public void testMagicianType() {
+    initializeTest();
+
+    // browser.maximizeWindow();
+
+    // Quickly add our three magicians
+    EditUserPage editUserPage = new EditUserPage(browser);
+    editUserPage.populateMagician(magician1);
+    editUserPage.clickSubmit();
+    EditMagicianPage editMagicianPage = new EditMagicianPage(editUserPage.getDriver());
+    editMagicianPage.populateMagician(magician1);
+
+    editUserPage = new EditUserPage(browser);
+    editUserPage.populateMagician(magician2);
+    editUserPage.clickSubmit();
+    editMagicianPage = new EditMagicianPage(editUserPage.getDriver());
+    editMagicianPage.populateMagician(magician2);
+
+    editUserPage = new EditUserPage(browser);
+    editUserPage.populateMagician(magician3);
+    editUserPage.clickSubmit();
+    editMagicianPage = new EditMagicianPage(editUserPage.getDriver());
+    editMagicianPage.populateMagician(magician3);
+
+    //Magician.createMagicianFromForm(new EditMagicianFormData(magician1));
+    //Magician.createMagicianFromForm(new EditMagicianFormData(magician2));
+    //Magician.createMagicianFromForm(new EditMagicianFormData(magician3));
+
+    // We should have 1 professional and 2 historians.
+    assertThat(MagicianType.getMagicianType("Neophyte").getMagicians().size()).isEqualTo(0);
+    assertThat(MagicianType.getMagicianType("Enthusiast").getMagicians().size()).isEqualTo(0);
+    assertThat(MagicianType.getMagicianType("Hobbyist").getMagicians().size()).isEqualTo(0);
+    assertThat(MagicianType.getMagicianType("Semi-Professional").getMagicians().size()).isEqualTo(0);
+    assertThat(MagicianType.getMagicianType("Professional").getMagicians().size()).isEqualTo(1);
+    assertThat(MagicianType.getMagicianType("Historian").getMagicians().size()).isEqualTo(2);
+    assertThat(MagicianType.getMagicianType("Collector").getMagicians().size()).isEqualTo(0);
+
+    // ...and test the other direction.
+    Magician magicianOne = Magician.find().where().eq("email", magician1.getEmail()).findUnique();
+    assertThat(magicianOne.getMagicianType()).isEqualTo(MagicianType.getMagicianType("Professional"));
 
   }
 
