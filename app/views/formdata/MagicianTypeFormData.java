@@ -2,7 +2,7 @@ package views.formdata;
 
 import models.MagicianType;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 // TODO: Refactor this into a generic class
@@ -24,7 +24,7 @@ public class MagicianTypeFormData {
    * @return The newly generated magicianTypeMap.
    */
   public static Map<String, Boolean> getMagicianTypes() {
-    Map<String, Boolean> magicianTypeMap = new HashMap<String, Boolean>();
+    Map<String, Boolean> magicianTypeMap = new LinkedHashMap<>();
 
     // TODO:  Magician Type is not being sorted in the Form...  This is because it's stored as a HashMap.
 
