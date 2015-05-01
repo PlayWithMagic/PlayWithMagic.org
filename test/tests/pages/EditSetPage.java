@@ -11,6 +11,10 @@ import static org.fluentlenium.core.filter.FilterConstructor.withId;
 
 /**
  * Provides scaffolding to remotely control the EditSet page for testing.
+ *
+ * When you want to *go* to a page, do new EditSetPage(browser);
+ * When you are already *at* a page, do new EditSetPage(browser.getDriver());
+ *
  */
 public class EditSetPage extends NavigationWrapper {
 

@@ -9,6 +9,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides test scaffolding for the ListMagicians page.
+ *
+ * When you want to *go* to a page, do new ListMagiciansPage(browser);
+ * When you are already *at* a page, do new ListMagiciansPage(browser.getDriver());
+ *
  */
 public class ListMagiciansPage extends NavigationWrapper {
 

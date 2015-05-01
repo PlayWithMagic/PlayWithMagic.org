@@ -9,6 +9,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides scaffolding to remotely control the EditRoutine page for testing.
+ *
+ * When you want to *go* to a page, do new EditRoutinePage(browser);
+ * When you are already *at* a page, do new EditRoutinePage(browser.getDriver());
+ *
  */
 public class EditRoutinePage extends NavigationWrapper {
 

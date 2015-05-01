@@ -9,6 +9,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides test scaffolding for the EditMagician page.
+ *
+ * When you want to *go* to a page, do new EditMagicianPage(browser);
+ * When you are already *at* a page, do new EditMagicianPage(browser.getDriver());
+ *
  */
 public class EditMagicianPage extends NavigationWrapper {
 

@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import play.test.TestBrowser;
 import tests.pages.EditRoutinePage;
+import tests.pages.IndexPage;
 import tests.pages.ListRoutinesPage;
 import tests.pages.ViewRoutinePage;
 
@@ -81,6 +82,7 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     // browser.maximizeWindow();
 
     // Start at the home page...
+    IndexPage indexPage = new IndexPage(browser);
     browser.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/");
     assertThat(browser.pageSource()).contains("We're looking for a few good routines");
     assertThat(browser.pageSource()).contains("Join the Community Today!");

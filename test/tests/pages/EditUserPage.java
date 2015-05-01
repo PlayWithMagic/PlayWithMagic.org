@@ -9,6 +9,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides test scaffolding for the EditUser page.
+ *
+ * When you want to *go* to a page, do new EditUserPage(browser);
+ * When you are already *at* a page, do new EditUserPage(browser.getDriver());
+ *
  */
 public class EditUserPage extends NavigationWrapper {
 

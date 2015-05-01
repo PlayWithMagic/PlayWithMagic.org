@@ -8,6 +8,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides scaffolding to remotely control the ListRoutines page for testing.
+ *
+ * When you want to *go* to a page, do new ListRoutinesPage(browser);
+ * When you are already *at* a page, do new ListRoutinesPage(browser.getDriver());
+ *
  */
 public class ListRoutinesPage extends NavigationWrapper {
 

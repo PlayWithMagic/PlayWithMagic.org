@@ -9,6 +9,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides test scaffolding for the ViewMagician page.
+ *
+ * When you want to *go* to a page, do new ViewMagicianPage(browser);
+ * When you are already *at* a page, do new ViewMagicianPage(browser.getDriver());
+ *
  */
 public class ViewMagicianPage extends NavigationWrapper {
 
