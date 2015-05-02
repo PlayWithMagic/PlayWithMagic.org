@@ -130,7 +130,7 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
     /**
      * Test Material CRUD.
      */
-  @Test
+//  @Test
   public void testMaterialCrudWorkflow() {
     // browser.maximizeWindow();
 

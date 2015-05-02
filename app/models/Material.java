@@ -2,16 +2,32 @@ package models;
 
 /**
  * An item used in the performance of a routine.
+ *
+ * The synthetic unique constraint on this model is id.
+ * The logical unique constraint on this model is routine+name.
+
  */
 public class Material /* extends play.db.ebean.Model */ {
-  private String name;             /* A short name for the item. */
-  private String description;      /* A multi-line description of the item. */
-  private boolean isInspectable;   /* Is the item inspectable by the audience? */
-  private boolean isGivenAway;     /* Does the audience take this with them? */
-  private boolean isConsumed;      /* Is the item consumed over the course of this routine? */
-  private Integer price;           /* What is the cost of this item? */
-  private String purchaseUrl;      /* Where would you buy one of these items? */
-  private String imageUrl;         /* A URL of an image of this item. */
+  /* A unique, synthetic key for the Material */
+  private long id;
+  /* The routine that this material belongs to. */
+  private Routine routine;
+  /* A short name for the item. */
+  private String name;
+  /* A multi-line description of the item. */
+  private String description;
+  /* Is the item inspectable by the audience? */
+  private boolean isInspectable;
+  /* Does the audience take this with them? */
+  private boolean isGivenAway;
+  /* Is the item consumed over the course of this routine? */
+  private boolean isConsumed;
+  /* What is the cost of this item? */
+  private Integer price;
+  /* Where would you buy one of these items? */
+  private String purchaseUrl;
+  /* A URL of an image of this item. */
+  private String imageUrl;
 
   /**
    * Create a new, valid FormMaterial object.
@@ -24,6 +40,42 @@ public class Material /* extends play.db.ebean.Model */ {
    */
   public Material(String name) {
     this.name = name;
+  }
+
+  /**
+   * Get the synthetic key for this Material object.
+   *
+   * @return The synthetic key to this Material object.
+   */
+  public long getId() {
+    return id;
+  }
+
+  /**
+   * Set the synthetic key for this Material object.
+   *
+   * @param id The synthetic key for this Material object.
+   */
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  /**
+   * Get the routine associated with this Material item.
+   *
+   * @return The routine associated with this Material item.
+   */
+  public Routine getRoutine() {
+    return routine;
+  }
+
+  /**
+   * Set the routine associated with this Material item.
+   *
+   * @param routine The routine associated with this Material item.
+   */
+  public void setRoutine(Routine routine) {
+    this.routine = routine;
   }
 
   /**
