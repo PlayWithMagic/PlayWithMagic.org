@@ -114,7 +114,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
   /**
    * Test Magician navigation from home page and navigation bars.
    */
-//  @Test
+  @Test
   public void testMagicianNav() {
     // browser.maximizeWindow();
 
@@ -132,7 +132,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
   /**
    * A workflow that tests a basic add and delete Magician with only the required fields.
    */
-//  @Test
+  @Test
   public void testMagicianMinimumAddDelete() {
     initializeTest();
 
@@ -171,7 +171,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
   /**
    * Test Magician CRUD.
    */
-//  @Test
+  @Test
   public void testMagicianCrudWorkflow() {
     initializeTest();
 
