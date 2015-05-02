@@ -1,5 +1,6 @@
 package tests.pages;
 
+import models.Set;
 import org.openqa.selenium.WebDriver;
 import play.test.TestBrowser;
 import tests.GlobalTest;
@@ -49,6 +50,57 @@ public class EditSetPage extends NavigationWrapper {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
     assertThat(pageSource()).contains("<body id=\"editSet\">");
   }
+
+
+  /**
+   * Click the Add or Update button (submit) at the bottom of the page.
+   * <p>
+   * This returns void because we don't know which page it would render...
+   *   On success, it goes to ListSets
+   *   On error, it stays on EditSet
+   */
+  public void clickSubmit() {
+    this.findFirst("#submit").click();
+  }
+
+
+  /**
+   * Set passed values into the form.
+   *
+   * @param set A container holding all of the fields to populate the Set with.
+   */
+  public void populateSet(Set set) {
+    // Required fields
+    fillRequiredField("#name", set.getName());
+    fillRequiredField("#description", set.getDescription());
+   }
+
+
+
+
+
+  /**
+   * Test to ensure the page does not have required field validation errors.
+   */
+  public void doesNotHaveRequiredFieldErrors() {
+    assertThat(this.pageSource()).doesNotContain("You must provide a name for your Set.");
+    assertThat(this.pageSource()).doesNotContain("Please provide a description of this Set.");
+    // assertThat(this.pageSource()).doesNotContain("Please select at least one Routine for a Set.");
+  }
+
+
+  /**
+   * Test to ensure the page has all of the required field validation errors.
+   */
+  public void hasRequiredFieldErrors() {
+    assertThat(this.pageSource()).contains("You must provide a name for your Set.");
+    assertThat(this.pageSource()).contains("Please provide a description of this Set.");
+    // assertThat(this.pageSource()).contains("Please select at least one Routine for a Set.");
+  }
+
+
+
+
 
 
   /**

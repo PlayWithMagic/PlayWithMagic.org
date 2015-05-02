@@ -83,9 +83,9 @@ public class RoutineDB {
   public static void addMaterial(MaterialFormData materialForm) {
     Material material = new Material(materialForm.name);
     material.setDescription(materialForm.description);
-    material.isInspectable(materialForm.isInspectable);
-    material.isGivenAway(materialForm.isGivenAway);
-    material.isConsumed(materialForm.isConsumed);
+    material.setIsInspectable(materialForm.isInspectable);
+    material.setIsGivenAway(materialForm.isGivenAway);
+    material.setIsConsumed(materialForm.isConsumed);
     material.setPrice(materialForm.price);
     material.setPurchaseUrl(materialForm.purchaseUrl);
     material.setImageUrl(materialForm.imageUrl);
@@ -191,9 +191,9 @@ public class RoutineDB {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(1);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/xxx.jpg");

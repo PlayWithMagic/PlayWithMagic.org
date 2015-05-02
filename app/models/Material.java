@@ -67,7 +67,7 @@ public class Material /* extends play.db.ebean.Model */ {
    *
    * @return True if the item is inspectable.  False if it is not inspectable.
    */
-  public boolean isInspectable() {
+  public boolean getIsInspectable() {
     return isInspectable;
   }
 
@@ -76,7 +76,7 @@ public class Material /* extends play.db.ebean.Model */ {
    *
    * @param isInspectable True if the item is inspectable.  False if it is not inspectable.
    */
-  public void isInspectable(boolean isInspectable) {
+  public void setIsInspectable(boolean isInspectable) {
     this.isInspectable = isInspectable;
   }
 
@@ -85,7 +85,7 @@ public class Material /* extends play.db.ebean.Model */ {
    *
    * @return True if the item is given away.  False if it is not given away.
    */
-  public boolean isGivenAway() {
+  public boolean getIsGivenAway() {
     return isGivenAway;
   }
 
@@ -94,7 +94,7 @@ public class Material /* extends play.db.ebean.Model */ {
    *
    * @param isGivenAway True if the item is given away.  False if it is not given away.
    */
-  public void isGivenAway(boolean isGivenAway) {
+  public void setIsGivenAway(boolean isGivenAway) {
     this.isGivenAway = isGivenAway;
   }
 
@@ -103,7 +103,7 @@ public class Material /* extends play.db.ebean.Model */ {
    *
    * @return True if the item is consumed over the course of the routine.  False if it is not consumed.
    */
-  public boolean isConsumed() {
+  public boolean getIsConsumed() {
     return isConsumed;
   }
 
@@ -112,7 +112,7 @@ public class Material /* extends play.db.ebean.Model */ {
    *
    * @param isConsumed True if the item is consumed over the course of the routine.  False if it is not consumed.
    */
-  public void isConsumed(boolean isConsumed) {
+  public void setIsConsumed(boolean isConsumed) {
     this.isConsumed = isConsumed;
   }
 

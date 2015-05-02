@@ -60,6 +60,15 @@ public class Routine extends play.db.ebean.Model {
   }
 
   /**
+   * Return a unique, synthetic key for the Routine.
+   *
+   * @param id A unique, synthetic key to the Routine.
+   */
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  /**
    * Returns a short name for the routine.
    *
    * @return A short name for the routine.
@@ -229,6 +238,15 @@ public class Routine extends play.db.ebean.Model {
    */
   public List<Material> getMaterials() {
     return materials;
+  }
+
+  /**
+   * Set the materials used for this routine.
+   *
+   * @param materials The materials used for this routine.
+   */
+  public void setMaterials(List<Material> materials) {
+    this.materials = materials;
   }
 
   /**

@@ -36,9 +36,9 @@ public class RoutineDBInit1 {
 
     material = new Material("A regular deck of cards");
     material.setDescription("I use red 808s, but any deck will do.");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.bicyclecards.com/products/playing-card/bicycle-standard-index");
     material.setImageUrl("images/material/1.jpg");
@@ -71,9 +71,9 @@ public class RoutineDBInit1 {
     material = new Material("A spool of thread");
     material.setDescription("Cotton quilting thread or silk thread work great.  Make sure it contrasts with what "
         + "you are wearing.");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(10);
     material.setPurchaseUrl("http://www.amazon.com/Natural-Cotton-Thread-Solids-Yards-Black/dp/B001K54U50/"
         + "ref=sr_1_fkmr0_2?ie=UTF8&qid=1428699866&sr=8-2-fkmr0&keywords=gutermann+cotton+quilting+thread+CNE50");
@@ -111,9 +111,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("A Mental Photography Deck");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(15);
     material.setPurchaseUrl("http://www.grandillusions.com/product/mental-photography/");
     material.setImageUrl("images/material/3.jpg");
@@ -146,9 +146,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("A matchstick");
-    material.isInspectable(true);
-    material.isGivenAway(true);
-    material.isConsumed(true);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(true);
     material.setPrice(0);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/200.jpg");
@@ -156,9 +156,9 @@ public class RoutineDBInit1 {
     routine.getMaterials().add(material);
 
     material = new Material("Sharpie");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/201.jpg");
@@ -193,9 +193,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Large shears or sissors");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(20);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/203.jpg");
@@ -204,9 +204,9 @@ public class RoutineDBInit1 {
     routine.getMaterials().add(material);
 
     material = new Material("Rope");
-    material.isInspectable(true);
-    material.isGivenAway(true);
-    material.isConsumed(true);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(true);
     material.setPrice(2);
     material.setPurchaseUrl("http://www.grandillusions.com/product/rope-300-foot-ball/");
     material.setImageUrl("images/material/204.gif");
@@ -239,9 +239,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Ribbon");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(10);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/205.jpg");
@@ -251,9 +251,9 @@ public class RoutineDBInit1 {
     routine.getMaterials().add(material);
 
     material = new Material("A few Chinese Coins");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Vintage-Chinese-Wealth-Double-Fortune/dp/B00JF0UPVK/ref=sr_1_11?"
         + "ie=UTF8&qid=1428755038&sr=8-11&keywords=chinese+coins");
@@ -287,9 +287,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("A double backed card");
-    material.isInspectable(false);
-    material.isGivenAway(true);
-    material.isConsumed(true);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(true);
     material.setPrice(10);
     material.setPurchaseUrl("http://www.grandillusions.com/product/double-back-cards/");
     material.setImageUrl("images/material/207.jpg");
@@ -298,9 +298,9 @@ public class RoutineDBInit1 {
     routine.getMaterials().add(material);
 
     material = new Material("A double faced card");
-    material.isInspectable(false);
-    material.isGivenAway(true);
-    material.isConsumed(true);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(true);
     material.setPrice(10);
     material.setPurchaseUrl("http://www.grandillusions.com/product/double-face-cards/");
     material.setImageUrl("images/material/208.jpg");
@@ -335,9 +335,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("The panic gaff");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(20);
     material.setPurchaseUrl("http://www.grandillusions.com/product/panic-by-aaron-fisher/");
     material.setImageUrl("images/material/209.jpg");
@@ -369,9 +369,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(20);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/1.jpg");
@@ -408,9 +408,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(20);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/1.jpg");
@@ -445,9 +445,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Rubber Band");
-    material.isInspectable(true);
-    material.isGivenAway(true);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(false);
     material.setPrice(1);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/401.jpg");
@@ -482,9 +482,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(20);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/1.jpg");
@@ -519,9 +519,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Zig-Zag Pencil Box");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(6);
     material.setPurchaseUrl("http://www.grandillusions.com/product/zig-zag-pencil/");
     material.setImageUrl("images/material/402.jpg");
@@ -530,9 +530,9 @@ public class RoutineDBInit1 {
     routine.getMaterials().add(material);
 
     material = new Material("Pencil");
-    material.isInspectable(true);
-    material.isGivenAway(true);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/403.jpg");
@@ -570,9 +570,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Coin");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(6);
     material.setPurchaseUrl("http://kbmagic.com/replicamorgandollars.html");
     material.setImageUrl("images/material/404.jpg");
@@ -581,9 +581,9 @@ public class RoutineDBInit1 {
     routine.getMaterials().add(material);
 
     material = new Material("Pen");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(3);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/405.jpg");
@@ -620,9 +620,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Coin");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(6);
     material.setPurchaseUrl("http://kbmagic.com/replicamorgandollars.html");
     material.setImageUrl("images/material/404.jpg");
@@ -659,9 +659,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(20);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/1.jpg");
@@ -700,9 +700,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Coin");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(6);
     material.setPurchaseUrl("http://kbmagic.com/replicamorgandollars.html");
     material.setImageUrl("images/material/404.jpg");
@@ -738,9 +738,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Overstuft Kit");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(30);
     material.setPurchaseUrl("https://store.theory11.com/products/overstuft-by-bizzaro");
     material.setImageUrl("images/material/406.jpg");
@@ -774,9 +774,9 @@ public class RoutineDBInit1 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cup and Ball Kit");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(25);
     material.setPurchaseUrl("http://www.grandillusions.com/product/combo-cups-and-balls/");
     material.setImageUrl("images/material/407.jpg");

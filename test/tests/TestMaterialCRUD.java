@@ -55,18 +55,18 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
 
     material1 = new Material("Test Material 01");
     material1.setDescription("Test Material Description 01");
-    material1.isConsumed(true);
-    material1.isGivenAway(false);
-    material1.isInspectable(true);
+    material1.setIsConsumed(true);
+    material1.setIsGivenAway(false);
+    material1.setIsInspectable(true);
     material1.setPrice(11011);
     material1.setPurchaseUrl("Test Material Purchase URL 01");
     material1.setImageUrl("Test Material Image URL 01");
 
     material2 = new Material("02 Test Material 02");
     material2.setDescription("02 Test Material Description 02");
-    material2.isConsumed(false);
-    material2.isGivenAway(true);
-    material2.isInspectable(false);
+    material2.setIsConsumed(false);
+    material2.setIsGivenAway(true);
+    material2.setIsInspectable(false);
     material2.setPrice(22022);
     material2.setPurchaseUrl("Test Material Purchase URL 02");
     material2.setImageUrl("Test Material Image URL 02");
@@ -93,7 +93,7 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
   /**
    * A workflow that tests a basic add of Material with only the required fields.
    */
-//  @Test
+  @Test
   public void testMaterialMinimumAddDelete() {
     // browser.maximizeWindow();
 

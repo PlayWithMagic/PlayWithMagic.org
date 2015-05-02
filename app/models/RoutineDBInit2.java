@@ -31,9 +31,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("1 length of rope");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/408.jpg");
@@ -68,9 +68,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(20);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/1.jpg");
@@ -107,9 +107,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Rubber Band");
-    material.isInspectable(true);
-    material.isGivenAway(true);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(false);
     material.setPrice(1);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/401.jpg");
@@ -145,9 +145,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(20);
     material.setPurchaseUrl("");
     material.setImageUrl("images/material/1.jpg");
@@ -183,9 +183,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Free Will Packet");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(18);
     material.setPurchaseUrl("http://www.grandillusions.com/product/free-will/");
     material.setImageUrl("images/material/409.jpg");
@@ -218,9 +218,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("iPhone");
-    material.isInspectable(true);
-    material.isGivenAway(true);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(false);
     material.setPrice(600);
     material.setPurchaseUrl("http://store.apple.com/us/iphone");
     material.setImageUrl("images/material/300a.jpeg");
@@ -229,9 +229,9 @@ public class RoutineDBInit2 {
     routine.getMaterials().add(material);
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -265,9 +265,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -304,9 +304,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -343,9 +343,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -379,9 +379,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -429,9 +429,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Chinese Coin set");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(25);
     material.setPurchaseUrl("http://shop.dananddave.com/recharmed-lance-pierce.html");
     material.setImageUrl("images/material/305.png");
@@ -465,9 +465,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -506,9 +506,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -542,9 +542,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -578,9 +578,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -616,9 +616,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -655,9 +655,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -700,9 +700,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Evidence bag and cards");
-    material.isInspectable(false);
-    material.isGivenAway(true);
-    material.isConsumed(true);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(true);
     material.setPrice(50);
     material.setPurchaseUrl("http://shop.dananddave.com/catch23-asi-wind.html");
     material.setImageUrl("images/material/312.png");
@@ -741,9 +741,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -778,9 +778,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -815,9 +815,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -850,9 +850,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Two silk scarves");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.grandillusions.com/product/silk-18-inch/");
     material.setImageUrl("images/material/210.gif");
@@ -886,9 +886,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Three 18\" silk scarves: Red, White and Blue");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(8);
     material.setPurchaseUrl("http://www.grandillusions.com/product/silk-18-inch/");
     material.setImageUrl("images/material/210.gif");
@@ -897,9 +897,9 @@ public class RoutineDBInit2 {
     routine.getMaterials().add(material);
 
     material = new Material("A blendo bag");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(30);
     material.setPurchaseUrl("http://www.grandillusions.com/product/american-flag-blendo/");
     material.setImageUrl("images/material/211.jpg");
@@ -932,9 +932,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Lucifer's wallet");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(30);
     material.setPurchaseUrl("http://www.themagicdepot.com/product_info.php?products_id=6365");
     material.setImageUrl("images/material/212.jpg");
@@ -943,9 +943,9 @@ public class RoutineDBInit2 {
     routine.getMaterials().add(material);
 
     material = new Material("Lighter fluid");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Zippo-3165-Lighter-Fluid-12OZ/dp/B000K2U3JG");
     material.setImageUrl("images/material/213.jpg");
@@ -954,9 +954,9 @@ public class RoutineDBInit2 {
     routine.getMaterials().add(material);
 
     material = new Material("Business card");
-    material.isInspectable(true);
-    material.isGivenAway(true);
-    material.isConsumed(true);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(true);
     material.setPrice(1);
     //material.setPurchaseUrl("");
     material.setImageUrl("images/material/214.jpg");
@@ -991,9 +991,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("A gaff book");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(10);
     material.setPurchaseUrl("http://www.grandillusions.com/product/coloring-book-magic/");
     material.setImageUrl("images/material/215.jpg");
@@ -1028,9 +1028,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Wellington Switchboard");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(400);
     material.setPurchaseUrl("http://www.wellingtonent.com/products/mswitchb.html");
     material.setImageUrl("images/material/216.jpg");
@@ -1064,9 +1064,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(true);
-    material.isConsumed(true);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(true);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -1098,9 +1098,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("At least four poker chips");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(20);
     material.setPurchaseUrl("http://www.leeasher.com/store/tricks/three_stylin.html");
     material.setImageUrl("images/routines/217.jpg");
@@ -1132,9 +1132,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("The Widness DVD");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(20);
     material.setPurchaseUrl("http://www.leeasher.com/store/media/witness.html");
     material.setImageUrl("images/routines/218.jpg");
@@ -1143,9 +1143,9 @@ public class RoutineDBInit2 {
     routine.getMaterials().add(material);
 
     material = new Material("A ziplock bag");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(5);
     //material.setPurchaseUrl("");
     material.setImageUrl("images/material/217.jpg");
@@ -1154,9 +1154,9 @@ public class RoutineDBInit2 {
     routine.getMaterials().add(material);
 
     material = new Material("Deck of Cards");
-    material.isInspectable(true);
-    material.isGivenAway(true);
-    material.isConsumed(true);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(true);
+    material.setIsConsumed(true);
     material.setPrice(5);
     material.setPurchaseUrl("http://www.amazon.com/Bicycle-Rider-Poker-Playing-Cards/dp/B002JAZ9GY/"
         + "ref=sr_1_1?ie=UTF8&qid=1428871353&sr=8-1&keywords=a+deck+of+cards");
@@ -1193,9 +1193,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Blue Fournier 505 Deck");
-    material.isInspectable(true);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(true);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(10);
     material.setPurchaseUrl("http://www.amazon.com/Fournier-Standard-Decks-Playing-Cards/dp/B000XZ0944/ref=sr_1_1?ie"
         + "=UTF8&s=toys-and-games&qid=1203992691&sr=8-1");
@@ -1229,9 +1229,9 @@ public class RoutineDBInit2 {
     routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Approaching Magic");
-    material.isInspectable(false);
-    material.isGivenAway(false);
-    material.isConsumed(false);
+    material.setIsInspectable(false);
+    material.setIsGivenAway(false);
+    material.setIsConsumed(false);
     material.setPrice(65);
     material.setPurchaseUrl("http://davidregal.com/approaching-magic/");
     material.setImageUrl("images/material/220.jpg");
