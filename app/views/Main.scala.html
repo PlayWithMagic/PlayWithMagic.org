@@ -3,7 +3,7 @@
 *
 * @see http://www.playframework.com
 *@
-@(page: String)(content: Html)
+@(page: String, isLoggedIn: Boolean, userInfo: Magician)(content: Html)
 
 <!DOCTYPE html>
 <html>
@@ -53,7 +53,7 @@
           <li><a id="browseMagicians" href="@routes.Application.listMagicians()">Browse Magicians</a></li>
         </ul>
 
-          <!-- Don't show Search on home page or New Magician page-->
+        <!-- Don't show Search on home page or New Magician page-->
         @* @if( page != "home" && page != "editMagician" ) { *@
         @*<form class="navbar-form navbar-left" role="search">*@
           @*<div class="input-group">*@
@@ -67,61 +67,41 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a id="linkToHelpPage" href="@routes.Application.help()">
+            <a id="navbarLinkToHelpPage" href="@routes.Application.help()">
               <i class="fa fa-question fa-lg hidden-xs"></i>
               <span class="visible-xs-inline">Help</span>
             </a>
           </li>
           <!-- User Info Dropdown, don't show if not logged in -->
-          <li class="dropdown">
-            @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in*@
-              @*Username <span class="caret"></span></a>*@
-            <a id="createNew" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Create...
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              @* <li><a href="displayuser">Profile</a></li> *@
-              @* <li><a href="@routes.Application.listRoutines()">My Routines</a></li>*@
-              @* <li><a href="@routes.Application.listSets()">My Sets</a></li>*@
-              <li><a id="createRoutine" href="@routes.Application.editRoutine()">Create Routine</a></li>
-              <li><a id="createSet" href="@routes.Application.editSet()">Create Set</a></li>
-              @* <li class="divider"></li>*@
-              @* <li><a href="#">Logout</a></li> *@
-            </ul>
-          </li>
-
-
-          <!-- Login Dropdown; only show on Home Page -->
-          @* @if(page == "home" ) {*@
-          @*<li class="dropdown">*@
-            @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">*@
-              @*Login <span class="caret"></span>*@
-            @*</a>*@
-            @*<form class="dropdown-menu login" role="form">*@
-              @*<div class="form-group">*@
-                @*<label for="loginUsername">Username</label>*@
-                @*<input type="email" class="form-control" id="loginUsername" placeholder="Username / Email">*@
-              @*</div>*@
-              @*<div class="form-group">*@
-                @*<label for="loginPassword">Password</label>*@
-                @*<input type="password" class="form-control" id="loginPassword" placeholder="Password">*@
-              @*</div>*@
-              @*<div class="checkbox">*@
-                @*<label>*@
-                  @*<input type="checkbox" value="remember-me"> Remember me*@
-                @*</label>*@
-              @*</div>*@
-              @*<button class="btn btn-sm btn-primary btn-block" type="submit">Sign in</button>*@
-            @*</form>*@
-          @*</li>*@
-          @*}*@
+          @if(isLoggedIn) {
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                Welcome @userInfo.getFirstName() <span class="caret"></span>
+              </a>
+              @*<a id="createNew" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Create...*@
+                @*<span class="caret"></span>*@
+              @*</a>*@
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="@routes.Application.editMagician(userInfo.getId)">Profile</a></li>
+                <li><a href="@routes.Application.listRoutines()">My Routines</a></li>
+                <li><a href="@routes.Application.listSets()">My Sets</a></li>
+                <li><a id="createRoutine" href="@routes.Application.editRoutine()">Create Routine</a></li>
+                <li><a id="createSet" href="@routes.Application.editSet()">Create Set</a></li>
+                <li class="divider"></li>
+                <li><a href="@routes.Application.logout()">Logout</a></li>
+              </ul>
+            </li>
+          } else {
+            <li><a id="navbarLinkToSignupPage" href="@routes.Application.signup()">Signup</a></li>
+            <li><a id="navbarLinkToLoginPage" href="@routes.Application.login()">Login</a></li>
+          }
         </ul>
       </div>
     </div>
   </nav>
   @content
-  <!-- Footer, only display on home page -->
-  @if( page == "home" || page == "help" ) {
+  <!-- Footer, only display on home and help page -->
+  @if( page == "home" || page == "help" || page == "login" ) {
     <footer class="footer">
       <div class="container">
         <div class="col-md-3">

@@ -3,14 +3,15 @@
 *
 * @see http://www.playframework.com
 *@
-@(routineForm: Form[views.formdata.RoutineFormData], materials: List[Material])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, routineForm: Form[views.formdata.RoutineFormData],
+    materials: List[Material])
 
 @import java.util.List
 
 @import helper.form
 @import views.html.bootstrap3.{hidden, text, text45, textInt, textarea};
 
-@Main("editRoutine") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->

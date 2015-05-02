@@ -4,12 +4,13 @@
 * @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(setForm: Form[views.formdata.SetFormData], routineList: List[Routine], formRoutines: List[Long])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, setForm: Form[views.formdata.SetFormData],
+    routineList: List[Routine], formRoutines: List[Long])
 
 @import helper.form
 @import views.html.bootstrap3.{text45, textarea}
 
-@Main("editSet") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->

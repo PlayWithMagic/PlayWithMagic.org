@@ -3,9 +3,10 @@
 *
 * @see http://www.playframework.com
 *@
-@(set: models.Set, routines: List[Routine], routineInSet: List[Long])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, set: models.Set, routines: List[Routine],
+    routineInSet: List[Long])
 
-@Main("viewSet") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->

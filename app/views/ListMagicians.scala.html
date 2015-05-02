@@ -3,9 +3,9 @@
 *
 * @see http://www.playframework.com
 *@
-@(magicians: List[Magician])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, magicians: List[Magician])
 
-@Main("listMagicians") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <div class="container">
     <h1>Current Magicians</h1>

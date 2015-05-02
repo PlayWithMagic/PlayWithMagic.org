@@ -49,6 +49,35 @@ public class IndexPage extends NavigationWrapper {
     assertThat(this.pageSource()).contains("Post Routines, Create Sets and Share Magic!");
   }
 
+  /**
+   * Click the Navbar Help button in the upper right.
+   *
+   * @return The HelpPage.
+   */
+  public HelpPage clickNavbarHelpButton() {
+    this.findFirst("#navbarLinkToHelpPage");
+    return new HelpPage(this.getDriver());
+  }
+
+  /**
+   * Click the Navbar Login button in the upper right.
+   *
+   * @return The LoginPage.
+   */
+  public LoginPage clickNavbarLoginButton() {
+    this.findFirst("#navbarLinkToLoginPage").click();
+    return new LoginPage(this.getDriver());
+  }
+
+  /**
+   * Click the Navbar Signup button in the upper right.
+   *
+   * @return The EditUserPage with Signup rendering.
+   */
+  public EditUserPage clickNavbarSignupButton() {
+    this.findFirst("#navbarLinkToSignupPage").click();
+    return new EditUserPage(this.getDriver());
+  }
 
   /**
    * Click the Join the Community Today button.
@@ -61,7 +90,7 @@ public class IndexPage extends NavigationWrapper {
   }
 
 
-  // Footers are only on the Index and Help page
+  // Footers are only on the Index, Help, and Login pages
 
   /**
    * Click the About button on the Index page.
@@ -116,5 +145,7 @@ public class IndexPage extends NavigationWrapper {
     this.findFirst("#linkToProjectHomepage").click();
     return this;
   }
+
+
 
 }

@@ -3,64 +3,107 @@
 *
 * @see http://www.playframework.com
 *@
-@(magicianForm: Form[views.formdata.EditUserFormData], magicianTypeMap: Map[String, Boolean])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician,
+    magicianForm: Form[views.formdata.EditUserFormData], magicianTypeMap: Map[String, Boolean])
 
 @import helper._
 @import views.html.bootstrap3._
 
 
-@Main("editUser") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->
     <section id="content" class="container">
       <div class="col-md-12">
         @if(magicianForm("id").value == "0") {
-          <h1>New User</h1>
+          <h1>Register New User</h1>
         } else {
           <h1>Edit User</h1>
         }
 
         <!-- User Attributes -->
         <div class="container">
-          @form(routes.Application.postUser(), 'class -> "form-horizontal") {
-            <!-- Hidden ID Field -->
-            @hidden(magicianForm("id"))
-            <!--<form class="form-horizontal">-->
-            <!-- First Name -->
-            @text45(magicianForm("firstName"),
-              label = "First Name",
-              placeholder = "First Name",
-              help = "Required")
-            <!-- Last Name -->
-            @text45(magicianForm("lastName"),
-              label = "Last Name",
-              placeholder = "Last Name",
-              help = "Required")
-            <!-- Email -->
-            @text(magicianForm("email"),
-              label = "Email",
-              placeholder = "i.e., name@domain.com",
-              help = "Required")
-            <!-- Magician Type -->
-            @bootstrap3.select(magicianForm("magicianType"),
-              label = "Experience with Magic",
-              optionMap = magicianTypeMap,
-              isMultiple = false,
-              help = "Required")
-            <!-- Password -->
-            @password(magicianForm("password"),
-              label = "Password",
-              placeholder = "Password",
-              help = "Required")
+          @if(magicianForm("id").value == "0") {
+            @form(routes.Application.postSignup(), 'class -> "form-horizontal") {
+                <!-- Hidden ID Field -->
+              @hidden(magicianForm("id"))
+                <!--<form class="form-horizontal">-->
+                <!-- First Name -->
+              @text45(magicianForm("firstName"),
+                label = "First Name",
+                placeholder = "First Name",
+                help = "Required")
+                <!-- Last Name -->
+              @text45(magicianForm("lastName"),
+                label = "Last Name",
+                placeholder = "Last Name",
+                help = "Required")
+                <!-- Email -->
+              @text(magicianForm("email"),
+                label = "Email",
+                placeholder = "i.e., name@domain.com",
+                help = "Required")
+                <!-- Magician Type -->
+              @bootstrap3.select(magicianForm("magicianType"),
+                label = "Experience with Magic",
+                optionMap = magicianTypeMap,
+                isMultiple = false,
+                help = "Required")
+                <!-- Password -->
+              @password(magicianForm("password"),
+                label = "Password",
+                placeholder = "Password",
+                help = "Required")
 
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button id="submit" type="submit" class="btn btn-default">
-                  @if(magicianForm("id").value == "0") {Add} else {Update}
-                </button>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button id="submit" type="submit" class="btn btn-default">
+                   Signup
+                  </button>
+                </div>
               </div>
-            </div>
+            }
+          } else {
+            @form(routes.Application.postUser(), 'class -> "form-horizontal") {
+              <!-- Hidden ID Field -->
+              @hidden(magicianForm("id"))
+              <!--<form class="form-horizontal">-->
+              <!-- First Name -->
+              @text45(magicianForm("firstName"),
+                label = "First Name",
+                placeholder = "First Name",
+                help = "Required")
+              <!-- Last Name -->
+              @text45(magicianForm("lastName"),
+                label = "Last Name",
+                placeholder = "Last Name",
+                help = "Required")
+              <!-- Email -->
+              @text(magicianForm("email"),
+                label = "Email",
+                placeholder = "i.e., name@domain.com",
+                help = "Required")
+              <!-- Magician Type -->
+              @bootstrap3.select(magicianForm("magicianType"),
+                label = "Experience with Magic",
+                optionMap = magicianTypeMap,
+                isMultiple = false,
+                help = "Required")
+              <!-- Password -->
+              @password(magicianForm("password"),
+                label = "Password",
+                placeholder = "Password",
+                help = "Required")
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button id="submit" type="submit" class="btn btn-default">
+                  Update
+                  </button>
+                </div>
+              </div>
+            }
           }
         </div>
       </div>

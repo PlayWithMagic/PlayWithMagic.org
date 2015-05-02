@@ -1,5 +1,6 @@
 package models;
 
+import org.mindrot.jbcrypt.BCrypt;
 import views.formdata.EditMagicianFormData;
 import views.formdata.EditUserFormData;
 
@@ -113,6 +114,20 @@ public class Magician extends play.db.ebean.Model {
 
 
   /**
+   * Get a Magician associated with a given email.
+   *
+   * @param email The ID of the magician to retrieve.
+   * @return The retrieved magician object.
+   */
+  public static Magician getMagician(String email) {
+    Magician magician = Magician.find().where().eq("email", email).findUnique();
+    if (magician == null) {
+      throw new RuntimeException("Unable to find Magician with the given email [" + email + "]");
+    }
+    return magician;
+  }
+
+  /**
    * Get a Magician associated with a given id.
    *
    * @param id The ID of the magician to retrieve.
@@ -124,6 +139,32 @@ public class Magician extends play.db.ebean.Model {
       throw new RuntimeException("Unable to find Magician with the given ID [" + id + "]");
     }
     return magician;
+  }
+
+  /**
+   * Check if an email address is associated with an existing Magician.
+   *
+   * @param email The email address to check against in the DB
+   * @return True if found, otherwise false.
+   */
+  public static boolean isExistingMagician(String email) {
+    int count = Magician.find().where().eq("email", email).findRowCount();
+    return count >= 1;
+  }
+
+
+  /**
+   * Check if a Magician's credentials are valid.
+   *
+   * @param email The email address of the Magician.
+   * @param password The password of the Magician to check.
+   * @return True if Magician exists and Password matches hashed password, otherwise false.
+   */
+  public static boolean isValidMagician(String email, String password) {
+    return ((email != null)
+        && (password != null)
+        && isExistingMagician(email)
+        && BCrypt.checkpw(password, getMagician(email).getPassword()));
   }
 
 
@@ -180,7 +221,7 @@ public class Magician extends play.db.ebean.Model {
           , editUserFormData.lastName
           , editUserFormData.email
           , magicianType
-          , editUserFormData.password);
+          , BCrypt.hashpw(editUserFormData.password, BCrypt.gensalt(12)));
     }
     else {
       magician = Magician.find().byId(editUserFormData.id);
@@ -188,7 +229,7 @@ public class Magician extends play.db.ebean.Model {
       magician.setLastName(editUserFormData.lastName);
       magician.setEmail(editUserFormData.email);
       magician.setMagicianType(magicianType);
-      magician.setPassword(editUserFormData.password);
+      magician.setPassword(BCrypt.hashpw(editUserFormData.password, BCrypt.gensalt(12)));
     }
 
     magician.save();
@@ -250,7 +291,7 @@ public class Magician extends play.db.ebean.Model {
   }
 
   /**
-   * Get the magician's password.
+   * Get the magician's encrypted password.
    *
    * @return The magician's password.
    */
@@ -259,7 +300,7 @@ public class Magician extends play.db.ebean.Model {
   }
 
   /**
-   * Set the magician's password.
+   * Set the magician's encrypted password.
    *
    * @param password The magician's password.
    */

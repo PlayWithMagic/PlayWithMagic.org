@@ -6,9 +6,9 @@
 *
 * @see http://www.playframework.com
 *@
-@(sets: List[models.Set])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, sets: List[models.Set])
 
-@Main("listSets") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->
