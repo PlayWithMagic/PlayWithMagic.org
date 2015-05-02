@@ -67,6 +67,4 @@ public class ViewMaterialPage extends NavigationWrapper {
     checkOptionalField(material.getImageUrl());
   }
 
-
-
 }

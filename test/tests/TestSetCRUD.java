@@ -23,6 +23,9 @@ import static play.test.Helpers.inMemoryDatabase;
  * <p>
  * Run a server with a fake application, in-memory database and browser (Chrome) to test the system.
  *
+ * When you want to *go* to a page, do new IndexPage(browser);
+ * When you are already *at* a page, do new IndexPage(browser.getDriver());
+ *
  * @see https://www.playframework.com/documentation/2.3.0/api/java/play/test/WithBrowser.html
  */
 public class TestSetCRUD extends play.test.WithBrowser {
@@ -86,7 +89,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
   /**
    * A workflow that tests a basic add and delete with only the required fields.
    */
-  @Test
+//  @Test
   public void testSetMinimumAddDelete() {
     SetDB.resetSetDB();
     RoutineDB.resetRoutineDB();
