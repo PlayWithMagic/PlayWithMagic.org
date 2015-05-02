@@ -47,7 +47,7 @@ public class EditSetPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("<h1>Create Set</h1>") || pageSource().contains("<h1>Update Set</h1>"));
+    assertThat(pageSource()).contains("<body id=\"editSet\">");
   }
 
 

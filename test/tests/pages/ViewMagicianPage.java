@@ -46,7 +46,7 @@ public class ViewMagicianPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("<h3>Experience with Magic</h3>"));
+    assertThat(pageSource()).contains("<h3>Experience with Magic</h3>");
   }
 
 

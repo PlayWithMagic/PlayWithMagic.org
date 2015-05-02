@@ -76,7 +76,7 @@ public class EditMagicianPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("<h1>Magician Profile</h1>"));
+    assertThat(pageSource()).contains("<h1>Magician Profile</h1>");
   }
 
 

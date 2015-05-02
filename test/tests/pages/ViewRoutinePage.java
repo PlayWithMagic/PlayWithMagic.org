@@ -1,5 +1,6 @@
 package tests.pages;
 
+import models.Material;
 import models.Routine;
 import org.openqa.selenium.WebDriver;
 import play.test.TestBrowser;
@@ -46,7 +47,7 @@ public class ViewRoutinePage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("<h3>Current Routines</h3>"));
+    assertThat(pageSource()).contains("<body id=\"viewRoutine\">");
   }
 
 
@@ -71,6 +72,41 @@ public class ViewRoutinePage extends NavigationWrapper {
     checkOptionalField(routine.getInspiration());
     checkOptionalField(routine.getPlacement());
     checkOptionalField(routine.getChoices());
+  }
+
+
+  /**
+   * Check the contents of the page for a Material.
+   *
+   * @param material A container holding all of the fields to check for in the page.
+   */
+  public void hasMaterial(Material material) {
+    // Required fields
+    assertThat(this.pageSource()).contains(material.getName());
+  }
+
+
+
+  /**
+   * Check the contents of the page for the absence of a Material.
+   *
+   * @param material A container holding all of the fields to check for in the page.
+   */
+  public void doesNotHaveMaterial(Material material) {
+    // Required fields
+    assertThat(this.pageSource()).doesNotContain(material.getName());
+  }
+
+
+
+  /**
+   * View the first material on the page.
+   *
+   * @return The ViewMaterialPage.
+   */
+  public ViewMaterialPage viewFirstMaterial() {
+    this.findFirst(".viewMaterial").click();
+    return new ViewMaterialPage(this.getDriver());
   }
 
 

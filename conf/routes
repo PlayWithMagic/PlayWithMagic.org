@@ -28,11 +28,11 @@ POST        /editMagician          controllers.Application.postMagician()
 GET         /deleteMagician        controllers.Application.deleteMagician(id: Long?= 0)
 
 #Material actions
+GET         /viewMaterial          controllers.Application.viewMaterial(routineId: Long, materialId: Integer)
 POST        /newMaterial           controllers.Application.newMaterial()
 POST        /editMaterial          controllers.Application.editMaterial(materialId: Integer)
-POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Integer)
 POST        /postMaterial          controllers.Application.postMaterial()
-GET         /viewMaterial          controllers.Application.viewMaterial(routineId: Long, materialId: Integer)
+POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Integer)
 
 # Set actions
 GET         /listSets              controllers.Application.listSets()

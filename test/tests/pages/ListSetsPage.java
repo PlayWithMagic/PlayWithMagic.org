@@ -44,7 +44,7 @@ public class ListSetsPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("<h1>Current Sets</h1>"));
+    assertThat(pageSource()).contains("<h1>Current Sets</h1>");
   }
 
 

@@ -1,5 +1,6 @@
 package tests.pages;
 
+import models.Material;
 import models.Routine;
 import org.openqa.selenium.WebDriver;
 import play.test.TestBrowser;
@@ -45,7 +46,7 @@ public class EditRoutinePage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("<h1>Create Routine</h1>") || pageSource().contains("<h1>Update Routine</h1>"));
+    assertThat(pageSource()).contains("<body id=\"editRoutine\">");
   }
 
   /**
@@ -60,6 +61,17 @@ public class EditRoutinePage extends NavigationWrapper {
   }
 
 
+  /**
+   * Click the Add Material button.
+   * <p>
+   * This returns void because we don't know which page it would render...
+   *   On success, it goes to EditMaterial
+   *   On error, it stays on EditRoutine
+   */
+  public void clickAddMaterial() {
+    this.findFirst("#addMaterial").click();
+  }
+
 
   /**
    * Set passed values into the form.
@@ -68,38 +80,20 @@ public class EditRoutinePage extends NavigationWrapper {
    */
   public void populateRoutine(Routine routine) {
     // Required fields
-    fill("#name").with(routine.getName());
-    fill("#description").with(routine.getDescription());
-    fill("#duration").with(routine.getDuration().toString());
+    fillRequiredField("#name", routine.getName());
+    fillRequiredField("#description", routine.getDescription());
+    fillRequiredField("#duration", routine.getDuration());
 
     // Optional fields
-    if (routine.getMethod() != null) {
-      fill("#method").with(routine.getMethod());
-    }
-    if (routine.getHandling() != null) {
-      fill("#handling").with(routine.getHandling());
-    }
-    if (routine.getResetDuration() != null) {
-      fill("#resetDuration").with(routine.getResetDuration().toString());
-    }
-    if (routine.getResetDescription() != null) {
-      fill("#resetDescription").with(routine.getResetDescription());
-    }
-    if (routine.getYouTubeUrl() != null) {
-      fill("#youTubeUrl").with(routine.getYouTubeUrl());
-    }
-    if (routine.getImageUrl() != null) {
-      fill("#imageUrl").with(routine.getImageUrl());
-    }
-    if (routine.getInspiration() != null) {
-      fill("#inspiration").with(routine.getInspiration());
-    }
-    if (routine.getPlacement() != null) {
-      fill("#placement").with(routine.getPlacement());
-    }
-    if (routine.getChoices() != null) {
-      fill("#choices").with(routine.getChoices());
-    }
+    fillOptionalField("#method", routine.getMethod());
+    fillOptionalField("#handling", routine.getHandling());
+    fillOptionalField("#resetDuration", routine.getResetDuration());
+    fillOptionalField("#resetDescription", routine.getResetDescription());
+    fillOptionalField("#youTubeUrl", routine.getYouTubeUrl());
+    fillOptionalField("#imageUrl", routine.getImageUrl());
+    fillOptionalField("#inspiration", routine.getInspiration());
+    fillOptionalField("#placement", routine.getPlacement());
+    fillOptionalField("#choices", routine.getChoices());
   }
 
 
@@ -124,6 +118,50 @@ public class EditRoutinePage extends NavigationWrapper {
     checkOptionalField(routine.getInspiration());
     checkOptionalField(routine.getPlacement());
     checkOptionalField(routine.getChoices());
+  }
+
+
+  /**
+   * Delete the first material on the page.  Return back to EditRoutine page.
+   *
+   * @return The EditRoutinePage.
+   */
+  public EditRoutinePage deleteFirstMaterial() {
+    this.findFirst(".deleteMaterial").click();
+    return new EditRoutinePage(this.getDriver());
+  }
+
+
+  /**
+   * Edit the first material on the page.  Return back to EditMaterialPage page.
+   *
+   * @return The EditMaterialPage.
+   */
+  public EditMaterialPage editFirstMaterial() {
+    this.findFirst(".editMaterial").click();
+    return new EditMaterialPage(this.getDriver());
+  }
+
+
+  /**
+   * See if the browser has all of the values in the Material object.
+   *
+   * @param material A container holding all of the fields to check for in the page.
+   */
+  public void hasMaterial(Material material) {
+    assertThat(this.pageSource()).contains(material.getName());
+    checkOptionalField(material.getPrice());
+    checkOptionalField(material.getImageUrl());
+  }
+
+
+  /**
+   * Ensure the browser does not have this Material object.
+   *
+   * @param material A container holding all of the fields to check for in the page.
+   */
+  public void doesNotHaveMaterial(Material material) {
+    assertThat(this.pageSource()).doesNotContain(material.getName());
   }
 
 

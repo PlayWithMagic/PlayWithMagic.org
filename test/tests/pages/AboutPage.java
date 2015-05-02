@@ -45,7 +45,7 @@ public class AboutPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("About this Website"));
-    assertThat(pageSource().contains("Play With Magic was written by:"));
+    assertThat(pageSource()).contains("About this Website");
+    assertThat(pageSource()).contains("PlayWithMagic was written by:");
   }
 }

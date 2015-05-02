@@ -44,8 +44,8 @@ public class HelpPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("Overview"));
-    assertThat(pageSource().contains("Terminology"));
+    assertThat(pageSource()).contains("Overview");
+    assertThat(pageSource()).contains("Terminology");
   }
 }
 

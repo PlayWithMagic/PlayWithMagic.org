@@ -114,7 +114,7 @@ public abstract class NavigationWrapper extends FluentPage {
 
 
   /**
-   * Fill a value in field.
+   * Fill a text value in field.
    *
    * @param fieldName The ID of the HTML form field.
    * @param fieldValue The value to put into the field.
@@ -128,7 +128,7 @@ public abstract class NavigationWrapper extends FluentPage {
 
 
   /**
-   * Optionally fill a value in a field.
+   * Optionally fill a text value in a field.
    *
    * @param fieldName The ID of the HTML form field.
    * @param fieldValue The value to put into the field.

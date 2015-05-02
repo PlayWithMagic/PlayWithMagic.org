@@ -3,7 +3,7 @@ package models;
 /**
  * An item used in the performance of a routine.
  */
-public class Material extends play.db.ebean.Model {
+public class Material /* extends play.db.ebean.Model */ {
   private String name;             /* A short name for the item. */
   private String description;      /* A multi-line description of the item. */
   private boolean isInspectable;   /* Is the item inspectable by the audience? */

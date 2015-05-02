@@ -45,8 +45,8 @@ public class IndexPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(this.title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(this.pageSource().contains("We're looking for a few good routines"));
-    assertThat(this.pageSource().contains("Post Routines, Create Sets and Share Magic!"));
+    assertThat(this.pageSource()).contains("We're looking for a few good routines");
+    assertThat(this.pageSource()).contains("Post Routines, Create Sets and Share Magic!");
   }
 
 
