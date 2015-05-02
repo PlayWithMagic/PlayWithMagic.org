@@ -67,7 +67,7 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a id="linkToHelpPage" href="@routes.Application.help()">
+            <a id="navbarLinkToHelpPage" href="@routes.Application.help()">
               <i class="fa fa-question fa-lg hidden-xs"></i>
               <span class="visible-xs-inline">Help</span>
             </a>
@@ -92,37 +92,9 @@
               </ul>
             </li>
           } else {
-            @* @if(page != "home") {*@
-              <li><a href="@routes.Application.signup()">Signup</a></li>
-            @* } *@
-            <li><a href="@routes.Application.login()">Login</a></li>
+            <li><a id="navbarLinkToSignupPage" href="@routes.Application.signup()">Signup</a></li>
+            <li><a id="navbarLinkToLoginPage" href="@routes.Application.login()">Login</a></li>
           }
-
-          <!-- Login Dropdown; only show on Home Page -->
-          <!-- NOTE: This is being moved to a separate page. -->
-          @* @if(page == "home" ) {*@
-          @*<li class="dropdown">*@
-            @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">*@
-              @*Login <span class="caret"></span>*@
-            @*</a>*@
-            @*<form class="dropdown-menu login" role="form">*@
-              @*<div class="form-group">*@
-                @*<label for="loginUsername">Username</label>*@
-                @*<input type="email" class="form-control" id="loginUsername" placeholder="Username / Email">*@
-              @*</div>*@
-              @*<div class="form-group">*@
-                @*<label for="loginPassword">Password</label>*@
-                @*<input type="password" class="form-control" id="loginPassword" placeholder="Password">*@
-              @*</div>*@
-              @*<div class="checkbox">*@
-                @*<label>*@
-                  @*<input type="checkbox" value="remember-me"> Remember me*@
-                @*</label>*@
-              @*</div>*@
-              @*<button class="btn btn-sm btn-primary btn-block" type="submit">Sign in</button>*@
-            @*</form>*@
-          @*</li>*@
-          @*}*@
         </ul>
       </div>
     </div>
