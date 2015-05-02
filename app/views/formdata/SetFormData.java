@@ -1,6 +1,9 @@
 package views.formdata;
 
+import models.GlobalDbInfo;
 import models.Set;
+import play.data.validation.Constraints.Required;
+import play.data.validation.Constraints.MaxLength;
 import play.data.validation.ValidationError;
 
 import java.util.ArrayList;
@@ -18,13 +21,19 @@ public class SetFormData {
   public long id;
 
   /**
-   * Input data Set Name field.
+   * A short name for the set.
    */
+  @Required(message = "You must provide a name for your Set.")
+  @MaxLength(value = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH,
+      message = "The set's name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters.")
   public String name;
 
   /**
-   * Input data Description field.
+   * A multi-line description of the set.
    */
+  @Required(message = "Please provide a description of this Set.")
+  @MaxLength(value = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH,
+      message = "Description can't be more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters.")
   public String description;
 
   /**
@@ -80,22 +89,11 @@ public class SetFormData {
    * @return Either null if no errors, or a List of Div IDs and their associated error messages.
    */
   public List<ValidationError> validate() {
-
     List<ValidationError> errors = new ArrayList<ValidationError>();
 
-    if (name == null || name.length() == 0) {
-      errors.add(new ValidationError("name", "Must provide a name for the Set."));
-    }
-
-    if (description == null || description.length() == 0) {
-      errors.add(new ValidationError("description", "Please provide a description of this Set."));
-    }
-
-    if (routines == null) {
+    if (routines == null || routines.size() == 0) {
       errors.add(new ValidationError("routines", "Please select at least one Routine for a Set."));
     }
-
-    //TO-DO:  Build validation inputs for a Set.
 
     return errors.isEmpty() ? null : errors;
 

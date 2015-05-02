@@ -1,20 +1,19 @@
 package tests;
 
 import models.Routine;
-import models.RoutineDB;
 import models.Set;
-import models.SetDB;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import play.test.TestBrowser;
 import tests.pages.EditRoutinePage;
 import tests.pages.EditSetPage;
+import tests.pages.IndexPage;
+import tests.pages.ListRoutinesPage;
 import tests.pages.ListSetsPage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
 
@@ -64,56 +63,38 @@ public class TestSetCRUD extends play.test.WithBrowser {
   }
 
   /**
-   * Test Set Navigation from the Index page and navigation bars.
+   * Test Set navigation from the Index page and navigation bars.
    */
   @Test
   public void testSetNav() {
     // browser.maximizeWindow();
 
     // Start at the home page...
-    browser.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/");
-    assertThat(browser.pageSource()).contains("We're looking for a few good routines");
-    assertThat(browser.pageSource()).contains("Join the Community Today!");
+    IndexPage indexPage = new IndexPage(browser);
 
     // Click the Browse Sets button
-    browser.findFirst("#browseSets").click();
-    assertThat(browser.pageSource()).contains("Current Sets");
+    ListSetsPage listSetsPage = indexPage.clickBrowseSetsButton();
 
     // Click the Create Sets button
-    browser.findFirst("#createNew").click();
-    browser.findFirst("#createSet").click();
-    assertThat(browser.pageSource()).contains("Create Set");
+    EditSetPage editSetPage = listSetsPage.clickCreateSetButton();
   }
 
 
   /**
    * A workflow that tests a basic add and delete with only the required fields.
    */
-//  @Test
+  @Test
   public void testSetMinimumAddDelete() {
-    SetDB.resetSetDB();
-    RoutineDB.resetRoutineDB();
-    // MagicianDB.resetMagicianDB();
-
     // browser.maximizeWindow();
 
     // Start at the home page...
-    browser.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/");
-    assertThat(browser.pageSource()).contains("We're looking for a few good routines");
+    IndexPage indexPage = new IndexPage(browser);
 
-    // Click Add Set
-    browser.findFirst("#createNew").click();
-    browser.findFirst("#createSet").click();
-    assertThat(browser.pageSource()).contains("Create Set");
-
-    // Click Add without entering any information... this should generate an error.
-    assertThat(browser.pageSource()).doesNotContain("Must provide a name for the Set.");
-    assertThat(browser.pageSource()).doesNotContain("Please provide a description of this Set.");
-    assertThat(browser.pageSource()).doesNotContain("Please select at least one Routine for a Set.");
-    browser.click(browser.find("#submit"));
-    assertThat(browser.pageSource()).contains("Must provide a name for the Set.");
-    assertThat(browser.pageSource()).contains("Please provide a description of this Set.");
-    assertThat(browser.pageSource()).contains("Please select at least one Routine for a Set.");
+    // Add a set without entering any information... this should generate an error.
+    EditSetPage editSetPage = indexPage.clickCreateSetButton();
+    editSetPage.doesNotHaveRequiredFieldErrors();
+    editSetPage.clickSubmit();
+    editSetPage.hasRequiredFieldErrors();
 
     // This is all we'll test for now because all fields are required for sets
   }
@@ -121,21 +102,43 @@ public class TestSetCRUD extends play.test.WithBrowser {
 
   /**
    * Test Set CRUD.
-   * <p>
-   * This is a large workflow because the Play Framework the application restarts between tests -- which wipes
-   * out the in-memory database.
    */
-//  @Test
+  @Test
   public void testSetCrudWorkflow() {
-    SetDB.resetSetDB();
-    RoutineDB.resetRoutineDB();
-    // MagicianDB.resetMagicianDB();
+
+    // Start at the home page...
+    IndexPage indexPage = new IndexPage(browser);
+
+    // Quickly populate three routines
+    EditRoutinePage editRoutinePage = indexPage.clickCreateRoutineButton();
+    editRoutinePage.populateRoutine(routine1);
+    editRoutinePage.clickSubmit();
+
+    ListRoutinesPage listRoutinesPage = new ListRoutinesPage(editRoutinePage.getDriver());
+    listRoutinesPage.clickCreateRoutineButton();
+    editRoutinePage.populateRoutine(routine2);
+    editRoutinePage.clickSubmit();
+
+    listRoutinesPage = new ListRoutinesPage(editRoutinePage.getDriver());
+    listRoutinesPage.clickCreateRoutineButton();
+    editRoutinePage.populateRoutine(routine3);
+    editRoutinePage.clickSubmit();
+
+    // Add a Set.
+    listRoutinesPage = new ListRoutinesPage(editRoutinePage.getDriver());
+    EditSetPage editSetPage = listRoutinesPage.clickCreateSetButton();
+    editSetPage.populateSet(set1);
+
+
+
+
+/*
     Long routineId1;
     Long routineId2;
     Long routineId3;
 
     // Create three routines used for testing
-    EditRoutinePage editRoutinePage;
+  //  EditRoutinePage editRoutinePage;
     editRoutinePage = new EditRoutinePage(browser);
     editRoutinePage.populateRoutine(routine1);
 // TODO:  This will no longer work with Postgres.
@@ -214,23 +217,12 @@ public class TestSetCRUD extends play.test.WithBrowser {
     assertThat(browser.pageSource()).contains(set2.getName());
     browser.findFirst(".deleteSet").click();
     assertThat(browser.pageSource()).doesNotContain(set2.getName());
-
+*/
   }
 
 
   /**
-   * Test that verifies the ListSets page can be retrieved.
-   */
-  @Test
-  public void testRetrieveListSetsPage() {
-    // browser.maximizeWindow();
-
-    ListSetsPage listSetsPage = new ListSetsPage(browser);
-  }
-
-
-  /**
-   * Test to verify that a EditSet form submission works and results can beviewed on the ListSets Page.
+   * Test to verify that a EditSet form submission works and results can be viewed on the ListSets Page.
    */
   // TODO:  This needs to get re-added to the test suite when it can populate its own routines.
 //  @Test

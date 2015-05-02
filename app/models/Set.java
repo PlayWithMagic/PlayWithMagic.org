@@ -11,7 +11,6 @@ import java.util.List;
 public class Set extends play.db.ebean.Model {
 
   private long id;
-  // Set Info
   private String name;
   private String description;
   private List<Long> routines;

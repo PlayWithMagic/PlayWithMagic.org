@@ -7,24 +7,42 @@ import java.util.List;
  * A single magic routine.
  * <p>
  * This is a central entity for the Play With Magic application.
+ *
+ * The synthetic unique constraint on this model is id.
+ * The logical unique constraint on this model is name.
+
  */
 public class Routine extends play.db.ebean.Model {
-
-  private long id;                   /* A unique, synthetic key to the Routine. */
-  private String name;               /* A short name for the routine. */
-  private String description;        /* A multi-line description of the routine. */
-  private Integer duration;          /* The average time to perform a basic rendition of this routine in minutes. */
-  private String method;             /* A multi-line discussion of the method for this routine. */
-  private String handling;           /* A multi-line discussion of the handling for the routine. */
-  private Integer resetDuration;     /* The average time to prepare the routine for presentation. */
-  private String resetDescription;   /* A description of the process to prepare the routine. */
-  private String youTubeUrl;         /* A URL of the magician performing this routine on YouTube. */
-  private String imageUrl;           /* A URL of an image of this routine. */
-  private List<Material> materials;  /* The materials used for this routine. */
-  private String reviewUrl;          /* A URL of a review of the routine. */
-  private String inspiration;        /* What was the inspiration for this routine. */
-  private String placement;          /* What routines would you put next to this. */
-  private String choices;            /* Why did you make some of the choices you made in the design of this routine. */
+  /* A unique, synthetic key to the Routine. */
+  private long id;
+  /* A short name for the routine. */
+  private String name;
+  /* A multi-line description of the routine. */
+  private String description;
+  /* The average time to perform a basic rendition of this routine in minutes. */
+  private Integer duration;
+  /* A multi-line discussion of the method for this routine. */
+  private String method;
+  /* A multi-line discussion of the handling for the routine. */
+  private String handling;
+  /* The average time to prepare the routine for presentation. */
+  private Integer resetDuration;
+  /* A description of the process to prepare the routine. */
+  private String resetDescription;
+  /* A URL of the magician performing this routine on YouTube. */
+  private String youTubeUrl;
+  /* A URL of an image of this routine. */
+  private String imageUrl;
+  /* The materials used for this routine. */
+  private List<Material> materials;
+  /* A URL of a review of the routine. */
+  private String reviewUrl;
+  /* What was the inspiration for this routine. */
+  private String inspiration;
+  /* What routines would you put next to this. */
+  private String placement;
+  /* Why did you make some of the choices you made in the design of this routine. */
+  private String choices;
 
   /**
    * Create new, valid Routine object.
@@ -57,6 +75,15 @@ public class Routine extends play.db.ebean.Model {
    */
   public long getId() {
     return id;
+  }
+
+  /**
+   * Return a unique, synthetic key for the Routine.
+   *
+   * @param id A unique, synthetic key to the Routine.
+   */
+  public void setId(long id) {
+    this.id = id;
   }
 
   /**
@@ -229,6 +256,15 @@ public class Routine extends play.db.ebean.Model {
    */
   public List<Material> getMaterials() {
     return materials;
+  }
+
+  /**
+   * Set the materials used for this routine.
+   *
+   * @param materials The materials used for this routine.
+   */
+  public void setMaterials(List<Material> materials) {
+    this.materials = materials;
   }
 
   /**

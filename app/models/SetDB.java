@@ -86,6 +86,7 @@ public class SetDB {
    * Delete all of the Sets in the database.  This is used by JUnit tests.
    */
   public static void resetSetDB() {
+    // TODO:  It is confirmed... we will need these methods long term.
     sets.clear();
     currentId = 1;
     Logger.warn("Set database reset");

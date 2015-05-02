@@ -102,9 +102,9 @@ public class MaterialFormData {
     this.routineId = routineId;
     this.materialId = materialId;
     this.name = material.getName();
-    this.isInspectable = material.isInspectable();
-    this.isGivenAway = material.isGivenAway();
-    this.isConsumed = material.isConsumed();
+    this.isInspectable = material.getIsInspectable();
+    this.isGivenAway = material.getIsGivenAway();
+    this.isConsumed = material.getIsConsumed();
     this.price = material.getPrice();
     this.description = material.getDescription();
     this.purchaseUrl = material.getPurchaseUrl();
