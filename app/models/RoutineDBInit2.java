@@ -16,9 +16,8 @@ public class RoutineDBInit2 {
     long id;
 
     routine = new Routine(0, "3 Long Ropes", "My uncle taught me this Routine when I was in elementary school. Take "
-        + "three different lengths of rope, and magically make them all the same length!");
+        + "three different lengths of rope, and magically make them all the same length!", 5);
 
-    routine.setDuration(5);
     routine.setMethod("Two of the lengths are cut in such a way that when crossed behind the hand, it appears that"
         + "the three ropes are now the same length.");
 
@@ -29,8 +28,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/412.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("1 length of rope");
     material.isInspectable(true);
@@ -56,9 +54,8 @@ public class RoutineDBInit2 {
         + "spectator to choose any card and place it on top of your pack. You do the same. To everyone's amazement, "
         + "BOTH cards match.\n A free choice from the spectator leads to one impossible conclusion.\n BLIND is a "
         + "modern take on a timeless prediction plot, done under impossible conditions. NO duplicates. NO doubles. "
-        + "NO possible explanation.");
+        + "NO possible explanation.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Learn the method at https://store.theory11.com/products/blind-daniel-madison");
 
     routine.setHandling("Be sure that the participant doesn't look at the decks!");
@@ -68,8 +65,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/413.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
     material.isInspectable(false);
@@ -97,9 +93,8 @@ public class RoutineDBInit2 {
         + "NO funny business.\n What happens next is practical, impromptu, visual magic at its best.\n"
         + "One-by-one, the bill travels up both rubberbands with just a flick of the wrist, coming to rest on the "
         + "very top strand. Three penetrations done in ten seconds time, under impossible conditions. For the finale, "
-        + "the bill travels back down the bands slowly and visually - ending where it originally started.");
+        + "the bill travels back down the bands slowly and visually - ending where it originally started.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Learn the method at https://store.theory11.com/products/blind-daniel-madison");
 
     routine.setHandling("Be patient and go slow with the rubber band setup; you don't want to flub it.");
@@ -109,8 +104,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/414.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Rubber Band");
     material.isInspectable(true);
@@ -136,9 +130,8 @@ public class RoutineDBInit2 {
         + "is lowered beneath a glass surface or tabletop and the selection visually penetrates up through the "
         + "glass.\n Without warning, it immediately melts back down through the table again.\n BREACH is an "
         + "incredibly visual card penetration that happens with little cover using ANY glass tabletop or surface. "
-        + "This is what card magic is supposed to look like.");
+        + "This is what card magic is supposed to look like.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Learn the method at https://store.theory11.com/products/breach-daniel-madison");
 
     routine.setHandling("As always this requires good control with the cards.  A clear table is also required, just "
@@ -149,8 +142,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/415.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Cards");
     material.isInspectable(true);
@@ -176,9 +168,8 @@ public class RoutineDBInit2 {
         + "A prediction is shown and placed, face down, onto the table.  The audience member chooses a token for "
         + "themselves, one for another spectator and one for the bag that the chips were taken from.  Amazingly, "
         + "even though the audience member had freewill, the prediction is perfectly accurate.\n Works EVERY "
-        + "time with NO sleight of hand. Very, very easy to perform");
+        + "time with NO sleight of hand. Very, very easy to perform", 2);
 
-    routine.setDuration(2);
     routine.setMethod("The method for this routine may be purchased as a kit at "
         + "http://www.grandillusions.com/product/free-will/");
 
@@ -189,8 +180,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/416.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Free Will Packet");
     material.isInspectable(true);
@@ -214,9 +204,8 @@ public class RoutineDBInit2 {
 
     routine = new Routine(0, "Double Exposure", "A mind-blowing new take on a classic effect. Double Exposure "
         + "by Asi Wind is a reality altering version of Triumph that happens within a borrowed camera under your "
-        + "spectators complete control.");
+        + "spectators complete control.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("");
 
     routine.setHandling("There are no gimmicks or special applications needed. 100% impromptu. "
@@ -226,8 +215,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/300.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("iPhone");
     material.isInspectable(true);
@@ -264,9 +252,8 @@ public class RoutineDBInit2 {
     routine = new Routine(0, "A.A.C.A.A.N", "From one spectator, any card is named. From a different spectator, "
         + "a number one through fifty-two is named. With absolutely nothing to suspect, the named card appears "
         + "at exactly the number named. A probability so impressive only magic can explain it. "
-        + "This is Any Card at Any Number, for real.");
+        + "This is Any Card at Any Number, for real.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("");
 
     routine.setHandling("");
@@ -275,8 +262,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/301.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -302,9 +288,8 @@ public class RoutineDBInit2 {
     routine = new Routine(0, "Peregrine Pass", "It's not often we stumble upon a secret technique that looks "
         + "authentic to the natural action taking place, in this case - closing a spread of cards. With the "
         + "Peregrine Pass, what happens \"behind the scenes\" when compared to the polished performance is "
-        + "night and day. This is sleight of hand at its finest!");
+        + "night and day. This is sleight of hand at its finest!", 2);
 
-    routine.setDuration(2);
     routine.setMethod("This. Is. Awesome. Incredible. Beautiful. Devastating. EASY!!!! If you have had some "
         + "experience with card manipulation, you can do the Peregrine Pass. The method is so gorgeous it's not "
         + "even right...you WILL have the mechanics down in under 8 minutes, and if you do this in front of "
@@ -316,8 +301,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/302.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -344,9 +328,8 @@ public class RoutineDBInit2 {
         + "cards dealt onto the table. Switch one card or many cards, cause cards to visually change, force cards, "
         + "and more. The Flux Deal is great for mathematical tricks, gambling demonstrations, and transpositions. "
         + "The possibilities are endless! The deal is not only imperceptible, but indistinguishable. With practice, "
-        + "the switch will even fool you.");
+        + "the switch will even fool you.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("I find the grip hard to execute because my forefinger isn't long enough to hold the cards "
         + "steady. I can hold the cards with my middle finger but then it´s hard to execute the following move "
         + "so I think it's only for people with big hands.");
@@ -357,8 +340,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/303.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -383,9 +365,8 @@ public class RoutineDBInit2 {
 
     routine = new Routine(0, "Slipshift", "The Slipshift is a visual color change done at the fingertips. "
         + "Within this video Chris explains several variations of the change along with a method to control "
-        + "a selected card to the top of the deck.");
+        + "a selected card to the top of the deck.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Being able to change a card right in front of the spectators face is one of the strongest "
         + "effects there are. I would say this is a must have but only for more advanced magicians.");
 
@@ -395,8 +376,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/304.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -423,9 +403,8 @@ public class RoutineDBInit2 {
         + "of string magically come off right before your eyes. With each phase progressively appearing more "
         + "impossible, the third and final coin is held at the fingertips and visibly melts right through the "
         + "string and then back on again. Finally, it vanishes completely, reappearing with the other two on "
-        + "a table.");
+        + "a table.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("");
 
     routine.setHandling("The performers shows three coins and a length of string. All can be freely examined "
@@ -447,8 +426,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/305.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Chinese Coin set");
     material.isInspectable(false);
@@ -473,9 +451,8 @@ public class RoutineDBInit2 {
     routine = new Routine(0, "King Brand", "Visually dynamic, the effect couldn't be simpler: The deck is removed "
         + "and only four cards are presented, the two red Kings and and the two black fours. With one pair "
         + "sandwiched between the other, they visually trade places under impossible conditions. "
-        + "The plot builds in three phases with the final trasposition happening in a spectators own hand.");
+        + "The plot builds in three phases with the final trasposition happening in a spectators own hand.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("Three phase, sleight heavy, and super deceptive.");
 
     routine.setHandling("");
@@ -485,8 +462,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/306.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -512,9 +488,8 @@ public class RoutineDBInit2 {
     routine = new Routine(0, "Gödel", "Gödel is an innovative face-up color change from the mind of Alexander "
         + "Hansford. With a wave of the hands, cards transform under direct scrutiny. Not only will you receive "
         + "two additional routines with your purchase, Twisting and Sandwich, you’ll find Gödel to be an "
-        + "incredible utility for the effects you already perform.");
+        + "incredible utility for the effects you already perform.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("");
 
     routine.setHandling("After having two cards selected and lost in the pack, two black Jacks are waved "
@@ -528,8 +503,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/307.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -554,9 +528,8 @@ public class RoutineDBInit2 {
 
     routine = new Routine(0, "Spring St. Aces", "As the cards are sprung face up from hand to hand, the dealer "
         + "is able to stop dead on an Ace. This is repeated three more times until all four Aces have been found. "
-        + "An impeccable feat to say the least.");
+        + "An impeccable feat to say the least.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("");
 
     routine.setHandling("");
@@ -566,8 +539,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/308.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -592,9 +564,8 @@ public class RoutineDBInit2 {
 
     routine = new Routine(0, "Diagonal Palm Shift", "First published in 1902 by S.W. Erdnase, the Diagonal Palm "
         + "Shift - a secret maneuver for bottom palming a selected card placed into the middle of the deck - "
-        + "is explained in detail by one of this generations most beloved sleight of hand artists, Ricky Smith.");
+        + "is explained in detail by one of this generations most beloved sleight of hand artists, Ricky Smith.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("");
 
     routine.setHandling("");
@@ -604,8 +575,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/309.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -632,9 +602,8 @@ public class RoutineDBInit2 {
         + "book, Ultimate Secrets of Card Magic (1967); however it wasn't until we saw a video of Ross Bertram "
         + "performing the shuffle perfectly that we began to take interest. What you see before you is our own "
         + "handling created to achieve the perfect one-for-one riffle along with various subtleties acquired "
-        + "from years of practice.");
+        + "from years of practice.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("");
 
     routine.setHandling("");
@@ -644,8 +613,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/310.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -672,9 +640,8 @@ public class RoutineDBInit2 {
         + "place away from the deck, WeFlex is a single-card color change. It all happens at the fingertips, "
         + "so it's all very open. With apparently just the flexing of a card back and forth, it changes right "
         + "before your eyes. WeFlex is as beautiful as it is graceful, and in our opinion is one of the most "
-        + "elegant and magical color change ever created.");
+        + "elegant and magical color change ever created.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("");
 
     routine.setHandling("It is not angle proof but its easy to get right after practice in the mirror. "
@@ -685,8 +652,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/311.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -713,9 +679,8 @@ public class RoutineDBInit2 {
         + "between the performer and the audience that few effects have the ability to do. Catch 23 has been an "
         + "integral part of Asi’s live shows for years. Today he offers it to us. Asi’s creative ingenuity and "
         + "passion for magic has advanced our art ten-fold. This newest addition to an overwhelming collection "
-        + "is nothing short of brilliant.");
+        + "is nothing short of brilliant.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("");
 
     routine.setHandling("A performer invites four spectators to the stage. After cleanly showing five envelopes "
@@ -732,8 +697,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/312.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Evidence bag and cards");
     material.isInspectable(false);
@@ -761,9 +725,8 @@ public class RoutineDBInit2 {
         + "except for twelve like-suited cards in order! It’s discovered that the card needed to complete the "
         + "sequence is the one that’s been on the table since the start of the effect. A spectator is then invited "
         + "to shuffle the pack themselves, and the trick is repeated to reveal the second selection of an entirely "
-        + "different suit. Finally, the first selection transforms into the second for a startling conclusion.");
+        + "different suit. Finally, the first selection transforms into the second for a startling conclusion.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("The method is smart and fun to pull off. With so many different forms of Triumph out "
         + "there, it can be easy to assume you know all you need to, but the second wave of this trick amplifies "
         + "the effect phenomenally.");
@@ -775,8 +738,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/313.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -800,9 +762,8 @@ public class RoutineDBInit2 {
     long id;
 
     routine = new Routine(0, "Trigger", "Trigger is a stunning and surprising effect that looks like trick "
-        + "photography. The solution is impossible to reconstruct, yet seems fair and is easily achieved.");
+        + "photography. The solution is impossible to reconstruct, yet seems fair and is easily achieved.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("After a card is shuffled into the center, the deck is wrapped tightly with a rubber "
         + "band, sealing the card within. At your command, the band passes through the entire deck with the "
         + "exception of a single card, which shoots out from the center for a dynamic and visual effect.");
@@ -814,8 +775,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/314.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -841,9 +801,8 @@ public class RoutineDBInit2 {
     routine = new Routine(0, "Static", "With the spectator's finger touching the top of the deck, the deck slowly "
         + "splits itself in half. With a delicate touch, their chosen card shoots out of the pack. The deck is "
         + "completely examinable before and after the effect. They will find nothing. They will have no "
-        + "explanation.");
+        + "explanation.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("");
 
     routine.setHandling("");
@@ -853,8 +812,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/315.png");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -879,9 +837,8 @@ public class RoutineDBInit2 {
 
     routine = new Routine(0, "Slydini's Knotted Slilks", "I've wanted to learn this trick for a long time.  It's "
         + "a 4 stage trick but it has over 60 moves to it.  The essence of the trick is that two silks are tied "
-        + "together with a solid knot, then magically, the silks come apart.");
+        + "together with a solid knot, then magically, the silks come apart.", 12);
 
-    routine.setDuration(12);
     routine.setMethod("Go buy the book.");
     routine.setHandling("Again, go buy the book.");
     routine.setResetDuration(0);
@@ -890,8 +847,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/206.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Two silk scarves");
     material.isInspectable(true);
@@ -917,9 +873,8 @@ public class RoutineDBInit2 {
         + "silks from a black, slik bag.  The silks are inspected and a spectator puts the silks into the bag and "
         + "'mixes' them.  The magician reminds the audience that the United States is a mixture of many, many "
         + "world cultures and the three silks are red, white and blue.  The three mixed silks are then instantly "
-        + "combined to produce an american flag.");
+        + "combined to produce an american flag.", 4);
 
-    routine.setDuration(4);
     routine.setMethod("Get a blendo bag and some silks.  Learn to fold the blendo bag.");
     //routine.setHandling("");
     routine.setResetDuration(10);
@@ -928,8 +883,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/207.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Three 18\" silk scarves: Red, White and Blue");
     material.isInspectable(true);
@@ -965,9 +919,8 @@ public class RoutineDBInit2 {
 
     routine = new Routine(0, "Lucifer's Wallet", "Remove your wallet.  Set it on fire, remove a burning business "
         + "card.  Blow it out.  Snuff out the fire in your wallet.  Hand out the still-warm card -- without a "
-        + "singe mark on it.  Let the audience look at the wallet.");
+        + "singe mark on it.  Let the audience look at the wallet.", 1);
 
-    routine.setDuration(1);
     routine.setMethod("Very carefully -- you're literally playing with fire.");
     //routine.setHandling("");
     routine.setResetDuration(5);
@@ -976,8 +929,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/208.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Lucifer's wallet");
     material.isInspectable(true);
@@ -1025,9 +977,8 @@ public class RoutineDBInit2 {
     routine = new Routine(0, "The Magic Project Plan", "\"The hardest part of a project is the beginning.  The fear of "
         + "the blank page\"... thumb through a `book` full of empty pages.  Then have a project manager sprinkle some "
         + "fairy dust on it and thumb through the book again -- this time it's full of charts and graphs.  Finally "
-        + "have a programmer type on the book's cover, and when you thumb through the book, it's full of code.");
+        + "have a programmer type on the book's cover, and when you thumb through the book, it's full of code.", 4);
 
-    routine.setDuration(4);
     routine.setMethod("I make my books by hand, but the template is a classic Magic Coloring Book");
     routine.setHandling("Oh, so easy.  Go visit your local magic shop and they'll set you up.");
     //routine.setResetDuration(1);
@@ -1037,8 +988,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/209.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("A gaff book");
     material.isInspectable(false);
@@ -1065,9 +1015,8 @@ public class RoutineDBInit2 {
         + "Mr. David Regal.  This routine uses a Wellington Switchboard and consists of three phases.  The first "
         + "phase introduces the switchboard... four colored lights and four colored switches.  Whenever the normal "
         + "person is asked to throw a switch the light corresponding to the switch's color lights up.  Whenever "
-        + "the engineer throws a switch, the light opposite the switch lights up.");
+        + "the engineer throws a switch, the light opposite the switch lights up.", 10);
 
-    routine.setDuration(10);
     //routine.setMethod("");
     //routine.setHandling("");
     //routine.setResetDuration(1);
@@ -1076,8 +1025,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/210.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Wellington Switchboard");
     material.isInspectable(true);
@@ -1103,9 +1051,8 @@ public class RoutineDBInit2 {
     routine = new Routine(0, "French Kiss", "This is a classic double-turnover routine that I originally found in "
         + "The Royal Road to Card Magic.  However, Wayne Houchin's version is edgy, fun and is my closer.  Thank you, "
         + "Wayne.  It's a transposition effect where a spectator's signed card, is transposed with the magician's "
-        + "signed card.");
+        + "signed card.", 4);
 
-    routine.setDuration(4);
     routine.setMethod("A flawless double turnover");
     routine.setHandling("");
     routine.setResetDuration(2);
@@ -1114,8 +1061,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/211.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Deck of Cards");
     material.isInspectable(true);
@@ -1139,9 +1085,8 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Three Fly", "Poker chips (or coins) fly from one hand to the other... and back.");
+    routine = new Routine(0, "Three Fly", "Poker chips (or coins) fly from one hand to the other... and back.", 2);
 
-    routine.setDuration(2);
     routine.setMethod("You can get that from Lee.");
     routine.setHandling("Checkout Lee Asher's performance of this routine 2:47 into the video...");
     routine.setResetDuration(1);
@@ -1150,8 +1095,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/217.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("At least four poker chips");
     material.isInspectable(true);
@@ -1175,9 +1119,8 @@ public class RoutineDBInit2 {
     long id;
 
     routine = new Routine(0, "Witness", "A spectator seals a 'wild joker' in a zip-lock bag.  The spectator then "
-        + "selects a card an puts it in the deck.  Suddenly, the card is in the zip-lock bag.");
+        + "selects a card an puts it in the deck.  Suddenly, the card is in the zip-lock bag.", 1);
 
-    routine.setDuration(1);
     routine.setMethod("See Lee's website...");
     //routine.setHandling("");
     routine.setResetDuration(2);
@@ -1186,8 +1129,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/218.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("The Widness DVD");
     material.isInspectable(false);
@@ -1238,9 +1180,8 @@ public class RoutineDBInit2 {
         + "about 90% of the time, the audience can't find the markings.  I use the time to talk about cards and "
         + "card games.  I tend to do it when I'm getting burned by an audience and I want to bring the tension down "
         + "a bit.  Sometimes, I'll do it to demonstrate that this isn't supernatural.  Other times, I'll do it "
-        + "to make an audience member feel special or not foolish.");
+        + "to make an audience member feel special or not foolish.", 5);
 
-    routine.setDuration(5);
     //routine.setMethod("");
     routine.setHandling("Just be yourself.");
     //routine.setResetDuration(1);
@@ -1249,8 +1190,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/material/219.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Blue Fournier 505 Deck");
     material.isInspectable(true);
@@ -1275,10 +1215,9 @@ public class RoutineDBInit2 {
     long id;
 
     routine = new Routine(0, "Cocoa", "I don't perform this trick... yet.  I saw David Regal perform it at a lecture "
-        + "once and it's burned into my mind.  Basically, these marshmellows are coming and going out of a cup "
-        + "of hot chocolate.  ");
+        + "once and it's burned into my mind.  Basically, these marshmallows are coming and going out of a cup "
+        + "of hot chocolate.", 10);
 
-    routine.setDuration(10);
     routine.setMethod("Get David's book Approaching Magic");
     //routine.setHandling("");
     //routine.setResetDuration(1);
@@ -1287,8 +1226,7 @@ public class RoutineDBInit2 {
 
     routine.setImageUrl("images/routines/220.jpg");
 
-    id = RoutineDB.addRoutines(new RoutineFormData(routine));
-    routine = RoutineDB.getRoutine(id);
+    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
 
     material = new Material("Approaching Magic");
     material.isInspectable(false);

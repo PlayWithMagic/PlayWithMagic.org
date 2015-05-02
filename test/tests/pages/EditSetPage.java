@@ -11,6 +11,10 @@ import static org.fluentlenium.core.filter.FilterConstructor.withId;
 
 /**
  * Provides scaffolding to remotely control the EditSet page for testing.
+ *
+ * When you want to *go* to a page, do new EditSetPage(browser);
+ * When you are already *at* a page, do new EditSetPage(browser.getDriver());
+ *
  */
 public class EditSetPage extends NavigationWrapper {
 
@@ -43,7 +47,7 @@ public class EditSetPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("<h1>Create Set</h1>") || pageSource().contains("<h1>Update Set</h1>"));
+    assertThat(pageSource()).contains("<body id=\"editSet\">");
   }
 
 

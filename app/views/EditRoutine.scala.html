@@ -61,7 +61,7 @@
             <div class="panel-heading">
               <h3 class="panel-title">Materials
 
-                <button id="add-material" type="submit" class="btn btn-success btn-xs pull-right"
+                <button id="addMaterial" type="submit" class="btn btn-success btn-xs pull-right"
                 formaction="@routes.Application.newMaterial()">
                     Add Material
                 </button>
@@ -90,13 +90,13 @@
                       }
                     </td>
                     <td>
-                      <button id="edit-material" type="submit" class="btn btn-warning btn-xs"
+                      <button id="edit-material" type="submit" class="btn btn-warning btn-xs editMaterial"
                       formaction="@routes.Application.editMaterial(materials.indexOf(material))">
                         Edit
                       </button>
                     </td>
                     <td>
-                      <button id="delete-material" type="submit" class="btn btn-danger btn-xs"
+                      <button id="delete-material" type="submit" class="btn btn-danger btn-xs deleteMaterial"
                       formaction="@routes.Application.deleteMaterial(materials.indexOf(material))">
                         Delete
                       </button>

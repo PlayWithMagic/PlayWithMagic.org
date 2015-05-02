@@ -9,6 +9,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides test scaffolding for the ViewMagician page.
+ *
+ * When you want to *go* to a page, do new ViewMagicianPage(browser);
+ * When you are already *at* a page, do new ViewMagicianPage(browser.getDriver());
+ *
  */
 public class ViewMagicianPage extends NavigationWrapper {
 
@@ -42,7 +46,7 @@ public class ViewMagicianPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("<h3>Experience with Magic</h3>"));
+    assertThat(pageSource()).contains("<h3>Experience with Magic</h3>");
   }
 
 
@@ -51,26 +55,29 @@ public class ViewMagicianPage extends NavigationWrapper {
    *
    * @param magician A container holding all of the fields to check for in the page.
    */
-  public void checkMagician(Magician magician) {
+  public void hasMagician(Magician magician) {
+    // Required fields
     assertThat(this.pageSource()).contains(magician.getFirstName());
     assertThat(this.pageSource()).contains(magician.getLastName());
     assertThat(this.pageSource()).contains(magician.getEmail());
     assertThat(this.pageSource()).contains(magician.getMagicianType().getName());
-    assertThat(this.pageSource()).contains(magician.getStageName());
+
+    // Optional fields
+    checkOptionalField(magician.getStageName());
     // No image for now
-    assertThat(this.pageSource()).contains(magician.getLocation());
-    assertThat(this.pageSource()).contains(magician.getBiography());
-    assertThat(this.pageSource()).contains(magician.getInterests());
-    assertThat(this.pageSource()).contains(magician.getInfluences());
-    assertThat(this.pageSource()).contains(magician.getYearStarted().toString());
-    assertThat(this.pageSource()).contains(magician.getOrganizations());
-    assertThat(this.pageSource()).contains(magician.getWebsite());
-    assertThat(this.pageSource()).contains(magician.getFacebook());
-    assertThat(this.pageSource()).contains(magician.getTwitter());
-    assertThat(this.pageSource()).contains(magician.getLinkedIn());
-    assertThat(this.pageSource()).contains(magician.getGooglePlus());
-    assertThat(this.pageSource()).contains(magician.getFlickr());
-    assertThat(this.pageSource()).contains(magician.getInstagram());
+    checkOptionalField(magician.getLocation());
+    checkOptionalField(magician.getBiography());
+    checkOptionalField(magician.getInterests());
+    checkOptionalField(magician.getInfluences());
+    checkOptionalField(magician.getYearStarted());
+    checkOptionalField(magician.getOrganizations());
+    checkOptionalField(magician.getWebsite());
+    checkOptionalField(magician.getFacebook());
+    checkOptionalField(magician.getTwitter());
+    checkOptionalField(magician.getLinkedIn());
+    checkOptionalField(magician.getGooglePlus());
+    checkOptionalField(magician.getFlickr());
+    checkOptionalField(magician.getInstagram());
   }
 
 

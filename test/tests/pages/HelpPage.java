@@ -8,6 +8,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides scaffolding to remotely control the Help page for testing.
+ *
+ * When you want to *go* to a page, do new HelpPage(browser);
+ * When you are already *at* a page, do new HelpPage(browser.getDriver());
+ *
  */
 public class HelpPage extends NavigationWrapper {
 
@@ -40,8 +44,8 @@ public class HelpPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("Overview"));
-    assertThat(pageSource().contains("Terminology"));
+    assertThat(pageSource()).contains("Overview");
+    assertThat(pageSource()).contains("Terminology");
   }
 }
 

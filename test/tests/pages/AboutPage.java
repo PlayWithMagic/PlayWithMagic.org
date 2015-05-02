@@ -9,6 +9,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides scaffolding to remotely control the About page for testing.
+ *
+ * When you want to *go* to a page, do new AboutPage(browser);
+ * When you are already *at* a page, do new AboutPage(browser.getDriver());
+ *
  */
 public class AboutPage extends NavigationWrapper {
 
@@ -41,7 +45,7 @@ public class AboutPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("About this Website"));
-    assertThat(pageSource().contains("Play With Magic was written by:"));
+    assertThat(pageSource()).contains("About this Website");
+    assertThat(pageSource()).contains("PlayWithMagic was written by:");
   }
 }

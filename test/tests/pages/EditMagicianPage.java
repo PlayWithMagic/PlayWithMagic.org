@@ -9,6 +9,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides test scaffolding for the EditMagician page.
+ *
+ * When you want to *go* to a page, do new EditMagicianPage(browser);
+ * When you are already *at* a page, do new EditMagicianPage(browser.getDriver());
+ *
  */
 public class EditMagicianPage extends NavigationWrapper {
 
@@ -41,25 +45,28 @@ public class EditMagicianPage extends NavigationWrapper {
    * @param magician A container holding all of the fields to check for in the page.
    */
   public void checkMagician(Magician magician) {
+    // Required fields
     assertThat(this.pageSource()).contains(magician.getFirstName());
     assertThat(this.pageSource()).contains(magician.getLastName());
     assertThat(this.pageSource()).contains(magician.getEmail());
     assertThat(this.pageSource()).contains(magician.getMagicianType().getName());
-    assertThat(this.pageSource()).contains(magician.getStageName());
+
+    // Optional fields
+    checkOptionalField(magician.getStageName());
     // No image for now
-    assertThat(this.pageSource()).contains(magician.getLocation());
-    assertThat(this.pageSource()).contains(magician.getBiography());
-    assertThat(this.pageSource()).contains(magician.getInterests());
-    assertThat(this.pageSource()).contains(magician.getInfluences());
-    assertThat(this.pageSource()).contains(magician.getYearStarted().toString());
-    assertThat(this.pageSource()).contains(magician.getOrganizations());
-    assertThat(this.pageSource()).contains(magician.getWebsite());
-    assertThat(this.pageSource()).contains(magician.getFacebook());
-    assertThat(this.pageSource()).contains(magician.getTwitter());
-    assertThat(this.pageSource()).contains(magician.getLinkedIn());
-    assertThat(this.pageSource()).contains(magician.getGooglePlus());
-    assertThat(this.pageSource()).contains(magician.getFlickr());
-    assertThat(this.pageSource()).contains(magician.getInstagram());
+    checkOptionalField(magician.getLocation());
+    checkOptionalField(magician.getBiography());
+    checkOptionalField(magician.getInterests());
+    checkOptionalField(magician.getInfluences());
+    checkOptionalField(magician.getYearStarted());
+    checkOptionalField(magician.getOrganizations());
+    checkOptionalField(magician.getWebsite());
+    checkOptionalField(magician.getFacebook());
+    checkOptionalField(magician.getTwitter());
+    checkOptionalField(magician.getLinkedIn());
+    checkOptionalField(magician.getGooglePlus());
+    checkOptionalField(magician.getFlickr());
+    checkOptionalField(magician.getInstagram());
   }
 
 
@@ -69,7 +76,7 @@ public class EditMagicianPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("<h1>Magician Profile</h1>"));
+    assertThat(pageSource()).contains("<h1>Magician Profile</h1>");
   }
 
 
@@ -100,24 +107,27 @@ public class EditMagicianPage extends NavigationWrapper {
    * @param magician A container holding all of the fields to check for in the page.
    */
   public void populateMagician(Magician magician) {
-    this.fill("#firstName").with(magician.getFirstName());
-    this.fill("#lastName").with(magician.getLastName());
-    this.fill("#email").with(magician.getEmail());
+    // Required fields
+    fillRequiredField("#firstName", magician.getFirstName());
+    fillRequiredField("#lastName", magician.getLastName());
+    fillRequiredField("#email", magician.getEmail());
     selectMagicianType(magician.getMagicianType().getName());
-    this.fill("#stageName").with(magician.getStageName());
-    this.fill("#location").with(magician.getLocation());
-    this.fill("#biography").with(magician.getBiography());
-    this.fill("#interests").with(magician.getInterests());
-    this.fill("#influences").with(magician.getInfluences());
-    this.fill("#yearStarted").with(magician.getYearStarted().toString());
-    this.fill("#organizations").with(magician.getOrganizations());
-    this.fill("#website").with(magician.getWebsite());
-    this.fill("#facebook").with(magician.getFacebook());
-    this.fill("#twitter").with(magician.getTwitter());
-    this.fill("#linkedIn").with(magician.getLinkedIn());
-    this.fill("#googlePlus").with(magician.getGooglePlus());
-    this.fill("#flickr").with(magician.getFlickr());
-    this.fill("#instagram").with(magician.getInstagram());
+
+    // Optional fields
+    fillOptionalField("#stageName", magician.getStageName());
+    fillOptionalField("#location", magician.getLocation());
+    fillOptionalField("#biography", magician.getBiography());
+    fillOptionalField("#interests", magician.getInterests());
+    fillOptionalField("#influences", magician.getInfluences());
+    fillOptionalField("#yearStarted", magician.getYearStarted());
+    fillOptionalField("#organizations", magician.getOrganizations());
+    fillOptionalField("#website", magician.getWebsite());
+    fillOptionalField("#facebook", magician.getFacebook());
+    fillOptionalField("#twitter", magician.getTwitter());
+    fillOptionalField("#linkedIn", magician.getLinkedIn());
+    fillOptionalField("#googlePlus", magician.getGooglePlus());
+    fillOptionalField("#flickr", magician.getFlickr());
+    fillOptionalField("#instagram", magician.getInstagram());
   }
 
 

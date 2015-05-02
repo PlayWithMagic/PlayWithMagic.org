@@ -9,6 +9,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides test scaffolding for the ListMagicians page.
+ *
+ * When you want to *go* to a page, do new ListMagiciansPage(browser);
+ * When you are already *at* a page, do new ListMagiciansPage(browser.getDriver());
+ *
  */
 public class ListMagiciansPage extends NavigationWrapper {
 
@@ -41,7 +45,7 @@ public class ListMagiciansPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("<h1>Current Magicians</h1>"));
+    assertThat(pageSource()).contains("<h1>Current Magicians</h1>");
   }
 
 
@@ -52,9 +56,11 @@ public class ListMagiciansPage extends NavigationWrapper {
    */
   public void hasMagician(Magician magician) {
     assertThat(pageSource()).contains(magician.getFirstName() + " " + magician.getLastName());
+
     if (magician.getStageName() != null) {
       assertThat(pageSource()).contains(magician.getStageName());
     }
+
     assertThat(pageSource()).contains(magician.getMagicianType().getName());
   }
 
@@ -66,10 +72,10 @@ public class ListMagiciansPage extends NavigationWrapper {
    */
   public void doesNotHaveMagician(Magician magician) {
     assertThat(pageSource()).doesNotContain(magician.getFirstName() + " " + magician.getLastName());
+
     if (magician.getStageName() != null) {
       assertThat(pageSource()).doesNotContain(magician.getStageName());
     }
-    assertThat(pageSource()).doesNotContain(magician.getMagicianType().getName());
   }
 
 
@@ -92,6 +98,17 @@ public class ListMagiciansPage extends NavigationWrapper {
   public EditUserPage changeFirstMagicianPassword() {
     this.findFirst(".changePassword").click();
     return new EditUserPage(this.getDriver());
+  }
+
+
+  /**
+   * Edit the first magician in the page by going to the EditMagician page.
+   *
+   * @return The EditMagicianPage.
+   */
+  public EditMagicianPage editFirstMagician() {
+    this.findFirst(".editMagician").click();
+    return new EditMagicianPage(this.getDriver());
   }
 
 

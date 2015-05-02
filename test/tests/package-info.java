@@ -21,6 +21,9 @@
  * to click pages and go to other pages, but we didn't want to get that much into it right now.  Possibly we'll
  * refactor the workflow into Fluentlenium pages some other time.
  *
+ * When you want to *go* to a page, do new IndexPage(browser);
+ * When you are already *at* a page, do new IndexPage(browser.getDriver());
+ *
  * @author Mark Nelson
  * @author David Neely
  * @author Patrick Karjala

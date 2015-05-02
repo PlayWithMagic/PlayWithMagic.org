@@ -13,12 +13,16 @@ import tests.pages.ViewMagicianPage;
 
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
+import static org.fest.assertions.Assertions.assertThat;
 
 
 /**
  * Test the live interaction of the Magician pages with Chrome.
  * <p>
  * Run a server with a fake application, in-memory database and browser (Chrome) to test the system.
+ *
+ * When you want to *go* to a page, do new IndexPage(browser);
+ * When you are already *at* a page, do new IndexPage(browser.getDriver());
  *
  * @see https://www.playframework.com/documentation/2.3.0/api/java/play/test/WithBrowser.html
  */
@@ -100,7 +104,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
         "03 Test First Name 03"
         , "03 Test Last Name 03"
         , "Test_eMail_03@playwithmagic.org"
-        , MagicianType.getMagicianType("Collector")
+        , MagicianType.getMagicianType("Historian")
         , "P@ssw0rd"
     );
 
@@ -108,7 +112,7 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
 
 
   /**
-   * Test Magician Navigation from home page and navigation bars.
+   * Test Magician navigation from home page and navigation bars.
    */
   @Test
   public void testMagicianNav() {
@@ -146,17 +150,12 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     editUser.hasRequiredFieldErrors();
 
     // Populate only the required information and click Add
-    editUser.fill("#firstName").with(magician3.getFirstName());
-    editUser.fill("#lastName").with(magician3.getLastName());
-    editUser.fill("#email").with(magician3.getEmail());
-    editUser.selectMagicianType(magician3.getMagicianType().getName());
-    editUser.fill("#password").with(magician3.getPassword());
+    editUser.populateMagician(magician3);
     editUser.clickSubmit();
 
     // This should be successful and the browser should go to EditMagicians.  Verify the magician.
     EditMagicianPage editMagicianPage = new EditMagicianPage(editUser.getDriver());
-    // editMagicianPage.hasMagician(magician3);
-    // TODO: Add above to EditMagician
+    editMagicianPage.checkMagician(magician3);
     editMagicianPage.clickSubmit();
 
     // This should be successful and the browser should go to ListMagicians.  Verify the magician.
@@ -189,17 +188,17 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     editUserPage.clickSubmit();
 
     // Land in the EditMagician page, populate all of the fields and click Add
-    EditMagicianPage editMagician = new EditMagicianPage(editUserPage.getDriver());
-    editMagician.populateMagician(magician1);
-    editMagician.clickSubmit();
+    EditMagicianPage editMagicianPage = new EditMagicianPage(editUserPage.getDriver());
+    editMagicianPage.populateMagician(magician1);
+    editMagicianPage.clickSubmit();
 
     // This should be successful and the browser should go to ListMagicians.  Verify the magician.
-    ListMagiciansPage listMagiciansPage = new ListMagiciansPage(editMagician.getDriver());
+    ListMagiciansPage listMagiciansPage = new ListMagiciansPage(editMagicianPage.getDriver());
     listMagiciansPage.hasMagician(magician1);
 
     // View the magician and check all of the fields
     ViewMagicianPage viewMagicianPage = listMagiciansPage.viewFirstMagician();
-    viewMagicianPage.checkMagician(magician1);
+    viewMagicianPage.hasMagician(magician1);
 
     // Update the user
     listMagiciansPage = viewMagicianPage.clickReturnToMagicianListButton();
@@ -209,17 +208,18 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     editUserPage.clickSubmit();
 
     // Update the magician
-    editMagician = new EditMagicianPage(editUserPage.getDriver());
-    editMagician.populateMagician(magician2);
-    editMagician.clickSubmit();
+    editMagicianPage = new EditMagicianPage(editUserPage.getDriver());
+    editMagicianPage.populateMagician(magician2);
+    editMagicianPage.clickSubmit();
 
     // Verify the new information is in the list and the old information is not.
-    listMagiciansPage = new ListMagiciansPage(editMagician.getDriver());
-    listMagiciansPage.hasMagician(magician2);
+    listMagiciansPage = new ListMagiciansPage(editMagicianPage.getDriver());
     listMagiciansPage.doesNotHaveMagician(magician1);
+    listMagiciansPage.hasMagician(magician2);
 
+    // Verify the new information is in ViewMagician
     viewMagicianPage = listMagiciansPage.viewFirstMagician();
-    viewMagicianPage.checkMagician(magician2);
+    viewMagicianPage.hasMagician(magician2);
     listMagiciansPage = viewMagicianPage.clickReturnToMagicianListButton();
 
     // Verify the new information is in the User
@@ -227,10 +227,58 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     editUserPage.checkMagician(magician2);
     listMagiciansPage = editUserPage.clickBrowseMagiciansButton();
 
-    // Go back to list magician and delete the magician
+    // Delete the magician
     listMagiciansPage.hasMagician(magician2);
     listMagiciansPage.deleteFirstMagician();
     listMagiciansPage.doesNotHaveMagician(magician2);
+
+  }
+
+
+  /**
+   * Test to ensure that the Magician and MagicianType entities are bi-directional.
+   */
+  @Test
+  public void testMagicianType() {
+    initializeTest();
+
+    // browser.maximizeWindow();
+
+    // Quickly add our three magicians
+    EditUserPage editUserPage = new EditUserPage(browser);
+    editUserPage.populateMagician(magician1);
+    editUserPage.clickSubmit();
+    EditMagicianPage editMagicianPage = new EditMagicianPage(editUserPage.getDriver());
+    editMagicianPage.populateMagician(magician1);
+
+    editUserPage = new EditUserPage(browser);
+    editUserPage.populateMagician(magician2);
+    editUserPage.clickSubmit();
+    editMagicianPage = new EditMagicianPage(editUserPage.getDriver());
+    editMagicianPage.populateMagician(magician2);
+
+    editUserPage = new EditUserPage(browser);
+    editUserPage.populateMagician(magician3);
+    editUserPage.clickSubmit();
+    editMagicianPage = new EditMagicianPage(editUserPage.getDriver());
+    editMagicianPage.populateMagician(magician3);
+
+    //Magician.createMagicianFromForm(new EditMagicianFormData(magician1));
+    //Magician.createMagicianFromForm(new EditMagicianFormData(magician2));
+    //Magician.createMagicianFromForm(new EditMagicianFormData(magician3));
+
+    // We should have 1 professional and 2 historians.
+    assertThat(MagicianType.getMagicianType("Neophyte").getMagicians().size()).isEqualTo(0);
+    assertThat(MagicianType.getMagicianType("Enthusiast").getMagicians().size()).isEqualTo(0);
+    assertThat(MagicianType.getMagicianType("Hobbyist").getMagicians().size()).isEqualTo(0);
+    assertThat(MagicianType.getMagicianType("Semi-Professional").getMagicians().size()).isEqualTo(0);
+    assertThat(MagicianType.getMagicianType("Professional").getMagicians().size()).isEqualTo(1);
+    assertThat(MagicianType.getMagicianType("Historian").getMagicians().size()).isEqualTo(2);
+    assertThat(MagicianType.getMagicianType("Collector").getMagicians().size()).isEqualTo(0);
+
+    // ...and test the other direction.
+    Magician magicianOne = Magician.find().where().eq("email", magician1.getEmail()).findUnique();
+    assertThat(magicianOne.getMagicianType()).isEqualTo(MagicianType.getMagicianType("Professional"));
 
   }
 

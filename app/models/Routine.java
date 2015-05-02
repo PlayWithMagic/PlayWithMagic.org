@@ -35,15 +35,18 @@ public class Routine extends play.db.ebean.Model {
    * @param id          A unique, synthetic key to the Routine.
    * @param name        A short name for the routine.
    * @param description A multi-line description of the routine.
+   * @param duration    The average time to perform a basic rendition of this routine in minutes.
    */
   public Routine(
       long id,
       String name,
-      String description) {
+      String description,
+      Integer duration) {
 
     this.id = id;
     this.name = name;
     this.description = description;
+    this.duration = duration;
     this.materials = new ArrayList<Material>();
   }
 

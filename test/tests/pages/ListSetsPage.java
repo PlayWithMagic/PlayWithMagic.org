@@ -8,6 +8,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides scaffolding to remotely control the ListSets page for testing.
+ *
+ * When you want to *go* to a page, do new ListSetsPage(browser);
+ * When you are already *at* a page, do new ListSetsPage(browser.getDriver());
+ *
  */
 public class ListSetsPage extends NavigationWrapper {
 
@@ -40,7 +44,7 @@ public class ListSetsPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource().contains("<h1>Current Sets</h1>"));
+    assertThat(pageSource()).contains("<h1>Current Sets</h1>");
   }
 
 
