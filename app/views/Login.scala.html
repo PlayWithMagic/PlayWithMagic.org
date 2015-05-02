@@ -4,7 +4,9 @@
 @import bootstrap3._
 
 @Main(page, isLoggedIn, userInfo) {
+  <div class="jumbotron">
    <div class="container">
      @loginform(routes.Application.postLogin(), loginForm("email"), loginForm("password"), message)
    </div>
+  </div>
 }

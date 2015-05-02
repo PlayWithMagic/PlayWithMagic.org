@@ -32,19 +32,26 @@
         @*</div>*@
 
         <br/>
-        @if(message.length() > 0) {
-          <p>@message</p>
-          <a href="@routes.Application.login()">
-            <button id="newLogin" type="button" class="btn btn-primary">
-              Log In to Get Started!
-            </button>
-          </a>
+        @if(isLoggedIn) {
+          <a href="@routes.Application.editRoutine()"><button id="createRoutine" type="button" class="btn btn-primary">
+            Create a Routine</button></a>
+          <a href="@routes.Application.editSet()"><button id="createSet" type="button" class="btn btn-primary">
+              Create a Set</button></a>
         } else {
-          <a href="@routes.Application.signup()">
-            <button id="joinTheCommunity" type="button" class="btn btn-primary">
-              Join the Community Today!
-            </button>
-          </a>
+          @if(message.length() > 0) {
+            <p>@message</p>
+            <a href="@routes.Application.login()">
+              <button id="newLogin" type="button" class="btn btn-primary">
+                Log In to Get Started!
+              </button>
+            </a>
+          } else {
+            <a href="@routes.Application.signup()">
+              <button id="joinTheCommunity" type="button" class="btn btn-primary">
+                Join the Community Today!
+              </button>
+            </a>
+          }
         }
       </div>
     </header>

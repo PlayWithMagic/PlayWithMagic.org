@@ -23,7 +23,7 @@
             <div class="form-group @if(passwordField.hasErrors) {has-error}" >
               <input id="@passwordField.id" name="@passwordField.name" value="@passwordField.value.getOrElse("")" class="form-control" placeholder="Password" type="password">
             </div>
-            <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
           </fieldset>
         }
           @if(flash.size() > 0){

@@ -179,7 +179,7 @@ public class Application extends Controller {
    */
   public static Result login(String message) {
     Form<LoginFormData> formData = Form.form(LoginFormData.class);
-    return ok(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, message));
+    return ok(Login.render("login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, message));
   }
 
   /**
@@ -205,7 +205,7 @@ public class Application extends Controller {
           }
         }
       }
-      return badRequest(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, ""));
+      return badRequest(Login.render("login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, ""));
     }
     else {
       // email/password OK, so now we set the session variable and only go to authenticated pages.

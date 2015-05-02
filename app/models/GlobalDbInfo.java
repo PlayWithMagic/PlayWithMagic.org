@@ -16,7 +16,7 @@ public class GlobalDbInfo {
   public static final int MAX_MULTILINE_TEXT_LENGTH = 2000;
 
   /** The minimum password length. */
-  public static final int MIN_PASSWORD_LENGTH = 8;
+  public static final int MIN_PASSWORD_LENGTH = 6;
 
   /** The minimum number of uppercase characters in the password. */
   public static final int MIN_PASSWORD_UPPERCASE_CHARS = 1;
