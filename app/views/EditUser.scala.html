@@ -3,20 +3,21 @@
 *
 * @see http://www.playframework.com
 *@
-@(magicianForm: Form[views.formdata.EditUserFormData], magicianTypeMap: Map[String, Boolean])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician,
+    magicianForm: Form[views.formdata.EditUserFormData], magicianTypeMap: Map[String, Boolean])
 
 @import helper._
 @import views.html.bootstrap3._
 
 
-@Main("editUser") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->
     <section id="content" class="container">
       <div class="col-md-12">
         @if(magicianForm("id").value == "0") {
-          <h1>New User</h1>
+          <h1>Register New User</h1>
         } else {
           <h1>Edit User</h1>
         }

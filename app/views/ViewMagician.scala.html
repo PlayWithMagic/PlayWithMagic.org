@@ -3,9 +3,9 @@
 *
 * @see http://www.playframework.com
 *@
-@(magician: Magician)
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, magician: Magician)
 
-@Main("viewMagician") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->

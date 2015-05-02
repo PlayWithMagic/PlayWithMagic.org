@@ -3,12 +3,12 @@
 *
 * @see http://www.playframework.com
 *@
-@(materialForm: Form[views.formdata.MaterialFormData])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, materialForm: Form[views.formdata.MaterialFormData])
 
 @import helper.form
 @import views.html.bootstrap3.{checkboxBoolean, hidden, text, text45, textInt, textarea}
 
-@Main("editMaterial") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->

@@ -54,10 +54,11 @@ public class Application extends Controller {
   /**
    * Render the Home/Index page.
    *
+   * @param message A String message that is passed to the home page.
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
-  public static Result index() {
-    return ok(Index.render());
+  public static Result index(String message) {
+    return ok(Index.render("home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), message));
   }
 
 
@@ -67,7 +68,7 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the About page.
    */
   public static Result about() {
-    return ok(About.render());
+    return ok(About.render("about", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
   }
 
 
@@ -77,7 +78,7 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the Help page.
    */
   public static Result help() {
-    return ok(Help.render());
+    return ok(Help.render("help", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
   }
 
 
@@ -106,7 +107,8 @@ public class Application extends Controller {
 
     Form<EditUserFormData> formData = Form.form(EditUserFormData.class).fill(editUserFormData);
     Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editUserFormData.magicianType);
-    return ok(EditUser.render(formData, magicianTypeMap));
+    return ok(EditUser.render("editUser", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formData, magicianTypeMap));
   }
 
 
@@ -135,7 +137,8 @@ public class Application extends Controller {
         magicianTypeMap = MagicianTypeFormData.getMagicianTypes();
       }
 
-      return badRequest(EditUser.render(formData, magicianTypeMap));
+      return badRequest(EditUser.render("editUser", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formData, magicianTypeMap));
     }
 
     EditUserFormData editUserFormData = formData.get();
@@ -159,7 +162,8 @@ public class Application extends Controller {
     Form<EditMagicianFormData> editMagicianFormFields;
     editMagicianFormFields = Form.form(EditMagicianFormData.class).fill(editMagicianFormData);
     Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editMagicianFormData.magicianType);
-    return ok(EditMagician.render(editMagicianFormFields, magicianTypeMap));
+    return ok(EditMagician.render("editMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        editMagicianFormFields, magicianTypeMap));
   }
 
 
@@ -207,7 +211,7 @@ public class Application extends Controller {
       // email/password OK, so now we set the session variable and only go to authenticated pages.
       session().clear();
       session("email", formData.get().email);
-      return redirect(routes.Application.index());
+      return redirect(routes.Application.index(""));
     }
   }
 
@@ -219,7 +223,7 @@ public class Application extends Controller {
   @Security.Authenticated(Secured.class)
   public static Result logout() {
     session().clear();
-    return redirect(routes.Application.index());
+    return redirect(routes.Application.index(""));
   }
 
   /**
@@ -228,8 +232,16 @@ public class Application extends Controller {
    * @return The Signup page.
    */
   public static Result signup() {
-    Form<EditUserFormData> formData = Form.form(EditUserFormData.class);
-    return ok(EditUser.render("Signup", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData));
+    //Form<EditUserFormData> formData = Form.form(EditUserFormData.class);
+
+    EditUserFormData editUserFormData;
+
+    editUserFormData = new EditUserFormData();
+
+    Form<EditUserFormData> formData = Form.form(EditUserFormData.class).fill(editUserFormData);
+    Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editUserFormData.magicianType);
+    return ok(EditUser.render("signup", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formData, magicianTypeMap));
   }
 
   /**
@@ -255,15 +267,23 @@ public class Application extends Controller {
           }
         }
       }
-      return badRequest(EditUser.render("Signup", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData));
+      Map<String, Boolean> magicianTypeMap = null;
+      if (MagicianTypeFormData.isMagicianType(formData.field("magicianType").value())) {
+        magicianTypeMap = MagicianTypeFormData.getMagicianTypes(formData.field("magicianType").value());
+      }
+      else {
+        magicianTypeMap = MagicianTypeFormData.getMagicianTypes();
+      }
+      return badRequest(EditUser.render("editUser", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formData, magicianTypeMap));
     }
     else {
       // email/password OK, so now we set the session variable and only go to authenticated pages.
-      //session().clear();
-      //session("email", formData.get().email);
+      // session().clear();
+      // session("email", formData.get().email);
       EditUserFormData dataFromForm = formData.get();
       Magician.createMagicianFromForm(dataFromForm);
-      return redirect(routes.Application.login("Success"));
+      return redirect(routes.Application.index("Successfully Signed Up!"));
     }
   }
 
@@ -279,12 +299,14 @@ public class Application extends Controller {
    * @param id The ID of the magician to edit.
    * @return An HTTP OK message along with the HTML content for the EditMagician page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result editMagician(long id) {
     EditMagicianFormData editMagicianFormData = new EditMagicianFormData(Magician.getMagician(id));
 
     Form<EditMagicianFormData> formData = Form.form(EditMagicianFormData.class).fill(editMagicianFormData);
     Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editMagicianFormData.magicianType);
-    return ok(EditMagician.render(formData, magicianTypeMap));
+    return ok(EditMagician.render("editMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formData, magicianTypeMap));
   }
 
 
@@ -293,6 +315,7 @@ public class Application extends Controller {
    *
    * @return If successful, the ListMagicians page.  On error, the EditMagician page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result postMagician() {
     Form<EditMagicianFormData> formData = Form.form(EditMagicianFormData.class).bindFromRequest();
 
@@ -312,7 +335,8 @@ public class Application extends Controller {
         magicianTypeMap = MagicianTypeFormData.getMagicianTypes();
       }
 
-      return badRequest(EditMagician.render(formData, magicianTypeMap));
+      return badRequest(EditMagician.render("editMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formData, magicianTypeMap));
     }
 
     EditMagicianFormData editMagicianFormData = formData.get();
@@ -329,7 +353,8 @@ public class Application extends Controller {
     Logger.debug("  firstName = [" + magician.getFirstName() + "]");
     Logger.debug("  magicianType = [" + magician.getMagicianType().getName() + "]");
 
-    return ok(ListMagicians.render(Magician.getActiveMagicians()));
+    return ok(ListMagicians.render("listMagicians", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        Magician.getActiveMagicians()));
   }
 
 
@@ -339,7 +364,8 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the ListMagicians page.
    */
   public static Result listMagicians() {
-    return ok(ListMagicians.render(Magician.getActiveMagicians()));
+    return ok(ListMagicians.render("listMagicians", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        Magician.getActiveMagicians()));
   }
 
 
@@ -350,7 +376,8 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for a single Magician page.
    */
   public static Result viewMagician(long id) {
-    return ok(ViewMagician.render(Magician.getMagician(id)));
+    return ok(ViewMagician.render("viewMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        Magician.getMagician(id)));
   }
 
 
@@ -360,9 +387,11 @@ public class Application extends Controller {
    * @param id The ID of the Magician to delete.
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result deleteMagician(long id) {
     Magician.deleteMagician(id);
-    return ok(ListMagicians.render(Magician.getActiveMagicians()));
+    return ok(ListMagicians.render("listMagicians", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        Magician.getActiveMagicians()));
   }
 
 
@@ -377,6 +406,7 @@ public class Application extends Controller {
    * @param routineId The ID of the routine to edit (or 0 if it's a new routine).
    * @return An HTTP OK message along with the HTML content for the EditRoutine page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result editRoutine(long routineId) {
     RoutineFormData routineFormData;
     if (routineId == 0) {
@@ -388,7 +418,8 @@ public class Application extends Controller {
 
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).fill(routineFormData);
 
-    return ok(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+    return ok(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithRoutineData, RoutineDB.getMaterials(routineId)));
   }
 
 
@@ -398,10 +429,12 @@ public class Application extends Controller {
    * @param routineId The ID of the routine to delete.
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result deleteRoutine(long routineId) {
     RoutineDB.deleteRoutine(routineId);
 
-    return ok(ListRoutines.render(RoutineDB.getRoutines()));
+    return ok(ListRoutines.render("listRoutines", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        RoutineDB.getRoutines()));
   }
 
 
@@ -411,6 +444,7 @@ public class Application extends Controller {
    *
    * @return The editRoutine page, either with errors or with form data.
    */
+  @Security.Authenticated(Secured.class)
   public static Result postRoutine() {
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
 
@@ -419,13 +453,15 @@ public class Application extends Controller {
     if (formWithRoutineData.hasErrors()) {
       Logger.error("HTTP Routine Form Error.");
 
-      return badRequest(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+      return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithRoutineData, RoutineDB.getMaterials(routineId)));
     }
 
     RoutineFormData routineFormData = formWithRoutineData.get();
     RoutineDB.addRoutines(routineFormData);
 
-    return ok(ListRoutines.render(RoutineDB.getRoutines()));
+    return ok(ListRoutines.render("listRoutines", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        RoutineDB.getRoutines()));
   }
 
 
@@ -435,7 +471,8 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the List Routine page.
    */
   public static Result listRoutines() {
-    return ok(ListRoutines.render(RoutineDB.getRoutines()));
+    return ok(ListRoutines.render("listRoutines", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        RoutineDB.getRoutines()));
   }
 
 
@@ -446,7 +483,8 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for a single Routine page.
    */
   public static Result viewRoutine(long routineId) {
-    return ok(ViewRoutine.render(RoutineDB.getRoutine(routineId)));
+    return ok(ViewRoutine.render("viewRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        RoutineDB.getRoutine(routineId)));
   }
 
   /***************************************************************************************************************
@@ -460,16 +498,19 @@ public class Application extends Controller {
    * @param id The ID of the Set to edit (or 0 if it's a new routine).
    * @return An HTTP OK message along with the HTML content for the EditSet page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result editSet(long id) {
     SetFormData data = (id == 0) ? new SetFormData() : new SetFormData(SetDB.getSet(id));
     Form<SetFormData> formData = Form.form(SetFormData.class).fill(data);
     if (id != 0) {
       Set thisSet = SetDB.getSet(id);
-      return ok(EditSet.render(formData, RoutineDB.getRoutines(), thisSet.getRoutines()));
+      return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
+          RoutineDB.getRoutines(), thisSet.getRoutines()));
     }
     else {
       List<Long> temp = new ArrayList<Long>();
-      return ok(EditSet.render(formData, RoutineDB.getRoutines(), temp));
+      return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
+          RoutineDB.getRoutines(), temp));
     }
   }
 
@@ -479,9 +520,10 @@ public class Application extends Controller {
    * @param id The ID of the set to delete.
    * @return An HTTP OK message along with the HTML content for the Set List page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result deleteSet(long id) {
     SetDB.deleteSet(id);
-    return ok(ListSets.render(SetDB.getSets()));
+    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SetDB.getSets()));
   }
 
   /**
@@ -489,6 +531,7 @@ public class Application extends Controller {
    *
    * @return An HTTP OK message if no errors, otherwise the form page with errors.
    */
+  @Security.Authenticated(Secured.class)
   public static Result postSet() {
     Form<SetFormData> formWithSetData = Form.form(SetFormData.class).bindFromRequest();
 
@@ -503,12 +546,13 @@ public class Application extends Controller {
       else {
         listOfRoutines = new ArrayList<Long>();
       }
-      return badRequest(EditSet.render(formWithSetData, RoutineDB.getRoutines(), listOfRoutines));
+      return badRequest(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithSetData, RoutineDB.getRoutines(), listOfRoutines));
     }
     else {
       SetFormData data = formWithSetData.get();
       SetDB.addSet(data);
-      return ok(ListSets.render(SetDB.getSets()));
+      return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SetDB.getSets()));
     }
   }
 
@@ -518,7 +562,7 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the List Set page.
    */
   public static Result listSets() {
-    return ok(ListSets.render(SetDB.getSets()));
+    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SetDB.getSets()));
   }
 
   /**
@@ -529,7 +573,8 @@ public class Application extends Controller {
    */
   public static Result viewSet(long id) {
     Set thisViewSet = SetDB.getSet(id);
-    return ok(ViewSet.render(SetDB.getSet(id), RoutineDB.getRoutines(), thisViewSet.getRoutines()));
+    return ok(ViewSet.render("viewSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SetDB.getSet(id),
+        RoutineDB.getRoutines(), thisViewSet.getRoutines()));
   }
 
   /***************************************************************************************************************
@@ -558,6 +603,7 @@ public class Application extends Controller {
    * @param materialId The ListArray index of the Material row you want to edit.
    * @return An HTTP page EditMaterial if all is well or EditRoutine if there's an error on that page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result editMaterial(Integer materialId) {
     Form<RoutineFormData> routineFormData = Form.form(RoutineFormData.class).bindFromRequest();
     long routineId = new Long(routineFormData.field("id").value()).longValue();
@@ -565,7 +611,8 @@ public class Application extends Controller {
     if (routineFormData.hasErrors()) {
       Logger.error("HTTP Form Error in editMaterial");
 
-      return badRequest(EditRoutine.render(routineFormData, RoutineDB.getMaterials(routineId)));
+      return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          routineFormData, RoutineDB.getMaterials(routineId)));
     }
 
     RoutineFormData data = routineFormData.get();
@@ -578,7 +625,8 @@ public class Application extends Controller {
 
     Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
 
-    return ok(EditMaterial.render(formWithMaterialData));
+    return ok(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithMaterialData));
   }
 
 
@@ -588,6 +636,7 @@ public class Application extends Controller {
    *
    * @return An HTTP page EditMaterial if all is well or EditRoutine if there's an error on that page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result newMaterial() {
     Form<RoutineFormData> routineFormData = Form.form(RoutineFormData.class).bindFromRequest();
     long routineId = new Long(routineFormData.field("id").value()).longValue();
@@ -595,7 +644,8 @@ public class Application extends Controller {
     if (routineFormData.hasErrors()) {
       Logger.error("HTTP Form Error in editMaterial");
 
-      return badRequest(EditRoutine.render(routineFormData, RoutineDB.getMaterials(routineId)));
+      return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          routineFormData, RoutineDB.getMaterials(routineId)));
     }
 
     RoutineFormData data = routineFormData.get();
@@ -608,7 +658,8 @@ public class Application extends Controller {
     materialFormData.materialId = -1;
 
     Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
-    return ok(EditMaterial.render(formWithMaterialData));
+    return ok(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithMaterialData));
   }
 
 
@@ -619,6 +670,7 @@ public class Application extends Controller {
    * @param materialId The ArrayList index in Routine.materials of the item to delete.
    * @return An HTTP EditMaterial page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result deleteMaterial(Integer materialId) {
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
     long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
@@ -626,7 +678,8 @@ public class Application extends Controller {
     if (formWithRoutineData.hasErrors()) {
       System.out.println("HTTP Form Error.");
 
-      return badRequest(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+      return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithRoutineData, RoutineDB.getMaterials(routineId)));
     }
 
     RoutineFormData routineFormData = formWithRoutineData.get();
@@ -636,7 +689,8 @@ public class Application extends Controller {
 
     RoutineDB.getMaterials(routineId).remove(materialId.intValue());
 
-    return ok(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+    return ok(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithRoutineData, RoutineDB.getMaterials(routineId)));
   }
 
 
@@ -647,6 +701,7 @@ public class Application extends Controller {
    * @return On success, an HTTP OK message along with the HTML content for the EditRoutine page.  On a validation
    * error, an HTTP BadRequest message with the HTML content of the EditMaterial page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result postMaterial() {
     Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).bindFromRequest();
 
@@ -655,7 +710,8 @@ public class Application extends Controller {
     if (formWithMaterialData.hasErrors()) {
       Logger.error("HTTP Form Error in postMaterial.");
 
-      return badRequest(EditMaterial.render(formWithMaterialData));
+      return badRequest(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithMaterialData));
     }
 
     Logger.debug("Form Field Data isInspectable = " + formWithMaterialData.field("isInspectable").value());
@@ -668,7 +724,8 @@ public class Application extends Controller {
     RoutineFormData routineFormData = new RoutineFormData(RoutineDB.getRoutine(routineId));
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).fill(routineFormData);
 
-    return ok(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+    return ok(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithRoutineData, RoutineDB.getMaterials(routineId)));
   }
 
 
@@ -683,7 +740,7 @@ public class Application extends Controller {
     Routine routine = RoutineDB.getRoutine(routineId);
     Material material = routine.getMaterials().get(materialId);
 
-    return ok(ViewMaterial.render(material));
+    return ok(ViewMaterial.render("viewRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), material));
   }
 
 }
