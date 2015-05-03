@@ -634,74 +634,113 @@ public class Magician extends play.db.ebean.Model {
 
 
   /**
-   * Add a magician to the database, but check to see if the magician is already in there first.
-   *
-   * @param magician The magician to add.
-   * @return The magician that was just added.
-   */
-  public static Magician init(Magician magician) {
-    Magician theMagician = Magician.find().where().eq("email", magician.email).findUnique();
-
-    if (theMagician != null) {
-      return theMagician;
-    }
-
-    magician.save();
-
-    return magician;
-  }
-
-
-  /**
    * Initialize the Magician dataset.
-   *
-   * TODO:  Get this to go through the backing classes.
    */
   public static void init() {
-    MagicianType magicianTypeSemiProfessional = MagicianType.getMagicianType("Semi-Professional");
-    MagicianType magicianTypeProfessional = MagicianType.getMagicianType("Professional");
-    MagicianType magicianTypeEnthusiast = MagicianType.getMagicianType("Enthusiast");
-
-    // --------------------------------------
-
     Magician magician = null;
+    EditUserFormData editUserFormData = null;
 
-    magician = new Magician("Mark", "Nelson", "mr_nelson@icloud.com", magicianTypeSemiProfessional, "P@ssw0rd");
-    magician.setStageName("Mark Nelson");
-    magician.setLocation("Honolulu, HI");
-    // No photo
-    magician.setBiography("I got started in magic in 2004.  A retired magician, JC Dunn, showed me a 2-card monte and "
-        + "I was hooked.  Since then, I've learned the craft, performed hundreds of shows in Honolulu and most "
-        + "recently I nailed a parlor act in Beijing.");
-    magician.setInterests("I'm most comfortable with close-up magic, but I'd like to develop a stage show.  I strive "
-        + "to be fluent in all mediums of the art (cards, coins, rope, etc.).");
-    magician.setInfluences("Tony Slydini, David Regal, Lee Asher, Aaron Fisher, my brother Steve Johnson and many, "
-        + "many others.");
-    magician.setYearStarted(2004);
-    //magician.setOrganizations();
-    magician.setWebsite("http://mark.nelson.engineer/wordpress/index.php/magic-home-page/");
-    magician.setFacebook("mark.nelson.engineer");
-    magician.setTwitter("@mr_marknelson");
-    magician.setLinkedIn("http://www.linkedin.com/in/marknelsonengineer/en");
-    magician.setGooglePlus("mr_nelson@icloud.com");
-    magician.setInstagram("mr_mark_nelson");
+    // Add Mark
+    magician = Magician.find().where().eq("email", "mr_nelson@icloud.com").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "Mark";
+      editUserFormData.lastName = "Nelson";
+      editUserFormData.magicianType = "Semi-Professional";
+      editUserFormData.email = "mr_nelson@icloud.com";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
 
-    Magician.init(magician);
+      EditMagicianFormData editMagicianFormData = new EditMagicianFormData();
+      editMagicianFormData.firstName = "Mark";
+      editMagicianFormData.lastName = "Nelson";
+      editMagicianFormData.magicianType = "Semi-Professional";
+      editMagicianFormData.email = "mr_nelson@icloud.com";
+      editMagicianFormData.location = "Honolulu, HI";
+      // No photo
+      editMagicianFormData.biography = "I got started in magic in 2004.  A retired magician, JC Dunn, showed me a "
+          + "2-card monte and I was hooked.  Since then, I've learned the craft, performed hundreds of shows in "
+          + "Honolulu and most recently I nailed a parlor act in Beijing.";
+      editMagicianFormData.interests = "I'm most comfortable with close-up magic, but I'd like to develop a stage "
+          + "show.  I strive to be fluent in all mediums of the art (cards, coins, rope, etc.).";
+      editMagicianFormData.influences = "Tony Slydini, David Regal, Lee Asher, Aaron Fisher, my brother Steve Johnson "
+          + "and many, many others.";
+      editMagicianFormData.yearStarted = 2004;
+      editMagicianFormData.organizations = "";
+      editMagicianFormData.website = "http://mark.nelson.engineer/wordpress/index.php/magic-home-page/";
+      editMagicianFormData.facebook = "mark.nelson.engineer";
+      editMagicianFormData.twitter = "@mr_marknelson";
+      editMagicianFormData.linkedIn = "http://www.linkedin.com/in/marknelsonengineer/en";
+      editMagicianFormData.googlePlus = "mr_nelson@icloud.com";
+      editMagicianFormData.instagram = "mr_mark_nelson";
+      Magician.createMagicianFromForm(editMagicianFormData);
+    }
 
-    magician = new Magician("Patrick", "Karjala", "pkarjala@gmail.com", magicianTypeEnthusiast, "P@ssw0rd");
-    Magician.init(magician);
+    // Add Patrick
+    magician = Magician.find().where().eq("email", "pkarjala@gmail.com").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "Patrick";
+      editUserFormData.lastName = "Karjala";
+      editUserFormData.magicianType = "Enthusiast";
+      editUserFormData.email = "pkarjala@gmail.com";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
+    }
 
-    magician = new Magician("David", "Neely", "dneely@hawaii.edu", magicianTypeEnthusiast, "P@ssw0rd");
-    Magician.init(magician);
+    // Add David
+    magician = Magician.find().where().eq("email", "dneely@hawaii.edu").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "David";
+      editUserFormData.lastName = "Neely";
+      editUserFormData.magicianType = "Enthusiast";
+      editUserFormData.email = "dneely@hawaii.edu";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
+    }
 
-    magician = new Magician("Lee", "Asher", "lee@leeasher.com", magicianTypeProfessional, "P@ssw0rd");
-    Magician.init(magician);
+    // Add Lee
+    magician = Magician.find().where().eq("email", "lee@leeasher.com").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "Lee";
+      editUserFormData.lastName = "Asher";
+      editUserFormData.magicianType = "Professional";
+      editUserFormData.email = "lee@leeasher.com";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
+    }
 
-    magician = new Magician("Steve", "Johnson", "steve@grandillusions.com", magicianTypeProfessional, "P@ssw0rd");
-    Magician.init(magician);
+    // Add Steve
+    magician = Magician.find().where().eq("email", "steve@grandillusions.com").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "Steve";
+      editUserFormData.lastName = "Johnson";
+      editUserFormData.magicianType = "Professional";
+      editUserFormData.email = "steve@grandillusions.com";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
+    }
 
-    magician = new Magician("Wayne", "Houchin", "wayne@waynehouchin.com", magicianTypeProfessional, "P@ssw0rd");
-    Magician.init(magician);
+    // Add Wayne
+    magician = Magician.find().where().eq("email", "wayne@waynehouchin.com").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "Wayne";
+      editUserFormData.lastName = "Houchin";
+      editUserFormData.magicianType = "Professional";
+      editUserFormData.email = "wayne@waynehouchin.com";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
+    }
   }
 
 }
