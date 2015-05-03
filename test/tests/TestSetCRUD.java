@@ -69,8 +69,10 @@ public class TestSetCRUD extends play.test.WithBrowser {
   public void testSetNav() {
     // browser.maximizeWindow();
 
-    // Start at the home page...
-    IndexPage indexPage = new IndexPage(browser);
+    // Clear database, create a test user and login as that user.  Start at the home page...
+    GlobalTest.resetDatabaseForTest("PlayWithMagic");
+    GlobalTest.addUserForTest();
+    IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
 
     // Click the Browse Sets button
     ListSetsPage listSetsPage = indexPage.clickBrowseSetsButton();
@@ -87,8 +89,10 @@ public class TestSetCRUD extends play.test.WithBrowser {
   public void testSetMinimumAddDelete() {
     // browser.maximizeWindow();
 
-    // Start at the home page...
-    IndexPage indexPage = new IndexPage(browser);
+    // Clear database, create a test user and login as that user.  Start at the home page...
+    GlobalTest.resetDatabaseForTest("PlayWithMagic");
+    GlobalTest.addUserForTest();
+    IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
 
     // Add a set without entering any information... this should generate an error.
     EditSetPage editSetPage = indexPage.clickCreateSetButton();
@@ -105,9 +109,13 @@ public class TestSetCRUD extends play.test.WithBrowser {
    */
   @Test
   public void testSetCrudWorkflow() {
+    // browser.maximizeWindow();
 
-    // Start at the home page...
-    IndexPage indexPage = new IndexPage(browser);
+    // Clear database, create a test user and login as that user.  Start at the home page...
+    GlobalTest.resetDatabaseForTest("PlayWithMagic");
+    GlobalTest.addUserForTest();
+    IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
+
 
     // Quickly populate three routines
     EditRoutinePage editRoutinePage = indexPage.clickCreateRoutineButton();
