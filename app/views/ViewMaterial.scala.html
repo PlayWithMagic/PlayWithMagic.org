@@ -26,9 +26,9 @@
         <p>@material.getDescription</p>
 
         <h3>Usage</h3>
-        <p>Is Inspectable? @if(material.getIsInspectable()) {Yes} else {No}</p>
-        <p>Is Given Away? @if(material.getIsGivenAway()) {Yes} else {No}</p>
-        <p>Is Consumed? @if(material.getIsConsumed()) {Yes} else {No}</p>
+        <p>Is Inspectable? @if(material.isInspectable()) {Yes} else {No}</p>
+        <p>Is Given Away? @if(material.isGivenAway()) {Yes} else {No}</p>
+        <p>Is Consumed? @if(material.isConsumed()) {Yes} else {No}</p>
 
         <h3>Procurement</h3>
         <p>Price = $ @if(material.getPrice() != null) {@material.getPrice()} else {Not available}</p>

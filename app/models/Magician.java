@@ -4,10 +4,12 @@ import org.mindrot.jbcrypt.BCrypt;
 import views.formdata.EditMagicianFormData;
 import views.formdata.EditUserFormData;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.io.File;
@@ -19,6 +21,8 @@ import java.util.List;
  *
  * The synthetic unique constraint on this model is id.
  * The logical unique constraint on this model is email.
+ *
+ * TODO: Be sure to drop the first_name, last_name unique constraint
  *
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/32
  */
@@ -35,6 +39,9 @@ public class Magician extends play.db.ebean.Model {
   @Column(nullable = false)
   @ManyToOne
   private MagicianType magicianType;
+
+  @OneToMany(mappedBy = "magician", cascade = CascadeType.PERSIST)
+  private List<Set> sets;
 
   @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String stageName;
   @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String location;  // City/State? Country? Perhaps a map.

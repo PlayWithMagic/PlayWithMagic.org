@@ -1,5 +1,11 @@
 package models;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,39 +16,74 @@ import java.util.List;
  *
  * The synthetic unique constraint on this model is id.
  * The logical unique constraint on this model is name.
-
+ *
+ * Routines are like Wikis... many people contribute - nobody owns them.  Magicians will own a rendition of a routine.
  */
+@Entity
 public class Routine extends play.db.ebean.Model {
-  /* A unique, synthetic key to the Routine. */
+  // A unique, synthetic key to the Routine
+  @Id
   private long id;
-  /* A short name for the routine. */
+
+  // A short name for the routine
+  @Column(unique = true, nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH)
   private String name;
-  /* A multi-line description of the routine. */
+
+  // A multi-line description of the routine
+  @Column(nullable = false, length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
   private String description;
-  /* The average time to perform a basic rendition of this routine in minutes. */
+
+  // The average time to perform a basic rendition of this routine in minutes
+  @Column(nullable = false)
   private Integer duration;
-  /* A multi-line discussion of the method for this routine. */
+
+  // A multi-line discussion of the method for this routine
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
   private String method;
-  /* A multi-line discussion of the handling for the routine. */
+
+  // A multi-line discussion of the handling for the routine
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
   private String handling;
-  /* The average time to prepare the routine for presentation. */
+
+  // The average time to prepare the routine for presentation
   private Integer resetDuration;
-  /* A description of the process to prepare the routine. */
+
+  // A description of the process to prepare the routine
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
   private String resetDescription;
-  /* A URL of the magician performing this routine on YouTube. */
+
+  // A URL of the magician performing this routine on YouTube
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
   private String youTubeUrl;
-  /* A URL of an image of this routine. */
+
+  // A URL of an image of this routine
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
   private String imageUrl;
-  /* The materials used for this routine. */
+
+  // The materials used for this routine
+  @OneToMany(mappedBy = "routine", cascade = CascadeType.PERSIST)
   private List<Material> materials;
-  /* A URL of a review of the routine. */
+
+  // A URL of a review of the routine
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
   private String reviewUrl;
-  /* What was the inspiration for this routine. */
+
+  // What was the inspiration for this routine
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
   private String inspiration;
-  /* What routines would you put next to this. */
+
+  // What routines would you put next to this
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
   private String placement;
-  /* Why did you make some of the choices you made in the design of this routine. */
+
+  // Why did you make some of the choices you made in the design of this routine
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
   private String choices;
+
+  // The sets that use this routine
+  @ManyToMany(mappedBy = "routines", cascade = CascadeType.PERSIST)
+  private List<Set> sets;
+
 
   /**
    * Create new, valid Routine object.

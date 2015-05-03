@@ -34,6 +34,8 @@ public class MaterialFormData {
    * It's name -- whatever you'd call this item.
    */
   @Required(message = "A name for the material is required.")
+  @MaxLength(value = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH,
+      message = "The name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters.")
   public String name;
 
   /**
@@ -102,9 +104,9 @@ public class MaterialFormData {
     this.routineId = routineId;
     this.materialId = materialId;
     this.name = material.getName();
-    this.isInspectable = material.getIsInspectable();
-    this.isGivenAway = material.getIsGivenAway();
-    this.isConsumed = material.getIsConsumed();
+    this.isInspectable = material.isInspectable();
+    this.isGivenAway = material.isGivenAway();
+    this.isConsumed = material.isConsumed();
     this.price = material.getPrice();
     this.description = material.getDescription();
     this.purchaseUrl = material.getPurchaseUrl();

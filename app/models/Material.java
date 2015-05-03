@@ -1,5 +1,10 @@
 package models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  * An item used in the performance of a routine.
  *
@@ -7,27 +12,48 @@ package models;
  * The logical unique constraint on this model is routine+name.
 
  */
-public class Material /* extends play.db.ebean.Model */ {
-  /* A unique, synthetic key for the Material */
+@Entity
+public class Material extends play.db.ebean.Model {
+  // A unique, synthetic key for the Material
+  @Id
   private long id;
-  /* The routine that this material belongs to. */
+
+  // The routine that this material belongs to
+  @ManyToOne
+  @Column(nullable = false)
   private Routine routine;
-  /* A short name for the item. */
+
+  // A short name for the item
+  @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH)
   private String name;
-  /* A multi-line description of the item. */
+
+  // A multi-line description of the item
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
   private String description;
-  /* Is the item inspectable by the audience? */
+
+  // Is the item inspectable by the audience?
+  @Column(nullable = false)
   private boolean isInspectable;
-  /* Does the audience take this with them? */
+
+  // Does the audience take this with them?
+  @Column(nullable = false)
   private boolean isGivenAway;
-  /* Is the item consumed over the course of this routine? */
+
+  // Is the item consumed over the course of this routine?
+  @Column(nullable = false)
   private boolean isConsumed;
-  /* What is the cost of this item? */
+
+  // What is the cost of this item?
   private Integer price;
-  /* Where would you buy one of these items? */
+
+  // Where would you buy one of these items?
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
   private String purchaseUrl;
-  /* A URL of an image of this item. */
+
+  // A URL of an image of this item.
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
   private String imageUrl;
+
 
   /**
    * Create a new, valid FormMaterial object.
@@ -119,7 +145,7 @@ public class Material /* extends play.db.ebean.Model */ {
    *
    * @return True if the item is inspectable.  False if it is not inspectable.
    */
-  public boolean getIsInspectable() {
+  public boolean isInspectable() {
     return isInspectable;
   }
 
@@ -137,7 +163,7 @@ public class Material /* extends play.db.ebean.Model */ {
    *
    * @return True if the item is given away.  False if it is not given away.
    */
-  public boolean getIsGivenAway() {
+  public boolean isGivenAway() {
     return isGivenAway;
   }
 
@@ -155,7 +181,7 @@ public class Material /* extends play.db.ebean.Model */ {
    *
    * @return True if the item is consumed over the course of the routine.  False if it is not consumed.
    */
-  public boolean getIsConsumed() {
+  public boolean isConsumed() {
     return isConsumed;
   }
 
