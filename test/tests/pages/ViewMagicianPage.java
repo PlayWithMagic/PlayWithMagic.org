@@ -93,6 +93,17 @@ public class ViewMagicianPage extends NavigationWrapper {
 
 
   /**
+   * Click the Change Password button.
+   *
+   * @return The EditUserPage.
+   */
+  public EditUserPage clickChangePasswordButton() {
+    this.findFirst("#changePassword").click();
+    return new EditUserPage(this.getDriver());
+  }
+
+
+  /**
    * Click the Return to Magician List button.
    *
    * @return The ListMagiciansPage.

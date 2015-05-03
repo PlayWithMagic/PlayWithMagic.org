@@ -22,6 +22,7 @@
 
         <p class="visible-xs-block visible-sm-block">
           <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">Edit Profile</a>
+          <a href="@routes.Application.editUser(magician.getId)" class="btn btn-large">Change Password</a>
           <a href="@routes.Application.listMagicians()" class="btn btn-large">Return to Magician List</a>
         </p>
 
@@ -58,6 +59,9 @@
         <p class="hidden-xs hidden-sm">
           <a id="editMagician" href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">
             Edit Profile
+          </a>
+          <a id="changePassword" href="@routes.Application.editUser(magician.getId)" class="btn btn-large">
+            Change Password
           </a>
           <a id="returnToMagicianList" href="@routes.Application.listMagicians()" class="btn btn-large">
             Return to Magician List
