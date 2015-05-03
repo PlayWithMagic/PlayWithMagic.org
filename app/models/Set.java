@@ -225,6 +225,20 @@ public class Set extends play.db.ebean.Model {
 
 
   /**
+   * Delete a Set.
+   *
+   * @param id The ID of the set to delete.
+   */
+  public static void deleteSet(long id) {
+    Set set = Set.find().byId(id);
+    if (set == null) {
+      throw new RuntimeException("Unable to find Set [" + id + "]");
+    }
+    set.delete();
+  }
+
+
+  /**
    * Remove a Routine from this Set.
    *
    * @param routine The Routine to remove.
@@ -258,4 +272,54 @@ public class Set extends play.db.ebean.Model {
     routines.add(routine);
     this.save();
   }
+
+
+  /**
+   * TODO: Initialize the Set database.
+   */
+  public static void init() {
+    // resetSetDB();
+/*    Set set = null;
+    SetFormData setFormData = null;
+
+    // --------------------------------------
+    setFormData = new SetFormData()
+
+
+    List<Long> routineIds = new ArrayList<Long>();
+    routineIds.add(2L);
+    routineIds.add(1L);
+    set = new Set(currentId, "Amazing Set", "This is the best set ever. It opens with the Ambitious Card trick"
+        + " to warm up the audience. From there, it shifts to something different with Gypsy Thread. "
+        + "And in the closer, it breaks back down to a card trick to cool down the audience afterwords.", routineIds);
+    SetDB.addSet(set);
+    currentId++;
+
+    List<Long> routineIds2 = new ArrayList<Long>();
+    routineIds2.add(5L);
+    routineIds2.add(10L);
+    routineIds2.add(33L);
+    set = new Set(currentId, "With Flare", "This starts off with a match routine for something that has a bit "
+        + "of an explosive opener, followed by a simple card trick.  Finally, you light up the night with a flaming "
+        + "wallet routine, which binds the card trick and the fire trick together.", routineIds2);
+    SetDB.addSet(set);
+    currentId++;
+
+    List<Long> routineIds3 = new ArrayList<Long>();
+    routineIds3.add(4L);
+    routineIds3.add(14L);
+    routineIds3.add(15L);
+    routineIds3.add(34L);
+    set = new Set(currentId, "Mechanisms", "With each of the routines in this set, it involves some physical device"
+        + " that the audience can either interact with, or view interaction with.  The key is to really liven up "
+        + "Zig-Zag-Pencil with your own bit of flare, otherwise it will pale against the other routines in this Set. "
+        + "Next, a simple card trick that allows the audience member to interact with their cell phone!  Always good "
+        + "to have more audience interaction.  Finally, the close is something that goes back to the engineer theme "
+        + "of the opener with a twist! "
+        + "Once you've closed, the audience member will walk away with a photo memory on their phone.", routineIds3);
+    SetDB.addSet(set);
+    currentId++;
+*/
+  }
+
 }

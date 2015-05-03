@@ -4,6 +4,7 @@ import com.typesafe.config.ConfigFactory;
 import models.Magician;
 import models.Routine;
 import models.RoutineDB;
+import models.Set;
 import views.formdata.EditUserFormData;
 
 /**
@@ -34,6 +35,8 @@ public class GlobalTest {
    *
    * This is only used for testing.
    *
+   * TODO: Figure out how to do standing data like MagicianType.
+   *
    * @param verify A simple verification to ensure programmers respect this very powerful method.
    * @throws RuntimeException On an attempt to delete the database without the correct verification string.
    */
@@ -44,6 +47,10 @@ public class GlobalTest {
 
     for (Magician magician : Magician.getAllMagicians()) {
       magician.delete();
+    }
+
+    for (Set set : Set.getAllSets()) {
+      set.delete();
     }
 
     // TODO: Add after Routine is persisted in the database

@@ -5,7 +5,6 @@ import models.Material;
 import models.Routine;
 import models.RoutineDB;
 import models.Set;
-import models.SetDB;
 import play.Logger;
 import play.data.Form;
 import play.data.validation.ValidationError;
@@ -498,7 +497,7 @@ public class Application extends Controller {
    */
   @Security.Authenticated(Secured.class)
   public static Result deleteSet(long id) {
-    SetDB.deleteSet(id);
+    Set.deleteSet(id);
     return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets(ctx())));
   }
 
