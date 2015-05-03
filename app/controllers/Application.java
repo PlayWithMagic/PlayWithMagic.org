@@ -88,6 +88,8 @@ public class Application extends Controller {
 
   /**
    * Show the EditUser page.  Add a Magician if the ID is 0; or edit an existing Magician (based on their ID).
+   *
+   * This is the Signup page (for unauthenticated users).
    * <p>
    * Note:  EditMagician and EditUser are two different views on the same entity.
    *
@@ -106,6 +108,7 @@ public class Application extends Controller {
 
     Form<EditUserFormData> formData = Form.form(EditUserFormData.class).fill(editUserFormData);
     Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editUserFormData.magicianType);
+
     return ok(EditUser.render("editUser", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
         formData, magicianTypeMap));
   }
@@ -114,7 +117,13 @@ public class Application extends Controller {
   /**
    * Handles the request to post form data from the EditUser page.
    *
-   * @return On success, the EditMagician page.  On failure, redisplay the EditUser page.
+   * First we bind the HTTP POST data to an instance of EditUserFormData.
+   * The binding process will invoke the EditUserFormData.validate() method.
+   *
+   * If errors are found, re-render the page, displaying the error data.
+   * If errors not found, take the user to the login screen and display message.
+   *
+   * @return On success, the Index page.  On failure, redisplay the EditUser page.
    */
   public static Result postUser() {
     Form<EditUserFormData> formData = Form.form(EditUserFormData.class).bindFromRequest();
@@ -125,16 +134,25 @@ public class Application extends Controller {
     Logger.debug("  eMail = [" + formData.field("email").value() + "]");
     Logger.debug("  magicianType = [" + formData.field("magicianType").value() + "]");
 
-    if (formData.hasErrors()) {
-      Logger.error("postUser HTTP Form Error.");
+      if (formData.hasErrors()) {
+        Logger.error("postUser HTTP Form Error.");
 
-      Map<String, Boolean> magicianTypeMap = null;
-      if (MagicianTypeFormData.isMagicianType(formData.field("magicianType").value())) {
-        magicianTypeMap = MagicianTypeFormData.getMagicianTypes(formData.field("magicianType").value());
-      }
-      else {
-        magicianTypeMap = MagicianTypeFormData.getMagicianTypes();
-      }
+        for (String key : formData.errors().keySet()) {
+          List<ValidationError> currentError = formData.errors().get(key);
+          for (play.data.validation.ValidationError error : currentError) {
+            if (!error.message().equals("")) {
+              flash(key, error.message());
+            }
+          }
+        }
+
+       Map<String, Boolean> magicianTypeMap = null;
+        if (MagicianTypeFormData.isMagicianType(formData.field("magicianType").value())) {
+          magicianTypeMap = MagicianTypeFormData.getMagicianTypes(formData.field("magicianType").value());
+        }
+        else {
+          magicianTypeMap = MagicianTypeFormData.getMagicianTypes();
+        }
 
       return badRequest(EditUser.render("editUser", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
           formData, magicianTypeMap));
@@ -158,11 +176,7 @@ public class Application extends Controller {
 
     EditMagicianFormData editMagicianFormData = new EditMagicianFormData(magician);
 
-    Form<EditMagicianFormData> editMagicianFormFields;
-    editMagicianFormFields = Form.form(EditMagicianFormData.class).fill(editMagicianFormData);
-    Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editMagicianFormData.magicianType);
-    return ok(EditMagician.render("editMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-        editMagicianFormFields, magicianTypeMap));
+    return redirect(routes.Application.index("Successfully Signed Up!"));
   }
 
 
@@ -171,7 +185,7 @@ public class Application extends Controller {
    ******************************************************************************************************************/
 
   /**
-   * Provides the Login page (only to unauthenticated users).
+   * Render the Login page (only to unauthenticated users).
    *
    * @param message The message being passed from any errors on the Login form.
    * @return The Login page.
@@ -181,10 +195,13 @@ public class Application extends Controller {
     return ok(Login.render("login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, message));
   }
 
+
   /**
    * Processes a login form submission from an unauthenticated user.
+   *
    * First we bind the HTTP POST data to an instance of LoginFormData.
    * The binding process will invoke the LoginFormData.validate() method.
+   *
    * If errors are found, re-render the page, displaying the error data.
    * If errors not found, render the page with the good data.
    *
@@ -206,12 +223,11 @@ public class Application extends Controller {
       }
       return badRequest(Login.render("login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, ""));
     }
-    else {
-      // email/password OK, so now we set the session variable and only go to authenticated pages.
-      session().clear();
-      session("email", formData.get().email);
-      return redirect(routes.Application.index(""));
-    }
+
+    // email/password OK, so now we set the session variable and only go to authenticated pages.
+    session().clear();
+    session("email", formData.get().email);
+    return redirect(routes.Application.index(""));
   }
 
   /**
@@ -223,68 +239,6 @@ public class Application extends Controller {
   public static Result logout() {
     session().clear();
     return redirect(routes.Application.index(""));
-  }
-
-  /**
-   * Provides the Signup page (only to unauthenticated users).
-   *
-   * @return The Signup page.
-   */
-  public static Result signup() {
-    //Form<EditUserFormData> formData = Form.form(EditUserFormData.class);
-
-    EditUserFormData editUserFormData;
-
-    editUserFormData = new EditUserFormData();
-
-    Form<EditUserFormData> formData = Form.form(EditUserFormData.class).fill(editUserFormData);
-    Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editUserFormData.magicianType);
-
-    return ok(EditUser.render("signup", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-        formData, magicianTypeMap));
-  }
-
-  /**
-   * Processes a Signup form submission from an unauthenticated user.
-   * First we bind the HTTP POST data to an instance of SignupFormData.
-   * The binding process will invoke the SignupFormData.validate() method.
-   * If errors are found, re-render the page, displaying the error data.
-   * If errors not found, take the user to the login screen and display message.
-   *
-   * @return The index page with the results of validation.
-   */
-  public static Result postSignup() {
-
-    // Get the submitted form data from the request object, and run validation.
-    Form<EditUserFormData> formData = Form.form(EditUserFormData.class).bindFromRequest();
-
-    if (formData.hasErrors()) {
-      for (String key : formData.errors().keySet()) {
-        List<ValidationError> currentError = formData.errors().get(key);
-        for (play.data.validation.ValidationError error : currentError) {
-          if (!error.message().equals("")) {
-            flash(key, error.message());
-          }
-        }
-      }
-      Map<String, Boolean> magicianTypeMap = null;
-      if (MagicianTypeFormData.isMagicianType(formData.field("magicianType").value())) {
-        magicianTypeMap = MagicianTypeFormData.getMagicianTypes(formData.field("magicianType").value());
-      }
-      else {
-        magicianTypeMap = MagicianTypeFormData.getMagicianTypes();
-      }
-      return badRequest(EditUser.render("editUser", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-          formData, magicianTypeMap));
-    }
-    else {
-      // email/password OK, so now we set the session variable and only go to authenticated pages.
-      // session().clear();
-      // session("email", formData.get().email);
-      EditUserFormData dataFromForm = formData.get();
-      Magician.createMagicianFromForm(dataFromForm);
-      return redirect(routes.Application.index("Successfully Signed Up!"));
-    }
   }
 
 

@@ -169,7 +169,7 @@ public class Magician extends play.db.ebean.Model {
 
 
   /**
-   * Create a new Magician object from EditMagicianFormData.  Add it to the database and return the newly created
+   * Update an existing Magician object from EditMagicianFormData.  Update the database and return the current
    * Magician.
    *
    * @param editMagicianFormData The source of data for the Magician.
@@ -179,6 +179,10 @@ public class Magician extends play.db.ebean.Model {
     MagicianType magicianType = MagicianType.getMagicianType(editMagicianFormData.magicianType);
 
     Magician magician = Magician.find().byId(editMagicianFormData.id);
+    if (magician == null) {
+      magician = Magician.find().where().eq("email", editMagicianFormData.email).findUnique();
+    }
+
     magician.setFirstName(editMagicianFormData.firstName);
     magician.setLastName(editMagicianFormData.lastName);
     magician.setEmail(editMagicianFormData.email);
@@ -204,8 +208,10 @@ public class Magician extends play.db.ebean.Model {
     return magician;
   }
 
+// TODO:  Need a mechanism to prevent a user from deleting their own account (or if they do, then log them out first).
+
   /**
-   * Create a new Magician object from EditMagicianFormData.  Add it to the database and return the newly created
+   * Create a new Magician object from EditUserFormData.  Add it to the database and return the newly created
    * Magician.
    *
    * @param editUserFormData The source of data for the Magician.
@@ -614,27 +620,35 @@ public class Magician extends play.db.ebean.Model {
     this.magicianType = magicianType;
   }
 
+
   /**
    * Add a magician to the database, but check to see if the magician is already in there first.
-   *
-   * TODO: Implement when we have a SELECT statement.
    *
    * @param magician The magician to add.
    * @return The magician that was just added.
    */
-  public Magician init(Magician magician) {
-    return null;
+  public static Magician init(Magician magician) {
+    Magician theMagician = Magician.find().where().eq("email", magician.email).findUnique();
+
+    if (theMagician != null) {
+      return theMagician;
+    }
+
+    magician.save();
+
+    return magician;
   }
 
 
   /**
-   * Initialize the Magician database.
+   * Initialize the Magician dataset.
+   *
+   * TODO:  Get this to go through the backing classes.
    */
   public static void init() {
-    // resetMagicianDB();
-
     MagicianType magicianTypeSemiProfessional = MagicianType.getMagicianType("Semi-Professional");
     MagicianType magicianTypeProfessional = MagicianType.getMagicianType("Professional");
+    MagicianType magicianTypeEnthusiast = MagicianType.getMagicianType("Enthusiast");
 
     // --------------------------------------
 
@@ -660,17 +674,22 @@ public class Magician extends play.db.ebean.Model {
     magician.setGooglePlus("mr_nelson@icloud.com");
     magician.setInstagram("mr_mark_nelson");
 
-    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
+    Magician.init(magician);
 
+    magician = new Magician("Patrick", "Karjala", "pkarjala@gmail.com", magicianTypeEnthusiast, "P@ssw0rd");
+    Magician.init(magician);
+
+    magician = new Magician("David", "Neely", "dneely@hawaii.edu", magicianTypeEnthusiast, "P@ssw0rd");
+    Magician.init(magician);
 
     magician = new Magician("Lee", "Asher", "lee@leeasher.com", magicianTypeProfessional, "P@ssw0rd");
-    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
+    Magician.init(magician);
 
     magician = new Magician("Steve", "Johnson", "steve@grandillusions.com", magicianTypeProfessional, "P@ssw0rd");
-    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
+    Magician.init(magician);
 
     magician = new Magician("Wayne", "Houchin", "wayne@waynehouchin.com", magicianTypeProfessional, "P@ssw0rd");
-    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
+    Magician.init(magician);
   }
 
 }

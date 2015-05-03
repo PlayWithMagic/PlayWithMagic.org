@@ -1,5 +1,6 @@
 package tests.pages;
 
+import models.Magician;
 import org.openqa.selenium.WebDriver;
 import play.test.TestBrowser;
 import tests.GlobalTest;
@@ -8,12 +9,12 @@ import static org.fest.assertions.Assertions.assertThat;
 
 
 /**
- * Provides scaffolding to remotely control the About page for testing.
+ * Provides scaffolding to remotely control the Login page for testing.
  */
 public class LoginPage extends NavigationWrapper {
 
   /**
-   * Go directly to the About page and make sure the browser gets there.
+   * Go directly to the Login page and make sure the browser gets there.
    *
    * @param browser A remotely controlled test browser.
    */
@@ -25,7 +26,7 @@ public class LoginPage extends NavigationWrapper {
 
 
   /**
-   * The browser should already be at the About page.  Make sure the browser is already there.
+   * The browser should already be at the Login page.  Make sure the browser is already there.
    *
    * @param webDriver The state of the current test browser.
    */
@@ -48,13 +49,13 @@ public class LoginPage extends NavigationWrapper {
   /**
    * Populate the login form with data.
    *
-   * @param email    The email address of the user to login.
-   * @param password The password of the user to login.
+   * @param magician A container holding all of the fields to populate.
    */
-  public void populateLogin(String email, String password) {
-    this.fill("#email").with(email);
-    this.fill("#password").with(password);
+  public void populateLogin(Magician magician) {
+    this.fillRequiredField("#email", magician.getEmail());
+    this.fillRequiredField("#password", magician.getPassword());
   }
+
 
   /**
    * Click the Login button (submit) at the bottom of the page.
@@ -62,6 +63,7 @@ public class LoginPage extends NavigationWrapper {
   public void clickSubmit() {
     this.findFirst("#submit").click();
   }
+
 
   /**
    * Test to ensure the page has all of the required field validation errors.

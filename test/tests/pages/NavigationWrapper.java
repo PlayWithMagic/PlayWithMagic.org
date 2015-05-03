@@ -67,30 +67,6 @@ public abstract class NavigationWrapper extends FluentPage {
 
 
   /**
-   * Click the Create Routine button in the top navigation.
-   *
-   * @return The EditRoutinePage.
-   */
-  public EditRoutinePage clickCreateRoutineButton() {
-    this.findFirst("#createNew").click();
-    this.findFirst("#createRoutine").click();
-    return new EditRoutinePage(this.getDriver());
-  }
-
-
-  /**
-   * Click the Create Set button in the top navigation.
-   *
-   * @return The EditSetPage.
-   */
-  public EditSetPage clickCreateSetButton() {
-    this.findFirst("#createNew").click();
-    this.findFirst("#createSet").click();
-    return new EditSetPage(this.getDriver());
-  }
-
-
-  /**
    * Click the Help button on the Index page.
    *
    * @return The HelpPage.
@@ -124,6 +100,92 @@ public abstract class NavigationWrapper extends FluentPage {
   public LoginPage clickLoginButton() {
     this.findFirst("#navbarLinkToLoginPage").click();
     return new LoginPage(this.getDriver());
+  }
+
+
+  /**
+   * Click the Profile button in the top navigation.
+   *
+   * Available to logged in users only.
+   *
+   * @return The EditMagicianPage.
+   */
+  public EditMagicianPage clickProfileButton() {
+    this.findFirst("#myName").click();
+    this.findFirst("#profile").click();
+    return new EditMagicianPage(this.getDriver());
+  }
+
+
+  /**
+   * Click the My Routines button in the top navigation.
+   *
+   * Available to logged in users only.
+   *
+   * TODO:  Test that it shows the users' subset of routines
+   * @return The ListRoutinesPage.
+   */
+  public ListRoutinesPage clickMyRoutinesButton() {
+    this.findFirst("#myName").click();
+    this.findFirst("#myRoutines").click();
+    return new ListRoutinesPage(this.getDriver());
+  }
+
+
+  /**
+   * Click the My Sets button in the top navigation.
+   *
+   * Available to logged in users only.
+   *
+   * TODO:  Test that it shows the users' subset of routines
+   * @return The ListSetsPage.
+   */
+  public ListSetsPage clickMySetsButton() {
+    this.findFirst("#myName").click();
+    this.findFirst("#mySets").click();
+    return new ListSetsPage(this.getDriver());
+  }
+
+
+  /**
+   * Click the Create Routine button in the top navigation.
+   *
+   * Available to logged in users only.
+   *
+   * @return The EditRoutinePage.
+   */
+  public EditRoutinePage clickCreateRoutineButton() {
+    this.findFirst("#myName").click();
+    this.findFirst("#createRoutine").click();
+    return new EditRoutinePage(this.getDriver());
+  }
+
+
+  /**
+   * Click the Create Set button in the top navigation.
+   *
+   * Available to logged in users only.
+   *
+   * @return The EditSetPage.
+   */
+  public EditSetPage clickCreateSetButton() {
+    this.findFirst("#myName").click();
+    this.findFirst("#createSet").click();
+    return new EditSetPage(this.getDriver());
+  }
+
+
+  /**
+   * Click the Logout button in the top navigation.
+   *
+   * Available to logged in users only.
+   *
+   * @return The IndexPage.
+   */
+  public IndexPage clickLogoutButton() {
+    this.findFirst("#myName").click();
+    this.findFirst("#logout").click();
+    return new IndexPage(this.getDriver());
   }
 
 

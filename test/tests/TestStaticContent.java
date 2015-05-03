@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import play.test.TestBrowser;
 import tests.pages.AboutPage;
+import tests.pages.EditMagicianPage;
 import tests.pages.EditRoutinePage;
 import tests.pages.EditSetPage;
 import tests.pages.EditUserPage;
@@ -44,10 +45,17 @@ public class TestStaticContent extends play.test.WithBrowser {
     return new TestBrowser(new ChromeDriver(), "/");
   }
 
+
+  // TODO: Test a basic login and logout -- verifying the menus, and verifying that you can't get to protected areas of the site even if you have the URL.
+
+  // TODO: If you delete yourslef, your're completly hosed.
+
+  // TODO: Verify Login w/o any information and bad passwords/bad data + excessive lengths (bounds checks).
+
   /**
-   * This test verifies the links at the bottom of the Index page.
+   * Verifies the links at the bottom of the Index page.
    */
-//  @Test
+  @Test
   public void testIndexFooterLinks() {
     // browser.maximizeWindow();
 
@@ -78,7 +86,44 @@ public class TestStaticContent extends play.test.WithBrowser {
 
 
   /**
-   * This test verifies the navigation links across the top of the Index page.
+   * Verifies the navigation links across the top of the Index page when a user is logged in.
+   */
+  @Test
+  public void testIndexTopNavigationLoggedIn() {
+    // browser.maximizeWindow();
+
+    // Clear database, create a test user and login as that user.
+    GlobalTest.resetDatabaseForTest("PlayWithMagic");
+    IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
+
+    // Test clicking nav links left-to-right
+    indexPage = indexPage.clickHomeButton();
+
+    ListRoutinesPage listRoutinesPage = indexPage.clickBrowseRoutinesButton();
+
+    ListSetsPage listSetsPage = listRoutinesPage.clickBrowseSetsButton();
+
+    ListMagiciansPage listMagiciansPage = listSetsPage.clickBrowseMagiciansButton();
+
+    HelpPage helpPage = listMagiciansPage.clickHelpButton();
+
+    EditMagicianPage editMagicianPage = helpPage.clickProfileButton();
+
+    listRoutinesPage = editMagicianPage.clickMyRoutinesButton();
+
+    listSetsPage = listRoutinesPage.clickMySetsButton();
+
+    EditRoutinePage editRoutinePage = listSetsPage.clickCreateRoutineButton();
+
+    EditSetPage editSetPage = editRoutinePage.clickCreateSetButton();
+
+    indexPage = editSetPage.clickLogoutButton();
+
+  }
+
+
+  /**
+   * This test verifies the navigation links across the top of the Index page when a user is not logged in.
    */
   @Test
   public void testIndexTopNavigationNotLoggedIn() {
@@ -100,17 +145,13 @@ public class TestStaticContent extends play.test.WithBrowser {
     LoginPage loginPage = editUserPage.clickLoginButton();
 
     indexPage = loginPage.clickHomeButton();
-
-//    EditRoutinePage editRoutinePage = helpPage.clickCreateRoutineButton();
-
-//    EditSetPage editSetPage = editRoutinePage.clickCreateSetButton();
   }
 
 
   /**
    * This test verifies Index page functionality (just click the big Join the Community Today button).
    */
-//  @Test
+  @Test
   public void testIndexPage() {
     // browser.maximizeWindow();
 

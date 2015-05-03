@@ -1,4 +1,5 @@
 import com.typesafe.config.ConfigFactory;
+import models.Magician;
 import models.MagicianType;
 import play.Application;
 import play.GlobalSettings;
@@ -14,7 +15,7 @@ public class Global extends GlobalSettings {
     super.onStart(application);
 
     MagicianType.init();
-    //MagicianDB.init();
+    Magician.init();
     //RoutineDB.init();
     //SetDB.init();
 

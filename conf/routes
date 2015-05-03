@@ -12,9 +12,6 @@ GET         /login               controllers.Application.login(msg: String?= "")
 POST        /login               controllers.Application.postLogin()
 GET         /logout              controllers.Application.logout()
 
-GET         /signup              controllers.Application.signup()
-POST        /signup              controllers.Application.postSignup()
-
 # Routine actions
 GET         /listRoutines          controllers.Application.listRoutines()
 # TODO: Possibly remove =0 from viewRoutine(check the others too)

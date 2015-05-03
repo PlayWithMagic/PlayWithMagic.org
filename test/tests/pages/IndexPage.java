@@ -50,6 +50,24 @@ public class IndexPage extends NavigationWrapper {
 
 
   /**
+   * Login to the test account an return the Index page.
+   *
+   * @return The IndexPage.
+   */
+  public IndexPage loginToTestAccount() {
+    // TODO:  Force logout/kill any old session
+    LoginPage loginPage = this.clickLoginButton();
+
+    // Fill in login page
+    loginPage.populateLogin(GlobalTest.testUser);
+    loginPage.clickSubmit();
+    IndexPage indexPage = new IndexPage(loginPage.getDriver());
+
+    return indexPage;
+  }
+
+
+  /**
    * Click the Navbar Help button in the upper right.
    *
    * @return The HelpPage.

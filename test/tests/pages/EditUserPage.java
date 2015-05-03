@@ -89,7 +89,7 @@ public class EditUserPage extends NavigationWrapper {
   /**
    * Set passed values into the form.
    *
-   * @param magician A container holding all of the fields to check for in the page.
+   * @param magician A container holding all of the fields to populate.
    */
   public void populateMagician(Magician magician) {
     this.fill("#firstName").with(magician.getFirstName());
