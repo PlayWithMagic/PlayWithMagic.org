@@ -83,8 +83,10 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
   public void testRoutineNav() {
     // browser.maximizeWindow();
 
-    // Start at the home page...
-    IndexPage indexPage = new IndexPage(browser);
+    // Clear database, create a test user and login as that user.  Start at the home page...
+    GlobalTest.resetDatabaseForTest("PlayWithMagic");
+    GlobalTest.addUserForTest();
+    IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
 
     // Click the Browse Routines button
     ListRoutinesPage listRoutinesPage = indexPage.clickBrowseRoutinesButton();
@@ -101,8 +103,10 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
   public void testMagicianMinimumAddDelete() {
     // browser.maximizeWindow();
 
-    // Start at the home page...
-    IndexPage indexPage = new IndexPage(browser);
+    // Clear database, create a test user and login as that user.  Start at the home page...
+    GlobalTest.resetDatabaseForTest("PlayWithMagic");
+    GlobalTest.addUserForTest();
+    IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
 
     // Click the Create Routines button
     EditRoutinePage editRoutinePage = indexPage.clickCreateRoutineButton();
@@ -125,16 +129,19 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     listRoutinesPage.doesNotHaveRoutine(routine3);
   }
 
+// TODO:  We discussed changing EditRoutine such that it would go to the view first rather than the EditPage
 
-    /**
-     * Test Routine CRUD.
-     */
+  /**
+   * Test Routine CRUD.
+   */
   @Test
   public void testRoutineCrudWorkflow() {
     // browser.maximizeWindow();
 
-    // Start at the home page...
-    IndexPage indexPage = new IndexPage(browser);
+    // Clear database, create a test user and login as that user.  Start at the home page...
+    GlobalTest.resetDatabaseForTest("PlayWithMagic");
+    GlobalTest.addUserForTest();
+    IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
 
     // Look at the List Routines page first...
     ListRoutinesPage listRoutinesPage = indexPage.clickBrowseRoutinesButton();
