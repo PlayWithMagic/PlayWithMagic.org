@@ -50,6 +50,26 @@ public class IndexPage extends NavigationWrapper {
 
 
   /**
+   * Determine if the IndexPage is in an unauthenticated state.
+   *
+   * @return True if the state is unauthenticated.  False if not.
+   */
+  public boolean isUnauthenticated() {
+    return this.pageSource().contains("navbarLinkToLoginPage");
+  }
+
+
+  /**
+   * Determine if the IndexPage is in an authenticated state.
+   *
+   * @return True if the state is authenticated.  False if not.
+   */
+  public boolean isAuthenticated() {
+    return this.pageSource().contains("logout");
+  }
+
+
+  /**
    * Login to the test account an return the Index page.
    *
    * @return The IndexPage.
@@ -72,33 +92,36 @@ public class IndexPage extends NavigationWrapper {
    *
    * @return The HelpPage.
    */
+/*
   public HelpPage clickNavbarHelpButton() {
     this.findFirst("#navbarLinkToHelpPage");
     return new HelpPage(this.getDriver());
   }
-
+*/
 
   /**
    * Click the Navbar Login button in the upper right.
    *
    * @return The LoginPage.
    */
+/*
   public LoginPage clickNavbarLoginButton() {
     this.findFirst("#navbarLinkToLoginPage").click();
     return new LoginPage(this.getDriver());
   }
-
+*/
 
   /**
    * Click the Navbar Signup button in the upper right.
    *
    * @return The EditUserPage with Signup rendering.
    */
+/*
   public EditUserPage clickNavbarSignupButton() {
     this.findFirst("#navbarLinkToSignupPage").click();
     return new EditUserPage(this.getDriver());
   }
-
+*/
 
   /**
    * Click the Join the Community Today button.

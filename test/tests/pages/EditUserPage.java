@@ -49,7 +49,8 @@ public class EditUserPage extends NavigationWrapper {
     assertThat(this.pageSource()).contains(magician.getLastName());
     assertThat(this.pageSource()).contains(magician.getEmail());
     assertThat(this.pageSource()).contains(magician.getMagicianType().getName());
-    assertThat(this.pageSource()).contains(magician.getPassword());
+    // There is no way to check the password.
+    // assertThat(this.pageSource()).contains(magician.getPassword());
   }
 
 

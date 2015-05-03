@@ -108,12 +108,12 @@ public abstract class NavigationWrapper extends FluentPage {
    *
    * Available to logged in users only.
    *
-   * @return The EditMagicianPage.
+   * @return The ViewMagicianPage.
    */
-  public EditMagicianPage clickProfileButton() {
+  public ViewMagicianPage clickProfileButton() {
     this.findFirst("#myName").click();
     this.findFirst("#profile").click();
-    return new EditMagicianPage(this.getDriver());
+    return new ViewMagicianPage(this.getDriver());
   }
 
 

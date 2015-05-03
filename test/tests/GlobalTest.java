@@ -35,13 +35,20 @@ public class GlobalTest {
    */
   public static void resetDatabaseForTest(String verify) {
     if (!verify.equals("PlayWithMagic")) {
+      // TODO: Throw an exception
       return;
     }
 
     for (Magician magician : Magician.find().all()) {
       magician.delete();
     }
+  }
 
+
+  /**
+   * Add a single user to the database for the test framework.  Populate the testUser global object.
+   */
+  public static void addUserForTest() {
     EditUserFormData editUserFormData = new EditUserFormData();
     editUserFormData.id = 0;
     editUserFormData.firstName = "Test";

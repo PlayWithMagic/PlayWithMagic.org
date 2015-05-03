@@ -15,6 +15,7 @@ import tests.pages.ListMagiciansPage;
 import tests.pages.ListRoutinesPage;
 import tests.pages.ListSetsPage;
 import tests.pages.LoginPage;
+import tests.pages.ViewMagicianPage;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.fakeApplication;
@@ -107,9 +108,9 @@ public class TestStaticContent extends play.test.WithBrowser {
 
     HelpPage helpPage = listMagiciansPage.clickHelpButton();
 
-    EditMagicianPage editMagicianPage = helpPage.clickProfileButton();
+    ViewMagicianPage viewMagicianPage = helpPage.clickProfileButton();
 
-    listRoutinesPage = editMagicianPage.clickMyRoutinesButton();
+    listRoutinesPage = viewMagicianPage.clickMyRoutinesButton();
 
     listSetsPage = listRoutinesPage.clickMySetsButton();
 
