@@ -2,6 +2,8 @@ package tests;
 
 import com.typesafe.config.ConfigFactory;
 import models.Magician;
+import models.Routine;
+import models.RoutineDB;
 import views.formdata.EditUserFormData;
 
 /**
@@ -40,9 +42,14 @@ public class GlobalTest {
       throw new RuntimeException("Attempt to reset Play With Magic database without correct verification string.");
     }
 
-    for (Magician magician : Magician.find().all()) {
+    for (Magician magician : Magician.getAllMagicians()) {
       magician.delete();
     }
+
+    // TODO: Add after Routine is persisted in the database
+//    for (Routine routine : RoutineDB.getRoutines()) {
+//      routine.delete();
+//    }
   }
 
 

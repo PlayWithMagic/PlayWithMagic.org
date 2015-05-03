@@ -89,11 +89,23 @@ public class Magician extends play.db.ebean.Model {
   /**
    * Get all of the active Magicians.
    * <p>
-   * TO-DO:  Add where status=active and create a getAllMagicians -- use only in Admin pages.
+   * TODO:  Add where status=active and create a getAllMagicians -- use only in Admin pages.
    *
    * @return The all active Magicians.
    */
   public static List<Magician> getActiveMagicians() {
+    return Magician.find().all();
+  }
+
+
+  /**
+   * Get all of the Magicians.
+   * <p>
+   * TODO:  Add where status=active and create a getAllMagicians -- use only in Admin pages.
+   *
+   * @return The all active Magicians.
+   */
+  public static List<Magician> getAllMagicians() {
     return Magician.find().all();
   }
 

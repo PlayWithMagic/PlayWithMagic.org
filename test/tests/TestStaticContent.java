@@ -98,7 +98,7 @@ public class TestStaticContent extends play.test.WithBrowser {
   public void testIndexTopNavigationLoggedIn() {
     // browser.maximizeWindow();
 
-    // Clear database, create a test user and login as that user.
+    // Clear database, create a test user and login as that user.  Start at the home page...
     GlobalTest.resetDatabaseForTest("PlayWithMagic");
     GlobalTest.addUserForTest();
     IndexPage indexPage = new IndexPage(browser).loginToTestAccount();

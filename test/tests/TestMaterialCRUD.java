@@ -97,8 +97,12 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
   public void testMaterialMinimumAddDelete() {
     // browser.maximizeWindow();
 
-    // Start at the home page...
-    IndexPage indexPage = new IndexPage(browser);
+    // Clear database, create a test user and login as that user.  Start at the home page...
+    GlobalTest.resetDatabaseForTest("PlayWithMagic");
+    GlobalTest.addUserForTest();
+    IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
+
+    // Add a routine...
     EditRoutinePage editRoutinePage = indexPage.clickCreateRoutineButton();
 
     // Click AddMaterial... and look for error messages.
@@ -130,13 +134,15 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
     /**
      * Test Material CRUD.
      */
-//  @Test
+  @Test
   public void testMaterialCrudWorkflow() {
     // browser.maximizeWindow();
 
-    // Start at the home page...
-    IndexPage indexPage = new IndexPage(browser);
-
+    // Clear database, create a test user and login as that user.  Start at the home page...
+    GlobalTest.resetDatabaseForTest("PlayWithMagic");
+    GlobalTest.addUserForTest();
+    IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
+/*
     // Add a routine
     EditRoutinePage editRoutinePage = indexPage.clickCreateRoutineButton();
     editRoutinePage.populateRoutine(routine1);
@@ -225,11 +231,11 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
     listRoutinesPage.deleteFirstRoutine();
     listRoutinesPage.doesNotHaveRoutine(routine1);
     listRoutinesPage.doesNotHaveRoutine(routine2);
-
+*/
   }
 
   /**
-   * Test to ensure that the Routine and Material entities are bi-directional.
+   * TODO: Test to ensure that the Routine and Material entities are bi-directional.
    */
   // @Test
   public void testBidirectionalEntities() {
