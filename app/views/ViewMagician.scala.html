@@ -23,6 +23,10 @@
         <p class="visible-xs-block visible-sm-block">
           <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">Edit Profile</a>
           <a href="@routes.Application.listMagicians()" class="btn btn-large">Return to Magician List</a>
+          @if(magician.getId() == userInfo.getId()) {
+            <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
+              Delete Account</a>
+          }
         </p>
 
         <img class="img-responsive" src="@routes.Assets.at("images/working-man.jpg")" alt="Image of Magician"/>
@@ -62,6 +66,10 @@
           <a id="returnToMagicianList" href="@routes.Application.listMagicians()" class="btn btn-large">
             Return to Magician List
           </a>
+          @if(magician.getId() == userInfo.getId()) {
+            <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
+              Delete Account</a>
+          }
         </p>
 
         <h3>Experience with Magic</h3>

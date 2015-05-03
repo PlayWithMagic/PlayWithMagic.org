@@ -8,9 +8,9 @@ GET         /about                 controllers.Application.about()
 GET         /help                  controllers.Application.help()
 
 # Login and authentication workflow
-GET         /login               controllers.Application.login(msg: String?= "")
-POST        /login               controllers.Application.postLogin()
-GET         /logout              controllers.Application.logout()
+GET         /login                 controllers.Application.login(msg: String?= "")
+POST        /login                 controllers.Application.postLogin()
+GET         /logout                controllers.Application.logout()
 
 # Routine actions
 GET         /listRoutines          controllers.Application.listRoutines()
@@ -30,6 +30,7 @@ GET         /viewMagician          controllers.Application.viewMagician(id: Long
 GET         /editMagician          controllers.Application.editMagician(id: Long)
 POST        /editMagician          controllers.Application.postMagician()
 GET         /deleteMagician        controllers.Application.deleteMagician(id: Long?= 0)
+POST        /deleteMagician        controllers.Application.postDeleteUser()
 
 #Material actions
 GET         /viewMaterial          controllers.Application.viewMaterial(routineId: Long, materialId: Integer)
