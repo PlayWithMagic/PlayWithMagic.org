@@ -25,7 +25,7 @@ create table magician (
   flickr                    varchar(255),
   instagram                 varchar(255),
   constraint uq_magician_email unique (email),
-  constraint uq_magician_1 unique (first_name,last_name),
+  constraint uq_magician_1 unique (email),
   constraint pk_magician primary key (id))
 ;
 

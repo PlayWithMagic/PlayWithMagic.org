@@ -147,6 +147,14 @@ public class EditUserFormData {
           "How would you identify yourself as a magician?  Please select from the list."));
     }
 
+    if (this.email != null) {
+      Magician checkExistingMagician = Magician.find().where().eq("email", email).findUnique();
+      if (checkExistingMagician != null) {
+        errors.add(new ValidationError("email",
+            "A user with this email address has already created an account.  Please enter a different email."));
+      }
+    }
+
     return errors.isEmpty() ? null : errors;
   }
 }
