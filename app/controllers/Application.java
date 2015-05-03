@@ -497,8 +497,9 @@ public class Application extends Controller {
     return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SetDB.getSets()));
   }
 
+
   /**
-   * Handles the request to post form data from the editSet page.
+   * Handles the request to post form data from EditSet.
    *
    * @return An HTTP OK message if no errors, otherwise the form page with errors.
    */
@@ -510,12 +511,12 @@ public class Application extends Controller {
 
     if (formWithSetData.hasErrors()) {
       Logger.warn("HTTP Form Error in postSet");
-      List<Long> listOfRoutines;
+      List<Routine> listOfRoutines;
       if (setId != 0) {
         listOfRoutines = SetDB.getSet(setId).getRoutines();
       }
       else {
-        listOfRoutines = new ArrayList<Long>();
+        listOfRoutines = new ArrayList<Routine>();
       }
       return badRequest(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
           formWithSetData, RoutineDB.getRoutines(), listOfRoutines));
@@ -535,6 +536,7 @@ public class Application extends Controller {
   public static Result listSets() {
     return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SetDB.getSets()));
   }
+
 
   /**
    * Render the View Set page.

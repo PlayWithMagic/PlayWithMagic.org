@@ -5,7 +5,7 @@
 * @see http://www.playframework.com
 *@
 @(page: String, isLoggedIn: Boolean, userInfo: Magician, setForm: Form[views.formdata.SetFormData],
-    routineList: List[Routine], formRoutines: List[Long])
+    allRoutines: List[Routine], routinesInSet: List[Routine])
 
 @import helper.form
 @import views.html.bootstrap3.{text45, textarea}
@@ -55,15 +55,15 @@
                 </thead>
                 <tbody>
               <!-- Should use the list of Routines thrown in against the list of Set list items to pull -->
-                @for(routine <- routineList) {
+                @for(routine <- allRoutines) {
                 <tr>
                   <td>
                       <input type="checkbox"
                         name="routines[]"
                         id="@routine.getId"
                         value="@routine.getId"
-                        @for(formRoutine <- formRoutines) {
-                          @if(formRoutine == routine.getId) {checked}
+                        @for(routineInSet <- routinesInSet) {
+                          @if(routineInSet == routine) {checked}
                         }>
                   </td>
                   <td>@routine.getName()</td>
