@@ -59,7 +59,8 @@ public class EditUserPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource()).contains("<body id=\"editUser\">");
+    assertThat(pageSource().contains("<h1>Register New User</h1>")
+            || pageSource().contains("<h1>Edit User</h1>")).isTrue();
   }
 
 

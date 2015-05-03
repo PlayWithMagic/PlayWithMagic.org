@@ -239,6 +239,7 @@ public class Application extends Controller {
 
     Form<EditUserFormData> formData = Form.form(EditUserFormData.class).fill(editUserFormData);
     Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editUserFormData.magicianType);
+
     return ok(EditUser.render("signup", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
         formData, magicianTypeMap));
   }
@@ -285,6 +286,7 @@ public class Application extends Controller {
       return redirect(routes.Application.index("Successfully Signed Up!"));
     }
   }
+
 
   /******************************************************************************************************************
    * M A G I C I A N

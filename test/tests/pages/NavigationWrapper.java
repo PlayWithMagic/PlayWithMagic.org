@@ -96,8 +96,34 @@ public abstract class NavigationWrapper extends FluentPage {
    * @return The HelpPage.
    */
   public HelpPage clickHelpButton() {
-    this.findFirst("#linkToHelpPage").click();
+    this.findFirst("#navbarLinkToHelpPage").click();
     return new HelpPage(this.getDriver());
+  }
+
+
+  /**
+   * Click the Signup button when a user is *not* logged in.
+   *
+   * This button is only visible when a user is *not* logged in.
+   *
+   * @return The EditUserPage.
+   */
+  public EditUserPage clickSignupButton() {
+    this.findFirst("#navbarLinkToSignupPage").click();
+    return new EditUserPage(this.getDriver());
+  }
+
+
+  /**
+   * Click the Login button when a user is *not* logged in.
+   *
+   * This button is only visible when a user is *not* logged in.
+   *
+   * @return The LoginPage.
+   */
+  public LoginPage clickLoginButton() {
+    this.findFirst("#navbarLinkToLoginPage").click();
+    return new LoginPage(this.getDriver());
   }
 
 

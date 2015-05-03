@@ -9,10 +9,9 @@ import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides scaffolding to remotely control the Index page for testing.
- *
+ * <p>
  * When you want to *go* to a page, do new IndexPage(browser);
  * When you are already *at* a page, do new IndexPage(browser.getDriver());
- *
  */
 public class IndexPage extends NavigationWrapper {
 
@@ -49,6 +48,7 @@ public class IndexPage extends NavigationWrapper {
     assertThat(this.pageSource()).contains("Post Routines, Create Sets and Share Magic!");
   }
 
+
   /**
    * Click the Navbar Help button in the upper right.
    *
@@ -58,6 +58,7 @@ public class IndexPage extends NavigationWrapper {
     this.findFirst("#navbarLinkToHelpPage");
     return new HelpPage(this.getDriver());
   }
+
 
   /**
    * Click the Navbar Login button in the upper right.
@@ -69,6 +70,7 @@ public class IndexPage extends NavigationWrapper {
     return new LoginPage(this.getDriver());
   }
 
+
   /**
    * Click the Navbar Signup button in the upper right.
    *
@@ -78,6 +80,7 @@ public class IndexPage extends NavigationWrapper {
     this.findFirst("#navbarLinkToSignupPage").click();
     return new EditUserPage(this.getDriver());
   }
+
 
   /**
    * Click the Join the Community Today button.
@@ -145,7 +148,5 @@ public class IndexPage extends NavigationWrapper {
     this.findFirst("#linkToProjectHomepage").click();
     return this;
   }
-
-
 
 }
