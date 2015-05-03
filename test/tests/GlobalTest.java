@@ -26,17 +26,18 @@ public class GlobalTest {
    */
   public static Magician testUser = null;
 
+
   /**
    * DANGEROUS:  Delete the entire PlayWithMagic database and create one test user.
    *
    * This is only used for testing.
    *
    * @param verify A simple verification to ensure programmers respect this very powerful method.
+   * @throws RuntimeException On an attempt to delete the database without the correct verification string.
    */
   public static void resetDatabaseForTest(String verify) {
     if (!verify.equals("PlayWithMagic")) {
-      // TODO: Throw an exception
-      return;
+      throw new RuntimeException("Attempt to reset Play With Magic database without correct verification string.");
     }
 
     for (Magician magician : Magician.find().all()) {
