@@ -21,6 +21,11 @@ public class SetFormData {
   public long id;
 
   /**
+   * Input data Magician id hidden field.
+   */
+  public long magicianId;
+
+  /**
    * A short name for the set.
    */
   @Required(message = "You must provide a name for your Set.")

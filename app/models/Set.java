@@ -31,6 +31,15 @@ public class Set extends play.db.ebean.Model {
   @ManyToMany()
   private List<Routine> routines;
 
+  /**
+   * The EBean ORM finder method for database queries.
+   *
+   * @return The finder method.
+   */
+  public static Finder<Long, Set> find() {
+    return new Finder<Long, Set>(Long.class, Set.class);
+  }
+
 
   /**
    * Create a Set object.

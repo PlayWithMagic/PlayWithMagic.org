@@ -15,7 +15,7 @@ public class Global extends GlobalSettings {
     super.onStart(application);
 
     MagicianType.init();
-    Magician.init();
+    //Magician.init();
     //RoutineDB.init();
     //SetDB.init();
 

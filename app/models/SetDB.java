@@ -16,8 +16,8 @@ import java.util.Map;
  */
 public class SetDB {
 
-  private static Map<Long, Set> sets = new HashMap<Long, Set>();
-  private static long currentId = 1;
+  //private static Map<Long, Set> sets = new HashMap<Long, Set>();
+  //private static long currentId = 1;
 
 
   /**
@@ -26,9 +26,10 @@ public class SetDB {
    * @param formData Input data from the submitted form.
    */
   public static void addSet(SetFormData formData) {
-    long idVal = (formData.id == 0) ? currentId++ : formData.id;
+    //long idVal = (formData.id == 0) ? currentId++ : formData.id;
     Set setFromForm = new Set(idVal, formData.name, formData.description, formData.routines);
-    sets.put(idVal, setFromForm);
+    //sets.put(idVal, setFromForm);
+    setFromForm.save();
   }
 
 
@@ -38,8 +39,9 @@ public class SetDB {
    * @param newSet The pre-formatted set to place in the database.
    */
   public static void addSet(Set newSet) {
-    long idVal = (newSet.getId() == 0) ? currentId++ : newSet.getId();
-    sets.put(idVal, newSet);
+    //long idVal = (newSet.getId() == 0) ? currentId++ : newSet.getId();
+    //sets.put(idVal, newSet);
+    newSet.save();
   }
 
 
@@ -50,7 +52,8 @@ public class SetDB {
    * @return The retrieved Set object.
    */
   public static Set getSet(long id) {
-    Set set = sets.get(id);
+    //Set set = sets.get(id);
+    Set set = Set.find().byId(id);
     if (set == null) {
       throw new RuntimeException("Unable to find Set with the given ID value");
     }
@@ -64,11 +67,13 @@ public class SetDB {
    * @param id The ID of the set to delete.
    */
   public static void deleteSet(long id) {
-    Set set = sets.get(id);
+    //Set set = sets.get(id);
+    Set set = Set.find().byId(id);
     if (set == null) {
       throw new RuntimeException("Unable to find Set with given ID value.");
     }
-    sets.remove(id);
+    //sets.remove(id);
+    set.delete();
   }
 
 
@@ -78,7 +83,8 @@ public class SetDB {
    * @return The full list of all Sets.
    */
   public static List<Set> getSets() {
-    return new ArrayList<Set>(sets.values());
+    //return new ArrayList<Set>(sets.values());
+    return new ArrayList<Set>(Set.find().all());
   }
 
 
