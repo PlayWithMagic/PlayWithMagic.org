@@ -458,6 +458,7 @@ public class Application extends Controller {
         RoutineDB.getRoutine(routineId)));
   }
 
+
   /***************************************************************************************************************
    * S E T
    ***************************************************************************************************************/
@@ -471,19 +472,23 @@ public class Application extends Controller {
    */
   @Security.Authenticated(Secured.class)
   public static Result editSet(long id) {
-    SetFormData data = (id == 0) ? new SetFormData() : new SetFormData(SetDB.getSet(id));
-    Form<SetFormData> formData = Form.form(SetFormData.class).fill(data);
+    SetFormData setFormData = (id == 0) ? new SetFormData() : new SetFormData(Set.getSet(id));
+
+    Form<SetFormData> formData = Form.form(SetFormData.class).fill(setFormData);
+
     if (id != 0) {
-      Set thisSet = SetDB.getSet(id);
+      Set thisSet = Set.getSet(id);
       return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
           RoutineDB.getRoutines(), thisSet.getRoutines()));
     }
     else {
-      List<Long> temp = new ArrayList<Long>();
+      List<Routine> emptyListOfRoutinesInSet = new ArrayList<Routine>();
+
       return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
-          RoutineDB.getRoutines(), temp));
+          RoutineDB.getRoutines(), emptyListOfRoutinesInSet));
     }
   }
+
 
   /**
    * Delete a set from the database and display the ListSets page.
@@ -494,7 +499,7 @@ public class Application extends Controller {
   @Security.Authenticated(Secured.class)
   public static Result deleteSet(long id) {
     SetDB.deleteSet(id);
-    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SetDB.getSets()));
+    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets(ctx())));
   }
 
 
@@ -513,7 +518,7 @@ public class Application extends Controller {
       Logger.warn("HTTP Form Error in postSet");
       List<Routine> listOfRoutines;
       if (setId != 0) {
-        listOfRoutines = SetDB.getSet(setId).getRoutines();
+        listOfRoutines = Set.getSet(setId).getRoutines();
       }
       else {
         listOfRoutines = new ArrayList<Routine>();
@@ -523,10 +528,11 @@ public class Application extends Controller {
     }
     else {
       SetFormData data = formWithSetData.get();
-      SetDB.addSet(data);
-      return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SetDB.getSets()));
+      Set.createSetFromForm(ctx(), data);
+      return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets(ctx())));
     }
   }
+
 
   /**
    * Render the List Sets page.
@@ -534,7 +540,7 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the List Set page.
    */
   public static Result listSets() {
-    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SetDB.getSets()));
+    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets(ctx())));
   }
 
 
@@ -545,10 +551,13 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for a single Set page.
    */
   public static Result viewSet(long id) {
-    Set thisViewSet = SetDB.getSet(id);
-    return ok(ViewSet.render("viewSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SetDB.getSet(id),
-        RoutineDB.getRoutines(), thisViewSet.getRoutines()));
+    Set thisViewSet = Set.getSet(id);
+//    return ok(ViewSet.render("viewSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getSet(id),
+//        RoutineDB.getRoutines(), thisViewSet.getRoutines()));
+    // TODO: Fix above -- just trying to get the app to compile.
+    return null;
   }
+
 
   /***************************************************************************************************************
    * M A T E R I A L

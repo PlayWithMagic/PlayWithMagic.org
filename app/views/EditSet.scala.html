@@ -8,7 +8,7 @@
     allRoutines: List[Routine], routinesInSet: List[Routine])
 
 @import helper.form
-@import views.html.bootstrap3.{text45, textarea}
+@import views.html.bootstrap3.{text45, textarea, hidden}
 
 @Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
@@ -24,16 +24,8 @@
           <!-- User Attributes -->
         <div class="container">
         @form(routes.Application.postSet(), 'class -> "form-horizontal") {
-          <input type="hidden"
-          name="@setForm("id").name"
-          id="@setForm("id").id"
-          value="@setForm("id").value"/>
-
-
-          <input type="hidden"
-          name="magicianId"
-          id="magicianId"
-          value="@userInfo.getId()" />
+          @hidden(setForm("id"))
+          @hidden(setForm("magicianId"))
 
           @text45(setForm("name"),
             label = "Name",

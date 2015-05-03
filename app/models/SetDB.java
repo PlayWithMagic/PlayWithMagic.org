@@ -5,9 +5,7 @@ import play.Logger;
 import views.formdata.SetFormData;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Holds an in-memory database of all Set objects in the data model.
@@ -16,21 +14,7 @@ import java.util.Map;
  */
 public class SetDB {
 
-  //private static Map<Long, Set> sets = new HashMap<Long, Set>();
-  //private static long currentId = 1;
 
-
-  /**
-   * Adds a formData input to the Set local storage list.
-   *
-   * @param formData Input data from the submitted form.
-   */
-  public static void addSet(SetFormData formData) {
-    //long idVal = (formData.id == 0) ? currentId++ : formData.id;
-    Set setFromForm = new Set(idVal, formData.name, formData.description, formData.routines);
-    //sets.put(idVal, setFromForm);
-    setFromForm.save();
-  }
 
 
   /**
@@ -42,22 +26,6 @@ public class SetDB {
     //long idVal = (newSet.getId() == 0) ? currentId++ : newSet.getId();
     //sets.put(idVal, newSet);
     newSet.save();
-  }
-
-
-  /**
-   * Retrieve a Set associated with a given id from the local storage list.
-   *
-   * @param id The ID of the Set to retrieve.
-   * @return The retrieved Set object.
-   */
-  public static Set getSet(long id) {
-    //Set set = sets.get(id);
-    Set set = Set.find().byId(id);
-    if (set == null) {
-      throw new RuntimeException("Unable to find Set with the given ID value");
-    }
-    return set;
   }
 
 
@@ -77,15 +45,6 @@ public class SetDB {
   }
 
 
-  /**
-   * Gets the full list of all Sets in the local storage list.
-   *
-   * @return The full list of all Sets.
-   */
-  public static List<Set> getSets() {
-    //return new ArrayList<Set>(sets.values());
-    return new ArrayList<Set>(Set.find().all());
-  }
 
 
   /**
@@ -93,21 +52,24 @@ public class SetDB {
    */
   public static void resetSetDB() {
     // TODO:  It is confirmed... we will need these methods long term.
-    sets.clear();
-    currentId = 1;
+//    sets.clear();
+//    currentId = 1;
     Logger.warn("Set database reset");
   }
 
 
   /**
-   * Initialize the Set database.
+   * TODO: Initialize the Set database.
    */
   public static void init() {
-    resetSetDB();
-    Set set = null;
-    //long id;
+    // resetSetDB();
+/*    Set set = null;
+    SetFormData setFormData = null;
 
     // --------------------------------------
+    setFormData = new SetFormData()
+
+
     List<Long> routineIds = new ArrayList<Long>();
     routineIds.add(2L);
     routineIds.add(1L);
@@ -141,7 +103,7 @@ public class SetDB {
         + "Once you've closed, the audience member will walk away with a photo memory on their phone.", routineIds3);
     SetDB.addSet(set);
     currentId++;
-
+*/
   }
 
 

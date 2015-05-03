@@ -19,8 +19,8 @@ public class Material extends play.db.ebean.Model {
   private long id;
 
   // The routine that this material belongs to
-  @ManyToOne
   @Column(nullable = false)
+  @ManyToOne
   private Routine routine;
 
   // A short name for the item
