@@ -59,6 +59,9 @@ public class Material extends play.db.ebean.Model {
   @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
   private String imageUrl;
 
+  // The image id associated with this material
+  private long imageId;
+
 
   /**
    * Create a new, valid FormMaterial object.
@@ -258,6 +261,22 @@ public class Material extends play.db.ebean.Model {
    */
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
+  }
+
+  /**
+   * Gets the image id associated with this material.
+   * @return The image id.
+   */
+  public long getImageId() {
+    return imageId;
+  }
+
+  /**
+   * Sets the image id associated with this material.
+   * @param imageId The image id.
+   */
+  public void setImageId(long imageId) {
+    this.imageId = imageId;
   }
 
 
