@@ -121,6 +121,10 @@ public class RoutineFormData {
       message = "The choices text can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String choices;            /* Why did you make some of the choices you made in the design of this routine. */
 
+  /**
+   * The image id associated with this routine.
+   */
+  public long imageId;
 
   /**
    * Default no-arg constructor required by Play.
@@ -150,6 +154,7 @@ public class RoutineFormData {
     inspiration = routine.getInspiration();
     placement = routine.getPlacement();
     choices = routine.getChoices();
+    imageId = routine.getImageId();
   }
 
 
