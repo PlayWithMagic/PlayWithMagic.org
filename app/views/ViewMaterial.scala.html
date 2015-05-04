@@ -12,8 +12,8 @@
     <section id="content" class="container">
       <div class="col-md-6">
         <h1>@material.getName</h1>
-        @if(material.getImageUrl != null) {
-          <img class="img-responsive" src="@routes.Assets.at(material.getImageUrl)" alt="Image of Material"/>
+        @if(material.getImageId != -1) {
+          <img class="img-responsive" src="@routes.Application.getImage(material.getImageId)" alt="Image of Material" />
         }
         <br />
       </div>
