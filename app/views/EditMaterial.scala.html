@@ -22,7 +22,7 @@
 
           <!-- Form Fields -->
         <div class="container">
-        @form(routes.Application.postMaterial(), 'class -> "form-horizontal") {
+        @form(routes.Application.postMaterial(), 'class -> "form-horizontal", 'enctype -> "multipart/form-data") {
 
           @hidden(materialForm("routineId"))
 
