@@ -26,7 +26,7 @@
           <a href="@routes.Application.listMagicians()" class="btn btn-large">Return to Magician List</a>
         </p>
 
-        <img class="img-responsive" src="@routes.Assets.at("images/working-man.jpg")" alt="Image of Magician"/>
+        <img class="img-responsive" src="@routes.Application.getImage(magician.getImageId)" alt="@magician.getImageId" />
 
         <section id="social">
           @if(magician.getEmail) {
