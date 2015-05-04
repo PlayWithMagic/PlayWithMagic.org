@@ -432,10 +432,36 @@ public class Application extends Controller {
 
     RoutineFormData routineFormData = formWithRoutineData.get();
 
+    /* Retrieves image from form */
+
+    Http.MultipartFormData body = request().body().asMultipartFormData();
+    Http.MultipartFormData.FilePart picture = body.getFile("image");
+    String fileName = "";
+    String contentType = "";
+    File file = null;
+    long imageId;
+    Image image = null;
+
+    if(request().body().isMaxSizeExceeded()) {
+      return badRequest("Image exceeds maximum allowed file size. (512K)");
+    }
+    else if (picture != null) {
+      fileName = picture.getFilename();
+      contentType = picture.getContentType();
+      file = picture.getFile();
+      image = new Image(fileName, file);
+      imageId = image.id;
+      routineFormData.imageId = imageId;
+    }
+    else {
+      System.out.printf("Error getting image");
+    }
+
     Logger.debug("postRoutine Form Backing Class Data");
     Logger.debug("  id = [" + routineFormData.id + "]");
     Logger.debug("  name = [" + routineFormData.name + "]");
     Logger.debug("  duration = [" + routineFormData.duration + "]");
+    Logger.debug("  imageId = [" + routineFormData.imageId + "]");
 
     Routine routine = Routine.saveRoutineFromForm(routineFormData);
 

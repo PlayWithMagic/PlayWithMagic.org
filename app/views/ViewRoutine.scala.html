@@ -17,7 +17,7 @@
           <a id="returnToRoutineList" href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
         </p>
         @if(routine.getImageUrl != null) {
-          <img class="img-responsive" src="@routes.Assets.at(routine.getImageUrl)" alt="Image of Routine"/>
+          <img class="img-responsive" src="@routes.Application.getImage(routine.getImageId)" alt="Image of Routine" />
         }
         <br />
         @if(routine.getYouTubeUrl != null) {

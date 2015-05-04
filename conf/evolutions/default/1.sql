@@ -74,6 +74,7 @@ create table routine (
   inspiration               varchar(2000),
   placement                 varchar(2000),
   choices                   varchar(2000),
+  image_id                  bigint,
   constraint uq_routine_name unique (name),
   constraint pk_routine primary key (id))
 ;
