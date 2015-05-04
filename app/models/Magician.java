@@ -83,183 +83,9 @@ public class Magician extends play.db.ebean.Model {
   }
 
 
-  /**
-   * The EBean ORM finder method for database queries.
-   *
-   * @return The finder method.
-   */
-  public static Finder<Long, Magician> find() {
-    return new Finder<Long, Magician>(Long.class, Magician.class);
-  }
-
-
-  /**
-   * Get all of the active Magicians.
-   * <p>
-   * TODO:  Add where status=active and create a getAllMagicians -- use only in Admin pages.
-   *
-   * @return The all active Magicians.
-   */
-  public static List<Magician> getActiveMagicians() {
-    return Magician.find().all();
-  }
-
-
-  /**
-   * Get all of the Magicians.
-   * <p>
-   * TODO:  Add where status=active and create a getAllMagicians -- use only in Admin pages.
-   *
-   * @return The all active Magicians.
-   */
-  public static List<Magician> getAllMagicians() {
-    return Magician.find().all();
-  }
-
-
-  /**
-   * Delete a Magician associated with a given id.
-   * <p>
-   * TO-DO:  Set the status=inactive instead of deleting the magician.  Rename method to deactivate Magician.
-   * Create an activate Magician method.
-   *
-   * @param id The ID of the magician to delete.
-   */
-  public static void deleteMagician(long id) {
-    Magician magician = getMagician(id);
-
-    magician.delete();
-  }
-
-
-  /**
-   * Get a Magician associated with a given email.
-   *
-   * @param email The ID of the magician to retrieve.
-   * @return The retrieved magician object.
-   */
-  public static Magician getMagician(String email) {
-    Magician magician = Magician.find().where().eq("email", email).findUnique();
-    if (magician == null) {
-      throw new RuntimeException("Unable to find Magician with the given email [" + email + "]");
-    }
-    return magician;
-  }
-
-  /**
-   * Get a Magician associated with a given id.
-   *
-   * @param id The ID of the magician to retrieve.
-   * @return The retrieved magician object.
-   */
-  public static Magician getMagician(long id) {
-    Magician magician = Magician.find().byId(id);
-    if (magician == null) {
-      throw new RuntimeException("Unable to find Magician with the given ID [" + id + "]");
-    }
-    return magician;
-  }
-
-  /**
-   * Check if an email address is associated with an existing Magician.
-   *
-   * @param email The email address to check against in the DB
-   * @return True if found, otherwise false.
-   */
-  public static boolean isExistingMagician(String email) {
-    int count = Magician.find().where().eq("email", email).findRowCount();
-    return count >= 1;
-  }
-
-
-  /**
-   * Check if a Magician's credentials are valid.
-   *
-   * @param email The email address of the Magician.
-   * @param password The password of the Magician to check.
-   * @return True if Magician exists and Password matches hashed password, otherwise false.
-   */
-  public static boolean isValidMagician(String email, String password) {
-    return ((email != null)
-        && (password != null)
-        && isExistingMagician(email)
-        && BCrypt.checkpw(password, getMagician(email).getPassword()));
-  }
-
-
-  /**
-   * Update an existing Magician object from EditMagicianFormData.  Update the database and return the current
-   * Magician.
-   *
-   * @param editMagicianFormData The source of data for the Magician.
-   * @return A fully populated Magician object that's just been persisted in the database.
-   */
-  public static Magician createMagicianFromForm(EditMagicianFormData editMagicianFormData) {
-    MagicianType magicianType = MagicianType.getMagicianType(editMagicianFormData.magicianType);
-
-    Magician magician = Magician.find().byId(editMagicianFormData.id);
-    if (magician == null) {
-      magician = Magician.find().where().eq("email", editMagicianFormData.email).findUnique();
-    }
-
-    magician.setFirstName(editMagicianFormData.firstName);
-    magician.setLastName(editMagicianFormData.lastName);
-    magician.setEmail(editMagicianFormData.email);
-    magician.setMagicianType(magicianType);
-
-    magician.setStageName(editMagicianFormData.stageName);
-    magician.setLocation(editMagicianFormData.location);
-    // User photo
-    magician.setBiography(editMagicianFormData.biography);
-    magician.setInterests(editMagicianFormData.interests);
-    magician.setInfluences(editMagicianFormData.influences);
-    magician.setYearStarted(editMagicianFormData.yearStarted);
-    magician.setOrganizations(editMagicianFormData.organizations);
-    magician.setWebsite(editMagicianFormData.website);
-    magician.setFacebook(editMagicianFormData.facebook);
-    magician.setTwitter(editMagicianFormData.twitter);
-    magician.setLinkedIn(editMagicianFormData.linkedIn);
-    magician.setGooglePlus(editMagicianFormData.googlePlus);
-    magician.setInstagram(editMagicianFormData.instagram);
-    magician.setFlickr(editMagicianFormData.flickr);
-
-    magician.save();
-    return magician;
-  }
-
-// TODO:  Need a mechanism to prevent a user from deleting their own account (or if they do, then log them out first).
-
-  /**
-   * Create a new Magician object from EditUserFormData.  Add it to the database and return the newly created
-   * Magician.
-   *
-   * @param editUserFormData The source of data for the Magician.
-   * @return A fully populated Magician object that's just been persisted in the database.
-   */
-  public static Magician createMagicianFromForm(EditUserFormData editUserFormData) {
-    Magician magician = null;
-    MagicianType magicianType = MagicianType.getMagicianType(editUserFormData.magicianType);
-
-    if (editUserFormData.id == 0) {
-      magician = new Magician(
-          editUserFormData.firstName
-          , editUserFormData.lastName
-          , editUserFormData.email
-          , magicianType
-          , BCrypt.hashpw(editUserFormData.password, BCrypt.gensalt(12)));
-    }
-    else {
-      magician = Magician.find().byId(editUserFormData.id);
-      magician.setFirstName(editUserFormData.firstName);
-      magician.setLastName(editUserFormData.lastName);
-      magician.setEmail(editUserFormData.email);
-      magician.setMagicianType(magicianType);
-      magician.setPassword(BCrypt.hashpw(editUserFormData.password, BCrypt.gensalt(12)));
-    }
-
-    magician.save();
-    return magician;
-  }
+  /******************************************************************************************************************
+   * G E T T E R S   &   S E T T E R S
+   ******************************************************************************************************************/
 
   /**
    * Get the ID of the magician.
@@ -637,6 +463,189 @@ public class Magician extends play.db.ebean.Model {
    */
   public void setMagicianType(MagicianType magicianType) {
     this.magicianType = magicianType;
+  }
+
+
+  /******************************************************************************************************************
+   * M E T H O D S
+   ******************************************************************************************************************/
+
+  /**
+   * The EBean ORM finder method for database queries.
+   *
+   * @return The finder method.
+   */
+  public static Finder<Long, Magician> find() {
+    return new Finder<Long, Magician>(Long.class, Magician.class);
+  }
+
+
+  /**
+   * Get all of the active Magicians.
+   * <p>
+   * TODO:  Add where status=active and create a getAllMagicians -- use only in Admin pages.
+   *
+   * @return The all active Magicians.
+   */
+  public static List<Magician> getActiveMagicians() {
+    return Magician.find().all();
+  }
+
+
+  /**
+   * Get all of the Magicians.
+   * <p>
+   * TODO:  Add where status=active and create a getAllMagicians -- use only in Admin pages.
+   *
+   * @return The all active Magicians.
+   */
+  public static List<Magician> getAllMagicians() {
+    return Magician.find().all();
+  }
+
+
+  /**
+   * Delete a Magician associated with a given id.
+   * <p>
+   * TO-DO:  Set the status=inactive instead of deleting the magician.  Rename method to deactivate Magician.
+   * Create an activate Magician method.
+   *
+   * @param id The ID of the magician to delete.
+   */
+  public static void deleteMagician(long id) {
+    Magician magician = getMagician(id);
+
+    magician.delete();
+  }
+
+
+  /**
+   * Get a Magician associated with a given email.
+   *
+   * @param email The ID of the magician to retrieve.
+   * @return The retrieved magician object.
+   */
+  public static Magician getMagician(String email) {
+    Magician magician = Magician.find().where().eq("email", email).findUnique();
+    if (magician == null) {
+      throw new RuntimeException("Unable to find Magician with the given email [" + email + "]");
+    }
+    return magician;
+  }
+
+  /**
+   * Get a Magician associated with a given id.
+   *
+   * @param id The ID of the magician to retrieve.
+   * @return The retrieved magician object.
+   */
+  public static Magician getMagician(long id) {
+    Magician magician = Magician.find().byId(id);
+    if (magician == null) {
+      throw new RuntimeException("Unable to find Magician with the given ID [" + id + "]");
+    }
+    return magician;
+  }
+
+  /**
+   * Check if an email address is associated with an existing Magician.
+   *
+   * @param email The email address to check against in the DB
+   * @return True if found, otherwise false.
+   */
+  public static boolean isExistingMagician(String email) {
+    int count = Magician.find().where().eq("email", email).findRowCount();
+    return count >= 1;
+  }
+
+
+  /**
+   * Check if a Magician's credentials are valid.
+   *
+   * @param email The email address of the Magician.
+   * @param password The password of the Magician to check.
+   * @return True if Magician exists and Password matches hashed password, otherwise false.
+   */
+  public static boolean isValidMagician(String email, String password) {
+    return ((email != null)
+        && (password != null)
+        && isExistingMagician(email)
+        && BCrypt.checkpw(password, getMagician(email).getPassword()));
+  }
+
+
+  /**
+   * Update an existing Magician object from EditMagicianFormData.  Update the database and return the current
+   * Magician.
+   *
+   * @param editMagicianFormData The source of data for the Magician.
+   * @return A fully populated Magician object that's just been persisted in the database.
+   */
+  public static Magician createMagicianFromForm(EditMagicianFormData editMagicianFormData) {
+    MagicianType magicianType = MagicianType.getMagicianType(editMagicianFormData.magicianType);
+
+    Magician magician = Magician.find().byId(editMagicianFormData.id);
+    if (magician == null) {
+      magician = Magician.find().where().eq("email", editMagicianFormData.email).findUnique();
+    }
+
+    magician.setFirstName(editMagicianFormData.firstName);
+    magician.setLastName(editMagicianFormData.lastName);
+    magician.setEmail(editMagicianFormData.email);
+    magician.setMagicianType(magicianType);
+
+    magician.setStageName(editMagicianFormData.stageName);
+    magician.setLocation(editMagicianFormData.location);
+    // User photo
+    magician.setBiography(editMagicianFormData.biography);
+    magician.setInterests(editMagicianFormData.interests);
+    magician.setInfluences(editMagicianFormData.influences);
+    magician.setYearStarted(editMagicianFormData.yearStarted);
+    magician.setOrganizations(editMagicianFormData.organizations);
+    magician.setWebsite(editMagicianFormData.website);
+    magician.setFacebook(editMagicianFormData.facebook);
+    magician.setTwitter(editMagicianFormData.twitter);
+    magician.setLinkedIn(editMagicianFormData.linkedIn);
+    magician.setGooglePlus(editMagicianFormData.googlePlus);
+    magician.setInstagram(editMagicianFormData.instagram);
+    magician.setFlickr(editMagicianFormData.flickr);
+
+    magician.save();
+    return magician;
+  }
+
+// TODO:  Need a mechanism to prevent a user from deleting their own account (or if they do, then log them out first).
+
+  /**
+   * Create a new Magician object from EditUserFormData.  Add it to the database and return the newly created
+   * Magician.
+   *
+   * @param editUserFormData The source of data for the Magician.
+   * @return A fully populated Magician object that's just been persisted in the database.
+   */
+  public static Magician createMagicianFromForm(EditUserFormData editUserFormData) {
+    Magician magician = null;
+    MagicianType magicianType = MagicianType.getMagicianType(editUserFormData.magicianType);
+
+    if (editUserFormData.id == 0) {
+      magician = new Magician(
+          editUserFormData.firstName
+          , editUserFormData.lastName
+          , editUserFormData.email
+          , magicianType
+          , BCrypt.hashpw(editUserFormData.password, BCrypt.gensalt(12)));
+    }
+    else {
+      magician = Magician.find().byId(editUserFormData.id);
+      magician.setFirstName(editUserFormData.firstName);
+      magician.setLastName(editUserFormData.lastName);
+      magician.setEmail(editUserFormData.email);
+      magician.setMagicianType(magicianType);
+      magician.setPassword(BCrypt.hashpw(editUserFormData.password, BCrypt.gensalt(12)));
+    }
+
+    magician.save();
+    return magician;
   }
 
 
