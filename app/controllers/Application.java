@@ -740,7 +740,6 @@ public class Application extends Controller {
    */
   public static Result getImage(long id) {
     Image image = Image.find.byId(id);
-
     if (image == null) {
       throw new RuntimeException("Could not find the image with associated id.");
     }

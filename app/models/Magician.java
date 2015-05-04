@@ -47,7 +47,7 @@ public class Magician extends play.db.ebean.Model {
   @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String location;  // City/State? Country? Perhaps a map.
   private File userPhoto;
 
-  // Magic Info
+  // Magician Info
   @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) private String biography;
   @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) private String interests;
   @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String influences;
@@ -64,6 +64,8 @@ public class Magician extends play.db.ebean.Model {
   @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String flickr;
   @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String instagram;
 
+  // Magician Image
+  private long imageId;
 
   /**
    * Create a magician with only the required fields.
@@ -463,6 +465,22 @@ public class Magician extends play.db.ebean.Model {
    */
   public void setMagicianType(MagicianType magicianType) {
     this.magicianType = magicianType;
+  }
+
+  /**
+   * Gets the image id.
+   * @return The image id.
+   */
+  public long getImageId() {
+    return imageId;
+  }
+
+  /**
+   * Sets the image id.
+   * @param imageId The image id.
+   */
+  public void setImageId(long imageId) {
+    this.imageId = imageId;
   }
 
 
