@@ -138,7 +138,7 @@ public abstract class NavigationWrapper extends FluentPage {
    *
    * Available to logged in users only.
    *
-   * TODO:  Test that it shows the users' subset of routines
+   * TO-DO:  Test that it shows the users' subset of Sets
    * @return The ListSetsPage.
    */
   public ListSetsPage clickMySetsButton() {

@@ -189,7 +189,8 @@ public class Set extends play.db.ebean.Model {
     Magician magician = Secured.getUserInfo(context);
 
     //TODO: Once we get things working, we need to get a function like below working...  See Routine.getActiveRoutines
-    //return Set.find().where().eq("magician", magician);
+
+    //return Set.find().where().eq(ma);
     return Set.find().all();
   }
 

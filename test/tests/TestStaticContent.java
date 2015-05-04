@@ -118,9 +118,7 @@ public class TestStaticContent extends play.test.WithBrowser {
 
     ViewMagicianPage viewMagicianPage = helpPage.clickProfileButton();
 
-    listRoutinesPage = viewMagicianPage.clickMyRoutinesButton();
-
-    listSetsPage = listRoutinesPage.clickMySetsButton();
+    listSetsPage = viewMagicianPage.clickMySetsButton();
 
     EditRoutinePage editRoutinePage = listSetsPage.clickCreateRoutineButton();
 

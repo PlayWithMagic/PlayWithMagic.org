@@ -9,6 +9,7 @@ import play.Logger;
 import play.data.Form;
 import play.data.validation.ValidationError;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.formdata.DeleteUserFormData;
@@ -59,6 +60,18 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result index(String message) {
+
+    /*
+    Http.Context context = Http.Context.current();
+    Magician magician = Secured.getUserInfo(context);
+
+    Logger.debug("Get My Sets");
+    List<Magician> myMagicians = Magician.find().where().eq("magician", magician.getId()).findList();
+    for (Set theSet : mySets) {
+      Logger.debug("    " + theSet.getName())
+    }
+
+    */
     return ok(Index.render("home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), message));
   }
 
@@ -562,11 +575,23 @@ public class Application extends Controller {
 
 
   /**
-   * Render the List Sets page.
+   * Render the List Sets page with all sets.
    *
    * @return An HTTP OK message along with the HTML content for the List Set page.
    */
-  public static Result listSets() {
+  public static Result listAllSets() {
+
+    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getAllSets()));
+  }
+
+
+  /**
+   * Render the List Sets page with just the Magician's sets.
+   *
+   * @return An HTTP OK message along with the HTML content for the List Set page.
+   */
+  public static Result listMySets() {
+
     return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
   }
 
@@ -765,6 +790,7 @@ public class Application extends Controller {
 
     return ok(ViewMaterial.render("viewRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), material));
   }
+
 
   /***************************************************************************************************************
    * I M A G E S

@@ -40,7 +40,8 @@ POST        /postMaterial          controllers.Application.postMaterial()
 POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Integer)
 
 # Set actions
-GET         /listSets              controllers.Application.listSets()
+GET         /listSets              controllers.Application.listAllSets()
+GET         /listMySets            controllers.Application.listMySets()
 GET         /viewSet               controllers.Application.viewSet(id: Long?=0)
 GET         /editSet               controllers.Application.editSet(id: Long?=0)
 POST        /editSet               controllers.Application.postSet()

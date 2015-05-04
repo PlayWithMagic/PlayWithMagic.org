@@ -2,7 +2,6 @@ package models;
 
 import play.Logger;
 import play.mvc.Http.Context;
-import controllers.Secured;
 import views.formdata.RoutineFormData;
 
 import javax.persistence.CascadeType;
@@ -414,8 +413,6 @@ public class Routine extends play.db.ebean.Model {
 
   /**
    * Get the active Routines in the database.
-   *
-   * TODO: Someday implement a Routine Status to takedown routines or hide them for awhile.
    *
    * @return The active Routines in the database.
    */
