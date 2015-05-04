@@ -304,10 +304,10 @@ public class Application extends Controller {
     String fileName = "";
     String contentType = "";
     File file = null;
-    long imageId;
+    long imageId = -1;
     Image image = null;
 
-    if(request().body().isMaxSizeExceeded()) {
+    if (request().body().isMaxSizeExceeded()) {
       return badRequest("Image exceeds maximum allowed file size. (512K)");
     }
     else if (picture != null) {
@@ -439,10 +439,10 @@ public class Application extends Controller {
     String fileName = "";
     String contentType = "";
     File file = null;
-    long imageId;
+    long imageId = -1;
     Image image = null;
 
-    if(request().body().isMaxSizeExceeded()) {
+    if (request().body().isMaxSizeExceeded()) {
       return badRequest("Image exceeds maximum allowed file size. (512K)");
     }
     else if (picture != null) {
@@ -764,10 +764,10 @@ public class Application extends Controller {
     String fileName = "";
     String contentType = "";
     File file = null;
-    long imageId;
+    long imageId = -1;
     Image image = null;
 
-    if(request().body().isMaxSizeExceeded()) {
+    if (request().body().isMaxSizeExceeded()) {
       return badRequest("Image exceeds maximum allowed file size. (512K)");
     }
     else if (picture != null) {
