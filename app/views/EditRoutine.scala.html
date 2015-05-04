@@ -9,7 +9,7 @@
 @import java.util.List
 
 @import helper.form
-@import views.html.bootstrap3.{hidden, text, text45, textInt, textarea};
+@import views.html.bootstrap3.{hidden, text, text45, textInt, textarea, image};
 
 @Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
@@ -139,10 +139,10 @@
                 placeholder = "The URL to your YouTube video performing this routine",
                 help = "Please use an embed URL in the form of http://www.youtube.com/embed/VIDEO_ID")
 
-              @text(routineForm("imageUrl"),
-                label = "Image URL",
-                placeholder = "The URL of the image that represents this routine",
-                help = "")
+                <!-- Magician Image -->
+              @image(magicianForm("image"),
+                label="Image",
+                help="Select an image")
             </div>
           </div>
 
