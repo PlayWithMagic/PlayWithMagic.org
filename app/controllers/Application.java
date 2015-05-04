@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Image;
 import models.Magician;
 import models.Material;
 import models.Routine;
@@ -711,7 +712,6 @@ public class Application extends Controller {
         formWithRoutineData, Routine.getMaterials(routineId)));
   }
 
-
   /**
    * Display a single Material page.
    *
@@ -724,6 +724,28 @@ public class Application extends Controller {
     Material material = routine.getMaterials().get(materialId);
 
     return ok(ViewMaterial.render("viewRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), material));
+  }
+
+  /***************************************************************************************************************
+   * I M A G E S
+   *
+   * Gets the image from the Images database.
+   *
+   ***************************************************************************************************************/
+
+  /**
+   * Gets the image.
+   * @param id The image id.
+   * @return The image.
+   */
+  public static Result getImage(long id) {
+    Image image = Image.find.byId(id);
+
+    if (image == null) {
+      throw new RuntimeException("Could not find the image with associated id.");
+    }
+
+    return ok(image.data).as("image");
   }
 
 }

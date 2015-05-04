@@ -8,9 +8,9 @@ GET         /about                 controllers.Application.about()
 GET         /help                  controllers.Application.help()
 
 # Login and authentication workflow
-GET         /login               controllers.Application.login(msg: String?= "")
-POST        /login               controllers.Application.postLogin()
-GET         /logout              controllers.Application.logout()
+GET         /login                 controllers.Application.login(msg: String?= "")
+POST        /login                 controllers.Application.postLogin()
+GET         /logout                controllers.Application.logout()
 
 # Routine actions
 GET         /listRoutines          controllers.Application.listRoutines()
@@ -44,6 +44,9 @@ GET         /viewSet               controllers.Application.viewSet(id: Long?=0)
 GET         /editSet               controllers.Application.editSet(id: Long?=0)
 POST        /editSet               controllers.Application.postSet()
 GET         /deleteSet             controllers.Application.deleteSet(id: Long?=0)
+
+# Get image from database
+GET         /getImage              controllers.Application.getImage(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file          controllers.Assets.at(path="/public", file)
