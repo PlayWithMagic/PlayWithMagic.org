@@ -122,14 +122,15 @@ public abstract class NavigationWrapper extends FluentPage {
    *
    * Available to logged in users only.
    *
-   * TODO:  Rename/remove this
+   * TO-DO: Remove until Magicians can bookmark Routines.
+   *
    * @return The ListRoutinesPage.
    */
-  public ListRoutinesPage clickMyRoutinesButton() {
+/*  public ListRoutinesPage clickMyRoutinesButton() {
     this.findFirst("#myName").click();
     this.findFirst("#myRoutines").click();
     return new ListRoutinesPage(this.getDriver());
-  }
+  }*/
 
 
   /**
