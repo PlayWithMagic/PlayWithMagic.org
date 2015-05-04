@@ -3,7 +3,6 @@ package controllers;
 import models.Magician;
 import models.Material;
 import models.Routine;
-import models.RoutineDB;
 import models.Set;
 import play.Logger;
 import play.data.Form;
@@ -33,7 +32,6 @@ import views.html.Login;
 import views.html.ViewMagician;
 import views.html.ViewMaterial;
 import views.html.ViewRoutine;
-import views.html.ViewSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -229,6 +227,7 @@ public class Application extends Controller {
     return redirect(routes.Application.index(""));
   }
 
+  
   /**
    * Logs out (only for authenticated users) and returns them to the Index page.
    *
@@ -265,7 +264,7 @@ public class Application extends Controller {
 
 
   /**
-   * Handles the request to post form data from the EditMagician page.
+   * Handle the request to post form data from the EditMagician page.
    *
    * @return If successful, the ListMagicians page.  On error, the EditMagician page.
    */
@@ -313,7 +312,7 @@ public class Application extends Controller {
 
 
   /**
-   * Displays the full list of Magicians registered on the site.
+   * Display the full list of Magicians registered on the site.
    *
    * @return An HTTP OK message along with the HTML content for the ListMagicians page.
    */
@@ -324,7 +323,7 @@ public class Application extends Controller {
 
 
   /**
-   * Displays a single Magician based off of the provided ID.
+   * Display a single Magician based off of the provided ID.
    *
    * @param id The ID of the Magician to be displayed.
    * @return An HTTP OK message along with the HTML content for a single Magician page.
@@ -368,13 +367,13 @@ public class Application extends Controller {
       routineFormData = new RoutineFormData();
     }
     else {
-      routineFormData = new RoutineFormData(RoutineDB.getRoutine(routineId));
+      routineFormData = new RoutineFormData(Routine.getRoutine(routineId));
     }
 
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).fill(routineFormData);
 
     return ok(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-        formWithRoutineData, RoutineDB.getMaterials(routineId)));
+        formWithRoutineData, Routine.getMaterials(routineId)));
   }
 
 
@@ -399,7 +398,7 @@ public class Application extends Controller {
       Logger.error("postRoutine HTTP Form Error.");
 
       return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-          formWithRoutineData, RoutineDB.getMaterials(routineId)));
+          formWithRoutineData, Routine.getMaterials(routineId)));
     }
 
     RoutineFormData routineFormData = formWithRoutineData.get();
@@ -409,7 +408,7 @@ public class Application extends Controller {
     Logger.debug("  name = [" + routineFormData.name + "]");
     Logger.debug("  duration = [" + routineFormData.duration + "]");
 
-    Routine routine = RoutineDB.saveRoutineFromForm(routineFormData);
+    Routine routine = Routine.saveRoutineFromForm(routineFormData);
 
     Logger.debug("postRoutine Persisted Data");
     Logger.debug("  id = [" + routine.getId() + "]");
@@ -417,7 +416,7 @@ public class Application extends Controller {
     Logger.debug("  duration = [" + routine.getDuration() + "]");
 
     return ok(ListRoutines.render("listRoutines", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-        RoutineDB.getRoutines()));
+        Routine.getActiveRoutines()));
   }
 
 
@@ -428,10 +427,10 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result deleteRoutine(long routineId) {
-    RoutineDB.deleteRoutine(routineId);
+    Routine.deleteRoutine(routineId);
 
     return ok(ListRoutines.render("listRoutines", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-        RoutineDB.getRoutines()));
+        Routine.getActiveRoutines()));
   }
 
 
@@ -442,7 +441,7 @@ public class Application extends Controller {
    */
   public static Result listRoutines() {
     return ok(ListRoutines.render("listRoutines", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-        RoutineDB.getRoutines()));
+        Routine.getActiveRoutines()));
   }
 
 
@@ -454,7 +453,7 @@ public class Application extends Controller {
    */
   public static Result viewRoutine(long routineId) {
     return ok(ViewRoutine.render("viewRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-        RoutineDB.getRoutine(routineId)));
+        Routine.getRoutine(routineId)));
   }
 
 
@@ -478,13 +477,13 @@ public class Application extends Controller {
     if (id != 0) {
       Set thisSet = Set.getSet(id);
       return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
-          RoutineDB.getRoutines(), thisSet.getRoutines()));
+          Routine.getActiveRoutines(), thisSet.getRoutines()));
     }
     else {
       List<Routine> emptyListOfRoutinesInSet = new ArrayList<Routine>();
 
       return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
-          RoutineDB.getRoutines(), emptyListOfRoutinesInSet));
+          Routine.getActiveRoutines(), emptyListOfRoutinesInSet));
     }
   }
 
@@ -498,7 +497,7 @@ public class Application extends Controller {
   @Security.Authenticated(Secured.class)
   public static Result deleteSet(long id) {
     Set.deleteSet(id);
-    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets(ctx())));
+    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
   }
 
 
@@ -523,12 +522,12 @@ public class Application extends Controller {
         listOfRoutines = new ArrayList<Routine>();
       }
       return badRequest(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-          formWithSetData, RoutineDB.getRoutines(), listOfRoutines));
+          formWithSetData, Routine.getActiveRoutines(), listOfRoutines));
     }
     else {
       SetFormData data = formWithSetData.get();
-      Set.createSetFromForm(ctx(), data);
-      return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets(ctx())));
+      Set.createSetFromForm(data);
+      return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
     }
   }
 
@@ -539,7 +538,7 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the List Set page.
    */
   public static Result listSets() {
-    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets(ctx())));
+    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
   }
 
 
@@ -579,7 +578,7 @@ public class Application extends Controller {
 
   /**
    * Show the EditMaterial page to update an item.  First, process the Routine page, deal with any errors and update
-   * RoutineDB.  Finally, show the EditMaterial page.
+   * the database.  Finally, show the EditMaterial page.
    *
    * @param materialId The ListArray index of the Material row you want to edit.
    * @return An HTTP page EditMaterial if all is well or EditRoutine if there's an error on that page.
@@ -593,17 +592,17 @@ public class Application extends Controller {
       Logger.error("HTTP Form Error in editMaterial");
 
       return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-          routineFormData, RoutineDB.getMaterials(routineId)));
+          routineFormData, Routine.getMaterials(routineId)));
     }
 
     RoutineFormData data = routineFormData.get();
-    Routine routine = RoutineDB.saveRoutineFromForm(data);
+    Routine routine = Routine.saveRoutineFromForm(data);
     routineId = routine.getId();
 
     // End of processing Routine page.  Start processing material.
 
     MaterialFormData materialFormData =
-        new MaterialFormData(RoutineDB.getMaterials(routineId).get(materialId.intValue()), routineId, materialId);
+        new MaterialFormData(Routine.getMaterials(routineId).get(materialId.intValue()), routineId, materialId);
 
     Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
 
@@ -614,7 +613,7 @@ public class Application extends Controller {
 
   /**
    * Show the EditMaterial page to create a new item.  First, process the Routine page and deal with any errors.
-   * Update RoutineDB and finally show the EditMaterial page.
+   * Update the database and finally show the EditMaterial page.
    *
    * @return An HTTP page EditMaterial if all is well or EditRoutine if there's an error on that page.
    */
@@ -627,11 +626,11 @@ public class Application extends Controller {
       Logger.error("HTTP Form Error in editMaterial");
 
       return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-          routineFormData, RoutineDB.getMaterials(routineId)));
+          routineFormData, Routine.getMaterials(routineId)));
     }
 
     RoutineFormData data = routineFormData.get();
-    Routine routine = RoutineDB.saveRoutineFromForm(data);
+    Routine routine = Routine.saveRoutineFromForm(data);
     routineId = routine.getId();
 
     // End of processing Routine page.  Start processing material.
@@ -648,7 +647,7 @@ public class Application extends Controller {
 
   /**
    * Delete a Material item and redisplay the EditRoutine page.  First, process the Routine page and deal with any
-   * errors.  Update RoutineDB, then delete the Material item and finally redisplay EditRoutine.
+   * errors.  Update the database, then delete the Material item and finally redisplay EditRoutine.
    *
    * @param materialId The ArrayList index in Routine.materials of the item to delete.
    * @return An HTTP EditMaterial page.
@@ -662,19 +661,19 @@ public class Application extends Controller {
       System.out.println("HTTP Form Error.");
 
       return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-          formWithRoutineData, RoutineDB.getMaterials(routineId)));
+          formWithRoutineData, Routine.getMaterials(routineId)));
     }
 
     RoutineFormData routineFormData = formWithRoutineData.get();
-    Routine routine = RoutineDB.saveRoutineFromForm(routineFormData);
+    Routine routine = Routine.saveRoutineFromForm(routineFormData);
     routineId = routine.getId();
 
     // End of processing Routine page.  Start of processing material.
 
-    RoutineDB.getMaterials(routineId).remove(materialId.intValue());
+    Routine.getMaterials(routineId).remove(materialId.intValue());
 
     return ok(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-        formWithRoutineData, RoutineDB.getMaterials(routineId)));
+        formWithRoutineData, Routine.getMaterials(routineId)));
   }
 
 
@@ -703,13 +702,13 @@ public class Application extends Controller {
 
     Logger.debug("isInspectable = " + materialFormData.isInspectable);
 
-    RoutineDB.addMaterial(materialFormData);
+    Material.saveMaterialFromForm(materialFormData);
 
-    RoutineFormData routineFormData = new RoutineFormData(RoutineDB.getRoutine(routineId));
+    RoutineFormData routineFormData = new RoutineFormData(Routine.getRoutine(routineId));
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).fill(routineFormData);
 
     return ok(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-        formWithRoutineData, RoutineDB.getMaterials(routineId)));
+        formWithRoutineData, Routine.getMaterials(routineId)));
   }
 
 
@@ -721,7 +720,7 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for a single Routine page.
    */
   public static Result viewMaterial(long routineId, int materialId) {
-    Routine routine = RoutineDB.getRoutine(routineId);
+    Routine routine = Routine.getRoutine(routineId);
     Material material = routine.getMaterials().get(materialId);
 
     return ok(ViewMaterial.render("viewRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), material));

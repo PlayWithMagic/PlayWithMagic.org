@@ -184,9 +184,11 @@ public class Set extends play.db.ebean.Model {
    *
    * @return The current Magician's Sets.
    */
-  public static List<Set> getMySets(Context context) {
+  public static List<Set> getMySets() {
+    Context context = Context.current();
     Magician magician = Secured.getUserInfo(context);
-    //TODO: Once we get things working, we need to get a function like below working...
+
+    //TODO: Once we get things working, we need to get a function like below working...  See Routine.getActiveRoutines
     //return Set.find().where().eq("magician", magician);
     return Set.find().all();
   }
@@ -215,8 +217,9 @@ public class Set extends play.db.ebean.Model {
    * TODO: Rename SetFormData to EditSetFormData.
    * @param setFormData Input data from the submitted form.
    */
-  public static void createSetFromForm(Context context, SetFormData setFormData) {
-    Magician magician = Secured.getUserInfo(context);
+  public static void createSetFromForm(SetFormData setFormData) {
+
+    Magician magician = Secured.getUserInfo(Context.current());
     Set set;
 
     if (setFormData.id == 0) {
@@ -239,10 +242,7 @@ public class Set extends play.db.ebean.Model {
    * @param id The ID of the set to delete.
    */
   public static void deleteSet(long id) {
-    Set set = Set.find().byId(id);
-    if (set == null) {
-      throw new RuntimeException("Unable to find Set [" + id + "]");
-    }
+    Set set = Set.getSet(id);
     set.delete();
   }
 

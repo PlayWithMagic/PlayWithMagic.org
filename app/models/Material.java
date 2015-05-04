@@ -1,5 +1,8 @@
 package models;
 
+import play.Logger;
+import views.formdata.MaterialFormData;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -64,9 +67,11 @@ public class Material extends play.db.ebean.Model {
    * fields.  The idea is that an object is always in a valid state.
    * </p>
    *
+   * @param routine The routine associated with this item.
    * @param name A short name for the item.
    */
-  public Material(String name) {
+  public Material(Routine routine, String name) {
+    this.routine = routine;
     this.name = name;
   }
 
@@ -297,6 +302,40 @@ public class Material extends play.db.ebean.Model {
     }
 
     return material;
+  }
+
+
+  /**
+   * Add or update a Material object to a Routine object saved in the Routines database.
+   *
+   * @param materialFormData Input data from an HTML form.
+   * @return The Material object just saved to the database.
+   */
+  public static Material saveMaterialFromForm(MaterialFormData materialFormData) {
+    Material material = new Material(Routine.getRoutine(materialFormData.routineId), materialFormData.name);
+    material.setDescription(materialFormData.description);
+    material.setIsInspectable(materialFormData.isInspectable);
+    material.setIsGivenAway(materialFormData.isGivenAway);
+    material.setIsConsumed(materialFormData.isConsumed);
+    material.setPrice(materialFormData.price);
+    material.setPurchaseUrl(materialFormData.purchaseUrl);
+    material.setImageUrl(materialFormData.imageUrl);
+
+    if (materialFormData.materialId == -1) {
+      Routine.getMaterials(materialFormData.routineId).add(material);
+    }
+    else {
+      Routine.getMaterials(materialFormData.routineId).set(materialFormData.materialId, material);
+    }
+
+    material.save();
+    material = Material.find().byId(material.getId());
+
+    Logger.debug(((materialFormData.materialId == 0) ? "Added" : "Updated") + " material.  id = [" + material.getId() + "]"
+        + "  name = [" + material.getName() + "]");
+
+    return material;
+
   }
 
 

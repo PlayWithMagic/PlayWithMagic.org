@@ -165,6 +165,11 @@ public class RoutineFormData {
       errors.add(new ValidationError("id", "An invalid ID has been passed into the application."));
     }
 
+    if (id == 0 && Routine.isExistingRoutine(name)) {
+      errors.add(new ValidationError("name",
+          "Play With Magic already has a routine with that name.  You'll need to pick another name."));
+    }
+
     // TO-DO:  The Play Framework prints 'error.invalid' and not presenting this error message.
     // Can't figure out how to get a nicer looking message up front.
     if (duration != null) {

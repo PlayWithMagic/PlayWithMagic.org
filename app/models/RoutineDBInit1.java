@@ -32,9 +32,9 @@ public class RoutineDBInit1 {
     routine.setImageUrl("images/routines/1.jpg");
     routine.setReviewUrl("http://www.themagiccafe.com/forums/viewtopic.php?topic=577109&forum=2");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("A regular deck of cards");
+    material = new Material(routine, "A regular deck of cards");
     material.setDescription("I use red 808s, but any deck will do.");
     material.setIsInspectable(true);
     material.setIsGivenAway(false);
@@ -66,9 +66,9 @@ public class RoutineDBInit1 {
     routine.setImageUrl("images/routines/2.jpg");
     routine.setReviewUrl("http://www.themagiccafe.com/forums/viewtopic.php?topic=245183&forum=109");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("A spool of thread");
+    material = new Material(routine, "A spool of thread");
     material.setDescription("Cotton quilting thread or silk thread work great.  Make sure it contrasts with what "
         + "you are wearing.");
     material.setIsInspectable(true);
@@ -108,9 +108,9 @@ public class RoutineDBInit1 {
     // TO-DO:  I need to record my own performance.
     routine.setImageUrl("images/routines/3.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("A Mental Photography Deck");
+    material = new Material(routine, "A Mental Photography Deck");
     material.setIsInspectable(false);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -143,9 +143,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/200.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("A matchstick");
+    material = new Material(routine, "A matchstick");
     material.setIsInspectable(true);
     material.setIsGivenAway(true);
     material.setIsConsumed(true);
@@ -155,7 +155,7 @@ public class RoutineDBInit1 {
 
     routine.getMaterials().add(material);
 
-    material = new Material("Sharpie");
+    material = new Material(routine, "Sharpie");
     material.setIsInspectable(false);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -190,9 +190,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/202.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Large shears or sissors");
+    material = new Material(routine, "Large shears or sissors");
     material.setIsInspectable(true);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -203,7 +203,7 @@ public class RoutineDBInit1 {
 
     routine.getMaterials().add(material);
 
-    material = new Material("Rope");
+    material = new Material(routine, "Rope");
     material.setIsInspectable(true);
     material.setIsGivenAway(true);
     material.setIsConsumed(true);
@@ -236,9 +236,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/203.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Ribbon");
+    material = new Material(routine, "Ribbon");
     material.setIsInspectable(true);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -250,7 +250,7 @@ public class RoutineDBInit1 {
 
     routine.getMaterials().add(material);
 
-    material = new Material("A few Chinese Coins");
+    material = new Material(routine, "A few Chinese Coins");
     material.setIsInspectable(true);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -284,9 +284,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/204.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("A double backed card");
+    material = new Material(routine, "A double backed card");
     material.setIsInspectable(false);
     material.setIsGivenAway(true);
     material.setIsConsumed(true);
@@ -297,7 +297,7 @@ public class RoutineDBInit1 {
 
     routine.getMaterials().add(material);
 
-    material = new Material("A double faced card");
+    material = new Material(routine, "A double faced card");
     material.setIsInspectable(false);
     material.setIsGivenAway(true);
     material.setIsConsumed(true);
@@ -332,9 +332,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/205.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("The panic gaff");
+    material = new Material(routine, "The panic gaff");
     material.setIsInspectable(false);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -366,9 +366,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/401.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Cards");
+    material = new Material(routine, "Cards");
     material.setIsInspectable(true);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -405,9 +405,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/402.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Cards");
+    material = new Material(routine, "Cards");
     material.setIsInspectable(true);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -442,9 +442,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/403.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Rubber Band");
+    material = new Material(routine, "Rubber Band");
     material.setIsInspectable(true);
     material.setIsGivenAway(true);
     material.setIsConsumed(false);
@@ -479,9 +479,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/404.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Cards");
+    material = new Material(routine, "Cards");
     material.setIsInspectable(true);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -516,9 +516,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/405.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Zig-Zag Pencil Box");
+    material = new Material(routine, "Zig-Zag Pencil Box");
     material.setIsInspectable(false);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -529,7 +529,7 @@ public class RoutineDBInit1 {
 
     routine.getMaterials().add(material);
 
-    material = new Material("Pencil");
+    material = new Material(routine, "Pencil");
     material.setIsInspectable(true);
     material.setIsGivenAway(true);
     material.setIsConsumed(false);
@@ -567,9 +567,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/406.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Coin");
+    material = new Material(routine, "Coin");
     material.setIsInspectable(false);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -580,7 +580,7 @@ public class RoutineDBInit1 {
 
     routine.getMaterials().add(material);
 
-    material = new Material("Pen");
+    material = new Material(routine, "Pen");
     material.setIsInspectable(false);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -617,9 +617,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/411.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Coin");
+    material = new Material(routine, "Coin");
     material.setIsInspectable(false);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -656,9 +656,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/407.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Cards");
+    material = new Material(routine, "Cards");
     material.setIsInspectable(true);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -697,9 +697,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/408.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Coin");
+    material = new Material(routine, "Coin");
     material.setIsInspectable(true);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -735,9 +735,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/409.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Overstuft Kit");
+    material = new Material(routine, "Overstuft Kit");
     material.setIsInspectable(false);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);
@@ -771,9 +771,9 @@ public class RoutineDBInit1 {
 
     routine.setImageUrl("images/routines/410.jpg");
 
-    routine = RoutineDB.saveRoutineFromForm(new RoutineFormData(routine));
+    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
 
-    material = new Material("Cup and Ball Kit");
+    material = new Material(routine, "Cup and Ball Kit");
     material.setIsInspectable(false);
     material.setIsGivenAway(false);
     material.setIsConsumed(false);

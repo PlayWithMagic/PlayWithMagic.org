@@ -69,7 +69,7 @@ public class EditRoutinePage extends NavigationWrapper {
    *   On error, it stays on EditRoutine
    */
   public void clickAddMaterial() {
-    this.findFirst("#addMaterial").click();
+    this.findFirst("#saveMaterialFromForm").click();
   }
 
 

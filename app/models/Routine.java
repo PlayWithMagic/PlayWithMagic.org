@@ -1,7 +1,9 @@
 package models;
 
+import play.Logger;
 import play.mvc.Http.Context;
 import controllers.Secured;
+import views.formdata.RoutineFormData;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -413,11 +415,22 @@ public class Routine extends play.db.ebean.Model {
   /**
    * Get the active Routines in the database.
    *
+   * TODO: Someday implement a Routine Status to takedown routines or hide them for awhile.
+   *
    * @return The active Routines in the database.
    */
   public static List<Routine> getActiveRoutines() {
-    // TODO: Someday implement a Routine Status to takedown routines or hide them for awhile.
-    return Routine.find().all();
+    Context context = Context.current();
+
+    if (context == null) {  // If unauthenticated...
+      return Routine.find().all();  // TO-DO: Only display the active routines
+    }
+
+    if ("context" == "Administrator") {
+      return Routine.find().all();  // Display all routines
+    }
+
+    return Routine.find().all();  // TO-DO: Only display the active routines
   }
 
 
@@ -435,6 +448,92 @@ public class Routine extends play.db.ebean.Model {
     }
 
     return routine;
+  }
+
+
+  /**
+   * See if the name is associated with an existing Routine.
+   *
+   * @param name The name to check against in the database.
+   * @return True if found.  False if not found.
+   */
+  public static boolean isExistingRoutine(String name) {
+    int count = Routine.find().where().eq("name", name).findRowCount();
+    return count >= 1;
+  }
+
+
+  /**
+   * Add a Routine, based on RoutineFormData, to the database.
+   *
+   * @param routineFormData Input data from the form.
+   * @return The Routine that was just added to the database.
+   */
+  public static Routine saveRoutineFromForm(RoutineFormData routineFormData) {
+    Routine routine;
+
+    if (routineFormData.id == 0) {
+      routine = new Routine(
+          routineFormData.name,
+          routineFormData.description,
+          routineFormData.duration
+      );
+    }
+    else {
+      routine = Routine.find().byId(routineFormData.id);
+
+      routine.setName(routineFormData.name);
+      routine.setDescription(routineFormData.description);
+      routine.setDuration(routineFormData.duration);
+    }
+
+    routine.setMethod(routineFormData.method);
+    routine.setHandling(routineFormData.handling);
+    routine.setResetDuration(routineFormData.resetDuration);
+    routine.setResetDescription(routineFormData.resetDescription);
+    routine.setYouTubeUrl(routineFormData.youTubeUrl);
+    routine.setImageUrl(routineFormData.imageUrl);
+    routine.setReviewUrl(routineFormData.reviewUrl);
+    routine.setInspiration(routineFormData.inspiration);
+    routine.setPlacement(routineFormData.placement);
+    routine.setChoices(routineFormData.choices);
+
+    routine.save();
+    routine = Routine.find().byId(routine.getId());
+
+    Logger.debug(((routineFormData.id == 0) ? "Added" : "Updated") + " routine.  id = [" + routine.getId() + "]"
+        + "  name = [" + routine.getName() + "]");
+
+    return routine;
+  }
+
+
+  /**
+   * Get a list of materials for the routine.
+   * <p>
+   * If the routineId is 0, return an empty list.  If the routineId is non-0, return the materials from the Routine.
+   *
+   * @param routineId The ID of a routine or 0 to create an empty list for a new routine.
+   * @return A list of materials.
+   */
+  public static List<Material> getMaterials(long routineId) {
+    if (routineId == 0) {
+      return new ArrayList<Material>();
+    }
+    else {
+      return Routine.getRoutine(routineId).getMaterials();
+    }
+  }
+
+
+  /**
+   * Deletes a routine from the database with a matching ID value.
+   *
+   * @param id The ID value of the routine to delete.
+   */
+  public static void deleteRoutine(long id) {
+    Routine routine = Routine.getRoutine(id);
+    routine.delete();
   }
 
 
