@@ -165,7 +165,7 @@ public class RoutineFormData {
       errors.add(new ValidationError("id", "An invalid ID has been passed into the application."));
     }
 
-    if (id == 0 && Routine.isExistingRoutine(name)) {
+    if (Routine.find().where().ne("id", id).ieq("name", name).findList().size() > 0) {
       errors.add(new ValidationError("name",
           "Play With Magic already has a routine with that name.  You'll need to pick another name."));
     }

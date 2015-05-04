@@ -11,10 +11,10 @@ import java.util.List;
 
 /**
  * An item used in the performance of a routine.
- *
+ * <p>
  * The synthetic unique constraint on this model is id.
  * The logical unique constraint on this model is routine+name.
- *
+ * <p>
  * Material objects are 'owned' by Routines.
  */
 @Entity
@@ -68,7 +68,7 @@ public class Material extends play.db.ebean.Model {
    * </p>
    *
    * @param routine The routine associated with this item.
-   * @param name A short name for the item.
+   * @param name    A short name for the item.
    */
   public Material(Routine routine, String name) {
     this.routine = routine;
@@ -79,6 +79,72 @@ public class Material extends play.db.ebean.Model {
   /******************************************************************************************************************
    * G E T T E R S   &   S E T T E R S
    ******************************************************************************************************************/
+
+  /**
+   * The EBean ORM finder method for database queries.
+   *
+   * @return The finder method.
+   */
+  public static Finder<Long, Material> find() {
+    return new Finder<Long, Material>(Long.class, Material.class);
+  }
+
+  /**
+   * Get all of the Materials in the databse.
+   *
+   * @return The all Materials.
+   */
+  public static List<Material> getAllMaterial() {
+    return Material.find().all();
+  }
+
+  /**
+   * Retrieve a Material item associated with a given id from the database.
+   *
+   * @param id The ID of the Material to retrieve.
+   * @return The Material.
+   * @throws RuntimeException if the ID can't be found.
+   */
+  public static Material getMaterial(long id) {
+    Material material = Material.find().byId(id);
+    if (material == null) {
+      throw new RuntimeException("Unable to find Material with ID [" + id + "]");
+    }
+
+    return material;
+  }
+
+  /**
+   * Add or update a Material object to a Routine object saved in the Routines database.
+   *
+   * @param materialFormData Input data from an HTML form.
+   * @return The Material object just saved to the database.
+   */
+  public static Material saveMaterialFromForm(MaterialFormData materialFormData) {
+    Material material = new Material(Routine.getRoutine(materialFormData.routineId), materialFormData.name);
+    material.setDescription(materialFormData.description);
+    material.setIsInspectable(materialFormData.isInspectable);
+    material.setIsGivenAway(materialFormData.isGivenAway);
+    material.setIsConsumed(materialFormData.isConsumed);
+    material.setPrice(materialFormData.price);
+    material.setPurchaseUrl(materialFormData.purchaseUrl);
+    material.setImageUrl(materialFormData.imageUrl);
+
+    if (materialFormData.materialId == -1) {
+      Routine.getMaterials(materialFormData.routineId).add(material);
+    }
+    else {
+      Routine.getMaterials(materialFormData.routineId).set(materialFormData.materialId, material);
+    }
+
+    material.save();
+    material = Material.find().byId(material.getId());
+
+    Logger.debug(((materialFormData.materialId == 0) ? "Add" : "Update Material:")
+        + "   id = [" + material.getId() + "]  name = [" + material.getName() + "]");
+
+    return material;
+  }
 
   /**
    * Get the synthetic key for this Material object.
@@ -224,6 +290,11 @@ public class Material extends play.db.ebean.Model {
     this.price = price;
   }
 
+
+  /******************************************************************************************************************
+   * M E T H O D S
+   ******************************************************************************************************************/
+
   /**
    * Get the URL to where you can purchase or find this item.
    *
@@ -232,6 +303,9 @@ public class Material extends play.db.ebean.Model {
   public String getPurchaseUrl() {
     return purchaseUrl;
   }
+
+
+  // No need to implement getRoutineMaterials(Routine routine)... this would be done with routine.getMaterials().
 
   /**
    * Set the URL where you can purchase or find this item.
@@ -259,85 +333,5 @@ public class Material extends play.db.ebean.Model {
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
   }
-
-
-  /******************************************************************************************************************
-   * M E T H O D S
-   ******************************************************************************************************************/
-
-  /**
-   * The EBean ORM finder method for database queries.
-   *
-   * @return The finder method.
-   */
-  public static Finder<Long, Material> find() {
-    return new Finder<Long, Material>(Long.class, Material.class);
-  }
-
-
-  // No need to implement getRoutineMaterials(Routine routine)... this would be done with routine.getMaterials().
-
-
-  /**
-   * Get all of the Materials in the databse.
-   *
-   * @return The all Materials.
-   */
-  public static List<Material> getAllMaterial() {
-    return Material.find().all();
-  }
-
-
-  /**
-   * Retrieve a Material item associated with a given id from the database.
-   *
-   * @param id The ID of the Material to retrieve.
-   * @return The Material.
-   * @throws RuntimeException if the ID can't be found.
-   */
-  public static Material getMaterial(long id) {
-    Material material = Material.find().byId(id);
-    if (material == null) {
-      throw new RuntimeException("Unable to find Material with ID [" + id + "]");
-    }
-
-    return material;
-  }
-
-
-  /**
-   * Add or update a Material object to a Routine object saved in the Routines database.
-   *
-   * @param materialFormData Input data from an HTML form.
-   * @return The Material object just saved to the database.
-   */
-  public static Material saveMaterialFromForm(MaterialFormData materialFormData) {
-    Material material = new Material(Routine.getRoutine(materialFormData.routineId), materialFormData.name);
-    material.setDescription(materialFormData.description);
-    material.setIsInspectable(materialFormData.isInspectable);
-    material.setIsGivenAway(materialFormData.isGivenAway);
-    material.setIsConsumed(materialFormData.isConsumed);
-    material.setPrice(materialFormData.price);
-    material.setPurchaseUrl(materialFormData.purchaseUrl);
-    material.setImageUrl(materialFormData.imageUrl);
-
-    if (materialFormData.materialId == -1) {
-      Routine.getMaterials(materialFormData.routineId).add(material);
-    }
-    else {
-      Routine.getMaterials(materialFormData.routineId).set(materialFormData.materialId, material);
-    }
-
-    material.save();
-    material = Material.find().byId(material.getId());
-
-    Logger.debug(((materialFormData.materialId == 0) ? "Added" : "Updated") + " material.  id = [" + material.getId() + "]"
-        + "  name = [" + material.getName() + "]");
-
-    return material;
-
-  }
-
-
 
 }

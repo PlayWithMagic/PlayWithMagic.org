@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.io.File;
 import java.util.List;
 
@@ -22,20 +21,26 @@ import java.util.List;
  * The synthetic unique constraint on this model is id.
  * The logical unique constraint on this model is email.
  *
- * TODO: Be sure to drop the first_name, last_name unique constraint
- *
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/32
  */
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
+@Table
 public class Magician extends play.db.ebean.Model {
   @Id
   private long id;
   // Magician Information
-  @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) private String firstName;
-  @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) private String lastName;
-  @Column(unique = true, nullable = false, length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String email;
-  @Column(nullable = false, length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String password;
+  @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH)
+  private String firstName;
+
+  @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH)
+  private String lastName;
+
+  @Column(unique = true, nullable = false, length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String email;
+
+  @Column(nullable = false, length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String password;
+
   @Column(nullable = false)
   @ManyToOne
   private MagicianType magicianType;
@@ -43,26 +48,49 @@ public class Magician extends play.db.ebean.Model {
   @OneToMany(mappedBy = "magician", cascade = CascadeType.PERSIST)
   private List<Set> sets;
 
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String stageName;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String location;  // City/State? Country? Perhaps a map.
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String stageName;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String location;  // City/State? Country? Perhaps a map.
+
   private File userPhoto;
 
   // Magic Info
-  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) private String biography;
-  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) private String interests;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String influences;
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
+  private String biography;
+
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
+  private String interests;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String influences;
 
   private Integer yearStarted;  // The year started - used to compute the number of years of experience.
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String organizations;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String website;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String organizations;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String website;
 
   // Social Media
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String facebook;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String twitter;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String linkedIn;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String googlePlus;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String flickr;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String instagram;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String facebook;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String twitter;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String linkedIn;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String googlePlus;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String flickr;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String instagram;
 
 
   /**
@@ -483,7 +511,7 @@ public class Magician extends play.db.ebean.Model {
   /**
    * Get all of the active Magicians.
    * <p>
-   * TODO:  Add where status=active and create a getAllMagicians -- use only in Admin pages.
+   * TO-DO:  Issue #191 Add where status=active and create a getAllMagicians -- use only in Admin pages.
    *
    * @return The all active Magicians.
    */
@@ -494,8 +522,9 @@ public class Magician extends play.db.ebean.Model {
 
   /**
    * Get all of the Magicians.
-   * <p>
-   * TODO:  Add where status=active and create a getAllMagicians -- use only in Admin pages.
+   *
+   * TO-DO:  Possibly make another getAllMagician that's context sensitive.  Admins get *all* magicians, while regular
+   * users just see Active magicians.
    *
    * @return The all active Magicians.
    */
@@ -617,7 +646,6 @@ public class Magician extends play.db.ebean.Model {
     return magician;
   }
 
-// TODO:  Need a mechanism to prevent a user from deleting their own account (or if they do, then log them out first).
 
   /**
    * Create a new Magician object from EditUserFormData.  Add it to the database and return the newly created

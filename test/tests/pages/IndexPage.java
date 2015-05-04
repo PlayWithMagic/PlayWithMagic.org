@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import play.test.TestBrowser;
 import tests.GlobalTest;
 
+
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
@@ -72,10 +73,12 @@ public class IndexPage extends NavigationWrapper {
   /**
    * Login to the test account an return the Index page.
    *
+   * It is not necessary to kill the old session because, unlike the database and application, each test seems to
+   * run in its own browser instance.  As near as I can tell, each test starts with an unauthenticated session.
+   *
    * @return The IndexPage.
    */
   public IndexPage loginToTestAccount() {
-    // TODO:  Force logout/kill any old session
     LoginPage loginPage = this.clickLoginButton();
 
     // Fill in login page
