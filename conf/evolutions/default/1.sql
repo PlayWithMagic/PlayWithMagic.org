@@ -3,6 +3,13 @@
 
 # --- !Ups
 
+create table image (
+  id                        bigint not null,
+  name                      varchar(255),
+  data                      bytea,
+  constraint pk_image primary key (id))
+;
+
 create table magician (
   id                        bigint not null,
   first_name                varchar(45) not null,
@@ -84,6 +91,8 @@ create table set_routine (
   routine_id                     bigint not null,
   constraint pk_set_routine primary key (set_id, routine_id))
 ;
+create sequence image_seq;
+
 create sequence magician_seq;
 
 create sequence magician_type_seq;
@@ -109,6 +118,7 @@ alter table set_routine add constraint fk_set_routine_routine_02 foreign key (ro
 
 # --- !Downs
 
+<<<<<<< HEAD
 drop table if exists magician cascade;
 
 drop table if exists magician_type cascade;
@@ -120,6 +130,23 @@ drop table if exists routine cascade;
 drop table if exists set_routine cascade;
 
 drop table if exists set cascade;
+=======
+drop table if exists image cascade;
+
+drop table if exists magician cascade;
+
+drop table if exists magician_type cascade;
+
+drop table if exists material cascade;
+
+drop table if exists routine cascade;
+
+drop table if exists set_routine cascade;
+
+drop table if exists set cascade;
+
+drop sequence if exists image_seq;
+>>>>>>> origin/imageUploads-1
 
 drop sequence if exists magician_seq;
 
