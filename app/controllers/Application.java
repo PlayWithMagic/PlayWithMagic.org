@@ -9,6 +9,7 @@ import play.Logger;
 import play.data.Form;
 import play.data.validation.ValidationError;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.formdata.EditMagicianFormData;
@@ -34,6 +35,7 @@ import views.html.ViewMagician;
 import views.html.ViewMaterial;
 import views.html.ViewRoutine;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -291,6 +293,30 @@ public class Application extends Controller {
 
       return badRequest(EditMagician.render("editMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
           formData, magicianTypeMap));
+    }
+
+    /* Retrieves image from form */
+
+    Http.MultipartFormData body = request().body().asMultipartFormData();
+    Http.MultipartFormData.FilePart picture = body.getFile("image");
+    String fileName = "";
+    String contentType = "";
+    File file = null;
+    long imageId = 0;
+    Image image = null;
+
+    if(request().body().isMaxSizeExceeded()) {
+      return badRequest("Image exceeds maximum allowed file size. (512K)");
+    }
+    else if (picture != null) {
+      fileName = picture.getFilename();
+      contentType = picture.getContentType();
+      file = picture.getFile();
+      image = new Image(fileName, file);
+      imageId = image.id;
+    }
+    else {
+      System.out.printf("Error getting image");
     }
 
     EditMagicianFormData editMagicianFormData = formData.get();
@@ -734,7 +760,7 @@ public class Application extends Controller {
    ***************************************************************************************************************/
 
   /**
-   * Gets the image.
+   * Gets the image that has been uploaded to the database.
    * @param id The image id.
    * @return The image.
    */
@@ -745,6 +771,13 @@ public class Application extends Controller {
     }
 
     return ok(image.data).as("image");
+  }
+
+  /**
+   * Uploads the image to the images database.
+   */
+  public static void uploadimage() {
+
   }
 
 }

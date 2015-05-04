@@ -19,7 +19,7 @@
         <h1>Magician Profile</h1>
           <!-- User Attributes -->
         <div class="container">
-        @form(routes.Application.postMagician(), 'class -> "form-horizontal") {
+        @form(routes.Application.postMagician(), 'class -> "form-horizontal", 'enctype -> "multipart/form-data") {
             <!-- Hidden ID Field -->
           @hidden(magicianForm("id"))
             <!--<form class="form-horizontal">-->
