@@ -295,6 +295,8 @@ public class Application extends Controller {
           formData, magicianTypeMap));
     }
 
+    EditMagicianFormData editMagicianFormData = formData.get();
+
     /* Retrieves image from form */
 
     Http.MultipartFormData body = request().body().asMultipartFormData();
@@ -302,7 +304,7 @@ public class Application extends Controller {
     String fileName = "";
     String contentType = "";
     File file = null;
-    long imageId = 0;
+    long imageId;
     Image image = null;
 
     if(request().body().isMaxSizeExceeded()) {
@@ -314,17 +316,17 @@ public class Application extends Controller {
       file = picture.getFile();
       image = new Image(fileName, file);
       imageId = image.id;
+      editMagicianFormData.imageId = imageId;
     }
     else {
       System.out.printf("Error getting image");
     }
 
-    EditMagicianFormData editMagicianFormData = formData.get();
-
     Logger.debug("postMagician Magician Form Data");
     Logger.debug("  id = [" + editMagicianFormData.id + "]");
     Logger.debug("  firstName = [" + editMagicianFormData.firstName + "]");
     Logger.debug("  magicianType = [" + editMagicianFormData.magicianType + "]");
+    Logger.debug("  imageId = [" + editMagicianFormData.imageId + "]");
 
     Magician magician = Magician.createMagicianFromForm(editMagicianFormData);
 
