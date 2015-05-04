@@ -2,7 +2,6 @@ package views.formdata;
 
 import models.GlobalDbInfo;
 import models.Magician;
-import models.Routine;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.MinLength;

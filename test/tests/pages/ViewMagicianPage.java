@@ -123,6 +123,4 @@ public class ViewMagicianPage extends NavigationWrapper {
     this.findFirst("#deleteAccount").click();
     return new DeleteUserPage(this.getDriver());
   }
-
-  // TODO: Scan the code for System.out messages -- replace with Logger
 }

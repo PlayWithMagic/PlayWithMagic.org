@@ -6,7 +6,7 @@ import play.test.TestBrowser;
 import tests.GlobalTest;
 
 import static org.fest.assertions.Assertions.assertThat;
-// TODO:  Create a test in the EditUser Backing class looking for duplicate stage names.
+
 /**
  * Provides test scaffolding for the EditUser page.
  *

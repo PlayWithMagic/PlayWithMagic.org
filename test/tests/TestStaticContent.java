@@ -46,13 +46,6 @@ public class TestStaticContent extends play.test.WithBrowser {
   }
 
 
-  // TODO: Test a basic login and logout -- use isAuthenticated() and isUnauthenticated()
-  // TODO: When not logged in, verify that you can't get to protected areas of the site even if you have the URL.
-
-  // TODO: If you delete yourself, you're completely hosed.
-
-  // TODO: Verify Login w/o any information and bad passwords/bad data + excessive lengths (bounds checks).
-
   /**
    * Verify the links at the bottom of the Index page.
    *

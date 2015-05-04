@@ -9,7 +9,6 @@ import play.Logger;
 import play.data.Form;
 import play.data.validation.ValidationError;
 import play.mvc.Controller;
-import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.formdata.DeleteUserFormData;

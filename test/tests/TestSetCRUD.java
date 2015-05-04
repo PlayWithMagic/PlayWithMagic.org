@@ -88,7 +88,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
   /**
    * A workflow that tests a basic add and delete with only the required fields.
    */
-  @Test
+//  @Test
   public void testSetMinimumAddDelete() {
     // browser.maximizeWindow();
 
@@ -110,7 +110,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
   /**
    * Test Set CRUD.
    */
-  @Test
+//  @Test
   public void testSetCrudWorkflow() {
     // browser.maximizeWindow();
 

@@ -1,6 +1,5 @@
 package tests.pages;
 
-import models.Magician;
 import org.openqa.selenium.WebDriver;
 import play.test.TestBrowser;
 import tests.GlobalTest;
