@@ -81,6 +81,11 @@ public class EditMagicianFormData {
   public File userPhoto;
 
   /**
+   * Image id for user image or photo.
+   */
+  public long imageId;
+
+  /**
    * Input data Biography field.
    */
   @MaxLength(value = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH,
@@ -186,6 +191,7 @@ public class EditMagicianFormData {
     this.stageName = magician.getStageName();
     this.location = magician.getLocation();
     this.userPhoto = magician.getUserPhoto();
+    this.imageId = magician.getImageId();
     this.biography = magician.getBiography();
     this.interests = magician.getInterests();
     this.influences = magician.getInfluences();
