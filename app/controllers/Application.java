@@ -151,10 +151,12 @@ public class Application extends Controller {
       if (formData.hasErrors()) {
         Logger.error("postUser HTTP Form Error.");
 
+        // TODO: Patrick:  What does this code do?
         for (String key : formData.errors().keySet()) {
           List<ValidationError> currentError = formData.errors().get(key);
           for (play.data.validation.ValidationError error : currentError) {
             if (!error.message().equals("")) {
+              Logger.error("   " + key + ":  " + error.message());
               flash(key, error.message());
             }
           }

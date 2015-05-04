@@ -114,4 +114,15 @@ public class ViewMagicianPage extends NavigationWrapper {
   }
 
 
+  /**
+   * Click the Delete Account button.
+   *
+   * @return The DeleteUserPage.
+   */
+  public DeleteUserPage clickDeleteAccountButton() {
+    this.findFirst("#deleteAccount").click();
+    return new DeleteUserPage(this.getDriver());
+  }
+
+  // TODO: Scan the code for System.out messages -- replace with Logger
 }

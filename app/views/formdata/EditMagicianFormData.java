@@ -2,6 +2,7 @@ package views.formdata;
 
 import models.GlobalDbInfo;
 import models.Magician;
+import play.Logger;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.Min;
@@ -215,9 +216,11 @@ public class EditMagicianFormData {
           "This eMail address is already in Play With Magic.  Please enter another address."));
     }
 
-    if (Magician.find().where().ne("id", id).ieq("stageName", stageName).findList().size() > 0) {
-      errors.add(new ValidationError("stageName",
-          "This Stage Name is already in Play With Magic.  Bummer.  Please enter another name."));
+    if (stageName != null && !stageName.isEmpty()) {
+      if (Magician.find().where().ne("id", id).ieq("stageName", stageName).findList().size() > 0) {
+        errors.add(new ValidationError("stageName",
+            "This Stage Name is already in Play With Magic.  Bummer.  Please enter another name."));
+      }
     }
 
     if (!MagicianTypeFormData.isMagicianType(magicianType)) {

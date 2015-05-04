@@ -6,6 +6,7 @@ import models.MagicianType;
 import models.Material;
 import models.Routine;
 import models.Set;
+import play.Logger;
 import views.formdata.EditUserFormData;
 
 /**
@@ -64,12 +65,12 @@ public class GlobalTest {
       magicianType.delete();
     }
 
-    System.out.println("The database has been fully reset.");
+    Logger.debug("The database has been fully reset.");
 
 
     MagicianType.init();
 
-    System.out.println("The standing data in the database has been populated.");
+    Logger.debug("The standing data in the database has been populated.");
   }
 
 

@@ -9,7 +9,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 
 /**
- * Provides scaffolding to remotely control the Login page for testing.
+ * Provides scaffolding to remotely control the DeleteUser page for testing.
  */
 public class DeleteUserPage extends NavigationWrapper {
 
@@ -49,11 +49,9 @@ public class DeleteUserPage extends NavigationWrapper {
   /**
    * Populate the DeleteUser form with data.
    *
-   * @param magician A container holding all of the fields to populate.
    * @param password The password to confirm the deletion of the account.
    */
-  public void populateDeleteUser(Magician magician, String password) {
-    this.fillRequiredField("#id", magician.getEmail());
+  public void populateDeleteUser(String password) {
     this.fillRequiredField("#password", password);
   }
 
@@ -65,17 +63,19 @@ public class DeleteUserPage extends NavigationWrapper {
     this.findFirst("#submit").click();
   }
 
+
   /**
    * Test to ensure the page does not have required field validation errors.
    */
   public void doesNotHaveRequiredFieldErrors() {
-    assertThat(this.pageSource()).doesNotContain("Sorry, but the provided password does not match this user.");
+    assertThat(this.pageSource()).doesNotContain("You must enter a password to confirm account deletion.");
   }
+
 
   /**
    * Test to ensure the page has all of the required field validation errors.
    */
   public void hasRequiredFieldErrors() {
-    assertThat(this.pageSource()).contains("Sorry, but the provided password does not match this user.");
+    assertThat(this.pageSource()).contains("You must enter a password to confirm account deletion.");
   }
 }

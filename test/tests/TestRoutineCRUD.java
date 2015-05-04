@@ -129,7 +129,6 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     listRoutinesPage.doesNotHaveRoutine(routine3);
   }
 
-// TODO:  We discussed changing EditRoutine such that it would go to the view first rather than the EditPage
 
   /**
    * Test Routine CRUD.

@@ -125,7 +125,6 @@ public class TestStaticContent extends play.test.WithBrowser {
     EditSetPage editSetPage = editRoutinePage.clickCreateSetButton();
 
     indexPage = editSetPage.clickLogoutButton();
-
   }
 
 

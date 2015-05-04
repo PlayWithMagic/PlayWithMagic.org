@@ -71,7 +71,8 @@
             Return to Magician List
           </a>
           @if(magician.getId() == userInfo.getId()) {
-            <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
+            <a id="deleteAccount" href="@routes.Application.deleteMagician(magician.getId)"
+               class="btn btn-danger btn-xs" role="button">
               Delete Account</a>
           }
         </p>
