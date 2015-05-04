@@ -89,6 +89,8 @@ public class Routine extends play.db.ebean.Model {
   @ManyToMany(mappedBy = "routines", cascade = CascadeType.PERSIST)
   private List<Set> sets;
 
+  // The image id associated with this routine
+  private long imageId;
 
   /**
    * Create new, valid Routine object.
@@ -385,6 +387,22 @@ public class Routine extends play.db.ebean.Model {
    */
   public void setPlacement(String placement) {
     this.placement = placement;
+  }
+
+  /**
+   * Gets the image id associated with this routine.
+   * @return The image id.
+   */
+  public long getImageId() {
+    return imageId;
+  }
+
+  /**
+   * Sets the image id associated with this routine.
+   * @param imageId The image id.
+   */
+  public void setImageId(long imageId) {
+    this.imageId = imageId;
   }
 
 
