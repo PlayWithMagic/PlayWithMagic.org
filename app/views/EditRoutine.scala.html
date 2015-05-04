@@ -86,8 +86,8 @@
                   <tr>
                     <td>@material.getName()</td>
                     <td>@material.getPrice()</td>
-                    <td>@if(material.getImageUrl != "") {
-                      <img src="@routes.Assets.at(material.getImageUrl)" height="22px" alt="Material">
+                    <td>@if(material.getImageId != "") {
+                      <img class="img-responsive" src="@routes.Application.getImage(material.getImageId)" alt="Image of Material" />
                       }
                     </td>
                     <td>
