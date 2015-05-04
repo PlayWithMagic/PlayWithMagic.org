@@ -27,7 +27,7 @@ import java.util.List;
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/32
  */
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"first_name", "last_name"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 public class Magician extends play.db.ebean.Model {
   @Id
   private long id;

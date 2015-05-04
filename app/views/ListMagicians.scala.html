@@ -21,7 +21,6 @@
           @*    <th>Routines</th>  *@   @* TODO: Remove for now / continuous release  *@
           <th>Edit</th>
           <th>Change Password</th>
-          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -30,7 +29,7 @@
             <td><a href="viewMagician?id=@magician.getId" class="viewMagician">@magician.getFirstName @magician.getLastName</a></td>
             <td>@if(magician.getStageName) { @magician.getStageName } else { None }</td>
             <td>@magician.getMagicianType.getName</td>
-@*          <td>Link to Magician's Routines Here</td>  *@
+            @* <td>Link to Magician's Routines Here</td>  *@
             <td>
               <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-warning btn-xs editMagician" role="button">
               Edit</a>
@@ -38,10 +37,6 @@
             <td>
               <a href="@routes.Application.editUser(magician.getId)" class="btn btn-warning btn-xs changePassword" role="button">
               Change Password</a>
-            </td>
-            <td>
-              <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs deleteMagician" role="button">
-              Delete</a>
             </td>
           </tr>
         }

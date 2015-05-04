@@ -10,6 +10,7 @@ import play.data.validation.ValidationError;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.formdata.DeleteUserFormData;
 import views.formdata.EditMagicianFormData;
 import views.formdata.EditUserFormData;
 import views.formdata.LoginFormData;
@@ -18,6 +19,7 @@ import views.formdata.MaterialFormData;
 import views.formdata.RoutineFormData;
 import views.formdata.SetFormData;
 import views.html.About;
+import views.html.DeleteUser;
 import views.html.EditMagician;
 import views.html.EditMaterial;
 import views.html.EditRoutine;
@@ -174,6 +176,36 @@ public class Application extends Controller {
     EditMagicianFormData editMagicianFormData = new EditMagicianFormData(magician);
 
     return redirect(routes.Application.index("Successfully Signed Up!"));
+  }
+
+
+  /**
+   * Posts an authenticated delete user request.
+   *
+   * @return The Index page, logged out.
+   */
+  @Security.Authenticated(Secured.class)
+  public static Result postDeleteUser() {
+    Form<DeleteUserFormData> deleteUserFormData = Form.form(DeleteUserFormData.class).bindFromRequest();
+    //DeleteUserFormData formData = deleteUserFormData.get();
+    if (deleteUserFormData.hasErrors()) {
+      for (String key : deleteUserFormData.errors().keySet()) {
+        List<ValidationError> currentError = deleteUserFormData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            flash(key, error.message());
+          }
+        }
+      }
+
+      //Magician magician = Magician.getMagician(formData.id);
+      return badRequest(DeleteUser.render("deleteMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          deleteUserFormData, Secured.getUserInfo(ctx())));
+    }
+    DeleteUserFormData formData = deleteUserFormData.get();
+    Magician.deleteMagician(formData.id);
+    session().clear();
+    return redirect(routes.Application.index(""));
   }
 
 
@@ -335,16 +367,24 @@ public class Application extends Controller {
 
 
   /**
-   * Delete a Magician from the database and render the List Magicians page.
+   * Direct a user to the Delete User page with the ID of the magician to be deleted.
    *
    * @param id The ID of the Magician to delete.
-   * @return An HTTP OK message along with the HTML content for the Home page.
+   * @return An HTTP OK message along with the HTML content for the DeleteUser confirmation page.
    */
   @Security.Authenticated(Secured.class)
   public static Result deleteMagician(long id) {
-    Magician.deleteMagician(id);
-    return ok(ListMagicians.render("listMagicians", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-        Magician.getActiveMagicians()));
+    //Magician.deleteMagician(id);
+    if (id == 0) {
+      return redirect(routes.Application.index(""));
+    }
+    else {
+      DeleteUserFormData deleteUserFormData = new DeleteUserFormData(Magician.getMagician(id));
+
+      Form<DeleteUserFormData> formWithDeleteData = Form.form(DeleteUserFormData.class).fill(deleteUserFormData);
+      return ok(DeleteUser.render("deleteMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithDeleteData, Magician.getMagician(id)));
+    }
   }
 
 
