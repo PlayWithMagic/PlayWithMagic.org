@@ -3,8 +3,8 @@
 *
 * @see http://www.playframework.com
 *@
-@(page: String, isLoggedIn: Boolean, userInfo: Magician, set: models.Set, routines: List[Routine],
-    routineInSet: List[Long])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, set: models.Set, allRoutines: List[Routine],
+    routinesInSet: List[Routine])
 
 @Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
@@ -26,9 +26,9 @@
             </tr>
           </thead>
           <tbody>
-            @for(routine <- routines) {
-              @for(thisRoutineId <- routineInSet) {
-                @if(routine.getId == thisRoutineId) {
+            @for(routine <- allRoutines) {
+              @for(thisRoutine <- routinesInSet) {
+                @if(routine.getId() == thisRoutine.getId()) {
                   <tr>
                     <td>@routine.getName</td>
                     <td>@routine.getDuration</td>

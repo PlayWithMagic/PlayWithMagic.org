@@ -35,6 +35,7 @@ import views.html.Login;
 import views.html.ViewMagician;
 import views.html.ViewMaterial;
 import views.html.ViewRoutine;
+import views.html.ViewSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -591,10 +592,9 @@ public class Application extends Controller {
    */
   public static Result viewSet(long id) {
     Set thisViewSet = Set.getSet(id);
-//    return ok(ViewSet.render("viewSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getSet(id),
-//        RoutineDB.getRoutines(), thisViewSet.getRoutines()));
-    // TODO: Fix above -- just trying to get the app to compile.
-    return null;
+
+    return ok(ViewSet.render("viewSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getSet(id),
+        Routine.getActiveRoutines(), thisViewSet.getRoutines()));
   }
 
 
