@@ -53,10 +53,9 @@
             placeholder = "Anything special about this item?",
             help = "")
 
-          @text(materialForm("imageUrl"),
-            label = "Image URL",
-            placeholder = "The URL of the image that represents this item",
-            help = "")
+          @image(materialForm("image"),
+            label="Image",
+            help="Select an image")
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
