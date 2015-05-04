@@ -16,7 +16,7 @@
           <a id="editRoutine" href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
           <a id="returnToRoutineList" href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
         </p>
-        @if(routine.getImageUrl != null) {
+        @if(routine.getImageId != null) {
           <img class="img-responsive" src="@routes.Application.getImage(routine.getImageId)" alt="Image of Routine" />
         }
         <br />
