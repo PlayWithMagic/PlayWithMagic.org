@@ -757,6 +757,31 @@ public class Application extends Controller {
 
     Logger.debug("isInspectable = " + materialFormData.isInspectable);
 
+    /* Retrieves image from form */
+
+    Http.MultipartFormData body = request().body().asMultipartFormData();
+    Http.MultipartFormData.FilePart picture = body.getFile("image");
+    String fileName = "";
+    String contentType = "";
+    File file = null;
+    long imageId;
+    Image image = null;
+
+    if(request().body().isMaxSizeExceeded()) {
+      return badRequest("Image exceeds maximum allowed file size. (512K)");
+    }
+    else if (picture != null) {
+      fileName = picture.getFilename();
+      contentType = picture.getContentType();
+      file = picture.getFile();
+      image = new Image(fileName, file);
+      imageId = image.id;
+      materialFormData.imageId = imageId;
+    }
+    else {
+      System.out.printf("Error getting image");
+    }
+
     Material.saveMaterialFromForm(materialFormData);
 
     RoutineFormData routineFormData = new RoutineFormData(Routine.getRoutine(routineId));
