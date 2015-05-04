@@ -40,6 +40,33 @@ public class Global extends GlobalSettings {
     Material material = null;
     long id;
 
+    RoutineFormData routineFormData = new RoutineFormData();
+    // Required fields
+    routineFormData.id = 0;
+    routineFormData.name = "";
+    routineFormData.description = "";
+    routineFormData.duration = 00001;
+
+    // Optional fields
+    routineFormData.method = "";
+    routineFormData.handling = "";
+    routineFormData.resetDuration = 0001;
+    routineFormData.resetDescription = "";
+    routineFormData.youTubeUrl = "";
+    routineFormData.reviewUrl = "";
+    routineFormData.inspiration = "";
+    routineFormData.placement = "";
+    routineFormData.choices = "";
+    // No image for now
+
+    routine = Routine.find().where().eq("name", routineFormData.name).findUnique();
+    if (routine == null) {
+      routine = Routine.saveRoutineFromForm(routineFormData);
+
+      // Material
+    }
+
+
     routine = new Routine("", "", 1);
 
     routine.setMethod("");
