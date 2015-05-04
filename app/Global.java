@@ -8,6 +8,7 @@ import models.RoutineDBInit2;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
+import views.formdata.MaterialFormData;
 import views.formdata.RoutineFormData;
 
 /**
@@ -21,7 +22,7 @@ public class Global extends GlobalSettings {
 
     MagicianType.init();
     Magician.init();
-    //RoutineDB.init();
+    this.initRoutines();
     //SetDB.init();
 
     Logger.info(ConfigFactory.load().getString("application.name") + " has started");
@@ -36,70 +37,53 @@ public class Global extends GlobalSettings {
    * Populate a routine.
    */
   public static void initTemplate() {
-    Routine routine = null;
-    Material material = null;
-    long id;
+    Routine routine;
 
     RoutineFormData routineFormData = new RoutineFormData();
     // Required fields
     routineFormData.id = 0;
     routineFormData.name = "";
     routineFormData.description = "";
-    routineFormData.duration = 00001;
+    routineFormData.duration = 1;
 
     // Optional fields
     routineFormData.method = "";
     routineFormData.handling = "";
-    routineFormData.resetDuration = 0001;
+    routineFormData.resetDuration = 1;
     routineFormData.resetDescription = "";
     routineFormData.youTubeUrl = "";
     routineFormData.reviewUrl = "";
     routineFormData.inspiration = "";
     routineFormData.placement = "";
     routineFormData.choices = "";
-    // No image for now
+    routineFormData.imageUrl = "";
 
     routine = Routine.find().where().eq("name", routineFormData.name).findUnique();
     if (routine == null) {
       routine = Routine.saveRoutineFromForm(routineFormData);
 
       // Material
+      MaterialFormData materialFormData = new MaterialFormData();
+      materialFormData.materialId = 0;
+      materialFormData.routineId = routine.getId();
+      materialFormData.name = "";
+      materialFormData.isInspectable = false;
+      materialFormData.isGivenAway = false;
+      materialFormData.isConsumed = false;
+      materialFormData.price = 000001;
+      materialFormData.purchaseUrl = "";
+      materialFormData.imageUrl = "";
+      materialFormData.description = "";
+
+      Material.saveMaterialFromForm(materialFormData);
     }
-
-
-    routine = new Routine("", "", 1);
-
-    routine.setMethod("");
-    routine.setHandling("");
-    routine.setResetDuration(1);
-    routine.setResetDescription("");
-    routine.setYouTubeUrl("https://www.youtube.com/embed/");
-    routine.setReviewUrl("");
-    routine.setInspiration("");
-    routine.setPlacement("");
-    routine.setChoices("");
-
-    routine.setImageUrl("images/routines/xxx.jpg");
-
-    routine = Routine.saveRoutineFromForm(new RoutineFormData(routine));
-
-    material = new Material(routine, "");
-    material.setIsInspectable(true);
-    material.setIsGivenAway(false);
-    material.setIsConsumed(false);
-    material.setPrice(1);
-    material.setPurchaseUrl("");
-    material.setImageUrl("images/material/xxx.jpg");
-    material.setDescription("");
-
-    routine.getMaterials().add(material);
   }
 
 
   /**
-   * Initialize the Routine database.
+   * Initialize the Routine dataset.
    */
-  public static void init() {
+  public static void initRoutines() {
     RoutineDBInit1.init01();
     RoutineDBInit1.init02();
     RoutineDBInit1.init03();
