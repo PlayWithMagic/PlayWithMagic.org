@@ -215,12 +215,10 @@ public class EditMagicianFormData {
           "This eMail address is already in Play With Magic.  Please enter another address."));
     }
 
-
     if (Magician.find().where().ne("id", id).ieq("stageName", stageName).findList().size() > 0) {
       errors.add(new ValidationError("stageName",
           "This Stage Name is already in Play With Magic.  Bummer.  Please enter another name."));
     }
-
 
     if (!MagicianTypeFormData.isMagicianType(magicianType)) {
       errors.add(new ValidationError("magicianType",

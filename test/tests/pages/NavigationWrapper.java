@@ -122,7 +122,7 @@ public abstract class NavigationWrapper extends FluentPage {
    *
    * Available to logged in users only.
    *
-   * TODO:  Test that it shows the users' subset of routines
+   * TODO:  Rename/remove this
    * @return The ListRoutinesPage.
    */
   public ListRoutinesPage clickMyRoutinesButton() {

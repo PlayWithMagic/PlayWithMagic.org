@@ -531,19 +531,6 @@ public class Application extends Controller {
 
 
   /**
-   * Delete a set from the database and display the ListSets page.
-   *
-   * @param id The ID of the set to delete.
-   * @return An HTTP OK message along with the HTML content for the Set List page.
-   */
-  @Security.Authenticated(Secured.class)
-  public static Result deleteSet(long id) {
-    Set.deleteSet(id);
-    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
-  }
-
-
-  /**
    * Handles the request to post form data from EditSet.
    *
    * @return An HTTP OK message if no errors, otherwise the form page with errors.
@@ -595,6 +582,19 @@ public class Application extends Controller {
 
     return ok(ViewSet.render("viewSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getSet(id),
         Routine.getActiveRoutines(), thisViewSet.getRoutines()));
+  }
+
+
+  /**
+   * Delete a set from the database and display the ListSets page.
+   *
+   * @param id The ID of the set to delete.
+   * @return An HTTP OK message along with the HTML content for the Set List page.
+   */
+  @Security.Authenticated(Secured.class)
+  public static Result deleteSet(long id) {
+    Set.deleteSet(id);
+    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
   }
 
 
