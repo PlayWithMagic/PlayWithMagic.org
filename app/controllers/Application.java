@@ -297,30 +297,7 @@ public class Application extends Controller {
 
     EditMagicianFormData editMagicianFormData = formData.get();
 
-    /* Retrieves image from form */
-
-    Http.MultipartFormData body = request().body().asMultipartFormData();
-    Http.MultipartFormData.FilePart picture = body.getFile("image");
-    String fileName = "";
-    String contentType = "";
-    File file = null;
-    long imageId = -1;
-    Image image = null;
-
-    if (request().body().isMaxSizeExceeded()) {
-      return badRequest("Image exceeds maximum allowed file size. (512K)");
-    }
-    else if (picture != null) {
-      fileName = picture.getFilename();
-      contentType = picture.getContentType();
-      file = picture.getFile();
-      image = new Image(fileName, file);
-      imageId = image.id;
-      editMagicianFormData.imageId = imageId;
-    }
-    else {
-      System.out.printf("Error getting image");
-    }
+    editMagicianFormData.imageId = uploadImage(request());
 
     Logger.debug("postMagician Magician Form Data");
     Logger.debug("  id = [" + editMagicianFormData.id + "]");
@@ -432,30 +409,7 @@ public class Application extends Controller {
 
     RoutineFormData routineFormData = formWithRoutineData.get();
 
-    /* Retrieves image from form */
-
-    Http.MultipartFormData body = request().body().asMultipartFormData();
-    Http.MultipartFormData.FilePart picture = body.getFile("image");
-    String fileName = "";
-    String contentType = "";
-    File file = null;
-    long imageId = -1;
-    Image image = null;
-
-    if (request().body().isMaxSizeExceeded()) {
-      return badRequest("Image exceeds maximum allowed file size. (512K)");
-    }
-    else if (picture != null) {
-      fileName = picture.getFilename();
-      contentType = picture.getContentType();
-      file = picture.getFile();
-      image = new Image(fileName, file);
-      imageId = image.id;
-      routineFormData.imageId = imageId;
-    }
-    else {
-      System.out.printf("Error getting image");
-    }
+    routineFormData.imageId = uploadImage(request());
 
     Logger.debug("postRoutine Form Backing Class Data");
     Logger.debug("  id = [" + routineFormData.id + "]");
@@ -757,30 +711,7 @@ public class Application extends Controller {
 
     Logger.debug("isInspectable = " + materialFormData.isInspectable);
 
-    /* Retrieves image from form */
-
-    Http.MultipartFormData body = request().body().asMultipartFormData();
-    Http.MultipartFormData.FilePart picture = body.getFile("image");
-    String fileName = "";
-    String contentType = "";
-    File file = null;
-    long imageId = -1;
-    Image image = null;
-
-    if (request().body().isMaxSizeExceeded()) {
-      return badRequest("Image exceeds maximum allowed file size. (512K)");
-    }
-    else if (picture != null) {
-      fileName = picture.getFilename();
-      contentType = picture.getContentType();
-      file = picture.getFile();
-      image = new Image(fileName, file);
-      imageId = image.id;
-      materialFormData.imageId = imageId;
-    }
-    else {
-      System.out.printf("Error getting image");
-    }
+    materialFormData.imageId = uploadImage(request());
 
     Material.saveMaterialFromForm(materialFormData);
 
@@ -827,10 +758,39 @@ public class Application extends Controller {
   }
 
   /**
-   * Uploads the image to the images database.
+   * Uploads image in Request to the Images database.
+   * @param request The request.
+   * @return The image id. Returns -1 if file size limit exceeded or no image found in form.
    */
-  public static void uploadimage() {
+  public static long uploadImage(Http.Request request) {
 
+    // takes request
+    Http.MultipartFormData body = request.body().asMultipartFormData();
+    Http.MultipartFormData.FilePart picture = body.getFile("image");
+
+    // creates variables
+    String fileName = "";
+    String contentType = "";
+    File file = null;
+    long imageId = -1;
+    Image image = null;
+
+    // checks image upload size against max
+    if (request().body().isMaxSizeExceeded()) {
+      System.out.printf("Image exceeds maximum allowed file size. (512K)");
+    }
+    else if (picture != null) {
+      fileName = picture.getFilename();
+      contentType = picture.getContentType();
+      file = picture.getFile();
+      image = new Image(fileName, file);
+      imageId = image.id;
+    }
+    else {
+      System.out.printf("Error getting image");
+    }
+
+    return imageId;
   }
 
 }
