@@ -1,5 +1,8 @@
 package models;
 
+import play.mvc.Http.Context;
+import controllers.Secured;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -91,23 +94,25 @@ public class Routine extends play.db.ebean.Model {
    * The constructor includes only the Routine's required fields.  Use setters to set the non-required
    * fields.  The idea is that an object (A routine) is always in a valid state.
    *
-   * @param id          A unique, synthetic key to the Routine.
    * @param name        A short name for the routine.
    * @param description A multi-line description of the routine.
    * @param duration    The average time to perform a basic rendition of this routine in minutes.
    */
   public Routine(
-      long id,
       String name,
       String description,
       Integer duration) {
 
-    this.id = id;
     this.name = name;
     this.description = description;
     this.duration = duration;
     this.materials = new ArrayList<Material>();
   }
+
+
+  /******************************************************************************************************************
+   * G E T T E R S   &   S E T T E R S
+   ******************************************************************************************************************/
 
   /**
    * Returns a unique, synthetic key to the Routine.
@@ -379,4 +384,59 @@ public class Routine extends play.db.ebean.Model {
   public void setPlacement(String placement) {
     this.placement = placement;
   }
+
+
+  /******************************************************************************************************************
+   * M E T H O D S
+   ******************************************************************************************************************/
+
+  /**
+   * The EBean ORM finder method for database queries.
+   *
+   * @return The finder method.
+   */
+  public static Finder<Long, Routine> find() {
+    return new Finder<Long, Routine>(Long.class, Routine.class);
+  }
+
+
+  /**
+   * Get all of the Routines in the database.
+   *
+   * @return All of the Routines in the database.
+   */
+  public static List<Routine> getAllRoutines() {
+    return Routine.find().all();
+  }
+
+
+  /**
+   * Get the active Routines in the database.
+   *
+   * @return The active Routines in the database.
+   */
+  public static List<Routine> getActiveRoutines() {
+    // TODO: Someday implement a Routine Status to takedown routines or hide them for awhile.
+    return Routine.find().all();
+  }
+
+
+  /**
+   * Retrieve a Routine associated with a given id from the database.
+   *
+   * @param id The ID of the Routine to retrieve.
+   * @return The Routine.
+   * @throws RuntimeException if the ID can't be found.
+   */
+  public static Routine getRoutine(long id) {
+    Routine routine = Routine.find().byId(id);
+    if (routine == null) {
+      throw new RuntimeException("Unable to find Routine with ID [" + id + "]");
+    }
+
+    return routine;
+  }
+
+
+
 }

@@ -37,7 +37,7 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
    * Populate static objects needed for testing.
    */
   public TestMaterialCRUD() {
-    routine1 = new Routine(0, "Test Routine Name 01", "Test Routine Description 01", 11);
+    routine1 = new Routine("Test Routine Name 01", "Test Routine Description 01", 11);
     routine1.setMethod("Test Routine Method 01");
     routine1.setHandling("Test Routine Handling 01");
     routine1.setResetDuration(10);
@@ -45,7 +45,7 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
     routine1.setYouTubeUrl("Test YouTube URL 01");
     routine1.setImageUrl("Test Image URL 01");
 
-    routine2 = new Routine(0, "02 Test Routine Name 02", "02 Test Routine Description 02", 22);
+    routine2 = new Routine("02 Test Routine Name 02", "02 Test Routine Description 02", 22);
     routine2.setMethod("02 Test Routine Method 02");
     routine2.setHandling("02 Test Routine Handling 02");
     routine2.setResetDuration(20);

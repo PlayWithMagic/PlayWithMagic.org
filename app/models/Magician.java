@@ -505,17 +505,18 @@ public class Magician extends play.db.ebean.Model {
 
 
   /**
-   * Delete a Magician associated with a given id.
-   * <p>
-   * TO-DO:  Set the status=inactive instead of deleting the magician.  Rename method to deactivate Magician.
-   * Create an activate Magician method.
+   * Get a Magician associated with a given id.
    *
-   * @param id The ID of the magician to delete.
+   * @param id The ID of the magician to retrieve.
+   * @return The retrieved magician object.
+   * @throws RuntimeException if the ID can't be found.
    */
-  public static void deleteMagician(long id) {
-    Magician magician = getMagician(id);
-
-    magician.delete();
+  public static Magician getMagician(long id) {
+    Magician magician = Magician.find().byId(id);
+    if (magician == null) {
+      throw new RuntimeException("Unable to find Magician with the given ID [" + id + "]");
+    }
+    return magician;
   }
 
 
@@ -533,19 +534,21 @@ public class Magician extends play.db.ebean.Model {
     return magician;
   }
 
+
   /**
-   * Get a Magician associated with a given id.
+   * Delete a Magician associated with a given id.
+   * <p>
+   * TO-DO:  Set the status=inactive instead of deleting the magician.  Rename method to deactivate Magician.
+   * Create an activate Magician method.
    *
-   * @param id The ID of the magician to retrieve.
-   * @return The retrieved magician object.
+   * @param id The ID of the magician to delete.
    */
-  public static Magician getMagician(long id) {
-    Magician magician = Magician.find().byId(id);
-    if (magician == null) {
-      throw new RuntimeException("Unable to find Magician with the given ID [" + id + "]");
-    }
-    return magician;
+  public static void deleteMagician(long id) {
+    Magician magician = getMagician(id);
+
+    magician.delete();
   }
+
 
   /**
    * Check if an email address is associated with an existing Magician.

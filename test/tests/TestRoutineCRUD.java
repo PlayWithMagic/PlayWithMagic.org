@@ -33,7 +33,7 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
    * Populate static objects needed for testing.
    */
   public TestRoutineCRUD() {
-    routine1 = new Routine(0, "Test Routine Name 01", "Test Routine Description 01", 101);
+    routine1 = new Routine("Test Routine Name 01", "Test Routine Description 01", 101);
     routine1.setMethod("Test Routine Method 01");
     routine1.setHandling("Test Routine Handling 01");
     routine1.setResetDuration(21);
@@ -44,7 +44,7 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     routine1.setPlacement("Test Placement 01");
     routine1.setChoices("Test Choices 01");
 
-    routine2 = new Routine(0, "02 Test Routine Name 02", "02 Test Routine Description 02", 22);
+    routine2 = new Routine("02 Test Routine Name 02", "02 Test Routine Description 02", 22);
     routine2.setMethod("02 Test Routine Method 02");
     routine2.setHandling("02 Test Routine Handling 02");
     routine2.setResetDuration(119);
@@ -55,7 +55,7 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     routine2.setPlacement("02 Test Placement 02");
     routine2.setChoices("02 Test Choices 02");
 
-    routine3 = new Routine(0, "Test Routine Name 03", "Test Routine Description 03", 33);
+    routine3 = new Routine("Test Routine Name 03", "Test Routine Description 03", 33);
 
     /* Logger.debug("Routines setup for testing"); */ // Logger doesn't work in JUnit tests w/ Play 2.0 (known issue).
     System.out.println("Test Routines constructed");

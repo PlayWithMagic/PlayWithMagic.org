@@ -15,7 +15,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "3 Long Ropes", "My uncle taught me this Routine when I was in elementary school. Take "
+    routine = new Routine("3 Long Ropes", "My uncle taught me this Routine when I was in elementary school. Take "
         + "three different lengths of rope, and magically make them all the same length!", 5);
 
     routine.setMethod("Two of the lengths are cut in such a way that when crossed behind the hand, it appears that"
@@ -50,7 +50,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Blind", "Two decks with different colored backs are introduced. You ask your "
+    routine = new Routine("Blind", "Two decks with different colored backs are introduced. You ask your "
         + "spectator to choose any card and place it on top of your pack. You do the same. To everyone's amazement, "
         + "BOTH cards match.\n A free choice from the spectator leads to one impossible conclusion.\n BLIND is a "
         + "modern take on a timeless prediction plot, done under impossible conditions. NO duplicates. NO doubles. "
@@ -87,7 +87,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Stairway", "An ordinary bill is borrowed from your spectator - then folded over the "
+    routine = new Routine("Stairway", "An ordinary bill is borrowed from your spectator - then folded over the "
         + "bottom of two rubberbands being held at the fingertips and paperclipped to ensure full security. "
         + "Additionally, a member of your audience pinches the bottom of the bill to dissolve any doubts. "
         + "NO funny business.\n What happens next is practical, impromptu, visual magic at its best.\n"
@@ -126,7 +126,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Breach", "Any playing card is selected and placed face up on top of the deck. The pack "
+    routine = new Routine("Breach", "Any playing card is selected and placed face up on top of the deck. The pack "
         + "is lowered beneath a glass surface or tabletop and the selection visually penetrates up through the "
         + "glass.\n Without warning, it immediately melts back down through the table again.\n BREACH is an "
         + "incredibly visual card penetration that happens with little cover using ANY glass tabletop or surface. "
@@ -164,7 +164,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Free Will", "Three wooden tokens are shown and mixed, face down by the audience.  "
+    routine = new Routine("Free Will", "Three wooden tokens are shown and mixed, face down by the audience.  "
         + "A prediction is shown and placed, face down, onto the table.  The audience member chooses a token for "
         + "themselves, one for another spectator and one for the bag that the chips were taken from.  Amazingly, "
         + "even though the audience member had freewill, the prediction is perfectly accurate.\n Works EVERY "
@@ -202,7 +202,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Double Exposure", "A mind-blowing new take on a classic effect. Double Exposure "
+    routine = new Routine("Double Exposure", "A mind-blowing new take on a classic effect. Double Exposure "
         + "by Asi Wind is a reality altering version of Triumph that happens within a borrowed camera under your "
         + "spectators complete control.", 2);
 
@@ -249,7 +249,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "A.A.C.A.A.N", "From one spectator, any card is named. From a different spectator, "
+    routine = new Routine("A.A.C.A.A.N", "From one spectator, any card is named. From a different spectator, "
         + "a number one through fifty-two is named. With absolutely nothing to suspect, the named card appears "
         + "at exactly the number named. A probability so impressive only magic can explain it. "
         + "This is Any Card at Any Number, for real.", 2);
@@ -285,7 +285,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Peregrine Pass", "It's not often we stumble upon a secret technique that looks "
+    routine = new Routine("Peregrine Pass", "It's not often we stumble upon a secret technique that looks "
         + "authentic to the natural action taking place, in this case - closing a spread of cards. With the "
         + "Peregrine Pass, what happens \"behind the scenes\" when compared to the polished performance is "
         + "night and day. This is sleight of hand at its finest!", 2);
@@ -324,7 +324,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Flux Deal", "A diabolical switch that allows for the seamless and constant change of "
+    routine = new Routine("Flux Deal", "A diabolical switch that allows for the seamless and constant change of "
         + "cards dealt onto the table. Switch one card or many cards, cause cards to visually change, force cards, "
         + "and more. The Flux Deal is great for mathematical tricks, gambling demonstrations, and transpositions. "
         + "The possibilities are endless! The deal is not only imperceptible, but indistinguishable. With practice, "
@@ -363,7 +363,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Slipshift", "The Slipshift is a visual color change done at the fingertips. "
+    routine = new Routine("Slipshift", "The Slipshift is a visual color change done at the fingertips. "
         + "Within this video Chris explains several variations of the change along with a method to control "
         + "a selected card to the top of the deck.", 2);
 
@@ -399,7 +399,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Recharmed, I'm Sure!", "One at a time, three Chinese coins hanging on a length "
+    routine = new Routine("Recharmed, I'm Sure!", "One at a time, three Chinese coins hanging on a length "
         + "of string magically come off right before your eyes. With each phase progressively appearing more "
         + "impossible, the third and final coin is held at the fingertips and visibly melts right through the "
         + "string and then back on again. Finally, it vanishes completely, reappearing with the other two on "
@@ -448,7 +448,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "King Brand", "Visually dynamic, the effect couldn't be simpler: The deck is removed "
+    routine = new Routine("King Brand", "Visually dynamic, the effect couldn't be simpler: The deck is removed "
         + "and only four cards are presented, the two red Kings and and the two black fours. With one pair "
         + "sandwiched between the other, they visually trade places under impossible conditions. "
         + "The plot builds in three phases with the final trasposition happening in a spectators own hand.", 2);
@@ -485,7 +485,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Gödel", "Gödel is an innovative face-up color change from the mind of Alexander "
+    routine = new Routine("Gödel", "Gödel is an innovative face-up color change from the mind of Alexander "
         + "Hansford. With a wave of the hands, cards transform under direct scrutiny. Not only will you receive "
         + "two additional routines with your purchase, Twisting and Sandwich, you’ll find Gödel to be an "
         + "incredible utility for the effects you already perform.", 2);
@@ -526,7 +526,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Spring St. Aces", "As the cards are sprung face up from hand to hand, the dealer "
+    routine = new Routine("Spring St. Aces", "As the cards are sprung face up from hand to hand, the dealer "
         + "is able to stop dead on an Ace. This is repeated three more times until all four Aces have been found. "
         + "An impeccable feat to say the least.", 2);
 
@@ -562,7 +562,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Diagonal Palm Shift", "First published in 1902 by S.W. Erdnase, the Diagonal Palm "
+    routine = new Routine("Diagonal Palm Shift", "First published in 1902 by S.W. Erdnase, the Diagonal Palm "
         + "Shift - a secret maneuver for bottom palming a selected card placed into the middle of the deck - "
         + "is explained in detail by one of this generations most beloved sleight of hand artists, Ricky Smith.", 2);
 
@@ -598,7 +598,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Vernon One-Hand Table Shuffle", "We originally learned this technique from Vernon's "
+    routine = new Routine("Vernon One-Hand Table Shuffle", "We originally learned this technique from Vernon's "
         + "book, Ultimate Secrets of Card Magic (1967); however it wasn't until we saw a video of Ross Bertram "
         + "performing the shuffle perfectly that we began to take interest. What you see before you is our own "
         + "handling created to achieve the perfect one-for-one riffle along with various subtleties acquired "
@@ -636,7 +636,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "WeFlex", "A remarkable transformation of a playing card unlike any other. Taking "
+    routine = new Routine("WeFlex", "A remarkable transformation of a playing card unlike any other. Taking "
         + "place away from the deck, WeFlex is a single-card color change. It all happens at the fingertips, "
         + "so it's all very open. With apparently just the flexing of a card back and forth, it changes right "
         + "before your eyes. WeFlex is as beautiful as it is graceful, and in our opinion is one of the most "
@@ -675,7 +675,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Catch 23", "Perfect for shows small and large, Asi’s Catch 23 creates a connection "
+    routine = new Routine("Catch 23", "Perfect for shows small and large, Asi’s Catch 23 creates a connection "
         + "between the performer and the audience that few effects have the ability to do. Catch 23 has been an "
         + "integral part of Asi’s live shows for years. Today he offers it to us. Asi’s creative ingenuity and "
         + "passion for magic has advanced our art ten-fold. This newest addition to an overwhelming collection "
@@ -719,7 +719,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Triumph and Triumph Again", "Two spectators are asked to make separate selections- "
+    routine = new Routine("Triumph and Triumph Again", "Two spectators are asked to make separate selections- "
         + "one to be placed immediately face down, the other remembered. The pack is then shuffled face-up and "
         + "face-down, only to be spread moments later to show the cards have returned to normal face-down position, "
         + "except for twelve like-suited cards in order! It’s discovered that the card needed to complete the "
@@ -761,7 +761,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Trigger", "Trigger is a stunning and surprising effect that looks like trick "
+    routine = new Routine("Trigger", "Trigger is a stunning and surprising effect that looks like trick "
         + "photography. The solution is impossible to reconstruct, yet seems fair and is easily achieved.", 2);
 
     routine.setMethod("After a card is shuffled into the center, the deck is wrapped tightly with a rubber "
@@ -798,7 +798,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Static", "With the spectator's finger touching the top of the deck, the deck slowly "
+    routine = new Routine("Static", "With the spectator's finger touching the top of the deck, the deck slowly "
         + "splits itself in half. With a delicate touch, their chosen card shoots out of the pack. The deck is "
         + "completely examinable before and after the effect. They will find nothing. They will have no "
         + "explanation.", 2);
@@ -835,7 +835,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Slydini's Knotted Slilks", "I've wanted to learn this trick for a long time.  It's "
+    routine = new Routine("Slydini's Knotted Slilks", "I've wanted to learn this trick for a long time.  It's "
         + "a 4 stage trick but it has over 60 moves to it.  The essence of the trick is that two silks are tied "
         + "together with a solid knot, then magically, the silks come apart.", 12);
 
@@ -869,7 +869,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Blendo", "This is a good parlor routine.  The magician removes three 24\" colorful "
+    routine = new Routine("Blendo", "This is a good parlor routine.  The magician removes three 24\" colorful "
         + "silks from a black, slik bag.  The silks are inspected and a spectator puts the silks into the bag and "
         + "'mixes' them.  The magician reminds the audience that the United States is a mixture of many, many "
         + "world cultures and the three silks are red, white and blue.  The three mixed silks are then instantly "
@@ -917,7 +917,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Lucifer's Wallet", "Remove your wallet.  Set it on fire, remove a burning business "
+    routine = new Routine("Lucifer's Wallet", "Remove your wallet.  Set it on fire, remove a burning business "
         + "card.  Blow it out.  Snuff out the fire in your wallet.  Hand out the still-warm card -- without a "
         + "singe mark on it.  Let the audience look at the wallet.", 1);
 
@@ -974,7 +974,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "The Magic Project Plan", "\"The hardest part of a project is the beginning.  The fear of "
+    routine = new Routine("The Magic Project Plan", "\"The hardest part of a project is the beginning.  The fear of "
         + "the blank page\"... thumb through a `book` full of empty pages.  Then have a project manager sprinkle some "
         + "fairy dust on it and thumb through the book again -- this time it's full of charts and graphs.  Finally "
         + "have a programmer type on the book's cover, and when you thumb through the book, it's full of code.", 4);
@@ -1011,7 +1011,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Are You Normal... or Are You an Engineer?", "Inspired by one of my favorite magicians "
+    routine = new Routine("Are You Normal... or Are You an Engineer?", "Inspired by one of my favorite magicians "
         + "Mr. David Regal.  This routine uses a Wellington Switchboard and consists of three phases.  The first "
         + "phase introduces the switchboard... four colored lights and four colored switches.  Whenever the normal "
         + "person is asked to throw a switch the light corresponding to the switch's color lights up.  Whenever "
@@ -1048,7 +1048,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "French Kiss", "This is a classic double-turnover routine that I originally found in "
+    routine = new Routine("French Kiss", "This is a classic double-turnover routine that I originally found in "
         + "The Royal Road to Card Magic.  However, Wayne Houchin's version is edgy, fun and is my closer.  Thank you, "
         + "Wayne.  It's a transposition effect where a spectator's signed card, is transposed with the magician's "
         + "signed card.", 4);
@@ -1085,7 +1085,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Three Fly", "Poker chips (or coins) fly from one hand to the other... and back.", 2);
+    routine = new Routine("Three Fly", "Poker chips (or coins) fly from one hand to the other... and back.", 2);
 
     routine.setMethod("You can get that from Lee.");
     routine.setHandling("Checkout Lee Asher's performance of this routine 2:47 into the video...");
@@ -1118,7 +1118,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Witness", "A spectator seals a 'wild joker' in a zip-lock bag.  The spectator then "
+    routine = new Routine("Witness", "A spectator seals a 'wild joker' in a zip-lock bag.  The spectator then "
         + "selects a card an puts it in the deck.  Suddenly, the card is in the zip-lock bag.", 1);
 
     routine.setMethod("See Lee's website...");
@@ -1175,7 +1175,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Marked Cards", "This isn't exactly a magic trick, but it's a nice intersticial bit "
+    routine = new Routine("Marked Cards", "This isn't exactly a magic trick, but it's a nice intersticial bit "
         + "I'll do.  Basically, I hand out cards from a blue-backed Fornier 505 deck.  The cards are marked, but "
         + "about 90% of the time, the audience can't find the markings.  I use the time to talk about cards and "
         + "card games.  I tend to do it when I'm getting burned by an audience and I want to bring the tension down "
@@ -1214,7 +1214,7 @@ public class RoutineDBInit2 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Cocoa", "I don't perform this trick... yet.  I saw David Regal perform it at a lecture "
+    routine = new Routine("Cocoa", "I don't perform this trick... yet.  I saw David Regal perform it at a lecture "
         + "once and it's burned into my mind.  Basically, these marshmallows are coming and going out of a cup "
         + "of hot chocolate.", 10);
 

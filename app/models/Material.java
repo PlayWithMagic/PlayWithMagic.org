@@ -4,13 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.util.List;
 
 /**
  * An item used in the performance of a routine.
  *
  * The synthetic unique constraint on this model is id.
  * The logical unique constraint on this model is routine+name.
-
+ *
+ * Material objects are 'owned' by Routines.
  */
 @Entity
 public class Material extends play.db.ebean.Model {
@@ -67,6 +69,11 @@ public class Material extends play.db.ebean.Model {
   public Material(String name) {
     this.name = name;
   }
+
+
+  /******************************************************************************************************************
+   * G E T T E R S   &   S E T T E R S
+   ******************************************************************************************************************/
 
   /**
    * Get the synthetic key for this Material object.
@@ -247,4 +254,51 @@ public class Material extends play.db.ebean.Model {
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
   }
+
+
+  /******************************************************************************************************************
+   * M E T H O D S
+   ******************************************************************************************************************/
+
+  /**
+   * The EBean ORM finder method for database queries.
+   *
+   * @return The finder method.
+   */
+  public static Finder<Long, Material> find() {
+    return new Finder<Long, Material>(Long.class, Material.class);
+  }
+
+
+  // No need to implement getRoutineMaterials(Routine routine)... this would be done with routine.getMaterials().
+
+
+  /**
+   * Get all of the Materials in the databse.
+   *
+   * @return The all Materials.
+   */
+  public static List<Material> getAllMaterial() {
+    return Material.find().all();
+  }
+
+
+  /**
+   * Retrieve a Material item associated with a given id from the database.
+   *
+   * @param id The ID of the Material to retrieve.
+   * @return The Material.
+   * @throws RuntimeException if the ID can't be found.
+   */
+  public static Material getMaterial(long id) {
+    Material material = Material.find().byId(id);
+    if (material == null) {
+      throw new RuntimeException("Unable to find Material with ID [" + id + "]");
+    }
+
+    return material;
+  }
+
+
+
 }

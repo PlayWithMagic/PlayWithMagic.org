@@ -14,6 +14,11 @@ import play.mvc.Http.Context;
 /**
  * A Set consists of an ordered lists of Routines.
  *
+ * The synthetic unique constraint on this model is id.
+ * The logical unique constraint on this model is magician + name.
+ *
+ * Sets are 'owned' by Magicians.
+ *
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/101
  */
 @Entity
@@ -37,7 +42,10 @@ public class Set extends play.db.ebean.Model {
 
 
   /**
-   * Create a Set object.
+   * Create a valid Set object.
+   *
+   * The constructor includes only the Set's required fields.  Use setters to set the non-required
+   * fields (if any).  The idea is that an object (A Set) is always in a valid state.
    *
    * @param magician    The Magician who created this Set.
    * @param name        The name of the Set.
@@ -162,9 +170,9 @@ public class Set extends play.db.ebean.Model {
 
 
   /**
-   * Get all of the sets in the database.
+   * Get all of the Sets in the database.
    *
-   * @return All of the sets in the database.
+   * @return All of the Sets in the database.
    */
   public static List<Set> getAllSets() {
     return Set.find().all();
@@ -189,6 +197,7 @@ public class Set extends play.db.ebean.Model {
    *
    * @param id The ID of the Set to retrieve.
    * @return The retrieved Set object.
+   * @throws RuntimeException if the ID can't be found.
    */
   public static Set getSet(long id) {
     Set set = Set.find().byId(id);

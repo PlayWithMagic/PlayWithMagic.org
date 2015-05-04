@@ -2,6 +2,8 @@ package tests;
 
 import com.typesafe.config.ConfigFactory;
 import models.Magician;
+import models.MagicianType;
+import models.Material;
 import models.Routine;
 import models.RoutineDB;
 import models.Set;
@@ -31,11 +33,9 @@ public class GlobalTest {
 
 
   /**
-   * DANGEROUS:  Delete the entire PlayWithMagic database and create one test user.
+   * DANGEROUS:  Delete the entire PlayWithMagic database.
    *
    * This is only used for testing.
-   *
-   * TODO: Figure out how to do standing data like MagicianType.
    *
    * @param verify A simple verification to ensure programmers respect this very powerful method.
    * @throws RuntimeException On an attempt to delete the database without the correct verification string.
@@ -45,18 +45,32 @@ public class GlobalTest {
       throw new RuntimeException("Attempt to reset Play With Magic database without correct verification string.");
     }
 
-    for (Magician magician : Magician.getAllMagicians()) {
-      magician.delete();
-    }
-
     for (Set set : Set.getAllSets()) {
       set.delete();
     }
 
-    // TODO: Add after Routine is persisted in the database
-//    for (Routine routine : RoutineDB.getRoutines()) {
-//      routine.delete();
-//    }
+    for (Material material : Material.getAllMaterial()) {
+      material.delete();
+    }
+
+    for (Routine routine : Routine.getAllRoutines()) {
+      routine.delete();
+    }
+
+    for (Magician magician : Magician.getAllMagicians()) {
+      magician.delete();
+    }
+
+    for (MagicianType magicianType : MagicianType.getAllMagicianTypes()) {
+      magicianType.delete();
+    }
+
+    System.out.println("The database has been fully reset.");
+
+
+    MagicianType.init();
+
+    System.out.println("The standing data in the database has been populated.");
   }
 
 

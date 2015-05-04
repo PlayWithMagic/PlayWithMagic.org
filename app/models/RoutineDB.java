@@ -34,13 +34,10 @@ public class RoutineDB {
    */
   public static Routine saveRoutineFromForm(RoutineFormData routineForm) {
     Routine routine;
-    long idVal;
+    long idVal = 0;
 
     if (routineForm.id == 0) {
-      idVal = currentId++;
-
       routine = new Routine(
-          idVal,
           routineForm.name,
           routineForm.description,
           routineForm.duration
@@ -174,7 +171,7 @@ public class RoutineDB {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "", "", 1);
+    routine = new Routine("", "", 1);
 
     routine.setMethod("");
     routine.setHandling("");

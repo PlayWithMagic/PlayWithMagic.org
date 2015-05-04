@@ -16,7 +16,7 @@ public class RoutineDBInit1 {
     long id;
 
     // --------------------------------------
-    routine = new Routine(0, "Ambitious Card", "Put a card in the middle of the deck.  It magically comes to "
+    routine = new Routine("Ambitious Card", "Put a card in the middle of the deck.  It magically comes to "
         + "the top.", 2);
 
     routine.setMethod("Get a break under the top two cards.  Perform a double turnover.  Say \"The card on the top "
@@ -55,7 +55,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Gypsy Thread", "Pieces of thread are restored into one continuous piece.", 4);
+    routine = new Routine("Gypsy Thread", "Pieces of thread are restored into one continuous piece.", 4);
 
     routine.setMethod("Not shared");
     routine.setHandling("I use this as an opener, with the spool in hand.  After detaching the initial piece of "
@@ -91,7 +91,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Magician's Practice Deck", "A 'cheap' deck of cards with nothing printed on them "
+    routine = new Routine("Magician's Practice Deck", "A 'cheap' deck of cards with nothing printed on them "
         + "magically gets printed on the front and back.", 3);
 
     routine.setMethod("A standard Mental Photography deck.  \"Have you ever seen a magician's practice deck?  "
@@ -130,7 +130,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Twice Burned", "This is a good bar trick I learned from Steve Johnson.  Strike a match "
+    routine = new Routine("Twice Burned", "This is a good bar trick I learned from Steve Johnson.  Strike a match "
         + "and blow it out.  Strike it a second time and, astonishingly, it lights!  It's a good way to get "
         + "a free beer.", 2);
 
@@ -175,7 +175,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Daryl's Vindu Knot", "I hope I got the title right...  This is a very fun "
+    routine = new Routine("Daryl's Vindu Knot", "I hope I got the title right...  This is a very fun "
         + "bit.  Take a rope and cut in half and tie the two ends together in a knot.  Have "
         + "folks from the audience test the strength of the knot -- it's solid.  Then, you have someone cover the "
         + "knot with their hand... and the knot moves.  In fact, the knot comes off in their hand and they are "
@@ -224,7 +224,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Charming Chinese Challenge", "This is a three phase effect where the magician removes "
+    routine = new Routine("Charming Chinese Challenge", "This is a three phase effect where the magician removes "
         + "Chinese coins threaded through a ribbon, one at a time.  I first learned this routine from Joshua "
         + "Jay, who credits Troy Hooser for this particular handling.", 5);
 
@@ -273,7 +273,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Two Card Monte", "This is a 'giveaway' routine I perform whereby I teach the "
+    routine = new Routine("Two Card Monte", "This is a 'giveaway' routine I perform whereby I teach the "
         + "audience a little magic trick and I give them two gaff (novelty) cards to remember the event.", 10);
 
     routine.setMethod("It's probably best just to watch the video.");
@@ -318,7 +318,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Panic", "This is my favorite effect within a set.  It's a transposition effect that "
+    routine = new Routine("Panic", "This is my favorite effect within a set.  It's a transposition effect that "
         + "allows me to switch from an audience-handled, sorted deck to a packet-loaded deck.  Strangly, people "
         + "forget about this nearly impossible effect because I follow it with my closer French Kiss.", 2);
 
@@ -354,7 +354,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Side Steal", "The Side Steal allows total control of a single card to the top of the deck"
+    routine = new Routine("Side Steal", "The Side Steal allows total control of a single card to the top of the deck"
         + " - invisibly. It doesn’t end there, use it to control a card to any position near the top or as a stunningly"
         + " visual color change.", 2);
 
@@ -388,7 +388,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Phantom", "You give half of the deck to the spectator. You take the remaining half, and "
+    routine = new Routine("Phantom", "You give half of the deck to the spectator. You take the remaining half, and "
         + "riffle through the faces. The spectator is asked to THINK of any card they see — it's a free selection.\n"
         + "Instantly, you spread through the cards and show that the card they were THINKING of is GONE. Vanished. It "
         + "was merely a PHANTOM. Where did it go? It’s been in THEIR hands all along. You even know it’s position - "
@@ -427,7 +427,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Fancyband", "An ordinary rubberband is sprung off your fingertips, spiraling a few "
+    routine = new Routine("Fancyband", "An ordinary rubberband is sprung off your fingertips, spiraling a few "
         + "meters forward - then spins on the tabletop, slingshotting it back towards you. A demonstration of skill "
         + "you can unleash at anytime.", 1);
 
@@ -464,7 +464,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Classic Color Change", "It is one of the simplest, most fluid, visual moves in magic - "
+    routine = new Routine("Classic Color Change", "It is one of the simplest, most fluid, visual moves in magic - "
         + "and it is also one of the easiest. With a simple wave, one playing card visually changes into another.\n"
         , 1);
 
@@ -501,7 +501,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Zig-Zag-Pencil", "This was one of the first Routines I was exposed to as a 10 year old."
+    routine = new Routine("Zig-Zag-Pencil", "This was one of the first Routines I was exposed to as a 10 year old."
         + " My grandparents purchased me a magic kit that included this, and the really cool part is how simple the "
         + "routine is--and also that you can improve upon it with a few easy steps!", 5);
 
@@ -550,7 +550,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "eXile", "From the award-winning mind of Mathieu Bich comes eXile - the effect that kick "
+    routine = new Routine("eXile", "From the award-winning mind of Mathieu Bich comes eXile - the effect that kick "
         + "started the latest David Blaine special with a bang. eXile takes place entirely on the spectator's own "
         + "hand. Three small X's are drawn on someone's open palm. A quarter is placed in the center of their hand.\n"
         + "Slowly, you slide your fingers over each X, and they visually, instantly vanish. No sign of ink to be "
@@ -600,7 +600,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Hellbound Spellbound", "A single silver coin is displayed and held at the fingertips. "
+    routine = new Routine("Hellbound Spellbound", "A single silver coin is displayed and held at the fingertips. "
         + "With a meticulous rub, the coin instantly and visually changes into a copper coin... then changes back to "
         + "a silver coin again.\n You explain you've been using two coins - but show that they're BOTH silver.\n"
         + "Hellbound Spellbound is a stunningly visual coin trick with nothing but great methodology and pure "
@@ -639,7 +639,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "GPS", "GPS is a classic and deceptively brilliant method to ascertain a spectator's "
+    routine = new Routine("GPS", "GPS is a classic and deceptively brilliant method to ascertain a spectator's "
         + "freely selected playing card - done under nearly impossible conditions. NO key cards. NO gimmicks.\n"
         + "They shuffle the the cards not once but TWICE during the demonstration.\n You are able to locate their "
         + "selection 100% of the time. Learn a powerful technique that you can apply to any magic trick you wish, "
@@ -678,7 +678,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Digital Dissolve", "A half dollar is placed into a spectator's closed hand. You rest "
+    routine = new Routine("Digital Dissolve", "A half dollar is placed into a spectator's closed hand. You rest "
         + "a copper English penny on the back of that same hand. In the blink of an eye and without warning, the "
         + "copper coin visually changes into the silver half dollar.\n The half dollar is immediately shown on "
         + "both sides. The spectator then slowly opens their hand to reveal the English penny. Both coins can be "
@@ -719,7 +719,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Overstuft", "You eat the cream inside of an Oreo cookie - and then, so visually, it "
+    routine = new Routine("Overstuft", "You eat the cream inside of an Oreo cookie - and then, so visually, it "
         + "REFILLS itself! As seen on The Ellen Show with Justin Flom.\n Overstuft is a utility prop that enables "
         + "you to do a myriad of magical effects using something the whole world is familiar with - a chocolate "
         + "cookie!\n From a quick trick to a full-fledged multi-phase routine, Overstuft will be your secret weapon "
@@ -757,7 +757,7 @@ public class RoutineDBInit1 {
     Material material = null;
     long id;
 
-    routine = new Routine(0, "Magic Cup and Balls", "Another simple routine that I learned as a child.  There are 3 "
+    routine = new Routine("Magic Cup and Balls", "Another simple routine that I learned as a child.  There are 3 "
         + "cups and 3 balls.  Make the balls pass through the cups, and multiply the number of balls that each cup"
         + "reveals!  There are a number of different variations that can also be done on this routine.", 5);
 
