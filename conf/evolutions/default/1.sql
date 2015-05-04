@@ -56,6 +56,7 @@ create table material (
   price                     integer,
   purchase_url              varchar(255),
   image_url                 varchar(255),
+  image_id                  bigint,
   constraint pk_material primary key (id))
 ;
 
