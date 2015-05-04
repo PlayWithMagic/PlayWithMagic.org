@@ -1,0 +1,51 @@
+@*
+* The Edit (New and Update) User HTML form page.
+*
+* @see http://www.playframework.com
+*@
+@(page: String, isLoggedIn: Boolean, userInfo: Magician,
+    deleteMagicianForm: Form[views.formdata.DeleteUserFormData], magician: Magician)
+
+@import helper._
+@import views.html.bootstrap3._
+
+
+@Main(page, isLoggedIn, userInfo) {
+  <!-- Page Content -->
+  <section id="page">
+      <!-- Content -->
+    <section id="content" class="container">
+      <div class="col-md-12">
+        <h1>Delete User</h1>
+
+          <!-- User Attributes -->
+        <div class="container">
+          <p>If you are sure you wish to delete your account, please enter your password below.</p>
+          <br />
+          @form(routes.Application.postDeleteUser(), 'class -> "form-horizontal") {
+              <!-- Hidden ID Field -->
+            @hidden(deleteMagicianForm("id"))
+              <!-- Password -->
+            @password(deleteMagicianForm("password"),
+              label = "Password",
+              placeholder = "Password",
+              help = "Required")
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button id="submit" type="submit" class="btn btn-danger">
+                  Delete
+                </button>
+                <h3>
+                  <span class="label label-danger">
+                    Please note that once you delete your account, it cannot be recovered!
+                  </span>
+                </h3>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  </section>
+}
