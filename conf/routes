@@ -35,9 +35,9 @@ POST        /deleteMagician        controllers.Application.postDeleteUser()
 #Material actions
 GET         /viewMaterial          controllers.Application.viewMaterial(routineId: Long, materialId: Integer)
 POST        /newMaterial           controllers.Application.newMaterial()
-POST        /editMaterial          controllers.Application.editMaterial(materialId: Integer)
+POST        /editMaterial          controllers.Application.editMaterial(materialId: Long)
 POST        /postMaterial          controllers.Application.postMaterial()
-POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Integer)
+POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Long)
 
 # Set actions
 GET         /listSets              controllers.Application.listAllSets()

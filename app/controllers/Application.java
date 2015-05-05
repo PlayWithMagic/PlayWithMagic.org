@@ -647,29 +647,35 @@ public class Application extends Controller {
    * Show the EditMaterial page to update an item.  First, process the Routine page, deal with any errors and update
    * the database.  Finally, show the EditMaterial page.
    *
-   * @param materialId The ListArray index of the Material row you want to edit.
+   * @param materialId The ID of the Material you want to edit.
    * @return An HTTP page EditMaterial if all is well or EditRoutine if there's an error on that page.
    */
   @Security.Authenticated(Secured.class)
-  public static Result editMaterial(Integer materialId) {
-    Form<RoutineFormData> routineFormData = Form.form(RoutineFormData.class).bindFromRequest();
-    long routineId = new Long(routineFormData.field("id").value()).longValue();
+  public static Result editMaterial(Long materialId) {
+    Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
 
-    if (routineFormData.hasErrors()) {
+    Logger.debug("editMaterial Raw Routine Form Data");
+    Logger.debug("  routineId = [" + formWithRoutineData.field("id").value() + "]");
+    Logger.debug("  name = [" + formWithRoutineData.field("name").value() + "]");
+    Logger.debug("  materialID = [" + materialId + "]");
+
+    long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
+
+    if (formWithRoutineData.hasErrors()) {
       Logger.error("HTTP Form Error in editMaterial");
 
       return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-          routineFormData, Routine.getMaterials(routineId)));
+          formWithRoutineData, Routine.getMaterials(routineId)));
     }
 
-    RoutineFormData data = routineFormData.get();
+    RoutineFormData data = formWithRoutineData.get();
     Routine routine = Routine.saveRoutineFromForm(data);
     routineId = routine.getId();
 
     // End of processing Routine page.  Start processing material.
 
     MaterialFormData materialFormData =
-        new MaterialFormData(Routine.getMaterials(routineId).get(materialId.intValue()), routineId, materialId);
+        new MaterialFormData(Material.getMaterial(materialId));
 
     Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
 
@@ -716,11 +722,11 @@ public class Application extends Controller {
    * Delete a Material item and redisplay the EditRoutine page.  First, process the Routine page and deal with any
    * errors.  Update the database, then delete the Material item and finally redisplay EditRoutine.
    *
-   * @param materialId The ArrayList index in Routine.materials of the item to delete.
+   * @param materialId The ID of the Material to delete.
    * @return An HTTP EditMaterial page.
    */
   @Security.Authenticated(Secured.class)
-  public static Result deleteMaterial(Integer materialId) {
+  public static Result deleteMaterial(Long materialId) {
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
     long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
 
@@ -737,7 +743,7 @@ public class Application extends Controller {
 
     // End of processing Routine page.  Start of processing material.
 
-    Routine.getMaterials(routineId).remove(materialId.intValue());
+    Material.getMaterial(materialId).delete();
 
     return ok(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
         formWithRoutineData, Routine.getMaterials(routineId)));

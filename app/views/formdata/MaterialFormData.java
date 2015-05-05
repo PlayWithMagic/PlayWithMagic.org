@@ -28,7 +28,7 @@ public class MaterialFormData {
    * <p>
    * This is held as an index into an ArrayList, so an int (the index into the ArrayList) is warranted.
    */
-  public int materialId;
+  public long materialId;
 
   /**
    * It's name -- whatever you'd call this item.
@@ -97,12 +97,10 @@ public class MaterialFormData {
    * Build a MaterialFormData object from a material object.
    *
    * @param material   The container holding the non-key portion of the material data.
-   * @param routineId  The ID of the routine associated with this material.
-   * @param materialId The ID of the material (if it's being edited) or 0 if it's new.
    */
-  public MaterialFormData(Material material, long routineId, int materialId) {
-    this.routineId = routineId;
-    this.materialId = materialId;
+  public MaterialFormData(Material material) {
+    this.routineId = material.getRoutine().getId();
+    this.materialId = material.getId();
     this.name = material.getName();
     this.isInspectable = material.isInspectable();
     this.isGivenAway = material.isGivenAway();

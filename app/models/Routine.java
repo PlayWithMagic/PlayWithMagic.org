@@ -65,7 +65,7 @@ public class Routine extends play.db.ebean.Model {
   private String imageUrl;
 
   // The materials used for this routine
-  @OneToMany(mappedBy = "routine", cascade = CascadeType.PERSIST)
+  @OneToMany(mappedBy = "routine", cascade = CascadeType.REMOVE)
   private List<Material> materials;
 
   // A URL of a review of the routine
@@ -498,7 +498,7 @@ public class Routine extends play.db.ebean.Model {
     routine.save();
     routine = Routine.find().byId(routine.getId());
 
-    Logger.debug(((routineFormData.id == 0) ? "Added" : "Updated") + " routine.  id = [" + routine.getId() + "]"
+    Logger.debug(((routineFormData.id == 0) ? "Add" : "Update") + " routine.  id = [" + routine.getId() + "]"
         + "  name = [" + routine.getName() + "]");
 
     return routine;
@@ -532,7 +532,5 @@ public class Routine extends play.db.ebean.Model {
     Routine routine = Routine.getRoutine(id);
     routine.delete();
   }
-
-
 
 }

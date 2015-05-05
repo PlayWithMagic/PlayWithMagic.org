@@ -130,17 +130,17 @@ public class Material extends play.db.ebean.Model {
     material.setPurchaseUrl(materialFormData.purchaseUrl);
     material.setImageUrl(materialFormData.imageUrl);
 
-    if (materialFormData.materialId == 0) {
-      Routine.getMaterials(materialFormData.routineId).add(material);
-    }
-    else {
-      Routine.getMaterials(materialFormData.routineId).set(materialFormData.materialId, material);
-    }
+//    if (materialFormData.materialId == 0) {
+//      Routine.getMaterials(materialFormData.routineId).add(material);
+//    }
+//    else {
+//      Routine.getMaterials(materialFormData.routineId).set(materialFormData.materialId, material);
+//    }
 
     material.save();
     material = Material.find().byId(material.getId());
 
-    Logger.debug(((materialFormData.materialId == 0) ? "Add" : "Update Material:")
+    Logger.debug(((materialFormData.materialId == 0) ? "  Add" : "  Update") + " material:"
         + "   id = [" + material.getId() + "]  name = [" + material.getName() + "]");
 
     return material;

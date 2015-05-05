@@ -92,13 +92,13 @@
                     </td>
                     <td>
                       <button id="edit-material" type="submit" class="btn btn-warning btn-xs editMaterial"
-                      formaction="@routes.Application.editMaterial(materials.indexOf(material))">
+                      formaction="@routes.Application.editMaterial(material.getId)">
                         Edit
                       </button>
                     </td>
                     <td>
                       <button id="delete-material" type="submit" class="btn btn-danger btn-xs deleteMaterial"
-                      formaction="@routes.Application.deleteMaterial(materials.indexOf(material))">
+                      formaction="@routes.Application.deleteMaterial(material.getId)">
                         Delete
                       </button>
 
