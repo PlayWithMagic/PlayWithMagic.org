@@ -107,7 +107,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
     /**
      * Test Set navigation from the Index page and navigation bars.
      */
-  @Test
+//  @Test
   public void testSetNav() {
     // browser.maximizeWindow();
 
@@ -127,7 +127,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
   /**
    * A workflow that tests a basic add and delete with only the required fields.
    */
-  @Test
+//  @Test
   public void testSetMinimumAddDelete() {
     // browser.maximizeWindow();
 
