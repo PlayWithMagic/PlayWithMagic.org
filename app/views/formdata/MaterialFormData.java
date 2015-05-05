@@ -126,14 +126,6 @@ public class MaterialFormData {
   public List<ValidationError> validate() {
     List<ValidationError> errors = new ArrayList<ValidationError>();
 
-    if (routineId < 0) {
-      errors.add(new ValidationError("routineId", "An invalid routine ID has been passed into the application."));
-    }
-
-    if (materialId < -1) {
-      errors.add(new ValidationError("materialId", "An invalid material ID has been passed into the application."));
-    }
-
     return errors.isEmpty() ? null : errors;
   }
 }

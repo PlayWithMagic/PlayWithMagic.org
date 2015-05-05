@@ -6,7 +6,7 @@
 create table image (
   id                        bigint not null,
   name                      varchar(255),
-  data                      blob,
+  data                      bytea,
   constraint pk_image primary key (id))
 ;
 
@@ -105,38 +105,34 @@ create sequence routine_seq;
 
 create sequence set_seq;
 
-alter table magician add constraint fk_magician_magicianType_1 foreign key (magician_type_id) references magician_type (id) on delete restrict on update restrict;
+alter table magician add constraint fk_magician_magicianType_1 foreign key (magician_type_id) references magician_type (id);
 create index ix_magician_magicianType_1 on magician (magician_type_id);
-alter table material add constraint fk_material_routine_2 foreign key (routine_id) references routine (id) on delete restrict on update restrict;
+alter table material add constraint fk_material_routine_2 foreign key (routine_id) references routine (id);
 create index ix_material_routine_2 on material (routine_id);
-alter table set add constraint fk_set_magician_3 foreign key (magician_id) references magician (id) on delete restrict on update restrict;
+alter table set add constraint fk_set_magician_3 foreign key (magician_id) references magician (id);
 create index ix_set_magician_3 on set (magician_id);
 
 
 
-alter table set_routine add constraint fk_set_routine_set_01 foreign key (set_id) references set (id) on delete restrict on update restrict;
+alter table set_routine add constraint fk_set_routine_set_01 foreign key (set_id) references set (id);
 
-alter table set_routine add constraint fk_set_routine_routine_02 foreign key (routine_id) references routine (id) on delete restrict on update restrict;
+alter table set_routine add constraint fk_set_routine_routine_02 foreign key (routine_id) references routine (id);
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+drop table if exists image cascade;
 
-drop table if exists image;
+drop table if exists magician cascade;
 
-drop table if exists magician;
+drop table if exists magician_type cascade;
 
-drop table if exists magician_type;
+drop table if exists material cascade;
 
-drop table if exists material;
+drop table if exists routine cascade;
 
-drop table if exists routine;
+drop table if exists set_routine cascade;
 
-drop table if exists set_routine;
-
-drop table if exists set;
-
-SET REFERENTIAL_INTEGRITY TRUE;
+drop table if exists set cascade;
 
 drop sequence if exists image_seq;
 

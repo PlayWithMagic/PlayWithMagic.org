@@ -495,7 +495,7 @@ public class Routine extends play.db.ebean.Model {
       );
     }
     else {
-      routine = Routine.find().byId(routineFormData.id);
+      routine = Routine.getRoutine(routineFormData.id);
 
       routine.setName(routineFormData.name);
       routine.setDescription(routineFormData.description);
@@ -518,7 +518,7 @@ public class Routine extends play.db.ebean.Model {
     }
 
     routine.save();
-    routine = Routine.find().byId(routine.getId());
+    routine = Routine.getRoutine(routine.getId());
 
     Logger.debug(((routineFormData.id == 0) ? "Add" : "Update") + " routine.  id = [" + routine.getId() + "]"
         + "  name = [" + routine.getName() + "]");

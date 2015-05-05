@@ -61,7 +61,7 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result index(String message) {
-
+// TODO: Remove below
     /*
     Http.Context context = Http.Context.current();
     Magician magician = Secured.getUserInfo(context);
@@ -724,7 +724,7 @@ public class Application extends Controller {
 
     MaterialFormData materialFormData = new MaterialFormData();
     materialFormData.routineId = routineId;
-    materialFormData.materialId = -1;
+    materialFormData.materialId = 0;
 
     Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
     return ok(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
