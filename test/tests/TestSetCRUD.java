@@ -162,6 +162,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
 
  // Add a Set.
     EditSetPage editSetPage = indexPage.clickCreateSetButton();
+System.out.println(editSetPage.pageSource());
     editSetPage.populateSet(set1);
     editSetPage.clickSubmit();
 
@@ -274,7 +275,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
     // TO-DO:  This needs to be refactored to populate its own routines (1 and 3 below)
     //routineList.add(1L);
     //routineList.add(3L);
-    editSetPage.createSet(name, description, routineList);
+    //editSetPage.createSet(name, description, routineList);
     browser.goTo(listSetsPage);
     listSetsPage.isAt();
     listSetsPage.hasSet(name);

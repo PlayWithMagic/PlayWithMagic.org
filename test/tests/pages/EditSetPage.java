@@ -1,7 +1,9 @@
 package tests.pages;
 
+import models.Routine;
 import models.Set;
 import org.openqa.selenium.WebDriver;
+import play.Logger;
 import play.test.TestBrowser;
 import tests.GlobalTest;
 
@@ -73,10 +75,15 @@ public class EditSetPage extends NavigationWrapper {
     // Required fields
     fillRequiredField("#name", set.getName());
     fillRequiredField("#description", set.getDescription());
-   }
 
-
-
+    for (Routine routine : set.getRoutines()) {
+      Logger.debug("  looking for... " + "#" + routine.getId());
+      //this.findFirst("input#" + routine.getId()).click();
+      this.findFirst("input[id=\"" + routine + "\"").click();
+      //String value = String.valueOf(routine);
+      //find("input", withId(value)).click();
+    }
+  }
 
 
   /**
@@ -99,10 +106,6 @@ public class EditSetPage extends NavigationWrapper {
   }
 
 
-
-
-
-
   /**
    * Tests the form on the EditSet page with provided data.
    *
@@ -110,6 +113,7 @@ public class EditSetPage extends NavigationWrapper {
    * @param description    The description of the Set.
    * @param routines       The list of routine IDs in the Set.
    */
+  // TODO: Delete this??
   public void createSet(String name, String description, List<Long> routines) {
     fill("#name").with(name);
     fill("#description").with(description);
