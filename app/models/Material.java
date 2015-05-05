@@ -339,7 +339,10 @@ public class Material extends play.db.ebean.Model {
     material.setPrice(materialFormData.price);
     material.setPurchaseUrl(materialFormData.purchaseUrl);
     material.setImageUrl(materialFormData.imageUrl);
-    material.setImageId(materialFormData.imageId);
+
+    if (materialFormData.imageId > 0) {
+      material.setImageId(materialFormData.imageId);
+    }
 
     if (materialFormData.materialId == -1) {
       Routine.getMaterials(materialFormData.routineId).add(material);

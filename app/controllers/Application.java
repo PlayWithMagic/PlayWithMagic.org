@@ -297,7 +297,10 @@ public class Application extends Controller {
 
     EditMagicianFormData editMagicianFormData = formData.get();
 
-    editMagicianFormData.imageId = uploadImage(request());
+    long imageId = uploadImage(request());
+    if (imageId > 0) {
+      editMagicianFormData.imageId = imageId;
+    }
 
     Logger.debug("postMagician Magician Form Data");
     Logger.debug("  id = [" + editMagicianFormData.id + "]");
@@ -409,7 +412,10 @@ public class Application extends Controller {
 
     RoutineFormData routineFormData = formWithRoutineData.get();
 
-    routineFormData.imageId = uploadImage(request());
+    long imageId = uploadImage(request());
+    if (imageId > 0) {
+      routineFormData.imageId = imageId;
+    }
 
     Logger.debug("postRoutine Form Backing Class Data");
     Logger.debug("  id = [" + routineFormData.id + "]");
@@ -711,7 +717,10 @@ public class Application extends Controller {
 
     Logger.debug("isInspectable = " + materialFormData.isInspectable);
 
-    materialFormData.imageId = uploadImage(request());
+    long imageId = uploadImage(request());
+    if (imageId > 0) {
+      materialFormData.imageId = imageId;
+    }
 
     Material.saveMaterialFromForm(materialFormData);
 
@@ -772,12 +781,13 @@ public class Application extends Controller {
     String fileName = "";
     String contentType = "";
     File file = null;
-    long imageId = -1;
+    long imageId;
     Image image = null;
 
     // checks image upload size against max
     if (request().body().isMaxSizeExceeded()) {
       System.out.printf("Image exceeds maximum allowed file size. (512K)");
+      imageId = -1;
     }
     else if (picture != null) {
       fileName = picture.getFilename();
@@ -787,7 +797,8 @@ public class Application extends Controller {
       imageId = image.id;
     }
     else {
-      System.out.printf("Error getting image");
+      System.out.printf("No new image found in form.");
+      imageId = -1;
     }
 
     return imageId;

@@ -617,7 +617,6 @@ public class Magician extends play.db.ebean.Model {
 
     magician.setStageName(editMagicianFormData.stageName);
     magician.setLocation(editMagicianFormData.location);
-    // User photo
     magician.setBiography(editMagicianFormData.biography);
     magician.setInterests(editMagicianFormData.interests);
     magician.setInfluences(editMagicianFormData.influences);
@@ -630,7 +629,10 @@ public class Magician extends play.db.ebean.Model {
     magician.setGooglePlus(editMagicianFormData.googlePlus);
     magician.setInstagram(editMagicianFormData.instagram);
     magician.setFlickr(editMagicianFormData.flickr);
-    magician.setImageId(editMagicianFormData.imageId);
+
+    if (editMagicianFormData.imageId > 0) {
+      magician.setImageId(editMagicianFormData.imageId);
+    }
 
     magician.save();
     return magician;

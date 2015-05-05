@@ -515,7 +515,10 @@ public class Routine extends play.db.ebean.Model {
     routine.setInspiration(routineFormData.inspiration);
     routine.setPlacement(routineFormData.placement);
     routine.setChoices(routineFormData.choices);
-    routine.setImageId(routineFormData.imageId);
+
+    if (routineFormData.imageId > 0) {
+      routine.setImageId(routineFormData.imageId);
+    }
 
     routine.save();
     routine = Routine.find().byId(routine.getId());

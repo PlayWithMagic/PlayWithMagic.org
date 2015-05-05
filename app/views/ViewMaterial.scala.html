@@ -12,8 +12,10 @@
     <section id="content" class="container">
       <div class="col-md-6">
         <h1>@material.getName</h1>
-        @if(material.getImageId != -1) {
+        @if(material.getImageId > 0) {
           <img class="img-responsive" src="@routes.Application.getImage(material.getImageId)" alt="Image of Material" />
+        } else {
+          <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.png")" alt="Material Image Placeholder"/>
         }
         <br />
       </div>
