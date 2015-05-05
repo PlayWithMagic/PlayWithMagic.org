@@ -162,7 +162,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
 
  // Add a Set.
     EditSetPage editSetPage = indexPage.clickCreateSetButton();
-System.out.println(editSetPage.pageSource());
+    System.out.println(editSetPage.pageSource());
     editSetPage.populateSet(set1);
     editSetPage.clickSubmit();
 

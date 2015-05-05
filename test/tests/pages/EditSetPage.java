@@ -79,9 +79,10 @@ public class EditSetPage extends NavigationWrapper {
     for (Routine routine : set.getRoutines()) {
       Logger.debug("  looking for... " + "#" + routine.getId());
       //this.findFirst("input#" + routine.getId()).click();
-      this.findFirst("input[id=\"" + routine + "\"").click();
+      //this.findFirst("input[id=\"" + routine + "\"").click();
       //String value = String.valueOf(routine);
-      //find("input", withId(value)).click();
+      String value = String.valueOf(routine.getId());
+      find("input", withId(value)).click();
     }
   }
 
