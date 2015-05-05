@@ -12,8 +12,14 @@
     <section id="content" class="container">
       <div class="col-md-6">
         <h1>@material.getName</h1>
-        @if(material.getImageUrl != null) {
-          <img class="img-responsive" src="@routes.Assets.at(material.getImageUrl)" alt="Image of Material"/>
+        @if(material.getImageId > 0) {
+          <img class="img-responsive" src="@routes.Application.getImage(material.getImageId)" alt="Image of Material" />
+        } else {
+          @if(material.getImageUrl != null) {
+            <img class="img-responsive" src="@routes.Assets.at(material.getImageUrl)" alt="Image of Material"/>
+          } else {
+            <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.png")" alt="Material Image Placeholder"/>
+          }
         }
         <br />
       </div>
@@ -26,9 +32,9 @@
         <p>@material.getDescription</p>
 
         <h3>Usage</h3>
-        <p>Is Inspectable? @if(material.getIsInspectable()) {Yes} else {No}</p>
-        <p>Is Given Away? @if(material.getIsGivenAway()) {Yes} else {No}</p>
-        <p>Is Consumed? @if(material.getIsConsumed()) {Yes} else {No}</p>
+        <p>Is Inspectable? @if(material.isInspectable()) {Yes} else {No}</p>
+        <p>Is Given Away? @if(material.isGivenAway()) {Yes} else {No}</p>
+        <p>Is Consumed? @if(material.isConsumed()) {Yes} else {No}</p>
 
         <h3>Procurement</h3>
         <p>Price = $ @if(material.getPrice() != null) {@material.getPrice()} else {Not available}</p>

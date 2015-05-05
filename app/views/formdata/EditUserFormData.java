@@ -63,7 +63,7 @@ public class EditUserFormData {
    * Input data Password field.
    */
   @Required(message = "You need to have a password.")
-  @MaxLength(value = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH,
+  @MaxLength(value = GlobalDbInfo.MAX_LONG_TEXT_LENGTH,
       message = "Your password can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters.")
   @MinLength(value = GlobalDbInfo.MIN_PASSWORD_LENGTH,
       message = "The password must be at least " + GlobalDbInfo.MIN_PASSWORD_LENGTH + " characters.")
@@ -145,6 +145,11 @@ public class EditUserFormData {
     if (!MagicianTypeFormData.isMagicianType(magicianType)) {
       errors.add(new ValidationError("magicianType",
           "How would you identify yourself as a magician?  Please select from the list."));
+    }
+
+    if (Magician.find().where().ne("id", id).ieq("email", email).findList().size() > 0) {
+      errors.add(new ValidationError("email",
+          "A user with this email address has already created an account.  Please enter a different email."));
     }
 
     return errors.isEmpty() ? null : errors;

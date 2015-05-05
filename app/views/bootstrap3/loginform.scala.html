@@ -18,21 +18,40 @@
         @helper.form(reverseRoute, 'role -> "form") {
           <fieldset>
             <div class="form-group @if(emailField.hasErrors) {has-error}" >
-              <input id="@emailField.id" name="@emailField.name" value="@emailField.value.getOrElse("")" class="form-control" placeholder="E-mail" type="text">
+              <input
+                id="@emailField.id"
+                name="@emailField.name"
+                value="@emailField.value.getOrElse("")"
+                class="form-control"
+                placeholder="E-mail"
+                type="text"
+              >
             </div>
             <div class="form-group @if(passwordField.hasErrors) {has-error}" >
-              <input id="@passwordField.id" name="@passwordField.name" value="@passwordField.value.getOrElse("")" class="form-control" placeholder="Password" type="password">
+              <input
+                id="@passwordField.id"
+                name="@passwordField.name"
+                value="@passwordField.value.getOrElse("")"
+                class="form-control"
+                placeholder="Password"
+                type="password"
+              >
             </div>
-            <input class="btn btn-lg btn-primary btn-block" type="submit" id="submit" value="Login">
+            <input
+              class="btn btn-lg btn-primary btn-block"
+              type="submit"
+              id="submit"
+              value="Login"
+            >
           </fieldset>
         }
-          @if(flash.size() > 0){
+        @if(flash.size() > 0){
           <div class="alert-alert error text-danger">
-              @for((key, value) <- flash){
+            @for((key, value) <- flash){
               <strong>Error : </strong> @value<br />
-              }
+            }
           </div>
-          }
+        }
       </div>
     </div>
   </div>

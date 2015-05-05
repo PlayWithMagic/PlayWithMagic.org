@@ -81,6 +81,11 @@ public class EditMagicianFormData {
   public File userPhoto;
 
   /**
+   * Image id for user image or photo.
+   */
+  public long imageId;
+
+  /**
    * Input data Biography field.
    */
   @MaxLength(value = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH,
@@ -186,6 +191,7 @@ public class EditMagicianFormData {
     this.stageName = magician.getStageName();
     this.location = magician.getLocation();
     this.userPhoto = magician.getUserPhoto();
+    this.imageId = magician.getImageId();
     this.biography = magician.getBiography();
     this.interests = magician.getInterests();
     this.influences = magician.getInfluences();
@@ -209,6 +215,18 @@ public class EditMagicianFormData {
   public List<ValidationError> validate() {
 
     List<ValidationError> errors = new ArrayList<ValidationError>();
+
+    if (Magician.find().where().ne("id", id).ieq("email", email).findList().size() > 0) {
+      errors.add(new ValidationError("email",
+          "This eMail address is already in Play With Magic.  Please enter another address."));
+    }
+
+    if (stageName != null && !stageName.isEmpty()) {
+      if (Magician.find().where().ne("id", id).ieq("stageName", stageName).findList().size() > 0) {
+        errors.add(new ValidationError("stageName",
+            "This Stage Name is already in Play With Magic.  Bummer.  Please enter another name."));
+      }
+    }
 
     if (!MagicianTypeFormData.isMagicianType(magicianType)) {
       errors.add(new ValidationError("magicianType",

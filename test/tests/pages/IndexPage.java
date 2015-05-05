@@ -5,14 +5,14 @@ import org.openqa.selenium.WebDriver;
 import play.test.TestBrowser;
 import tests.GlobalTest;
 
+
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Provides scaffolding to remotely control the Index page for testing.
- *
+ * <p>
  * When you want to *go* to a page, do new IndexPage(browser);
  * When you are already *at* a page, do new IndexPage(browser.getDriver());
- *
  */
 public class IndexPage extends NavigationWrapper {
 
@@ -49,35 +49,82 @@ public class IndexPage extends NavigationWrapper {
     assertThat(this.pageSource()).contains("Post Routines, Create Sets and Share Magic!");
   }
 
+
+  /**
+   * Determine if the IndexPage is in an unauthenticated state.
+   *
+   * @return True if the state is unauthenticated.  False if not.
+   */
+  public boolean isUnauthenticated() {
+    return this.pageSource().contains("navbarLinkToLoginPage");
+  }
+
+
+  /**
+   * Determine if the IndexPage is in an authenticated state.
+   *
+   * @return True if the state is authenticated.  False if not.
+   */
+  public boolean isAuthenticated() {
+    return this.pageSource().contains("logout");
+  }
+
+
+  /**
+   * Login to the test account an return the Index page.
+   *
+   * It is not necessary to kill the old session because, unlike the database and application, each test seems to
+   * run in its own browser instance.  As near as I can tell, each test starts with an unauthenticated session.
+   *
+   * @return The IndexPage.
+   */
+  public IndexPage loginToTestAccount() {
+    LoginPage loginPage = this.clickLoginButton();
+
+    // Fill in login page
+    loginPage.populateLogin(GlobalTest.testUser);
+    loginPage.clickSubmit();
+    IndexPage indexPage = new IndexPage(loginPage.getDriver());
+
+    return indexPage;
+  }
+
+
   /**
    * Click the Navbar Help button in the upper right.
    *
    * @return The HelpPage.
    */
+/*
   public HelpPage clickNavbarHelpButton() {
     this.findFirst("#navbarLinkToHelpPage");
     return new HelpPage(this.getDriver());
   }
+*/
 
   /**
    * Click the Navbar Login button in the upper right.
    *
    * @return The LoginPage.
    */
+/*
   public LoginPage clickNavbarLoginButton() {
     this.findFirst("#navbarLinkToLoginPage").click();
     return new LoginPage(this.getDriver());
   }
+*/
 
   /**
    * Click the Navbar Signup button in the upper right.
    *
    * @return The EditUserPage with Signup rendering.
    */
+/*
   public EditUserPage clickNavbarSignupButton() {
     this.findFirst("#navbarLinkToSignupPage").click();
     return new EditUserPage(this.getDriver());
   }
+*/
 
   /**
    * Click the Join the Community Today button.
@@ -145,7 +192,5 @@ public class IndexPage extends NavigationWrapper {
     this.findFirst("#linkToProjectHomepage").click();
     return this;
   }
-
-
 
 }

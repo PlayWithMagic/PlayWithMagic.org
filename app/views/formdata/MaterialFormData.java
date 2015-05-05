@@ -28,12 +28,14 @@ public class MaterialFormData {
    * <p>
    * This is held as an index into an ArrayList, so an int (the index into the ArrayList) is warranted.
    */
-  public int materialId;
+  public long materialId;
 
   /**
    * It's name -- whatever you'd call this item.
    */
   @Required(message = "A name for the material is required.")
+  @MaxLength(value = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH,
+      message = "The name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters.")
   public String name;
 
   /**
@@ -82,6 +84,11 @@ public class MaterialFormData {
       message = "The image URL can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String imageUrl;
 
+  /**
+   * The image id associated with this material.
+   */
+  public long imageId;
+
 
   /**
    * Default no-arg constructor required by Play.
@@ -95,20 +102,19 @@ public class MaterialFormData {
    * Build a MaterialFormData object from a material object.
    *
    * @param material   The container holding the non-key portion of the material data.
-   * @param routineId  The ID of the routine associated with this material.
-   * @param materialId The ID of the material (if it's being edited) or 0 if it's new.
    */
-  public MaterialFormData(Material material, long routineId, int materialId) {
-    this.routineId = routineId;
-    this.materialId = materialId;
+  public MaterialFormData(Material material) {
+    this.routineId = material.getRoutine().getId();
+    this.materialId = material.getId();
     this.name = material.getName();
-    this.isInspectable = material.getIsInspectable();
-    this.isGivenAway = material.getIsGivenAway();
-    this.isConsumed = material.getIsConsumed();
+    this.isInspectable = material.isInspectable();
+    this.isGivenAway = material.isGivenAway();
+    this.isConsumed = material.isConsumed();
     this.price = material.getPrice();
     this.description = material.getDescription();
     this.purchaseUrl = material.getPurchaseUrl();
     this.imageUrl = material.getImageUrl();
+    this.imageId = material.getImageId();
   }
 
 

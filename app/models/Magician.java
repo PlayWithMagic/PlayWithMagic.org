@@ -4,12 +4,13 @@ import org.mindrot.jbcrypt.BCrypt;
 import views.formdata.EditMagicianFormData;
 import views.formdata.EditUserFormData;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.io.File;
 import java.util.List;
 
@@ -23,40 +24,76 @@ import java.util.List;
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/32
  */
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"first_name", "last_name"}))
+@Table
 public class Magician extends play.db.ebean.Model {
   @Id
   private long id;
   // Magician Information
-  @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) private String firstName;
-  @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH) private String lastName;
-  @Column(unique = true, nullable = false, length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String email;
-  @Column(nullable = false, length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String password;
+  @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH)
+  private String firstName;
+
+  @Column(nullable = false, length = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH)
+  private String lastName;
+
+  @Column(unique = true, nullable = false, length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String email;
+
+  @Column(nullable = false, length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String password;
+
   @Column(nullable = false)
   @ManyToOne
   private MagicianType magicianType;
 
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String stageName;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String location;  // City/State? Country? Perhaps a map.
+  @OneToMany(mappedBy = "magician", cascade = CascadeType.PERSIST)
+  private List<Set> sets;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String stageName;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String location;  // City/State? Country? Perhaps a map.
+
   private File userPhoto;
 
   // Magic Info
-  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) private String biography;
-  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH) private String interests;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String influences;
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
+  private String biography;
+
+  @Column(length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
+  private String interests;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String influences;
 
   private Integer yearStarted;  // The year started - used to compute the number of years of experience.
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String organizations;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String website;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String organizations;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String website;
 
   // Social Media
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String facebook;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String twitter;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String linkedIn;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String googlePlus;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String flickr;
-  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH) private String instagram;
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String facebook;
 
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String twitter;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String linkedIn;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String googlePlus;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String flickr;
+
+  @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
+  private String instagram;
+
+  // Magician Image
+  private long imageId;
 
   /**
    * Create a magician with only the required fields.
@@ -76,165 +113,9 @@ public class Magician extends play.db.ebean.Model {
   }
 
 
-  /**
-   * The EBean ORM finder method for database queries.
-   *
-   * @return The finder method.
-   */
-  public static Finder<Long, Magician> find() {
-    return new Finder<Long, Magician>(Long.class, Magician.class);
-  }
-
-
-  /**
-   * Get all of the active Magicians.
-   * <p>
-   * TO-DO:  Add where status=active and create a getAllMagicians -- use only in Admin pages.
-   *
-   * @return The all active Magicians.
-   */
-  public static List<Magician> getActiveMagicians() {
-    return Magician.find().all();
-  }
-
-
-  /**
-   * Delete a Magician associated with a given id.
-   * <p>
-   * TO-DO:  Set the status=inactive instead of deleting the magician.  Rename method to deactivate Magician.
-   * Create an activate Magician method.
-   *
-   * @param id The ID of the magician to delete.
-   */
-  public static void deleteMagician(long id) {
-    Magician magician = getMagician(id);
-
-    magician.delete();
-  }
-
-
-  /**
-   * Get a Magician associated with a given email.
-   *
-   * @param email The ID of the magician to retrieve.
-   * @return The retrieved magician object.
-   */
-  public static Magician getMagician(String email) {
-    Magician magician = Magician.find().where().eq("email", email).findUnique();
-    if (magician == null) {
-      throw new RuntimeException("Unable to find Magician with the given email [" + email + "]");
-    }
-    return magician;
-  }
-
-  /**
-   * Get a Magician associated with a given id.
-   *
-   * @param id The ID of the magician to retrieve.
-   * @return The retrieved magician object.
-   */
-  public static Magician getMagician(long id) {
-    Magician magician = Magician.find().byId(id);
-    if (magician == null) {
-      throw new RuntimeException("Unable to find Magician with the given ID [" + id + "]");
-    }
-    return magician;
-  }
-
-  /**
-   * Check if an email address is associated with an existing Magician.
-   *
-   * @param email The email address to check against in the DB
-   * @return True if found, otherwise false.
-   */
-  public static boolean isExistingMagician(String email) {
-    int count = Magician.find().where().eq("email", email).findRowCount();
-    return count >= 1;
-  }
-
-
-  /**
-   * Check if a Magician's credentials are valid.
-   *
-   * @param email The email address of the Magician.
-   * @param password The password of the Magician to check.
-   * @return True if Magician exists and Password matches hashed password, otherwise false.
-   */
-  public static boolean isValidMagician(String email, String password) {
-    return ((email != null)
-        && (password != null)
-        && isExistingMagician(email)
-        && BCrypt.checkpw(password, getMagician(email).getPassword()));
-  }
-
-
-  /**
-   * Create a new Magician object from EditMagicianFormData.  Add it to the database and return the newly created
-   * Magician.
-   *
-   * @param editMagicianFormData The source of data for the Magician.
-   * @return A fully populated Magician object that's just been persisted in the database.
-   */
-  public static Magician createMagicianFromForm(EditMagicianFormData editMagicianFormData) {
-    MagicianType magicianType = MagicianType.getMagicianType(editMagicianFormData.magicianType);
-
-    Magician magician = Magician.find().byId(editMagicianFormData.id);
-    magician.setFirstName(editMagicianFormData.firstName);
-    magician.setLastName(editMagicianFormData.lastName);
-    magician.setEmail(editMagicianFormData.email);
-    magician.setMagicianType(magicianType);
-
-    magician.setStageName(editMagicianFormData.stageName);
-    magician.setLocation(editMagicianFormData.location);
-    // User photo
-    magician.setBiography(editMagicianFormData.biography);
-    magician.setInterests(editMagicianFormData.interests);
-    magician.setInfluences(editMagicianFormData.influences);
-    magician.setYearStarted(editMagicianFormData.yearStarted);
-    magician.setOrganizations(editMagicianFormData.organizations);
-    magician.setWebsite(editMagicianFormData.website);
-    magician.setFacebook(editMagicianFormData.facebook);
-    magician.setTwitter(editMagicianFormData.twitter);
-    magician.setLinkedIn(editMagicianFormData.linkedIn);
-    magician.setGooglePlus(editMagicianFormData.googlePlus);
-    magician.setInstagram(editMagicianFormData.instagram);
-    magician.setFlickr(editMagicianFormData.flickr);
-
-    magician.save();
-    return magician;
-  }
-
-  /**
-   * Create a new Magician object from EditMagicianFormData.  Add it to the database and return the newly created
-   * Magician.
-   *
-   * @param editUserFormData The source of data for the Magician.
-   * @return A fully populated Magician object that's just been persisted in the database.
-   */
-  public static Magician createMagicianFromForm(EditUserFormData editUserFormData) {
-    Magician magician = null;
-    MagicianType magicianType = MagicianType.getMagicianType(editUserFormData.magicianType);
-
-    if (editUserFormData.id == 0) {
-      magician = new Magician(
-          editUserFormData.firstName
-          , editUserFormData.lastName
-          , editUserFormData.email
-          , magicianType
-          , BCrypt.hashpw(editUserFormData.password, BCrypt.gensalt(12)));
-    }
-    else {
-      magician = Magician.find().byId(editUserFormData.id);
-      magician.setFirstName(editUserFormData.firstName);
-      magician.setLastName(editUserFormData.lastName);
-      magician.setEmail(editUserFormData.email);
-      magician.setMagicianType(magicianType);
-      magician.setPassword(BCrypt.hashpw(editUserFormData.password, BCrypt.gensalt(12)));
-    }
-
-    magician.save();
-    return magician;
-  }
+  /******************************************************************************************************************
+   * G E T T E R S   &   S E T T E R S
+   ******************************************************************************************************************/
 
   /**
    * Get the ID of the magician.
@@ -615,62 +496,320 @@ public class Magician extends play.db.ebean.Model {
   }
 
   /**
-   * Add a magician to the database, but check to see if the magician is already in there first.
-   *
-   * TODO: Implement when we have a SELECT statement.
-   *
-   * @param magician The magician to add.
-   * @return The magician that was just added.
+   * Gets the image id.
+   * @return The image id.
    */
-  public Magician init(Magician magician) {
-    return null;
+  public long getImageId() {
+    return imageId;
+  }
+
+  /**
+   * Sets the image id.
+   * @param imageId The image id.
+   */
+  public void setImageId(long imageId) {
+    this.imageId = imageId;
+  }
+
+
+
+  /******************************************************************************************************************
+   * M E T H O D S
+   ******************************************************************************************************************/
+
+  /**
+   * The EBean ORM finder method for database queries.
+   *
+   * @return The finder method.
+   */
+  public static Finder<Long, Magician> find() {
+    return new Finder<Long, Magician>(Long.class, Magician.class);
   }
 
 
   /**
-   * Initialize the Magician database.
+   * Get all of the active Magicians.
+   * <p>
+   * TO-DO:  Issue #191 Add where status=active and create a getAllMagicians -- use only in Admin pages.
+   *
+   * @return The all active Magicians.
+   */
+  public static List<Magician> getActiveMagicians() {
+    return Magician.find().all();
+  }
+
+
+  /**
+   * Get all of the Magicians.
+   *
+   * TO-DO:  Possibly make another getAllMagician that's context sensitive.  Admins get *all* magicians, while regular
+   * users just see Active magicians.
+   *
+   * @return The all active Magicians.
+   */
+  public static List<Magician> getAllMagicians() {
+    return Magician.find().all();
+  }
+
+
+  /**
+   * Get a Magician associated with a given id.
+   *
+   * @param id The ID of the magician to retrieve.
+   * @return The retrieved magician object.
+   * @throws RuntimeException if the ID can't be found.
+   */
+  public static Magician getMagician(long id) {
+    Magician magician = Magician.find().byId(id);
+    if (magician == null) {
+      throw new RuntimeException("Unable to find Magician with the given ID [" + id + "]");
+    }
+    return magician;
+  }
+
+
+  /**
+   * Get a Magician associated with a given email.
+   *
+   * @param email The ID of the magician to retrieve.
+   * @return The retrieved magician object.
+   */
+  public static Magician getMagician(String email) {
+    Magician magician = Magician.find().where().eq("email", email).findUnique();
+    if (magician == null) {
+      throw new RuntimeException("Unable to find Magician with the given email [" + email + "]");
+    }
+    return magician;
+  }
+
+
+  /**
+   * Delete a Magician associated with a given id.
+   * <p>
+   * TO-DO:  Set the status=inactive instead of deleting the magician.  Rename method to deactivate Magician.
+   * Create an activate Magician method.
+   *
+   * @param id The ID of the magician to delete.
+   */
+  public static void deleteMagician(long id) {
+    Magician magician = getMagician(id);
+
+    magician.delete();
+  }
+
+
+  /**
+   * Check if an email address is associated with an existing Magician.
+   *
+   * @param email The email address to check against in the DB
+   * @return True if found, otherwise false.
+   */
+  public static boolean isExistingMagician(String email) {
+    int count = Magician.find().where().eq("email", email).findRowCount();
+    return count >= 1;
+  }
+
+
+  /**
+   * Check if a Magician's credentials are valid.
+   *
+   * @param email The email address of the Magician.
+   * @param password The password of the Magician to check.
+   * @return True if Magician exists and Password matches hashed password, otherwise false.
+   */
+  public static boolean isValidMagician(String email, String password) {
+    return ((email != null)
+        && (password != null)
+        && isExistingMagician(email)
+        && BCrypt.checkpw(password, getMagician(email).getPassword()));
+  }
+
+
+  /**
+   * Update an existing Magician object from EditMagicianFormData.  Update the database and return the current
+   * Magician.
+   *
+   * @param editMagicianFormData The source of data for the Magician.
+   * @return A fully populated Magician object that's just been persisted in the database.
+   */
+  public static Magician createMagicianFromForm(EditMagicianFormData editMagicianFormData) {
+    MagicianType magicianType = MagicianType.getMagicianType(editMagicianFormData.magicianType);
+
+    Magician magician = Magician.find().byId(editMagicianFormData.id);
+    if (magician == null) {
+      magician = Magician.find().where().eq("email", editMagicianFormData.email).findUnique();
+    }
+
+    magician.setFirstName(editMagicianFormData.firstName);
+    magician.setLastName(editMagicianFormData.lastName);
+    magician.setEmail(editMagicianFormData.email);
+    magician.setMagicianType(magicianType);
+
+    magician.setStageName(editMagicianFormData.stageName);
+    magician.setLocation(editMagicianFormData.location);
+    magician.setBiography(editMagicianFormData.biography);
+    magician.setInterests(editMagicianFormData.interests);
+    magician.setInfluences(editMagicianFormData.influences);
+    magician.setYearStarted(editMagicianFormData.yearStarted);
+    magician.setOrganizations(editMagicianFormData.organizations);
+    magician.setWebsite(editMagicianFormData.website);
+    magician.setFacebook(editMagicianFormData.facebook);
+    magician.setTwitter(editMagicianFormData.twitter);
+    magician.setLinkedIn(editMagicianFormData.linkedIn);
+    magician.setGooglePlus(editMagicianFormData.googlePlus);
+    magician.setInstagram(editMagicianFormData.instagram);
+    magician.setFlickr(editMagicianFormData.flickr);
+
+    if (editMagicianFormData.imageId > 0) {
+      magician.setImageId(editMagicianFormData.imageId);
+    }
+
+    magician.save();
+    return magician;
+  }
+
+
+  /**
+   * Create a new Magician object from EditUserFormData.  Add it to the database and return the newly created
+   * Magician.
+   *
+   * @param editUserFormData The source of data for the Magician.
+   * @return A fully populated Magician object that's just been persisted in the database.
+   */
+  public static Magician createMagicianFromForm(EditUserFormData editUserFormData) {
+    Magician magician = null;
+    MagicianType magicianType = MagicianType.getMagicianType(editUserFormData.magicianType);
+
+    if (editUserFormData.id == 0) {
+      magician = new Magician(
+          editUserFormData.firstName
+          , editUserFormData.lastName
+          , editUserFormData.email
+          , magicianType
+          , BCrypt.hashpw(editUserFormData.password, BCrypt.gensalt(12)));
+    }
+    else {
+      magician = Magician.find().byId(editUserFormData.id);
+      magician.setFirstName(editUserFormData.firstName);
+      magician.setLastName(editUserFormData.lastName);
+      magician.setEmail(editUserFormData.email);
+      magician.setMagicianType(magicianType);
+      magician.setPassword(BCrypt.hashpw(editUserFormData.password, BCrypt.gensalt(12)));
+    }
+
+    magician.save();
+    return magician;
+  }
+
+
+  /**
+   * Initialize the Magician dataset.
    */
   public static void init() {
-    // resetMagicianDB();
-
-    MagicianType magicianTypeSemiProfessional = MagicianType.getMagicianType("Semi-Professional");
-    MagicianType magicianTypeProfessional = MagicianType.getMagicianType("Professional");
-
-    // --------------------------------------
-
     Magician magician = null;
+    EditUserFormData editUserFormData = null;
 
-    magician = new Magician("Mark", "Nelson", "mr_nelson@icloud.com", magicianTypeSemiProfessional, "P@ssw0rd");
-    magician.setStageName("Mark Nelson");
-    magician.setLocation("Honolulu, HI");
-    // No photo
-    magician.setBiography("I got started in magic in 2004.  A retired magician, JC Dunn, showed me a 2-card monte and "
-        + "I was hooked.  Since then, I've learned the craft, performed hundreds of shows in Honolulu and most "
-        + "recently I nailed a parlor act in Beijing.");
-    magician.setInterests("I'm most comfortable with close-up magic, but I'd like to develop a stage show.  I strive "
-        + "to be fluent in all mediums of the art (cards, coins, rope, etc.).");
-    magician.setInfluences("Tony Slydini, David Regal, Lee Asher, Aaron Fisher, my brother Steve Johnson and many, "
-        + "many others.");
-    magician.setYearStarted(2004);
-    //magician.setOrganizations();
-    magician.setWebsite("http://mark.nelson.engineer/wordpress/index.php/magic-home-page/");
-    magician.setFacebook("mark.nelson.engineer");
-    magician.setTwitter("@mr_marknelson");
-    magician.setLinkedIn("http://www.linkedin.com/in/marknelsonengineer/en");
-    magician.setGooglePlus("mr_nelson@icloud.com");
-    magician.setInstagram("mr_mark_nelson");
+    // Add Mark
+    magician = Magician.find().where().eq("email", "mr_nelson@icloud.com").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "Mark";
+      editUserFormData.lastName = "Nelson";
+      editUserFormData.magicianType = "Semi-Professional";
+      editUserFormData.email = "mr_nelson@icloud.com";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
 
-    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
+      EditMagicianFormData editMagicianFormData = new EditMagicianFormData();
+      editMagicianFormData.firstName = "Mark";
+      editMagicianFormData.lastName = "Nelson";
+      editMagicianFormData.magicianType = "Semi-Professional";
+      editMagicianFormData.email = "mr_nelson@icloud.com";
+      editMagicianFormData.location = "Honolulu, HI";
+      // No photo
+      editMagicianFormData.biography = "I got started in magic in 2004.  A retired magician, JC Dunn, showed me a "
+          + "2-card monte and I was hooked.  Since then, I've learned the craft, performed hundreds of shows in "
+          + "Honolulu and most recently I nailed a parlor act in Beijing.";
+      editMagicianFormData.interests = "I'm most comfortable with close-up magic, but I'd like to develop a stage "
+          + "show.  I strive to be fluent in all mediums of the art (cards, coins, rope, etc.).";
+      editMagicianFormData.influences = "Tony Slydini, David Regal, Lee Asher, Aaron Fisher, my brother Steve Johnson "
+          + "and many, many others.";
+      editMagicianFormData.yearStarted = 2004;
+      editMagicianFormData.organizations = "";
+      editMagicianFormData.website = "http://mark.nelson.engineer/wordpress/index.php/magic-home-page/";
+      editMagicianFormData.facebook = "mark.nelson.engineer";
+      editMagicianFormData.twitter = "@mr_marknelson";
+      editMagicianFormData.linkedIn = "http://www.linkedin.com/in/marknelsonengineer/en";
+      editMagicianFormData.googlePlus = "mr_nelson@icloud.com";
+      editMagicianFormData.instagram = "mr_mark_nelson";
+      Magician.createMagicianFromForm(editMagicianFormData);
+    }
 
+    // Add Patrick
+    magician = Magician.find().where().eq("email", "pkarjala@gmail.com").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "Patrick";
+      editUserFormData.lastName = "Karjala";
+      editUserFormData.magicianType = "Enthusiast";
+      editUserFormData.email = "pkarjala@gmail.com";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
+    }
 
-    magician = new Magician("Lee", "Asher", "lee@leeasher.com", magicianTypeProfessional, "P@ssw0rd");
-    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
+    // Add David
+    magician = Magician.find().where().eq("email", "dneely@hawaii.edu").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "David";
+      editUserFormData.lastName = "Neely";
+      editUserFormData.magicianType = "Enthusiast";
+      editUserFormData.email = "dneely@hawaii.edu";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
+    }
 
-    magician = new Magician("Steve", "Johnson", "steve@grandillusions.com", magicianTypeProfessional, "P@ssw0rd");
-    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
+    // Add Lee
+    magician = Magician.find().where().eq("email", "lee@leeasher.com").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "Lee";
+      editUserFormData.lastName = "Asher";
+      editUserFormData.magicianType = "Professional";
+      editUserFormData.email = "lee@leeasher.com";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
+    }
 
-    magician = new Magician("Wayne", "Houchin", "wayne@waynehouchin.com", magicianTypeProfessional, "P@ssw0rd");
-    Magician.createMagicianFromForm(new EditMagicianFormData(magician));
+    // Add Steve
+    magician = Magician.find().where().eq("email", "steve@grandillusions.com").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "Steve";
+      editUserFormData.lastName = "Johnson";
+      editUserFormData.magicianType = "Professional";
+      editUserFormData.email = "steve@grandillusions.com";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
+    }
+
+    // Add Wayne
+    magician = Magician.find().where().eq("email", "wayne@waynehouchin.com").findUnique();
+    if (magician == null) {
+      editUserFormData = new EditUserFormData();
+      editUserFormData.id = 0;
+      editUserFormData.firstName = "Wayne";
+      editUserFormData.lastName = "Houchin";
+      editUserFormData.magicianType = "Professional";
+      editUserFormData.email = "wayne@waynehouchin.com";
+      editUserFormData.password = "P@ssw0rd";
+      Magician.createMagicianFromForm(editUserFormData);
+    }
   }
 
 }

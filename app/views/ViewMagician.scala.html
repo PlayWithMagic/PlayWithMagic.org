@@ -22,10 +22,19 @@
 
         <p class="visible-xs-block visible-sm-block">
           <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">Edit Profile</a>
+          <a href="@routes.Application.editUser(magician.getId)" class="btn btn-large">Change Password</a>
           <a href="@routes.Application.listMagicians()" class="btn btn-large">Return to Magician List</a>
+          @if(magician.getId() == userInfo.getId()) {
+            <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
+              Delete Account</a>
+          }
         </p>
 
-        <img class="img-responsive" src="@routes.Assets.at("images/working-man.jpg")" alt="Image of Magician"/>
+        @if(magician.getImageId > 0) {
+          <img class="img-responsive" src="@routes.Application.getImage(magician.getImageId)" alt="Image of Magician" />
+        } else {
+          <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")" alt="Magician Image Placeholder"/>
+        }
 
         <section id="social">
           @if(magician.getEmail) {
@@ -59,9 +68,17 @@
           <a id="editMagician" href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">
             Edit Profile
           </a>
+          <a id="changePassword" href="@routes.Application.editUser(magician.getId)" class="btn btn-large">
+            Change Password
+          </a>
           <a id="returnToMagicianList" href="@routes.Application.listMagicians()" class="btn btn-large">
             Return to Magician List
           </a>
+          @if(magician.getId() == userInfo.getId()) {
+            <a id="deleteAccount" href="@routes.Application.deleteMagician(magician.getId)"
+               class="btn btn-danger btn-xs" role="button">
+              Delete Account</a>
+          }
         </p>
 
         <h3>Experience with Magic</h3>

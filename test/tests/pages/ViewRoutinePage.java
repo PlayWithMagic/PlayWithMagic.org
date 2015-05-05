@@ -68,7 +68,7 @@ public class ViewRoutinePage extends NavigationWrapper {
     checkOptionalField(routine.getResetDuration());
     checkOptionalField(routine.getResetDescription());
     checkOptionalField(routine.getYouTubeUrl());
-    checkOptionalField(routine.getImageUrl());
+//  checkOptionalField(routine.getImageUrl());
     checkOptionalField(routine.getInspiration());
     checkOptionalField(routine.getPlacement());
     checkOptionalField(routine.getChoices());

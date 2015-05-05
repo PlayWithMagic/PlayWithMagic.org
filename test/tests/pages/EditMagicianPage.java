@@ -40,6 +40,16 @@ public class EditMagicianPage extends NavigationWrapper {
 
 
   /**
+   * Validate that the browser is on the right page.
+   */
+  @Override
+  public void isAt() {
+    assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
+    assertThat(pageSource()).contains("<h1>Magician Profile</h1>");
+  }
+
+
+  /**
    * See if the browser has all of the values in the Magician object.
    *
    * @param magician A container holding all of the fields to check for in the page.
@@ -67,16 +77,6 @@ public class EditMagicianPage extends NavigationWrapper {
     checkOptionalField(magician.getGooglePlus());
     checkOptionalField(magician.getFlickr());
     checkOptionalField(magician.getInstagram());
-  }
-
-
-  /**
-   * Validate that the browser is on the right page.
-   */
-  @Override
-  public void isAt() {
-    assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource()).contains("<h1>Magician Profile</h1>");
   }
 
 

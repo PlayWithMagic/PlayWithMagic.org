@@ -69,7 +69,7 @@ public class EditRoutinePage extends NavigationWrapper {
    *   On error, it stays on EditRoutine
    */
   public void clickAddMaterial() {
-    this.findFirst("#addMaterial").click();
+    this.findFirst("#saveMaterialFromForm").click();
   }
 
 
@@ -90,7 +90,7 @@ public class EditRoutinePage extends NavigationWrapper {
     fillOptionalField("#resetDuration", routine.getResetDuration());
     fillOptionalField("#resetDescription", routine.getResetDescription());
     fillOptionalField("#youTubeUrl", routine.getYouTubeUrl());
-    fillOptionalField("#imageUrl", routine.getImageUrl());
+//  fillOptionalField("#imageUrl", routine.getImageUrl());
     fillOptionalField("#inspiration", routine.getInspiration());
     fillOptionalField("#placement", routine.getPlacement());
     fillOptionalField("#choices", routine.getChoices());
@@ -114,7 +114,7 @@ public class EditRoutinePage extends NavigationWrapper {
     checkOptionalField(routine.getResetDuration());
     checkOptionalField(routine.getResetDescription());
     checkOptionalField(routine.getYouTubeUrl());
-    checkOptionalField(routine.getImageUrl());
+//  checkOptionalField(routine.getImageUrl());
     checkOptionalField(routine.getInspiration());
     checkOptionalField(routine.getPlacement());
     checkOptionalField(routine.getChoices());

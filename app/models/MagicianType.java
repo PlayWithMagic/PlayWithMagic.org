@@ -43,6 +43,17 @@ public class MagicianType extends play.db.ebean.Model {
     return new Finder<Long, MagicianType>(Long.class, MagicianType.class);
   }
 
+
+  /**
+   * Get all of the MagicianTypes in the database.
+   *
+   * @return All of the MagicianTypes.
+   */
+  public static List<MagicianType> getAllMagicianTypes() {
+    return MagicianType.find().all();
+  }
+
+
   /**
    * Get a MagicianType from the database.
    *

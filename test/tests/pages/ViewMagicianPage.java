@@ -93,6 +93,17 @@ public class ViewMagicianPage extends NavigationWrapper {
 
 
   /**
+   * Click the Change Password button.
+   *
+   * @return The EditUserPage.
+   */
+  public EditUserPage clickChangePasswordButton() {
+    this.findFirst("#changePassword").click();
+    return new EditUserPage(this.getDriver());
+  }
+
+
+  /**
    * Click the Return to Magician List button.
    *
    * @return The ListMagiciansPage.
@@ -103,4 +114,13 @@ public class ViewMagicianPage extends NavigationWrapper {
   }
 
 
+  /**
+   * Click the Delete Account button.
+   *
+   * @return The DeleteUserPage.
+   */
+  public DeleteUserPage clickDeleteAccountButton() {
+    this.findFirst("#deleteAccount").click();
+    return new DeleteUserPage(this.getDriver());
+  }
 }

@@ -80,17 +80,6 @@ public class ListMagiciansPage extends NavigationWrapper {
 
 
   /**
-   * Delete the first magician in the page.  Return back to ListMagicians page.
-   *
-   * @return The ListMagiciansPage.
-   */
-  public ListMagiciansPage deleteFirstMagician() {
-    this.findFirst(".deleteMagician").click();
-    return new ListMagiciansPage(this.getDriver());
-  }
-
-
-  /**
    * Edit the first user in the page by going to the EditUser page.
    *
    * @return The EditUserPage.

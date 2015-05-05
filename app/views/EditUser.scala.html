@@ -22,89 +22,51 @@
           <h1>Edit User</h1>
         }
 
-        <!-- User Attributes -->
+          <!-- User Attributes -->
         <div class="container">
-          @if(magicianForm("id").value == "0") {
-            @form(routes.Application.postSignup(), 'class -> "form-horizontal") {
-                <!-- Hidden ID Field -->
-              @hidden(magicianForm("id"))
-                <!--<form class="form-horizontal">-->
-                <!-- First Name -->
-              @text45(magicianForm("firstName"),
-                label = "First Name",
-                placeholder = "First Name",
-                help = "Required")
-                <!-- Last Name -->
-              @text45(magicianForm("lastName"),
-                label = "Last Name",
-                placeholder = "Last Name",
-                help = "Required")
-                <!-- Email -->
-              @text(magicianForm("email"),
-                label = "Email",
-                placeholder = "i.e., name@domain.com",
-                help = "Required")
-                <!-- Magician Type -->
-              @bootstrap3.select(magicianForm("magicianType"),
-                label = "Experience with Magic",
-                optionMap = magicianTypeMap,
-                isMultiple = false,
-                help = "Required")
-                <!-- Password -->
-              @password(magicianForm("password"),
-                label = "Password",
-                placeholder = "Password",
-                help = "Required")
+        @form(routes.Application.postUser(), 'class -> "form-horizontal") {
+            <!-- Hidden ID Field -->
+          @hidden(magicianForm("id"))
+            <!--<form class="form-horizontal">-->
+            <!-- First Name -->
+          @text45(magicianForm("firstName"),
+            label = "First Name",
+            placeholder = "First Name",
+            help = "Required")
+            <!-- Last Name -->
+          @text45(magicianForm("lastName"),
+            label = "Last Name",
+            placeholder = "Last Name",
+            help = "Required")
+            <!-- Email -->
+          @text(magicianForm("email"),
+            label = "Email",
+            placeholder = "i.e., name@domain.com",
+            help = "Required")
+            <!-- Magician Type -->
+          @bootstrap3.select(magicianForm("magicianType"),
+            label = "Experience with Magic",
+            optionMap = magicianTypeMap,
+            isMultiple = false,
+            help = "Required")
+            <!-- Password -->
+          @password(magicianForm("password"),
+            label = "Password",
+            placeholder = "Password",
+            help = "Required")
 
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <button id="submit" type="submit" class="btn btn-default">
-                   Signup
-                  </button>
-                </div>
-              </div>
-            }
-          } else {
-            @form(routes.Application.postUser(), 'class -> "form-horizontal") {
-              <!-- Hidden ID Field -->
-              @hidden(magicianForm("id"))
-              <!--<form class="form-horizontal">-->
-              <!-- First Name -->
-              @text45(magicianForm("firstName"),
-                label = "First Name",
-                placeholder = "First Name",
-                help = "Required")
-              <!-- Last Name -->
-              @text45(magicianForm("lastName"),
-                label = "Last Name",
-                placeholder = "Last Name",
-                help = "Required")
-              <!-- Email -->
-              @text(magicianForm("email"),
-                label = "Email",
-                placeholder = "i.e., name@domain.com",
-                help = "Required")
-              <!-- Magician Type -->
-              @bootstrap3.select(magicianForm("magicianType"),
-                label = "Experience with Magic",
-                optionMap = magicianTypeMap,
-                isMultiple = false,
-                help = "Required")
-              <!-- Password -->
-              @password(magicianForm("password"),
-                label = "Password",
-                placeholder = "Password",
-                help = "Required")
-
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <button id="submit" type="submit" class="btn btn-default">
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button id="submit" type="submit" class="btn btn-default">
+                @if(magicianForm("id").value == "0") {
+                  Signup
+                } else {
                   Update
-                  </button>
-                </div>
-              </div>
-            }
-          }
+                }
+              </button>
+            </div>
+          </div>
+        }
         </div>
       </div>
     </section>

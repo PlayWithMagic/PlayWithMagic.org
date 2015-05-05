@@ -1,6 +1,7 @@
 package views.formdata;
 
 import models.GlobalDbInfo;
+import models.Routine;
 import models.Set;
 import play.data.validation.Constraints.Required;
 import play.data.validation.Constraints.MaxLength;
@@ -21,6 +22,11 @@ public class SetFormData {
   public long id;
 
   /**
+   * Input data Magician id hidden field.
+   */
+  public long magicianId;
+
+  /**
    * A short name for the set.
    */
   @Required(message = "You must provide a name for your Set.")
@@ -39,7 +45,12 @@ public class SetFormData {
   /**
    * Input data list of Routine IDs.
    */
-  public List<Long> routines;
+  public List<Routine> routines;
+
+
+  /******************************************************************************************************************
+   * C O N S T R U C T O R S
+   ******************************************************************************************************************/
 
   /**
    * Default no-arg constructor required by Play.
@@ -60,6 +71,11 @@ public class SetFormData {
     this.routines = set.getRoutines();
   }
 
+
+  /******************************************************************************************************************
+   * M E T H O D S
+   ******************************************************************************************************************/
+
   /**
    * Testing initialization constructor, does not include ID.
    *
@@ -68,6 +84,7 @@ public class SetFormData {
    * @param routines    The list of Routine IDs in the Set.
    */
   public SetFormData(String name, String description, List<Long> routines) {
+/*
     this.name = name;
     this.description = description;
     if (routines != null) {
@@ -80,11 +97,12 @@ public class SetFormData {
       System.out.println("Null Routine Data.");
       this.routines.clear();
     }
-
+*/
   }
 
+
   /**
-   * Validate that all fields are non-empty, and that certain fields adhere to specific criteria.
+   * Validate that at least one routine is in the set.
    *
    * @return Either null if no errors, or a List of Div IDs and their associated error messages.
    */

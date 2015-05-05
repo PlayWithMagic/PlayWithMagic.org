@@ -49,7 +49,8 @@ public class EditUserPage extends NavigationWrapper {
     assertThat(this.pageSource()).contains(magician.getLastName());
     assertThat(this.pageSource()).contains(magician.getEmail());
     assertThat(this.pageSource()).contains(magician.getMagicianType().getName());
-    assertThat(this.pageSource()).contains(magician.getPassword());
+    // There is no way to check the password.
+    // assertThat(this.pageSource()).contains(magician.getPassword());
   }
 
 
@@ -59,7 +60,8 @@ public class EditUserPage extends NavigationWrapper {
   @Override
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
-    assertThat(pageSource()).contains("<body id=\"editUser\">");
+    assertThat(pageSource().contains("<h1>Register New User</h1>")
+            || pageSource().contains("<h1>Edit User</h1>")).isTrue();
   }
 
 
@@ -88,7 +90,7 @@ public class EditUserPage extends NavigationWrapper {
   /**
    * Set passed values into the form.
    *
-   * @param magician A container holding all of the fields to check for in the page.
+   * @param magician A container holding all of the fields to populate.
    */
   public void populateMagician(Magician magician) {
     this.fill("#firstName").with(magician.getFirstName());

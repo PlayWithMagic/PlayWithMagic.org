@@ -19,7 +19,7 @@
         <h1>Magician Profile</h1>
           <!-- User Attributes -->
         <div class="container">
-        @form(routes.Application.postMagician(), 'class -> "form-horizontal") {
+        @form(routes.Application.postMagician(), 'class -> "form-horizontal", 'enctype -> "multipart/form-data") {
             <!-- Hidden ID Field -->
           @hidden(magicianForm("id"))
             <!--<form class="form-horizontal">-->
@@ -44,6 +44,29 @@
             optionMap = magicianTypeMap,
             isMultiple = false,
             help = "Required")
+
+          <!-- Shows Current Magician Image -->
+          <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+
+              @if(userInfo.getImageId() > 0) {
+                <img class="img-responsive" src="@routes.Application.getImage(userInfo.getImageId)"
+                alt="Image of Magician" width="400"/>
+              } else {
+                <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")"
+                alt="Magician Image Placeholder" width="400"/>
+              }
+            </div>
+          </div>
+          <br />
+
+
+          <!-- Magician Image -->
+          @image(magicianForm("image"),
+            label="Image",
+            help="Select an image")
             <!-- Stage Name -->
           @text(magicianForm("stageName"),
             label = "Stage Name",
@@ -54,8 +77,6 @@
             label = "Location",
             placeholder = "City, State, and/or Country",
             help = "")
-            <!-- Magician Photo -->
-            <!-- Temporarily disabled until file uploads are sorted -->
             <!-- Biography -->
           @bootstrap3.textarea(magicianForm("biography"),
             rows = "5",
