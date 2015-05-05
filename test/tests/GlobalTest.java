@@ -49,7 +49,7 @@ public class GlobalTest {
       set.delete();
     }
 
-    for (Material material : Material.getAllMaterial()) {
+    for (Material material : Material.getAllMaterials()) {
       material.delete();
     }
 

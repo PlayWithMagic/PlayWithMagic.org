@@ -84,6 +84,11 @@ public class MaterialFormData {
       message = "The image URL can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String imageUrl;
 
+  /**
+   * The image id associated with this material.
+   */
+  public long imageId;
+
 
   /**
    * Default no-arg constructor required by Play.
@@ -109,6 +114,7 @@ public class MaterialFormData {
     this.description = material.getDescription();
     this.purchaseUrl = material.getPurchaseUrl();
     this.imageUrl = material.getImageUrl();
+    this.imageId = material.getImageId();
   }
 
 

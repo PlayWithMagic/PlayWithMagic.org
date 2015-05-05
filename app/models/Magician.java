@@ -92,6 +92,8 @@ public class Magician extends play.db.ebean.Model {
   @Column(length = GlobalDbInfo.MAX_LONG_TEXT_LENGTH)
   private String instagram;
 
+  // Magician Image
+  private long imageId;
 
   /**
    * Create a magician with only the required fields.
@@ -493,6 +495,23 @@ public class Magician extends play.db.ebean.Model {
     this.magicianType = magicianType;
   }
 
+  /**
+   * Gets the image id.
+   * @return The image id.
+   */
+  public long getImageId() {
+    return imageId;
+  }
+
+  /**
+   * Sets the image id.
+   * @param imageId The image id.
+   */
+  public void setImageId(long imageId) {
+    this.imageId = imageId;
+  }
+
+
 
   /******************************************************************************************************************
    * M E T H O D S
@@ -628,7 +647,6 @@ public class Magician extends play.db.ebean.Model {
 
     magician.setStageName(editMagicianFormData.stageName);
     magician.setLocation(editMagicianFormData.location);
-    // User photo
     magician.setBiography(editMagicianFormData.biography);
     magician.setInterests(editMagicianFormData.interests);
     magician.setInfluences(editMagicianFormData.influences);
@@ -641,6 +659,10 @@ public class Magician extends play.db.ebean.Model {
     magician.setGooglePlus(editMagicianFormData.googlePlus);
     magician.setInstagram(editMagicianFormData.instagram);
     magician.setFlickr(editMagicianFormData.flickr);
+
+    if (editMagicianFormData.imageId > 0) {
+      magician.setImageId(editMagicianFormData.imageId);
+    }
 
     magician.save();
     return magician;

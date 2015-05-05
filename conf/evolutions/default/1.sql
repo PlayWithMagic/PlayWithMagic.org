@@ -6,7 +6,7 @@
 create table image (
   id                        bigint not null,
   name                      varchar(255),
-  data                      bytea,
+  data                      blob,
   constraint pk_image primary key (id))
 ;
 
@@ -31,6 +31,7 @@ create table magician (
   google_plus               varchar(255),
   flickr                    varchar(255),
   instagram                 varchar(255),
+  image_id                  bigint,
   constraint uq_magician_email unique (email),
   constraint pk_magician primary key (id))
 ;
@@ -54,6 +55,7 @@ create table material (
   price                     integer,
   purchase_url              varchar(255),
   image_url                 varchar(255),
+  image_id                  bigint,
   constraint pk_material primary key (id))
 ;
 
@@ -72,6 +74,7 @@ create table routine (
   inspiration               varchar(2000),
   placement                 varchar(2000),
   choices                   varchar(2000),
+  image_id                  bigint,
   constraint uq_routine_name unique (name),
   constraint pk_routine primary key (id))
 ;
@@ -102,34 +105,38 @@ create sequence routine_seq;
 
 create sequence set_seq;
 
-alter table magician add constraint fk_magician_magicianType_1 foreign key (magician_type_id) references magician_type (id);
+alter table magician add constraint fk_magician_magicianType_1 foreign key (magician_type_id) references magician_type (id) on delete restrict on update restrict;
 create index ix_magician_magicianType_1 on magician (magician_type_id);
-alter table material add constraint fk_material_routine_2 foreign key (routine_id) references routine (id);
+alter table material add constraint fk_material_routine_2 foreign key (routine_id) references routine (id) on delete restrict on update restrict;
 create index ix_material_routine_2 on material (routine_id);
-alter table set add constraint fk_set_magician_3 foreign key (magician_id) references magician (id);
+alter table set add constraint fk_set_magician_3 foreign key (magician_id) references magician (id) on delete restrict on update restrict;
 create index ix_set_magician_3 on set (magician_id);
 
 
 
-alter table set_routine add constraint fk_set_routine_set_01 foreign key (set_id) references set (id);
+alter table set_routine add constraint fk_set_routine_set_01 foreign key (set_id) references set (id) on delete restrict on update restrict;
 
-alter table set_routine add constraint fk_set_routine_routine_02 foreign key (routine_id) references routine (id);
+alter table set_routine add constraint fk_set_routine_routine_02 foreign key (routine_id) references routine (id) on delete restrict on update restrict;
 
 # --- !Downs
 
-drop table if exists image cascade;
+SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists magician cascade;
+drop table if exists image;
 
-drop table if exists magician_type cascade;
+drop table if exists magician;
 
-drop table if exists material cascade;
+drop table if exists magician_type;
 
-drop table if exists routine cascade;
+drop table if exists material;
 
-drop table if exists set_routine cascade;
+drop table if exists routine;
 
-drop table if exists set cascade;
+drop table if exists set_routine;
+
+drop table if exists set;
+
+SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists image_seq;
 

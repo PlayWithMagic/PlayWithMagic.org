@@ -9,6 +9,7 @@ import play.Logger;
 import play.data.Form;
 import play.data.validation.ValidationError;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.formdata.DeleteUserFormData;
@@ -37,6 +38,7 @@ import views.html.ViewMaterial;
 import views.html.ViewRoutine;
 import views.html.ViewSet;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -342,10 +344,16 @@ public class Application extends Controller {
 
     EditMagicianFormData editMagicianFormData = formData.get();
 
+    long imageId = uploadImage(request());
+    if (imageId > 0) {
+      editMagicianFormData.imageId = imageId;
+    }
+
     Logger.debug("postMagician Magician Form Data");
     Logger.debug("  id = [" + editMagicianFormData.id + "]");
     Logger.debug("  firstName = [" + editMagicianFormData.firstName + "]");
     Logger.debug("  magicianType = [" + editMagicianFormData.magicianType + "]");
+    Logger.debug("  imageId = [" + editMagicianFormData.imageId + "]");
 
     Magician magician = Magician.createMagicianFromForm(editMagicianFormData);
 
@@ -459,10 +467,16 @@ public class Application extends Controller {
 
     RoutineFormData routineFormData = formWithRoutineData.get();
 
+    long imageId = uploadImage(request());
+    if (imageId > 0) {
+      routineFormData.imageId = imageId;
+    }
+
     Logger.debug("postRoutine Form Backing Class Data");
     Logger.debug("  id = [" + routineFormData.id + "]");
     Logger.debug("  name = [" + routineFormData.name + "]");
     Logger.debug("  duration = [" + routineFormData.duration + "]");
+    Logger.debug("  imageId = [" + routineFormData.imageId + "]");
 
     Routine routine = Routine.saveRoutineFromForm(routineFormData);
 
@@ -775,6 +789,11 @@ public class Application extends Controller {
 
     Logger.debug("isInspectable = " + materialFormData.isInspectable);
 
+    long imageId = uploadImage(request());
+    if (imageId > 0) {
+      materialFormData.imageId = imageId;
+    }
+
     Material.saveMaterialFromForm(materialFormData);
 
     RoutineFormData routineFormData = new RoutineFormData(Routine.getRoutine(routineId));
@@ -807,18 +826,55 @@ public class Application extends Controller {
    ***************************************************************************************************************/
 
   /**
-   * Gets the image.
+   * Gets the image that has been uploaded to the database.
    * @param id The image id.
    * @return The image.
    */
   public static Result getImage(long id) {
     Image image = Image.find.byId(id);
-
     if (image == null) {
       throw new RuntimeException("Could not find the image with associated id.");
     }
 
     return ok(image.data).as("image");
+  }
+
+  /**
+   * Uploads image in Request to the Images database.
+   * @param request The request.
+   * @return The image id. Returns -1 if file size limit exceeded or no image found in form.
+   */
+  public static long uploadImage(Http.Request request) {
+
+    // takes request
+    Http.MultipartFormData body = request.body().asMultipartFormData();
+    Http.MultipartFormData.FilePart picture = body.getFile("image");
+
+    // creates variables
+    String fileName = "";
+    String contentType = "";
+    File file = null;
+    long imageId;
+    Image image = null;
+
+    // checks image upload size against max
+    if (request().body().isMaxSizeExceeded()) {
+      System.out.printf("Image exceeds maximum allowed file size. (512K)");
+      imageId = -1;
+    }
+    else if (picture != null) {
+      fileName = picture.getFilename();
+      contentType = picture.getContentType();
+      file = picture.getFile();
+      image = new Image(fileName, file);
+      imageId = image.id;
+    }
+    else {
+      System.out.printf("No new image found in form.");
+      imageId = -1;
+    }
+
+    return imageId;
   }
 
 }

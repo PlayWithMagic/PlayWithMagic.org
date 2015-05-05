@@ -6,7 +6,7 @@
 @(page: String, isLoggedIn: Boolean, userInfo: Magician, materialForm: Form[views.formdata.MaterialFormData])
 
 @import helper.form
-@import views.html.bootstrap3.{checkboxBoolean, hidden, text, text45, textInt, textarea}
+@import views.html.bootstrap3.{checkboxBoolean, hidden, text, text45, textInt, textarea, image}
 
 @Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
@@ -20,9 +20,9 @@
           <h1>Edit Item</h1>
         }
 
-          <!-- Form Fields -->
+        <!-- Form Fields -->
         <div class="container">
-        @form(routes.Application.postMaterial(), 'class -> "form-horizontal") {
+        @form(routes.Application.postMaterial(), 'class -> "form-horizontal", 'enctype -> "multipart/form-data") {
 
           @hidden(materialForm("routineId"))
 
@@ -53,10 +53,28 @@
             placeholder = "Anything special about this item?",
             help = "")
 
-          @text(materialForm("imageUrl"),
-            label = "Image URL",
-            placeholder = "The URL of the image that represents this item",
-            help = "")
+          <!-- Shows Current Material Image -->
+          <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+            @if(materialForm("materialId").value != "0" && materialForm("materialId").value != "-1") {
+              @if(Material.getMaterial(materialForm.get.materialId).getImageId > 0) {
+                <img class="img-responsive"
+                src="@routes.Application.getImage(Routine.getRoutine(materialForm.get.materialId).getImageId)"
+                alt="Image of Material" width="400"/>
+              }
+            } else {
+              <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")"
+              alt="Material Image Placeholder" width="400"/>
+            }
+            </div>
+          </div>
+          <br />
+
+          @image(materialForm("image"),
+            label="Image",
+            help="Select an image")
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
