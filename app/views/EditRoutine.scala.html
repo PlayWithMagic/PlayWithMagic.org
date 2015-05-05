@@ -91,8 +91,12 @@
                       <img class="img-responsive material-image" src="@routes.Application.getImage(material.getImageId)"
                       alt="Image of Material" />
                     } else {
-                      <img class="img-responsive material-image" src="@routes.Assets.at("images/card-rainbow.jpg")"
-                      alt="Material Image Placeholder" />
+                      @if(material.getImageUrl != null) {
+                        <img class="img-responsive" src="@routes.Assets.at(material.getImageUrl)" alt="Image of Material"/>
+                      } else {
+                        <img class="img-responsive material-image" src="@routes.Assets.at("images/card-rainbow.jpg")"
+                        alt="Material Image Placeholder" />
+                      }
                     }
                     </td>
                     <td>

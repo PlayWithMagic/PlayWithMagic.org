@@ -138,7 +138,10 @@ public class Application extends Controller {
    * If errors are found, re-render the page, displaying the error data.
    * If errors not found, take the user to the login screen and display message.
    *
+   * The flash() method is an easy way to push error messages and then retireve them in the page view.
+   *
    * @return On success, the Index page.  On failure, redisplay the EditUser page.
+   * @see https://www.playframework.com/documentation/2.3.7/JavaSessionFlash
    */
   public static Result postUser() {
     Form<EditUserFormData> formData = Form.form(EditUserFormData.class).bindFromRequest();
@@ -152,7 +155,6 @@ public class Application extends Controller {
       if (formData.hasErrors()) {
         Logger.error("postUser HTTP Form Error.");
 
-        // TODO: Patrick:  What does this code do?
         for (String key : formData.errors().keySet()) {
           List<ValidationError> currentError = formData.errors().get(key);
           for (play.data.validation.ValidationError error : currentError) {
