@@ -86,10 +86,14 @@
                   <tr>
                     <td>@material.getName()</td>
                     <td>@material.getPrice()</td>
-                    <td>@if(material.getImageId != -1) {
+                    <td>
+                    @if(material.getImageId > 0) {
                       <img class="img-responsive" src="@routes.Application.getImage(material.getImageId)"
                         alt="Image of Material" />
-                      }
+                    } else {
+                      <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")"
+                        alt="Material Image Placeholder" width="400"/>
+                    }
                     </td>
                     <td>
                       <button id="edit-material" type="submit" class="btn btn-warning btn-xs editMaterial"
@@ -140,7 +144,10 @@
                 placeholder = "The URL to your YouTube video performing this routine",
                 help = "Please use an embed URL in the form of http://www.youtube.com/embed/VIDEO_ID")
 
-                <!-- Magician Image -->
+
+
+
+                <!-- Routine Image -->
               @image(routineForm("image"),
                 label="Image",
                 help="Select an image")
