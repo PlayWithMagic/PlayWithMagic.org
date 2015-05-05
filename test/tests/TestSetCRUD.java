@@ -1,15 +1,14 @@
 package tests;
 
+import models.Magician;
 import models.Routine;
 import models.Set;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import play.Logger;
 import play.test.TestBrowser;
-import tests.pages.EditRoutinePage;
 import tests.pages.EditSetPage;
 import tests.pages.IndexPage;
-import tests.pages.ListRoutinesPage;
 import tests.pages.ListSetsPage;
 import views.formdata.RoutineFormData;
 import views.formdata.SetFormData;
@@ -57,7 +56,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
    * Populate static objects needed for testing.
    */
   public void initializeTest() {
-    /*
+
     RoutineFormData routineFormData;
     SetFormData setFormData;
 
@@ -84,25 +83,31 @@ public class TestSetCRUD extends play.test.WithBrowser {
 
     setFormData = new SetFormData();
     setFormData.id = 0;
-    setFormData.magicianId = 0;  // TODO: Find this value
     setFormData.name = "Test Set Name 01";
     setFormData.description = "Test Set Description 01";
-    setFormData.routines = new ArrayList<Routine>();
-    setFormData.routines.add(routine1);
-    setFormData.routines.add(routine3);
-    set1 = Set.createSetFromForm(setFormData);
-*/
-    /*
-    set1 = new Set(-1, "Test Set Name 01", "Test Set Description 01", null);
-    set2 = new Set(-1, "02 Test Set Name 02", "02 Test Set Description 02", null);
-    */
+    setFormData.routines = new ArrayList<Long>();
+    setFormData.routines.add(routine1.getId());
+    setFormData.routines.add(routine3.getId());
+
+    set1 = Set.createSetFromForm(Magician.getMagician("test@test.com"), setFormData);
+
+    setFormData = new SetFormData();
+    setFormData.id = 0;
+    setFormData.name = "02 Test Set Name 02";
+    setFormData.description = "02 Test Set Description 02";
+    setFormData.routines = new ArrayList<Long>();
+    setFormData.routines.add(routine2.getId());
+    setFormData.routines.add(routine3.getId());
+
+    set2 = Set.createSetFromForm(Magician.getMagician("test@test.com"), setFormData);
+
     Logger.debug("Test Routines constructed");
   }
 
     /**
      * Test Set navigation from the Index page and navigation bars.
      */
-//  @Test
+  @Test
   public void testSetNav() {
     // browser.maximizeWindow();
 
@@ -122,7 +127,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
   /**
    * A workflow that tests a basic add and delete with only the required fields.
    */
-//  @Test
+  @Test
   public void testSetMinimumAddDelete() {
     // browser.maximizeWindow();
 
@@ -172,7 +177,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
   //  EditRoutinePage editRoutinePage;
     editRoutinePage = new EditRoutinePage(browser);
     editRoutinePage.populateRoutine(routine1);
-// TODO:  This will no longer work with Postgres.
+// TO-DO:  This will no longer work with Postgres.
     routineId1 = RoutineDB.getRoutines().get(0).getId();
 
     editRoutinePage = new EditRoutinePage(browser);
@@ -251,11 +256,12 @@ public class TestSetCRUD extends play.test.WithBrowser {
 */
   }
 
-
+// TO-DO: Verify bi-directional datasets
+  
   /**
    * Test to verify that a EditSet form submission works and results can be viewed on the ListSets Page.
    */
-  // TODO:  This needs to get re-added to the test suite when it can populate its own routines.
+  // TO-DO:  This needs to get re-added to the test suite when it can populate its own routines.
 //  @Test
   public void testCreateNewSet() {
     // browser.maximizeWindow();
@@ -265,14 +271,14 @@ public class TestSetCRUD extends play.test.WithBrowser {
     String name = "My First Set";
     String description = "This is the first set that I have built!";
     List<Long> routineList = new ArrayList<Long>();
-    // TODO:  This needs to be refactored to populate its own routines (1 and 3 below)
+    // TO-DO:  This needs to be refactored to populate its own routines (1 and 3 below)
     //routineList.add(1L);
     //routineList.add(3L);
     editSetPage.createSet(name, description, routineList);
     browser.goTo(listSetsPage);
     listSetsPage.isAt();
     listSetsPage.hasSet(name);
-    // TODO:  Add tests to ensure the routines that should be in here are in here
+    // TO-DO:  Add tests to ensure the routines that should be in here are in here
   }
 
 }
