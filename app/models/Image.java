@@ -16,6 +16,7 @@ import java.io.IOException;
 /**
  * Image holds the image associated with a magician, routine, or material.
  * Images are not required.
+ * cited source: https://github.com/DirtyDan88/play-framework-blob
  */
 @Entity
 public class Image extends Model {
@@ -73,5 +74,3 @@ public class Image extends Model {
     this.save();
   }
 }
-
-// cited source: https://github.com/DirtyDan88/play-framework-blob
