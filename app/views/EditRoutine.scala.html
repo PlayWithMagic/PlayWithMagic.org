@@ -9,7 +9,7 @@
 @import java.util.List
 
 @import helper.form
-@import views.html.bootstrap3.{hidden, text, text45, textInt, textarea, image};
+@import views.html.bootstrap3.{hidden, image, text, text45, textInt, textarea};
 
 @Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
@@ -64,7 +64,7 @@
 
                 <button id="saveMaterialFromForm" type="submit" class="btn btn-success btn-xs pull-right"
                 formaction="@routes.Application.newMaterial()">
-                    Add Material
+                  Add Material
                 </button>
 
               </h3>
@@ -89,10 +89,10 @@
                     <td>
                     @if(material.getImageId > 0) {
                       <img class="img-responsive" src="@routes.Application.getImage(material.getImageId)"
-                        alt="Image of Material" />
+                      alt="Image of Material" />
                     } else {
                       <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")"
-                        alt="Material Image Placeholder" width="400"/>
+                      alt="Material Image Placeholder" />
                     }
                     </td>
                     <td>
@@ -144,13 +144,29 @@
                 placeholder = "The URL to your YouTube video performing this routine",
                 help = "Please use an embed URL in the form of http://www.youtube.com/embed/VIDEO_ID")
 
+              <!-- Shows Current Routine Image -->
+              <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-10">
+                @if(routineForm("id").value != "0") {
+                  @if(Routine.getRoutine(routineForm.get.id).getImageId > 0) {
+                    <img class="img-responsive"
+                    src="@routes.Application.getImage(Routine.getRoutine(routineForm.get.id).getImageId)"
+                    alt="Image of Magician" width="400"/>
+                  }
+                } else {
+                  <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")"
+                  alt="Magician Image Placeholder" width="400"/>
+                }
+                </div>
+              </div>
+              <br />
 
-
-
-                <!-- Routine Image -->
+              <!-- Routine Image -->
               @image(routineForm("image"),
-                label="Image",
-                help="Select an image")
+                label = "Image",
+                help = "Select an image")
             </div>
           </div>
 
@@ -159,10 +175,10 @@
               <h3 class="panel-title">Reviews</h3>
             </div>
             <div class="panel-body">
-              @text(routineForm("reviewUrl"),
-                label = "Review URL",
-                placeholder = "The URL to a review of this routine",
-                help = "Please enter a valid url that points to a review of this routine.")
+            @text(routineForm("reviewUrl"),
+              label = "Review URL",
+              placeholder = "The URL to a review of this routine",
+              help = "Please enter a valid url that points to a review of this routine.")
             </div>
           </div>
 
