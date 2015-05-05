@@ -5,7 +5,7 @@
 * @see http://www.playframework.com
 *@
 @(page: String, isLoggedIn: Boolean, userInfo: Magician, setForm: Form[views.formdata.SetFormData],
-    allRoutines: List[Routine], routinesInSet: List[Routine])
+    allRoutines: List[Routine], routinesInSet: List[Long])
 
 @import helper.form
 @import views.html.bootstrap3.{text45, textarea, hidden}
@@ -61,7 +61,7 @@
                         id="@routine.getId"
                         value="@routine.getId"
                         @for(routineInSet <- routinesInSet) {
-                          @if(routineInSet == routine) {checked}
+                          @if(routineInSet == routine.getId) {checked}
                         }>
                   </td>
                   <td>@routine.getName()</td>

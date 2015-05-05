@@ -64,7 +64,41 @@ public class ViewMaterialPage extends NavigationWrapper {
     checkOptionalField(material.getDescription());
     checkOptionalField(material.getPrice());
     checkOptionalField(material.getPurchaseUrl());
-    checkOptionalField(material.getImageUrl());
+    // checkOptionalField(material.getImageUrl());  // TO-DO Implement image upload tests someday
+    // TO-DO: Add assertThat for "Is Inspectable? Yes"... (true/false x 3 fields)
+  }
+
+
+  /**
+   * Click the View Routine button.
+   *
+   * @return The ViewRoutinePage.
+   */
+  public ViewRoutinePage clickViewRoutineButton() {
+    this.findFirst("#viewRoutine").click();
+    return new ViewRoutinePage(this.getDriver());
+  }
+
+
+  /**
+   * Click the Edit Routine button.
+   *
+   * @return The EditRoutinePage.
+   */
+  public EditRoutinePage clickEditRoutineButton() {
+    this.findFirst("#editRoutine").click();
+    return new EditRoutinePage(this.getDriver());
+  }
+
+
+  /**
+   * Click the Edit Material button.
+   *
+   * @return The EditMaterialPage.
+   */
+  public EditMaterialPage clickEditMaterialButton() {
+    this.findFirst("#editMaterial").click();
+    return new EditMaterialPage(this.getDriver());
   }
 
 }

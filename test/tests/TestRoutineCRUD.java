@@ -3,6 +3,7 @@ package tests;
 import models.Routine;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
+import play.Logger;
 import play.test.TestBrowser;
 import tests.pages.EditRoutinePage;
 import tests.pages.IndexPage;
@@ -58,7 +59,7 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     routine3 = new Routine("Test Routine Name 03", "Test Routine Description 03", 33);
 
     /* Logger.debug("Routines setup for testing"); */ // Logger doesn't work in JUnit tests w/ Play 2.0 (known issue).
-    System.out.println("Test Routines constructed");
+    Logger.debug("Test Routines constructed");
   }
 
   @Override
@@ -157,7 +158,7 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     listRoutinesPage.hasRoutine(routine1);
 
     // View the routine and check all of the fields
-    ViewRoutinePage viewRoutinePage = listRoutinesPage.viewFirstRoutine();
+    ViewRoutinePage viewRoutinePage = listRoutinesPage.viewRoutine(0);
     viewRoutinePage.hasRoutine(routine1);
 
     // Update the routine
@@ -173,7 +174,7 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     listRoutinesPage.hasRoutine(routine2);
 
     // Verify the new information is in ViewRoutine
-    viewRoutinePage = listRoutinesPage.viewFirstRoutine();
+    viewRoutinePage = listRoutinesPage.viewRoutine(0);
     viewRoutinePage.hasRoutine(routine2);
     listRoutinesPage = viewRoutinePage.clickReturnToRoutineListButton();
 

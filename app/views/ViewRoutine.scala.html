@@ -84,10 +84,10 @@
           <ul>
           @for(material <- routine.getMaterials()) {
             <li>
-              <a href="@routes.Application.viewMaterial(
+              <a id="viewMaterial@routine.getMaterials.indexOf(material)"
+                href="@routes.Application.viewMaterial(
                 routine.getId(),
-                routine.getMaterials().indexOf(material))"
-                class="viewMaterial">
+                material.getId)">
               @material.getName()
               </a>
             </li>
