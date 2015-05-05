@@ -335,7 +335,8 @@ public class Material extends play.db.ebean.Model {
 
     if (materialFormData.materialId == 0) {
       material = new Material(Routine.getRoutine(materialFormData.routineId), materialFormData.name);
-    } else {
+    }
+    else {
       material = Material.getMaterial(materialFormData.materialId);
       material.setRoutine(Routine.getRoutine(materialFormData.routineId));
       material.setName(materialFormData.name);

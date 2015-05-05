@@ -12,6 +12,7 @@ import tests.pages.ListRoutinesPage;
 import tests.pages.ViewMaterialPage;
 import tests.pages.ViewRoutinePage;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
 
@@ -38,7 +39,7 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
    */
   public TestMaterialCRUD() {
 
-    // TODO:  This type of initialization is no longer viable.  Need to find another way to do it.
+    // TO-DO:  This type of initialization is no longer viable.  Need to find another way to do it.
 
     routine1 = new Routine("Test Routine Name 01", "Test Routine Description 01", 11);
     routine1.setMethod("Test Routine Method 01");
@@ -96,7 +97,7 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
   /**
    * A workflow that tests a basic add of Material with only the required fields.
    */
-//  @Test
+  @Test
   public void testMaterialMinimumAddDelete() {
     // browser.maximizeWindow();
 
@@ -145,7 +146,7 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
     GlobalTest.resetDatabaseForTest("PlayWithMagic");
     GlobalTest.addUserForTest();
     IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
-/*
+
     // Add a routine
     EditRoutinePage editRoutinePage = indexPage.clickCreateRoutineButton();
     editRoutinePage.populateRoutine(routine1);
@@ -160,87 +161,90 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
     editRoutinePage = new EditRoutinePage(editMaterialPage.getDriver());
     editRoutinePage.hasMaterial(material1);
 
-    // Populate material information #2
-    editRoutinePage.clickAddMaterial();
-    editMaterialPage = new EditMaterialPage(editRoutinePage.getDriver());
-    editMaterialPage.populateMaterial(material3);
-    editMaterialPage.clickSubmit();
-
-    // Check material information in routine
-    editRoutinePage = new EditRoutinePage(editMaterialPage.getDriver());
-    editRoutinePage.hasMaterial(material1);
-    editRoutinePage.hasMaterial(material3);
-
     // Save the routine
     editRoutinePage.clickSubmit();
 
-    // View the routine & check the first material
+    // Check all of the entered data
+    // View the routine & check the material view
     ListRoutinesPage listRoutinesPage = new ListRoutinesPage(editMaterialPage.getDriver());
-    ViewRoutinePage viewRoutinePage = listRoutinesPage.viewFirstRoutine();
-    ViewMaterialPage viewMaterialPage = viewRoutinePage.viewFirstMaterial();
+    ViewRoutinePage viewRoutinePage = listRoutinesPage.viewRoutine(0);
+    viewRoutinePage.hasMaterial(material1);
+    ViewMaterialPage viewMaterialPage = viewRoutinePage.viewMaterial(0);
     viewMaterialPage.hasMaterial(material1);
 
-    // Edit the first material in the routine
-    // TODO:  Fix this after database work by clicking the Edit Material button in the viewMaterial page.
+    // Edit the material
     listRoutinesPage = new ListRoutinesPage(browser);
     editRoutinePage = listRoutinesPage.editFirstRoutine();
-    editRoutinePage.populateRoutine(routine2);
+    editRoutinePage.checkRoutine(routine1);
+    editRoutinePage.hasMaterial(material1);
     editMaterialPage = editRoutinePage.editFirstMaterial();
+    editMaterialPage.hasMaterial(material1);
     editMaterialPage.populateMaterial(material2);
     editMaterialPage.clickSubmit();
 
     // Check the edited routine and material
     editRoutinePage = new EditRoutinePage(editMaterialPage.getDriver());
-    editRoutinePage.checkRoutine(routine2);
+    editRoutinePage.checkRoutine(routine1);
     editRoutinePage.doesNotHaveMaterial(material1);
     editRoutinePage.hasMaterial(material2);
-    editRoutinePage.hasMaterial(material3);
-
-    // Verify the new routine and material information is available on the view page
     editRoutinePage.clickSubmit();
+
+    // Verify the new material information is available on the view page
     listRoutinesPage = new ListRoutinesPage(editRoutinePage.getDriver());
-    viewRoutinePage = listRoutinesPage.viewFirstRoutine();
-    viewRoutinePage.hasRoutine(routine2);
+    listRoutinesPage.hasRoutine(routine1);
+    viewRoutinePage = listRoutinesPage.viewRoutine(0);
+    viewRoutinePage.hasRoutine(routine1);
     viewRoutinePage.doesNotHaveMaterial(material1);
     viewRoutinePage.hasMaterial(material2);
-    viewRoutinePage.hasMaterial(material3);
 
     // Verify the new material page is in ViewMaterial.
-    viewMaterialPage = viewRoutinePage.viewFirstMaterial();
+    viewMaterialPage = viewRoutinePage.viewMaterial(0);
     viewMaterialPage.hasMaterial(material2);
 
-    // Edit the first material in the routine
-    // TODO:  Fix this after database work by clicking the Edit Material button in the viewMaterial page.
-    listRoutinesPage = new ListRoutinesPage(browser);
-    editRoutinePage = listRoutinesPage.editFirstRoutine();
-
     // Delete the first material
+    editRoutinePage = viewMaterialPage.clickEditRoutineButton();
+    editRoutinePage.doesNotHaveMaterial(material1);
     editRoutinePage.hasMaterial(material2);
-    editRoutinePage.hasMaterial(material3);
-    editRoutinePage.deleteFirstMaterial();
-    editRoutinePage.doesNotHaveMaterial(material2);
-    editRoutinePage.hasMaterial(material3);
-
-    // Delete the second material
     editRoutinePage.deleteFirstMaterial();
     editRoutinePage.doesNotHaveMaterial(material1);
     editRoutinePage.doesNotHaveMaterial(material2);
-    editRoutinePage.doesNotHaveMaterial(material3);
 
     // Delete the routine
     editRoutinePage.clickSubmit();
     listRoutinesPage = new ListRoutinesPage(editMaterialPage.getDriver());
-    listRoutinesPage.hasRoutine(routine2);
+    listRoutinesPage.hasRoutine(routine1);
     listRoutinesPage.deleteFirstRoutine();
     listRoutinesPage.doesNotHaveRoutine(routine1);
-    listRoutinesPage.doesNotHaveRoutine(routine2);
-*/
+
   }
 
+
   /**
-   * TODO: Test to ensure that the Routine and Material entities are bi-directional.
+   * Test to ensure that the Routine and Material entities are bi-directional.
    */
-  // @Test
+  @Test
   public void testBidirectionalEntities() {
+    // browser.maximizeWindow();
+
+    // Clear database, create a test user and login as that user.  Start at the home page...
+    GlobalTest.resetDatabaseForTest("PlayWithMagic");
+    GlobalTest.addUserForTest();
+    IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
+
+    // Add a routine
+    EditRoutinePage editRoutinePage = indexPage.clickCreateRoutineButton();
+    editRoutinePage.populateRoutine(routine1);
+
+    // Populate material information #1
+    editRoutinePage.clickAddMaterial();
+    EditMaterialPage editMaterialPage = new EditMaterialPage(editRoutinePage.getDriver());
+    editMaterialPage.populateMaterial(material1);
+    editMaterialPage.clickSubmit();
+
+    Routine routineSrc = Routine.getAllRoutines().get(0);
+    Material material = routineSrc.getMaterials().get(0);
+    Routine routineDest = material.getRoutine();
+
+    assertThat(routineSrc.getId()).isEqualTo(routineDest.getId());
   }
 }

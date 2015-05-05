@@ -103,9 +103,10 @@ public class ViewRoutinePage extends NavigationWrapper {
    * View the first material on the page.
    *
    * @return The ViewMaterialPage.
+   * @param index The index of the material item to view.
    */
-  public ViewMaterialPage viewFirstMaterial() {
-    this.findFirst(".viewMaterial").click();
+  public ViewMaterialPage viewMaterial(int index) {
+    this.findFirst("#viewMaterial" + index).click();
     return new ViewMaterialPage(this.getDriver());
   }
 

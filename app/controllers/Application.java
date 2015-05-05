@@ -660,6 +660,24 @@ public class Application extends Controller {
    ***************************************************************************************************************/
 
   /**
+   * Show the EditMaterial page to update an item.
+   *
+   * @param materialId The ID of the Material you want to edit.
+   * @return An HTTP page EditMaterial.
+   */
+  @Security.Authenticated(Secured.class)
+  public static Result editMaterialDirect(Long materialId) {
+    MaterialFormData materialFormData =
+        new MaterialFormData(Material.getMaterial(materialId));
+
+    Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
+
+    return ok(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithMaterialData));
+  }
+
+
+  /**
    * Show the EditMaterial page to update an item.  First, process the Routine page, deal with any errors and update
    * the database.  Finally, show the EditMaterial page.
    *
@@ -688,15 +706,7 @@ public class Application extends Controller {
     Routine routine = Routine.saveRoutineFromForm(data);
     routineId = routine.getId();
 
-    // End of processing Routine page.  Start processing material.
-
-    MaterialFormData materialFormData =
-        new MaterialFormData(Material.getMaterial(materialId));
-
-    Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
-
-    return ok(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-        formWithMaterialData));
+    return editMaterialDirect(materialId);
   }
 
 
@@ -809,12 +819,12 @@ public class Application extends Controller {
    * Display a single Material page.
    *
    * @param routineId  The ID of the Routine to be displayed.
-   * @param materialId The ArrayList index of the material to display.
+   * @param materialId The ID of the material to display.
    * @return An HTTP OK message along with the HTML content for a single Routine page.
    */
-  public static Result viewMaterial(long routineId, int materialId) {
+  public static Result viewMaterial(long routineId, long materialId) {
     Routine routine = Routine.getRoutine(routineId);
-    Material material = routine.getMaterials().get(materialId);
+    Material material = Material.getMaterial(materialId);
 
     return ok(ViewMaterial.render("viewRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), material));
   }

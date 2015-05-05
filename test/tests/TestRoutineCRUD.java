@@ -157,7 +157,7 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     listRoutinesPage.hasRoutine(routine1);
 
     // View the routine and check all of the fields
-    ViewRoutinePage viewRoutinePage = listRoutinesPage.viewFirstRoutine();
+    ViewRoutinePage viewRoutinePage = listRoutinesPage.viewRoutine(0);
     viewRoutinePage.hasRoutine(routine1);
 
     // Update the routine
@@ -173,7 +173,7 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     listRoutinesPage.hasRoutine(routine2);
 
     // Verify the new information is in ViewRoutine
-    viewRoutinePage = listRoutinesPage.viewFirstRoutine();
+    viewRoutinePage = listRoutinesPage.viewRoutine(0);
     viewRoutinePage.hasRoutine(routine2);
     listRoutinesPage = viewRoutinePage.clickReturnToRoutineListButton();
 

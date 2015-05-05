@@ -24,9 +24,13 @@
         <br />
       </div>
       <div class="col-md-6">
-        <p class="hidden-xs hidden-sm">  @* TODO FIX 1 Below *@
-          <a id="editMaterial" href="@routes.Application.editMaterial(1)" class="btn btn-large">Edit Material</a>
-          <a href="@routes.Application.listRoutines()" class="btn btn-large">Show Routines</a>
+        <p class="hidden-xs hidden-sm">
+          <a id="viewRoutine" href="@routes.Application.viewRoutine(material.getRoutine.getId)" class="btn btn-large">
+            View Routine</a>
+          <a id="editRoutine" href="@routes.Application.editRoutine(material.getRoutine.getId)" class="btn btn-large">
+            Edit Routine</a>
+          <a id="editMaterial" href="@routes.Application.editMaterialDirect(material.getId)" class="btn btn-large">
+            Edit Material</a>
         </p>
         <h3>Notes</h3>
         <p>@material.getDescription</p>
