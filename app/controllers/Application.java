@@ -696,7 +696,7 @@ public class Application extends Controller {
     long routineId = new Long(routineFormData.field("id").value()).longValue();
 
     if (routineFormData.hasErrors()) {
-      Logger.error("HTTP Form Error in editMaterial");
+      Logger.error("HTTP Form Error in newMaterial");
 
       return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
           routineFormData, Routine.getMaterials(routineId)));
@@ -731,7 +731,7 @@ public class Application extends Controller {
     long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
 
     if (formWithRoutineData.hasErrors()) {
-      System.out.println("HTTP Form Error.");
+      Logger.error("HTTP Form Error in deleteMaterial");
 
       return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
           formWithRoutineData, Routine.getMaterials(routineId)));
