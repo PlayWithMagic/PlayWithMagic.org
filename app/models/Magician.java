@@ -660,7 +660,12 @@ public class Magician extends play.db.ebean.Model {
     magician.setInstagram(editMagicianFormData.instagram);
     magician.setFlickr(editMagicianFormData.flickr);
 
+    long currentImageId = magician.getImageId();
     if (editMagicianFormData.imageId > 0) {
+      if (editMagicianFormData.imageId != currentImageId) {
+        Image thisImage = Image.find().byId(currentImageId);
+        thisImage.delete();
+      }
       magician.setImageId(editMagicianFormData.imageId);
     }
 

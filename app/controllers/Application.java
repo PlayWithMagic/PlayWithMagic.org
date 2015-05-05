@@ -151,8 +151,6 @@ public class Application extends Controller {
 
       if (formData.hasErrors()) {
         Logger.error("postUser HTTP Form Error.");
-
-        // TODO: Patrick:  What does this code do?
         for (String key : formData.errors().keySet()) {
           List<ValidationError> currentError = formData.errors().get(key);
           for (play.data.validation.ValidationError error : currentError) {
@@ -831,7 +829,7 @@ public class Application extends Controller {
    * @return The image.
    */
   public static Result getImage(long id) {
-    Image image = Image.find.byId(id);
+    Image image = Image.find().byId(id);
     if (image == null) {
       throw new RuntimeException("Could not find the image with associated id.");
     }
@@ -870,7 +868,7 @@ public class Application extends Controller {
       imageId = image.id;
     }
     else {
-      System.out.printf("No new image found in form.");
+      Logger.debug("No new image found in form.");
       imageId = -1;
     }
 
