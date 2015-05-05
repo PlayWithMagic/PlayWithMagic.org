@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-import play.db.ebean.Model;
 import play.data.validation.Constraints;
 
 import java.io.File;
@@ -19,7 +18,7 @@ import java.io.IOException;
  * cited source: https://github.com/DirtyDan88/play-framework-blob
  */
 @Entity
-public class Image extends Model {
+public class Image extends play.db.ebean.Model {
   private static final long serialVersionUID = 1L;
 
   /** The image id. */
@@ -39,8 +38,9 @@ public class Image extends Model {
    *
    * @return The finder method.
    */
-  public static Finder<Long, Image> find =
-      new Finder<Long, Image>(Long.class, Image.class);
+  public static Finder<Long, Image> find() {
+    return new Finder<Long, Image>(Long.class, Image.class);
+  }
 
   /**
    * Creates a new image entity.

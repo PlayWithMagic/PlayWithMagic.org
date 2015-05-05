@@ -513,7 +513,12 @@ public class Routine extends play.db.ebean.Model {
     routine.setPlacement(routineFormData.placement);
     routine.setChoices(routineFormData.choices);
 
+    long currentImageId = routine.getImageId();
     if (routineFormData.imageId > 0) {
+      if (routineFormData.imageId != currentImageId) {
+        Image thisImage = Image.find().byId(currentImageId);
+        thisImage.delete();
+      }
       routine.setImageId(routineFormData.imageId);
     }
 

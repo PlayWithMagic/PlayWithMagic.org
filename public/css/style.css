@@ -67,6 +67,9 @@ body section#page section#content {
 body section#page section#content section#social {
   font-size: 32px;
 }
+body section#page section#content img.material-image {
+  max-width: 300px;
+}
 body section#page section#content section#imageUpload {
   color: white;
   background-color: aqua;
