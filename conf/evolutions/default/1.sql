@@ -84,6 +84,7 @@ create table set (
   magician_id               bigint,
   name                      varchar(45) not null,
   description               varchar(2000) not null,
+  constraint uq_set_1 unique (magician_id,name),
   constraint pk_set primary key (id))
 ;
 

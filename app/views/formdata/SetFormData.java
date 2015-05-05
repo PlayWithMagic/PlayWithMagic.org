@@ -45,7 +45,7 @@ public class SetFormData {
   /**
    * Input data list of Routine IDs.
    */
-  public List<Routine> routines;
+  public List<Long> routines;
 
 
   /******************************************************************************************************************
@@ -68,7 +68,7 @@ public class SetFormData {
     this.id = set.getId();
     this.name = set.getName();
     this.description = set.getDescription();
-    this.routines = set.getRoutines();
+    this.routines = Routine.getListOfIds(set.getRoutines());
   }
 
 

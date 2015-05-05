@@ -21,6 +21,7 @@
         <table class="table table-bordered table-striped">
           <thead>
             <tr>
+              <th>Magician</th>
               <th>Name</th>
               <th>Edit</th>
               <th>Delete</th>
@@ -29,6 +30,9 @@
           <tbody>
           @for(thisSet <- sets) {
             <tr>
+              <td><a href="viewMagician?id=@thisSet.getMagician.getId" class="viewSet">
+                @thisSet.getMagician.getName
+              </a></td>
               <td><a href="viewSet?id=@thisSet.getId" class="viewSet">@thisSet.getName</a></td>
               <td>
                 <a href="@routes.Application.editSet(thisSet.getId)" class="btn btn-warning btn-xs"

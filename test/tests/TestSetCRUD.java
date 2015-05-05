@@ -4,12 +4,15 @@ import models.Routine;
 import models.Set;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
+import play.Logger;
 import play.test.TestBrowser;
 import tests.pages.EditRoutinePage;
 import tests.pages.EditSetPage;
 import tests.pages.IndexPage;
 import tests.pages.ListRoutinesPage;
 import tests.pages.ListSetsPage;
+import views.formdata.RoutineFormData;
+import views.formdata.SetFormData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,21 +38,6 @@ public class TestSetCRUD extends play.test.WithBrowser {
   private static Routine routine2 = null;
   private static Routine routine3 = null;
 
-  /**
-   * Populate static objects needed for testing.
-   */
-  public TestSetCRUD() {
-    // TODO: Fix this up
-    /*
-    set1 = new Set(-1, "Test Set Name 01", "Test Set Description 01", null);
-    set2 = new Set(-1, "02 Test Set Name 02", "02 Test Set Description 02", null);
-
-    routine1 = new Routine(0, "Test Routine Name 01", "Test Routine Description 01", 11);
-    routine2 = new Routine(0, "Test Routine Name 02", "Test Routine Description 02", 22);
-    routine3 = new Routine(0, "Test Routine Name 03", "Test Routine Description 03", 33);
-    */
-  }
-
   @Override
   protected play.test.FakeApplication provideFakeApplication() {
     return fakeApplication(inMemoryDatabase());
@@ -66,9 +54,55 @@ public class TestSetCRUD extends play.test.WithBrowser {
   }
 
   /**
-   * Test Set navigation from the Index page and navigation bars.
+   * Populate static objects needed for testing.
    */
-  @Test
+  public void initializeTest() {
+    /*
+    RoutineFormData routineFormData;
+    SetFormData setFormData;
+
+    routineFormData = new RoutineFormData();
+    routineFormData.id = 0;
+    routineFormData.name = "Test Routine Name 01";
+    routineFormData.description = "Test Routine Description 01";
+    routineFormData.duration = 11;
+    routine1 = Routine.saveRoutineFromForm(routineFormData);
+
+    routineFormData = new RoutineFormData();
+    routineFormData.id = 0;
+    routineFormData.name = "Test Routine Name 02";
+    routineFormData.description = "Test Routine Description 02";
+    routineFormData.duration = 22;
+    routine2 = Routine.saveRoutineFromForm(routineFormData);
+
+    routineFormData = new RoutineFormData();
+    routineFormData.id = 0;
+    routineFormData.name = "Test Routine Name 03";
+    routineFormData.description = "Test Routine Description 03";
+    routineFormData.duration = 33;
+    routine3 = Routine.saveRoutineFromForm(routineFormData);
+
+    setFormData = new SetFormData();
+    setFormData.id = 0;
+    setFormData.magicianId = 0;  // TODO: Find this value
+    setFormData.name = "Test Set Name 01";
+    setFormData.description = "Test Set Description 01";
+    setFormData.routines = new ArrayList<Routine>();
+    setFormData.routines.add(routine1);
+    setFormData.routines.add(routine3);
+    set1 = Set.createSetFromForm(setFormData);
+*/
+    /*
+    set1 = new Set(-1, "Test Set Name 01", "Test Set Description 01", null);
+    set2 = new Set(-1, "02 Test Set Name 02", "02 Test Set Description 02", null);
+    */
+    Logger.debug("Test Routines constructed");
+  }
+
+    /**
+     * Test Set navigation from the Index page and navigation bars.
+     */
+//  @Test
   public void testSetNav() {
     // browser.maximizeWindow();
 
@@ -96,6 +130,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
     GlobalTest.resetDatabaseForTest("PlayWithMagic");
     GlobalTest.addUserForTest();
     IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
+    initializeTest();
 
     // Add a set without entering any information... this should generate an error.
     EditSetPage editSetPage = indexPage.clickCreateSetButton();
@@ -110,7 +145,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
   /**
    * Test Set CRUD.
    */
-//  @Test
+  @Test
   public void testSetCrudWorkflow() {
     // browser.maximizeWindow();
 
@@ -118,27 +153,12 @@ public class TestSetCRUD extends play.test.WithBrowser {
     GlobalTest.resetDatabaseForTest("PlayWithMagic");
     GlobalTest.addUserForTest();
     IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
+    initializeTest();
 
-
-    // Quickly populate three routines
-    EditRoutinePage editRoutinePage = indexPage.clickCreateRoutineButton();
-    editRoutinePage.populateRoutine(routine1);
-    editRoutinePage.clickSubmit();
-
-    ListRoutinesPage listRoutinesPage = new ListRoutinesPage(editRoutinePage.getDriver());
-    listRoutinesPage.clickCreateRoutineButton();
-    editRoutinePage.populateRoutine(routine2);
-    editRoutinePage.clickSubmit();
-
-    listRoutinesPage = new ListRoutinesPage(editRoutinePage.getDriver());
-    listRoutinesPage.clickCreateRoutineButton();
-    editRoutinePage.populateRoutine(routine3);
-    editRoutinePage.clickSubmit();
-
-    // Add a Set.
-    listRoutinesPage = new ListRoutinesPage(editRoutinePage.getDriver());
-    EditSetPage editSetPage = listRoutinesPage.clickCreateSetButton();
+ // Add a Set.
+    EditSetPage editSetPage = indexPage.clickCreateSetButton();
     editSetPage.populateSet(set1);
+    editSetPage.clickSubmit();
 
 
 

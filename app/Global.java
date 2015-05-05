@@ -5,6 +5,7 @@ import models.Material;
 import models.Routine;
 import models.RoutineDBInit1;
 import models.RoutineDBInit2;
+import models.Set;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
@@ -22,8 +23,10 @@ public class Global extends GlobalSettings {
 
     MagicianType.init();
     Magician.init();
-    this.initRoutines();
-    //SetDB.init();
+    initRoutines();
+    Set.init(Magician.getMagician("mr_nelson@icloud.com"));
+    Set.init(Magician.getMagician("pkarjala@gmail.com"));
+    Set.init(Magician.getMagician("dneely@hawaii.edu"));
 
     Logger.info(ConfigFactory.load().getString("application.name") + " has started");
   }

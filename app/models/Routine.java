@@ -85,7 +85,7 @@ public class Routine extends play.db.ebean.Model {
   private String choices;
 
   // The sets that use this routine
-  @ManyToMany(mappedBy = "routines", cascade = CascadeType.PERSIST)
+  @ManyToMany(mappedBy = "routines", cascade = CascadeType.REMOVE)
   private List<Set> sets;
 
   // The image id associated with this routine
@@ -454,12 +454,29 @@ public class Routine extends play.db.ebean.Model {
    *
    * @param id The ID of the Routine to retrieve.
    * @return The Routine.
-   * @throws RuntimeException if the ID can't be found.
+   * @throws RuntimeException If the ID can't be found.
    */
   public static Routine getRoutine(long id) {
     Routine routine = Routine.find().byId(id);
     if (routine == null) {
       throw new RuntimeException("Unable to find Routine with ID [" + id + "]");
+    }
+
+    return routine;
+  }
+
+
+  /**
+   * Retrieve a Routine based on name.
+   *
+   * @param name The name of the routine (case sensitive).
+   * @return The Routine.
+   * @throws RuntimeException If the name can't be found.
+   */
+  public static Routine getRoutine(String name) {
+    Routine routine = Routine.find().where().eq("name", name).findUnique();
+    if (routine == null) {
+      throw new RuntimeException("Unable to find Routine with name = [" + name + "]");
     }
 
     return routine;
@@ -555,4 +572,37 @@ public class Routine extends play.db.ebean.Model {
     routine.delete();
   }
 
+
+  /**
+   * Take a list of routines and return a list of their IDs.
+   *
+   * @param routines A list of routines.
+   * @return A list of Long IDs.
+   */
+  public static List<Long> getListOfIds(List<Routine> routines) {
+    List<Long> listOfIds = new ArrayList<Long>();
+
+    for (Routine routine : routines) {
+      listOfIds.add(routine.getId());
+    }
+
+    return listOfIds;
+  }
+
+
+  /**
+   * Take a list of IDs and return a list of Routines.
+   *
+   * @param listOfIds A list of Long ID numbers.
+   * @return A list of Routines.
+   */
+  public static List<Routine> getRoutines(List<Long> listOfIds) {
+    List<Routine> listOfRoutines = new ArrayList<Routine>();
+
+    for (Long id : listOfIds) {
+      listOfRoutines.add(Routine.getRoutine(id));
+    }
+
+    return listOfRoutines;
+  }
 }

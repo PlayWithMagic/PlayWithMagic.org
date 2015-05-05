@@ -9,6 +9,7 @@ import play.Logger;
 import play.data.Form;
 import play.data.validation.ValidationError;
 import play.mvc.Controller;
+import play.mvc.Http.Context;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -61,18 +62,6 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result index(String message) {
-// TODO: Remove below
-    /*
-    Http.Context context = Http.Context.current();
-    Magician magician = Secured.getUserInfo(context);
-
-    Logger.debug("Get My Sets");
-    List<Magician> myMagicians = Magician.find().where().eq("magician", magician.getId()).findList();
-    for (Set theSet : mySets) {
-      Logger.debug("    " + theSet.getName())
-    }
-
-    */
     return ok(Index.render("home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), message));
   }
 
@@ -332,6 +321,15 @@ public class Application extends Controller {
     if (formData.hasErrors()) {
       Logger.error("postMagician HTTP Form Error.");
 
+      for (String key : formData.errors().keySet()) {
+        List<ValidationError> currentError = formData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            Logger.error("   " + key + ":  " + error.message());
+          }
+        }
+      }
+
       Map<String, Boolean> magicianTypeMap = null;
       if (MagicianTypeFormData.isMagicianType(formData.field("magicianType").value())) {
         magicianTypeMap = MagicianTypeFormData.getMagicianTypes(formData.field("magicianType").value());
@@ -463,6 +461,15 @@ public class Application extends Controller {
     if (formWithRoutineData.hasErrors()) {
       Logger.error("postRoutine HTTP Form Error.");
 
+      for (String key : formWithRoutineData.errors().keySet()) {
+        List<ValidationError> currentError = formWithRoutineData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            Logger.error("   " + key + ":  " + error.message());
+          }
+        }
+      }
+
       return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
           formWithRoutineData, Routine.getMaterials(routineId)));
     }
@@ -549,10 +556,10 @@ public class Application extends Controller {
     if (id != 0) {
       Set thisSet = Set.getSet(id);
       return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
-          Routine.getActiveRoutines(), thisSet.getRoutines()));
+          Routine.getActiveRoutines(), Routine.getListOfIds(thisSet.getRoutines())));
     }
     else {
-      List<Routine> emptyListOfRoutinesInSet = new ArrayList<Routine>();
+      List<Long> emptyListOfRoutinesInSet = new ArrayList<Long>();
 
       return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
           Routine.getActiveRoutines(), emptyListOfRoutinesInSet));
@@ -569,23 +576,38 @@ public class Application extends Controller {
   public static Result postSet() {
     Form<SetFormData> formWithSetData = Form.form(SetFormData.class).bindFromRequest();
 
+    Logger.debug("postSet Raw Routine Form Data");
+    Logger.debug("  id = [" + formWithSetData.field("id").value() + "]");
+    Logger.debug("  name = [" + formWithSetData.field("name").value() + "]");
+
     long setId = new Long(formWithSetData.field("id").value()).longValue();
 
     if (formWithSetData.hasErrors()) {
       Logger.warn("HTTP Form Error in postSet");
-      List<Routine> listOfRoutines;
+
+      for (String key : formWithSetData.errors().keySet()) {
+        List<ValidationError> currentError = formWithSetData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            Logger.error("   " + key + ":  " + error.message());
+          }
+        }
+      }
+
+      List<Long> listOfRoutines;
       if (setId != 0) {
-        listOfRoutines = Set.getSet(setId).getRoutines();
+        listOfRoutines = Routine.getListOfIds(Set.getSet(setId).getRoutines());
       }
       else {
-        listOfRoutines = new ArrayList<Routine>();
+        listOfRoutines = new ArrayList<Long>();
       }
       return badRequest(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
           formWithSetData, Routine.getActiveRoutines(), listOfRoutines));
     }
     else {
       SetFormData data = formWithSetData.get();
-      Set.createSetFromForm(data);
+      Magician magician = Secured.getUserInfo(Context.current());
+      Set.createSetFromForm(magician, data);
       return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
     }
   }
