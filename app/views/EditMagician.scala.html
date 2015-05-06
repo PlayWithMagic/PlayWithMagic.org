@@ -45,25 +45,25 @@
             isMultiple = false,
             help = "Required")
 
-          <!-- Shows Current Magician Image -->
+            <!-- Shows Current Magician Image -->
           <div class="row">
             <div class="col-md-2">
             </div>
             <div class="col-md-10">
 
-              @if(userInfo.getImageId() > 0) {
-                <img class="img-responsive" src="@routes.Application.getImage(userInfo.getImageId)"
-                alt="Image of Magician" width="400"/>
-              } else {
-                <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")"
-                alt="Magician Image Placeholder" width="400"/>
-              }
+            @if(userInfo.getImageId() > 0) {
+              <img class="img-responsive" src="@routes.Application.getImage(userInfo.getImageId)"
+              alt="Image of Magician" width="400"/>
+            } else {
+              <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")"
+              alt="Magician Image Placeholder" width="400"/>
+            }
             </div>
           </div>
           <br />
 
 
-          <!-- Magician Image -->
+            <!-- Magician Image -->
           @image(magicianForm("image"),
             label="Image",
             help="Select an image")

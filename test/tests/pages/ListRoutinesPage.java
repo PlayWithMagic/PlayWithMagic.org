@@ -74,16 +74,10 @@ public class ListRoutinesPage extends NavigationWrapper {
    * View the first routine on the page.
    *
    * @return The ViewRoutinePage.
-<<<<<<< HEAD
-   */
-  public ViewRoutinePage viewFirstRoutine() {
-    this.findFirst(".viewRoutine").click();
-=======
    * @param index Which routine do you want to view.
    */
   public ViewRoutinePage viewRoutine(int index) {
     this.findFirst("#viewRoutine" + index).click();
->>>>>>> Milestone-3
     return new ViewRoutinePage(this.getDriver());
   }
 

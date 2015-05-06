@@ -26,16 +26,16 @@
             </tr>
           </thead>
           <tbody>
-            @for(routine <- allRoutines) {
-              @for(thisRoutine <- routinesInSet) {
-                @if(routine.getId() == thisRoutine.getId()) {
-                  <tr>
-                    <td>@routine.getName</td>
-                    <td>@routine.getDuration</td>
-                  </tr>
-                }
+          @for(routine <- allRoutines) {
+            @for(thisRoutine <- routinesInSet) {
+              @if(routine.getId() == thisRoutine.getId()) {
+                <tr>
+                  <td>@routine.getName</td>
+                  <td>@routine.getDuration</td>
+                </tr>
               }
             }
+          }
           </tbody>
         </table>
       </div>

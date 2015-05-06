@@ -33,16 +33,10 @@ GET         /deleteMagician        controllers.Application.deleteMagician(id: Lo
 POST        /deleteMagician        controllers.Application.postDeleteUser()
 
 #Material actions
-<<<<<<< HEAD
-GET         /viewMaterial          controllers.Application.viewMaterial(routineId: Long, materialId: Integer)
-POST        /newMaterial           controllers.Application.newMaterial()
-POST        /editMaterial          controllers.Application.editMaterial(materialId: Long)
-=======
 GET         /viewMaterial          controllers.Application.viewMaterial(routineId: Long, materialId: Long)
 POST        /newMaterial           controllers.Application.newMaterial()
 POST        /editMaterial          controllers.Application.editMaterial(materialId: Long)
 GET         /editMaterialDirect    controllers.Application.editMaterialDirect(materialId: Long)
->>>>>>> Milestone-3
 POST        /postMaterial          controllers.Application.postMaterial()
 POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Long)
 

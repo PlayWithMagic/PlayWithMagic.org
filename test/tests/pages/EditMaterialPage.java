@@ -67,17 +67,11 @@ public class EditMaterialPage extends NavigationWrapper {
     fillOptionalField("#price", material.getPrice());
     fillOptionalField("#purchaseUrl", material.getPurchaseUrl());
     fillOptionalField("#description", material.getDescription());
-<<<<<<< HEAD
-    fillOptionalField("#imageUrl", material.getImageUrl());
-=======
 //  fillOptionalField("#imageUrl", material.getImageUrl());
->>>>>>> Milestone-3
   }
 
 
   /**
-<<<<<<< HEAD
-=======
    * See if the browser has all of the values in the Material object.
    *
    * @param material A container holding all of the fields to check for in the page.
@@ -94,7 +88,6 @@ public class EditMaterialPage extends NavigationWrapper {
 
 
   /**
->>>>>>> Milestone-3
    * Test to ensure the page does not have required field validation errors.
    */
   public void doesNotHaveRequiredFieldErrors() {

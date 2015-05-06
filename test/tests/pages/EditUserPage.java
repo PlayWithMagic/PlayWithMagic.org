@@ -61,7 +61,7 @@ public class EditUserPage extends NavigationWrapper {
   public void isAt() {
     assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
     assertThat(pageSource().contains("<h1>Register New User</h1>")
-            || pageSource().contains("<h1>Edit User</h1>")).isTrue();
+        || pageSource().contains("<h1>Edit User</h1>")).isTrue();
   }
 
 
@@ -125,4 +125,3 @@ public class EditUserPage extends NavigationWrapper {
   }
 
 }
-

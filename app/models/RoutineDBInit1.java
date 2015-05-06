@@ -273,7 +273,7 @@ public class RoutineDBInit1 {
       materialFormData.purchaseUrl = "http://www.grandillusions.com/product/rope-300-foot-ball/";
       materialFormData.imageUrl = "images/material/204.gif";
       materialFormData.description = "You can re-use about 90% of the rope... About 8\" will be consumed with each "
-      + "performance";
+          + "performance";
 
       Material.saveMaterialFromForm(materialFormData);
     }

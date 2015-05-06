@@ -48,4 +48,3 @@ public class HelpPage extends NavigationWrapper {
     assertThat(pageSource()).contains("Terminology");
   }
 }
-

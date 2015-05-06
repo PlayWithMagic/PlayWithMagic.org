@@ -151,11 +151,7 @@ public class EditRoutinePage extends NavigationWrapper {
   public void hasMaterial(Material material) {
     assertThat(this.pageSource()).contains(material.getName());
     checkOptionalField(material.getPrice());
-<<<<<<< HEAD
-    checkOptionalField(material.getImageUrl());
-=======
 //  checkOptionalField(material.getImageUrl());
->>>>>>> Milestone-3
   }
 
 

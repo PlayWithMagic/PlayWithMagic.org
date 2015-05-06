@@ -30,13 +30,9 @@
           <tbody>
           @for(routine <- routines) {
             <tr>
-<<<<<<< HEAD
-              <td><a href="@routes.Application.viewRoutine(routine.getId)" class="viewRoutine">@routine.getName</a></td>
-=======
               <td><a id="viewRoutine@Routine.getActiveRoutines().indexOf(routine)"
-                href="@routes.Application.viewRoutine(routine.getId)">
-                @routine.getName</a></td>
->>>>>>> Milestone-3
+              href="@routes.Application.viewRoutine(routine.getId)">
+              @routine.getName</a></td>
               <td>@routine.getDuration @if(routine.getDuration == 1) {min} else {mins}</td>
               <td>
                 <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-warning btn-xs editRoutine"

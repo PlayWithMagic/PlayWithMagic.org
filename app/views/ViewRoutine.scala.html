@@ -85,14 +85,9 @@
           @for(material <- routine.getMaterials()) {
             <li>
               <a id="viewMaterial@routine.getMaterials.indexOf(material)"
-                href="@routes.Application.viewMaterial(
+              href="@routes.Application.viewMaterial(
                 routine.getId(),
-<<<<<<< HEAD
-                routine.getMaterials().indexOf(material))"
-                class="viewMaterial">
-=======
                 material.getId)">
->>>>>>> Milestone-3
               @material.getName()
               </a>
             </li>

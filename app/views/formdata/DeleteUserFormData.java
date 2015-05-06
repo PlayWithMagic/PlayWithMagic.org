@@ -46,7 +46,7 @@ public class DeleteUserFormData {
   public List<ValidationError> validate() {
 
     List<ValidationError> errors = new ArrayList<>();
-    
+
     Magician deletingMagician = Magician.getMagician(id);
     if (!BCrypt.checkpw(password, deletingMagician.getPassword())) {
       errors.add(new ValidationError("password", "Sorry, but the provided password does not match this user."));

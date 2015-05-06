@@ -24,17 +24,11 @@
           <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">Edit Profile</a>
           <a href="@routes.Application.editUser(magician.getId)" class="btn btn-large">Change Password</a>
           <a href="@routes.Application.listMagicians()" class="btn btn-large">Return to Magician List</a>
-<<<<<<< HEAD
-          @if(magician.getId() == userInfo.getId()) {
-            <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
-              Delete Account</a>
-=======
           @if(userInfo != null) {
             @if(magician.getId() == userInfo.getId()) {
               <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
                 Delete Account</a>
             }
->>>>>>> Milestone-3
           }
         </p>
 
@@ -82,19 +76,12 @@
           <a id="returnToMagicianList" href="@routes.Application.listMagicians()" class="btn btn-large">
             Return to Magician List
           </a>
-<<<<<<< HEAD
-          @if(magician.getId() == userInfo.getId()) {
-            <a id="deleteAccount" href="@routes.Application.deleteMagician(magician.getId)"
-               class="btn btn-danger btn-xs" role="button">
-              Delete Account</a>
-=======
           @if(userInfo != null) {
             @if(magician.getId() == userInfo.getId()) {
               <a id="deleteAccount" href="@routes.Application.deleteMagician(magician.getId)"
               class="btn btn-danger btn-xs" role="button">
                 Delete Account</a>
             }
->>>>>>> Milestone-3
           }
         </p>
 
@@ -133,58 +120,58 @@
         * we're commenting this out for now.
         *
         <h3>@magician.getStageName's Routines
-          <small class="hidden-xs hidden-sm">
-            <a class="btn btn-large" href="/editRoutine">Add Routine</a>
-          </small>
+        <small class="hidden-xs hidden-sm">
+        <a class="btn btn-large" href="/editRoutine">Add Routine</a>
+        </small>
         </h3>
         <p class="visible-xs-block visible-sm-block">
         <a href="/editRoutine" class="btn btn-sm">Add Routine</a>
         </p>
         <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Row</th>
-              <th>Routine</th>
-              <th>Attribution</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td><a href="displayRoutine.html">Routine Name</a></td>
-              <td><a href="displayUser.html">User Name</a></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td><a href="displayRoutine.html">Routine Name</a></td>
-              <td><a href="displayUser.html">User Name</a></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td><a href="displayRoutine.html">Routine Name</a></td>
-              <td><a href="displayUser.html">User Name</a></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td><a href="displayRoutine.html">Routine Name</a></td>
-              <td><a href="displayUser.html">User Name</a></td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td><a href="displayRoutine.html">Routine Name</a></td>
-              <td><a href="displayUser.html">User Name</a></td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td><a href="displayRoutine.html">Routine Name</a></td>
-              <td><a href="displayUser.html">User Name</a></td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td><a href="displayRoutine.html">Routine Name</a></td>
-              <td><a href="displayUser.html">User Name</a></td>
-            </tr>
-          </tbody>
+        <thead>
+        <tr>
+        <th>Row</th>
+        <th>Routine</th>
+        <th>Attribution</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>1</td>
+        <td><a href="displayRoutine.html">Routine Name</a></td>
+        <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        <tr>
+        <td>2</td>
+        <td><a href="displayRoutine.html">Routine Name</a></td>
+        <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        <tr>
+        <td>3</td>
+        <td><a href="displayRoutine.html">Routine Name</a></td>
+        <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        <tr>
+        <td>4</td>
+        <td><a href="displayRoutine.html">Routine Name</a></td>
+        <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        <tr>
+        <td>5</td>
+        <td><a href="displayRoutine.html">Routine Name</a></td>
+        <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        <tr>
+        <td>6</td>
+        <td><a href="displayRoutine.html">Routine Name</a></td>
+        <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        <tr>
+        <td>7</td>
+        <td><a href="displayRoutine.html">Routine Name</a></td>
+        <td><a href="displayUser.html">User Name</a></td>
+        </tr>
+        </tbody>
         </table>
         *@
       </div>

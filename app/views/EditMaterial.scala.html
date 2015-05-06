@@ -20,7 +20,7 @@
           <h1>Edit Item</h1>
         }
 
-        <!-- Form Fields -->
+          <!-- Form Fields -->
         <div class="container">
         @form(routes.Application.postMaterial(), 'class -> "form-horizontal", 'enctype -> "multipart/form-data") {
 
@@ -53,7 +53,7 @@
             placeholder = "Anything special about this item?",
             help = "")
 
-          <!-- Shows Current Material Image -->
+            <!-- Shows Current Material Image -->
           <div class="row">
             <div class="col-md-2">
             </div>
@@ -80,18 +80,18 @@
             <div class="col-sm-offset-2 col-sm-10">
 
               @* This isn't pretty, but it works.  Can't use a button, as it will send a POST.
-               * If we use Play's @route, then I'd need a routineId as a Long, which is hard
-               * to get.  This is quick-and-dirty.  *@
+              * If we use Play's @route, then I'd need a routineId as a Long, which is hard
+              * to get.  This is quick-and-dirty.  *@
               <a class="btn" onclick="goBack()">Go Back</a>
 
               <script>
-                function goBack() {
-                  window.history.back();
-                }
+              function goBack() {
+              window.history.back();
+              }
               </script>
 
               <button id="submit" type="submit" class="btn btn-default pull-right">
-                @if(materialForm("materialId").value == "-1") {Add} else {Update}
+              @if(materialForm("materialId").value == "-1") {Add} else {Update}
               </button>
             </div>
           </div>

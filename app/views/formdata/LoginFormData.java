@@ -34,7 +34,7 @@ public class LoginFormData {
   public List<ValidationError> validate() {
 
     List<ValidationError> errors = new ArrayList<>();
-    
+
     if (!Magician.isValidMagician(email, password)) {
       errors.add(new ValidationError("email", "error with login credentials"));
       errors.add(new ValidationError("password", ""));

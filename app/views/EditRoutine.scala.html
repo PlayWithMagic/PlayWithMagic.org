@@ -88,13 +88,6 @@
                     <td>@material.getPrice()</td>
                     <td>
                     @if(material.getImageId > 0) {
-<<<<<<< HEAD
-                      <img class="img-responsive" src="@routes.Application.getImage(material.getImageId)"
-                      alt="Image of Material" />
-                    } else {
-                      <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")"
-                      alt="Material Image Placeholder" />
-=======
                       <img class="img-responsive material-image" src="@routes.Application.getImage(material.getImageId)"
                       alt="Image of Material" />
                     } else {
@@ -104,19 +97,18 @@
                         <img class="img-responsive material-image" src="@routes.Assets.at("images/card-rainbow.jpg")"
                         alt="Material Image Placeholder" />
                       }
->>>>>>> Milestone-3
                     }
                     </td>
                     <td>
                       <button id="edit-material" type="submit" class="btn btn-warning btn-xs editMaterial"
                       formaction="@routes.Application.editMaterial(material.getId)">
-                        Edit
+                      Edit
                       </button>
                     </td>
                     <td>
                       <button id="delete-material" type="submit" class="btn btn-danger btn-xs deleteMaterial"
                       formaction="@routes.Application.deleteMaterial(material.getId)">
-                        Delete
+                      Delete
                       </button>
 
                     </td>
@@ -156,7 +148,7 @@
                 placeholder = "The URL to your YouTube video performing this routine",
                 help = "Please use an embed URL in the form of http://www.youtube.com/embed/VIDEO_ID")
 
-              <!-- Shows Current Routine Image -->
+                <!-- Shows Current Routine Image -->
               <div class="row">
                 <div class="col-md-2">
                 </div>
@@ -175,7 +167,7 @@
               </div>
               <br />
 
-              <!-- Routine Image -->
+                <!-- Routine Image -->
               @image(routineForm("image"),
                 label = "Image",
                 help = "Select an image")

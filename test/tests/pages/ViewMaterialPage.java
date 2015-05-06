@@ -64,9 +64,6 @@ public class ViewMaterialPage extends NavigationWrapper {
     checkOptionalField(material.getDescription());
     checkOptionalField(material.getPrice());
     checkOptionalField(material.getPurchaseUrl());
-<<<<<<< HEAD
-    checkOptionalField(material.getImageUrl());
-=======
     // checkOptionalField(material.getImageUrl());  // TO-DO Implement image upload tests someday
     // TO-DO: Add assertThat for "Is Inspectable? Yes"... (true/false x 3 fields)
   }
@@ -102,7 +99,6 @@ public class ViewMaterialPage extends NavigationWrapper {
   public EditMaterialPage clickEditMaterialButton() {
     this.findFirst("#editMaterial").click();
     return new EditMaterialPage(this.getDriver());
->>>>>>> Milestone-3
   }
 
 }

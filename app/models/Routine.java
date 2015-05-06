@@ -85,11 +85,7 @@ public class Routine extends play.db.ebean.Model {
   private String choices;
 
   // The sets that use this routine
-<<<<<<< HEAD
-  @ManyToMany(mappedBy = "routines", cascade = CascadeType.PERSIST)
-=======
   @ManyToMany(mappedBy = "routines", cascade = CascadeType.REMOVE)
->>>>>>> Milestone-3
   private List<Set> sets;
 
   // The image id associated with this routine
@@ -458,11 +454,7 @@ public class Routine extends play.db.ebean.Model {
    *
    * @param id The ID of the Routine to retrieve.
    * @return The Routine.
-<<<<<<< HEAD
-   * @throws RuntimeException if the ID can't be found.
-=======
    * @throws RuntimeException If the ID can't be found.
->>>>>>> Milestone-3
    */
   public static Routine getRoutine(long id) {
     Routine routine = Routine.find().byId(id);
@@ -475,8 +467,6 @@ public class Routine extends play.db.ebean.Model {
 
 
   /**
-<<<<<<< HEAD
-=======
    * Retrieve a Routine based on name.
    *
    * @param name The name of the routine (case sensitive).
@@ -494,7 +484,6 @@ public class Routine extends play.db.ebean.Model {
 
 
   /**
->>>>>>> Milestone-3
    * See if the name is associated with an existing Routine.
    *
    * @param name The name to check against in the database.
@@ -523,11 +512,7 @@ public class Routine extends play.db.ebean.Model {
       );
     }
     else {
-<<<<<<< HEAD
-      routine = Routine.find().byId(routineFormData.id);
-=======
       routine = Routine.getRoutine(routineFormData.id);
->>>>>>> Milestone-3
 
       routine.setName(routineFormData.name);
       routine.setDescription(routineFormData.description);
@@ -545,25 +530,17 @@ public class Routine extends play.db.ebean.Model {
     routine.setPlacement(routineFormData.placement);
     routine.setChoices(routineFormData.choices);
 
-<<<<<<< HEAD
-    if (routineFormData.imageId > 0) {
-=======
     long currentImageId = routine.getImageId();
     if (routineFormData.imageId > 0) {
       if (routineFormData.imageId != currentImageId) {
         Image thisImage = Image.find().byId(currentImageId);
         thisImage.delete();
       }
->>>>>>> Milestone-3
       routine.setImageId(routineFormData.imageId);
     }
 
     routine.save();
-<<<<<<< HEAD
-    routine = Routine.find().byId(routine.getId());
-=======
     routine = Routine.getRoutine(routine.getId());
->>>>>>> Milestone-3
 
     Logger.debug(((routineFormData.id == 0) ? "Add" : "Update") + " routine.  id = [" + routine.getId() + "]"
         + "  name = [" + routine.getName() + "]");
@@ -600,8 +577,6 @@ public class Routine extends play.db.ebean.Model {
     routine.delete();
   }
 
-<<<<<<< HEAD
-=======
 
   /**
    * Take a list of routines and return a list of their IDs.
@@ -635,5 +610,4 @@ public class Routine extends play.db.ebean.Model {
 
     return listOfRoutines;
   }
->>>>>>> Milestone-3
 }

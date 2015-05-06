@@ -17,14 +17,14 @@
       <div class="col-md-12">
         <h1>Delete User Account</h1>
 
-        <!-- User Attributes -->
+          <!-- User Attributes -->
         <div class="container">
           <p>If you are sure you wish to delete your account, please enter your password below.</p>
           <br />
           @form(routes.Application.postDeleteUser(), 'class -> "form-horizontal") {
-            <!-- Hidden ID Field -->
+              <!-- Hidden ID Field -->
             @hidden(deleteMagicianForm("id"))
-            <!-- Password -->
+              <!-- Password -->
             @password(deleteMagicianForm("password"),
               label = "Password",
               placeholder = "Password",
