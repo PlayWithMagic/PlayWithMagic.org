@@ -9,6 +9,10 @@ import play.Logger;
 import play.data.Form;
 import play.data.validation.ValidationError;
 import play.mvc.Controller;
+<<<<<<< HEAD
+=======
+import play.mvc.Http.Context;
+>>>>>>> Milestone-3
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -61,6 +65,7 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result index(String message) {
+<<<<<<< HEAD
 
     /*
     Http.Context context = Http.Context.current();
@@ -73,6 +78,8 @@ public class Application extends Controller {
     }
 
     */
+=======
+>>>>>>> Milestone-3
     return ok(Index.render("home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), message));
   }
 
@@ -138,7 +145,14 @@ public class Application extends Controller {
    * If errors are found, re-render the page, displaying the error data.
    * If errors not found, take the user to the login screen and display message.
    *
+<<<<<<< HEAD
    * @return On success, the Index page.  On failure, redisplay the EditUser page.
+=======
+   * The flash() method is an easy way to push error messages and then retireve them in the page view.
+   *
+   * @return On success, the Index page.  On failure, redisplay the EditUser page.
+   * @see https://www.playframework.com/documentation/2.3.7/JavaSessionFlash
+>>>>>>> Milestone-3
    */
   public static Result postUser() {
     Form<EditUserFormData> formData = Form.form(EditUserFormData.class).bindFromRequest();
@@ -152,7 +166,10 @@ public class Application extends Controller {
       if (formData.hasErrors()) {
         Logger.error("postUser HTTP Form Error.");
 
+<<<<<<< HEAD
         // TODO: Patrick:  What does this code do?
+=======
+>>>>>>> Milestone-3
         for (String key : formData.errors().keySet()) {
           List<ValidationError> currentError = formData.errors().get(key);
           for (play.data.validation.ValidationError error : currentError) {
@@ -329,6 +346,18 @@ public class Application extends Controller {
 
     if (formData.hasErrors()) {
       Logger.error("postMagician HTTP Form Error.");
+<<<<<<< HEAD
+=======
+
+      for (String key : formData.errors().keySet()) {
+        List<ValidationError> currentError = formData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            Logger.error("   " + key + ":  " + error.message());
+          }
+        }
+      }
+>>>>>>> Milestone-3
 
       Map<String, Boolean> magicianTypeMap = null;
       if (MagicianTypeFormData.isMagicianType(formData.field("magicianType").value())) {
@@ -460,6 +489,18 @@ public class Application extends Controller {
 
     if (formWithRoutineData.hasErrors()) {
       Logger.error("postRoutine HTTP Form Error.");
+<<<<<<< HEAD
+=======
+
+      for (String key : formWithRoutineData.errors().keySet()) {
+        List<ValidationError> currentError = formWithRoutineData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            Logger.error("   " + key + ":  " + error.message());
+          }
+        }
+      }
+>>>>>>> Milestone-3
 
       return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
           formWithRoutineData, Routine.getMaterials(routineId)));
@@ -547,10 +588,17 @@ public class Application extends Controller {
     if (id != 0) {
       Set thisSet = Set.getSet(id);
       return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
+<<<<<<< HEAD
           Routine.getActiveRoutines(), thisSet.getRoutines()));
     }
     else {
       List<Routine> emptyListOfRoutinesInSet = new ArrayList<Routine>();
+=======
+          Routine.getActiveRoutines(), Routine.getListOfIds(thisSet.getRoutines())));
+    }
+    else {
+      List<Long> emptyListOfRoutinesInSet = new ArrayList<Long>();
+>>>>>>> Milestone-3
 
       return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
           Routine.getActiveRoutines(), emptyListOfRoutinesInSet));
@@ -567,23 +615,51 @@ public class Application extends Controller {
   public static Result postSet() {
     Form<SetFormData> formWithSetData = Form.form(SetFormData.class).bindFromRequest();
 
+    Logger.debug("postSet Raw Routine Form Data");
+    Logger.debug("  id = [" + formWithSetData.field("id").value() + "]");
+    Logger.debug("  name = [" + formWithSetData.field("name").value() + "]");
+
     long setId = new Long(formWithSetData.field("id").value()).longValue();
 
     if (formWithSetData.hasErrors()) {
       Logger.warn("HTTP Form Error in postSet");
+<<<<<<< HEAD
       List<Routine> listOfRoutines;
       if (setId != 0) {
         listOfRoutines = Set.getSet(setId).getRoutines();
       }
       else {
         listOfRoutines = new ArrayList<Routine>();
+=======
+
+      for (String key : formWithSetData.errors().keySet()) {
+        List<ValidationError> currentError = formWithSetData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            Logger.error("   " + key + ":  " + error.message());
+          }
+        }
+      }
+
+      List<Long> listOfRoutines;
+      if (setId != 0) {
+        listOfRoutines = Routine.getListOfIds(Set.getSet(setId).getRoutines());
+      }
+      else {
+        listOfRoutines = new ArrayList<Long>();
+>>>>>>> Milestone-3
       }
       return badRequest(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
           formWithSetData, Routine.getActiveRoutines(), listOfRoutines));
     }
     else {
       SetFormData data = formWithSetData.get();
+<<<<<<< HEAD
       Set.createSetFromForm(data);
+=======
+      Magician magician = Secured.getUserInfo(Context.current());
+      Set.createSetFromForm(magician, data);
+>>>>>>> Milestone-3
       return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
     }
   }
@@ -658,6 +734,24 @@ public class Application extends Controller {
    ***************************************************************************************************************/
 
   /**
+   * Show the EditMaterial page to update an item.
+   *
+   * @param materialId The ID of the Material you want to edit.
+   * @return An HTTP page EditMaterial.
+   */
+  @Security.Authenticated(Secured.class)
+  public static Result editMaterialDirect(Long materialId) {
+    MaterialFormData materialFormData =
+        new MaterialFormData(Material.getMaterial(materialId));
+
+    Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
+
+    return ok(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithMaterialData));
+  }
+
+
+  /**
    * Show the EditMaterial page to update an item.  First, process the Routine page, deal with any errors and update
    * the database.  Finally, show the EditMaterial page.
    *
@@ -667,6 +761,7 @@ public class Application extends Controller {
   @Security.Authenticated(Secured.class)
   public static Result editMaterial(Long materialId) {
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
+<<<<<<< HEAD
 
     Logger.debug("editMaterial Raw Routine Form Data");
     Logger.debug("  routineId = [" + formWithRoutineData.field("id").value() + "]");
@@ -685,16 +780,38 @@ public class Application extends Controller {
     RoutineFormData data = formWithRoutineData.get();
     Routine routine = Routine.saveRoutineFromForm(data);
     routineId = routine.getId();
+=======
 
-    // End of processing Routine page.  Start processing material.
+    Logger.debug("editMaterial Raw Routine Form Data");
+    Logger.debug("  routineId = [" + formWithRoutineData.field("id").value() + "]");
+    Logger.debug("  name = [" + formWithRoutineData.field("name").value() + "]");
+    Logger.debug("  materialID = [" + materialId + "]");
 
+    long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
+>>>>>>> Milestone-3
+
+    if (formWithRoutineData.hasErrors()) {
+      Logger.error("HTTP Form Error in editMaterial");
+
+<<<<<<< HEAD
     MaterialFormData materialFormData =
         new MaterialFormData(Material.getMaterial(materialId));
+=======
+      return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithRoutineData, Routine.getMaterials(routineId)));
+    }
+>>>>>>> Milestone-3
 
-    Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
+    RoutineFormData data = formWithRoutineData.get();
+    Routine routine = Routine.saveRoutineFromForm(data);
+    routineId = routine.getId();
 
+<<<<<<< HEAD
     return ok(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
         formWithMaterialData));
+=======
+    return editMaterialDirect(materialId);
+>>>>>>> Milestone-3
   }
 
 
@@ -724,7 +841,7 @@ public class Application extends Controller {
 
     MaterialFormData materialFormData = new MaterialFormData();
     materialFormData.routineId = routineId;
-    materialFormData.materialId = -1;
+    materialFormData.materialId = 0;
 
     Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
     return ok(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
@@ -807,6 +924,7 @@ public class Application extends Controller {
    * Display a single Material page.
    *
    * @param routineId  The ID of the Routine to be displayed.
+<<<<<<< HEAD
    * @param materialId The ArrayList index of the material to display.
    * @return An HTTP OK message along with the HTML content for a single Routine page.
    */
@@ -874,6 +992,75 @@ public class Application extends Controller {
       imageId = -1;
     }
 
+=======
+   * @param materialId The ID of the material to display.
+   * @return An HTTP OK message along with the HTML content for a single Routine page.
+   */
+  public static Result viewMaterial(long routineId, long materialId) {
+    Routine routine = Routine.getRoutine(routineId);
+    Material material = Material.getMaterial(materialId);
+
+    return ok(ViewMaterial.render("viewRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), material));
+  }
+
+
+  /***************************************************************************************************************
+   * I M A G E S
+   *
+   * Gets the image from the Images database.
+   *
+   ***************************************************************************************************************/
+
+  /**
+   * Gets the image that has been uploaded to the database.
+   * @param id The image id.
+   * @return The image.
+   */
+  public static Result getImage(long id) {
+    Image image = Image.find().byId(id);
+    if (image == null) {
+      throw new RuntimeException("Could not find the image with associated id.");
+    }
+
+    return ok(image.data).as("image");
+  }
+
+  /**
+   * Uploads image in Request to the Images database.
+   * @param request The request.
+   * @return The image id. Returns -1 if file size limit exceeded or no image found in form.
+   */
+  public static long uploadImage(Http.Request request) {
+
+    // takes request
+    Http.MultipartFormData body = request.body().asMultipartFormData();
+    Http.MultipartFormData.FilePart picture = body.getFile("image");
+
+    // creates variables
+    String fileName = "";
+    String contentType = "";
+    File file = null;
+    long imageId;
+    Image image = null;
+
+    // checks image upload size against max
+    if (request().body().isMaxSizeExceeded()) {
+      System.out.printf("Image exceeds maximum allowed file size. (512K)");
+      imageId = -1;
+    }
+    else if (picture != null) {
+      fileName = picture.getFilename();
+      contentType = picture.getContentType();
+      file = picture.getFile();
+      image = new Image(fileName, file);
+      imageId = image.id;
+    }
+    else {
+      Logger.debug("No new image found in form.");
+      imageId = -1;
+    }
+
+>>>>>>> Milestone-3
     return imageId;
   }
 

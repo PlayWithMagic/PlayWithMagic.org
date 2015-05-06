@@ -584,6 +584,23 @@ public class Magician extends play.db.ebean.Model {
 
 
   /**
+<<<<<<< HEAD
+=======
+   * Get the Magician's name.  If the magician has a stage name, use it.  Otherwise, use firstName lastName.
+   *
+   * @return The Magician's name.
+   */
+  public String getName() {
+    if (this.stageName != null && !this.stageName.isEmpty()) {
+      return this.stageName;
+    }
+
+    return this.firstName + " " + this.lastName;
+  }
+
+
+  /**
+>>>>>>> Milestone-3
    * Delete a Magician associated with a given id.
    * <p>
    * TO-DO:  Set the status=inactive instead of deleting the magician.  Rename method to deactivate Magician.
@@ -660,7 +677,16 @@ public class Magician extends play.db.ebean.Model {
     magician.setInstagram(editMagicianFormData.instagram);
     magician.setFlickr(editMagicianFormData.flickr);
 
+<<<<<<< HEAD
     if (editMagicianFormData.imageId > 0) {
+=======
+    long currentImageId = magician.getImageId();
+    if (editMagicianFormData.imageId > 0) {
+      if (editMagicianFormData.imageId != currentImageId) {
+        Image thisImage = Image.find().byId(currentImageId);
+        thisImage.delete();
+      }
+>>>>>>> Milestone-3
       magician.setImageId(editMagicianFormData.imageId);
     }
 

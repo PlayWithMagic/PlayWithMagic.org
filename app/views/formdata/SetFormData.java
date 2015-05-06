@@ -52,6 +52,11 @@ public class SetFormData {
    * C O N S T R U C T O R S
    ******************************************************************************************************************/
 
+
+  /******************************************************************************************************************
+   * C O N S T R U C T O R S
+   ******************************************************************************************************************/
+
   /**
    * Default no-arg constructor required by Play.
    */
@@ -68,7 +73,7 @@ public class SetFormData {
     this.id = set.getId();
     this.name = set.getName();
     this.description = set.getDescription();
-    this.routines = set.getRoutines();
+    this.routines = Routine.getListOfIds(set.getRoutines());
   }
 
 

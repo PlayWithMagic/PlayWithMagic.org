@@ -88,11 +88,23 @@
                     <td>@material.getPrice()</td>
                     <td>
                     @if(material.getImageId > 0) {
+<<<<<<< HEAD
                       <img class="img-responsive" src="@routes.Application.getImage(material.getImageId)"
                       alt="Image of Material" />
                     } else {
                       <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")"
                       alt="Material Image Placeholder" />
+=======
+                      <img class="img-responsive material-image" src="@routes.Application.getImage(material.getImageId)"
+                      alt="Image of Material" />
+                    } else {
+                      @if(material.getImageUrl != null) {
+                        <img class="img-responsive" src="@routes.Assets.at(material.getImageUrl)" alt="Image of Material"/>
+                      } else {
+                        <img class="img-responsive material-image" src="@routes.Assets.at("images/card-rainbow.jpg")"
+                        alt="Material Image Placeholder" />
+                      }
+>>>>>>> Milestone-3
                     }
                     </td>
                     <td>

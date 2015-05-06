@@ -1,15 +1,29 @@
 package tests;
 
+<<<<<<< HEAD
+=======
+import models.Magician;
+>>>>>>> Milestone-3
 import models.Routine;
 import models.Set;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
+<<<<<<< HEAD
 import play.test.TestBrowser;
 import tests.pages.EditRoutinePage;
 import tests.pages.EditSetPage;
 import tests.pages.IndexPage;
 import tests.pages.ListRoutinesPage;
 import tests.pages.ListSetsPage;
+=======
+import play.Logger;
+import play.test.TestBrowser;
+import tests.pages.EditSetPage;
+import tests.pages.IndexPage;
+import tests.pages.ListSetsPage;
+import views.formdata.RoutineFormData;
+import views.formdata.SetFormData;
+>>>>>>> Milestone-3
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +49,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
   private static Routine routine2 = null;
   private static Routine routine3 = null;
 
+<<<<<<< HEAD
   /**
    * Populate static objects needed for testing.
    */
@@ -50,6 +65,8 @@ public class TestSetCRUD extends play.test.WithBrowser {
     */
   }
 
+=======
+>>>>>>> Milestone-3
   @Override
   protected play.test.FakeApplication provideFakeApplication() {
     return fakeApplication(inMemoryDatabase());
@@ -66,9 +83,54 @@ public class TestSetCRUD extends play.test.WithBrowser {
   }
 
   /**
+<<<<<<< HEAD
    * Test Set navigation from the Index page and navigation bars.
    */
   @Test
+=======
+   * Populate static objects needed for testing.
+   */
+  public void initializeTest() {
+
+    RoutineFormData routineFormData;
+    SetFormData setFormData;
+
+    routineFormData = new RoutineFormData();
+    routineFormData.id = 0;
+    routineFormData.name = "Test Routine Name 01";
+    routineFormData.description = "Test Routine Description 01";
+    routineFormData.duration = 11;
+    routine1 = Routine.saveRoutineFromForm(routineFormData);
+
+    routineFormData = new RoutineFormData();
+    routineFormData.id = 0;
+    routineFormData.name = "Test Routine Name 02";
+    routineFormData.description = "Test Routine Description 02";
+    routineFormData.duration = 22;
+    routine2 = Routine.saveRoutineFromForm(routineFormData);
+
+    routineFormData = new RoutineFormData();
+    routineFormData.id = 0;
+    routineFormData.name = "Test Routine Name 03";
+    routineFormData.description = "Test Routine Description 03";
+    routineFormData.duration = 33;
+    routine3 = Routine.saveRoutineFromForm(routineFormData);
+
+    // Sets can't instantiate an object in the database, because we want the test to actually create this set
+    // in the database.
+    set1 = new Set(Magician.getMagician("test@test.com"), "Test Set Name 01", "Test Set Description 01",
+        new ArrayList<Routine>());
+    set1.getRoutines().add(routine1);
+    set1.getRoutines().add(routine3);
+
+    Logger.debug("Test Routines constructed");
+  }
+
+    /**
+     * Test Set navigation from the Index page and navigation bars.
+     */
+//  @Test
+>>>>>>> Milestone-3
   public void testSetNav() {
     // browser.maximizeWindow();
 
@@ -96,6 +158,10 @@ public class TestSetCRUD extends play.test.WithBrowser {
     GlobalTest.resetDatabaseForTest("PlayWithMagic");
     GlobalTest.addUserForTest();
     IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
+<<<<<<< HEAD
+=======
+    initializeTest();
+>>>>>>> Milestone-3
 
     // Add a set without entering any information... this should generate an error.
     EditSetPage editSetPage = indexPage.clickCreateSetButton();
@@ -110,7 +176,11 @@ public class TestSetCRUD extends play.test.WithBrowser {
   /**
    * Test Set CRUD.
    */
+<<<<<<< HEAD
 //  @Test
+=======
+  @Test
+>>>>>>> Milestone-3
   public void testSetCrudWorkflow() {
     // browser.maximizeWindow();
 
@@ -118,6 +188,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
     GlobalTest.resetDatabaseForTest("PlayWithMagic");
     GlobalTest.addUserForTest();
     IndexPage indexPage = new IndexPage(browser).loginToTestAccount();
+<<<<<<< HEAD
 
 
     // Quickly populate three routines
@@ -142,6 +213,14 @@ public class TestSetCRUD extends play.test.WithBrowser {
 
 
 
+=======
+    initializeTest();
+
+ // Add a Set.
+    EditSetPage editSetPage = indexPage.clickCreateSetButton();
+    editSetPage.populateSet(set1);
+    editSetPage.clickSubmit();
+>>>>>>> Milestone-3
 
 /*
     Long routineId1;
@@ -152,7 +231,11 @@ public class TestSetCRUD extends play.test.WithBrowser {
   //  EditRoutinePage editRoutinePage;
     editRoutinePage = new EditRoutinePage(browser);
     editRoutinePage.populateRoutine(routine1);
+<<<<<<< HEAD
 // TODO:  This will no longer work with Postgres.
+=======
+// TO-DO:  This will no longer work with Postgres.
+>>>>>>> Milestone-3
     routineId1 = RoutineDB.getRoutines().get(0).getId();
 
     editRoutinePage = new EditRoutinePage(browser);
@@ -231,11 +314,20 @@ public class TestSetCRUD extends play.test.WithBrowser {
 */
   }
 
+<<<<<<< HEAD
 
   /**
    * Test to verify that a EditSet form submission works and results can be viewed on the ListSets Page.
    */
   // TODO:  This needs to get re-added to the test suite when it can populate its own routines.
+=======
+// TO-DO: Verify bi-directional datasets
+  
+  /**
+   * Test to verify that a EditSet form submission works and results can be viewed on the ListSets Page.
+   */
+  // TO-DO:  This needs to get re-added to the test suite when it can populate its own routines.
+>>>>>>> Milestone-3
 //  @Test
   public void testCreateNewSet() {
     // browser.maximizeWindow();
@@ -245,6 +337,7 @@ public class TestSetCRUD extends play.test.WithBrowser {
     String name = "My First Set";
     String description = "This is the first set that I have built!";
     List<Long> routineList = new ArrayList<Long>();
+<<<<<<< HEAD
     // TODO:  This needs to be refactored to populate its own routines (1 and 3 below)
     //routineList.add(1L);
     //routineList.add(3L);
@@ -253,6 +346,16 @@ public class TestSetCRUD extends play.test.WithBrowser {
     listSetsPage.isAt();
     listSetsPage.hasSet(name);
     // TODO:  Add tests to ensure the routines that should be in here are in here
+=======
+    // TO-DO:  This needs to be refactored to populate its own routines (1 and 3 below)
+    //routineList.add(1L);
+    //routineList.add(3L);
+    //editSetPage.createSet(name, description, routineList);
+    browser.goTo(listSetsPage);
+    listSetsPage.isAt();
+    listSetsPage.hasSet(name);
+    // TO-DO:  Add tests to ensure the routines that should be in here are in here
+>>>>>>> Milestone-3
   }
 
 }

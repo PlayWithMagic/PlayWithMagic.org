@@ -1,13 +1,26 @@
 package models;
 
 import controllers.Secured;
+<<<<<<< HEAD
 import views.formdata.SetFormData;
 
+=======
+import play.Logger;
+import views.formdata.SetFormData;
+
+import javax.persistence.CascadeType;
+>>>>>>> Milestone-3
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+<<<<<<< HEAD
+=======
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import java.util.ArrayList;
+>>>>>>> Milestone-3
 import java.util.List;
 import play.mvc.Http.Context;
 
@@ -22,6 +35,10 @@ import play.mvc.Http.Context;
  * @see https://github.com/PlayWithMagic/PlayWithMagic/issues/101
  */
 @Entity
+<<<<<<< HEAD
+=======
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"magician_id", "name"}))
+>>>>>>> Milestone-3
 public class Set extends play.db.ebean.Model {
 
   @Id
@@ -37,7 +54,11 @@ public class Set extends play.db.ebean.Model {
   @Column(nullable = false, length = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH)
   private String description;
 
+<<<<<<< HEAD
   @ManyToMany()
+=======
+  @ManyToMany(cascade = CascadeType.REMOVE)
+>>>>>>> Milestone-3
   private List<Routine> routines;
 
 
@@ -188,10 +209,14 @@ public class Set extends play.db.ebean.Model {
     Context context = Context.current();
     Magician magician = Secured.getUserInfo(context);
 
+<<<<<<< HEAD
     //TODO: Once we get things working, we need to get a function like below working...  See Routine.getActiveRoutines
 
     //return Set.find().where().eq(ma);
     return Set.find().all();
+=======
+    return Set.find().where().eq("magician_id", magician.getId()).findList();
+>>>>>>> Milestone-3
   }
 
 
@@ -215,6 +240,7 @@ public class Set extends play.db.ebean.Model {
   /**
    * Create/save a new Set from SetFormData.
    *
+<<<<<<< HEAD
    * TODO: Rename SetFormData to EditSetFormData.
    * @param setFormData Input data from the submitted form.
    */
@@ -234,6 +260,33 @@ public class Set extends play.db.ebean.Model {
       set.setRoutines(setFormData.routines);
     }
     set.save();
+=======
+   * @param magician The magician who owns this set.
+   * @param setFormData Input data from the submitted form.
+   * @return The set that was just saved.
+   */
+  public static Set createSetFromForm(Magician magician, SetFormData setFormData) {
+    Set set;
+
+    if (setFormData.id == 0) {
+      set = new Set(magician, setFormData.name, setFormData.description, Routine.getRoutines(setFormData.routines));
+    }
+    else {
+      // TO-DO: Right now anybody can modify someone else's set
+      set = Set.find().byId(setFormData.id);
+      set.setName(setFormData.name);
+      set.setDescription(setFormData.description);
+      set.setRoutines(Routine.getRoutines(setFormData.routines));
+    }
+
+    set.save();
+    set = Set.getSet(set.id);
+
+    Logger.debug(((setFormData.id == 0) ? "Add" : "Update") + " set.  id = [" + set.getId() + "]"
+        + "  name = [" + set.getName() + "]");
+
+    return set;
+>>>>>>> Milestone-3
   }
 
 
@@ -285,6 +338,7 @@ public class Set extends play.db.ebean.Model {
 
 
   /**
+<<<<<<< HEAD
    * TODO: Initialize the Set database.
    */
   public static void init() {
@@ -321,15 +375,73 @@ public class Set extends play.db.ebean.Model {
     routineIds3.add(15L);
     routineIds3.add(34L);
     set = new Set(currentId, "Mechanisms", "With each of the routines in this set, it involves some physical device"
+=======
+   * Initialize the Set database.
+   *
+   * @param magician The Magician who will own these sets.
+   */
+  public static void init(Magician magician) {
+
+    Set set = null;
+    SetFormData setFormData = null;
+
+    setFormData = new SetFormData();
+    setFormData.id = 0;
+    setFormData.magicianId = magician.getId();
+    setFormData.name = "My Amazing Set";
+    setFormData.description = "This is the best set ever. It opens with the Ambitious Card trick"
+        + " to warm up the audience. From there, it shifts to something different with Gypsy Thread. "
+        + "And in the closer, it breaks back down to a card trick to cool down the audience afterwords.";
+    setFormData.routines = new ArrayList<Long>();
+    setFormData.routines.add(Routine.getRoutine("Ambitious Card").getId());
+    setFormData.routines.add(Routine.getRoutine("Gypsy Thread").getId());
+    setFormData.routines.add(Routine.getRoutine("Two Card Monte").getId());
+    if (Set.find().where().eq("magician_id", magician.getId()).eq("name", setFormData.name).findList().size() == 0) {
+      Set.createSetFromForm(magician, setFormData);
+    }
+
+    setFormData = new SetFormData();
+    setFormData.id = 0;
+    setFormData.magicianId = magician.getId();
+    setFormData.name = "With Flare";
+    setFormData.description = "This starts off with a match routine for something that has a bit "
+        + "of an explosive opener, followed by a simple card trick.  Finally, you light up the night with a flaming "
+        + "wallet routine, which binds the card trick and the fire trick together.";
+    setFormData.routines = new ArrayList<Long>();
+    setFormData.routines.add(Routine.getRoutine("Twice Burned").getId());
+    setFormData.routines.add(Routine.getRoutine("Phantom").getId());
+    setFormData.routines.add(Routine.getRoutine("Lucifer's Wallet").getId());
+    if (Set.find().where().eq("magician_id", magician.getId()).eq("name", setFormData.name).findList().size() == 0) {
+      Set.createSetFromForm(magician, setFormData);
+    }
+
+    setFormData = new SetFormData();
+    setFormData.id = 0;
+    setFormData.magicianId = magician.getId();
+    setFormData.name = "Mechanisms";
+    setFormData.description = "With each of the routines in this set, it involves some physical device"
+>>>>>>> Milestone-3
         + " that the audience can either interact with, or view interaction with.  The key is to really liven up "
         + "Zig-Zag-Pencil with your own bit of flare, otherwise it will pale against the other routines in this Set. "
         + "Next, a simple card trick that allows the audience member to interact with their cell phone!  Always good "
         + "to have more audience interaction.  Finally, the close is something that goes back to the engineer theme "
         + "of the opener with a twist! "
+<<<<<<< HEAD
         + "Once you've closed, the audience member will walk away with a photo memory on their phone.", routineIds3);
     SetDB.addSet(set);
     currentId++;
 */
+=======
+        + "Once you've closed, the audience member will walk away with a photo memory on their phone.";
+    setFormData.routines = new ArrayList<Long>();
+    setFormData.routines.add(Routine.getRoutine("Zig-Zag-Pencil").getId());
+    setFormData.routines.add(Routine.getRoutine("Triumph and Triumph Again").getId());
+    setFormData.routines.add(Routine.getRoutine("Ambitious Card").getId());
+    if (Set.find().where().eq("magician_id", magician.getId()).eq("name", setFormData.name).findList().size() == 0) {
+      Set.createSetFromForm(magician, setFormData);
+    }
+
+>>>>>>> Milestone-3
   }
 
 }

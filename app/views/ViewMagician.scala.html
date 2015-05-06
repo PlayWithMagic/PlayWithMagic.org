@@ -24,9 +24,17 @@
           <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">Edit Profile</a>
           <a href="@routes.Application.editUser(magician.getId)" class="btn btn-large">Change Password</a>
           <a href="@routes.Application.listMagicians()" class="btn btn-large">Return to Magician List</a>
+<<<<<<< HEAD
           @if(magician.getId() == userInfo.getId()) {
             <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
               Delete Account</a>
+=======
+          @if(userInfo != null) {
+            @if(magician.getId() == userInfo.getId()) {
+              <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
+                Delete Account</a>
+            }
+>>>>>>> Milestone-3
           }
         </p>
 
@@ -74,10 +82,19 @@
           <a id="returnToMagicianList" href="@routes.Application.listMagicians()" class="btn btn-large">
             Return to Magician List
           </a>
+<<<<<<< HEAD
           @if(magician.getId() == userInfo.getId()) {
             <a id="deleteAccount" href="@routes.Application.deleteMagician(magician.getId)"
                class="btn btn-danger btn-xs" role="button">
               Delete Account</a>
+=======
+          @if(userInfo != null) {
+            @if(magician.getId() == userInfo.getId()) {
+              <a id="deleteAccount" href="@routes.Application.deleteMagician(magician.getId)"
+              class="btn btn-danger btn-xs" role="button">
+                Delete Account</a>
+            }
+>>>>>>> Milestone-3
           }
         </p>
 

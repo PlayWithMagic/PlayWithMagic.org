@@ -331,7 +331,21 @@ public class Material extends play.db.ebean.Model {
    * @return The Material object just saved to the database.
    */
   public static Material saveMaterialFromForm(MaterialFormData materialFormData) {
+<<<<<<< HEAD
     Material material = new Material(Routine.getRoutine(materialFormData.routineId), materialFormData.name);
+=======
+    Material material;
+
+    if (materialFormData.materialId == 0) {
+      material = new Material(Routine.getRoutine(materialFormData.routineId), materialFormData.name);
+    }
+    else {
+      material = Material.getMaterial(materialFormData.materialId);
+      material.setRoutine(Routine.getRoutine(materialFormData.routineId));
+      material.setName(materialFormData.name);
+    }
+
+>>>>>>> Milestone-3
     material.setDescription(materialFormData.description);
     material.setIsInspectable(materialFormData.isInspectable);
     material.setIsGivenAway(materialFormData.isGivenAway);
@@ -340,11 +354,24 @@ public class Material extends play.db.ebean.Model {
     material.setPurchaseUrl(materialFormData.purchaseUrl);
     material.setImageUrl(materialFormData.imageUrl);
 
+<<<<<<< HEAD
     if (materialFormData.imageId > 0) {
       material.setImageId(materialFormData.imageId);
     }
 
 //    if (materialFormData.materialId == 0) {  // Previously -1
+=======
+    long currentImageId = material.getImageId();
+    if (materialFormData.imageId > 0) {
+      if (materialFormData.imageId != currentImageId) {
+        Image thisImage = Image.find().byId(currentImageId);
+        thisImage.delete();
+      }
+      material.setImageId(materialFormData.imageId);
+    }
+
+//    if (materialFormData.materialId == 0) {
+>>>>>>> Milestone-3
 //      Routine.getMaterials(materialFormData.routineId).add(material);
 //    }
 //    else {

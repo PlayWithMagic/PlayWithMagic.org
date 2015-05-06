@@ -84,6 +84,10 @@ create table set (
   magician_id               bigint,
   name                      varchar(45) not null,
   description               varchar(2000) not null,
+<<<<<<< HEAD
+=======
+  constraint uq_set_1 unique (magician_id,name),
+>>>>>>> Milestone-3
   constraint pk_set primary key (id))
 ;
 

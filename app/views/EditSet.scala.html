@@ -5,7 +5,11 @@
 * @see http://www.playframework.com
 *@
 @(page: String, isLoggedIn: Boolean, userInfo: Magician, setForm: Form[views.formdata.SetFormData],
+<<<<<<< HEAD
     allRoutines: List[Routine], routinesInSet: List[Routine])
+=======
+    allRoutines: List[Routine], routinesInSet: List[Long])
+>>>>>>> Milestone-3
 
 @import helper.form
 @import views.html.bootstrap3.{text45, textarea, hidden}
@@ -61,7 +65,11 @@
                         id="@routine.getId"
                         value="@routine.getId"
                         @for(routineInSet <- routinesInSet) {
+<<<<<<< HEAD
                           @if(routineInSet == routine) {checked}
+=======
+                          @if(routineInSet == routine.getId) {checked}
+>>>>>>> Milestone-3
                         }>
                   </td>
                   <td>@routine.getName()</td>
