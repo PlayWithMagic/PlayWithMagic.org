@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * A Magician object that holds the information about a user of the Play With Magic site.
  * Essentially the user data.
- * <p>
+ *
  * The synthetic unique constraint on this model is id.
  * The logical unique constraint on this model is email.
  *
@@ -98,11 +98,11 @@ public class Magician extends play.db.ebean.Model {
   /**
    * Create a magician with only the required fields.
    *
-   * @param firstName    The magician's first name.
-   * @param lastName     The magician's last name.
-   * @param email        The magician's eMail address.
-   * @param magicianType The type of magician the user identifies with.
-   * @param password     The magician's password.
+   * @param firstName       The magician's first name.
+   * @param lastName        The magician's last name.
+   * @param email           The magician's eMail address.
+   * @param magicianType    The type of magician the user identifies with.
+   * @param password        The magician's password.
    */
   public Magician(String firstName, String lastName, String email, MagicianType magicianType, String password) {
     this.firstName = firstName;
@@ -497,7 +497,6 @@ public class Magician extends play.db.ebean.Model {
 
   /**
    * Gets the image id.
-   *
    * @return The image id.
    */
   public long getImageId() {
@@ -506,12 +505,12 @@ public class Magician extends play.db.ebean.Model {
 
   /**
    * Sets the image id.
-   *
    * @param imageId The image id.
    */
   public void setImageId(long imageId) {
     this.imageId = imageId;
   }
+
 
 
   /******************************************************************************************************************
@@ -542,7 +541,7 @@ public class Magician extends play.db.ebean.Model {
 
   /**
    * Get all of the Magicians.
-   * <p>
+   *
    * TO-DO:  Possibly make another getAllMagician that's context sensitive.  Admins get *all* magicians, while regular
    * users just see Active magicians.
    *
@@ -628,7 +627,7 @@ public class Magician extends play.db.ebean.Model {
   /**
    * Check if a Magician's credentials are valid.
    *
-   * @param email    The email address of the Magician.
+   * @param email The email address of the Magician.
    * @param password The password of the Magician to check.
    * @return True if Magician exists and Password matches hashed password, otherwise false.
    */

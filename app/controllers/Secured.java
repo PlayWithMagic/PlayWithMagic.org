@@ -10,10 +10,10 @@ import play.mvc.Security;
  * Implement authorization for the system.
  * getUserName() and onAuthorized override superclass methods to restrict access to the NewContact page to an
  * associated user only.
- * <p>
+ *
  * getDigitsUser(), isLoggedIn, and GetUserInfo() provide static helper methods so that controllers can know when a
  * user is logged in.
- * <p>
+ *
  * Based on original implementation by Philip Johnson at
  */
 public class Secured extends Security.Authenticator {
@@ -52,7 +52,6 @@ public class Secured extends Security.Authenticator {
 
   /**
    * Check if the user is loged in.
-   *
    * @param context The context.
    * @return True if the user is logged in, null otherwise.
    */
