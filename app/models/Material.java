@@ -268,7 +268,6 @@ public class Material extends play.db.ebean.Model {
 
   /**
    * Gets the image id associated with this material.
-   *
    * @return The image id.
    */
   public long getImageId() {
@@ -277,12 +276,12 @@ public class Material extends play.db.ebean.Model {
 
   /**
    * Sets the image id associated with this material.
-   *
    * @param imageId The image id.
    */
   public void setImageId(long imageId) {
     this.imageId = imageId;
   }
+
 
 
   /******************************************************************************************************************
