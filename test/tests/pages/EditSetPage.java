@@ -3,11 +3,8 @@ package tests.pages;
 import models.Routine;
 import models.Set;
 import org.openqa.selenium.WebDriver;
-import play.Logger;
 import play.test.TestBrowser;
 import tests.GlobalTest;
-
-import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withId;
@@ -77,10 +74,6 @@ public class EditSetPage extends NavigationWrapper {
     fillRequiredField("#description", set.getDescription());
 
     for (Routine routine : set.getRoutines()) {
-      Logger.debug("  looking for... " + "#" + routine.getId());
-      //this.findFirst("input#" + routine.getId()).click();
-      //this.findFirst("input[id=\"" + routine + "\"").click();
-      //String value = String.valueOf(routine);
       String value = String.valueOf(routine.getId());
       find("input", withId(value)).click();
     }
@@ -106,23 +99,5 @@ public class EditSetPage extends NavigationWrapper {
     // assertThat(this.pageSource()).contains("Please select at least one Routine for a Set.");
   }
 
-
-  /**
-   * Tests the form on the EditSet page with provided data.
-   *
-   * @param name           The name of the Set.
-   * @param description    The description of the Set.
-   * @param routines       The list of routine IDs in the Set.
-   */
-  // TODO: Delete this??
-  public void createSet(String name, String description, List<Long> routines) {
-    fill("#name").with(name);
-    fill("#description").with(description);
-    for (long routine : routines) {
-      String value = String.valueOf(routine);
-      find("input", withId(value)).click();
-    }
-    submit("#submit");
-  }
 }
 
