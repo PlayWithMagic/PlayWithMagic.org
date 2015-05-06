@@ -24,7 +24,7 @@
           <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">Edit Profile</a>
           <a href="@routes.Application.editUser(magician.getId)" class="btn btn-large">Change Password</a>
           <a href="@routes.Application.listMagicians()" class="btn btn-large">Return to Magician List</a>
-          @if(userInfo != null) {
+          @if(isLoggedIn) {
             @if(magician.getId() == userInfo.getId()) {
               <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
                 Delete Account</a>
