@@ -6,9 +6,9 @@
 *
 * @see http://www.playframework.com
 *@
-@(sets: List[models.Set])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, sets: List[models.Set])
 
-@Main("listSets") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->
@@ -29,13 +29,13 @@
           <tbody>
           @for(thisSet <- sets) {
             <tr>
-              <td><a href="viewSet?id=@thisSet.getId">@thisSet.getName</a></td>
+              <td><a href="viewSet?id=@thisSet.getId" class="viewSet">@thisSet.getName</a></td>
               <td>
                 <a href="@routes.Application.editSet(thisSet.getId)" class="btn btn-warning btn-xs"
                 role="button">Edit</a>
               </td>
               <td>
-                <a href="@routes.Application.deleteSet(thisSet.getId)" class="btn btn-danger btn-xs"
+                <a href="@routes.Application.deleteSet(thisSet.getId)" class="btn btn-danger btn-xs deleteSet"
                 role="button">Delete</a>
               </td>
             </tr>

@@ -3,23 +3,46 @@
 *
 * @see http://www.playframework.com
 *@
-@(magician: Magician)
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, magician: Magician)
 
-@Main("viewMagician") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->
     <section id="content" class="container">
       <div class="col-md-6">
-        <h2>@if(magician.getStageName) { @magician.getStageName } else { Magician }
+        <h2>
+          @if(magician.getStageName && magician.getStageName != magician.getFirstName + " " + magician.getLastName) {
+            @magician.getStageName
+          } else {
+            Magician
+          }
           <small>@magician.getFirstName @magician.getLastName</small>
-          <p class="visible-xs-block visible-sm-block">
-            <a href="/editMagician?id=@magician.getId" class="btn btn-large">Edit Profile</a>
-            <a href="listMagicians" class="btn btn-large">Return to Magician List</a>
-          </p>
         </h2>
-        <img class="img-responsive" src="@routes.Assets.at("images/working-man.jpg")" alt="Image of Magician"/>
+
+        <p class="visible-xs-block visible-sm-block">
+          <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">Edit Profile</a>
+          <a href="@routes.Application.editUser(magician.getId)" class="btn btn-large">Change Password</a>
+          <a href="@routes.Application.listMagicians()" class="btn btn-large">Return to Magician List</a>
+          @if(magician.getId() == userInfo.getId()) {
+            <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
+              Delete Account</a>
+          }
+        </p>
+
+        @if(magician.getImageId > 0) {
+          <img class="img-responsive" src="@routes.Application.getImage(magician.getImageId)" alt="Image of Magician" />
+        } else {
+          <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")" alt="Magician Image Placeholder"/>
+        }
+
         <section id="social">
+          @if(magician.getEmail) {
+            <a href="mailto:@magician.getEmail"><i class="fa fa-envelope-o"></i></a>
+          }
+          @if(magician.getWebsite) {
+            <a href="@magician.getWebsite"><i class="fa fa-home"></i></a>
+          }
           @if(magician.getFacebook) {
             <a href="@magician.getFacebook"><i class="fa fa-facebook"></i></a>
           }
@@ -42,34 +65,63 @@
       </div>
       <div class="col-md-6">
         <p class="hidden-xs hidden-sm">
-          <a href="/editMagician?id=@magician.getId" class="btn btn-large">Edit Profile</a>
-          <a href="listMagicians" class="btn btn-large">Return to Magician List</a>
+          <a id="editMagician" href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">
+            Edit Profile
+          </a>
+          <a id="changePassword" href="@routes.Application.editUser(magician.getId)" class="btn btn-large">
+            Change Password
+          </a>
+          <a id="returnToMagicianList" href="@routes.Application.listMagicians()" class="btn btn-large">
+            Return to Magician List
+          </a>
+          @if(magician.getId() == userInfo.getId()) {
+            <a id="deleteAccount" href="@routes.Application.deleteMagician(magician.getId)"
+               class="btn btn-danger btn-xs" role="button">
+              Delete Account</a>
+          }
         </p>
-        <h3>Level of Experience</h3>
+
+        <h3>Experience with Magic</h3>
         <p>
-          @magician.getExperienceLevel@if(magician.getYearStarted != 0) {, practicing since @magician.getYearStarted}
+          @magician.getMagicianType.getName @if(magician.getYearStarted != null) {, practicing since @magician.getYearStarted}
         </p>
-        <h3>Biography</h3>
-        <p>@magician.getBiography</p>
 
-        <h3>Interests in Magic</h3>
-        <p>@magician.getInterests</p>
+        @if(magician.getBiography) {
+          <h3>Biography</h3>
+          <p>@magician.getBiography</p>
+        }
 
-        <h3>Influences</h3>
-        <p>@magician.getInfluences</p>
+        @if(magician.getLocation) {
+          <h3>Home Base</h3>
+          <p>@magician.getLocation</p>
+        }
+
+        @if(magician.getInterests) {
+          <h3>Interests in Magic</h3>
+          <p>@magician.getInterests</p>
+        }
+
+        @if(magician.getInfluences) {
+          <h3>Influences</h3>
+          <p>@magician.getInfluences</p>
+        }
 
         @if(magician.getOrganizations) {
           <h3>Organizations</h3>
           <p>@magician.getOrganizations</p>
         }
 
+        @**
+        * In keeping with the 'continuous release strategy and ensuring that all code is functional,
+        * we're commenting this out for now.
+        *
         <h3>@magician.getStageName's Routines
           <small class="hidden-xs hidden-sm">
             <a class="btn btn-large" href="/editRoutine">Add Routine</a>
           </small>
         </h3>
         <p class="visible-xs-block visible-sm-block">
-          <a href="/editRoutine" class="btn btn-sm">Add Routine</a>
+        <a href="/editRoutine" class="btn btn-sm">Add Routine</a>
         </p>
         <table class="table table-striped">
           <thead>
@@ -117,6 +169,7 @@
             </tr>
           </tbody>
         </table>
+        *@
       </div>
     </section>
   </section>

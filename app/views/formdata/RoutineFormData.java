@@ -121,6 +121,10 @@ public class RoutineFormData {
       message = "The choices text can't be more than " + GlobalDbInfo.MAX_LONG_TEXT_LENGTH + " characters.")
   public String choices;            /* Why did you make some of the choices you made in the design of this routine. */
 
+  /**
+   * The image id associated with this routine.
+   */
+  public long imageId;
 
   /**
    * Default no-arg constructor required by Play.
@@ -150,6 +154,7 @@ public class RoutineFormData {
     inspiration = routine.getInspiration();
     placement = routine.getPlacement();
     choices = routine.getChoices();
+    imageId = routine.getImageId();
   }
 
 
@@ -159,10 +164,15 @@ public class RoutineFormData {
    * @return Either null if no errors or a List of errors.
    */
   public List<ValidationError> validate() {
-    List<ValidationError> errors = new ArrayList<>();
+    List<ValidationError> errors = new ArrayList<ValidationError>();
 
     if (id < 0) {
       errors.add(new ValidationError("id", "An invalid ID has been passed into the application."));
+    }
+
+    if (Routine.find().where().ne("id", id).ieq("name", name).findList().size() > 0) {
+      errors.add(new ValidationError("name",
+          "Play With Magic already has a routine with that name.  You'll need to pick another name."));
     }
 
     // TO-DO:  The Play Framework prints 'error.invalid' and not presenting this error message.

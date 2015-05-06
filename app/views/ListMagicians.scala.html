@@ -3,9 +3,9 @@
 *
 * @see http://www.playframework.com
 *@
-@(magicians: List[Magician])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, magicians: List[Magician])
 
-@Main("listMagicians") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <div class="container">
     <h1>Current Magicians</h1>
@@ -17,24 +17,26 @@
         <tr>
           <th>Name</th>
           <th>Stage Name</th>
-          <th>Skill Level</th>
-          <th>Routines</th>
+          <th>Type</th>
+          @*    <th>Routines</th>  *@   @* TODO: Remove for now / continuous release  *@
+          <th>Edit</th>
+          <th>Change Password</th>
         </tr>
       </thead>
       <tbody>
         @for(magician <- magicians) {
           <tr>
-            <td><a href="viewMagician?id=@magician.getId">@magician.getFirstName @magician.getLastName</a></td>
+            <td><a href="viewMagician?id=@magician.getId" class="viewMagician">@magician.getFirstName @magician.getLastName</a></td>
             <td>@if(magician.getStageName) { @magician.getStageName } else { None }</td>
-            <td>@magician.getExperienceLevel</td>
-            <td>Link to Magician's Routines Here</td>
+            <td>@magician.getMagicianType.getName</td>
+            @* <td>Link to Magician's Routines Here</td>  *@
             <td>
-              <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-warning btn-xs" role="button">
+              <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-warning btn-xs editMagician" role="button">
               Edit</a>
             </td>
             <td>
-              <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
-              Delete</a>
+              <a href="@routes.Application.editUser(magician.getId)" class="btn btn-danger btn-xs changePassword" role="button">
+              Change Password</a>
             </td>
           </tr>
         }

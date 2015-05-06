@@ -1,55 +1,57 @@
 package tests.pages;
 
-import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
+import play.test.TestBrowser;
+import tests.GlobalTest;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
- * Provides test scaffolding for the ListRoutines page.
+ * Provides scaffolding to remotely control the ListSets page for testing.
+ *
+ * When you want to *go* to a page, do new ListSetsPage(browser);
+ * When you are already *at* a page, do new ListSetsPage(browser.getDriver());
+ *
  */
-public class ListSetsPage extends FluentPage {
-
-  private String url;
+public class ListSetsPage extends NavigationWrapper {
 
   /**
-   * Create the ListSets page.
+   * Go directly to the ListSets page and make sure the browser gets there.
    *
-   * @param webDriver The driver.
-   * @param port      The port.
+   * @param browser A remotely controlled test browser.
    */
-  public ListSetsPage(WebDriver webDriver, int port) {
-    super(webDriver);
-    this.url = "http://localhost:" + port + "/listSets";
+  public ListSetsPage(TestBrowser browser) {
+    super(browser.getDriver());
+    this.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/listSets");
+    isAt();
   }
+
 
   /**
-   * Create the ListSets page (but actually delete the Set and return to the ListSets page).
+   * The browser should already be at the ListSets page.  Make sure the browser is already there.
    *
-   * @param webDriver The driver.
-   * @param port      The port.
-   * @param id        The id of the routine to delete.
+   * @param webDriver The state of the current test browser.
    */
-  public ListSetsPage(WebDriver webDriver, int port, long id) {
+  public ListSetsPage(WebDriver webDriver) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/deleteRoutine?id=" + id;
+    isAt();
   }
 
-  @Override
-  public String getUrl() {
-    return this.url;
-  }
 
+  /**
+   * Validate that the browser is on the right page.
+   */
   @Override
   public void isAt() {
-    assertThat(title()).isEqualTo("Play With Magic");
-    assertThat(pageSource().contains("<h1>Current Sets</h1>"));
+    assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
+    assertThat(pageSource()).contains("<h1>Current Sets</h1>");
   }
 
+
   /**
-   * Checks that the ListSets page contains a given Set, with only name.
+   * Checks that the ListSets page contains a given Set.
    *
-   * @param name        The name of the set.
+   * @param name The name of the set.
    */
   public void hasSet(String name) {
     assertThat(pageSource()).contains(name);
