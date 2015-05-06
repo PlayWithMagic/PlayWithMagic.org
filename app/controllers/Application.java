@@ -1,35 +1,45 @@
 package controllers;
 
-import models.MagicianDB;
+import models.Image;
+import models.Magician;
 import models.Material;
 import models.Routine;
-import models.RoutineDB;
 import models.Set;
-import models.SetDB;
 import play.Logger;
 import play.data.Form;
+import play.data.validation.ValidationError;
 import play.mvc.Controller;
+import play.mvc.Http.Context;
+import play.mvc.Http;
 import play.mvc.Result;
-import views.formdata.ExperienceLevels;
-import views.formdata.MagicianFormData;
+import play.mvc.Security;
+import views.formdata.DeleteUserFormData;
+import views.formdata.EditMagicianFormData;
+import views.formdata.EditUserFormData;
+import views.formdata.LoginFormData;
+import views.formdata.MagicianTypeFormData;
 import views.formdata.MaterialFormData;
 import views.formdata.RoutineFormData;
 import views.formdata.SetFormData;
 import views.html.About;
+import views.html.DeleteUser;
 import views.html.EditMagician;
 import views.html.EditMaterial;
 import views.html.EditRoutine;
 import views.html.EditSet;
+import views.html.EditUser;
 import views.html.Help;
 import views.html.Index;
 import views.html.ListMagicians;
 import views.html.ListRoutines;
 import views.html.ListSets;
+import views.html.Login;
 import views.html.ViewMagician;
 import views.html.ViewMaterial;
 import views.html.ViewRoutine;
 import views.html.ViewSet;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -48,10 +58,11 @@ public class Application extends Controller {
   /**
    * Render the Home/Index page.
    *
+   * @param message A String message that is passed to the home page.
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
-  public static Result index() {
-    return ok(Index.render());
+  public static Result index(String message) {
+    return ok(Index.render("home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), message));
   }
 
 
@@ -61,7 +72,7 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the About page.
    */
   public static Result about() {
-    return ok(About.render());
+    return ok(About.render("about", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
   }
 
 
@@ -71,7 +82,202 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the Help page.
    */
   public static Result help() {
-    return ok(Help.render());
+    return ok(Help.render("help", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+  }
+
+
+  /******************************************************************************************************************
+   * U S E R
+   ******************************************************************************************************************/
+
+  /**
+   * Show the EditUser page.  Add a Magician if the ID is 0; or edit an existing Magician (based on their ID).
+   *
+   * This is the Signup page (for unauthenticated users).
+   * <p>
+   * Note:  EditMagician and EditUser are two different views on the same entity.
+   *
+   * @param id The ID of the Magician to edit; if new Magician, ID is 0.
+   * @return An HTTP OK message along with the HTML content for the EditUser page.
+   */
+  public static Result editUser(long id) {
+    EditUserFormData editUserFormData;
+
+    if (id == 0) {
+      editUserFormData = new EditUserFormData();
+    }
+    else {
+      editUserFormData = new EditUserFormData(Magician.getMagician(id));
+    }
+
+    Form<EditUserFormData> formData = Form.form(EditUserFormData.class).fill(editUserFormData);
+    Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editUserFormData.magicianType);
+
+    return ok(EditUser.render("editUser", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formData, magicianTypeMap));
+  }
+
+
+  /**
+   * Handles the request to post form data from the EditUser page.
+   *
+   * First we bind the HTTP POST data to an instance of EditUserFormData.
+   * The binding process will invoke the EditUserFormData.validate() method.
+   *
+   * If errors are found, re-render the page, displaying the error data.
+   * If errors not found, take the user to the login screen and display message.
+   *
+   * The flash() method is an easy way to push error messages and then retireve them in the page view.
+   *
+   * @return On success, the Index page.  On failure, redisplay the EditUser page.
+   * @see https://www.playframework.com/documentation/2.3.7/JavaSessionFlash
+   */
+  public static Result postUser() {
+    Form<EditUserFormData> formData = Form.form(EditUserFormData.class).bindFromRequest();
+
+    Logger.debug("postUser Raw Magician Form Data");
+    Logger.debug("  id = [" + formData.field("id").value() + "]");
+    Logger.debug("  firstName = [" + formData.field("firstName").value() + "]");
+    Logger.debug("  eMail = [" + formData.field("email").value() + "]");
+    Logger.debug("  magicianType = [" + formData.field("magicianType").value() + "]");
+
+      if (formData.hasErrors()) {
+        Logger.error("postUser HTTP Form Error.");
+
+        for (String key : formData.errors().keySet()) {
+          List<ValidationError> currentError = formData.errors().get(key);
+          for (play.data.validation.ValidationError error : currentError) {
+            if (!error.message().equals("")) {
+              Logger.error("   " + key + ":  " + error.message());
+              flash(key, error.message());
+            }
+          }
+        }
+
+       Map<String, Boolean> magicianTypeMap = null;
+        if (MagicianTypeFormData.isMagicianType(formData.field("magicianType").value())) {
+          magicianTypeMap = MagicianTypeFormData.getMagicianTypes(formData.field("magicianType").value());
+        }
+        else {
+          magicianTypeMap = MagicianTypeFormData.getMagicianTypes();
+        }
+
+      return badRequest(EditUser.render("editUser", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formData, magicianTypeMap));
+    }
+
+    EditUserFormData editUserFormData = formData.get();
+
+    Logger.debug("postUser Form Backing Class Data");
+    Logger.debug("  id = [" + editUserFormData.id + "]");
+    Logger.debug("  firstName = [" + editUserFormData.firstName + "]");
+    Logger.debug("  eMail = [" + editUserFormData.email + "]");
+    Logger.debug("  magicianType = [" + editUserFormData.magicianType + "]");
+
+    Magician magician = Magician.createMagicianFromForm(editUserFormData);
+
+    Logger.debug("postUser Persisted Data");
+    Logger.debug("  id = [" + magician.getId() + "]");
+    Logger.debug("  firstName = [" + magician.getFirstName() + "]");
+    Logger.debug("  eMail = [" + magician.getEmail() + "]");
+    Logger.debug("  magicianType = [" + magician.getMagicianType().getName() + "]");
+
+    EditMagicianFormData editMagicianFormData = new EditMagicianFormData(magician);
+
+    return redirect(routes.Application.index("Successfully Signed Up!"));
+  }
+
+
+  /**
+   * Posts an authenticated delete user request.
+   *
+   * @return The Index page, logged out.
+   */
+  @Security.Authenticated(Secured.class)
+  public static Result postDeleteUser() {
+    Form<DeleteUserFormData> deleteUserFormData = Form.form(DeleteUserFormData.class).bindFromRequest();
+    //DeleteUserFormData formData = deleteUserFormData.get();
+    if (deleteUserFormData.hasErrors()) {
+      for (String key : deleteUserFormData.errors().keySet()) {
+        List<ValidationError> currentError = deleteUserFormData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            flash(key, error.message());
+          }
+        }
+      }
+
+      //Magician magician = Magician.getMagician(formData.id);
+      return badRequest(DeleteUser.render("deleteMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          deleteUserFormData, Secured.getUserInfo(ctx())));
+    }
+    DeleteUserFormData formData = deleteUserFormData.get();
+    Magician.deleteMagician(formData.id);
+    session().clear();
+    return redirect(routes.Application.index(""));
+  }
+
+
+  /******************************************************************************************************************
+   * A U T H E N T I C A T I O N
+   ******************************************************************************************************************/
+
+  /**
+   * Render the Login page (only to unauthenticated users).
+   *
+   * @param message The message being passed from any errors on the Login form.
+   * @return The Login page.
+   */
+  public static Result login(String message) {
+    Form<LoginFormData> formData = Form.form(LoginFormData.class);
+    return ok(Login.render("login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, message));
+  }
+
+
+  /**
+   * Processes a login form submission from an unauthenticated user.
+   *
+   * First we bind the HTTP POST data to an instance of LoginFormData.
+   * The binding process will invoke the LoginFormData.validate() method.
+   *
+   * If errors are found, re-render the page, displaying the error data.
+   * If errors not found, render the page with the good data.
+   *
+   * @return The index page with the results of validation.
+   */
+  public static Result postLogin() {
+
+    // Get the submitted form data from the request object, and run validation.
+    Form<LoginFormData> formData = Form.form(LoginFormData.class).bindFromRequest();
+
+    if (formData.hasErrors()) {
+      for (String key : formData.errors().keySet()) {
+        List<ValidationError> currentError = formData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            flash(key, error.message());
+          }
+        }
+      }
+      return badRequest(Login.render("login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, ""));
+    }
+
+    // email/password OK, so now we set the session variable and only go to authenticated pages.
+    session().clear();
+    session("email", formData.get().email);
+    return redirect(routes.Application.index(""));
+  }
+
+  
+  /**
+   * Logs out (only for authenticated users) and returns them to the Index page.
+   *
+   * @return A redirect to the Index page.
+   */
+  @Security.Authenticated(Secured.class)
+  public static Result logout() {
+    session().clear();
+    return redirect(routes.Application.index(""));
   }
 
 
@@ -80,98 +286,129 @@ public class Application extends Controller {
    ******************************************************************************************************************/
 
   /**
-   * Renders the editMagician page with a form to add a Magician if the ID is 0; or edit an existing
-   * Magician (based on their ID).
+   * Show the EditMagician page.  Can only edit existing Magicians (based on the ID).
+   * <p>
+   * Note:  EditMagician and EditUser are two different views on the same entity.
    *
-   * @param id The ID of the magician to edit; if new Magician, ID is 0.
+   * @param id The ID of the magician to edit.
    * @return An HTTP OK message along with the HTML content for the EditMagician page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result editMagician(long id) {
-    MagicianFormData data = (id == 0) ? new MagicianFormData() : new MagicianFormData(MagicianDB.getMagician(id));
-    Form<MagicianFormData> formData = Form.form(MagicianFormData.class).fill(data);
-    Map<String, Boolean> experienceLevelMap = ExperienceLevels.getExperienceLevels(data.experienceLevel);
-    return ok(EditMagician.render(formData, experienceLevelMap));
+    EditMagicianFormData editMagicianFormData = new EditMagicianFormData(Magician.getMagician(id));
+
+    Form<EditMagicianFormData> formData = Form.form(EditMagicianFormData.class).fill(editMagicianFormData);
+    Map<String, Boolean> magicianTypeMap = MagicianTypeFormData.getMagicianTypes(editMagicianFormData.magicianType);
+    return ok(EditMagician.render("editMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formData, magicianTypeMap));
   }
 
 
   /**
-   * Handles the request to post form data from the EditMagician page.
+   * Handle the request to post form data from the EditMagician page.
    *
-   * @return The EditMagician page, either with errors or success.
+   * @return If successful, the ListMagicians page.  On error, the EditMagician page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result postMagician() {
-    Form<MagicianFormData> formData = Form.form(MagicianFormData.class).bindFromRequest();
+    Form<EditMagicianFormData> formData = Form.form(EditMagicianFormData.class).bindFromRequest();
 
-    Logger.debug("Raw Magician Form Data");
+    Logger.debug("postMagician Raw Magician Form Data");
     Logger.debug("  id = [" + formData.field("id").value() + "]");
     Logger.debug("  firstName = [" + formData.field("firstName").value() + "]");
-    Logger.debug("  experienceLevel = [" + formData.field("experienceLevel").value() + "]");
-    Logger.debug("  yearStarted = [" + formData.field("yearStarted").value() + "]");
+    Logger.debug("  magicianType = [" + formData.field("magicianType").value() + "]");
 
     if (formData.hasErrors()) {
-      Logger.error("HTTP Form Error.");
+      Logger.error("postMagician HTTP Form Error.");
 
-      Map<String, Boolean> experienceLevelMap = null;
-      if (ExperienceLevels.isExperienceLevel(formData.field("experienceLevel").value())) {
-        experienceLevelMap = ExperienceLevels.getExperienceLevels(formData.field("experienceLevel").value());
+      for (String key : formData.errors().keySet()) {
+        List<ValidationError> currentError = formData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            Logger.error("   " + key + ":  " + error.message());
+          }
+        }
+      }
+
+      Map<String, Boolean> magicianTypeMap = null;
+      if (MagicianTypeFormData.isMagicianType(formData.field("magicianType").value())) {
+        magicianTypeMap = MagicianTypeFormData.getMagicianTypes(formData.field("magicianType").value());
       }
       else {
-        experienceLevelMap = ExperienceLevels.getExperienceLevels();
+        magicianTypeMap = MagicianTypeFormData.getMagicianTypes();
       }
 
-      return badRequest(EditMagician.render(formData, experienceLevelMap));
+      return badRequest(EditMagician.render("editMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formData, magicianTypeMap));
     }
 
-    MagicianFormData data = formData.get();
+    EditMagicianFormData editMagicianFormData = formData.get();
 
-    Logger.debug("Magician Form Data");
-    Logger.debug("  id = [" + data.id + "]");
-    Logger.debug("  firstName = [" + data.firstName + "]");
-    Logger.debug("  experienceLevel = [" + data.experienceLevel + "]");
-    Logger.debug("  yearStarted = [" + data.yearStarted + "]");
+    long imageId = uploadImage(request());
+    if (imageId > 0) {
+      editMagicianFormData.imageId = imageId;
+    }
 
-    MagicianDB.addMagicians(data);
+    Logger.debug("postMagician Magician Form Data");
+    Logger.debug("  id = [" + editMagicianFormData.id + "]");
+    Logger.debug("  firstName = [" + editMagicianFormData.firstName + "]");
+    Logger.debug("  magicianType = [" + editMagicianFormData.magicianType + "]");
+    Logger.debug("  imageId = [" + editMagicianFormData.imageId + "]");
 
-    System.out.printf("HTTP OK; Form Data submitted:  %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, "
-            + "%s, %s, %s %n", data.id, data.firstName, data.lastName, data.stageName, data.location, data.biography,
-        data.interests, data.influences, data.yearStarted, data.organizations, data.website, data.email,
-        data.facebook, data.twitter, data.linkedIn, data.googlePlus, data.flickr, data.instagram);
-    System.out.println(data.experienceLevel);
+    Magician magician = Magician.createMagicianFromForm(editMagicianFormData);
 
-    return ok(ListMagicians.render(MagicianDB.getMagicians()));
+    Logger.debug("postMagician Magician Persisted Data");
+    Logger.debug("  id = [" + magician.getId() + "]");
+    Logger.debug("  firstName = [" + magician.getFirstName() + "]");
+    Logger.debug("  magicianType = [" + magician.getMagicianType().getName() + "]");
+
+    return ok(ListMagicians.render("listMagicians", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        Magician.getActiveMagicians()));
   }
 
 
   /**
-   * Displays the full list of Magicians registered on the site.
+   * Display the full list of Magicians registered on the site.
    *
    * @return An HTTP OK message along with the HTML content for the ListMagicians page.
    */
   public static Result listMagicians() {
-    return ok(ListMagicians.render(MagicianDB.getMagicians()));
+    return ok(ListMagicians.render("listMagicians", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        Magician.getActiveMagicians()));
   }
 
 
   /**
-   * Displays a single Magician based off of the provided ID.
+   * Display a single Magician based off of the provided ID.
    *
    * @param id The ID of the Magician to be displayed.
    * @return An HTTP OK message along with the HTML content for a single Magician page.
    */
   public static Result viewMagician(long id) {
-    return ok(ViewMagician.render(MagicianDB.getMagician(id)));
+    return ok(ViewMagician.render("viewMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        Magician.getMagician(id)));
   }
 
 
   /**
-   * Delete a Magician from the database and render the List Magicians page.
+   * Direct a user to the Delete User page with the ID of the magician to be deleted.
    *
    * @param id The ID of the Magician to delete.
-   * @return An HTTP OK message along with the HTML content for the Home page.
+   * @return An HTTP OK message along with the HTML content for the DeleteUser confirmation page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result deleteMagician(long id) {
-    MagicianDB.deleteMagician(id);
-    return ok(ListMagicians.render(MagicianDB.getMagicians()));
+    //Magician.deleteMagician(id);
+    if (id == 0) {
+      return redirect(routes.Application.index(""));
+    }
+    else {
+      DeleteUserFormData deleteUserFormData = new DeleteUserFormData(Magician.getMagician(id));
+
+      Form<DeleteUserFormData> formWithDeleteData = Form.form(DeleteUserFormData.class).fill(deleteUserFormData);
+      return ok(DeleteUser.render("deleteMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithDeleteData, Magician.getMagician(id)));
+    }
   }
 
 
@@ -186,18 +423,79 @@ public class Application extends Controller {
    * @param routineId The ID of the routine to edit (or 0 if it's a new routine).
    * @return An HTTP OK message along with the HTML content for the EditRoutine page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result editRoutine(long routineId) {
     RoutineFormData routineFormData;
+
     if (routineId == 0) {
       routineFormData = new RoutineFormData();
     }
     else {
-      routineFormData = new RoutineFormData(RoutineDB.getRoutine(routineId));
+      routineFormData = new RoutineFormData(Routine.getRoutine(routineId));
     }
 
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).fill(routineFormData);
 
-    return ok(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+    return ok(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithRoutineData, Routine.getMaterials(routineId)));
+  }
+
+
+  /**
+   * Process the POST method from the EditRoutine page.  If the form has errors, then redisplay EditRoutine.  If not,
+   * then display ListRoutines.
+   *
+   * @return On success, the ListRoutines page.  On failure, redisplay the EditRoutine page.
+   */
+  @Security.Authenticated(Secured.class)
+  public static Result postRoutine() {
+    Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
+
+    Logger.debug("postRoutine Raw Routine Form Data");
+    Logger.debug("  id = [" + formWithRoutineData.field("id").value() + "]");
+    Logger.debug("  name = [" + formWithRoutineData.field("name").value() + "]");
+    Logger.debug("  duration = [" + formWithRoutineData.field("duration").value() + "]");
+
+    long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
+
+    if (formWithRoutineData.hasErrors()) {
+      Logger.error("postRoutine HTTP Form Error.");
+
+      for (String key : formWithRoutineData.errors().keySet()) {
+        List<ValidationError> currentError = formWithRoutineData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            Logger.error("   " + key + ":  " + error.message());
+          }
+        }
+      }
+
+      return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithRoutineData, Routine.getMaterials(routineId)));
+    }
+
+    RoutineFormData routineFormData = formWithRoutineData.get();
+
+    long imageId = uploadImage(request());
+    if (imageId > 0) {
+      routineFormData.imageId = imageId;
+    }
+
+    Logger.debug("postRoutine Form Backing Class Data");
+    Logger.debug("  id = [" + routineFormData.id + "]");
+    Logger.debug("  name = [" + routineFormData.name + "]");
+    Logger.debug("  duration = [" + routineFormData.duration + "]");
+    Logger.debug("  imageId = [" + routineFormData.imageId + "]");
+
+    Routine routine = Routine.saveRoutineFromForm(routineFormData);
+
+    Logger.debug("postRoutine Persisted Data");
+    Logger.debug("  id = [" + routine.getId() + "]");
+    Logger.debug("  name = [" + routine.getName() + "]");
+    Logger.debug("  duration = [" + routine.getDuration() + "]");
+
+    return ok(ListRoutines.render("listRoutines", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        Routine.getActiveRoutines()));
   }
 
 
@@ -208,33 +506,10 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result deleteRoutine(long routineId) {
-    RoutineDB.deleteRoutine(routineId);
+    Routine.deleteRoutine(routineId);
 
-    return ok(ListRoutines.render(RoutineDB.getRoutines()));
-  }
-
-
-  /**
-   * Process the POST method from the EditRoutine page.  If the form has errors, then redisplay EditRoutine.  If not,
-   * then display ListRoutines.
-   *
-   * @return The editRoutine page, either with errors or with form data.
-   */
-  public static Result postRoutine() {
-    Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
-
-    long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
-
-    if (formWithRoutineData.hasErrors()) {
-      Logger.error("HTTP Routine Form Error.");
-
-      return badRequest(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
-    }
-
-    RoutineFormData routineFormData = formWithRoutineData.get();
-    RoutineDB.addRoutines(routineFormData);
-
-    return ok(ListRoutines.render(RoutineDB.getRoutines()));
+    return ok(ListRoutines.render("listRoutines", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        Routine.getActiveRoutines()));
   }
 
 
@@ -244,7 +519,8 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the List Routine page.
    */
   public static Result listRoutines() {
-    return ok(ListRoutines.render(RoutineDB.getRoutines()));
+    return ok(ListRoutines.render("listRoutines", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        Routine.getActiveRoutines()));
   }
 
 
@@ -255,8 +531,10 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for a single Routine page.
    */
   public static Result viewRoutine(long routineId) {
-    return ok(ViewRoutine.render(RoutineDB.getRoutine(routineId)));
+    return ok(ViewRoutine.render("viewRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        Routine.getRoutine(routineId)));
   }
+
 
   /***************************************************************************************************************
    * S E T
@@ -269,60 +547,93 @@ public class Application extends Controller {
    * @param id The ID of the Set to edit (or 0 if it's a new routine).
    * @return An HTTP OK message along with the HTML content for the EditSet page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result editSet(long id) {
-    SetFormData data = (id == 0) ? new SetFormData() : new SetFormData(SetDB.getSet(id));
-    Form<SetFormData> formData = Form.form(SetFormData.class).fill(data);
+    SetFormData setFormData = (id == 0) ? new SetFormData() : new SetFormData(Set.getSet(id));
+
+    Form<SetFormData> formData = Form.form(SetFormData.class).fill(setFormData);
+
     if (id != 0) {
-      Set thisSet = SetDB.getSet(id);
-      return ok(EditSet.render(formData, RoutineDB.getRoutines(), thisSet.getRoutines()));
+      Set thisSet = Set.getSet(id);
+      return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
+          Routine.getActiveRoutines(), Routine.getListOfIds(thisSet.getRoutines())));
     }
     else {
-      List<Long> temp = new ArrayList<Long>();
-      return ok(EditSet.render(formData, RoutineDB.getRoutines(), temp));
+      List<Long> emptyListOfRoutinesInSet = new ArrayList<Long>();
+
+      return ok(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
+          Routine.getActiveRoutines(), emptyListOfRoutinesInSet));
     }
   }
 
-  /**
-   * Delete a set from the database and display the ListSets page.
-   *
-   * @param id The ID of the set to delete.
-   * @return An HTTP OK message along with the HTML content for the Set List page.
-   */
-  public static Result deleteSet(long id) {
-    SetDB.deleteSet(id);
-    return ok(ListSets.render(SetDB.getSets()));
-  }
 
   /**
-   * Handles the request to post form data from the editSet page.
+   * Handles the request to post form data from EditSet.
    *
    * @return An HTTP OK message if no errors, otherwise the form page with errors.
    */
+  @Security.Authenticated(Secured.class)
   public static Result postSet() {
     Form<SetFormData> formWithSetData = Form.form(SetFormData.class).bindFromRequest();
+
+    Logger.debug("postSet Raw Routine Form Data");
+    Logger.debug("  id = [" + formWithSetData.field("id").value() + "]");
+    Logger.debug("  name = [" + formWithSetData.field("name").value() + "]");
 
     long setId = new Long(formWithSetData.field("id").value()).longValue();
 
     if (formWithSetData.hasErrors()) {
-      System.out.println("HTTP Form Error.");
-      Set thisSet = SetDB.getSet(setId);
-      return badRequest(EditSet.render(formWithSetData, RoutineDB.getRoutines(), thisSet.getRoutines()));
+      Logger.warn("HTTP Form Error in postSet");
+
+      for (String key : formWithSetData.errors().keySet()) {
+        List<ValidationError> currentError = formWithSetData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            Logger.error("   " + key + ":  " + error.message());
+          }
+        }
+      }
+
+      List<Long> listOfRoutines;
+      if (setId != 0) {
+        listOfRoutines = Routine.getListOfIds(Set.getSet(setId).getRoutines());
+      }
+      else {
+        listOfRoutines = new ArrayList<Long>();
+      }
+      return badRequest(EditSet.render("editSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithSetData, Routine.getActiveRoutines(), listOfRoutines));
     }
     else {
       SetFormData data = formWithSetData.get();
-      SetDB.addSet(data);
-      return ok(ListSets.render(SetDB.getSets()));
+      Magician magician = Secured.getUserInfo(Context.current());
+      Set.createSetFromForm(magician, data);
+      return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
     }
   }
 
+
   /**
-   * Render the List Sets page.
+   * Render the List Sets page with all sets.
    *
    * @return An HTTP OK message along with the HTML content for the List Set page.
    */
-  public static Result listSets() {
-    return ok(ListSets.render(SetDB.getSets()));
+  public static Result listAllSets() {
+
+    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getAllSets()));
   }
+
+
+  /**
+   * Render the List Sets page with just the Magician's sets.
+   *
+   * @return An HTTP OK message along with the HTML content for the List Set page.
+   */
+  public static Result listMySets() {
+
+    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
+  }
+
 
   /**
    * Render the View Set page.
@@ -331,9 +642,25 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for a single Set page.
    */
   public static Result viewSet(long id) {
-    Set thisViewSet = SetDB.getSet(id);
-    return ok(ViewSet.render(SetDB.getSet(id), RoutineDB.getRoutines(), thisViewSet.getRoutines()));
+    Set thisViewSet = Set.getSet(id);
+
+    return ok(ViewSet.render("viewSet", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getSet(id),
+        Routine.getActiveRoutines(), thisViewSet.getRoutines()));
   }
+
+
+  /**
+   * Delete a set from the database and display the ListSets page.
+   *
+   * @param id The ID of the set to delete.
+   * @return An HTTP OK message along with the HTML content for the Set List page.
+   */
+  @Security.Authenticated(Secured.class)
+  public static Result deleteSet(long id) {
+    Set.deleteSet(id);
+    return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
+  }
+
 
   /***************************************************************************************************************
    * M A T E R I A L
@@ -355,91 +682,119 @@ public class Application extends Controller {
    ***************************************************************************************************************/
 
   /**
-   * Show the EditMaterial page to update an item.  First, process the Routine page, deal with any errors and update
-   * RoutineDB.  Finally, show the EditMaterial page.
+   * Show the EditMaterial page to update an item.
    *
-   * @param materialId The ListArray index of the Material row you want to edit.
-   * @return An HTTP page EditMaterial if all is well or EditRoutine if there's an error on that page.
+   * @param materialId The ID of the Material you want to edit.
+   * @return An HTTP page EditMaterial.
    */
-  public static Result editMaterial(Integer materialId) {
-    Form<RoutineFormData> routineFormData = Form.form(RoutineFormData.class).bindFromRequest();
-    long routineId = new Long(routineFormData.field("id").value()).longValue();
-
-    if (routineFormData.hasErrors()) {
-      Logger.error("HTTP Form Error in editMaterial");
-
-      return badRequest(EditRoutine.render(routineFormData, RoutineDB.getMaterials(routineId)));
-    }
-
-    RoutineFormData data = routineFormData.get();
-    routineId = RoutineDB.addRoutines(data);
-
-    // End of processing Routine page.  Start processing material.
-
+  @Security.Authenticated(Secured.class)
+  public static Result editMaterialDirect(Long materialId) {
     MaterialFormData materialFormData =
-        new MaterialFormData(RoutineDB.getMaterials(routineId).get(materialId.intValue()), routineId, materialId);
+        new MaterialFormData(Material.getMaterial(materialId));
 
     Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
 
-    return ok(EditMaterial.render(formWithMaterialData));
+    return ok(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithMaterialData));
+  }
+
+
+  /**
+   * Show the EditMaterial page to update an item.  First, process the Routine page, deal with any errors and update
+   * the database.  Finally, show the EditMaterial page.
+   *
+   * @param materialId The ID of the Material you want to edit.
+   * @return An HTTP page EditMaterial if all is well or EditRoutine if there's an error on that page.
+   */
+  @Security.Authenticated(Secured.class)
+  public static Result editMaterial(Long materialId) {
+    Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
+
+    Logger.debug("editMaterial Raw Routine Form Data");
+    Logger.debug("  routineId = [" + formWithRoutineData.field("id").value() + "]");
+    Logger.debug("  name = [" + formWithRoutineData.field("name").value() + "]");
+    Logger.debug("  materialID = [" + materialId + "]");
+
+    long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
+
+    if (formWithRoutineData.hasErrors()) {
+      Logger.error("HTTP Form Error in editMaterial");
+
+      return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithRoutineData, Routine.getMaterials(routineId)));
+    }
+
+    RoutineFormData data = formWithRoutineData.get();
+    Routine routine = Routine.saveRoutineFromForm(data);
+    routineId = routine.getId();
+
+    return editMaterialDirect(materialId);
   }
 
 
   /**
    * Show the EditMaterial page to create a new item.  First, process the Routine page and deal with any errors.
-   * Update RoutineDB and finally show the EditMaterial page.
+   * Update the database and finally show the EditMaterial page.
    *
    * @return An HTTP page EditMaterial if all is well or EditRoutine if there's an error on that page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result newMaterial() {
     Form<RoutineFormData> routineFormData = Form.form(RoutineFormData.class).bindFromRequest();
     long routineId = new Long(routineFormData.field("id").value()).longValue();
 
     if (routineFormData.hasErrors()) {
-      Logger.error("HTTP Form Error in editMaterial");
+      Logger.error("HTTP Form Error in newMaterial");
 
-      return badRequest(EditRoutine.render(routineFormData, RoutineDB.getMaterials(routineId)));
+      return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          routineFormData, Routine.getMaterials(routineId)));
     }
 
     RoutineFormData data = routineFormData.get();
-    routineId = RoutineDB.addRoutines(data);
+    Routine routine = Routine.saveRoutineFromForm(data);
+    routineId = routine.getId();
 
     // End of processing Routine page.  Start processing material.
 
     MaterialFormData materialFormData = new MaterialFormData();
     materialFormData.routineId = routineId;
-    materialFormData.materialId = -1;
+    materialFormData.materialId = 0;
 
     Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).fill(materialFormData);
-    return ok(EditMaterial.render(formWithMaterialData));
+    return ok(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithMaterialData));
   }
 
 
   /**
    * Delete a Material item and redisplay the EditRoutine page.  First, process the Routine page and deal with any
-   * errors.  Update RoutineDB, then delete the Material item and finally redisplay EditRoutine.
+   * errors.  Update the database, then delete the Material item and finally redisplay EditRoutine.
    *
-   * @param materialId The ArrayList index in Routine.materials of the item to delete.
+   * @param materialId The ID of the Material to delete.
    * @return An HTTP EditMaterial page.
    */
-  public static Result deleteMaterial(Integer materialId) {
+  @Security.Authenticated(Secured.class)
+  public static Result deleteMaterial(Long materialId) {
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).bindFromRequest();
     long routineId = new Long(formWithRoutineData.field("id").value()).longValue();
 
     if (formWithRoutineData.hasErrors()) {
-      System.out.println("HTTP Form Error.");
+      Logger.error("HTTP Form Error in deleteMaterial");
 
-      return badRequest(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+      return badRequest(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithRoutineData, Routine.getMaterials(routineId)));
     }
 
     RoutineFormData routineFormData = formWithRoutineData.get();
-    routineId = RoutineDB.addRoutines(routineFormData);
+    Routine routine = Routine.saveRoutineFromForm(routineFormData);
+    routineId = routine.getId();
 
     // End of processing Routine page.  Start of processing material.
 
-    RoutineDB.getMaterials(routineId).remove(materialId.intValue());
+    Material.getMaterial(materialId).delete();
 
-    return ok(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+    return ok(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithRoutineData, Routine.getMaterials(routineId)));
   }
 
 
@@ -450,6 +805,7 @@ public class Application extends Controller {
    * @return On success, an HTTP OK message along with the HTML content for the EditRoutine page.  On a validation
    * error, an HTTP BadRequest message with the HTML content of the EditMaterial page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result postMaterial() {
     Form<MaterialFormData> formWithMaterialData = Form.form(MaterialFormData.class).bindFromRequest();
 
@@ -458,7 +814,8 @@ public class Application extends Controller {
     if (formWithMaterialData.hasErrors()) {
       Logger.error("HTTP Form Error in postMaterial.");
 
-      return badRequest(EditMaterial.render(formWithMaterialData));
+      return badRequest(EditMaterial.render("editMaterial", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+          formWithMaterialData));
     }
 
     Logger.debug("Form Field Data isInspectable = " + formWithMaterialData.field("isInspectable").value());
@@ -466,27 +823,92 @@ public class Application extends Controller {
 
     Logger.debug("isInspectable = " + materialFormData.isInspectable);
 
-    RoutineDB.addMaterial(materialFormData);
+    long imageId = uploadImage(request());
+    if (imageId > 0) {
+      materialFormData.imageId = imageId;
+    }
 
-    RoutineFormData routineFormData = new RoutineFormData(RoutineDB.getRoutine(routineId));
+    Material.saveMaterialFromForm(materialFormData);
+
+    RoutineFormData routineFormData = new RoutineFormData(Routine.getRoutine(routineId));
     Form<RoutineFormData> formWithRoutineData = Form.form(RoutineFormData.class).fill(routineFormData);
 
-    return ok(EditRoutine.render(formWithRoutineData, RoutineDB.getMaterials(routineId)));
+    return ok(EditRoutine.render("editRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
+        formWithRoutineData, Routine.getMaterials(routineId)));
   }
-
 
   /**
    * Display a single Material page.
    *
-   * @param routineId The ID of the Routine to be displayed.
-   * @param materialId The ArrayList index of the material to display.
+   * @param routineId  The ID of the Routine to be displayed.
+   * @param materialId The ID of the material to display.
    * @return An HTTP OK message along with the HTML content for a single Routine page.
    */
-  public static Result viewMaterial(long routineId, int materialId) {
-    Routine routine = RoutineDB.getRoutine(routineId);
-    Material material = routine.getMaterials().get(materialId);
+  public static Result viewMaterial(long routineId, long materialId) {
+    Routine routine = Routine.getRoutine(routineId);
+    Material material = Material.getMaterial(materialId);
 
-    return ok(ViewMaterial.render(material));
+    return ok(ViewMaterial.render("viewRoutine", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), material));
+  }
+
+
+  /***************************************************************************************************************
+   * I M A G E S
+   *
+   * Gets the image from the Images database.
+   *
+   ***************************************************************************************************************/
+
+  /**
+   * Gets the image that has been uploaded to the database.
+   * @param id The image id.
+   * @return The image.
+   */
+  public static Result getImage(long id) {
+    Image image = Image.find().byId(id);
+    if (image == null) {
+      throw new RuntimeException("Could not find the image with associated id.");
+    }
+
+    return ok(image.data).as("image");
+  }
+
+  /**
+   * Uploads image in Request to the Images database.
+   * @param request The request.
+   * @return The image id. Returns -1 if file size limit exceeded or no image found in form.
+   */
+  public static long uploadImage(Http.Request request) {
+
+    // takes request
+    Http.MultipartFormData body = request.body().asMultipartFormData();
+    Http.MultipartFormData.FilePart picture = body.getFile("image");
+
+    // creates variables
+    String fileName = "";
+    String contentType = "";
+    File file = null;
+    long imageId;
+    Image image = null;
+
+    // checks image upload size against max
+    if (request().body().isMaxSizeExceeded()) {
+      System.out.printf("Image exceeds maximum allowed file size. (512K)");
+      imageId = -1;
+    }
+    else if (picture != null) {
+      fileName = picture.getFilename();
+      contentType = picture.getContentType();
+      file = picture.getFile();
+      image = new Image(fileName, file);
+      imageId = image.id;
+    }
+    else {
+      Logger.debug("No new image found in form.");
+      imageId = -1;
+    }
+
+    return imageId;
   }
 
 }

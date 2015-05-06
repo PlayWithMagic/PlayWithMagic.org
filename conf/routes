@@ -3,39 +3,53 @@
 # ~~~~
 
 # Home / About / Lexicon page
-GET         /                      controllers.Application.index()
+GET         /                      controllers.Application.index(msg: String?= "")
 GET         /about                 controllers.Application.about()
 GET         /help                  controllers.Application.help()
 
+# Login and authentication workflow
+GET         /login                 controllers.Application.login(msg: String?= "")
+POST        /login                 controllers.Application.postLogin()
+GET         /logout                controllers.Application.logout()
 
 # Routine actions
 GET         /listRoutines          controllers.Application.listRoutines()
+# TODO: Possibly remove =0 from viewRoutine(check the others too)
 GET         /viewRoutine           controllers.Application.viewRoutine(id: Long?= 0)
 GET         /editRoutine           controllers.Application.editRoutine(id: Long?= 0)
 POST        /editRoutine           controllers.Application.postRoutine()
 GET         /deleteRoutine         controllers.Application.deleteRoutine(id: Long?= 0)
 
+# User actions
+GET         /editUser              controllers.Application.editUser(id: Long?=0)
+POST        /editUser              controllers.Application.postUser()
 
 # Magician actions
 GET         /listMagicians         controllers.Application.listMagicians()
-GET         /viewMagician          controllers.Application.viewMagician(id: Long?=0)
-GET         /editMagician          controllers.Application.editMagician(id: Long?=0)
+GET         /viewMagician          controllers.Application.viewMagician(id: Long)
+GET         /editMagician          controllers.Application.editMagician(id: Long)
 POST        /editMagician          controllers.Application.postMagician()
 GET         /deleteMagician        controllers.Application.deleteMagician(id: Long?= 0)
+POST        /deleteMagician        controllers.Application.postDeleteUser()
 
 #Material actions
+GET         /viewMaterial          controllers.Application.viewMaterial(routineId: Long, materialId: Long)
 POST        /newMaterial           controllers.Application.newMaterial()
-POST        /editMaterial          controllers.Application.editMaterial(materialId: Integer)
-POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Integer)
+POST        /editMaterial          controllers.Application.editMaterial(materialId: Long)
+GET         /editMaterialDirect    controllers.Application.editMaterialDirect(materialId: Long)
 POST        /postMaterial          controllers.Application.postMaterial()
-GET         /viewMaterial          controllers.Application.viewMaterial(routineId: Long, materialId: Integer)
+POST        /deleteMaterial        controllers.Application.deleteMaterial(materialId: Long)
 
 # Set actions
-GET         /listSets              controllers.Application.listSets()
+GET         /listSets              controllers.Application.listAllSets()
+GET         /listMySets            controllers.Application.listMySets()
 GET         /viewSet               controllers.Application.viewSet(id: Long?=0)
 GET         /editSet               controllers.Application.editSet(id: Long?=0)
 POST        /editSet               controllers.Application.postSet()
 GET         /deleteSet             controllers.Application.deleteSet(id: Long?=0)
+
+# Get image from database
+GET         /getImage              controllers.Application.getImage(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file          controllers.Assets.at(path="/public", file)

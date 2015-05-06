@@ -1,6 +1,10 @@
 package views.formdata;
 
+import models.GlobalDbInfo;
+import models.Routine;
 import models.Set;
+import play.data.validation.Constraints.Required;
+import play.data.validation.Constraints.MaxLength;
 import play.data.validation.ValidationError;
 
 import java.util.ArrayList;
@@ -18,24 +22,35 @@ public class SetFormData {
   public long id;
 
   /**
-   * Input data user ID hidden field.
+   * Input data Magician id hidden field.
    */
-  public long userId;
+  public long magicianId;
 
   /**
-   * Input data Set Name field.
+   * A short name for the set.
    */
+  @Required(message = "You must provide a name for your Set.")
+  @MaxLength(value = GlobalDbInfo.MAX_SHORT_TEXT_LENGTH,
+      message = "The set's name can't be longer than " + GlobalDbInfo.MAX_SHORT_TEXT_LENGTH + " characters.")
   public String name;
 
   /**
-   * Input data Description field.
+   * A multi-line description of the set.
    */
+  @Required(message = "Please provide a description of this Set.")
+  @MaxLength(value = GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH,
+      message = "Description can't be more than " + GlobalDbInfo.MAX_MULTILINE_TEXT_LENGTH + " characters.")
   public String description;
 
   /**
    * Input data list of Routine IDs.
    */
   public List<Long> routines;
+
+
+  /******************************************************************************************************************
+   * C O N S T R U C T O R S
+   ******************************************************************************************************************/
 
   /**
    * Default no-arg constructor required by Play.
@@ -51,22 +66,25 @@ public class SetFormData {
    */
   public SetFormData(Set set) {
     this.id = set.getId();
-    this.userId = set.getUserId();
     this.name = set.getName();
     this.description = set.getDescription();
-    this.routines = set.getRoutines();
+    this.routines = Routine.getListOfIds(set.getRoutines());
   }
+
+
+  /******************************************************************************************************************
+   * M E T H O D S
+   ******************************************************************************************************************/
 
   /**
    * Testing initialization constructor, does not include ID.
    *
-   * @param userId      The userID associated with the Set.
    * @param name        The name of the Set.
    * @param description The description of the Set.
    * @param routines    The list of Routine IDs in the Set.
    */
-  public SetFormData(long userId, String name, String description, List<Long> routines) {
-    this.userId = userId;
+  public SetFormData(String name, String description, List<Long> routines) {
+/*
     this.name = name;
     this.description = description;
     if (routines != null) {
@@ -79,31 +97,21 @@ public class SetFormData {
       System.out.println("Null Routine Data.");
       this.routines.clear();
     }
-
+*/
   }
 
+
   /**
-   * Validate that all fields are non-empty, and that certain fields adhere to specific criteria.
+   * Validate that at least one routine is in the set.
    *
    * @return Either null if no errors, or a List of Div IDs and their associated error messages.
    */
   public List<ValidationError> validate() {
+    List<ValidationError> errors = new ArrayList<ValidationError>();
 
-    List<ValidationError> errors = new ArrayList<>();
-
-    if (name == null || name.length() == 0) {
-      errors.add(new ValidationError("name", "Must provide a name for the Set."));
-    }
-
-    if (description == null || description.length() == 0) {
-      errors.add(new ValidationError("description", "Please provide a description of this Set."));
-    }
-
-    if (routines == null) {
+    if (routines == null || routines.size() == 0) {
       errors.add(new ValidationError("routines", "Please select at least one Routine for a Set."));
     }
-
-    //TO-DO:  Build validation inputs for a Set.
 
     return errors.isEmpty() ? null : errors;
 

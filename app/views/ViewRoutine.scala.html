@@ -3,9 +3,9 @@
 *
 * @see http://www.playframework.com
 *@
-@(routine: Routine)
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, routine: Routine)
 
-@Main("viewRoutine") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->
@@ -13,11 +13,17 @@
       <div class="col-md-6">
         <h1>@routine.getName <small><a href="listMagicians">Magician Name</a></small></h1>
         <p class="visible-xs-block visible-sm-block">
-          <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
-          <a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
+          <a id="editRoutine" href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
+          <a id="returnToRoutineList" href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
         </p>
-        @if(routine.getImageUrl != null) {
-          <img class="img-responsive" src="@routes.Assets.at(routine.getImageUrl)" alt="Image of Routine"/>
+        @if(routine.getImageId > 0) {
+          <img class="img-responsive" src="@routes.Application.getImage(routine.getImageId)" alt="Image of Routine" />
+        } else {
+          @if(routine.getImageUrl != null) {
+            <img class="img-responsive" src="@routes.Assets.at(routine.getImageUrl)" alt="Image of Routine"/>
+          } else {
+            <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")" alt="Routine Image Placeholder"/>
+          }
         }
         <br />
         @if(routine.getYouTubeUrl != null) {
@@ -50,8 +56,8 @@
       </div>
       <div class="col-md-6">
         <p class="hidden-xs hidden-sm">
-          <a href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
-          <a href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
+          <a id="editRoutine" href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
+          <a id="returnToRoutineList" href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
         </p>
         <h3>Description</h3>
         <p>@routine.getDescription</p>
@@ -78,9 +84,10 @@
           <ul>
           @for(material <- routine.getMaterials()) {
             <li>
-              <a href="@routes.Application.viewMaterial(
+              <a id="viewMaterial@routine.getMaterials.indexOf(material)"
+                href="@routes.Application.viewMaterial(
                 routine.getId(),
-                routine.getMaterials().indexOf(material))">
+                material.getId)">
               @material.getName()
               </a>
             </li>

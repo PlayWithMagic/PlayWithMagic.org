@@ -3,9 +3,9 @@
 *
 * @see http://www.playframework.com
 *@
-@()
+@(page: String, isLoggedIn: Boolean, userInfo: Magician)
 
-@Main("help") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="main">
       <!-- Header -->

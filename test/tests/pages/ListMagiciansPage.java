@@ -1,59 +1,114 @@
 package tests.pages;
 
-import org.fluentlenium.core.FluentPage;
+import models.Magician;
 import org.openqa.selenium.WebDriver;
+import play.test.TestBrowser;
+import tests.GlobalTest;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 /**
- * Provides test scaffolding for the listMagicians page.
+ * Provides test scaffolding for the ListMagicians page.
+ *
+ * When you want to *go* to a page, do new ListMagiciansPage(browser);
+ * When you are already *at* a page, do new ListMagiciansPage(browser.getDriver());
+ *
  */
-public class ListMagiciansPage extends FluentPage {
-
-  private String url;
+public class ListMagiciansPage extends NavigationWrapper {
 
   /**
-   * Create the listMagicians Page.
+   * Go directly to the ListMagicians page and make sure the browser gets there.
    *
-   * @param webDriver The driver.
-   * @param port      The port.
+   * @param browser A remotely controlled test browser.
    */
-  public ListMagiciansPage(WebDriver webDriver, int port) {
+  public ListMagiciansPage(TestBrowser browser) {
+    super(browser.getDriver());
+    this.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/listMagicians");
+    isAt();
+  }
+
+
+  /**
+   * The browser should already be at the ListMagicians page.  Make sure the browser is there.
+   *
+   * @param webDriver The state of the current test browser.
+   */
+  public ListMagiciansPage(WebDriver webDriver) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/listMagicians";
+    isAt();
   }
 
-  /**
-   * Get the URL for this page.
-   *
-   * @return The page's URL.
-   */
-  @Override
-  public String getUrl() {
-    return this.url;
-  }
 
   /**
-   * A test to ensure the rendered page displays the correct content.
+   * Validate that the browser is on the right page.
    */
   @Override
   public void isAt() {
-    assertThat(pageSource().contains("<body id=\"viewMagician\">"));
+    assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
+    assertThat(pageSource()).contains("<h1>Current Magicians</h1>");
   }
 
+
   /**
-   * Checks that the EditMagician page contains a given magician, with only Name, Stage Name, Skill Level, and
-   * Interests.
+   * Checks the ListMagician page contains a given magician.
    *
-   * @param fullName        The combined first and last name of the magician.
-   * @param stageName       The stage name of the magician.
-   * @param experienceLevel User's experience level; pre-set values.
+   * @param magician A magician that should be listed on this page.
    */
-  public void hasMagician(String fullName, String stageName, String experienceLevel) {
-    assertThat(pageSource()).contains(fullName);
-    assertThat(pageSource()).contains(stageName);
-    assertThat(pageSource()).contains(experienceLevel);
+  public void hasMagician(Magician magician) {
+    assertThat(pageSource()).contains(magician.getFirstName() + " " + magician.getLastName());
+
+    if (magician.getStageName() != null) {
+      assertThat(pageSource()).contains(magician.getStageName());
+    }
+
+    assertThat(pageSource()).contains(magician.getMagicianType().getName());
+  }
+
+
+  /**
+   * Checks the ListMagician page does not contain a given magician.
+   *
+   * @param magician A magician that should be listed on this page.
+   */
+  public void doesNotHaveMagician(Magician magician) {
+    assertThat(pageSource()).doesNotContain(magician.getFirstName() + " " + magician.getLastName());
+
+    if (magician.getStageName() != null) {
+      assertThat(pageSource()).doesNotContain(magician.getStageName());
+    }
+  }
+
+
+  /**
+   * Edit the first user in the page by going to the EditUser page.
+   *
+   * @return The EditUserPage.
+   */
+  public EditUserPage changeFirstMagicianPassword() {
+    this.findFirst(".changePassword").click();
+    return new EditUserPage(this.getDriver());
+  }
+
+
+  /**
+   * Edit the first magician in the page by going to the EditMagician page.
+   *
+   * @return The EditMagicianPage.
+   */
+  public EditMagicianPage editFirstMagician() {
+    this.findFirst(".editMagician").click();
+    return new EditMagicianPage(this.getDriver());
+  }
+
+
+  /**
+   * View the first magician in the page.
+   *
+   * @return The ViewMagicianPage.
+   */
+  public ViewMagicianPage viewFirstMagician() {
+    this.findFirst(".viewMagician").click();
+    return new ViewMagicianPage(this.getDriver());
   }
 
 }
-

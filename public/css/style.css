@@ -67,6 +67,36 @@ body section#page section#content {
 body section#page section#content section#social {
   font-size: 32px;
 }
+body section#page section#content img.material-image {
+  max-width: 300px;
+}
+body section#page section#content section#imageUpload {
+  color: white;
+  background-color: aqua;
+}
+body .btn-file {
+  position: relative;
+  overflow: hidden;
+}
+body .btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+body input.form-control[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
 body#home footer {
   width: 100%;
   height: 100px;

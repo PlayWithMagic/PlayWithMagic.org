@@ -4,12 +4,13 @@
 * @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(setForm: Form[views.formdata.SetFormData], routineList: List[Routine], formRoutines: List[Long])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, setForm: Form[views.formdata.SetFormData],
+    allRoutines: List[Routine], routinesInSet: List[Long])
 
 @import helper.form
-@import views.html.bootstrap3.{text45, textarea}
+@import views.html.bootstrap3.{text45, textarea, hidden}
 
-@Main("editSet") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->
@@ -23,10 +24,8 @@
           <!-- User Attributes -->
         <div class="container">
         @form(routes.Application.postSet(), 'class -> "form-horizontal") {
-          <input type="hidden"
-          name="@setForm("id").name"
-          id="@setForm("id").id"
-          value="@setForm("id").value"/>
+          @hidden(setForm("id"))
+          @hidden(setForm("magicianId"))
 
           @text45(setForm("name"),
             label = "Name",
@@ -54,15 +53,15 @@
                 </thead>
                 <tbody>
               <!-- Should use the list of Routines thrown in against the list of Set list items to pull -->
-                @for(routine <- routineList) {
+                @for(routine <- allRoutines) {
                 <tr>
                   <td>
                       <input type="checkbox"
                         name="routines[]"
                         id="@routine.getId"
                         value="@routine.getId"
-                        @for(formRoutine <- formRoutines) {
-                          @if(formRoutine == routine.getId) {checked}
+                        @for(routineInSet <- routinesInSet) {
+                          @if(routineInSet == routine.getId) {checked}
                         }>
                   </td>
                   <td>@routine.getName()</td>

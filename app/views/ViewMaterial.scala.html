@@ -3,24 +3,34 @@
 *
 * @see http://www.playframework.com
 *@
-@(material: Material)
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, material: Material)
 
-@Main("viewRoutine") {
+@Main(page, isLoggedIn, userInfo) {
   <!-- Page Content -->
   <section id="page">
       <!-- Content -->
     <section id="content" class="container">
       <div class="col-md-6">
         <h1>@material.getName</h1>
-        @if(material.getImageUrl != null) {
-          <img class="img-responsive" src="@routes.Assets.at(material.getImageUrl)" alt="Image of Marerial"/>
+        @if(material.getImageId > 0) {
+          <img class="img-responsive" src="@routes.Application.getImage(material.getImageId)" alt="Image of Material" />
+        } else {
+          @if(material.getImageUrl != null) {
+            <img class="img-responsive" src="@routes.Assets.at(material.getImageUrl)" alt="Image of Material"/>
+          } else {
+            <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.png")" alt="Material Image Placeholder"/>
+          }
         }
         <br />
       </div>
       <div class="col-md-6">
-        <p class="hidden-xs hidden-sm">  @* TODO FIX 1 Below *@
-          <a href="@routes.Application.editMaterial(1)" class="btn btn-large">Edit Material</a>
-          <a href="@routes.Application.listRoutines()" class="btn btn-large">Show Routines</a>
+        <p class="hidden-xs hidden-sm">
+          <a id="viewRoutine" href="@routes.Application.viewRoutine(material.getRoutine.getId)" class="btn btn-large">
+            View Routine</a>
+          <a id="editRoutine" href="@routes.Application.editRoutine(material.getRoutine.getId)" class="btn btn-large">
+            Edit Routine</a>
+          <a id="editMaterial" href="@routes.Application.editMaterialDirect(material.getId)" class="btn btn-large">
+            Edit Material</a>
         </p>
         <h3>Notes</h3>
         <p>@material.getDescription</p>

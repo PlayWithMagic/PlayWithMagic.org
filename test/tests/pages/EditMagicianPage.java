@@ -1,96 +1,156 @@
 package tests.pages;
 
-import org.fluentlenium.core.FluentPage;
+import models.Magician;
 import org.openqa.selenium.WebDriver;
+import play.test.TestBrowser;
+import tests.GlobalTest;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.withId;
-import static org.fluentlenium.core.filter.FilterConstructor.withText;
 
 /**
  * Provides test scaffolding for the EditMagician page.
+ *
+ * When you want to *go* to a page, do new EditMagicianPage(browser);
+ * When you are already *at* a page, do new EditMagicianPage(browser.getDriver());
+ *
  */
-public class EditMagicianPage extends FluentPage {
-
-  private String url;
+public class EditMagicianPage extends NavigationWrapper {
 
   /**
-   * Create the EditMagician.
+   * Go directly to the EditMagician page and make sure the browser gets there.
    *
-   * @param webDriver The driver.
-   * @param port      The port.
+   * @param browser A remotely controlled test browser.
    */
-  public EditMagicianPage(WebDriver webDriver, int port) {
+  public EditMagicianPage(TestBrowser browser) {
+    super(browser.getDriver());
+    this.goTo("http://localhost:" + GlobalTest.TEST_PORT + "/editMagician");
+    isAt();
+  }
+
+
+  /**
+   * The browser should already be at the EditMagician page.  Make sure the browser is already there.
+   *
+   * @param webDriver The state of the current test browser.
+   */
+  public EditMagicianPage(WebDriver webDriver) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/editMagician";
+    isAt();
   }
 
-  /**
-   * Get the URL for this page.
-   *
-   * @return The page's URL.
-   */
-  @Override
-  public String getUrl() {
-    return this.url;
-  }
 
   /**
-   * A test to ensure the rendered page displays the correct content.
+   * Validate that the browser is on the right page.
    */
   @Override
   public void isAt() {
-    assertThat(pageSource().contains("<body id=\"editMagician\">"));
+    assertThat(title()).isEqualTo(GlobalTest.APPLICATION_NAME);
+    assertThat(pageSource()).contains("<h1>Magician Profile</h1>");
   }
 
 
   /**
-   * Tests the form on the EditMagician page with provided data.
+   * See if the browser has all of the values in the Magician object.
    *
-   * @param firstName       The first name of the magician.
-   * @param lastName        The last name of the magician.
-   * @param stageName       The stage name of the magician.
-   * @param location        Global location.
-   * @param biography       Biography of magician.
-   * @param interests       Magician's interests in magic.
-   * @param influences      Magician's invluences.
-   * @param experienceLevel Magician's experience level; pre-set values.
-   * @param yearStarted     The year started - used to compute the number of years of experience.
-   * @param organizations   Any affiliations or organizations the magician is a member of.
-   * @param website         Magician's personal website.
-   * @param email           Magician's email address.
-   * @param facebook        The magician's facebook account.
-   * @param twitter         Magician's Twitter account.
-   * @param linkedIn        Magician's LinkedIn account.
-   * @param googlePlus      Magician's Google Plus account.
-   * @param flickr          Magician's flickr account.
-   * @param instagram       Magician's instagram account.
+   * @param magician A container holding all of the fields to check for in the page.
    */
-  public void createMagician(String firstName, String lastName, String stageName, String location, String biography,
-                             String interests, String influences, String experienceLevel, String yearStarted,
-                             String organizations, String website, String email, String facebook,
-                             String twitter, String linkedIn, String googlePlus, String flickr, String instagram) {
-    fill("#firstName").with(firstName);
-    fill("#lastName").with(lastName);
-    fill("#email").with(email);
-    fill("#stageName").with(stageName);
-    fill("#location").with(location);
-    fill("#biography").with(biography);
-    fill("#interests").with(interests);
-    fill("#influences").with(influences);
-    System.out.println("Experience Level: " + experienceLevel);
-    find("select", withId("experienceLevel")).find("option", withText().equalTo(experienceLevel)).click();
-    //find("select", withId().equalTo("gender")).find("option", withText().equalTo(gender)).click();
-    fill("#yearStarted").with(yearStarted);
-    fill("#organizations").with(organizations);
-    fill("#website").with(website);
-    fill("#facebook").with(facebook);
-    fill("#twitter").with(twitter);
-    fill("#linkedIn").with(linkedIn);
-    fill("#googlePlus").with(googlePlus);
-    fill("#flickr").with(flickr);
-    fill("#instagram").with(instagram);
-    submit("#submit");
+  public void checkMagician(Magician magician) {
+    // Required fields
+    assertThat(this.pageSource()).contains(magician.getFirstName());
+    assertThat(this.pageSource()).contains(magician.getLastName());
+    assertThat(this.pageSource()).contains(magician.getEmail());
+    assertThat(this.pageSource()).contains(magician.getMagicianType().getName());
+
+    // Optional fields
+    checkOptionalField(magician.getStageName());
+    // No image for now
+    checkOptionalField(magician.getLocation());
+    checkOptionalField(magician.getBiography());
+    checkOptionalField(magician.getInterests());
+    checkOptionalField(magician.getInfluences());
+    checkOptionalField(magician.getYearStarted());
+    checkOptionalField(magician.getOrganizations());
+    checkOptionalField(magician.getWebsite());
+    checkOptionalField(magician.getFacebook());
+    checkOptionalField(magician.getTwitter());
+    checkOptionalField(magician.getLinkedIn());
+    checkOptionalField(magician.getGooglePlus());
+    checkOptionalField(magician.getFlickr());
+    checkOptionalField(magician.getInstagram());
   }
+
+
+  /**
+   * Click the Add or Update button (submit) at the bottom of the page.
+   * <p>
+   * This returns void because we don't know which page it would render...
+   * On success, it goes to ListMagicians
+   * On error, it stays on EditMagician
+   */
+  public void clickSubmit() {
+    this.findFirst("#submit").click();
+  }
+
+
+  /**
+   * Select the Magician Type from the listbox.
+   *
+   * @param magicianTypeName The name of the Magician Type.
+   */
+  public void selectMagicianType(String magicianTypeName) {
+    this.find("#" + magicianTypeName).click();
+  }
+
+  /**
+   * Set passed values into the form.
+   *
+   * @param magician A container holding all of the fields to check for in the page.
+   */
+  public void populateMagician(Magician magician) {
+    // Required fields
+    fillRequiredField("#firstName", magician.getFirstName());
+    fillRequiredField("#lastName", magician.getLastName());
+    fillRequiredField("#email", magician.getEmail());
+    selectMagicianType(magician.getMagicianType().getName());
+
+    // Optional fields
+    fillOptionalField("#stageName", magician.getStageName());
+    fillOptionalField("#location", magician.getLocation());
+    fillOptionalField("#biography", magician.getBiography());
+    fillOptionalField("#interests", magician.getInterests());
+    fillOptionalField("#influences", magician.getInfluences());
+    fillOptionalField("#yearStarted", magician.getYearStarted());
+    fillOptionalField("#organizations", magician.getOrganizations());
+    fillOptionalField("#website", magician.getWebsite());
+    fillOptionalField("#facebook", magician.getFacebook());
+    fillOptionalField("#twitter", magician.getTwitter());
+    fillOptionalField("#linkedIn", magician.getLinkedIn());
+    fillOptionalField("#googlePlus", magician.getGooglePlus());
+    fillOptionalField("#flickr", magician.getFlickr());
+    fillOptionalField("#instagram", magician.getInstagram());
+  }
+
+
+  /**
+   * Test to ensure the page does not have required field validation errors.
+   */
+  public void doesNotHaveRequiredFieldErrors() {
+    assertThat(this.pageSource()).doesNotContain("Everybody (except Teller) has a first name.");
+    assertThat(this.pageSource()).doesNotContain("A Last Name must be provided.");
+    assertThat(this.pageSource()).doesNotContain("An Email address must be provided.");
+    assertThat(this.pageSource()).doesNotContain("How would you identify yourself as a magician?");
+  }
+
+
+  /**
+   * Test to ensure the page has all of the required field validation errors.
+   */
+  public void hasRequiredFieldErrors() {
+    assertThat(this.pageSource()).contains("Everybody (except Teller) has a first name.");
+    assertThat(this.pageSource()).contains("A Last Name must be provided.");
+    assertThat(this.pageSource()).contains("An Email address must be provided.");
+    assertThat(this.pageSource()).contains("How would you identify yourself as a magician?");
+  }
+
 }
 
