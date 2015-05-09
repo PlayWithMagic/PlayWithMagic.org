@@ -353,7 +353,10 @@ public class Application extends Controller {
     Logger.debug("  id = [" + editMagicianFormData.id + "]");
     Logger.debug("  firstName = [" + editMagicianFormData.firstName + "]");
     Logger.debug("  magicianType = [" + editMagicianFormData.magicianType + "]");
-    Logger.debug("  imageId = [" + editMagicianFormData.imageId + "]");
+
+    if (editMagicianFormData.imageId > 0) {
+      Logger.debug("  imageId = [" + editMagicianFormData.imageId + "]");
+    }
 
     Magician magician = Magician.createMagicianFromForm(editMagicianFormData);
 
@@ -485,7 +488,10 @@ public class Application extends Controller {
     Logger.debug("  id = [" + routineFormData.id + "]");
     Logger.debug("  name = [" + routineFormData.name + "]");
     Logger.debug("  duration = [" + routineFormData.duration + "]");
-    Logger.debug("  imageId = [" + routineFormData.imageId + "]");
+
+    if (routineFormData.imageId > 0) {
+      Logger.debug("  imageId = [" + routineFormData.imageId + "]");
+    }
 
     Routine routine = Routine.saveRoutineFromForm(routineFormData);
 
