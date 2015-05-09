@@ -21,6 +21,7 @@ import views.formdata.MagicianTypeFormData;
 import views.formdata.MaterialFormData;
 import views.formdata.RoutineFormData;
 import views.formdata.SetFormData;
+import views.formdata.SetNotesFormData;
 import views.html.About;
 import views.html.DeleteUser;
 import views.html.EditMagician;
@@ -34,6 +35,7 @@ import views.html.ListMagicians;
 import views.html.ListRoutines;
 import views.html.ListSets;
 import views.html.Login;
+import views.html.SetNotes;
 import views.html.ViewMagician;
 import views.html.ViewMaterial;
 import views.html.ViewRoutine;
@@ -43,6 +45,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * Play With Magic's MVC Controller class.
@@ -909,6 +912,69 @@ public class Application extends Controller {
     }
 
     return imageId;
+  }
+
+
+  /******************************************************************************************************************
+   * S E T   N O T E S
+   ******************************************************************************************************************/
+
+  public static Result getSetNotes(long setId) {
+    Set set = Set.getSet(setId);
+
+    SetNotesFormData setNotesFormData = new SetNotesFormData(setId, null, null);
+    Form<SetNotesFormData> formData = Form.form(SetNotesFormData.class).fill(setNotesFormData);
+
+    return ok(SetNotes.render("setNotes", Secured.isLoggedIn(ctx())
+        , Secured.getUserInfo(ctx())
+        , set
+        , formData));
+  }
+
+
+  public static Result postSetNotes() {
+    Form<SetNotesFormData> formData = Form.form(SetNotesFormData.class).bindFromRequest();
+
+    Logger.debug("postSetNotes Raw Magician Form Data");
+    Logger.debug("  id = [" + formData.field("id").value() + "]");
+    Logger.debug("  duration = [" + formData.field("duration").value() + "]");
+    Logger.debug("  cost = [" + formData.field("cost").value() + "]");
+
+    if (formData.hasErrors()) {
+      Logger.error("postSetNotes HTTP Form Error.");
+
+      for (String key : formData.errors().keySet()) {
+        List<ValidationError> currentError = formData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            Logger.error("   " + key + ":  " + error.message());
+            flash(key, error.message());
+          }
+        }
+      }
+
+      Set set = Set.getSet(Long.parseLong(formData.field("id").value()));
+
+      return badRequest(SetNotes.render("setNotes", Secured.isLoggedIn(ctx())
+          , Secured.getUserInfo(ctx())
+          , set
+          , formData));
+    }
+
+    SetNotesFormData setNotesFormData = formData.get();
+
+    Logger.debug("postSetNotes Form Backing Class Data");
+    Logger.debug("  id = [" + setNotesFormData.id + "]");
+    Logger.debug("  duration = [" + setNotesFormData.duration + "]");
+    Logger.debug("  cost = [" + setNotesFormData.cost + "]");
+
+
+    Set set = Set.getSet(setNotesFormData.id);
+
+    return ok(SetNotes.render("setNotes", Secured.isLoggedIn(ctx())
+          , Secured.getUserInfo(ctx())
+          , set
+          , formData));
   }
 
 }

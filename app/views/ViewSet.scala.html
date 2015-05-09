@@ -15,6 +15,7 @@
         <h1>@set.getName <small><a href="@routes.Application.listMagicians()">Magician Name</a></small></h1>
         <p class="visible-xs-block visible-sm-block">
           <a href="@routes.Application.editSet(set.getId)" class="btn btn-large">Edit Set</a>
+          <a href="@routes.Application.getSetNotes(set.getId)" class="btn btn-large">Notes</a>
           <a href="@routes.Application.listAllSets()" class="btn btn-large">Return to Set List</a>
         </p>
         <h2>Routines in this Set</h2>
@@ -42,6 +43,7 @@
       <div class="col-md-6">
         <p class="hidden-xs hidden-sm">
           <a href="@routes.Application.editSet(set.getId)" class="btn btn-large editSet">Edit Set</a>
+          <a href="@routes.Application.getSetNotes(set.getId)" class="btn btn-large setNotes">Notes</a>
           <a href="@routes.Application.listMySets()" class="btn btn-large listSets">Return to Set List</a>
         </p>
         <h3>Description</h3>
