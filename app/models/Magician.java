@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.File;
 import java.util.List;
@@ -93,6 +94,7 @@ public class Magician extends play.db.ebean.Model {
   private String instagram;
 
   // Magician Image
+  @OneToOne
   private long imageId;
 
   /**
@@ -678,7 +680,9 @@ public class Magician extends play.db.ebean.Model {
     if (editMagicianFormData.imageId > 0) {
       if (editMagicianFormData.imageId != currentImageId) {
         Image thisImage = Image.find().byId(currentImageId);
-        thisImage.delete();
+        if(thisImage != null) {
+          thisImage.delete();
+        }
       }
       magician.setImageId(editMagicianFormData.imageId);
     }
