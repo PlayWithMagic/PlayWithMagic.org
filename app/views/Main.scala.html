@@ -49,22 +49,11 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a id="browseRoutines" href="@routes.Application.listRoutines()">Browse Routines</a></li>
-            <li><a id="browseSets" href="@routes.Application.listAllSets()">Browse Sets</a></li>
-            <li><a id="browseMagicians" href="@routes.Application.listMagicians()">Browse Magicians</a></li>
+            @if(isLoggedIn) {
+              <li><a id="browseSets" href="@routes.Application.listAllSets()">Browse Sets</a></li>
+              <li><a id="browseMagicians" href="@routes.Application.listMagicians()">Browse Magicians</a></li>
+            }
           </ul>
-
-            <!-- Don't show Search on home page or New Magician page-->
-          @* @if( page != "home" && page != "editMagician" ) { *@
-          @*<form class="navbar-form navbar-left" role="search">*@
-          @*<div class="input-group">*@
-          @*<input type="text" class="form-control" placeholder="Search" />*@
-          @*<span class="input-group-btn">*@
-          @*<button class="btn btn-default" type="button"><a href="listRoutines">Search Routines</a></button>*@
-          @*</span>*@
-          @*</div>*@
-          @*</form>*@
-          @*}*@
-
           <ul class="nav navbar-nav navbar-right">
             <li>
               <a id="navbarLinkToHelpPage" href="@routes.Application.help()">

@@ -505,6 +505,7 @@ public class Application extends Controller {
    * @param routineId The ID of the routine to delete.
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result deleteRoutine(long routineId) {
     Routine.deleteRoutine(routineId);
 
