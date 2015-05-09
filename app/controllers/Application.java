@@ -400,8 +400,12 @@ public class Application extends Controller {
    */
   @Security.Authenticated(Secured.class)
   public static Result deleteMagician(long id) {
-    //Magician.deleteMagician(id);
     if (id == 0) {
+      // Can't delete empty user ID.
+      return redirect(routes.Application.index(""));
+    }
+    else if (id != Secured.getUserInfo(ctx()).getId()) {
+      // Prevent users from deleting someone else's account.
       return redirect(routes.Application.index(""));
     }
     else {
