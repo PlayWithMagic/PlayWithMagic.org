@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 /**
@@ -60,6 +61,7 @@ public class Material extends play.db.ebean.Model {
   private String imageUrl;
 
   // The image id associated with this material
+  @OneToOne
   private long imageId;
 
 
