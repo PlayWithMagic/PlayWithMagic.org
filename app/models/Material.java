@@ -356,7 +356,7 @@ public class Material extends play.db.ebean.Model {
     if (materialFormData.imageId > 0) {
       if (materialFormData.imageId != currentImageId) {
         Image thisImage = Image.find().byId(currentImageId);
-        if(thisImage != null) {
+        if (thisImage != null) {
           thisImage.delete();
         }
       }

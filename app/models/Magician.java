@@ -680,7 +680,7 @@ public class Magician extends play.db.ebean.Model {
     if (editMagicianFormData.imageId > 0) {
       if (editMagicianFormData.imageId != currentImageId) {
         Image thisImage = Image.find().byId(currentImageId);
-        if(thisImage != null) {
+        if (thisImage != null) {
           thisImage.delete();
         }
       }
