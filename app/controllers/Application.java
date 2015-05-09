@@ -372,6 +372,7 @@ public class Application extends Controller {
    *
    * @return An HTTP OK message along with the HTML content for the ListMagicians page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result listMagicians() {
     return ok(ListMagicians.render("listMagicians", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
         Magician.getActiveMagicians()));
@@ -384,6 +385,7 @@ public class Application extends Controller {
    * @param id The ID of the Magician to be displayed.
    * @return An HTTP OK message along with the HTML content for a single Magician page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result viewMagician(long id) {
     return ok(ViewMagician.render("viewMagician", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
         Magician.getMagician(id)));
@@ -505,6 +507,7 @@ public class Application extends Controller {
    * @param routineId The ID of the routine to delete.
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result deleteRoutine(long routineId) {
     Routine.deleteRoutine(routineId);
 
@@ -618,6 +621,7 @@ public class Application extends Controller {
    *
    * @return An HTTP OK message along with the HTML content for the List Set page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result listAllSets() {
 
     return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getAllSets()));
@@ -629,6 +633,7 @@ public class Application extends Controller {
    *
    * @return An HTTP OK message along with the HTML content for the List Set page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result listMySets() {
 
     return ok(ListSets.render("listSets", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), Set.getMySets()));
@@ -641,6 +646,7 @@ public class Application extends Controller {
    * @param id The ID of the Set to view.
    * @return An HTTP OK message along with the HTML content for a single Set page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result viewSet(long id) {
     Set thisViewSet = Set.getSet(id);
 
