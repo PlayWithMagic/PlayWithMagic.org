@@ -536,7 +536,9 @@ public class Routine extends play.db.ebean.Model {
     if (routineFormData.imageId > 0) {
       if (routineFormData.imageId != currentImageId) {
         Image thisImage = Image.find().byId(currentImageId);
-        thisImage.delete();
+        if(thisImage != null) {
+          thisImage.delete();
+        }
       }
       routine.setImageId(routineFormData.imageId);
     }
