@@ -26,7 +26,7 @@ public class SetNotesFormData {
 
   /** The desired cost of the Set. */
   @Min(value = 0,
-      message = "Your expenses... you think you're going to get *paid* for this set?")
+      message = "What are your expenses for one performance of this set?")
   @Max(value = 1000,
       message = "If you need to make this larger, submit a bug report and we'll look into it.")
   public Integer cost;
