@@ -293,10 +293,11 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     viewMagicianPage.hasMagician(magician1Update);
     listMagiciansPage = viewMagicianPage.clickReturnToMagicianListButton();
 
+    // Commented out as these links are no longer listed on the listMagicians Page.
     // Verify the new information is in the User
-    editUserPage = listMagiciansPage.changeFirstMagicianPassword();
-    editUserPage.checkMagician(magician1Update);
-    listMagiciansPage = editUserPage.clickBrowseMagiciansButton();
+//    editUserPage = listMagiciansPage.changeFirstMagicianPassword();
+//    editUserPage.checkMagician(magician1Update);
+//    listMagiciansPage = editUserPage.clickBrowseMagiciansButton();
 
 // Commented out as we do not want users to delete magicians.
 //    // Delete the magician
