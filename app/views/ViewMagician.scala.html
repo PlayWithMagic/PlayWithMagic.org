@@ -59,7 +59,7 @@
         </a>
         @if(userInfo != null) {
           @if(magician.getId() == userInfo.getId()) {
-          <p class="hidden-xs hidden-sm">
+          <p>
             <a id="editMagician" href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">
               Edit Profile
             </a>
