@@ -20,24 +20,6 @@
           <small>@magician.getFirstName @magician.getLastName</small>
         </h2>
 
-        <p class="visible-xs-block visible-sm-block">
-          <a id="editMagician" href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">
-            Edit Profile
-          </a>
-          <a id="changePassword" href="@routes.Application.editUser(magician.getId)" class="btn btn-large">
-            Change Password
-          </a>
-          <a id="returnToMagicianList" href="@routes.Application.listMagicians()" class="btn btn-large">
-            Return to Magician List
-          </a>
-          @if(isLoggedIn) {
-            @if(magician.getId() == userInfo.getId()) {
-              <a href="@routes.Application.deleteMagician(magician.getId)" class="btn btn-danger btn-xs" role="button">
-                Delete Account</a>
-            }
-          }
-        </p>
-
         @if(magician.getImageId > 0) {
           <img class="img-responsive" src="@routes.Application.getImage(magician.getImageId)" alt="Image of Magician" />
         } else {
