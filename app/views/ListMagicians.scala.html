@@ -19,10 +19,6 @@
           <th>Stage Name</th>
           <th>Type</th>
           @*    <th>Routines</th>  *@   @* TO-DO: Remove for now / continuous release  *@
-          @if(isLoggedIn) {
-            <th>Edit</th>
-            <th>Change Password</th>
-          }
         </tr>
       </thead>
       <tbody>
@@ -36,18 +32,6 @@
           <td>@if(magician.getStageName) { @magician.getStageName } else { None }</td>
           <td>@magician.getMagicianType.getName</td>
           @* <td>Link to Magician's Routines Here</td>  *@
-          @if(isLoggedIn) {
-            @if(magician.getId() == userInfo.getId()) {
-              <td>
-                <a href="@routes.Application.editMagician(magician.getId)" class="btn btn-warning btn-xs editMagician" role="button">
-                Edit</a>
-              </td>
-              <td>
-                <a href="@routes.Application.editUser(magician.getId)" class="btn btn-danger btn-xs changePassword" role="button">
-                Change Password</a>
-              </td>
-            }
-          }
         </tr>
       }
       </tbody>

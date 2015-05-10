@@ -213,8 +213,10 @@ public class TestMaterialCRUD extends play.test.WithBrowser {
     editRoutinePage.clickSubmit();
     listRoutinesPage = new ListRoutinesPage(editMaterialPage.getDriver());
     listRoutinesPage.hasRoutine(routine1);
-    listRoutinesPage.deleteFirstRoutine();
-    listRoutinesPage.doesNotHaveRoutine(routine1);
+
+// Commented out as we do not want users to delete routines.
+//    listRoutinesPage.deleteFirstRoutine();
+//    listRoutinesPage.doesNotHaveRoutine(routine1);
 
   }
 
