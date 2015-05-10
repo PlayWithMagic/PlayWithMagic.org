@@ -56,6 +56,22 @@
               <p>
                 @set.getDescription
               </p>
+              <p>
+                Duration: @set.getDuration minutes
+              </p>
+              <p>
+                Cost: $ @set.getCost
+              </p>
+
+              <h4>Routines</h4>
+
+              @for(routine <- set.getRoutines) {
+                <p>
+                  @routine.getName
+                </p>
+
+              }
+
             </div>
           </div>
         </div>

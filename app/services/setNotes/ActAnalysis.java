@@ -103,15 +103,22 @@ public class ActAnalysis {
     }
 
     if (expectedDuration != null) {
-      Note note = new Note("That's something duration");
+      if (set.getDuration() > expectedDuration) {
+        int overrun = set.getDuration() - expectedDuration;
+        Note note = new Note("The set is running long.  Try shortening it by "
+            + overrun + ((overrun == 1) ? " minute." : " minutes."));
 
-      notes.add(note);
+        notes.add(note);
+      }
     }
 
     if (expectedCost != null) {
-      Note note = new Note("That's something cost");
+      if (set.getCost() > expectedCost) {
+        int overrun = set.getCost() - expectedCost;
+        Note note = new Note("The set is over budget by " + overrun + ((overrun == 1) ? " dollar." : " dollars."));
 
-      notes.add(note);
+        notes.add(note);
+      }
     }
 
     return notes;

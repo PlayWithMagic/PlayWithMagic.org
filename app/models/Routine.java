@@ -418,8 +418,9 @@ public class Routine extends play.db.ebean.Model {
     int cost = 0;
 
     for (Material material : materials) {
-      if (material.getPrice() != null)
-      cost += material.getPrice();
+      if (material.getPrice() != null) {
+        cost += material.getPrice();
+      }
     }
 
     return cost;
