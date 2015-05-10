@@ -1,0 +1,98 @@
+@*
+* The Set Notes HTML form page.
+*
+* @see https://github.com/PlayWithMagic/PlayWithMagic.org/wiki/Set-Notes
+* @see http://www.playframework.com
+*@
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, set: models.Set, setNotesForm: Form[views.formdata.SetNotesFormData], setNotes: List[models.Note])
+
+@import helper.form
+@import views.html.bootstrap3.textInt
+@import views.html.bootstrap3.hidden
+
+@Main(page, isLoggedIn, userInfo) {
+  <!-- Page Content -->
+  <section id="page">
+    <!-- Content -->
+    <section id="content" class="container">
+      @form(routes.Application.postSetNotes(), 'class -> "form-horizontal") {
+        <div class="col-md-12">
+          <h1>Set Notes</h1>
+          <!-- User Attributes -->
+          <div class="container">
+            @hidden(setNotesForm("id"))
+            @textInt(setNotesForm("duration"),
+              label = "Preferred Duration",
+              placeholder = "Expected duration in minutes",
+              help = "")
+            @textInt(setNotesForm("cost"),
+              label = "Budget",
+              placeholder = "Expected cost in dollars",
+              help = "")
+          </div>
+
+          <div class="container">
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button id="submit" type="submit" class="btn btn-default">
+                  Get Notes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                Set
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p>
+                Name: @set.getName
+              </p>
+              <p>
+                @set.getDescription
+              </p>
+              <p>
+                Duration: @set.getDuration minutes
+              </p>
+              <p>
+                Cost: $ @set.getCost
+              </p>
+
+              <h4>Routines</h4>
+
+              @for(routine <- set.getRoutines) {
+                <p>
+                  @routine.getName
+                </p>
+
+              }
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                Notes
+              </h3>
+            </div>
+            <div class="panel-body">
+              @for(note <- setNotes) {
+                <div class="well">
+                  @note.getText
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </section>
+  </section>
+}

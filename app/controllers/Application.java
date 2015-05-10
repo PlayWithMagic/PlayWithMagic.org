@@ -13,6 +13,7 @@ import play.mvc.Http.Context;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
+import services.setNotes.ActAnalysis;
 import views.formdata.DeleteUserFormData;
 import views.formdata.EditMagicianFormData;
 import views.formdata.EditUserFormData;
@@ -21,6 +22,7 @@ import views.formdata.MagicianTypeFormData;
 import views.formdata.MaterialFormData;
 import views.formdata.RoutineFormData;
 import views.formdata.SetFormData;
+import views.formdata.SetNotesFormData;
 import views.html.About;
 import views.html.DeleteUser;
 import views.html.EditMagician;
@@ -34,6 +36,7 @@ import views.html.ListMagicians;
 import views.html.ListRoutines;
 import views.html.ListSets;
 import views.html.Login;
+import views.html.SetNotes;
 import views.html.ViewMagician;
 import views.html.ViewMaterial;
 import views.html.ViewRoutine;
@@ -43,6 +46,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * Play With Magic's MVC Controller class.
@@ -921,6 +925,88 @@ public class Application extends Controller {
     }
 
     return imageId;
+  }
+
+
+  /******************************************************************************************************************
+   * S E T   N O T E S
+   ******************************************************************************************************************/
+
+  /**
+   * Show the SetNotes.
+   *
+   * @param setId The ID number of the set to analyze.
+   * @return An HTTP page SetNotes.
+   */
+  public static Result getSetNotes(long setId) {
+    Set set = Set.getSet(setId);
+
+    SetNotesFormData setNotesFormData = new SetNotesFormData(setId, null, null);
+    Form<SetNotesFormData> formData = Form.form(SetNotesFormData.class).fill(setNotesFormData);
+
+    return ok(SetNotes.render("setNotes", Secured.isLoggedIn(ctx())
+        , Secured.getUserInfo(ctx())
+        , set
+        , formData
+        , ActAnalysis.getEmptyList()));
+  }
+
+
+  /**
+   * Analyze the set and re-render the page with notes..
+   *
+   * @return On success, an HTTP OK message along with the HTML content for the SetNotes page.  On a validation
+   * error, an HTTP BadRequest message with the HTML content of the SetNotes page.
+   */
+  public static Result postSetNotes() {
+    Form<SetNotesFormData> formData = Form.form(SetNotesFormData.class).bindFromRequest();
+
+    Logger.debug("postSetNotes Raw Magician Form Data");
+    Logger.debug("  id = [" + formData.field("id").value() + "]");
+    Logger.debug("  duration = [" + formData.field("duration").value() + "]");
+    Logger.debug("  cost = [" + formData.field("cost").value() + "]");
+
+    if (formData.hasErrors()) {
+      Logger.error("postSetNotes HTTP Form Error.");
+
+      for (String key : formData.errors().keySet()) {
+        List<ValidationError> currentError = formData.errors().get(key);
+        for (play.data.validation.ValidationError error : currentError) {
+          if (!error.message().equals("")) {
+            Logger.error("   " + key + ":  " + error.message());
+            flash(key, error.message());
+          }
+        }
+      }
+
+      Set set = Set.getSet(Long.parseLong(formData.field("id").value()));
+
+      return badRequest(SetNotes.render("setNotes", Secured.isLoggedIn(ctx())
+          , Secured.getUserInfo(ctx())
+          , set
+          , formData
+          , ActAnalysis.getEmptyList()));
+    }
+
+    SetNotesFormData setNotesFormData = formData.get();
+
+    Logger.debug("postSetNotes Form Backing Class Data");
+    Logger.debug("  id = [" + setNotesFormData.id + "]");
+    Logger.debug("  duration = [" + setNotesFormData.duration + "]");
+    Logger.debug("  cost = [" + setNotesFormData.cost + "]");
+
+    Set set = Set.getSet(setNotesFormData.id);
+    ActAnalysis actAnalysis = new ActAnalysis(set);
+    actAnalysis.setExpectedDuration(setNotesFormData.duration);
+    actAnalysis.setExpectedCost(setNotesFormData.cost);
+
+    actAnalysis.analyzeSet();
+
+    return ok(SetNotes.render("setNotes", Secured.isLoggedIn(ctx())
+          , Secured.getUserInfo(ctx())
+          , set
+          , formData
+          , actAnalysis.getNotes()));
   }
 
 }
