@@ -74,6 +74,9 @@ body section#page section#content section#imageUpload {
   color: white;
   background-color: aqua;
 }
+body section#page section#content i.profile-image-placeholder {
+  font-size: 400px;
+}
 body .btn-file {
   position: relative;
   overflow: hidden;
