@@ -160,9 +160,80 @@ public class Set extends play.db.ebean.Model {
     this.routines = routines;
   }
 
+  /******************************************************************************************************************
+   * O B J E C T   M E T H O D S
+   ******************************************************************************************************************/
+
+  /**
+   * Add a Routine to this Set.
+   *
+   * @param routine The Routine to add.
+   * @throws RuntimeException If the routine is already in the Set.
+   */
+  public void addRoutine(Routine routine) {
+    if (routines.contains(routine)) {
+      throw new RuntimeException("Attempt to add a routine [" + routine.getName() + "] to a set... but the "
+          + "routine is already in the set");
+      // If this exception becomes a pain, then remove it and ignore the condition.
+    }
+
+    routines.add(routine);
+    this.save();
+  }
+
+
+  /**
+   * Remove a Routine from this Set.
+   *
+   * @param routine The Routine to remove.
+   * @throws RuntimeException If the routine is not currently in the Set.
+   */
+  public void removeRoutine(Routine routine) {
+    if (!routines.contains(routine)) {
+      throw new RuntimeException("Attempt to remove routine [" + routine.getName() + "] from a set... but the "
+          + "routine was not in the set");
+      // If this exception becomes a pain, then remove it and ignore the condition.
+    }
+
+    routines.remove(routine);
+    this.save();
+  }
+
+
+  /**
+   * Get the total cost of all of the materials to perform this Set once.
+   *
+   * @return The total cost of all of the materials to perform this Set once.
+   */
+  public int getCost() {
+    int cost = 0;
+
+    for (Routine routine : routines) {
+      cost += routine.getCost();
+    }
+
+    return cost;
+  }
+
+
+  /**
+   * Get the duration of all of the Routines in the Set.
+   *
+   * @return The duration of all of the Routines in the Set.
+   */
+  public int getDuration() {
+    int duration = 0;
+
+    for (Routine routine : routines) {
+      duration += routine.getDuration();
+    }
+
+    return duration;
+  }
+
 
   /******************************************************************************************************************
-   * M E T H O D S
+   * S T A T I C   M E T H O D S
    ******************************************************************************************************************/
 
   /**
@@ -254,42 +325,6 @@ public class Set extends play.db.ebean.Model {
   public static void deleteSet(long id) {
     Set set = Set.getSet(id);
     set.delete();
-  }
-
-
-  /**
-   * Remove a Routine from this Set.
-   *
-   * @param routine The Routine to remove.
-   * @throws RuntimeException If the routine is not currently in the Set.
-   */
-  public void removeRoutine(Routine routine) {
-    if (!routines.contains(routine)) {
-      throw new RuntimeException("Attempt to remove routine [" + routine.getName() + "] from a set... but the "
-          + "routine was not in the set");
-      // If this exception becomes a pain, then remove it and ignore the condition.
-    }
-
-    routines.remove(routine);
-    this.save();
-  }
-
-
-  /**
-   * Add a Routine to this Set.
-   *
-   * @param routine The Routine to add.
-   * @throws RuntimeException If the routine is already in the Set.
-   */
-  public void addRoutine(Routine routine) {
-    if (routines.contains(routine)) {
-      throw new RuntimeException("Attempt to add a routine [" + routine.getName() + "] to a set... but the "
-          + "routine is already in the set");
-      // If this exception becomes a pain, then remove it and ignore the condition.
-    }
-
-    routines.add(routine);
-    this.save();
   }
 
 

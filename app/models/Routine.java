@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +90,7 @@ public class Routine extends play.db.ebean.Model {
   private List<Set> sets;
 
   // The image id associated with this routine
+  @OneToOne
   private long imageId;
 
   /**
@@ -406,7 +408,29 @@ public class Routine extends play.db.ebean.Model {
 
 
   /******************************************************************************************************************
-   * M E T H O D S
+   * O B J E C T   M E T H O D S
+   ******************************************************************************************************************/
+
+  /**
+   * Get the total cost of all of the materials to perform one rendition of this routine.
+   *
+   * @return The total cost of all of the materials to perform one rendition of this routine.
+   */
+  public int getCost() {
+    int cost = 0;
+
+    for (Material material : materials) {
+      if (material.getPrice() != null) {
+        cost += material.getPrice();
+      }
+    }
+
+    return cost;
+  }
+
+
+  /******************************************************************************************************************
+   * S T A T I C   M E T H O D S
    ******************************************************************************************************************/
 
   /**
@@ -534,7 +558,9 @@ public class Routine extends play.db.ebean.Model {
     if (routineFormData.imageId > 0) {
       if (routineFormData.imageId != currentImageId) {
         Image thisImage = Image.find().byId(currentImageId);
-        thisImage.delete();
+        if (thisImage != null) {
+          thisImage.delete();
+        }
       }
       routine.setImageId(routineFormData.imageId);
     }

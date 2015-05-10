@@ -11,10 +11,20 @@
       <!-- Content -->
     <section id="content" class="container">
       <div class="col-md-6">
-        <h1>@routine.getName <small><a href="listMagicians">Magician Name</a></small></h1>
+        <h1>@routine.getName
+          <small>
+            @if(isLoggedIn) {<a href="listMagicians">Magician Name</a>} else { Magician Name }
+          </small>
+        </h1>
+        <!-- Mobile View -->
         <p class="visible-xs-block visible-sm-block">
-          <a id="editRoutine" href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
-          <a id="returnToRoutineList" href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
+          @if(isLoggedIn) {
+            <a id="editRoutine" href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">
+              Edit Routine</a>
+          }
+          <a id="returnToRoutineList" href="@routes.Application.listRoutines()" class="btn btn-large">
+            Return to Routine List
+          </a>
         </p>
         @if(routine.getImageId > 0) {
           <img class="img-responsive" src="@routes.Application.getImage(routine.getImageId)" alt="Image of Routine" />
@@ -54,10 +64,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Full Size View -->
       <div class="col-md-6">
         <p class="hidden-xs hidden-sm">
-          <a id="editRoutine" href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">Edit Routine</a>
-          <a id="returnToRoutineList" href="@routes.Application.listRoutines()" class="btn btn-large">Return to Routine List</a>
+        @if(isLoggedIn) {
+          <a id="editRoutine" href="@routes.Application.editRoutine(routine.getId)" class="btn btn-large">
+            Edit Routine
+          </a>
+        }
+          <a id="returnToRoutineList" href="@routes.Application.listRoutines()" class="btn btn-large">
+            Return to Routine List
+          </a>
         </p>
         <h3>Description</h3>
         <p>@routine.getDescription</p>
