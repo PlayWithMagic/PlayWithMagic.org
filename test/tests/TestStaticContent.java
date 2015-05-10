@@ -137,11 +137,13 @@ public class TestStaticContent extends play.test.WithBrowser {
 
     ListRoutinesPage listRoutinesPage = indexPage.clickBrowseRoutinesButton();
 
-    ListSetsPage listSetsPage = listRoutinesPage.clickBrowseSetsButton();
+// Commented out as non-logged in users will not be able to access Browse Sets button
+//    ListSetsPage listSetsPage = listRoutinesPage.clickBrowseSetsButton();
 
-    ListMagiciansPage listMagiciansPage = listSetsPage.clickBrowseMagiciansButton();
+// Commented out as non-logged in users will not be able to access Browse Magicians button
+//    ListMagiciansPage listMagiciansPage = listSetsPage.clickBrowseMagiciansButton();
 
-    HelpPage helpPage = listMagiciansPage.clickHelpButton();
+    HelpPage helpPage = indexPage.clickHelpButton();
 
     EditUserPage editUserPage = helpPage.clickSignupButton();
 
