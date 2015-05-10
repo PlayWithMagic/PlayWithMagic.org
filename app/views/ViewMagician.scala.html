@@ -23,7 +23,7 @@
         @if(magician.getImageId > 0) {
           <img class="img-responsive" src="@routes.Application.getImage(magician.getImageId)" alt="Image of Magician" />
         } else {
-          <img class="img-responsive" src="@routes.Assets.at("images/card-rainbow.jpg")" alt="Magician Image Placeholder"/>
+          <i class="fa fa-user profile-image-placeholder"></i>
         }
 
         <section id="social">
@@ -54,23 +54,23 @@
         </section>
       </div>
       <div class="col-md-6">
-        <p class="hidden-xs hidden-sm">
-          <a id="editMagician" href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">
-            Edit Profile
-          </a>
-          <a id="changePassword" href="@routes.Application.editUser(magician.getId)" class="btn btn-large">
-            Change Password
-          </a>
-          <a id="returnToMagicianList" href="@routes.Application.listMagicians()" class="btn btn-large">
-            Return to Magician List
-          </a>
-          @if(userInfo != null) {
-            @if(magician.getId() == userInfo.getId()) {
-              <a id="deleteAccount" href="@routes.Application.deleteMagician(magician.getId)"
-              class="btn btn-danger btn-xs" role="button">
-                Delete Account</a>
-            }
+        <a id="returnToMagicianList" href="@routes.Application.listMagicians()" class="btn btn-large">
+          Return to Magician List
+        </a>
+        @if(userInfo != null) {
+          @if(magician.getId() == userInfo.getId()) {
+          <p>
+            <a id="editMagician" href="@routes.Application.editMagician(magician.getId)" class="btn btn-large">
+              Edit Profile
+            </a>
+            <a id="changePassword" href="@routes.Application.editUser(magician.getId)" class="btn btn-large">
+              Change Password
+            </a>
+            <a id="deleteAccount" href="@routes.Application.deleteMagician(magician.getId)"
+            class="btn btn-danger btn-xs" role="button">
+              Delete Account</a>
           }
+        }
         </p>
 
         <h3>Experience with Magic</h3>
