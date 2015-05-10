@@ -5,7 +5,10 @@ import models.MagicianType;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import play.test.TestBrowser;
-import tests.pages.DeleteUserPage;
+
+// Commented out as we do not want to allow users to delete magicians.
+//import tests.pages.DeleteUserPage;
+
 import tests.pages.EditMagicianPage;
 import tests.pages.EditUserPage;
 import tests.pages.IndexPage;
@@ -135,8 +138,10 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     // Click the Join the Community Today! button
     EditUserPage editUserPage = indexPage.clickJoinTheCommunityToday();
 
-    // Click the Browse Magicians button
-    ListMagiciansPage listMagiciansPage = editUserPage.clickBrowseMagiciansButton();
+// Commented out as we have updated the navigation. Users must be logged in first to access
+// Browse Magicians page.
+//    // Click the Browse Magicians button
+//    ListMagiciansPage listMagiciansPage = editUserPage.clickBrowseMagiciansButton();
   }
 
 
@@ -192,28 +197,29 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     ListMagiciansPage listMagiciansPage = new ListMagiciansPage(editUserPage.getDriver());
     listMagiciansPage.hasMagician(magician3);
 
-    // Delete the magician
-    viewMagicianPage = listMagiciansPage.viewFirstMagician();
-    DeleteUserPage deleteUserPage = viewMagicianPage.clickDeleteAccountButton();
+// Commented out as we do not want users deleting magicians.
+//    // Delete the magician
+//    viewMagicianPage = listMagiciansPage.viewFirstMagician();
+//    DeleteUserPage deleteUserPage = viewMagicianPage.clickDeleteAccountButton();
+//
+//    // Try clicking the Delete button without any input... it should generate an error.
+//    deleteUserPage.doesNotHaveRequiredFieldErrors();
+//    deleteUserPage.clickSubmit();
+//    deleteUserPage.hasRequiredFieldErrors();
+//
+//    // Delete the magician (for real)
+//    deleteUserPage.populateDeleteUser(magician3.getPassword());
+//    deleteUserPage.clickSubmit();
 
-    // Try clicking the Delete button without any input... it should generate an error.
-    deleteUserPage.doesNotHaveRequiredFieldErrors();
-    deleteUserPage.clickSubmit();
-    deleteUserPage.hasRequiredFieldErrors();
+//    // Should be on the index page (unauthenticated)
+//    indexPage = new IndexPage(deleteUserPage.getDriver());
+//    assertThat(indexPage.isUnauthenticated()).isTrue();
 
-    // Delete the magician (for real)
-    deleteUserPage.populateDeleteUser(magician3.getPassword());
-    deleteUserPage.clickSubmit();
-
-    // Should be on the index page (unauthenticated)
-    indexPage = new IndexPage(deleteUserPage.getDriver());
-    assertThat(indexPage.isUnauthenticated()).isTrue();
-
-    // Try logging in
-    loginPage = indexPage.clickLoginButton();
-    loginPage.populateLogin(magician3);
-    loginPage.clickSubmit();
-    loginPage.hasRequiredFieldErrors();
+//    // Try logging in
+//    loginPage = indexPage.clickLoginButton();
+//    loginPage.populateLogin(magician3);
+//    loginPage.clickSubmit();
+//    loginPage.hasRequiredFieldErrors();
   }
 
 
@@ -292,15 +298,16 @@ public class TestMagicianCRUD extends play.test.WithBrowser {
     editUserPage.checkMagician(magician1Update);
     listMagiciansPage = editUserPage.clickBrowseMagiciansButton();
 
-    // Delete the magician
-    viewMagicianPage = listMagiciansPage.viewFirstMagician();
-    DeleteUserPage deleteUserPage = viewMagicianPage.clickDeleteAccountButton();
-    deleteUserPage.populateDeleteUser(magician1Update.getPassword());
-    deleteUserPage.clickSubmit();
-
-    // Should be on the index page (unauthenticated)
-    indexPage = new IndexPage(deleteUserPage.getDriver());
-    assertThat(indexPage.isUnauthenticated()).isTrue();
+// Commented out as we do not want users to delete magicians.
+//    // Delete the magician
+//    viewMagicianPage = listMagiciansPage.viewFirstMagician();
+//    DeleteUserPage deleteUserPage = viewMagicianPage.clickDeleteAccountButton();
+//    deleteUserPage.populateDeleteUser(magician1Update.getPassword());
+//    deleteUserPage.clickSubmit();
+//
+//    // Should be on the index page (unauthenticated)
+//    indexPage = new IndexPage(deleteUserPage.getDriver());
+//    assertThat(indexPage.isUnauthenticated()).isTrue();
   }
 
 

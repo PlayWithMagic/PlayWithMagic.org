@@ -125,9 +125,10 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
     ListRoutinesPage listRoutinesPage = new ListRoutinesPage(editRoutinePage.getDriver());
     listRoutinesPage.hasRoutine(routine3);
 
-    // Delete the routine
-    listRoutinesPage.deleteFirstRoutine();
-    listRoutinesPage.doesNotHaveRoutine(routine3);
+// Commented out delete as we do not currently allow users to delete routines
+//    // Delete the routine
+//    listRoutinesPage.deleteFirstRoutine();
+//    listRoutinesPage.doesNotHaveRoutine(routine3);
   }
 
 
@@ -185,9 +186,11 @@ public class TestRoutineCRUD extends play.test.WithBrowser {
 
     // Delete the routine
     listRoutinesPage.hasRoutine(routine2);
-    listRoutinesPage.deleteFirstRoutine();
-    listRoutinesPage.doesNotHaveRoutine(routine2);
-    listRoutinesPage.doesNotHaveRoutine(routine1);
+
+// Commented out delete as we do not currently allow users to delete routines
+//    listRoutinesPage.deleteFirstRoutine();
+//    listRoutinesPage.doesNotHaveRoutine(routine2);
+//    listRoutinesPage.doesNotHaveRoutine(routine1);
 
   }
 
