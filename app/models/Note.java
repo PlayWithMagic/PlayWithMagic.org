@@ -1,8 +1,5 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A note is constructive criticism.
  *
@@ -10,6 +7,17 @@ import java.util.List;
  */
 public class Note {
   private String text;
+
+
+  /**
+   * Create a new note.
+   *
+   * @param text The text of the note.
+   */
+  public Note(String text) {
+    this.text = text;
+  }
+
 
   /**
    * Get the text of a note.
@@ -28,15 +36,5 @@ public class Note {
   public void setText(String text) {
     this.text = text;
   }
-
-
-  public static List<Note> generateSetNotes(Set set) {
-    List<Note> notes = new ArrayList<Note>();
-
-    
-
-    return notes;
-  }
-
 
 }

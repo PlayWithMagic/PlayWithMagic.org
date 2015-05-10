@@ -4,7 +4,7 @@
 * @see https://github.com/PlayWithMagic/PlayWithMagic.org/wiki/Set-Notes
 * @see http://www.playframework.com
 *@
-@(page: String, isLoggedIn: Boolean, userInfo: Magician, set: models.Set, setNotesForm: Form[views.formdata.SetNotesFormData])
+@(page: String, isLoggedIn: Boolean, userInfo: Magician, set: models.Set, setNotesForm: Form[views.formdata.SetNotesFormData], setNotes: List[models.Note])
 
 @import helper.form
 @import views.html.bootstrap3.textInt
@@ -38,6 +38,41 @@
                   Get Notes
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                Set
+              </h3>
+            </div>
+            <div class="panel-body">
+              <p>
+                Name: @set.getName
+              </p>
+              <p>
+                @set.getDescription
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                Notes
+              </h3>
+            </div>
+            <div class="panel-body">
+              @for(note <- setNotes) {
+                <div class="well">
+                  @note.getText
+                </div>
+              }
             </div>
           </div>
         </div>

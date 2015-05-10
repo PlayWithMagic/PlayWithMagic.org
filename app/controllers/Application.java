@@ -13,6 +13,7 @@ import play.mvc.Http.Context;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
+import services.setNotes.ActAnalysis;
 import views.formdata.DeleteUserFormData;
 import views.formdata.EditMagicianFormData;
 import views.formdata.EditUserFormData;
@@ -919,6 +920,12 @@ public class Application extends Controller {
    * S E T   N O T E S
    ******************************************************************************************************************/
 
+  /**
+   * Show the SetNotes.
+   *
+   * @param setId The ID number of the set to analyze.
+   * @return An HTTP page SetNotes.
+   */
   public static Result getSetNotes(long setId) {
     Set set = Set.getSet(setId);
 
@@ -928,10 +935,17 @@ public class Application extends Controller {
     return ok(SetNotes.render("setNotes", Secured.isLoggedIn(ctx())
         , Secured.getUserInfo(ctx())
         , set
-        , formData));
+        , formData
+        , ActAnalysis.getEmptyList()));
   }
 
 
+  /**
+   * Analyze the set and re-render the page with notes..
+   *
+   * @return On success, an HTTP OK message along with the HTML content for the SetNotes page.  On a validation
+   * error, an HTTP BadRequest message with the HTML content of the SetNotes page.
+   */
   public static Result postSetNotes() {
     Form<SetNotesFormData> formData = Form.form(SetNotesFormData.class).bindFromRequest();
 
@@ -958,7 +972,8 @@ public class Application extends Controller {
       return badRequest(SetNotes.render("setNotes", Secured.isLoggedIn(ctx())
           , Secured.getUserInfo(ctx())
           , set
-          , formData));
+          , formData
+          , ActAnalysis.getEmptyList()));
     }
 
     SetNotesFormData setNotesFormData = formData.get();
@@ -968,13 +983,18 @@ public class Application extends Controller {
     Logger.debug("  duration = [" + setNotesFormData.duration + "]");
     Logger.debug("  cost = [" + setNotesFormData.cost + "]");
 
-
     Set set = Set.getSet(setNotesFormData.id);
+    ActAnalysis actAnalysis = new ActAnalysis(set);
+    actAnalysis.setExpectedDuration(setNotesFormData.duration);
+    actAnalysis.setExpectedCost(setNotesFormData.cost);
+
+    actAnalysis.analyzeSet();
 
     return ok(SetNotes.render("setNotes", Secured.isLoggedIn(ctx())
           , Secured.getUserInfo(ctx())
           , set
-          , formData));
+          , formData
+          , actAnalysis.getNotes()));
   }
 
 }

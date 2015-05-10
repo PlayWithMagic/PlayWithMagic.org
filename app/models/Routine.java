@@ -406,7 +406,28 @@ public class Routine extends play.db.ebean.Model {
 
 
   /******************************************************************************************************************
-   * M E T H O D S
+   * O B J E C T   M E T H O D S
+   ******************************************************************************************************************/
+
+  /**
+   * Get the total cost of all of the materials to perform one rendition of this routine.
+   *
+   * @return The total cost of all of the materials to perform one rendition of this routine.
+   */
+  public int getCost() {
+    int cost = 0;
+
+    for (Material material : materials) {
+      if (material.getPrice() != null)
+      cost += material.getPrice();
+    }
+
+    return cost;
+  }
+
+
+  /******************************************************************************************************************
+   * S T A T I C   M E T H O D S
    ******************************************************************************************************************/
 
   /**
